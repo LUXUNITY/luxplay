@@ -48,7 +48,7 @@ const FeaturesSection = () => {
             viewport={{ once: true }}
             className="font-display text-6xl md:text-8xl lg:text-9xl tracking-wider leading-[0.9] mb-10 md:mb-14"
           >
-            <span className="text-gradient-neon">WE'RE<br />CREATING THEM!</span>
+            <span className="text-gradient-neon">WE'RE CREATING THEM!</span>
           </motion.h2>
 
           {/* Statements */}
