@@ -1,80 +1,166 @@
-import { motion } from "framer-motion";
-import { Check, Star, Zap } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { Check, Star, Zap, Flame, Clock } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 const creditDeals = [
   {
     price: "£10",
-    credits: "100 Credits",
-    bonus: "30% bonus",
-    worth: "Worth £13",
-    limited: 500,
-    features: ["30% bonus credits", "Valid from opening day"],
+    name: "Explorer",
+    credits: "160 Credits",
+    bonus: "60% bonus",
+    worth: "Worth £16",
+    plays: "20 plays",
+    remaining: 513,
+    total: 1000,
+    features: ["60% bonus credits vs standard", "Valid from opening day"],
     highlight: false,
+    color: "neon-green",
   },
   {
     price: "£25",
-    credits: "300 Credits",
-    bonus: "56% bonus",
-    worth: "Worth £39",
-    limited: 300,
-    features: ["56% bonus credits", "Valid from opening day"],
+    name: "Champion",
+    credits: "500 Credits",
+    bonus: "Double your money",
+    worth: "Worth £50",
+    plays: "62 plays",
+    remaining: 451,
+    total: 1000,
+    features: ["Double your money", "Valid from opening day"],
     highlight: false,
+    color: "neon-cyan",
   },
   {
-    price: "£75",
-    credits: "1000 Credits",
-    bonus: "73% bonus",
-    worth: "Worth £130+",
-    limited: 200,
-    features: [
-      "73% bonus credits",
-      "VIP entry — skip the queue",
-      "Exclusive Founder hoodie",
-      "10% off top-ups for 12 months",
-    ],
+    price: "£50",
+    name: "Legend",
+    credits: "1,200 Credits",
+    bonus: "140% bonus",
+    worth: "Worth £120",
+    plays: "150 plays",
+    remaining: 187,
+    total: 1000,
+    features: ["140% bonus credits", "The smart choice", "Valid from opening day"],
     highlight: true,
-    badge: "FOUNDER PASS",
+    badge: "BEST VALUE",
+    color: "neon-pink",
   },
 ];
 
+const ultimateDeal = {
+  price: "£100",
+  name: "Ultimate Pass",
+  credits: "2,800 Credits",
+  bonus: "180% bonus",
+  worth: "Worth £280",
+  plays: "350 plays",
+  remaining: 116,
+  total: 250,
+  features: [
+    "180% bonus credits",
+    "VIP early access before public opening",
+    "Exclusive LuxPlay hoodie",
+    "10% off all future top-ups for life",
+  ],
+  badge: "ULTIMATE",
+  color: "neon-purple",
+};
+
+/* Animated countdown number */
+const AnimatedCounter = ({ target, color }: { target: number; color: string }) => {
+  const [count, setCount] = useState(target + Math.floor(Math.random() * 30) + 10);
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (!isInView) return;
+    const start = count;
+    const duration = 2000;
+    const startTime = Date.now();
+    const tick = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(start - (start - target) * eased));
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, [isInView, target]);
+
+  return (
+    <span ref={ref} className={`font-display text-4xl md:text-5xl text-${color} tabular-nums`}>
+      {count}
+    </span>
+  );
+};
+
 const PreSaleSection = () => {
-  const handleBuy = (index: number) => {
-    const deal = creditDeals[index];
-    alert(`You selected ${deal.credits} for ${deal.price}. Payment coming soon!`);
+  const handleBuy = (name: string, price: string) => {
+    alert(`You selected ${name} for ${price}. Payment coming soon!`);
   };
 
   return (
-    <section id="presale" className="relative bg-[#070710]">
+    <section id="presale" className="relative bg-[#070710] overflow-hidden">
       {/* Neon top bar */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-neon-bar" />
 
-      {/* Subtle glow orbs */}
+      {/* Glow orbs */}
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-neon-purple/5 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-neon-pink/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-neon-green/3 rounded-full blur-[200px] pointer-events-none" />
 
       <div className="relative z-10 px-6 md:px-12 lg:px-20 py-20 md:py-28">
-        {/* Badge */}
+        {/* ========== MASSIVE ANIMATED LUXPLAY LOGO ========== */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.3, rotateX: 40 }}
+          whileInView={{ opacity: 1, scale: 1, rotateX: 0 }}
+          viewport={{ once: true }}
+          transition={{ type: "spring", stiffness: 80, damping: 12, duration: 1.2 }}
+          className="text-center mb-6"
+        >
+          <motion.h2
+            className="font-display text-[6rem] md:text-[12rem] lg:text-[16rem] leading-none tracking-[0.1em] text-gradient-neon select-none"
+            animate={{
+              textShadow: [
+                "0 0 20px rgba(170,255,0,0.4), 0 0 60px rgba(0,238,255,0.2)",
+                "0 0 40px rgba(255,0,204,0.5), 0 0 80px rgba(119,0,255,0.3)",
+                "0 0 20px rgba(0,238,255,0.4), 0 0 60px rgba(170,255,0,0.2)",
+                "0 0 40px rgba(255,0,204,0.5), 0 0 80px rgba(119,0,255,0.3)",
+              ],
+            }}
+            transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+          >
+            LUXPLAY
+          </motion.h2>
+        </motion.div>
+
+        {/* Flashing urgency badge */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           className="text-center mb-4"
         >
-          <span className="inline-flex items-center gap-2 border border-neon-purple/50 text-neon-purple font-body text-xs tracking-widest uppercase px-5 py-2">
-            <Zap className="w-3.5 h-3.5 text-neon-green" />
-            Pre-Launch Exclusive
-          </span>
+          <motion.span
+            animate={{ scale: [1, 1.05, 1], opacity: [1, 0.8, 1] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
+            className="inline-flex items-center gap-2 border-2 border-neon-pink bg-neon-pink/10 text-neon-pink font-display text-sm md:text-base tracking-[0.3em] uppercase px-6 py-3"
+          >
+            <Flame className="w-4 h-4 text-neon-green" />
+            PRE-LAUNCH EXCLUSIVE
+            <Flame className="w-4 h-4 text-neon-green" />
+          </motion.span>
         </motion.div>
 
         {/* Headline */}
-        <motion.h2
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-display text-5xl md:text-7xl lg:text-8xl text-center tracking-wider mb-2"
+          className="text-center mb-2"
         >
-          <span className="text-gradient-neon">BUY YOUR CREDITS NOW</span>
-        </motion.h2>
+          <h3 className="font-display text-5xl md:text-7xl lg:text-8xl tracking-wider">
+            <span className="text-gradient-neon">BUY YOUR CREDITS NOW</span>
+          </h3>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0 }}
@@ -85,57 +171,92 @@ const PreSaleSection = () => {
           <p className="font-body text-white/50 text-sm md:text-base">
             LuxPlay opens May 2026. Buy before we open and
           </p>
-          <p className="font-display text-4xl md:text-5xl text-neon-green glow-green tracking-wider mt-1">
+          <motion.p
+            className="font-display text-4xl md:text-5xl text-neon-green glow-green tracking-wider mt-1"
+            animate={{ scale: [1, 1.03, 1] }}
+            transition={{ repeat: Infinity, duration: 2 }}
+          >
             SAVE BIG.
-          </p>
+          </motion.p>
         </motion.div>
 
-        <p className="text-center text-white/40 font-body text-xs md:text-sm mb-12">
-          Credits loaded to your account on opening day.
-        </p>
+        {/* Going fast warning */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="flex items-center justify-center gap-3 mb-12"
+        >
+          <motion.div
+            animate={{ opacity: [1, 0.4, 1] }}
+            transition={{ repeat: Infinity, duration: 0.8 }}
+          >
+            <Clock className="w-4 h-4 text-neon-pink" />
+          </motion.div>
+          <p className="font-display text-sm md:text-base tracking-[0.2em] text-neon-pink glow-pink">
+            SPACES ARE GOING FAST — DON'T MISS OUT
+          </p>
+          <motion.div
+            animate={{ opacity: [1, 0.4, 1] }}
+            transition={{ repeat: Infinity, duration: 0.8 }}
+          >
+            <Clock className="w-4 h-4 text-neon-pink" />
+          </motion.div>
+        </motion.div>
 
-        {/* Three cards SIDE BY SIDE */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        {/* ========== THREE TIER CARDS ========== */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-10">
           {creditDeals.map((deal, i) => (
             <motion.div
-              key={deal.credits}
-              initial={{ opacity: 0, y: 30 }}
+              key={deal.name}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className={`relative p-6 md:p-8 flex flex-col ${
+              transition={{ delay: i * 0.12 }}
+              whileHover={{ scale: 1.03, y: -4 }}
+              className={`relative p-6 md:p-8 flex flex-col transition-all duration-300 ${
                 deal.highlight
-                  ? "border-2 border-neon-pink bg-[#0d0d1a] shadow-[0_0_30px_rgba(255,0,204,0.15)]"
-                  : "border border-white/10 bg-[#0a0a16]"
+                  ? "border-2 border-neon-pink bg-[#0d0d1a] shadow-[0_0_40px_rgba(255,0,204,0.2)]"
+                  : "border border-white/10 bg-[#0a0a16] hover:border-white/20"
               }`}
             >
               {deal.badge && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-neon-pink text-[#070710] text-xs font-display tracking-widest px-4 py-1">
+                <motion.div
+                  animate={{ scale: [1, 1.08, 1] }}
+                  transition={{ repeat: Infinity, duration: 2 }}
+                  className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-neon-pink text-[#070710] text-xs font-display tracking-widest px-4 py-1"
+                >
                   <Star className="w-3 h-3" /> {deal.badge}
-                </div>
+                </motion.div>
               )}
 
+              {/* Tier name */}
+              <p className={`font-display text-sm tracking-[0.3em] text-center mb-2 mt-1 text-${deal.color}`}>
+                {deal.name.toUpperCase()}
+              </p>
+
               {/* Price */}
-              <div className="text-center mb-6 mt-2">
+              <div className="text-center mb-4">
                 <span className={`font-display text-6xl md:text-7xl tracking-wide ${
-                  deal.highlight ? "text-neon-pink glow-pink" : "text-neon-green glow-green"
-                }`}>
+                  deal.highlight ? "text-neon-pink glow-pink" : `text-${deal.color}`
+                } ${deal.color === 'neon-green' ? 'glow-green' : deal.color === 'neon-cyan' ? 'glow-cyan' : ''}`}>
                   {deal.price}
                 </span>
               </div>
 
               {/* Credits */}
-              <h3 className={`font-display text-2xl md:text-3xl tracking-wider text-center mb-1 ${
-                deal.highlight ? "text-neon-pink" : "text-neon-cyan"
-              }`}>
+              <h4 className={`font-display text-2xl md:text-3xl tracking-wider text-center mb-1 text-${deal.color}`}>
                 {deal.credits}
-              </h3>
-              <p className="text-white/40 text-xs text-center mb-6">
+              </h4>
+              <p className="text-white/40 text-xs text-center mb-1">
                 <span className="line-through">{deal.worth}</span> · {deal.bonus}
+              </p>
+              <p className="text-white/30 text-[10px] text-center mb-5 font-body">
+                {deal.plays}
               </p>
 
               {/* Features */}
-              <div className="space-y-2 mb-8 flex-1">
+              <div className="space-y-2 mb-6 flex-1">
                 {deal.features.map((feat) => (
                   <p key={feat} className="text-xs text-white/60 flex items-start gap-2 font-body">
                     <Check className="w-3.5 h-3.5 text-neon-green mt-0.5 flex-shrink-0" />
@@ -144,41 +265,137 @@ const PreSaleSection = () => {
                 ))}
               </div>
 
-              {/* Limited + Buy */}
-              <div className="text-center">
-                <p className="font-display text-3xl text-white tracking-wide">{deal.limited}</p>
-                <p className={`font-display text-xs tracking-widest mb-4 ${
-                  deal.highlight ? "text-neon-pink" : "text-white/40"
-                }`}>
-                  LIMITED — GOING FAST
+              {/* Remaining counter */}
+              <div className="text-center mb-4">
+                <AnimatedCounter target={deal.remaining} color={deal.color} />
+                <p className="font-display text-[10px] tracking-[0.2em] text-white/30">
+                  / {deal.total} REMAINING
                 </p>
-                <button
-                  onClick={() => handleBuy(i)}
-                  className={`w-full font-display text-sm tracking-widest py-3 transition-all duration-300 ${
-                    deal.highlight
-                      ? "bg-neon-pink text-[#070710] hover:shadow-[0_0_40px_rgba(255,0,204,0.5)]"
-                      : "bg-neon-green text-[#070710] hover:shadow-[0_0_40px_rgba(170,255,0,0.5)]"
-                  }`}
-                >
-                  BUY NOW
-                </button>
+                {/* Progress bar */}
+                <div className="w-full h-1.5 bg-white/5 mt-2 overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${((deal.total - deal.remaining) / deal.total) * 100}%` }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.5, delay: 0.5 + i * 0.1 }}
+                    className={`h-full bg-${deal.color}`}
+                  />
+                </div>
               </div>
+
+              {/* Buy */}
+              <button
+                onClick={() => handleBuy(deal.name, deal.price)}
+                className={`w-full font-display text-sm tracking-widest py-3 transition-all duration-300 ${
+                  deal.highlight
+                    ? "bg-neon-pink text-[#070710] hover:shadow-[0_0_40px_rgba(255,0,204,0.5)]"
+                    : "bg-neon-green text-[#070710] hover:shadow-[0_0_40px_rgba(170,255,0,0.5)]"
+                }`}
+              >
+                BUY NOW
+              </button>
             </motion.div>
           ))}
         </div>
 
-        {/* Urgency */}
+        {/* ========== ULTIMATE PASS — FULL WIDTH, MASSIVE ========== */}
+        <motion.div
+          initial={{ opacity: 0, y: 50, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ type: "spring", stiffness: 60, damping: 14 }}
+          className="max-w-5xl mx-auto relative border-2 border-neon-purple bg-[#0d0d1a] p-8 md:p-12 shadow-[0_0_60px_rgba(119,0,255,0.2)]"
+        >
+          {/* Badge */}
+          <motion.div
+            animate={{ scale: [1, 1.08, 1] }}
+            transition={{ repeat: Infinity, duration: 2.5 }}
+            className="absolute -top-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-neon-purple text-[#070710] font-display text-sm tracking-[0.3em] px-6 py-1.5"
+          >
+            <Star className="w-4 h-4" /> ULTIMATE <Star className="w-4 h-4" />
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mt-4">
+            {/* Left — Price & Credits */}
+            <div className="text-center md:text-left">
+              <p className="font-display text-sm tracking-[0.3em] text-neon-purple mb-2">ULTIMATE PASS</p>
+              <motion.span
+                className="font-display text-8xl md:text-9xl tracking-wide text-neon-purple inline-block"
+                animate={{
+                  textShadow: [
+                    "0 0 20px rgba(119,0,255,0.5), 0 0 60px rgba(119,0,255,0.3)",
+                    "0 0 40px rgba(119,0,255,0.7), 0 0 80px rgba(119,0,255,0.4)",
+                    "0 0 20px rgba(119,0,255,0.5), 0 0 60px rgba(119,0,255,0.3)",
+                  ],
+                }}
+                transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+              >
+                {ultimateDeal.price}
+              </motion.span>
+              <h4 className="font-display text-3xl md:text-4xl tracking-wider text-neon-purple mt-2">
+                {ultimateDeal.credits}
+              </h4>
+              <p className="text-white/40 text-sm mt-1">
+                <span className="line-through">{ultimateDeal.worth}</span> · {ultimateDeal.bonus} · {ultimateDeal.plays}
+              </p>
+            </div>
+
+            {/* Right — Features + Counter */}
+            <div>
+              <div className="space-y-3 mb-6">
+                {ultimateDeal.features.map((feat) => (
+                  <p key={feat} className="text-sm text-white/70 flex items-start gap-3 font-body">
+                    <Check className="w-4 h-4 text-neon-purple mt-0.5 flex-shrink-0" />
+                    {feat}
+                  </p>
+                ))}
+              </div>
+
+              {/* Remaining */}
+              <div className="flex items-center gap-4 mb-6">
+                <div>
+                  <AnimatedCounter target={ultimateDeal.remaining} color="neon-purple" />
+                  <p className="font-display text-[10px] tracking-[0.2em] text-white/30">
+                    / {ultimateDeal.total} REMAINING
+                  </p>
+                </div>
+                <div className="flex-1 h-2 bg-white/5 overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${((ultimateDeal.total - ultimateDeal.remaining) / ultimateDeal.total) * 100}%` }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.5, delay: 0.8 }}
+                    className="h-full bg-neon-purple"
+                  />
+                </div>
+              </div>
+
+              <button
+                onClick={() => handleBuy(ultimateDeal.name, ultimateDeal.price)}
+                className="w-full font-display text-base tracking-widest py-4 bg-neon-purple text-[#070710] hover:shadow-[0_0_50px_rgba(119,0,255,0.5)] transition-all duration-300"
+              >
+                GET THE ULTIMATE PASS
+              </button>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ========== URGENCY FOOTER ========== */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="mt-12 max-w-3xl mx-auto border border-white/10 p-6 md:p-8 text-center bg-[#0a0a16]"
         >
-          <p className="text-white/80 font-body text-sm md:text-base font-semibold">
-            These prices <strong className="text-white">will not be available after opening day.</strong> Once we open, credits are full price.
-          </p>
+          <motion.p
+            animate={{ opacity: [1, 0.7, 1] }}
+            transition={{ repeat: Infinity, duration: 2 }}
+            className="text-white/80 font-body text-sm md:text-base font-semibold"
+          >
+            All limited tickets — <strong className="text-white">once they're gone, they're gone.</strong>
+          </motion.p>
           <p className="text-neon-pink font-bold mt-3 text-sm md:text-base glow-pink font-body">
-            Founder Passes are strictly limited to 200 — once they're gone, they're gone.
+            All tickets will be full price on the day of opening.
           </p>
         </motion.div>
       </div>
