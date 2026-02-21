@@ -4,69 +4,62 @@ import arcadeHero from "@/assets/arcade-hero.jpg";
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex flex-col justify-end overflow-hidden">
-      {/* Rainbow top bar */}
-      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-rainbow-bar z-20" />
+      {/* Neon top bar */}
+      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-neon-bar z-20" />
 
-      {/* Full-bleed cinematic arcade image */}
+      {/* Full-bleed arcade image */}
       <img
         src={arcadeHero}
         alt="LuxPlay Arcade — 40+ machines, opening May 2026"
         className="absolute inset-0 w-full h-full object-cover object-center"
       />
 
-      {/* Heavy gradient overlay — bottom-heavy for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/20" />
-      <div className="absolute inset-0 bg-gradient-to-r from-background/50 to-transparent" />
+      {/* Heavy gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#070710] via-[#070710]/70 to-[#070710]/20" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#070710]/50 to-transparent" />
 
-      {/* Content pinned to bottom */}
-      <div className="relative z-10 px-6 md:px-12 lg:px-20 pb-12 md:pb-20">
+      {/* Content */}
+      <div className="relative z-10 px-6 md:px-12 lg:px-20 pb-16 md:pb-24">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="font-display text-sm md:text-xl lg:text-2xl font-bold uppercase tracking-[0.2em] text-foreground/90 mb-2 md:mb-3"
+          className="font-display text-2xl md:text-4xl lg:text-5xl tracking-wider text-white/90 mb-1"
         >
-          While Everyone Is Closing —
+          WHILE EVERYONE IS CLOSING —
         </motion.p>
 
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.15 }}
-          className="font-display text-6xl md:text-8xl lg:text-[10rem] font-black uppercase leading-[0.85] tracking-tight"
+          className="font-display text-7xl md:text-[10rem] lg:text-[14rem] leading-[0.85] tracking-wide"
         >
-          <span className="text-gradient-rainbow">We're</span>
+          <span className="text-gradient-neon">WE'RE</span>
           <br />
-          <span className="text-gradient-rainbow">Opening!</span>
+          <span className="text-gradient-neon">OPENING!</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="font-display text-[10px] md:text-sm tracking-[0.25em] text-foreground/70 uppercase mt-4 md:mt-6"
+          className="font-body text-sm md:text-base tracking-widest text-white/60 uppercase mt-6"
         >
           40+ Arcade Machines · Mini Golf · Prizes · Café — Opening May 2026
         </motion.p>
 
-        {/* CTA — immediate, loud, unmissable */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.7 }}
-          className="mt-6 md:mt-10 flex flex-col sm:flex-row gap-4"
+          className="mt-8 md:mt-12"
         >
           <a
             href="#presale"
-            className="inline-block font-display text-sm md:text-base uppercase tracking-[0.2em] font-bold px-8 md:px-12 py-4 md:py-5 bg-neon-green text-background rounded-md hover:shadow-[0_0_40px_hsl(var(--neon-green)/0.5)] transition-all duration-300 text-center"
+            className="inline-block font-display text-xl md:text-2xl tracking-widest px-10 md:px-14 py-4 md:py-5 bg-neon-green text-[#070710] hover:shadow-[0_0_50px_rgba(170,255,0,0.5)] transition-all duration-300 text-center"
           >
-            Buy Credits Now
-          </a>
-          <a
-            href="#about"
-            className="inline-block font-display text-xs md:text-sm uppercase tracking-[0.2em] font-bold px-8 py-4 border border-foreground/20 text-foreground/80 rounded-md hover:border-neon-cyan hover:text-neon-cyan transition-all duration-300 text-center"
-          >
-            Learn More
+            BUY CREDITS NOW
           </a>
         </motion.div>
       </div>
@@ -81,7 +74,7 @@ const HeroSection = () => {
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
-          className="w-5 h-8 rounded-full border-2 border-foreground/30 flex items-start justify-center pt-1.5"
+          className="w-5 h-8 rounded-full border-2 border-white/30 flex items-start justify-center pt-1.5"
         >
           <div className="w-1 h-2 rounded-full bg-neon-cyan" />
         </motion.div>

@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['Orbitron', 'sans-serif'],
-        body: ['Inter', 'sans-serif'],
+        display: ['"Bebas Neue"', 'sans-serif'],
+        body: ['Montserrat', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -52,12 +52,10 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         neon: {
-          green: "hsl(var(--neon-green))",
-          pink: "hsl(var(--neon-pink))",
-          cyan: "hsl(var(--neon-cyan))",
-          yellow: "hsl(var(--neon-yellow))",
-          blue: "hsl(var(--neon-blue))",
-          purple: "hsl(var(--neon-purple))",
+          green: "#aaff00",
+          pink: "#ff00cc",
+          cyan: "#00eeff",
+          purple: "#7700ff",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
