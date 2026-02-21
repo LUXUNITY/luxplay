@@ -25,6 +25,9 @@ const VenueSection = () => {
           <span className="text-white">ONE VENUE. </span>
           <span className="text-gradient-neon">ENDLESS FUN.</span>
         </motion.h2>
+        <p className="mt-6 text-center font-body text-sm md:text-base tracking-widest text-white/40 uppercase">
+          Unit 7, Sovereign Centre · Boscombe · Bournemouth · BH1 4SX
+        </p>
       </div>
 
       {/* 2x2 grid */}
