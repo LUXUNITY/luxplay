@@ -1,118 +1,167 @@
 import { motion } from "framer-motion";
-import arcadeHero from "@/assets/arcade-hero.jpg";
+import venueArcade from "@/assets/venue-arcade.jpg";
+import venueMinigolf from "@/assets/venue-minigolf.jpg";
+import venuePrizes from "@/assets/venue-prizes.jpg";
+import venueCafe from "@/assets/venue-cafe.jpg";
 
 const HeroSection = () => {
   return (
     <section className="relative overflow-hidden">
-      {/* Rainbow top bar */}
+      {/* Rainbow top bar — exactly matching design */}
       <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-rainbow-bar z-20" />
 
-      {/* LUXPLAY Logo at very top */}
-      <div className="bg-background pt-6 pb-4 px-4 text-center">
-        <motion.h1
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
+      {/* Top spacing + headline — matches PDF: large top padding, left-aligned */}
+      <div className="bg-background pt-16 md:pt-24 pb-8 md:pb-10 px-6 md:px-12 lg:px-20">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="font-display text-4xl md:text-6xl lg:text-7xl font-black tracking-[0.2em] uppercase"
+          className="font-display text-xl md:text-3xl lg:text-4xl font-bold uppercase tracking-wider text-foreground"
         >
-          {"LUXPLAY".split("").map((char, i) => {
-            const colors = [
-              "text-neon-green",
-              "text-neon-cyan",
-              "text-neon-blue",
-              "text-neon-purple",
-              "text-neon-pink",
-              "text-neon-yellow",
-            ];
-            return (
-              <span key={i} className={`${colors[i]} drop-shadow-[0_0_20px_currentColor]`}>
-                {char}
-              </span>
-            );
-          })}
+          While Everyone Is Closing —
+        </motion.p>
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="font-display text-5xl md:text-7xl lg:text-8xl font-black uppercase leading-[0.95] mt-1"
+        >
+          <span className="text-gradient-rainbow">We're Opening!</span>
         </motion.h1>
-        <p className="font-display text-[10px] md:text-xs tracking-[0.4em] text-muted-foreground uppercase mt-2">
-          Bournemouth's Biggest New Arcade & Entertainment Centre
-        </p>
       </div>
 
-      {/* Hero arcade image */}
-      <div className="relative w-full">
-        <img
-          src={arcadeHero}
-          alt="LuxPlay Arcade — 40+ machines"
-          className="w-full h-[60vw] min-h-[280px] max-h-[600px] object-cover object-center"
-        />
-        {/* Gradient overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/30 to-transparent" />
+      {/* 2x2 venue photo grid — exactly matching PDF layout */}
+      <div className="grid grid-cols-2 gap-0.5 px-6 md:px-12 lg:px-20">
+        {/* Top left: Arcade Zone */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="relative aspect-[4/3] overflow-hidden"
+        >
+          <img src={venueArcade} alt="Arcade Zone" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+          <div className="absolute bottom-0 left-0 p-3 md:p-4">
+            <p className="font-display text-[10px] md:text-xs uppercase font-bold tracking-[0.2em] text-neon-green">
+              Arcade Zone
+            </p>
+          </div>
+        </motion.div>
 
-        {/* Massive headline */}
-        <div className="absolute inset-0 flex flex-col justify-end px-5 pb-6 md:px-10 md:pb-12">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="font-display text-xs md:text-sm tracking-[0.3em] text-neon-cyan uppercase mb-2 md:mb-4"
-          >
-            While Everyone Is Closing —
-          </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="font-display text-5xl md:text-8xl lg:text-9xl font-black uppercase leading-[0.9]"
-          >
-            <span className="text-gradient-rainbow">We're</span>
-            <br />
-            <span className="text-gradient-rainbow">Opening!</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="font-display text-xs md:text-sm tracking-[0.15em] text-foreground uppercase mt-3 md:mt-5"
-          >
-            40+ Arcade Machines & Counting — More On The Way
-          </motion.p>
-        </div>
+        {/* Top right: Mini Golf */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="relative aspect-[4/3] overflow-hidden"
+        >
+          <img src={venueMinigolf} alt="Mini Golf" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+          <div className="absolute bottom-0 left-0 p-3 md:p-4">
+            <p className="font-display text-[10px] md:text-xs uppercase font-bold tracking-[0.2em] text-neon-cyan">
+              Mini Golf
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Bottom left: Prize Redemption */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="relative aspect-[4/3] overflow-hidden"
+        >
+          <img src={venuePrizes} alt="Prize Redemption" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+          <div className="absolute bottom-0 left-0 p-3 md:p-4">
+            <p className="font-display text-[10px] md:text-xs uppercase font-bold tracking-[0.2em] text-neon-yellow">
+              Prize Redemption
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Bottom right: Café & Refreshments */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.7 }}
+          className="relative aspect-[4/3] overflow-hidden"
+        >
+          <img src={venueCafe} alt="Café & Refreshments" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+          <div className="absolute bottom-0 left-0 p-3 md:p-4">
+            <p className="font-display text-[10px] md:text-xs uppercase font-bold tracking-[0.2em] text-neon-pink">
+              Café & Refreshments
+            </p>
+          </div>
+        </motion.div>
       </div>
 
-      {/* Feature strip under hero */}
-      <div className="bg-background px-4 py-8 md:py-12">
-        <div className="container mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-2xl mx-auto"
-          >
-            {[
-              { icon: "🎮", label: "Arcade Games", sub: "40+ Machines", color: "text-neon-green" },
-              { icon: "⛳", label: "Mini Golf", sub: "9 Holes", color: "text-neon-cyan" },
-              { icon: "🏆", label: "Prizes", sub: "Win Big", color: "text-neon-yellow" },
-              { icon: "☕", label: "Café", sub: "Food & Drinks", color: "text-neon-pink" },
-            ].map((f) => (
-              <div key={f.label} className="card-neon-border rounded-lg bg-card p-4 text-center">
-                <span className="text-2xl md:text-3xl">{f.icon}</span>
-                <p className={`font-display text-[10px] md:text-xs uppercase font-bold tracking-wider mt-2 ${f.color}`}>
-                  {f.label}
-                </p>
-                <p className="text-muted-foreground text-[10px] md:text-xs mt-1">{f.sub}</p>
-              </div>
-            ))}
-          </motion.div>
+      {/* Description text — exactly matching PDF */}
+      <div className="px-6 md:px-12 lg:px-20 pt-10 pb-4">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-muted-foreground text-base md:text-lg max-w-3xl"
+        >
+          Bournemouth's biggest new family entertainment destination. Arcade games, mini golf, prizes and a café — <strong className="text-foreground">all under one roof. Something for everyone.</strong>
+        </motion.p>
+      </div>
 
-          {/* Opening callout */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center mt-8 font-display text-sm md:text-lg text-muted-foreground tracking-wider uppercase"
-          >
-            Opening <span className="text-neon-pink font-bold glow-pink">May 2026</span> · Sovereign Centre, Boscombe
-          </motion.p>
-        </div>
+      {/* 3-column feature strip in bordered card — exactly matching PDF */}
+      <div className="px-6 md:px-12 lg:px-20 py-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="card-neon-border rounded-lg bg-card grid grid-cols-3 divide-x divide-border max-w-2xl"
+        >
+          {[
+            { icon: "🎮", label: "Arcade Games", sub: "40+ Machines", color: "text-neon-green" },
+            { icon: "⛳", label: "Mini Golf", sub: "9 Holes", color: "text-neon-cyan" },
+            { icon: "☕", label: "Café", sub: "Food & Drinks", color: "text-neon-pink" },
+          ].map((f) => (
+            <div key={f.label} className="p-5 md:p-6 text-center">
+              <span className="text-xl md:text-2xl">{f.icon}</span>
+              <p className={`font-display text-[9px] md:text-xs uppercase font-bold tracking-wider mt-2 ${f.color}`}>
+                {f.label}
+              </p>
+              <p className="text-muted-foreground text-[10px] md:text-xs mt-1 uppercase tracking-wider">
+                {f.sub}
+              </p>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Pre-launch callout with pink left border — exactly matching PDF */}
+      <div className="px-6 md:px-12 lg:px-20 pb-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-muted/50 border-l-4 border-neon-pink rounded-r-lg p-5 md:p-6 max-w-3xl"
+        >
+          <p className="text-foreground font-semibold text-sm md:text-base">
+            Pre-launch passes available now. Buy your credits before we open and save big.{" "}
+            <span className="text-neon-pink font-bold">Limited Founder Passes — first come, first served.</span>
+          </p>
+        </motion.div>
+      </div>
+
+      {/* Bottom text — exactly matching PDF */}
+      <div className="px-6 md:px-12 lg:px-20 py-6 pb-10">
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-foreground font-semibold text-sm md:text-base"
+        >
+          40+ arcade machines. 9-hole mini golf. Prize redemption. Café.
+          <br />
+          <span className="text-muted-foreground font-normal">One incredible venue. Opening May 2026.</span>
+        </motion.p>
       </div>
     </section>
   );
