@@ -48,6 +48,14 @@ const HeroSection = () => {
         >
           40+ Arcade Machines · Mini Golf · Prizes · Café — Opening May 2026
         </motion.p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="font-body text-xs md:text-sm tracking-widest text-white/40 uppercase mt-2"
+        >
+          Unit 7, Sovereign Centre · Boscombe · Bournemouth · BH1 4SX
+        </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
