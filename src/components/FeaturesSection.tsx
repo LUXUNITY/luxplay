@@ -14,17 +14,16 @@ const FeaturesSection = () => {
       {/* LAYOUT: Portrait left 40% | Statement right 60% */}
       <div className="relative z-10 flex flex-col md:flex-row min-h-screen">
         {/* LEFT — Founder portrait, full height, NO cropping into a card */}
-        <div className="w-full md:w-[40%] relative">
+        <div className="w-full md:w-[40%] flex items-center justify-center px-6 py-10 md:py-20">
           <img
             src={founderBaz}
             alt="Baz — Founder of LuxPlay"
-            className="w-full h-full object-cover md:absolute md:inset-0 min-h-[500px] md:min-h-0"
+            className="w-full max-w-md object-contain rounded-sm"
+            style={{
+              boxShadow: '0 0 20px #ff00cc, 0 0 40px #ff00cc, 0 0 20px #00eeff, 0 0 60px #00eeff',
+            }}
           />
-          {/* Gradient fade into the dark right side */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#070710] hidden md:block" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#070710] to-transparent md:hidden" />
-          {/* Name badge */}
-          <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10">
+          <div className="mt-4 text-center">
             <span className="font-display text-lg md:text-xl tracking-widest text-neon-green bg-[#070710]/80 px-4 py-2">
               BAZ — FOUNDER
             </span>
