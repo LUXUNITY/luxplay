@@ -1,168 +1,91 @@
 import { motion } from "framer-motion";
-import venueArcade from "@/assets/venue-arcade.jpg";
-import venueMinigolf from "@/assets/venue-minigolf.jpg";
-import venuePrizes from "@/assets/venue-prizes.jpg";
-import venueCafe from "@/assets/venue-cafe.jpg";
+import arcadeHero from "@/assets/arcade-hero.jpg";
 
 const HeroSection = () => {
   return (
-    <section className="relative overflow-hidden">
-      {/* Rainbow top bar — exactly matching design */}
+    <section className="relative min-h-screen flex flex-col justify-end overflow-hidden">
+      {/* Rainbow top bar */}
       <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-rainbow-bar z-20" />
 
-      {/* Top spacing + headline — matches PDF: large top padding, left-aligned */}
-      <div className="bg-background pt-16 md:pt-24 pb-8 md:pb-10 px-6 md:px-12 lg:px-20">
+      {/* Full-bleed cinematic arcade image */}
+      <img
+        src={arcadeHero}
+        alt="LuxPlay Arcade — 40+ machines, opening May 2026"
+        className="absolute inset-0 w-full h-full object-cover object-center"
+      />
+
+      {/* Heavy gradient overlay — bottom-heavy for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/20" />
+      <div className="absolute inset-0 bg-gradient-to-r from-background/50 to-transparent" />
+
+      {/* Content pinned to bottom */}
+      <div className="relative z-10 px-6 md:px-12 lg:px-20 pb-12 md:pb-20">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="font-display text-xl md:text-3xl lg:text-4xl font-bold uppercase tracking-wider text-foreground"
+          transition={{ duration: 0.5 }}
+          className="font-display text-sm md:text-xl lg:text-2xl font-bold uppercase tracking-[0.2em] text-foreground/90 mb-2 md:mb-3"
         >
           While Everyone Is Closing —
         </motion.p>
+
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="font-display text-5xl md:text-7xl lg:text-8xl font-black uppercase leading-[0.95] mt-1"
+          transition={{ duration: 0.8, delay: 0.15 }}
+          className="font-display text-6xl md:text-8xl lg:text-[10rem] font-black uppercase leading-[0.85] tracking-tight"
         >
-          <span className="text-gradient-rainbow">We're Opening!</span>
+          <span className="text-gradient-rainbow">We're</span>
+          <br />
+          <span className="text-gradient-rainbow">Opening!</span>
         </motion.h1>
-      </div>
 
-      {/* 2x2 venue photo grid — exactly matching PDF layout */}
-      <div className="grid grid-cols-2 gap-0.5 px-6 md:px-12 lg:px-20">
-        {/* Top left: Arcade Zone */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="relative aspect-[4/3] overflow-hidden"
-        >
-          <img src={venueArcade} alt="Arcade Zone" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-          <div className="absolute bottom-0 left-0 p-3 md:p-4">
-            <p className="font-display text-[10px] md:text-xs uppercase font-bold tracking-[0.2em] text-neon-green">
-              Arcade Zone
-            </p>
-          </div>
-        </motion.div>
-
-        {/* Top right: Mini Golf */}
-        <motion.div
+        <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="relative aspect-[4/3] overflow-hidden"
+          className="font-display text-[10px] md:text-sm tracking-[0.25em] text-foreground/70 uppercase mt-4 md:mt-6"
         >
-          <img src={venueMinigolf} alt="Mini Golf" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-          <div className="absolute bottom-0 left-0 p-3 md:p-4">
-            <p className="font-display text-[10px] md:text-xs uppercase font-bold tracking-[0.2em] text-neon-cyan">
-              Mini Golf
-            </p>
-          </div>
-        </motion.div>
+          40+ Arcade Machines · Mini Golf · Prizes · Café — Opening May 2026
+        </motion.p>
 
-        {/* Bottom left: Prize Redemption */}
+        {/* CTA — immediate, loud, unmissable */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="relative aspect-[4/3] overflow-hidden"
-        >
-          <img src={venuePrizes} alt="Prize Redemption" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-          <div className="absolute bottom-0 left-0 p-3 md:p-4">
-            <p className="font-display text-[10px] md:text-xs uppercase font-bold tracking-[0.2em] text-neon-yellow">
-              Prize Redemption
-            </p>
-          </div>
-        </motion.div>
-
-        {/* Bottom right: Café & Refreshments */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.7 }}
-          className="relative aspect-[4/3] overflow-hidden"
+          className="mt-6 md:mt-10 flex flex-col sm:flex-row gap-4"
         >
-          <img src={venueCafe} alt="Café & Refreshments" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-          <div className="absolute bottom-0 left-0 p-3 md:p-4">
-            <p className="font-display text-[10px] md:text-xs uppercase font-bold tracking-[0.2em] text-neon-pink">
-              Café & Refreshments
-            </p>
-          </div>
+          <a
+            href="#presale"
+            className="inline-block font-display text-sm md:text-base uppercase tracking-[0.2em] font-bold px-8 md:px-12 py-4 md:py-5 bg-neon-green text-background rounded-md hover:shadow-[0_0_40px_hsl(var(--neon-green)/0.5)] transition-all duration-300 text-center"
+          >
+            Buy Credits Now
+          </a>
+          <a
+            href="#about"
+            className="inline-block font-display text-xs md:text-sm uppercase tracking-[0.2em] font-bold px-8 py-4 border border-foreground/20 text-foreground/80 rounded-md hover:border-neon-cyan hover:text-neon-cyan transition-all duration-300 text-center"
+          >
+            Learn More
+          </a>
         </motion.div>
       </div>
 
-      {/* Description text — exactly matching PDF */}
-      <div className="px-6 md:px-12 lg:px-20 pt-10 pb-4">
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-muted-foreground text-base md:text-lg max-w-3xl"
-        >
-          Bournemouth's biggest new family entertainment destination. Arcade games, mini golf, prizes and a café — <strong className="text-foreground">all under one roof. Something for everyone.</strong>
-        </motion.p>
-      </div>
-
-      {/* 3-column feature strip in bordered card — exactly matching PDF */}
-      <div className="px-6 md:px-12 lg:px-20 py-8">
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2 }}
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10"
+      >
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="card-neon-border rounded-lg bg-card grid grid-cols-3 divide-x divide-border max-w-2xl"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5 }}
+          className="w-5 h-8 rounded-full border-2 border-foreground/30 flex items-start justify-center pt-1.5"
         >
-          {[
-            { icon: "🎮", label: "Arcade Games", sub: "40+ Machines", color: "text-neon-green" },
-            { icon: "⛳", label: "Mini Golf", sub: "9 Holes", color: "text-neon-cyan" },
-            { icon: "☕", label: "Café", sub: "Food & Drinks", color: "text-neon-pink" },
-          ].map((f) => (
-            <div key={f.label} className="p-5 md:p-6 text-center">
-              <span className="text-xl md:text-2xl">{f.icon}</span>
-              <p className={`font-display text-[9px] md:text-xs uppercase font-bold tracking-wider mt-2 ${f.color}`}>
-                {f.label}
-              </p>
-              <p className="text-muted-foreground text-[10px] md:text-xs mt-1 uppercase tracking-wider">
-                {f.sub}
-              </p>
-            </div>
-          ))}
+          <div className="w-1 h-2 rounded-full bg-neon-cyan" />
         </motion.div>
-      </div>
-
-      {/* Pre-launch callout with pink left border — exactly matching PDF */}
-      <div className="px-6 md:px-12 lg:px-20 pb-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-muted/50 border-l-4 border-neon-pink rounded-r-lg p-5 md:p-6 max-w-3xl"
-        >
-          <p className="text-foreground font-semibold text-sm md:text-base">
-            Pre-launch passes available now. Buy your credits before we open and save big.{" "}
-            <span className="text-neon-pink font-bold">Limited Founder Passes — first come, first served.</span>
-          </p>
-        </motion.div>
-      </div>
-
-      {/* Bottom text — exactly matching PDF */}
-      <div className="px-6 md:px-12 lg:px-20 py-6 pb-10">
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-foreground font-semibold text-sm md:text-base"
-        >
-          40+ arcade machines. 9-hole mini golf. Prize redemption. Café.
-          <br />
-          <span className="text-muted-foreground font-normal">One incredible venue. Opening May 2026.</span>
-        </motion.p>
-      </div>
+      </motion.div>
     </section>
   );
 };
