@@ -38,7 +38,7 @@ const FeaturesSection = () => {
             viewport={{ once: true }}
             className="font-display text-2xl md:text-3xl lg:text-4xl tracking-wider text-white/70 mb-2"
           >
-            WHILE EVERYONE IS CLOSING —
+            While others wait for better times —
           </motion.p>
 
           {/* Main headline */}
@@ -48,7 +48,7 @@ const FeaturesSection = () => {
             viewport={{ once: true }}
             className="font-display text-6xl md:text-8xl lg:text-9xl tracking-wider leading-[0.9] mb-10 md:mb-14"
           >
-            <span className="text-gradient-neon">WE'RE<br />OPENING!</span>
+            <span className="text-gradient-neon">WE'RE<br />CREATING THEM!</span>
           </motion.h2>
 
           {/* Statements */}
