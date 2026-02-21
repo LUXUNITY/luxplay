@@ -102,18 +102,17 @@ const PreSaleSection = () => {
       {/* Neon top bar */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-neon-bar" />
 
-      {/* Glow orbs */}
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-neon-purple/5 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-neon-pink/5 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-neon-green/3 rounded-full blur-[200px] pointer-events-none" />
+      {/* Glow orbs — use smaller blur for performance */}
+      <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-neon-purple/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-neon-pink/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative z-10 px-6 md:px-12 lg:px-20 py-20 md:py-28">
         {/* ========== MASSIVE ANIMATED LUXPLAY LOGO ========== */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.3, rotateX: 40 }}
-          whileInView={{ opacity: 1, scale: 1, rotateX: 0 }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ type: "spring", stiffness: 80, damping: 12, duration: 1.2 }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-6"
         >
           <h2
@@ -187,11 +186,10 @@ const PreSaleSection = () => {
           {creditDeals.map((deal, i) => (
             <motion.div
               key={deal.name}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.12 }}
-              whileHover={{ scale: 1.03, y: -4 }}
+              transition={{ delay: i * 0.1, duration: 0.4 }}
               className={`relative p-6 md:p-8 flex flex-col transition-all duration-300 ${
                 deal.highlight
                   ? "border-2 border-neon-pink bg-[#0d0d1a] shadow-[0_0_40px_rgba(255,0,204,0.2)]"
@@ -276,11 +274,11 @@ const PreSaleSection = () => {
 
         {/* ========== ULTIMATE PASS — FULL WIDTH, MASSIVE ========== */}
         <motion.div
-          initial={{ opacity: 0, y: 50, scale: 0.95 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ type: "spring", stiffness: 60, damping: 14 }}
-          className="max-w-5xl mx-auto relative border-2 border-neon-purple bg-[#0d0d1a] p-8 md:p-12 shadow-[0_0_60px_rgba(119,0,255,0.2)]"
+          transition={{ duration: 0.5 }}
+          className="max-w-5xl mx-auto relative border-2 border-neon-purple bg-[#0d0d1a] p-8 md:p-12 shadow-[0_0_30px_rgba(119,0,255,0.15)]"
         >
           {/* Badge */}
           <div

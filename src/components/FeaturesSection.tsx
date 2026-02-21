@@ -8,8 +8,8 @@ const FeaturesSection = () => {
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-neon-bar z-10" />
 
       {/* Ambient glow */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-neon-purple/5 rounded-full blur-[200px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-neon-pink/5 rounded-full blur-[200px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-neon-purple/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-neon-pink/5 rounded-full blur-3xl pointer-events-none" />
 
       {/* LAYOUT: Portrait left 40% | Statement right 60% */}
       <div className="relative z-10 flex flex-col md:flex-row min-h-screen">
