@@ -116,20 +116,12 @@ const PreSaleSection = () => {
           transition={{ type: "spring", stiffness: 80, damping: 12, duration: 1.2 }}
           className="text-center mb-6"
         >
-          <motion.h2
+          <h2
             className="font-display text-[6rem] md:text-[12rem] lg:text-[16rem] leading-none tracking-[0.1em] text-gradient-neon select-none"
-            animate={{
-              textShadow: [
-                "0 0 20px rgba(170,255,0,0.4), 0 0 60px rgba(0,238,255,0.2)",
-                "0 0 40px rgba(255,0,204,0.5), 0 0 80px rgba(119,0,255,0.3)",
-                "0 0 20px rgba(0,238,255,0.4), 0 0 60px rgba(170,255,0,0.2)",
-                "0 0 40px rgba(255,0,204,0.5), 0 0 80px rgba(119,0,255,0.3)",
-              ],
-            }}
-            transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+            style={{ textShadow: "0 0 30px rgba(170,255,0,0.4), 0 0 60px rgba(0,238,255,0.2)" }}
           >
             LUXPLAY
-          </motion.h2>
+          </h2>
         </motion.div>
 
         {/* Flashing urgency badge */}
@@ -139,15 +131,13 @@ const PreSaleSection = () => {
           viewport={{ once: true }}
           className="text-center mb-4"
         >
-          <motion.span
-            animate={{ scale: [1, 1.05, 1], opacity: [1, 0.8, 1] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
-            className="inline-flex items-center gap-2 border-2 border-neon-pink bg-neon-pink/10 text-neon-pink font-display text-sm md:text-base tracking-[0.3em] uppercase px-6 py-3"
+          <span
+            className="inline-flex items-center gap-2 border-2 border-neon-pink bg-neon-pink/10 text-neon-pink font-display text-sm md:text-base tracking-[0.3em] uppercase px-6 py-3 animate-pulse"
           >
             <Flame className="w-4 h-4 text-neon-green" />
             PRE-LAUNCH EXCLUSIVE
             <Flame className="w-4 h-4 text-neon-green" />
-          </motion.span>
+          </span>
         </motion.div>
 
         {/* Headline */}
@@ -171,13 +161,11 @@ const PreSaleSection = () => {
           <p className="font-body text-white/50 text-sm md:text-base">
             LuxPlay opens May 2026. Buy before we open and
           </p>
-          <motion.p
-            className="font-display text-4xl md:text-5xl text-neon-green glow-green tracking-wider mt-1"
-            animate={{ scale: [1, 1.03, 1] }}
-            transition={{ repeat: Infinity, duration: 2 }}
+          <p
+            className="font-display text-4xl md:text-5xl text-neon-green glow-green tracking-wider mt-1 animate-pulse"
           >
             SAVE BIG.
-          </motion.p>
+          </p>
         </motion.div>
 
         {/* Going fast warning */}
@@ -187,21 +175,11 @@ const PreSaleSection = () => {
           viewport={{ once: true }}
           className="flex items-center justify-center gap-3 mb-12"
         >
-          <motion.div
-            animate={{ opacity: [1, 0.4, 1] }}
-            transition={{ repeat: Infinity, duration: 0.8 }}
-          >
-            <Clock className="w-4 h-4 text-neon-pink" />
-          </motion.div>
+          <Clock className="w-4 h-4 text-neon-pink animate-pulse" />
           <p className="font-display text-sm md:text-base tracking-[0.2em] text-neon-pink glow-pink">
             SPACES ARE GOING FAST — DON'T MISS OUT
           </p>
-          <motion.div
-            animate={{ opacity: [1, 0.4, 1] }}
-            transition={{ repeat: Infinity, duration: 0.8 }}
-          >
-            <Clock className="w-4 h-4 text-neon-pink" />
-          </motion.div>
+          <Clock className="w-4 h-4 text-neon-pink animate-pulse" />
         </motion.div>
 
         {/* ========== THREE TIER CARDS ========== */}
@@ -221,13 +199,11 @@ const PreSaleSection = () => {
               }`}
             >
               {deal.badge && (
-                <motion.div
-                  animate={{ scale: [1, 1.08, 1] }}
-                  transition={{ repeat: Infinity, duration: 2 }}
-                  className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-neon-pink text-[#070710] text-xs font-display tracking-widest px-4 py-1"
+                <div
+                  className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-neon-pink text-[#070710] text-xs font-display tracking-widest px-4 py-1 animate-pulse"
                 >
                   <Star className="w-3 h-3" /> {deal.badge}
-                </motion.div>
+                </div>
               )}
 
               {/* Tier name */}
@@ -307,31 +283,21 @@ const PreSaleSection = () => {
           className="max-w-5xl mx-auto relative border-2 border-neon-purple bg-[#0d0d1a] p-8 md:p-12 shadow-[0_0_60px_rgba(119,0,255,0.2)]"
         >
           {/* Badge */}
-          <motion.div
-            animate={{ scale: [1, 1.08, 1] }}
-            transition={{ repeat: Infinity, duration: 2.5 }}
-            className="absolute -top-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-neon-purple text-[#070710] font-display text-sm tracking-[0.3em] px-6 py-1.5"
+          <div
+            className="absolute -top-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-neon-purple text-[#070710] font-display text-sm tracking-[0.3em] px-6 py-1.5 animate-pulse"
           >
             <Star className="w-4 h-4" /> ULTIMATE <Star className="w-4 h-4" />
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mt-4">
             {/* Left — Price & Credits */}
             <div className="text-center md:text-left">
               <p className="font-display text-sm tracking-[0.3em] text-neon-purple mb-2">ULTIMATE PASS</p>
-              <motion.span
-                className="font-display text-8xl md:text-9xl tracking-wide text-neon-purple inline-block"
-                animate={{
-                  textShadow: [
-                    "0 0 20px rgba(119,0,255,0.5), 0 0 60px rgba(119,0,255,0.3)",
-                    "0 0 40px rgba(119,0,255,0.7), 0 0 80px rgba(119,0,255,0.4)",
-                    "0 0 20px rgba(119,0,255,0.5), 0 0 60px rgba(119,0,255,0.3)",
-                  ],
-                }}
-                transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+              <span
+                className="font-display text-8xl md:text-9xl tracking-wide text-neon-purple inline-block glow-purple"
               >
                 {ultimateDeal.price}
-              </motion.span>
+              </span>
               <h4 className="font-display text-3xl md:text-4xl tracking-wider text-neon-purple mt-2">
                 {ultimateDeal.credits}
               </h4>
@@ -387,13 +353,11 @@ const PreSaleSection = () => {
           viewport={{ once: true }}
           className="mt-12 max-w-3xl mx-auto border border-white/10 p-6 md:p-8 text-center bg-[#0a0a16]"
         >
-          <motion.p
-            animate={{ opacity: [1, 0.7, 1] }}
-            transition={{ repeat: Infinity, duration: 2 }}
+          <p
             className="text-white/80 font-body text-sm md:text-base font-semibold"
           >
             All limited tickets — <strong className="text-white">once they're gone, they're gone.</strong>
-          </motion.p>
+          </p>
           <p className="text-neon-pink font-bold mt-3 text-sm md:text-base glow-pink font-body">
             All tickets will be full price on the day of opening.
           </p>
