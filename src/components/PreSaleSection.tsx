@@ -284,14 +284,17 @@ const PreSaleSection = () => {
 
               {/* Buy */}
               <button
-                onClick={() => handleBuy(deal.name, deal.price)}
-                className={`w-full font-display text-sm tracking-widest py-3 transition-all duration-300 ${
+                onClick={() => handleBuy(deal.packageId)}
+                disabled={loadingPackage === deal.packageId}
+                className={`w-full font-display text-sm tracking-widest py-3 transition-all duration-300 disabled:opacity-50 ${
                   deal.highlight
                     ? "bg-neon-pink text-[#070710] hover:shadow-[0_0_40px_rgba(255,0,204,0.5)]"
                     : "bg-neon-green text-[#070710] hover:shadow-[0_0_40px_rgba(170,255,0,0.5)]"
                 }`}
               >
-                BUY NOW
+                {loadingPackage === deal.packageId ? (
+                  <Loader2 className="w-4 h-4 animate-spin mx-auto" />
+                ) : "BUY NOW"}
               </button>
             </motion.div>
           ))}
@@ -360,10 +363,13 @@ const PreSaleSection = () => {
               </div>
 
               <button
-                onClick={() => handleBuy(ultimateDeal.name, ultimateDeal.price)}
-                className="w-full font-display text-base tracking-widest py-4 bg-neon-purple text-[#070710] hover:shadow-[0_0_50px_rgba(119,0,255,0.5)] transition-all duration-300"
+                onClick={() => handleBuy(ultimateDeal.packageId)}
+                disabled={loadingPackage === ultimateDeal.packageId}
+                className="w-full font-display text-base tracking-widest py-4 bg-neon-purple text-[#070710] hover:shadow-[0_0_50px_rgba(119,0,255,0.5)] transition-all duration-300 disabled:opacity-50"
               >
-                GET THE ULTIMATE PASS
+                {loadingPackage === ultimateDeal.packageId ? (
+                  <Loader2 className="w-4 h-4 animate-spin mx-auto" />
+                ) : "GET THE ULTIMATE PASS"}
               </button>
             </div>
           </div>
