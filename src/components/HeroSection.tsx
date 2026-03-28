@@ -46,7 +46,7 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="font-body text-sm md:text-base tracking-widest text-white/60 uppercase mt-6"
         >
-          40+ Arcade Machines · Mini Golf · Prizes · Café — Opening May 2026
+          40+ Arcade Machines · Soft Play · Prizes · Café — Opening May 2026
         </motion.p>
         <motion.p
           initial={{ opacity: 0 }}
