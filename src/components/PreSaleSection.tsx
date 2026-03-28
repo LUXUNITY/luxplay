@@ -1,11 +1,14 @@
 import { motion, useInView } from "framer-motion";
-import { Check, Star, Zap, Flame, Clock } from "lucide-react";
+import { Check, Star, Zap, Flame, Clock, Loader2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
 
 const creditDeals = [
   {
     price: "£10",
     name: "Explorer",
+    packageId: "explorer",
     credits: "130 Credits",
     bonus: "23% off",
     worth: "Normal price £13",
@@ -19,6 +22,7 @@ const creditDeals = [
   {
     price: "£25",
     name: "Champion",
+    packageId: "champion",
     credits: "350 Credits",
     bonus: "29% off",
     worth: "Normal price £35",
@@ -32,6 +36,7 @@ const creditDeals = [
   {
     price: "£50",
     name: "Legend",
+    packageId: "legend",
     credits: "800 Credits",
     bonus: "38% off",
     worth: "Normal price £80",
@@ -48,6 +53,7 @@ const creditDeals = [
 const ultimateDeal = {
   price: "£100",
   name: "Ultimate Pass",
+  packageId: "ultimate",
   credits: "2,000 Credits",
   bonus: "50% off",
   worth: "Normal price £200",
@@ -93,8 +99,27 @@ const AnimatedCounter = ({ target, color }: { target: number; color: string }) =
 };
 
 const PreSaleSection = () => {
-  const handleBuy = (name: string, price: string) => {
-    alert(`You selected ${name} for ${price}. Payment coming soon!`);
+  const [loadingPackage, setLoadingPackage] = useState<string | null>(null);
+
+  const handleBuy = async (packageId: string) => {
+    setLoadingPackage(packageId);
+    try {
+      const { data, error } = await supabase.functions.invoke("create-checkout", {
+        body: { packageId },
+      });
+      if (error) throw error;
+      if (data?.url) {
+        window.location.href = data.url;
+      }
+    } catch (err: any) {
+      toast({
+        title: "Checkout failed",
+        description: err.message || "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoadingPackage(null);
+    }
   };
 
   return (
@@ -259,14 +284,17 @@ const PreSaleSection = () => {
 
               {/* Buy */}
               <button
-                onClick={() => handleBuy(deal.name, deal.price)}
-                className={`w-full font-display text-sm tracking-widest py-3 transition-all duration-300 ${
+                onClick={() => handleBuy(deal.packageId)}
+                disabled={loadingPackage === deal.packageId}
+                className={`w-full font-display text-sm tracking-widest py-3 transition-all duration-300 disabled:opacity-50 ${
                   deal.highlight
                     ? "bg-neon-pink text-[#070710] hover:shadow-[0_0_40px_rgba(255,0,204,0.5)]"
                     : "bg-neon-green text-[#070710] hover:shadow-[0_0_40px_rgba(170,255,0,0.5)]"
                 }`}
               >
-                BUY NOW
+                {loadingPackage === deal.packageId ? (
+                  <Loader2 className="w-4 h-4 animate-spin mx-auto" />
+                ) : "BUY NOW"}
               </button>
             </motion.div>
           ))}
@@ -335,10 +363,13 @@ const PreSaleSection = () => {
               </div>
 
               <button
-                onClick={() => handleBuy(ultimateDeal.name, ultimateDeal.price)}
-                className="w-full font-display text-base tracking-widest py-4 bg-neon-purple text-[#070710] hover:shadow-[0_0_50px_rgba(119,0,255,0.5)] transition-all duration-300"
+                onClick={() => handleBuy(ultimateDeal.packageId)}
+                disabled={loadingPackage === ultimateDeal.packageId}
+                className="w-full font-display text-base tracking-widest py-4 bg-neon-purple text-[#070710] hover:shadow-[0_0_50px_rgba(119,0,255,0.5)] transition-all duration-300 disabled:opacity-50"
               >
-                GET THE ULTIMATE PASS
+                {loadingPackage === ultimateDeal.packageId ? (
+                  <Loader2 className="w-4 h-4 animate-spin mx-auto" />
+                ) : "GET THE ULTIMATE PASS"}
               </button>
             </div>
           </div>
