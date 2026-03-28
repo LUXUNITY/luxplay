@@ -1,6 +1,8 @@
 import { motion, useInView } from "framer-motion";
-import { Check, Star, Zap, Flame, Clock } from "lucide-react";
+import { Check, Star, Zap, Flame, Clock, Loader2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
 
 const creditDeals = [
   {
