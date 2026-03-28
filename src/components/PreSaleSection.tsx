@@ -99,8 +99,27 @@ const AnimatedCounter = ({ target, color }: { target: number; color: string }) =
 };
 
 const PreSaleSection = () => {
-  const handleBuy = (name: string, price: string) => {
-    alert(`You selected ${name} for ${price}. Payment coming soon!`);
+  const [loadingPackage, setLoadingPackage] = useState<string | null>(null);
+
+  const handleBuy = async (packageId: string) => {
+    setLoadingPackage(packageId);
+    try {
+      const { data, error } = await supabase.functions.invoke("create-checkout", {
+        body: { packageId },
+      });
+      if (error) throw error;
+      if (data?.url) {
+        window.location.href = data.url;
+      }
+    } catch (err: any) {
+      toast({
+        title: "Checkout failed",
+        description: err.message || "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoadingPackage(null);
+    }
   };
 
   return (
