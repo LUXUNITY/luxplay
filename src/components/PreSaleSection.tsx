@@ -6,39 +6,39 @@ const creditDeals = [
   {
     price: "£10",
     name: "Explorer",
-    credits: "160 Credits",
-    bonus: "60% bonus",
-    worth: "Worth £16",
-    plays: "20 plays",
+    credits: "80 Credits",
+    bonus: "33% off",
+    worth: "Normal price £15",
+    plays: "10 plays",
     remaining: 513,
     total: 1000,
-    features: ["60% bonus credits vs standard", "Valid from opening day"],
+    features: ["33% pre-launch discount", "Valid from opening day"],
     highlight: false,
     color: "neon-green",
   },
   {
     price: "£25",
     name: "Champion",
-    credits: "500 Credits",
-    bonus: "Double your money",
-    worth: "Worth £50",
-    plays: "62 plays",
+    credits: "240 Credits",
+    bonus: "44% off",
+    worth: "Normal price £45",
+    plays: "30 plays",
     remaining: 451,
     total: 1000,
-    features: ["Double your money", "Valid from opening day"],
+    features: ["44% pre-launch discount", "Valid from opening day"],
     highlight: false,
     color: "neon-cyan",
   },
   {
     price: "£50",
     name: "Legend",
-    credits: "1,200 Credits",
-    bonus: "140% bonus",
-    worth: "Worth £120",
-    plays: "150 plays",
+    credits: "560 Credits",
+    bonus: "52% off",
+    worth: "Normal price £105",
+    plays: "70 plays",
     remaining: 187,
     total: 1000,
-    features: ["140% bonus credits", "The smart choice", "Valid from opening day"],
+    features: ["52% pre-launch discount", "The smart choice", "Valid from opening day"],
     highlight: true,
     badge: "BEST VALUE",
     color: "neon-pink",
@@ -48,14 +48,14 @@ const creditDeals = [
 const ultimateDeal = {
   price: "£100",
   name: "Ultimate Pass",
-  credits: "2,800 Credits",
-  bonus: "180% bonus",
-  worth: "Worth £280",
-  plays: "350 plays",
+  credits: "1,200 Credits",
+  bonus: "56% off",
+  worth: "Normal price £225",
+  plays: "150 plays",
   remaining: 116,
   total: 250,
   features: [
-    "180% bonus credits",
+    "56% pre-launch discount",
     "VIP early access before public opening",
     "Exclusive LuxPlay hoodie",
     "10% off all future top-ups for life",
@@ -354,10 +354,10 @@ const PreSaleSection = () => {
           <p
             className="text-white/80 font-body text-sm md:text-base font-semibold"
           >
-            All limited tickets — <strong className="text-white">once they're gone, they're gone.</strong>
+            Pre-launch only — <strong className="text-white">these discounts disappear when we open.</strong>
           </p>
           <p className="text-neon-pink font-bold mt-3 text-sm md:text-base glow-pink font-body">
-            All tickets will be full price on the day of opening.
+            Full price from opening day. Lock in your savings now.
           </p>
         </motion.div>
       </div>
