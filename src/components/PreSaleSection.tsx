@@ -22,6 +22,7 @@ const creditDeals = [
   {
     price: "£25",
     name: "Champion",
+    packageId: "champion",
     credits: "350 Credits",
     bonus: "29% off",
     worth: "Normal price £35",
@@ -35,6 +36,7 @@ const creditDeals = [
   {
     price: "£50",
     name: "Legend",
+    packageId: "legend",
     credits: "800 Credits",
     bonus: "38% off",
     worth: "Normal price £80",
@@ -51,6 +53,7 @@ const creditDeals = [
 const ultimateDeal = {
   price: "£100",
   name: "Ultimate Pass",
+  packageId: "ultimate",
   credits: "2,000 Credits",
   bonus: "50% off",
   worth: "Normal price £200",
