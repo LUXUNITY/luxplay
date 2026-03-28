@@ -8,6 +8,7 @@ const creditDeals = [
   {
     price: "£10",
     name: "Explorer",
+    packageId: "explorer",
     credits: "130 Credits",
     bonus: "23% off",
     worth: "Normal price £13",
