@@ -55,7 +55,7 @@ const ultimateDeal = {
   remaining: 116,
   total: 250,
   features: [
-    "56% pre-launch discount",
+    "50% pre-launch discount",
     "VIP early access before public opening",
     "Exclusive LuxPlay hoodie",
     "10% off all future top-ups for life",
