@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 import venueArcade from "@/assets/venue-arcade.jpg";
-import venueMinigolf from "@/assets/venue-minigolf.jpg";
+import venueSoftplay from "@/assets/softplay.png";
 import venuePrizes from "@/assets/venue-prizes.jpg";
 import venueCafe from "@/assets/venue-cafe.jpg";
 
 const venues = [
   { img: venueArcade, label: "ARCADE ZONE", color: "text-neon-green" },
-  { img: venueMinigolf, label: "MINI GOLF", color: "text-neon-cyan" },
+  { img: venueSoftplay, label: "SOFT PLAY", color: "text-neon-cyan" },
   { img: venuePrizes, label: "PRIZE REDEMPTION", color: "text-neon-pink" },
   { img: venueCafe, label: "CAFÉ", color: "text-neon-purple" },
 ];
