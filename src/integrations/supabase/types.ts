@@ -14,7 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      orders: {
+        Row: {
+          amount_paid: number
+          created_at: string
+          credits: number
+          currency: string
+          customer_email: string
+          id: string
+          package_name: string
+          redeemed: boolean
+          redeemed_at: string | null
+          redemption_code: string
+          stripe_session_id: string
+        }
+        Insert: {
+          amount_paid: number
+          created_at?: string
+          credits: number
+          currency?: string
+          customer_email: string
+          id?: string
+          package_name: string
+          redeemed?: boolean
+          redeemed_at?: string | null
+          redemption_code: string
+          stripe_session_id: string
+        }
+        Update: {
+          amount_paid?: number
+          created_at?: string
+          credits?: number
+          currency?: string
+          customer_email?: string
+          id?: string
+          package_name?: string
+          redeemed?: boolean
+          redeemed_at?: string | null
+          redemption_code?: string
+          stripe_session_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
