@@ -33,6 +33,19 @@ const PaymentSuccess = () => {
         if (fnError) throw fnError;
         if (data?.order) {
           setOrder(data.order);
+          // Send redemption code email
+          await supabase.functions.invoke("send-transactional-email", {
+            body: {
+              templateName: "redemption-code",
+              recipientEmail: data.order.customer_email,
+              idempotencyKey: `redemption-${data.order.stripe_session_id || sessionId}`,
+              templateData: {
+                packageName: data.order.package_name,
+                credits: data.order.credits,
+                redemptionCode: data.order.redemption_code,
+              },
+            },
+          });
         } else {
           setError(data?.error || "Could not find your order.");
         }
