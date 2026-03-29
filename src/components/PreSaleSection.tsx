@@ -317,7 +317,7 @@ const PreSaleSection = () => {
                 <div className="w-full h-1.5 bg-white/5 mt-2 overflow-hidden">
                   <motion.div
                     initial={{ width: 0 }}
-                    whileInView={{ width: `${((soldCounts[deal.packageId] || 0) / (PACKAGE_TOTALS[deal.packageId] || deal.total)) * 100}%` }}
+                    whileInView={{ width: `${(getTotalSold(deal.packageId) / (PACKAGE_TOTALS[deal.packageId] || deal.total)) * 100}%` }}
                     viewport={{ once: true }}
                     transition={{ duration: 1.5, delay: 0.5 + i * 0.1 }}
                     className={`h-full bg-${deal.color}`}
