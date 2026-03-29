@@ -143,6 +143,57 @@ export type Database = {
         }
         Relationships: []
       }
+      soft_play_bookings: {
+        Row: {
+          amount_paid: number
+          booking_code: string
+          checked_in: boolean
+          checked_in_at: string | null
+          child_name: string
+          created_at: string
+          currency: string
+          id: string
+          parent_email: string
+          parent_name: string
+          parent_phone: string | null
+          session_date: string
+          session_time: string
+          stripe_session_id: string
+        }
+        Insert: {
+          amount_paid?: number
+          booking_code: string
+          checked_in?: boolean
+          checked_in_at?: string | null
+          child_name: string
+          created_at?: string
+          currency?: string
+          id?: string
+          parent_email: string
+          parent_name: string
+          parent_phone?: string | null
+          session_date: string
+          session_time: string
+          stripe_session_id: string
+        }
+        Update: {
+          amount_paid?: number
+          booking_code?: string
+          checked_in?: boolean
+          checked_in_at?: string | null
+          child_name?: string
+          created_at?: string
+          currency?: string
+          id?: string
+          parent_email?: string
+          parent_name?: string
+          parent_phone?: string | null
+          session_date?: string
+          session_time?: string
+          stripe_session_id?: string
+        }
+        Relationships: []
+      }
       suppressed_emails: {
         Row: {
           created_at: string
