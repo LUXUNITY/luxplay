@@ -24,8 +24,10 @@ const FeaturesSection = () => {
             }}
           />
           <div className="mt-6 text-center">
-            <p className="font-display text-3xl md:text-4xl tracking-widest text-white">BAZ</p>
-            <p className="font-display text-base md:text-lg tracking-[0.3em] text-neon-purple mt-1">— Founder of LUXPLAY</p>
+            <p className="font-display text-sm md:text-base tracking-[0.25em] text-white/60">Sarbaz</p>
+            <p className="font-display text-4xl md:text-5xl tracking-widest text-white mt-0.5">"BAZ"</p>
+            <p className="font-display text-sm md:text-base tracking-[0.25em] text-white/60 mt-0.5">Roushbaiani</p>
+            <p className="font-display text-base md:text-lg tracking-[0.3em] text-neon-purple mt-2">— Founder of LUXPLAY</p>
           </div>
         </div>
 
@@ -123,7 +125,7 @@ const FeaturesSection = () => {
               <span className="text-neon-cyan font-bold">we're doubling down on this town.</span>
             </p>
             <p className="font-display text-sm tracking-widest text-white/30 mt-4">
-              — BAZ, FOUNDER OF LUXPLAY
+              — SARBAZ "BAZ" ROUSHBAIANI, FOUNDER OF LUXPLAY
             </p>
           </motion.div>
         </div>
