@@ -98,6 +98,14 @@ const AnimatedCounter = ({ target, color }: { target: number; color: string }) =
   );
 };
 
+// Base "already sold" counts hardcoded from the original design
+const BASE_SOLD: Record<string, number> = {
+  explorer: 487,   // 1000 - 513
+  champion: 549,   // 1000 - 451
+  legend: 813,     // 1000 - 187
+  ultimate: 134,   // 250 - 116
+};
+
 const PACKAGE_TOTALS: Record<string, number> = {
   explorer: 1000,
   champion: 1000,
@@ -107,7 +115,7 @@ const PACKAGE_TOTALS: Record<string, number> = {
 
 const PreSaleSection = () => {
   const [loadingPackage, setLoadingPackage] = useState<string | null>(null);
-  const [soldCounts, setSoldCounts] = useState<Record<string, number>>({});
+  const [realSoldCounts, setRealSoldCounts] = useState<Record<string, number>>({});
 
   useEffect(() => {
     const fetchSoldCounts = async () => {
@@ -121,16 +129,19 @@ const PreSaleSection = () => {
           const key = order.package_name.toLowerCase().replace(" pass", "").replace(" ", "-");
           counts[key] = (counts[key] || 0) + 1;
         });
-        setSoldCounts(counts);
+        setRealSoldCounts(counts);
       }
     };
     fetchSoldCounts();
   }, []);
 
+  const getTotalSold = (packageId: string) => {
+    return (BASE_SOLD[packageId] || 0) + (realSoldCounts[packageId] || 0);
+  };
+
   const getRemaining = (packageId: string) => {
     const total = PACKAGE_TOTALS[packageId] || 1000;
-    const sold = soldCounts[packageId] || 0;
-    return Math.max(total - sold, 0);
+    return Math.max(total - getTotalSold(packageId), 0);
   };
 
   const handleBuy = async (packageId: string) => {
