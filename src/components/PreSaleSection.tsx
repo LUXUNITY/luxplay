@@ -98,8 +98,40 @@ const AnimatedCounter = ({ target, color }: { target: number; color: string }) =
   );
 };
 
+const PACKAGE_TOTALS: Record<string, number> = {
+  explorer: 1000,
+  champion: 1000,
+  legend: 1000,
+  ultimate: 250,
+};
+
 const PreSaleSection = () => {
   const [loadingPackage, setLoadingPackage] = useState<string | null>(null);
+  const [soldCounts, setSoldCounts] = useState<Record<string, number>>({});
+
+  useEffect(() => {
+    const fetchSoldCounts = async () => {
+      const { data } = await supabase
+        .from("orders")
+        .select("package_name");
+
+      if (data) {
+        const counts: Record<string, number> = {};
+        data.forEach((order) => {
+          const key = order.package_name.toLowerCase().replace(" pass", "").replace(" ", "-");
+          counts[key] = (counts[key] || 0) + 1;
+        });
+        setSoldCounts(counts);
+      }
+    };
+    fetchSoldCounts();
+  }, []);
+
+  const getRemaining = (packageId: string) => {
+    const total = PACKAGE_TOTALS[packageId] || 1000;
+    const sold = soldCounts[packageId] || 0;
+    return Math.max(total - sold, 0);
+  };
 
   const handleBuy = async (packageId: string) => {
     setLoadingPackage(packageId);
@@ -266,15 +298,15 @@ const PreSaleSection = () => {
 
               {/* Remaining counter */}
               <div className="text-center mb-4">
-                <AnimatedCounter target={deal.remaining} color={deal.color} />
+                <AnimatedCounter target={getRemaining(deal.packageId)} color={deal.color} />
                 <p className="font-display text-[10px] tracking-[0.2em] text-white/30">
-                  / {deal.total} REMAINING
+                  / {PACKAGE_TOTALS[deal.packageId] || deal.total} REMAINING
                 </p>
                 {/* Progress bar */}
                 <div className="w-full h-1.5 bg-white/5 mt-2 overflow-hidden">
                   <motion.div
                     initial={{ width: 0 }}
-                    whileInView={{ width: `${((deal.total - deal.remaining) / deal.total) * 100}%` }}
+                    whileInView={{ width: `${((soldCounts[deal.packageId] || 0) / (PACKAGE_TOTALS[deal.packageId] || deal.total)) * 100}%` }}
                     viewport={{ once: true }}
                     transition={{ duration: 1.5, delay: 0.5 + i * 0.1 }}
                     className={`h-full bg-${deal.color}`}
@@ -346,15 +378,15 @@ const PreSaleSection = () => {
               {/* Remaining */}
               <div className="flex items-center gap-4 mb-6">
                 <div>
-                  <AnimatedCounter target={ultimateDeal.remaining} color="neon-purple" />
+                  <AnimatedCounter target={getRemaining("ultimate")} color="neon-purple" />
                   <p className="font-display text-[10px] tracking-[0.2em] text-white/30">
-                    / {ultimateDeal.total} REMAINING
+                    / {PACKAGE_TOTALS["ultimate"]} REMAINING
                   </p>
                 </div>
                 <div className="flex-1 h-2 bg-white/5 overflow-hidden">
                   <motion.div
                     initial={{ width: 0 }}
-                    whileInView={{ width: `${((ultimateDeal.total - ultimateDeal.remaining) / ultimateDeal.total) * 100}%` }}
+                    whileInView={{ width: `${((soldCounts["ultimate"] || 0) / PACKAGE_TOTALS["ultimate"]) * 100}%` }}
                     viewport={{ once: true }}
                     transition={{ duration: 1.5, delay: 0.8 }}
                     className="h-full bg-neon-purple"
