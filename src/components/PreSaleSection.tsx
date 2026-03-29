@@ -98,8 +98,40 @@ const AnimatedCounter = ({ target, color }: { target: number; color: string }) =
   );
 };
 
+const PACKAGE_TOTALS: Record<string, number> = {
+  explorer: 1000,
+  champion: 1000,
+  legend: 1000,
+  ultimate: 250,
+};
+
 const PreSaleSection = () => {
   const [loadingPackage, setLoadingPackage] = useState<string | null>(null);
+  const [soldCounts, setSoldCounts] = useState<Record<string, number>>({});
+
+  useEffect(() => {
+    const fetchSoldCounts = async () => {
+      const { data } = await supabase
+        .from("orders")
+        .select("package_name");
+
+      if (data) {
+        const counts: Record<string, number> = {};
+        data.forEach((order) => {
+          const key = order.package_name.toLowerCase().replace(" pass", "").replace(" ", "-");
+          counts[key] = (counts[key] || 0) + 1;
+        });
+        setSoldCounts(counts);
+      }
+    };
+    fetchSoldCounts();
+  }, []);
+
+  const getRemaining = (packageId: string) => {
+    const total = PACKAGE_TOTALS[packageId] || 1000;
+    const sold = soldCounts[packageId] || 0;
+    return Math.max(total - sold, 0);
+  };
 
   const handleBuy = async (packageId: string) => {
     setLoadingPackage(packageId);
