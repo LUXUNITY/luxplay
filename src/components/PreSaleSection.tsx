@@ -298,15 +298,15 @@ const PreSaleSection = () => {
 
               {/* Remaining counter */}
               <div className="text-center mb-4">
-                <AnimatedCounter target={deal.remaining} color={deal.color} />
+                <AnimatedCounter target={getRemaining(deal.packageId)} color={deal.color} />
                 <p className="font-display text-[10px] tracking-[0.2em] text-white/30">
-                  / {deal.total} REMAINING
+                  / {PACKAGE_TOTALS[deal.packageId] || deal.total} REMAINING
                 </p>
                 {/* Progress bar */}
                 <div className="w-full h-1.5 bg-white/5 mt-2 overflow-hidden">
                   <motion.div
                     initial={{ width: 0 }}
-                    whileInView={{ width: `${((deal.total - deal.remaining) / deal.total) * 100}%` }}
+                    whileInView={{ width: `${((soldCounts[deal.packageId] || 0) / (PACKAGE_TOTALS[deal.packageId] || deal.total)) * 100}%` }}
                     viewport={{ once: true }}
                     transition={{ duration: 1.5, delay: 0.5 + i * 0.1 }}
                     className={`h-full bg-${deal.color}`}
