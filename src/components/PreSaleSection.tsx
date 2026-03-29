@@ -378,15 +378,15 @@ const PreSaleSection = () => {
               {/* Remaining */}
               <div className="flex items-center gap-4 mb-6">
                 <div>
-                  <AnimatedCounter target={ultimateDeal.remaining} color="neon-purple" />
+                  <AnimatedCounter target={getRemaining("ultimate")} color="neon-purple" />
                   <p className="font-display text-[10px] tracking-[0.2em] text-white/30">
-                    / {ultimateDeal.total} REMAINING
+                    / {PACKAGE_TOTALS["ultimate"]} REMAINING
                   </p>
                 </div>
                 <div className="flex-1 h-2 bg-white/5 overflow-hidden">
                   <motion.div
                     initial={{ width: 0 }}
-                    whileInView={{ width: `${((ultimateDeal.total - ultimateDeal.remaining) / ultimateDeal.total) * 100}%` }}
+                    whileInView={{ width: `${((soldCounts["ultimate"] || 0) / PACKAGE_TOTALS["ultimate"]) * 100}%` }}
                     viewport={{ once: true }}
                     transition={{ duration: 1.5, delay: 0.8 }}
                     className="h-full bg-neon-purple"
