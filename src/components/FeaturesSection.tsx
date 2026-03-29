@@ -125,7 +125,7 @@ const FeaturesSection = () => {
               <span className="text-neon-cyan font-bold">we're doubling down on this town.</span>
             </p>
             <p className="font-display text-sm tracking-widest text-white/30 mt-4">
-              — BAZ, FOUNDER OF LUXPLAY
+              — SARBAZ "BAZ" ROUSHBAIANI, FOUNDER OF LUXPLAY
             </p>
           </motion.div>
         </div>
