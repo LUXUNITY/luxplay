@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import Unsubscribe from "./pages/Unsubscribe";
 import Admin from "./pages/Admin";
+import SoftPlaySuccess from "./pages/SoftPlaySuccess";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/payment-success" element={<PaymentSuccess />} />
           <Route path="/unsubscribe" element={<Unsubscribe />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/softplay-success" element={<SoftPlaySuccess />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
