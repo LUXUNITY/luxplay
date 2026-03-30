@@ -61,6 +61,26 @@ const SoftPlaySuccess = () => {
               },
             },
           });
+          // Notify admin
+          await supabase.functions.invoke("send-transactional-email", {
+            body: {
+              templateName: "admin-purchase-notification",
+              recipientEmail: "luxplayuk@gmail.com",
+              idempotencyKey: `admin-softplay-${data.booking.stripe_session_id || sessionId}`,
+              templateData: {
+                type: "softplay",
+                customerEmail: data.booking.parent_email,
+                childName: data.booking.child_name,
+                parentName: data.booking.parent_name,
+                sessionTime: SESSION_LABELS[data.booking.session_time] || data.booking.session_time,
+                sessionDate: new Date(data.booking.session_date).toLocaleDateString("en-GB", {
+                  weekday: "long", day: "numeric", month: "long", year: "numeric",
+                }),
+                bookingCode: data.booking.booking_code,
+                amountPaid: `£${((data.booking.amount_paid || 0) / 100).toFixed(2)}`,
+              },
+            },
+          });
         } else {
           setError(data?.error || "Could not find your booking.");
         }

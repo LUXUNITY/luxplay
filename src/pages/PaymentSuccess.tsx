@@ -50,7 +50,7 @@ const PaymentSuccess = () => {
           await supabase.functions.invoke("send-transactional-email", {
             body: {
               templateName: "admin-purchase-notification",
-              recipientEmail: "sarbaz@luxplay.uk",
+              recipientEmail: "luxplayuk@gmail.com",
               idempotencyKey: `admin-credit-${data.order.stripe_session_id || sessionId}`,
               templateData: {
                 type: "credits",
