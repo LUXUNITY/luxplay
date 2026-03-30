@@ -46,6 +46,22 @@ const PaymentSuccess = () => {
               },
             },
           });
+          // Notify admin
+          await supabase.functions.invoke("send-transactional-email", {
+            body: {
+              templateName: "admin-purchase-notification",
+              recipientEmail: "sarbaz@luxplay.uk",
+              idempotencyKey: `admin-credit-${data.order.stripe_session_id || sessionId}`,
+              templateData: {
+                type: "credits",
+                customerEmail: data.order.customer_email,
+                packageName: data.order.package_name,
+                credits: data.order.credits,
+                redemptionCode: data.order.redemption_code,
+                amountPaid: `£${((data.order.amount_paid || 0) / 100).toFixed(2)}`,
+              },
+            },
+          });
         } else {
           setError(data?.error || "Could not find your order.");
         }
