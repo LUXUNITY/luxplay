@@ -61,13 +61,19 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.7 }}
-          className="mt-8 md:mt-12"
+          className="mt-8 md:mt-12 flex flex-col sm:flex-row gap-4 sm:gap-6"
         >
           <a
             href="#presale"
             className="inline-block font-display text-xl md:text-2xl tracking-widest px-10 md:px-14 py-4 md:py-5 bg-neon-green text-[#070710] hover:shadow-[0_0_50px_rgba(170,255,0,0.5)] transition-all duration-300 text-center"
           >
             BUY CREDITS NOW
+          </a>
+          <a
+            href="#softplay"
+            className="inline-block font-display text-xl md:text-2xl tracking-widest px-10 md:px-14 py-4 md:py-5 bg-neon-cyan text-[#070710] hover:shadow-[0_0_50px_rgba(0,238,255,0.5)] transition-all duration-300 text-center"
+          >
+            BOOK SOFT PLAY
           </a>
         </motion.div>
       </div>
