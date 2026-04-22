@@ -131,8 +131,8 @@ const SoftPlaySection = () => {
             Book your child's spot for opening day — limited to 40 kids per session
           </p>
           <div className="flex items-center justify-center gap-4 mt-3">
-            <span className="font-display text-2xl text-white/30 line-through">£5.00</span>
-            <span className="font-display text-5xl md:text-6xl text-neon-cyan glow-cyan">£2.50</span>
+            <span className="font-display text-2xl text-white/30 line-through">£8.00</span>
+            <span className="font-display text-5xl md:text-6xl text-neon-cyan glow-cyan">£4.00</span>
             <span className="bg-neon-pink text-[#070710] font-display text-xs tracking-widest px-3 py-1 animate-pulse">
               50% OFF
             </span>
@@ -256,7 +256,7 @@ const SoftPlaySection = () => {
 
             <div className="border border-white/10 bg-[#0d0d1a] p-3 mb-6 flex items-center justify-between">
               <span className="font-body text-white/60 text-sm">Opening Day Session</span>
-              <span className="font-display text-neon-cyan text-lg">£2.50</span>
+              <span className="font-display text-neon-cyan text-lg">£4.00</span>
             </div>
 
             <button
@@ -269,7 +269,7 @@ const SoftPlaySection = () => {
               ) : (
                 <>
                   <Baby className="w-4 h-4" />
-                  BOOK NOW — £2.50
+                  BOOK NOW — £4.00
                 </>
               )}
             </button>
@@ -284,7 +284,7 @@ const SoftPlaySection = () => {
           className="mt-12 max-w-3xl mx-auto border border-white/10 p-6 md:p-8 text-center bg-[#0a0a16]"
         >
           <p className="text-white/80 font-body text-sm md:text-base font-semibold">
-            Opening day only — <strong className="text-white">normal price £5 after launch.</strong>
+            Opening day only — <strong className="text-white">normal price £8 after launch.</strong>
           </p>
           <p className="text-neon-cyan font-bold mt-3 text-sm md:text-base glow-cyan font-body">
             Limited to 40 kids per session. Book now to guarantee your spot.
