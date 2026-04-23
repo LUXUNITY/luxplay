@@ -28,21 +28,22 @@ const SoftPlaySection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
 
-  useEffect(() => {
-    const fetchCounts = async () => {
-      const { data } = await supabase
-        .from("soft_play_bookings")
-        .select("session_time")
-        .eq("session_date", OPENING_DATE);
+  const fetchCounts = async () => {
+    const { data } = await supabase
+      .from("soft_play_bookings")
+      .select("session_time")
+      .eq("session_date", OPENING_DATE);
 
-      if (data) {
-        const counts: Record<string, number> = {};
-        data.forEach((b) => {
-          counts[b.session_time] = (counts[b.session_time] || 0) + 1;
-        });
-        setBookedCounts(counts);
-      }
-    };
+    if (data) {
+      const counts: Record<string, number> = {};
+      data.forEach((b) => {
+        counts[b.session_time] = (counts[b.session_time] || 0) + 1;
+      });
+      setBookedCounts(counts);
+    }
+  };
+
+  useEffect(() => {
     fetchCounts();
   }, []);
 
