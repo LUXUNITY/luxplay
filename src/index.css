@@ -270,109 +270,126 @@
       inset 0 0 18px hsl(var(--neon-purple) / 0.25);
   }
 
-  /* === Poster-driven hero === */
-  @keyframes hero-poster-sheen {
-    0% { transform: translateX(-30%); opacity: 0.0; }
-    25% { opacity: 0.55; }
-    100% { transform: translateX(130%); opacity: 0.0; }
+  /* === Hero space backdrop === */
+  .hero-space {
+    background-color: #04030d;
   }
-  .hero-poster-sheen {
-    background: linear-gradient(
-      100deg,
-      transparent 35%,
-      rgba(255, 255, 255, 0.18) 48%,
-      rgba(0, 238, 255, 0.22) 52%,
-      rgba(255, 0, 204, 0.18) 56%,
-      transparent 70%
-    );
-    mix-blend-mode: screen;
-    animation: hero-poster-sheen 4.5s linear infinite;
-  }
-
-  /* Animated laser circuit grid (overlays the poster) */
-  @keyframes hero-laser-shift {
-    0% { background-position: 0 0, 0 0; }
-    100% { background-position: 88px 0, 0 88px; }
-  }
-  .hero-laser-grid {
-    background-image:
-      linear-gradient(90deg, hsl(var(--neon-cyan) / 0.20) 1px, transparent 1px),
-      linear-gradient(180deg, hsl(var(--neon-pink) / 0.18) 1px, transparent 1px);
-    background-size: 44px 44px, 44px 44px;
-    mix-blend-mode: screen;
-    animation: hero-laser-shift 6s linear infinite;
-    pointer-events: none;
-  }
-
-  @keyframes hero-laser-hue {
-    0%   { filter: hue-rotate(0deg)   drop-shadow(0 0 8px hsl(var(--neon-pink) / 0.6)); }
-    50%  { filter: hue-rotate(180deg) drop-shadow(0 0 10px hsl(var(--neon-cyan) / 0.7)); }
-    100% { filter: hue-rotate(360deg) drop-shadow(0 0 8px hsl(var(--neon-green) / 0.6)); }
-  }
-  .hero-laser-lines {
+  .hero-space-bg {
     background:
-      repeating-linear-gradient(45deg, transparent 0 80px, hsl(var(--neon-pink) / 0.30) 80px 81px, transparent 81px 160px),
-      repeating-linear-gradient(-45deg, transparent 0 90px, hsl(var(--neon-cyan) / 0.30) 90px 91px, transparent 91px 180px),
-      repeating-linear-gradient(0deg, transparent 0 120px, hsl(var(--neon-green) / 0.22) 120px 121px, transparent 121px 240px);
-    mix-blend-mode: screen;
-    animation: hero-laser-hue 6s linear infinite;
-    pointer-events: none;
+      radial-gradient(ellipse at 50% 20%, hsl(267 100% 18% / 0.85), transparent 60%),
+      radial-gradient(ellipse at 20% 90%, hsl(312 100% 14% / 0.75), transparent 60%),
+      radial-gradient(ellipse at 80% 90%, hsl(186 100% 14% / 0.7), transparent 60%),
+      linear-gradient(180deg, #050315 0%, #0a0524 50%, #04030d 100%);
   }
 
-  @keyframes hero-laser-scan {
-    0%   { background-position: 0 -100%; opacity: 0.0; }
-    40%  { opacity: 0.55; }
-    100% { background-position: 0 200%; opacity: 0.0; }
+  @keyframes hero-twinkle {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 1; }
   }
-  .hero-laser-scan {
-    background: linear-gradient(180deg, transparent 0%, hsl(var(--neon-cyan) / 0.45) 49%, hsl(var(--neon-pink) / 0.35) 51%, transparent 100%);
-    background-size: 100% 220%;
-    mix-blend-mode: screen;
-    animation: hero-laser-scan 5s ease-in-out infinite;
+  .hero-stars {
+    background-image:
+      radial-gradient(1px 1px at 12% 18%, #ffffff 50%, transparent 100%),
+      radial-gradient(1px 1px at 28% 72%, #aaeaff 50%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 47% 38%, #ffffff 50%, transparent 100%),
+      radial-gradient(1px 1px at 64% 14%, #ffd6ff 50%, transparent 100%),
+      radial-gradient(1px 1px at 82% 56%, #ffffff 50%, transparent 100%),
+      radial-gradient(1px 1px at 92% 86%, #c9f4ff 50%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 8% 88%, #ffffff 50%, transparent 100%),
+      radial-gradient(1px 1px at 38% 92%, #ffe7a8 50%, transparent 100%);
+    animation: hero-twinkle 3.5s ease-in-out infinite;
     pointer-events: none;
+  }
+  .hero-stars-2 {
+    background-image:
+      radial-gradient(1px 1px at 22% 32%, #ffffff 50%, transparent 100%),
+      radial-gradient(1px 1px at 56% 64%, #ffd6ff 50%, transparent 100%),
+      radial-gradient(1px 1px at 74% 22%, #aaeaff 50%, transparent 100%),
+      radial-gradient(1px 1px at 18% 60%, #ffffff 50%, transparent 100%);
+    animation: hero-twinkle 5.5s ease-in-out infinite;
+    animation-delay: 1.2s;
   }
 
-  /* CTA buttons with rainbow flowing border */
-  @keyframes hero-cta-flow {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 200% 50%; }
+  /* Corner circuit traces */
+  @keyframes hero-circuit-pulse {
+    0%, 100% { opacity: 0.55; filter: drop-shadow(0 0 6px hsl(var(--neon-cyan) / 0.6)); }
+    50% { opacity: 1; filter: drop-shadow(0 0 12px hsl(var(--neon-pink) / 0.8)); }
   }
-  .hero-cta {
-    position: relative;
-    color: hsl(var(--foreground));
-    background: hsl(240 40% 4% / 0.78);
-    backdrop-filter: blur(8px);
-    border: 2px solid transparent;
-    background-clip: padding-box;
-    transition: transform 0.2s ease;
-    text-shadow: 0 0 14px hsl(var(--neon-cyan) / 0.5);
-  }
-  .hero-cta::before {
-    content: "";
-    position: absolute;
-    inset: -2px;
-    border-radius: inherit;
-    padding: 2px;
-    background: linear-gradient(90deg, #ff00cc, #7700ff, #00eeff, #aaff00, #ffcc00, #ff00cc);
-    background-size: 200% 100%;
-    animation: hero-cta-flow 3s linear infinite;
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;
+  .hero-circuit-corner {
+    width: 38%;
+    height: 22%;
     pointer-events: none;
+    animation: hero-circuit-pulse 3s ease-in-out infinite;
+    background-repeat: no-repeat;
+    opacity: 0.85;
   }
-  .hero-cta:hover { transform: scale(1.02); }
-  .hero-cta-green { box-shadow: 0 0 24px hsl(var(--neon-green) / 0.55); }
-  .hero-cta-pink  { box-shadow: 0 0 24px hsl(var(--neon-pink)  / 0.55); }
+  .hero-circuit-tl {
+    background-image:
+      linear-gradient(90deg, hsl(var(--neon-cyan)) 0 28%, transparent 28%),
+      linear-gradient(180deg, hsl(var(--neon-pink)) 0 18%, transparent 18%),
+      linear-gradient(135deg, transparent 47%, hsl(var(--neon-cyan)) 47% 49%, transparent 49%);
+    background-size: 100% 2px, 2px 100%, 36% 36%;
+    background-position: 0 14%, 14% 0, 14% 14%;
+  }
+  .hero-circuit-tr {
+    background-image:
+      linear-gradient(90deg, transparent 72%, hsl(var(--neon-pink)) 72% 100%),
+      linear-gradient(180deg, hsl(var(--neon-cyan)) 0 18%, transparent 18%),
+      linear-gradient(225deg, transparent 47%, hsl(var(--neon-pink)) 47% 49%, transparent 49%);
+    background-size: 100% 2px, 2px 100%, 36% 36%;
+    background-position: 100% 14%, 86% 0, 50% 14%;
+    animation-delay: 0.4s;
+  }
+  .hero-circuit-bl {
+    background-image:
+      linear-gradient(90deg, hsl(var(--neon-green)) 0 28%, transparent 28%),
+      linear-gradient(180deg, transparent 82%, hsl(var(--neon-green)) 82% 100%),
+      linear-gradient(45deg, transparent 47%, hsl(var(--neon-green)) 47% 49%, transparent 49%);
+    background-size: 100% 2px, 2px 100%, 36% 36%;
+    background-position: 0 86%, 14% 100%, 14% 50%;
+    animation-delay: 0.8s;
+  }
+  .hero-circuit-br {
+    background-image:
+      linear-gradient(90deg, transparent 72%, hsl(var(--neon-purple)) 72% 100%),
+      linear-gradient(180deg, transparent 82%, hsl(var(--neon-purple)) 82% 100%),
+      linear-gradient(315deg, transparent 47%, hsl(var(--neon-purple)) 47% 49%, transparent 49%);
+    background-size: 100% 2px, 2px 100%, 36% 36%;
+    background-position: 100% 86%, 86% 100%, 50% 50%;
+    animation-delay: 1.2s;
+  }
+
+  /* Ribbon */
+  .hero-ribbon {
+    background: linear-gradient(90deg, hsl(var(--neon-pink) / 0.18), hsl(var(--neon-cyan) / 0.18));
+    box-shadow: 0 0 18px hsl(var(--neon-pink) / 0.25);
+  }
+
+  /* Offer card */
+  .hero-offer-card {
+    box-shadow:
+      0 0 22px hsl(var(--neon-cyan) / 0.4),
+      inset 0 0 24px hsl(var(--neon-purple) / 0.28);
+  }
+
+  /* Neon CTA buttons */
+  @keyframes hero-neon-pulse-pink {
+    0%, 100% { box-shadow: 0 0 18px hsl(var(--neon-pink) / 0.5), inset 0 0 12px hsl(var(--neon-pink) / 0.18); }
+    50% { box-shadow: 0 0 32px hsl(var(--neon-pink) / 0.85), inset 0 0 20px hsl(var(--neon-pink) / 0.3); }
+  }
+  @keyframes hero-neon-pulse-cyan {
+    0%, 100% { box-shadow: 0 0 18px hsl(var(--neon-cyan) / 0.5), inset 0 0 12px hsl(var(--neon-cyan) / 0.18); }
+    50% { box-shadow: 0 0 32px hsl(var(--neon-cyan) / 0.85), inset 0 0 20px hsl(var(--neon-cyan) / 0.3); }
+  }
+  .hero-neon-btn-pink { animation: hero-neon-pulse-pink 1.8s ease-in-out infinite; }
+  .hero-neon-btn-cyan { animation: hero-neon-pulse-cyan 1.8s ease-in-out infinite; animation-delay: 0.6s; }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-circuit-overlay,
     .hero-flash,
-    .hero-poster-sheen,
-    .hero-laser-grid,
-    .hero-laser-lines,
-    .hero-laser-scan,
-    .hero-cta::before {
+    .hero-stars,
+    .hero-stars-2,
+    .hero-circuit-corner,
+    .hero-neon-btn-pink,
+    .hero-neon-btn-cyan {
       animation: none;
     }
   }
