@@ -91,6 +91,33 @@ serve(async (req) => {
 
     if (error) {
       console.error("Failed to insert booking:", error);
+
+      // If the session filled up between checkout and payment, auto-refund.
+      const isSessionFull =
+        (error.message || "").includes("SESSION_FULL") ||
+        (error as any).code === "23514";
+
+      if (isSessionFull && session.payment_intent) {
+        try {
+          await stripe.refunds.create({
+            payment_intent: session.payment_intent as string,
+            reason: "requested_by_customer",
+          });
+          console.log("Auto-refunded overbooked session:", sessionId);
+        } catch (refundErr) {
+          console.error("Refund failed:", refundErr);
+        }
+
+        return new Response(
+          JSON.stringify({
+            error: "SESSION_FULL",
+            message:
+              "Sorry — this session filled up before your payment completed. You've been automatically refunded. Please pick another time.",
+          }),
+          { status: 409, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
       return new Response(
         JSON.stringify({ error: "Failed to save booking" }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
