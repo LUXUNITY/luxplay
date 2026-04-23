@@ -360,19 +360,28 @@
 
   /* Ribbon */
   .hero-ribbon {
-    background: linear-gradient(180deg, hsl(var(--foreground) / 0.96), hsl(var(--foreground) / 0.9));
+    background: linear-gradient(180deg, hsl(var(--foreground) / 0.97), hsl(var(--foreground) / 0.92));
     box-shadow:
-      0 0 0 2px hsl(var(--neon-pink) / 0.3),
-      0 0 22px hsl(var(--neon-pink) / 0.25);
+      0 0 0 2px hsl(var(--neon-pink) / 0.34),
+      0 0 24px hsl(var(--neon-pink) / 0.28);
   }
 
   .hero-burst {
     background:
-      radial-gradient(circle at 50% 28%, hsl(var(--foreground) / 0.12), transparent 20%),
+      radial-gradient(circle at 50% 28%, hsl(var(--foreground) / 0.12), transparent 18%),
       radial-gradient(circle at 50% 30%, hsl(var(--neon-pink) / 0.24), transparent 34%),
-      radial-gradient(circle at 50% 32%, hsl(var(--neon-cyan) / 0.18), transparent 48%);
+      radial-gradient(circle at 50% 32%, hsl(var(--neon-cyan) / 0.18), transparent 50%);
     filter: blur(6px);
     pointer-events: none;
+  }
+
+  .hero-logo-title {
+    background: linear-gradient(90deg, #fff1a8 0%, #7bfff2 28%, #bfeaff 46%, #ff7edb 74%, #f7f0ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.12));
   }
 
   .hero-title-top {
