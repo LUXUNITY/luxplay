@@ -1,6 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import Stripe from "https://esm.sh/stripe@18.5.0";
-import { createClient } from "npm:@supabase/supabase-js@2.57.2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -9,11 +8,8 @@ const corsHeaders = {
 };
 
 const SOFTPLAY_PRICE_ID = "price_1TOvjMKDxuB13duTCKh7B9pZ";
+
 const VALID_SESSIONS = ["10:00", "12:00", "14:00", "16:00", "18:00", "20:00"];
-const MAX_CAPACITY = 40;
-// Reserve a small buffer for in-flight (paid but not yet inserted) checkouts
-// to reduce overbooking risk under simultaneous bookings.
-const SAFETY_BUFFER = 0;
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -34,38 +30,6 @@ serve(async (req) => {
       return new Response(
         JSON.stringify({ error: "Invalid session time" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
-
-    // Server-side capacity check — block checkout if session is full
-    const supabase = createClient(
-      Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
-    );
-
-    const { count, error: countError } = await supabase
-      .from("soft_play_bookings")
-      .select("*", { count: "exact", head: true })
-      .eq("session_date", sessionDate)
-      .eq("session_time", sessionTime);
-
-    if (countError) {
-      console.error("Capacity check failed:", countError);
-      return new Response(
-        JSON.stringify({ error: "Could not verify session availability. Please try again." }),
-        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
-
-    const booked = count ?? 0;
-    if (booked >= MAX_CAPACITY - SAFETY_BUFFER) {
-      return new Response(
-        JSON.stringify({
-          error: "SESSION_FULL",
-          message: "This session is now fully booked. Please pick another time.",
-          spotsLeft: 0,
-        }),
-        { status: 409, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
