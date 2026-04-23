@@ -1,7 +1,6 @@
-import wordmark from "@/assets/luxplay-wordmark.png";
+import type { MouseEvent } from "react";
 import arcadeImg from "@/assets/luxplay-arcade.jpg";
 import softplayImg from "@/assets/luxplay-softplay.jpg";
-import type { MouseEvent } from "react";
 
 const HeroSection = () => {
   const scrollTo = (id: string) => (e: MouseEvent<HTMLAnchorElement>) => {
@@ -27,20 +26,17 @@ const HeroSection = () => {
 
       <div className="relative z-20 mx-auto flex min-h-[100svh] w-full max-w-[680px] flex-col px-4 pb-4 pt-4 text-center sm:max-w-[840px] md:max-w-[1080px] md:pt-7">
         <div className="flex flex-col items-center gap-2.5">
-          <img
-            src={wordmark}
-            alt="LuxPlay"
-            className="h-auto w-[84%] max-w-[620px] drop-shadow-[0_0_28px_hsl(var(--neon-cyan)/0.55)]"
-            loading="eager"
-          />
+          <div className="hero-logo-title font-display text-[4.2rem] leading-none sm:text-[5.8rem] md:text-[7rem]">
+            LUXPLAY
+          </div>
 
           <div className="flex w-full flex-col items-center">
-            <h1 className="flex flex-col items-center font-display leading-[0.78]">
-              <span className="hero-flash hero-title-top text-[6.4rem] sm:text-[10rem] md:text-[13rem]">
+            <h1 className="flex flex-col items-center font-display leading-[0.78] tracking-[0]">
+              <span className="hero-flash hero-title-top text-[6.3rem] sm:text-[10rem] md:text-[13rem]">
                 WE'RE
               </span>
               <span
-                className="hero-flash hero-title-bottom -mt-3 text-[7.2rem] sm:text-[11.3rem] md:text-[14.5rem]"
+                className="hero-flash hero-title-bottom -mt-3 text-[7.15rem] sm:text-[11.3rem] md:text-[14.5rem]"
                 style={{ animationDelay: "0.2s" }}
               >
                 OPENING!
@@ -61,15 +57,15 @@ const HeroSection = () => {
               href="#presale"
               onClick={scrollTo("presale")}
               aria-label="Discounted arcade credits"
-              className="hero-reference-tile hero-reference-left group relative block overflow-hidden rounded-[1.35rem] border-2 border-neon-pink/85"
+              className="hero-reference-tile group relative block overflow-hidden rounded-[1.35rem] border-2 border-neon-pink/85"
             >
               <img
                 src={arcadeImg}
                 alt="Arcade machines at LuxPlay"
-                className="h-full min-h-[15rem] w-full object-cover sm:min-h-[20rem]"
+                className="h-full min-h-[15rem] w-full object-cover"
                 loading="eager"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/88 via-background/12 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/88 via-background/8 to-transparent" />
             </a>
 
             <div className="hero-offer-card relative flex flex-col items-center justify-center rounded-[1.7rem] border-2 border-neon-cyan/85 bg-background/78 px-2 py-3 backdrop-blur-md sm:py-5">
@@ -109,10 +105,10 @@ const HeroSection = () => {
               <img
                 src={softplayImg}
                 alt="Soft play at LuxPlay"
-                className="h-full min-h-[15rem] w-full object-cover sm:min-h-[20rem]"
+                className="h-full min-h-[15rem] w-full object-cover"
                 loading="eager"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/88 via-background/12 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/88 via-background/8 to-transparent" />
             </a>
           </div>
 
