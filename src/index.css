@@ -270,12 +270,85 @@
       inset 0 0 18px hsl(var(--neon-purple) / 0.25);
   }
 
+  /* === Poster-driven hero === */
+  .hero-poster-wrap {
+    box-shadow:
+      0 0 60px hsl(var(--neon-pink) / 0.35),
+      0 0 120px hsl(var(--neon-purple) / 0.25);
+  }
+
+  @keyframes hero-poster-sheen {
+    0% { transform: translateX(-30%); opacity: 0.0; }
+    25% { opacity: 0.55; }
+    100% { transform: translateX(130%); opacity: 0.0; }
+  }
+
+  .hero-poster-sheen {
+    background: linear-gradient(
+      100deg,
+      transparent 35%,
+      rgba(255, 255, 255, 0.18) 48%,
+      rgba(0, 238, 255, 0.22) 52%,
+      rgba(255, 0, 204, 0.18) 56%,
+      transparent 70%
+    );
+    mix-blend-mode: screen;
+    animation: hero-poster-sheen 4.5s linear infinite;
+  }
+
+  @keyframes hero-poster-pulse {
+    0%, 100% { box-shadow: inset 0 0 60px hsl(var(--neon-pink) / 0.0); }
+    50% { box-shadow: inset 0 0 80px hsl(var(--neon-cyan) / 0.25); }
+  }
+
+  .hero-poster-pulse {
+    animation: hero-poster-pulse 3s ease-in-out infinite;
+  }
+
+  .hero-hotspot {
+    border-radius: 4px;
+    transition: box-shadow 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+  }
+  .hero-hotspot:hover,
+  .hero-hotspot:focus-visible {
+    background-color: hsl(var(--neon-cyan) / 0.08);
+    box-shadow:
+      0 0 0 2px hsl(var(--neon-cyan) / 0.7),
+      0 0 24px hsl(var(--neon-pink) / 0.55);
+    outline: none;
+  }
+
+  @keyframes hero-booknow-pulse {
+    0%, 100% {
+      box-shadow:
+        0 0 0 0 hsl(var(--neon-pink) / 0.55),
+        0 0 30px hsl(var(--neon-cyan) / 0.45);
+    }
+    50% {
+      box-shadow:
+        0 0 0 12px hsl(var(--neon-pink) / 0.0),
+        0 0 50px hsl(var(--neon-green) / 0.55);
+    }
+  }
+
+  .hero-booknow {
+    animation: hero-booknow-pulse 1.6s ease-in-out infinite;
+  }
+  .hero-booknow:hover,
+  .hero-booknow:focus-visible {
+    transform: scale(1.02);
+    outline: none;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .hero-circuit-overlay,
     .hero-heading,
     .hero-flash,
     .hero-panel-green,
-    .hero-panel-pink {
+    .hero-panel-pink,
+    .hero-poster-sheen,
+    .hero-poster-pulse,
+    .hero-booknow {
       animation: none;
     }
   }
