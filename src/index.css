@@ -102,73 +102,77 @@
 
   @keyframes hero-grid-shift {
     0% {
-      background-position: 0% 0%, 0 0, 0 0;
-      opacity: 0.45;
+      background-position: 0 0, 0 0, 0 0;
+      opacity: 0.38;
     }
     50% {
-      background-position: 100% 0%, 120px 60px, -120px 40px;
-      opacity: 0.8;
+      background-position: 140px 0, 80px 40px, -120px 70px;
+      opacity: 0.74;
     }
     100% {
-      background-position: 200% 0%, 240px 120px, -240px 80px;
-      opacity: 0.45;
+      background-position: 280px 0, 160px 80px, -240px 140px;
+      opacity: 0.38;
     }
   }
 
-  @keyframes hero-neon-pulse {
+  @keyframes hero-heading-pulse {
     0%, 100% {
+      transform: translateY(0) scale(1);
       filter: brightness(1) saturate(1);
-      transform: scale(1);
     }
     50% {
-      filter: brightness(1.18) saturate(1.2);
-      transform: scale(1.03);
+      transform: translateY(-2px) scale(1.03);
+      filter: brightness(1.18) saturate(1.18);
     }
   }
 
   @keyframes hero-card-glow-green {
     0%, 100% {
-      box-shadow: 0 0 18px rgba(170, 255, 0, 0.2), inset 0 0 0 rgba(170, 255, 0, 0);
+      box-shadow: 0 0 14px rgba(170, 255, 0, 0.18), inset 0 0 0 rgba(170, 255, 0, 0);
       border-color: rgba(170, 255, 0, 0.45);
     }
     50% {
-      box-shadow: 0 0 32px rgba(170, 255, 0, 0.5), inset 0 0 22px rgba(170, 255, 0, 0.1);
-      border-color: rgba(170, 255, 0, 0.9);
+      box-shadow: 0 0 26px rgba(170, 255, 0, 0.42), inset 0 0 20px rgba(170, 255, 0, 0.09);
+      border-color: rgba(170, 255, 0, 0.95);
     }
   }
 
   @keyframes hero-card-glow-pink {
     0%, 100% {
-      box-shadow: 0 0 18px rgba(255, 0, 204, 0.2), inset 0 0 0 rgba(255, 0, 204, 0);
+      box-shadow: 0 0 14px rgba(255, 0, 204, 0.18), inset 0 0 0 rgba(255, 0, 204, 0);
       border-color: rgba(255, 0, 204, 0.45);
     }
     50% {
-      box-shadow: 0 0 32px rgba(255, 0, 204, 0.5), inset 0 0 22px rgba(255, 0, 204, 0.1);
-      border-color: rgba(255, 0, 204, 0.9);
+      box-shadow: 0 0 26px rgba(255, 0, 204, 0.42), inset 0 0 20px rgba(255, 0, 204, 0.09);
+      border-color: rgba(255, 0, 204, 0.95);
     }
   }
 
   .hero-circuit-overlay {
     background-image:
-      linear-gradient(90deg, rgba(255, 0, 204, 0) 0%, rgba(255, 0, 204, 0.28) 20%, rgba(0, 238, 255, 0.3) 50%, rgba(170, 255, 0, 0.28) 80%, rgba(170, 255, 0, 0) 100%),
-      repeating-linear-gradient(90deg, rgba(255, 255, 255, 0) 0 70px, rgba(0, 238, 255, 0.14) 70px 73px, rgba(255, 255, 255, 0) 73px 150px),
-      repeating-linear-gradient(180deg, rgba(255, 255, 255, 0) 0 54px, rgba(255, 0, 204, 0.12) 54px 57px, rgba(255, 255, 255, 0) 57px 118px);
-    background-size: 240% 100%, 240px 160px, 220px 140px;
+      linear-gradient(90deg, rgba(255, 0, 204, 0) 0%, rgba(255, 0, 204, 0.18) 22%, rgba(0, 238, 255, 0.22) 50%, rgba(170, 255, 0, 0.18) 80%, rgba(170, 255, 0, 0) 100%),
+      repeating-linear-gradient(90deg, rgba(255, 255, 255, 0) 0 74px, rgba(0, 238, 255, 0.12) 74px 77px, rgba(255, 255, 255, 0) 77px 154px),
+      repeating-linear-gradient(180deg, rgba(255, 255, 255, 0) 0 56px, rgba(255, 0, 204, 0.1) 56px 59px, rgba(255, 255, 255, 0) 59px 118px);
+    background-size: 200% 100%, 240px 160px, 220px 140px;
     mix-blend-mode: screen;
-    animation: hero-grid-shift 9s linear infinite;
+    animation: hero-grid-shift 8.5s linear infinite;
   }
 
   .hero-heading {
-    animation: hero-neon-pulse 3.6s ease-in-out infinite;
+    animation: hero-heading-pulse 3.2s ease-in-out infinite;
+    background: linear-gradient(90deg, #ffffff 0%, #d7fbff 24%, #91f2ff 47%, #ffd4fb 72%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     text-shadow:
-      0 0 10px rgba(255, 255, 255, 0.85),
-      0 0 24px rgba(0, 238, 255, 0.55),
-      0 0 44px rgba(255, 0, 204, 0.4);
+      0 0 10px rgba(255, 255, 255, 0.8),
+      0 0 26px rgba(0, 238, 255, 0.52),
+      0 0 50px rgba(255, 0, 204, 0.38);
   }
 
   .hero-panel {
     backdrop-filter: blur(10px);
-    background: linear-gradient(180deg, rgba(7, 7, 16, 0.76) 0%, rgba(7, 7, 16, 0.92) 100%);
+    background: linear-gradient(180deg, rgba(7, 7, 16, 0.66) 0%, rgba(7, 7, 16, 0.9) 100%);
   }
 
   .hero-panel-green {
