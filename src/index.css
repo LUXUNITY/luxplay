@@ -271,18 +271,11 @@
   }
 
   /* === Poster-driven hero === */
-  .hero-poster-wrap {
-    box-shadow:
-      0 0 60px hsl(var(--neon-pink) / 0.35),
-      0 0 120px hsl(var(--neon-purple) / 0.25);
-  }
-
   @keyframes hero-poster-sheen {
     0% { transform: translateX(-30%); opacity: 0.0; }
     25% { opacity: 0.55; }
     100% { transform: translateX(130%); opacity: 0.0; }
   }
-
   .hero-poster-sheen {
     background: linear-gradient(
       100deg,
@@ -296,59 +289,90 @@
     animation: hero-poster-sheen 4.5s linear infinite;
   }
 
-  @keyframes hero-poster-pulse {
-    0%, 100% { box-shadow: inset 0 0 60px hsl(var(--neon-pink) / 0.0); }
-    50% { box-shadow: inset 0 0 80px hsl(var(--neon-cyan) / 0.25); }
+  /* Animated laser circuit grid (overlays the poster) */
+  @keyframes hero-laser-shift {
+    0% { background-position: 0 0, 0 0; }
+    100% { background-position: 88px 0, 0 88px; }
+  }
+  .hero-laser-grid {
+    background-image:
+      linear-gradient(90deg, hsl(var(--neon-cyan) / 0.20) 1px, transparent 1px),
+      linear-gradient(180deg, hsl(var(--neon-pink) / 0.18) 1px, transparent 1px);
+    background-size: 44px 44px, 44px 44px;
+    mix-blend-mode: screen;
+    animation: hero-laser-shift 6s linear infinite;
+    pointer-events: none;
   }
 
-  .hero-poster-pulse {
-    animation: hero-poster-pulse 3s ease-in-out infinite;
+  @keyframes hero-laser-hue {
+    0%   { filter: hue-rotate(0deg)   drop-shadow(0 0 8px hsl(var(--neon-pink) / 0.6)); }
+    50%  { filter: hue-rotate(180deg) drop-shadow(0 0 10px hsl(var(--neon-cyan) / 0.7)); }
+    100% { filter: hue-rotate(360deg) drop-shadow(0 0 8px hsl(var(--neon-green) / 0.6)); }
+  }
+  .hero-laser-lines {
+    background:
+      repeating-linear-gradient(45deg, transparent 0 80px, hsl(var(--neon-pink) / 0.30) 80px 81px, transparent 81px 160px),
+      repeating-linear-gradient(-45deg, transparent 0 90px, hsl(var(--neon-cyan) / 0.30) 90px 91px, transparent 91px 180px),
+      repeating-linear-gradient(0deg, transparent 0 120px, hsl(var(--neon-green) / 0.22) 120px 121px, transparent 121px 240px);
+    mix-blend-mode: screen;
+    animation: hero-laser-hue 6s linear infinite;
+    pointer-events: none;
   }
 
-  .hero-hotspot {
-    border-radius: 4px;
-    transition: box-shadow 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+  @keyframes hero-laser-scan {
+    0%   { background-position: 0 -100%; opacity: 0.0; }
+    40%  { opacity: 0.55; }
+    100% { background-position: 0 200%; opacity: 0.0; }
   }
-  .hero-hotspot:hover,
-  .hero-hotspot:focus-visible {
-    background-color: hsl(var(--neon-cyan) / 0.08);
-    box-shadow:
-      0 0 0 2px hsl(var(--neon-cyan) / 0.7),
-      0 0 24px hsl(var(--neon-pink) / 0.55);
-    outline: none;
-  }
-
-  @keyframes hero-booknow-pulse {
-    0%, 100% {
-      box-shadow:
-        0 0 0 0 hsl(var(--neon-pink) / 0.55),
-        0 0 30px hsl(var(--neon-cyan) / 0.45);
-    }
-    50% {
-      box-shadow:
-        0 0 0 12px hsl(var(--neon-pink) / 0.0),
-        0 0 50px hsl(var(--neon-green) / 0.55);
-    }
+  .hero-laser-scan {
+    background: linear-gradient(180deg, transparent 0%, hsl(var(--neon-cyan) / 0.45) 49%, hsl(var(--neon-pink) / 0.35) 51%, transparent 100%);
+    background-size: 100% 220%;
+    mix-blend-mode: screen;
+    animation: hero-laser-scan 5s ease-in-out infinite;
+    pointer-events: none;
   }
 
-  .hero-booknow {
-    animation: hero-booknow-pulse 1.6s ease-in-out infinite;
+  /* CTA buttons with rainbow flowing border */
+  @keyframes hero-cta-flow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
   }
-  .hero-booknow:hover,
-  .hero-booknow:focus-visible {
-    transform: scale(1.02);
-    outline: none;
+  .hero-cta {
+    position: relative;
+    color: hsl(var(--foreground));
+    background: hsl(240 40% 4% / 0.78);
+    backdrop-filter: blur(8px);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    transition: transform 0.2s ease;
+    text-shadow: 0 0 14px hsl(var(--neon-cyan) / 0.5);
   }
+  .hero-cta::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(90deg, #ff00cc, #7700ff, #00eeff, #aaff00, #ffcc00, #ff00cc);
+    background-size: 200% 100%;
+    animation: hero-cta-flow 3s linear infinite;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+  }
+  .hero-cta:hover { transform: scale(1.02); }
+  .hero-cta-green { box-shadow: 0 0 24px hsl(var(--neon-green) / 0.55); }
+  .hero-cta-pink  { box-shadow: 0 0 24px hsl(var(--neon-pink)  / 0.55); }
 
   @media (prefers-reduced-motion: reduce) {
     .hero-circuit-overlay,
-    .hero-heading,
     .hero-flash,
-    .hero-panel-green,
-    .hero-panel-pink,
     .hero-poster-sheen,
-    .hero-poster-pulse,
-    .hero-booknow {
+    .hero-laser-grid,
+    .hero-laser-lines,
+    .hero-laser-scan,
+    .hero-cta::before {
       animation: none;
     }
   }
