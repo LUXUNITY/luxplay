@@ -4,10 +4,8 @@ import arcadeHero from "@/assets/arcade-hero.jpg";
 const HeroSection = () => {
   return (
     <section className="relative w-full overflow-hidden bg-[#070710]">
-      {/* Neon top bar */}
       <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-neon-bar z-20" />
 
-      {/* Full-bleed flyer image — text & graphics baked in */}
       <div className="relative w-full">
         <img
           src={arcadeHero}
@@ -15,13 +13,23 @@ const HeroSection = () => {
           className="w-full h-auto block"
         />
 
-        {/* Flashing neon overlay on the 50% OFF SOFT PLAY badge (lower-left of image) */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <div className="absolute left-1/2 top-[58.5%] -translate-x-1/2 -translate-y-1/2 w-[46%] h-[31%] rounded-[28px] bg-background/0" />
+
+          <div className="absolute left-1/2 top-[58.5%] -translate-x-1/2 -translate-y-1/2 w-[48%] text-center">
+            <div className="hero-opening-overlay font-display text-[clamp(3.5rem,8.7vw,10rem)] leading-[0.84]">
+              WE’RE
+              <br />
+              OPENING!
+            </div>
+          </div>
+        </div>
+
         <div
           className="absolute pointer-events-none flash-green"
           style={{ left: "3.2%", top: "78%", width: "13.5%", height: "16%" }}
           aria-hidden="true"
         />
-        {/* Flashing neon overlay on the DISCOUNTED ARCADE CREDITS badge */}
         <div
           className="absolute pointer-events-none flash-pink"
           style={{ left: "17.5%", top: "78%", width: "14.5%", height: "16%" }}
@@ -29,7 +37,6 @@ const HeroSection = () => {
         />
       </div>
 
-      {/* CTAs sit cleanly below the image — no overlap */}
       <div className="relative z-10 px-6 md:px-12 lg:px-20 py-10 md:py-14 text-center bg-[#070710]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -51,12 +58,10 @@ const HeroSection = () => {
           </a>
         </motion.div>
 
-        {/* Address */}
         <p className="font-body text-xs md:text-sm tracking-widest text-white/60 uppercase mb-4">
           Unit 7, Sovereign Centre · Boscombe · Bournemouth · BH1 4SX
         </p>
 
-        {/* Feature highlights */}
         <p className="font-display text-lg md:text-2xl tracking-widest">
           <span className="text-neon-pink glow-pink">40+ ARCADE MACHINES</span>
           <span className="text-white/40 mx-3">·</span>
@@ -68,7 +73,6 @@ const HeroSection = () => {
         </p>
       </div>
 
-      {/* Neon bottom bar */}
       <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-neon-bar z-20" />
     </section>
   );
