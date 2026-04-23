@@ -28,21 +28,22 @@ const SoftPlaySection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
 
-  useEffect(() => {
-    const fetchCounts = async () => {
-      const { data } = await supabase
-        .from("soft_play_bookings")
-        .select("session_time")
-        .eq("session_date", OPENING_DATE);
+  const fetchCounts = async () => {
+    const { data } = await supabase
+      .from("soft_play_bookings")
+      .select("session_time")
+      .eq("session_date", OPENING_DATE);
 
-      if (data) {
-        const counts: Record<string, number> = {};
-        data.forEach((b) => {
-          counts[b.session_time] = (counts[b.session_time] || 0) + 1;
-        });
-        setBookedCounts(counts);
-      }
-    };
+    if (data) {
+      const counts: Record<string, number> = {};
+      data.forEach((b) => {
+        counts[b.session_time] = (counts[b.session_time] || 0) + 1;
+      });
+      setBookedCounts(counts);
+    }
+  };
+
+  useEffect(() => {
     fetchCounts();
   }, []);
 
@@ -73,6 +74,20 @@ const SoftPlaySection = () => {
           parentPhone: parentPhone.trim(),
         },
       });
+
+      // Server returned a session-full error (HTTP 409)
+      const serverError = (data as any)?.error || (error as any)?.context?.error;
+      if (serverError === "SESSION_FULL") {
+        toast({
+          title: "Session just filled up",
+          description: "Sorry — that slot was booked seconds ago. Please choose another time.",
+          variant: "destructive",
+        });
+        await fetchCounts();
+        setSelectedSession(null);
+        return;
+      }
+
       if (error) throw error;
       if (data?.url) {
         window.location.href = data.url;
