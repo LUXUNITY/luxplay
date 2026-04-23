@@ -17,7 +17,7 @@ const HeroSection = () => {
       <div className="absolute top-0 left-0 right-0 z-30 h-1.5 bg-gradient-neon-bar" />
       <div className="absolute bottom-0 left-0 right-0 z-30 h-1 bg-gradient-neon-bar" />
 
-      <div className="relative z-20 mx-auto flex min-h-[100svh] w-full max-w-[640px] flex-col items-center justify-between px-4 pb-5 pt-5 text-center sm:max-w-[820px] md:max-w-[1100px] md:pt-8">
+      <div className="relative z-20 mx-auto flex min-h-[100svh] w-full max-w-[640px] flex-col items-center justify-between px-3 pb-4 pt-5 text-center sm:max-w-[820px] md:max-w-[1100px] md:pt-8">
         {/* LUXPLAY wordmark + subtitle */}
         <div className="animate-fade-in flex w-full flex-col items-center">
           <img
@@ -37,8 +37,8 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* WE'RE / OPENING — single flashing rainbow headline */}
-        <div className="mt-3 flex w-full flex-col items-center">
+        {/* WE'RE / OPENING — single flashing rainbow headline, stacked */}
+        <div className="mt-2 flex w-full flex-col items-center">
           <h1 className="font-display leading-[0.82] tracking-[0.005em] flex flex-col items-center">
             <span className="hero-flash text-[5rem] sm:text-[8.5rem] md:text-[12rem]">WE'RE</span>
             <span
@@ -57,8 +57,8 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Arcade + Soft Play image grid */}
-        <div className="mt-3 grid w-full grid-cols-2 gap-2.5 sm:gap-3">
+        {/* 3-column band: arcade photo | promo panel | soft play photo */}
+        <div className="mt-3 grid w-full grid-cols-[1fr_1.2fr_1fr] gap-2 sm:gap-3">
           <a
             href="#presale"
             className="hero-tile group relative block overflow-hidden rounded-sm border-2 border-neon-pink/70 transition-transform duration-200 hover:scale-[1.03]"
@@ -67,19 +67,35 @@ const HeroSection = () => {
             <img
               src={arcadeImg}
               alt="Arcade machines and prize claw at LuxPlay"
-              className="h-44 w-full object-cover sm:h-64 md:h-80"
+              className="h-48 w-full object-cover sm:h-72 md:h-[22rem]"
               loading="eager"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/15 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 p-2 text-left">
-              <span className="block font-display text-[1.2rem] leading-none text-neon-pink glow-pink sm:text-[1.7rem]">
-                ARCADE
-              </span>
-              <span className="mt-1 block font-display text-[0.7rem] tracking-[0.16em] text-foreground sm:text-[0.9rem]">
-                WIN BIG PRIZES
-              </span>
+            <div className="absolute left-1.5 top-1.5 rounded-sm border border-neon-pink/80 bg-background/80 px-1.5 py-0.5 font-display text-[0.65rem] tracking-[0.18em] text-neon-pink glow-pink sm:text-[0.8rem]">
+              ARCADE
             </div>
           </a>
+
+          {/* Promo panel — neon offer card */}
+          <div className="hero-promo-panel relative flex flex-col items-center justify-center rounded-sm border-2 border-neon-cyan/70 bg-background/70 px-2 py-3 backdrop-blur-md sm:py-5">
+            <div className="font-display leading-[0.85]">
+              <span className="hero-flash text-[2.4rem] sm:text-[3.6rem] md:text-[4.6rem]">50%</span>
+              <span className="ml-1 align-top font-display text-[0.85rem] text-neon-cyan glow-cyan sm:text-[1.1rem]">OFF</span>
+            </div>
+            <div className="mt-0.5 font-display text-[1rem] tracking-[0.1em] text-foreground sm:text-[1.3rem]">
+              SOFT PLAY
+            </div>
+            <div className="my-1.5 font-display text-[1.1rem] text-neon-green glow-green sm:text-[1.4rem]">+</div>
+            <div className="font-display text-[0.7rem] tracking-[0.18em] text-neon-green glow-green sm:text-[0.9rem]">
+              DISCOUNTED
+            </div>
+            <div className="hero-flash font-display text-[1.15rem] leading-none sm:text-[1.7rem] md:text-[2rem]">
+              ARCADE
+            </div>
+            <div className="hero-flash font-display text-[1.15rem] leading-none sm:text-[1.7rem] md:text-[2rem]">
+              CREDITS
+            </div>
+          </div>
 
           <a
             href="#softplay"
@@ -89,41 +105,52 @@ const HeroSection = () => {
             <img
               src={softplayImg}
               alt="Neon soft play frame and ball pit at LuxPlay"
-              className="h-44 w-full object-cover sm:h-64 md:h-80"
+              className="h-48 w-full object-cover sm:h-72 md:h-[22rem]"
               loading="eager"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/15 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 p-2 text-left">
-              <span className="block font-display text-[1.2rem] leading-none text-neon-green glow-green sm:text-[1.7rem]">
-                SOFT PLAY
-              </span>
-              <span className="mt-1 block font-display text-[0.7rem] tracking-[0.16em] text-foreground sm:text-[0.9rem]">
-                BALL PIT • SLIDES
-              </span>
+            <div className="absolute right-1.5 top-1.5 rounded-sm border border-neon-green/80 bg-background/80 px-1.5 py-0.5 font-display text-[0.65rem] tracking-[0.18em] text-neon-green glow-green sm:text-[0.8rem]">
+              SOFT PLAY
             </div>
           </a>
         </div>
 
-        {/* Two distinct CTAs — stacked on mobile so they never overlap */}
+        {/* BOOK NOW rainbow bar with pulsing chevrons + secondary CTA */}
         <div className="mt-3 w-full">
-          <div className="flex w-full flex-col gap-2.5 sm:flex-row sm:gap-3">
+          <div className="flex w-full items-center gap-2 sm:gap-3">
+            <span className="hero-chevrons shrink-0 font-display text-[1.4rem] text-neon-pink glow-pink sm:text-[2rem]" aria-hidden>
+              »
+            </span>
             <a
               href="#softplay"
-              className="hero-cta hero-cta-green flex flex-1 items-center justify-center rounded-md px-4 py-3.5 font-display text-[1.1rem] tracking-[0.12em] sm:text-[1.35rem]"
+              aria-label="Book soft play"
+              className="hero-rainbow-btn group relative flex flex-1 items-center justify-center overflow-hidden rounded-md border-2 border-white/60 px-4 py-3.5 font-display text-[1.25rem] tracking-[0.12em] text-foreground transition-transform duration-200 hover:scale-[1.02] sm:py-4 sm:text-[1.7rem]"
             >
-              BOOK SOFT PLAY
+              <span className="relative z-10 drop-shadow-[0_2px_0_rgba(0,0,0,0.6)]">BOOK NOW</span>
             </a>
-            <a
-              href="#presale"
-              className="hero-cta hero-cta-pink flex flex-1 items-center justify-center rounded-md px-4 py-3.5 font-display text-[1.1rem] tracking-[0.12em] sm:text-[1.35rem]"
+            <span
+              className="hero-chevrons shrink-0 font-display text-[1.4rem] text-neon-cyan glow-cyan sm:text-[2rem]"
+              aria-hidden
+              style={{ animationDelay: "0.4s" }}
             >
-              BUY CREDITS
-            </a>
+              «
+            </span>
           </div>
-          <p className="mt-2 font-display text-[0.72rem] tracking-[0.18em] text-foreground sm:text-[0.85rem]">
-            <span className="text-neon-green">●</span> LIMITED SPACES —{" "}
-            <span className="text-neon-green">SELLING FAST!</span>
-          </p>
+          <a
+            href="#presale"
+            className="mt-2 block w-full rounded-md border border-neon-pink/70 bg-background/80 px-4 py-2.5 font-display text-[0.95rem] tracking-[0.14em] text-neon-pink shadow-[0_0_18px_hsl(var(--neon-pink)/0.45)] transition-transform duration-200 hover:scale-[1.02] sm:text-[1.1rem]"
+          >
+            BUY ARCADE CREDITS
+          </a>
+        </div>
+
+        {/* Footer line */}
+        <div className="mt-2 flex w-full items-center justify-center gap-3 font-display text-[0.7rem] tracking-[0.18em] text-foreground sm:text-[0.85rem]">
+          <span className="text-neon-cyan glow-cyan">◉</span>
+          <span>WWW.LUXPLAY.UK</span>
+          <span className="text-foreground/30">|</span>
+          <span className="text-neon-pink glow-pink">◉</span>
+          <span>@LUXPLAY.UK</span>
         </div>
       </div>
     </section>
