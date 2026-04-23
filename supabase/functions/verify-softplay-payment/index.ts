@@ -90,6 +90,33 @@ serve(async (req) => {
     }).select().single();
 
     if (error) {
+      // Hard capacity guard rejected the insert — session filled while customer paid.
+      // Auto-refund the customer and return a clear error.
+      const isCapacityError =
+        error.message?.includes("SESSION_FULL") ||
+        (error as any).code === "23514";
+
+      if (isCapacityError) {
+        console.warn("Capacity exceeded after payment, refunding:", sessionId);
+        try {
+          if (session.payment_intent) {
+            await stripe.refunds.create({
+              payment_intent: session.payment_intent as string,
+              reason: "requested_by_customer",
+            });
+          }
+        } catch (refundErr) {
+          console.error("Refund failed:", refundErr);
+        }
+        return new Response(
+          JSON.stringify({
+            error: "SESSION_FULL",
+            message: "Sorry — that session filled up while you were paying. You've been automatically refunded.",
+          }),
+          { status: 409, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
       console.error("Failed to insert booking:", error);
       return new Response(
         JSON.stringify({ error: "Failed to save booking" }),
