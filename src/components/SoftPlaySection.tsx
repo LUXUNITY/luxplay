@@ -74,6 +74,20 @@ const SoftPlaySection = () => {
           parentPhone: parentPhone.trim(),
         },
       });
+
+      // Server returned a session-full error (HTTP 409)
+      const serverError = (data as any)?.error || (error as any)?.context?.error;
+      if (serverError === "SESSION_FULL") {
+        toast({
+          title: "Session just filled up",
+          description: "Sorry — that slot was booked seconds ago. Please choose another time.",
+          variant: "destructive",
+        });
+        await fetchCounts();
+        setSelectedSession(null);
+        return;
+      }
+
       if (error) throw error;
       if (data?.url) {
         window.location.href = data.url;
