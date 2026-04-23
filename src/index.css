@@ -156,6 +156,53 @@
     background-size: 200% 100%, 240px 160px, 220px 140px;
     mix-blend-mode: screen;
     animation: hero-grid-shift 8.5s linear infinite;
+    pointer-events: none;
+  }
+
+  .hero-circuit-grid {
+    background-color: #050510;
+    background-image:
+      linear-gradient(rgba(0, 238, 255, 0.10) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 0, 204, 0.10) 1px, transparent 1px),
+      linear-gradient(45deg, transparent 48%, rgba(170, 255, 0, 0.18) 49%, rgba(170, 255, 0, 0.18) 51%, transparent 52%),
+      linear-gradient(-45deg, transparent 48%, rgba(119, 0, 255, 0.18) 49%, rgba(119, 0, 255, 0.18) 51%, transparent 52%);
+    background-size: 44px 44px, 44px 44px, 220px 220px, 260px 260px;
+    transition: background-position 0.4s ease;
+  }
+  .hero-circuit-grid:hover {
+    background-position: 12px 12px, -12px -12px, 30px 0, -30px 0;
+  }
+
+  @keyframes hero-flash {
+    0%, 100% {
+      filter: brightness(1) drop-shadow(0 0 12px hsl(var(--neon-cyan) / 0.55)) drop-shadow(0 0 28px hsl(var(--neon-pink) / 0.35));
+      opacity: 1;
+    }
+    45% {
+      filter: brightness(1.35) drop-shadow(0 0 24px hsl(var(--neon-cyan) / 0.85)) drop-shadow(0 0 48px hsl(var(--neon-pink) / 0.6));
+      opacity: 1;
+    }
+    55% {
+      opacity: 0.78;
+    }
+  }
+
+  .hero-flash {
+    background: linear-gradient(90deg, #ffffff 0%, #8ff3ff 30%, #ffffff 50%, #ff9ae6 75%, #ffffff 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    text-shadow: none;
+    animation: hero-flash 1.6s ease-in-out infinite, hero-grid-shift 6s linear infinite;
+  }
+
+  .hero-tile {
+    box-shadow: 0 0 18px hsl(var(--neon-cyan) / 0.18);
+  }
+  .hero-tile:hover {
+    box-shadow: 0 0 32px hsl(var(--neon-pink) / 0.45);
   }
 
   .hero-heading {
@@ -191,6 +238,7 @@
   @media (prefers-reduced-motion: reduce) {
     .hero-circuit-overlay,
     .hero-heading,
+    .hero-flash,
     .hero-panel-green,
     .hero-panel-pink {
       animation: none;
