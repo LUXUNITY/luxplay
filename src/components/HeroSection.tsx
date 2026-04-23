@@ -125,9 +125,6 @@ const HeroSection = () => {
             <p className="font-body text-[10px] uppercase tracking-[0.2em] text-white/72 sm:text-xs md:text-sm">
               Unit 7, Sovereign Centre · Boscombe · Bournemouth · BH1 4SX
             </p>
-            <p className="font-body text-[10px] uppercase tracking-[0.2em] text-white/58 sm:text-xs md:text-sm">
-              Electro-galaxy launch · Big energy · Family fun all day
-            </p>
           </div>
         </motion.div>
       </div>
