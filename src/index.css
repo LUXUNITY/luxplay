@@ -240,6 +240,36 @@
     background: linear-gradient(90deg, rgba(255, 0, 204, 0.14), rgba(0, 238, 255, 0.14));
   }
 
+  @keyframes hero-rainbow-btn-shift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+
+  .hero-rainbow-btn {
+    background: linear-gradient(90deg, #ff00cc, #7700ff, #00eeff, #aaff00, #ffcc00, #ff00cc);
+    background-size: 200% 100%;
+    animation: hero-rainbow-btn-shift 3s linear infinite;
+    box-shadow:
+      0 0 18px rgba(255, 0, 204, 0.55),
+      0 0 32px rgba(0, 238, 255, 0.45),
+      inset 0 0 10px rgba(255, 255, 255, 0.25);
+  }
+
+  @keyframes hero-chevron-pulse {
+    0%, 100% { transform: translateX(0); opacity: 0.8; }
+    50% { transform: translateX(4px); opacity: 1; }
+  }
+
+  .hero-chevrons {
+    animation: hero-chevron-pulse 1s ease-in-out infinite;
+  }
+
+  .hero-promo-panel {
+    box-shadow:
+      0 0 18px hsl(var(--neon-cyan) / 0.35),
+      inset 0 0 18px hsl(var(--neon-purple) / 0.25);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .hero-circuit-overlay,
     .hero-heading,
