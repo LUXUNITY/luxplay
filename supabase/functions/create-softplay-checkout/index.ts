@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import Stripe from "https://esm.sh/stripe@18.5.0";
+import { createClient } from "npm:@supabase/supabase-js@2.57.2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -10,6 +11,7 @@ const corsHeaders = {
 const SOFTPLAY_PRICE_ID = "price_1TOvjMKDxuB13duTCKh7B9pZ";
 
 const VALID_SESSIONS = ["10:00", "12:00", "14:00", "16:00", "18:00", "20:00"];
+const MAX_CAPACITY = 40;
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -30,6 +32,36 @@ serve(async (req) => {
       return new Response(
         JSON.stringify({ error: "Invalid session time" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Pre-checkout capacity check (DB trigger remains the final guarantee)
+    const supabase = createClient(
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+    );
+
+    const { count, error: countError } = await supabase
+      .from("soft_play_bookings")
+      .select("id", { count: "exact", head: true })
+      .eq("session_date", sessionDate)
+      .eq("session_time", sessionTime);
+
+    if (countError) {
+      console.error("Capacity check failed:", countError);
+      return new Response(
+        JSON.stringify({ error: "Could not verify session availability" }),
+        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    if ((count ?? 0) >= MAX_CAPACITY) {
+      return new Response(
+        JSON.stringify({
+          error: "SESSION_FULL",
+          message: "Sorry, this session is fully booked. Please pick another time.",
+        }),
+        { status: 409, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
