@@ -11,15 +11,23 @@ const HeroSection = () => {
     <section className="relative min-h-[100svh] w-full overflow-hidden bg-background">
       <div className="absolute top-0 left-0 right-0 z-30 h-1 bg-gradient-neon-bar" />
 
-      <div className="relative z-10 mx-auto min-h-[100svh] w-full max-w-[680px]">
+      {/* Poster scaled to fit the screen with correct aspect ratio (1024x1536 ≈ 2:3) */}
+      <div
+        className="relative z-10 mx-auto"
+        style={{
+          width: "min(100vw, calc(100svh * 2 / 3))",
+          aspectRatio: "1024 / 1536",
+        }}
+      >
         <img
           src={referenceHero}
           alt="LuxPlay we're opening poster with soft play and arcade offers"
-          className="block h-auto w-full select-none"
+          className="block h-full w-full select-none"
           loading="eager"
           draggable={false}
         />
 
+        {/* BOOK NOW · SOFT PLAY hotspot */}
         <a
           href="#softplay"
           onClick={scrollTo("softplay")}
@@ -27,6 +35,7 @@ const HeroSection = () => {
           className="absolute left-[4%] top-[80.5%] h-[11.8%] w-[43.8%] rounded-[1.5rem]"
         />
 
+        {/* BUY CREDITS · ARCADE MACHINES hotspot */}
         <a
           href="#presale"
           onClick={scrollTo("presale")}
@@ -34,12 +43,12 @@ const HeroSection = () => {
           className="absolute right-[4%] top-[80.5%] h-[11.8%] w-[46%] rounded-[1.5rem]"
         />
 
+        {/* Footer links */}
         <a
           href="https://www.luxplay.uk"
           aria-label="Visit LuxPlay website"
           className="absolute left-[18%] top-[93.7%] h-[3.6%] w-[28%]"
         />
-
         <a
           href="https://instagram.com/luxplay.uk"
           target="_blank"
