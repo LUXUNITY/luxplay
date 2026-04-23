@@ -7,9 +7,11 @@ const HeroSection = () => {
     <section className="relative min-h-[100svh] w-full overflow-hidden bg-background">
       {/* Animated neon circuit grid background */}
       <div className="hero-circuit-grid absolute inset-0" />
-      <div className="hero-circuit-overlay absolute inset-0 opacity-70" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,hsl(var(--neon-purple)/0.18),transparent_60%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_90%,hsl(var(--neon-pink)/0.16),transparent_55%)]" />
+      <div className="hero-circuit-overlay absolute inset-0 opacity-90" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,hsl(var(--neon-purple)/0.45),transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_85%,hsl(var(--neon-cyan)/0.32),transparent_55%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_85%,hsl(var(--neon-pink)/0.35),transparent_55%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_55%,hsl(var(--neon-green)/0.18),transparent_45%)]" />
 
       {/* Top neon bar */}
       <div className="absolute top-0 left-0 right-0 z-20 h-1.5 bg-gradient-neon-bar" />
