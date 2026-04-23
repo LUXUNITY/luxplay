@@ -238,6 +238,7 @@
   @media (prefers-reduced-motion: reduce) {
     .hero-circuit-overlay,
     .hero-heading,
+    .hero-flash,
     .hero-panel-green,
     .hero-panel-pink {
       animation: none;
