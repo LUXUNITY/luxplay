@@ -14,13 +14,12 @@ const HeroSection = () => {
         className="absolute inset-0 w-full h-full object-cover object-center"
       />
 
-      {/* Heavy gradient overlay for legibility */}
-      <div className="absolute inset-0 bg-[#070710]/55" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#070710] via-[#070710]/70 to-[#070710]/50" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(7,7,16,0.55)_0%,_rgba(7,7,16,0.85)_75%)]" />
+      {/* Heavy gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#070710] via-[#070710]/70 to-[#070710]/40" />
+      <div className="absolute inset-0 bg-[#070710]/30" />
 
       {/* Content */}
-      <div className="relative z-10 px-6 md:px-12 lg:px-20 py-24 md:py-32 w-full text-center flex flex-col items-center [text-shadow:_0_2px_18px_rgba(0,0,0,0.85)]">
+      <div className="relative z-10 px-6 md:px-12 lg:px-20 py-24 md:py-32 w-full text-center flex flex-col items-center text-stroke-dark">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
