@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import heroDesktop from "@/assets/hero-bg-desktop.webp";
-import heroMobile from "@/assets/hero-bg-mobile.webp";
+import heroBg from "@/assets/hero-bg-arcade.jpg";
 
 const HeroSection = () => {
   return (
@@ -9,16 +8,13 @@ const HeroSection = () => {
       <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-neon-bar z-20" />
 
       {/* Full-bleed arcade image */}
-      <picture>
-        <source media="(min-width: 768px)" srcSet={heroDesktop} />
-        <img
-          src={heroMobile}
-          alt="LuxPlay Arcade — 40+ machines, opening 23 May 2026"
-          className="absolute inset-0 w-full h-full object-cover object-center"
-          fetchPriority="high"
-          decoding="async"
-        />
-      </picture>
+      <img
+        src={heroBg}
+        alt="LuxPlay Arcade — 40+ machines, opening 23 May 2026"
+        className="absolute inset-0 w-full h-full object-cover object-center"
+        fetchPriority="high"
+        decoding="async"
+      />
 
       {/* Heavy gradient overlay — darker mid + top so headline pops */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#070710] via-[#070710]/85 to-[#070710]/75" />

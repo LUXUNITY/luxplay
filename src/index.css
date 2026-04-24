@@ -115,10 +115,14 @@
     paint-order: stroke fill;
   }
 
-  /* Hero headline — clean neon gradient fill, no stroke */
+  /* Hero headline — pure neon gradient, NO stroke at all */
   .hero-bold-stroke {
     position: relative;
     display: inline-block;
+    -webkit-text-stroke: 0 !important;
+    font-weight: 900;
+    font-family: 'Bowlby One', 'Bebas Neue', sans-serif;
+    letter-spacing: 0.02em;
   }
 
   /* Neon flash — opacity + glow pulse, GPU-friendly, no layout thrash */
