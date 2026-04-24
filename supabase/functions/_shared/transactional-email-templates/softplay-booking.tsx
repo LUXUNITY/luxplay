@@ -75,7 +75,7 @@ export const template = {
     childName: 'Sophie',
     parentName: 'Sarah',
     sessionTime: '2:00 PM',
-    sessionDate: 'Friday 1st May 2026',
+    sessionDate: 'Saturday 23rd May 2026',
     bookingCode: 'SP-AB3-K7M',
   },
 } satisfies TemplateEntry
