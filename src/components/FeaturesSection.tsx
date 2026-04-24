@@ -38,20 +38,10 @@ const TeamGrid = () => (
       {TEAM.map((m) => (
         <div key={m.name} className="text-center">
           <div className="relative w-full max-w-[220px] mx-auto">
-            {/* Faded circuit backdrop */}
-            <img
-              src={neonCircuit}
-              alt=""
-              aria-hidden="true"
-              className="pointer-events-none select-none absolute inset-0 -m-3 sm:-m-5 w-[calc(100%+1.5rem)] sm:w-[calc(100%+2.5rem)] h-[calc(100%+1.5rem)] sm:h-[calc(100%+2.5rem)] object-cover opacity-25 mix-blend-screen"
-              loading="lazy"
-              decoding="async"
-              style={{
-                WebkitMaskImage:
-                  "radial-gradient(ellipse 70% 70% at center, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.8) 50%, #000 80%, #000 100%)",
-                maskImage:
-                  "radial-gradient(ellipse 70% 70% at center, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.8) 50%, #000 80%, #000 100%)",
-              }}
+            {/* Faded SVG circuit backdrop */}
+            <CircuitPattern
+              opacity={0.18}
+              className="pointer-events-none select-none absolute -inset-4 sm:-inset-6 w-[calc(100%+2rem)] sm:w-[calc(100%+3rem)] h-[calc(100%+2rem)] sm:h-[calc(100%+3rem)] mix-blend-screen"
             />
             <div
               className="relative aspect-square w-full overflow-hidden rounded-sm border border-white/10"
