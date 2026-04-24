@@ -35,10 +35,10 @@ const TeamGrid = () => (
     <p className="font-display text-xs tracking-[0.3em] text-white/30 mb-6 text-center">
       THE TEAM
     </p>
-    <div className="grid grid-cols-3 gap-3 sm:gap-6 md:gap-8 max-w-4xl mx-auto">
+    <div className="grid grid-cols-3 gap-3 sm:gap-6 md:gap-8 max-w-5xl mx-auto">
       {TEAM.map((m) => (
         <div key={m.name} className="text-center">
-          <div className="relative w-full max-w-[220px] mx-auto">
+          <div className="relative w-full max-w-[280px] md:max-w-[320px] mx-auto">
             {/* (Background grid + aurora glow lives at section level) */}
             <div
               className="relative aspect-square w-full overflow-hidden rounded-sm border border-white/10"
@@ -56,13 +56,13 @@ const TeamGrid = () => (
               />
             </div>
           </div>
-          <p className="font-display text-[11px] md:text-xs tracking-[0.18em] text-white mt-3 leading-tight">
+          <p className="font-display text-sm md:text-base tracking-[0.18em] text-white mt-4 leading-tight">
             {m.name}
           </p>
-          <p className="font-body text-[10px] md:text-[11px] text-neon-purple/90 mt-1 leading-snug">
+          <p className="font-body text-xs md:text-sm text-neon-purple/90 mt-1.5 leading-snug">
             {m.role}
           </p>
-          <p className="font-body text-[10px] md:text-[11px] text-white/40 mt-1 leading-snug">
+          <p className="font-body text-xs md:text-sm text-white/40 mt-1 leading-snug">
             {m.company}
           </p>
         </div>
