@@ -3,7 +3,7 @@ import arcadeHero from "@/assets/hero-bg.png";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex flex-col justify-end overflow-hidden">
+    <section className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden">
       {/* Neon top bar */}
       <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-neon-bar z-20" />
 
@@ -15,11 +15,11 @@ const HeroSection = () => {
       />
 
       {/* Heavy gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#070710] via-[#070710]/70 to-[#070710]/20" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#070710]/50 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#070710] via-[#070710]/70 to-[#070710]/40" />
+      <div className="absolute inset-0 bg-[#070710]/30" />
 
       {/* Content */}
-      <div className="relative z-10 px-6 md:px-12 lg:px-20 pb-16 md:pb-24">
+      <div className="relative z-10 px-6 md:px-12 lg:px-20 py-24 md:py-32 w-full text-center flex flex-col items-center">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -44,7 +44,7 @@ const HeroSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="font-body text-sm md:text-base tracking-widest text-white/60 uppercase mt-6"
+          className="font-body text-sm md:text-base tracking-widest text-white/60 uppercase mt-6 max-w-3xl"
         >
           40+ Arcade Machines · Soft Play · Prizes · Café — Opening May 2026
         </motion.p>
@@ -52,7 +52,7 @@ const HeroSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="font-body text-xs md:text-sm tracking-widest text-white/40 uppercase mt-2"
+          className="font-body text-xs md:text-sm tracking-widest text-white/40 uppercase mt-2 max-w-3xl"
         >
           Unit 7, Sovereign Centre · Boscombe · Bournemouth · BH1 4SX
         </motion.p>
@@ -61,7 +61,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.7 }}
-          className="mt-8 md:mt-12 flex flex-col sm:flex-row gap-4 sm:gap-6"
+          className="mt-8 md:mt-12 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center"
         >
           <a
             href="#presale"
