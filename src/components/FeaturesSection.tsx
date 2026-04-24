@@ -3,6 +3,7 @@ import founderBaz from "@/assets/founder-baz.jpg";
 import teamRares from "@/assets/team-rares.jpg";
 import teamJack from "@/assets/team-jack.jpg";
 import teamMartin from "@/assets/team-martin.png";
+import neonCircuit from "@/assets/neon-circuit.png";
 
 const FeaturesSection = () => {
   return (
@@ -14,30 +15,52 @@ const FeaturesSection = () => {
       <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-neon-purple/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-neon-pink/5 rounded-full blur-3xl pointer-events-none" />
 
-      {/* LAYOUT: Portrait left 40% | Statement right 60% */}
+      {/* LAYOUT: Portrait left | Statement right */}
       <div className="relative z-10 flex flex-col md:flex-row min-h-screen">
-        {/* LEFT — Founder portrait, full height, NO cropping into a card */}
-        <div className="w-full md:w-[40%] flex flex-col items-center justify-center px-6 py-10 md:py-20">
+        {/* LEFT — Founder portrait with neon circuit patterns flanking it */}
+        <div className="relative w-full md:w-[40%] flex flex-col items-center justify-center px-6 py-10 md:py-20">
+          {/* Circuit decoration — left */}
           <img
-            src={founderBaz}
-            alt="Baz — Founder of LuxPlay"
-            className="w-full max-w-md object-contain rounded-sm"
+            src={neonCircuit}
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none select-none absolute left-0 top-1/2 -translate-y-1/2 h-[80%] w-auto opacity-50 mix-blend-screen"
             loading="lazy"
             decoding="async"
-            style={{
-              boxShadow: '0 0 15px #7700ff, 0 0 30px rgba(119, 0, 255, 0.5), 0 0 60px rgba(119, 0, 255, 0.3)',
-            }}
           />
-          <div className="mt-6 text-center">
-            <p className="font-display text-sm md:text-base tracking-[0.25em] text-white/60">Sarbaz</p>
-            <p className="font-display text-4xl md:text-5xl tracking-widest text-white mt-0.5">"BAZ"</p>
-            <p className="font-display text-sm md:text-base tracking-[0.25em] text-white/60 mt-0.5">Roushbaiani</p>
-            <p className="font-display text-base md:text-lg tracking-[0.3em] text-neon-purple mt-3">— Founder &amp; Managing Director</p>
-            <p className="font-display text-xs md:text-sm tracking-[0.25em] text-white/50 mt-1.5">Owner &amp; Director of Lux Unity Ltd</p>
+          {/* Circuit decoration — right (mirrored) */}
+          <img
+            src={neonCircuit}
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none select-none absolute right-0 top-1/2 -translate-y-1/2 h-[80%] w-auto opacity-50 mix-blend-screen scale-x-[-1]"
+            loading="lazy"
+            decoding="async"
+          />
+
+          <div className="relative z-10 flex flex-col items-center">
+            <img
+              src={founderBaz}
+              alt="Baz — Founder of LuxPlay"
+              className="w-full max-w-[320px] md:max-w-sm object-contain rounded-sm"
+              loading="lazy"
+              decoding="async"
+              style={{
+                boxShadow:
+                  '0 0 15px #7700ff, 0 0 30px rgba(119, 0, 255, 0.5), 0 0 60px rgba(119, 0, 255, 0.3)',
+              }}
+            />
+            <div className="mt-6 text-center">
+              <p className="font-display text-sm md:text-base tracking-[0.25em] text-white/60">Sarbaz</p>
+              <p className="font-display text-4xl md:text-5xl tracking-widest text-white mt-0.5">"BAZ"</p>
+              <p className="font-display text-sm md:text-base tracking-[0.25em] text-white/60 mt-0.5">Roushbaiani</p>
+              <p className="font-display text-base md:text-lg tracking-[0.3em] text-neon-purple mt-3">— Founder &amp; Managing Director</p>
+              <p className="font-display text-xs md:text-sm tracking-[0.25em] text-white/50 mt-1.5">Owner &amp; Director of Lux Unity Ltd</p>
+            </div>
           </div>
         </div>
 
-        {/* RIGHT — Statement content, fills space */}
+        {/* RIGHT — Statement content */}
         <div className="w-full md:w-[60%] flex flex-col justify-center px-6 md:px-14 lg:px-20 py-16 md:py-20">
           {/* Subhead */}
           <motion.p
@@ -134,72 +157,72 @@ const FeaturesSection = () => {
               — SARBAZ "BAZ" ROUSHBAIANI, FOUNDER OF LUXPLAY
             </p>
           </motion.div>
-
-          {/* The team — supporting directors. Kept visually smaller than Baz's portrait. */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-12 md:mt-16"
-          >
-            <p className="font-display text-xs tracking-[0.3em] text-white/30 mb-5">
-              THE TEAM
-            </p>
-            <div className="grid grid-cols-3 gap-4 md:gap-6">
-              {[
-                {
-                  img: teamJack,
-                  alt: "Jack Oswell",
-                  name: "JACK OSWELL",
-                  role: "Arcade Systems & Technical Operations",
-                  company: "Co-Owner & Director, JNR Innovations",
-                },
-                {
-                  img: teamRares,
-                  alt: "Rares Cucos",
-                  name: "RARES CUCOS",
-                  role: "Arcade Systems & Technical Operations",
-                  company: "Co-Owner & Director, JNR Innovations",
-                },
-                {
-                  img: teamMartin,
-                  alt: "Martin MacGillivray",
-                  name: "MARTIN MACGILLIVRAY",
-                  role: "Lead Construction & Development Director",
-                  company: "Owner & Director, MasterClass Renovations",
-                },
-              ].map((m) => (
-                <div key={m.name} className="text-center">
-                  <div
-                    className="aspect-square w-full max-w-[140px] mx-auto overflow-hidden rounded-sm border border-white/10"
-                    style={{
-                      boxShadow:
-                        "0 0 8px rgba(119, 0, 255, 0.35), 0 0 16px rgba(119, 0, 255, 0.18)",
-                    }}
-                  >
-                    <img
-                      src={m.img}
-                      alt={m.alt}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                  <p className="font-display text-[11px] md:text-xs tracking-[0.18em] text-white mt-3 leading-tight">
-                    {m.name}
-                  </p>
-                  <p className="font-body text-[10px] md:text-[11px] text-neon-purple/90 mt-1 leading-snug">
-                    {m.role}
-                  </p>
-                  <p className="font-body text-[10px] md:text-[11px] text-white/40 mt-1 leading-snug">
-                    {m.company}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
         </div>
       </div>
+
+      {/* THE TEAM — full-width row underneath Baz */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="relative z-10 px-6 md:px-14 lg:px-20 pb-16 md:pb-24"
+      >
+        <p className="font-display text-xs tracking-[0.3em] text-white/30 mb-6 text-center">
+          THE TEAM
+        </p>
+        <div className="grid grid-cols-3 gap-4 md:gap-8 max-w-3xl mx-auto">
+          {[
+            {
+              img: teamJack,
+              alt: "Jack Oswell",
+              name: "JACK OSWELL",
+              role: "Arcade Systems & Technical Operations",
+              company: "Co-Owner & Director, JNR Innovations",
+            },
+            {
+              img: teamRares,
+              alt: "Rares Cucos",
+              name: "RARES CUCOS",
+              role: "Arcade Systems & Technical Operations",
+              company: "Co-Owner & Director, JNR Innovations",
+            },
+            {
+              img: teamMartin,
+              alt: "Martin MacGillivray",
+              name: "MARTIN MACGILLIVRAY",
+              role: "Lead Construction & Development Director",
+              company: "Owner & Director, MasterClass Exteriors",
+            },
+          ].map((m) => (
+            <div key={m.name} className="text-center">
+              <div
+                className="aspect-square w-full max-w-[160px] mx-auto overflow-hidden rounded-sm border border-white/10"
+                style={{
+                  boxShadow:
+                    "0 0 8px rgba(119, 0, 255, 0.35), 0 0 16px rgba(119, 0, 255, 0.18)",
+                }}
+              >
+                <img
+                  src={m.img}
+                  alt={m.alt}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <p className="font-display text-[11px] md:text-xs tracking-[0.18em] text-white mt-3 leading-tight">
+                {m.name}
+              </p>
+              <p className="font-body text-[10px] md:text-[11px] text-neon-purple/90 mt-1 leading-snug">
+                {m.role}
+              </p>
+              <p className="font-body text-[10px] md:text-[11px] text-white/40 mt-1 leading-snug">
+                {m.company}
+              </p>
+            </div>
+          ))}
+        </div>
+      </motion.div>
     </section>
   );
 };
