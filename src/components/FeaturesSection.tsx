@@ -38,11 +38,7 @@ const TeamGrid = () => (
       {TEAM.map((m) => (
         <div key={m.name} className="text-center">
           <div className="relative w-full max-w-[220px] mx-auto">
-            {/* Faded SVG circuit backdrop */}
-            <CircuitPattern
-              opacity={0.18}
-              className="pointer-events-none select-none absolute -inset-4 sm:-inset-6 w-[calc(100%+2rem)] sm:w-[calc(100%+3rem)] h-[calc(100%+2rem)] sm:h-[calc(100%+3rem)] mix-blend-screen"
-            />
+            {/* (Circuit pattern is now provided by the section-wide background) */}
             <div
               className="relative aspect-square w-full overflow-hidden rounded-sm border border-white/10"
               style={{
