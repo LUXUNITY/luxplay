@@ -48,8 +48,8 @@ const SoftPlaySuccess = () => {
         if (data?.bookings?.length) {
           const allBookings = data.bookings as Booking[];
           const primaryBooking = allBookings[0];
-          const childNames = allBookings.map((entry) => entry.child_name);
           const bookingCodes = allBookings.map((entry) => entry.booking_code);
+          const childCount = allBookings.length;
           const totalAmount = allBookings.reduce((sum, entry) => sum + (entry.amount_paid || 0), 0);
 
           setBookings(allBookings);
@@ -60,9 +60,7 @@ const SoftPlaySuccess = () => {
               recipientEmail: primaryBooking.parent_email,
               idempotencyKey: `softplay-${primaryBooking.stripe_session_id || sessionId}`,
               templateData: {
-                childName: primaryBooking.child_name,
-                childNames,
-                childCount: childNames.length,
+                childCount,
                 parentName: primaryBooking.parent_name,
                 sessionTime: SESSION_LABELS[primaryBooking.session_time] || primaryBooking.session_time,
                 sessionDate: new Date(primaryBooking.session_date).toLocaleDateString("en-GB", {
@@ -83,9 +81,7 @@ const SoftPlaySuccess = () => {
               templateData: {
                 type: "softplay",
                 customerEmail: primaryBooking.parent_email,
-                childName: primaryBooking.child_name,
-                childNames,
-                childCount: childNames.length,
+                childCount,
                 parentName: primaryBooking.parent_name,
                 sessionTime: SESSION_LABELS[primaryBooking.session_time] || primaryBooking.session_time,
                 sessionDate: new Date(primaryBooking.session_date).toLocaleDateString("en-GB", {
@@ -155,9 +151,7 @@ const SoftPlaySuccess = () => {
 
             <p className="font-body text-white/70 text-base mb-2">
               <strong className="text-white">
-                {bookings.length === 1
-                  ? booking.child_name
-                  : `${bookings.length} children`}
+                {bookings.length} {bookings.length === 1 ? "child" : "children"}
               </strong>{" "}
               {bookings.length === 1 ? "is" : "are"} booked in! 🎉
             </p>
@@ -171,12 +165,12 @@ const SoftPlaySuccess = () => {
 
             <div className="border border-white/10 bg-[#0d0d1a] p-4 mb-6 text-left space-y-2">
               <p className="font-display text-[10px] tracking-[0.3em] text-neon-cyan/80 mb-3">
-                CHILDREN ON THIS BOOKING
+                BOOKING CODE{bookings.length > 1 ? "S" : ""}
               </p>
               <ul className="space-y-2">
-                {bookings.map((entry) => (
+                {bookings.map((entry, idx) => (
                   <li key={entry.booking_code} className="flex items-start justify-between gap-3 border-b border-white/5 pb-2 last:border-b-0 last:pb-0">
-                    <span className="font-body text-white/80 text-sm">👶 {entry.child_name}</span>
+                    <span className="font-body text-white/80 text-sm">👶 Child {idx + 1}</span>
                     <span className="font-display text-[11px] tracking-[0.2em] text-neon-cyan">{entry.booking_code}</span>
                   </li>
                 ))}
@@ -195,13 +189,10 @@ const SoftPlaySuccess = () => {
                 📧 Confirmation sent to <strong className="text-white/80">{booking.parent_email}</strong>
               </p>
               <p className="font-body text-white/60 text-sm">
-                🏪 Show this code at the LuxPlay soft play entrance
-              </p>
-              <p className="font-body text-white/60 text-sm">
-                👶 Your child's name will be on the check-in list
+                🏪 Show {bookings.length > 1 ? "these codes" : "this code"} at the LuxPlay soft play entrance
               </p>
               <p className="font-body text-neon-pink/70 text-xs mt-2">
-                ⚠️ Save this code — screenshot this page or check your email
+                ⚠️ Save {bookings.length > 1 ? "these codes" : "this code"} — screenshot this page or check your email
               </p>
             </div>
 
