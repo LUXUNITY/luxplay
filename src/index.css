@@ -115,30 +115,10 @@
     paint-order: stroke fill;
   }
 
-  /* Multi-colour neon "outline" for the giant hero headline.
-     The fill runs green → cyan → purple → pink.
-     The outline below uses the OPPOSITE gradient (pink → purple → cyan → green)
-     so every section of the letter edge contrasts with what it's touching. */
+  /* Hero headline — clean neon gradient fill, no outline */
   .hero-bold-stroke {
     position: relative;
     display: inline-block;
-    z-index: 1;
-  }
-  .hero-bold-stroke::before {
-    content: attr(data-text);
-    position: absolute;
-    inset: 0;
-    -webkit-text-stroke: 6px transparent;
-    background: linear-gradient(90deg, #ff00cc, #7700ff, #00eeff, #aaff00);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    /* Push the outline behind the fill */
-    z-index: -1;
-    /* Soft neon halo so the outline reads even where colours match the bg */
-    filter: drop-shadow(0 0 8px rgba(255, 0, 204, 0.6))
-            drop-shadow(0 0 14px rgba(0, 238, 255, 0.45));
-    pointer-events: none;
   }
 
   /* Neon flash — opacity + glow pulse, GPU-friendly, no layout thrash */
