@@ -39,12 +39,7 @@ const TeamGrid = () => (
       {TEAM.map((m) => (
         <div key={m.name} className="text-center">
           <div className="relative w-full max-w-[220px] mx-auto">
-            {/* Hand-drawn neon circuit traces wrapping each portrait */}
-            <CircuitDecor
-              variant="frame"
-              opacity={0.55}
-              className="pointer-events-none absolute -inset-5 sm:-inset-8 w-[calc(100%+2.5rem)] sm:w-[calc(100%+4rem)] h-[calc(100%+2.5rem)] sm:h-[calc(100%+4rem)]"
-            />
+            {/* (Background grid + aurora glow lives at section level) */}
             <div
               className="relative aspect-square w-full overflow-hidden rounded-sm border border-white/10"
               style={{
