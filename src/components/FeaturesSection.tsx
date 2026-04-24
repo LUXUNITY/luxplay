@@ -56,7 +56,7 @@ const TeamGrid = () => (
               />
             </div>
           </div>
-          <p className="font-display text-sm md:text-base tracking-[0.18em] text-white mt-4 leading-tight">
+          <p className="font-display text-[11px] sm:text-sm md:text-base tracking-[0.12em] sm:tracking-[0.15em] md:tracking-[0.18em] text-white mt-4 leading-tight whitespace-nowrap">
             {m.name}
           </p>
           <p className="font-body text-xs md:text-sm text-neon-purple/90 mt-1.5 leading-snug">
