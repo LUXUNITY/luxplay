@@ -3,7 +3,7 @@ import founderBaz from "@/assets/founder-baz.jpg";
 import teamRares from "@/assets/team-rares.jpg";
 import teamJack from "@/assets/team-jack.jpg";
 import teamMartin from "@/assets/team-martin.png";
-import CircuitDecor from "@/components/CircuitDecor";
+
 import { circuitTileUrl } from "@/components/circuitTile";
 
 const TEAM = [
