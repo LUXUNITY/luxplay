@@ -3,7 +3,7 @@ import founderBaz from "@/assets/founder-baz.jpg";
 import teamRares from "@/assets/team-rares.jpg";
 import teamJack from "@/assets/team-jack.jpg";
 import teamMartin from "@/assets/team-martin.png";
-import neonCircuit from "@/assets/neon-circuit.png";
+import CircuitDecor from "@/components/CircuitDecor";
 
 const TEAM = [
   {
@@ -38,7 +38,12 @@ const TeamGrid = () => (
       {TEAM.map((m) => (
         <div key={m.name} className="text-center">
           <div className="relative w-full max-w-[220px] mx-auto">
-            {/* (Circuit pattern is now provided by the section-wide background) */}
+            {/* Hand-drawn neon circuit traces wrapping each portrait */}
+            <CircuitDecor
+              variant="frame"
+              opacity={0.55}
+              className="pointer-events-none absolute -inset-5 sm:-inset-8 w-[calc(100%+2.5rem)] sm:w-[calc(100%+4rem)] h-[calc(100%+2.5rem)] sm:h-[calc(100%+4rem)]"
+            />
             <div
               className="relative aspect-square w-full overflow-hidden rounded-sm border border-white/10"
               style={{
@@ -77,37 +82,26 @@ const FeaturesSection = () => {
       {/* Neon top bar */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-neon-bar z-20" />
 
-      {/* MAIN CIRCUIT BACKGROUND — covers the whole section, sits behind everything */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          backgroundImage: `url(${neonCircuit})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          opacity: 0.55,
-          mixBlendMode: "screen",
-        }}
+      {/* MAIN CIRCUIT BACKGROUND — hand-drawn SVG traces (not the reference image) */}
+      <CircuitDecor
+        variant="section"
+        opacity={0.9}
+        className="pointer-events-none absolute inset-0 w-full h-full z-0"
       />
-      {/* Mirrored copy on the right for symmetry */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          backgroundImage: `url(${neonCircuit})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          opacity: 0.45,
-          mixBlendMode: "screen",
-          transform: "scaleX(-1)",
-        }}
-      />
+      {/* Mirrored copy for extra density on both sides */}
+      <div className="pointer-events-none absolute inset-0 z-0" style={{ transform: "scaleX(-1)" }}>
+        <CircuitDecor
+          variant="section"
+          opacity={0.6}
+          className="w-full h-full"
+        />
+      </div>
       {/* Soft vignette so center stays readable */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
         style={{
           background:
-            "radial-gradient(ellipse 60% 60% at center, rgba(7,7,16,0.85) 0%, rgba(7,7,16,0.4) 50%, rgba(7,7,16,0) 100%)",
+            "radial-gradient(ellipse 55% 55% at center, rgba(7,7,16,0.85) 0%, rgba(7,7,16,0.45) 45%, rgba(7,7,16,0) 100%)",
         }}
       />
 
