@@ -78,15 +78,15 @@ const HeroSection = () => {
         >
           <a
             href="#presale"
-            className="inline-block font-display text-xl md:text-2xl tracking-widest px-10 md:px-14 py-4 md:py-5 bg-neon-green text-[#070710] animate-btn-flash-green transition-transform duration-200 hover:scale-105 text-center"
+            className="neon-cta inline-block font-display text-xl md:text-2xl tracking-widest px-10 md:px-14 py-4 md:py-5 bg-neon-green text-[#070710] animate-btn-flash-green transition-transform duration-200 hover:scale-110 text-center"
           >
-            BUY CREDITS NOW
+            <span>BUY CREDITS NOW</span>
           </a>
           <a
             href="#softplay"
-            className="inline-block font-display text-xl md:text-2xl tracking-widest px-10 md:px-14 py-4 md:py-5 bg-neon-cyan text-[#070710] animate-btn-flash-cyan transition-transform duration-200 hover:scale-105 text-center"
+            className="neon-cta inline-block font-display text-xl md:text-2xl tracking-widest px-10 md:px-14 py-4 md:py-5 bg-neon-cyan text-[#070710] animate-btn-flash-cyan transition-transform duration-200 hover:scale-110 text-center"
           >
-            BOOK SOFT PLAY
+            <span>BOOK SOFT PLAY</span>
           </a>
         </motion.div>
       </div>
