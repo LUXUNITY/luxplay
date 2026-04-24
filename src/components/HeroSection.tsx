@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import arcadeHero from "@/assets/hero-bg.png";
+import heroDesktop from "@/assets/hero-bg-desktop.webp";
+import heroMobile from "@/assets/hero-bg-mobile.webp";
 
 const HeroSection = () => {
   return (
@@ -8,11 +9,16 @@ const HeroSection = () => {
       <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-neon-bar z-20" />
 
       {/* Full-bleed arcade image */}
-      <img
-        src={arcadeHero}
-        alt="LuxPlay Arcade — 40+ machines, opening 23 May 2026"
-        className="absolute inset-0 w-full h-full object-cover object-center"
-      />
+      <picture>
+        <source media="(min-width: 768px)" srcSet={heroDesktop} />
+        <img
+          src={heroMobile}
+          alt="LuxPlay Arcade — 40+ machines, opening 23 May 2026"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          fetchPriority="high"
+          decoding="async"
+        />
+      </picture>
 
       {/* Heavy gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#070710] via-[#070710]/70 to-[#070710]/40" />
@@ -97,13 +103,9 @@ const HeroSection = () => {
         transition={{ delay: 1.2 }}
         className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10"
       >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5 }}
-          className="w-5 h-8 rounded-full border-2 border-white/30 flex items-start justify-center pt-1.5"
-        >
-          <div className="w-1 h-2 rounded-full bg-neon-cyan" />
-        </motion.div>
+        <div className="w-5 h-8 rounded-full border-2 border-white/30 flex items-start justify-center pt-1.5">
+          <div className="w-1 h-2 rounded-full bg-neon-cyan animate-pulse" />
+        </div>
       </motion.div>
     </section>
   );

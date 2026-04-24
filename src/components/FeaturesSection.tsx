@@ -19,6 +19,8 @@ const FeaturesSection = () => {
             src={founderBaz}
             alt="Baz — Founder of LuxPlay"
             className="w-full max-w-md object-contain rounded-sm"
+            loading="lazy"
+            decoding="async"
             style={{
               boxShadow: '0 0 15px #7700ff, 0 0 30px rgba(119, 0, 255, 0.5), 0 0 60px rgba(119, 0, 255, 0.3)',
             }}
