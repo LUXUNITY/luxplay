@@ -115,6 +115,17 @@
     paint-order: stroke fill;
   }
 
+  /* Slightly bolder weight for the giant hero headline only — no size change */
+  .hero-bold-stroke {
+    -webkit-text-stroke: 3px currentColor;
+    paint-order: stroke fill;
+  }
+  .text-stroke-dark .hero-bold-stroke {
+    /* keep dark outline on the outside, neon fill stays vivid */
+    -webkit-text-stroke: 3px rgba(0, 0, 0, 0.95);
+    paint-order: stroke fill;
+  }
+
   /* Neon flash — opacity + glow pulse, GPU-friendly, no layout thrash */
   @keyframes neon-flash {
     0%, 100% {

@@ -35,9 +35,9 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.15 }}
           className="font-display text-[5.5rem] sm:text-[8rem] md:text-[14rem] lg:text-[18rem] xl:text-[20rem] leading-[0.85] tracking-wide animate-neon-flash"
         >
-          <span className="text-gradient-neon">WE'RE</span>
+          <span className="text-gradient-neon hero-bold-stroke">WE'RE</span>
           <br />
-          <span className="text-gradient-neon">OPENING!</span>
+          <span className="text-gradient-neon hero-bold-stroke">OPENING!</span>
         </motion.h1>
 
         <motion.p
