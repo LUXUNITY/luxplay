@@ -54,8 +54,13 @@ const FeaturesSection = () => {
               <p className="font-display text-sm md:text-base tracking-[0.25em] text-white/60">Sarbaz</p>
               <p className="font-display text-4xl md:text-5xl tracking-widest text-white mt-0.5">"BAZ"</p>
               <p className="font-display text-sm md:text-base tracking-[0.25em] text-white/60 mt-0.5">Roushbaiani</p>
-              <p className="font-display text-base md:text-lg tracking-[0.3em] text-neon-purple mt-3">— Founder &amp; Managing Director</p>
-              <p className="font-display text-xs md:text-sm tracking-[0.25em] text-white/50 mt-1.5">Owner &amp; Director of Lux Unity Ltd</p>
+              <p
+                className="font-display text-base md:text-lg tracking-[0.3em] text-neon-cyan mt-3"
+                style={{ textShadow: '0 0 10px rgba(0, 255, 255, 0.6), 0 0 20px rgba(0, 255, 255, 0.3)' }}
+              >
+                — Founder &amp; Managing Director
+              </p>
+              <p className="font-display text-xs md:text-sm tracking-[0.25em] text-white/70 mt-1.5">Owner &amp; Director of Lux Unity Ltd</p>
             </div>
           </div>
         </div>
@@ -170,7 +175,7 @@ const FeaturesSection = () => {
         <p className="font-display text-xs tracking-[0.3em] text-white/30 mb-6 text-center">
           THE TEAM
         </p>
-        <div className="grid grid-cols-3 gap-4 md:gap-8 max-w-3xl mx-auto">
+        <div className="grid grid-cols-3 gap-3 sm:gap-6 md:gap-8 max-w-4xl mx-auto">
           {[
             {
               img: teamJack,
@@ -196,7 +201,7 @@ const FeaturesSection = () => {
           ].map((m) => (
             <div key={m.name} className="text-center">
               <div
-                className="aspect-square w-full max-w-[160px] mx-auto overflow-hidden rounded-sm border border-white/10"
+                className="aspect-square w-full max-w-[220px] mx-auto overflow-hidden rounded-sm border border-white/10"
                 style={{
                   boxShadow:
                     "0 0 8px rgba(119, 0, 255, 0.35), 0 0 16px rgba(119, 0, 255, 0.18)",
