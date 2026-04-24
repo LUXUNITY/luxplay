@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import arcadeHero from "@/assets/arcade-hero.jpg";
+import arcadeHero from "@/assets/hero-bg.png";
 
 const HeroSection = () => {
   return (
