@@ -100,6 +100,16 @@
     text-shadow: 0 0 20px rgba(119, 0, 255, 0.6), 0 0 40px rgba(119, 0, 255, 0.3);
   }
 
+  /* Crisp thin black outline around every letter for legibility on busy backgrounds */
+  .text-stroke-dark {
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.9);
+    paint-order: stroke fill;
+  }
+  .text-stroke-dark .text-gradient-neon {
+    -webkit-text-stroke: 2px rgba(0, 0, 0, 0.95);
+    paint-order: stroke fill;
+  }
+
   /* Neon flash — opacity + glow pulse, GPU-friendly, no layout thrash */
   @keyframes neon-flash {
     0%, 100% {
