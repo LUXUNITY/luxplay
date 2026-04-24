@@ -173,9 +173,10 @@
     background-color: hsl(var(--background));
     background-image:
       linear-gradient(hsl(var(--background) / 0.56), hsl(var(--background) / 0.56)),
-      url("./assets/luxplay-bg-pattern.jpeg");
+      url("./assets/luxplay-site-pattern.jpeg");
     background-position: center;
-    background-repeat: repeat;
-    background-size: 320px 320px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
   }
 }
