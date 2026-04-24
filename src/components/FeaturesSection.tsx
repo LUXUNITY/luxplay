@@ -15,8 +15,8 @@ const FeaturesSection = () => {
       <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-neon-purple/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-neon-pink/5 rounded-full blur-3xl pointer-events-none" />
 
-      {/* LAYOUT: Portrait left | Statement right */}
-      <div className="relative z-10 flex flex-col md:flex-row min-h-screen">
+      {/* LAYOUT: Portrait left | Statement right (on mobile, team is forced between them via flex order) */}
+      <div className="relative z-10 flex flex-col md:flex-row md:min-h-screen">
         {/* LEFT — Founder portrait with neon circuit patterns flanking it */}
         <div className="relative w-full md:w-[40%] flex flex-col items-center justify-center px-6 py-10 md:py-20">
           {/* Circuit decoration — left */}
