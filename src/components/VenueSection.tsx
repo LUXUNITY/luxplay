@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import venueArcade from "@/assets/venue-arcade.jpg";
-import venueSoftplay from "@/assets/softplay.png";
-import venuePrizes from "@/assets/venue-prizes.jpg";
-import venueCafe from "@/assets/venue-cafe.jpg";
+import venueArcade from "@/assets/venue-arcade.webp";
+import venueSoftplay from "@/assets/softplay.webp";
+import venuePrizes from "@/assets/venue-prizes.webp";
+import venueCafe from "@/assets/venue-cafe.webp";
 
 const venues = [
   { img: venueArcade, label: "ARCADE ZONE", color: "text-neon-green" },

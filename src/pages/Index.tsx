@@ -1,9 +1,11 @@
+import { Suspense, lazy } from "react";
 import HeroSection from "@/components/HeroSection";
-import PreSaleSection from "@/components/PreSaleSection";
-import SoftPlaySection from "@/components/SoftPlaySection";
-import VenueSection from "@/components/VenueSection";
-import FeaturesSection from "@/components/FeaturesSection";
-import FooterSection from "@/components/FooterSection";
+
+const PreSaleSection = lazy(() => import("@/components/PreSaleSection"));
+const SoftPlaySection = lazy(() => import("@/components/SoftPlaySection"));
+const VenueSection = lazy(() => import("@/components/VenueSection"));
+const FeaturesSection = lazy(() => import("@/components/FeaturesSection"));
+const FooterSection = lazy(() => import("@/components/FooterSection"));
 
 const Index = () => {
   return (
@@ -14,19 +16,39 @@ const Index = () => {
       {/* Mid-page sections — LuxPlay card starfield background */}
       <div className="relative luxplay-pattern-bg">
         {/* 2. Credits — money section FIRST, before any explanation */}
-        <PreSaleSection />
+        <div className="defer-section">
+          <Suspense fallback={null}>
+            <PreSaleSection />
+          </Suspense>
+        </div>
         {/* 3. Soft Play — opening day session bookings */}
-        <SoftPlaySection />
+        <div className="defer-section">
+          <Suspense fallback={null}>
+            <SoftPlaySection />
+          </Suspense>
+        </div>
         {/* 4. Venue visuals — large cinematic splits, not a grid */}
-        <VenueSection />
+        <div className="defer-section">
+          <Suspense fallback={null}>
+            <VenueSection />
+          </Suspense>
+        </div>
       </div>
 
       {/* 5. Founder story — last, earns trust after excitement */}
-      <FeaturesSection />
+      <div className="defer-section">
+        <Suspense fallback={null}>
+          <FeaturesSection />
+        </Suspense>
+      </div>
 
       {/* 6. Footer — also keeps the starfield */}
       <div className="relative luxplay-pattern-bg">
-        <FooterSection />
+        <div className="defer-section">
+          <Suspense fallback={null}>
+            <FooterSection />
+          </Suspense>
+        </div>
       </div>
     </main>
   );
