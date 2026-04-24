@@ -1,5 +1,6 @@
 import { Suspense, lazy } from "react";
 import HeroSection from "@/components/HeroSection";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const PreSaleSection = lazy(() => import("@/components/PreSaleSection"));
 const SoftPlaySection = lazy(() => import("@/components/SoftPlaySection"));
@@ -18,19 +19,25 @@ const Index = () => {
         {/* 2. Credits — money section FIRST, before any explanation */}
         <div className="defer-section">
           <Suspense fallback={null}>
-            <PreSaleSection />
+            <ScrollReveal>
+              <PreSaleSection />
+            </ScrollReveal>
           </Suspense>
         </div>
         {/* 3. Soft Play — opening day session bookings */}
         <div className="defer-section">
           <Suspense fallback={null}>
-            <SoftPlaySection />
+            <ScrollReveal>
+              <SoftPlaySection />
+            </ScrollReveal>
           </Suspense>
         </div>
         {/* 4. Venue visuals — large cinematic splits, not a grid */}
         <div className="defer-section">
           <Suspense fallback={null}>
-            <VenueSection />
+            <ScrollReveal>
+              <VenueSection />
+            </ScrollReveal>
           </Suspense>
         </div>
       </div>
@@ -38,7 +45,9 @@ const Index = () => {
       {/* 5. Founder story — last, earns trust after excitement */}
       <div className="defer-section">
         <Suspense fallback={null}>
-          <FeaturesSection />
+          <ScrollReveal>
+            <FeaturesSection />
+          </ScrollReveal>
         </Suspense>
       </div>
 
@@ -46,7 +55,9 @@ const Index = () => {
       <div className="relative luxplay-pattern-bg">
         <div className="defer-section">
           <Suspense fallback={null}>
-            <FooterSection />
+            <ScrollReveal>
+              <FooterSection />
+            </ScrollReveal>
           </Suspense>
         </div>
       </div>
@@ -55,3 +66,4 @@ const Index = () => {
 };
 
 export default Index;
+
