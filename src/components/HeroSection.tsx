@@ -33,7 +33,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.15 }}
-          className="font-display text-7xl md:text-[10rem] lg:text-[14rem] leading-[0.85] tracking-wide"
+          className="font-display text-[5.5rem] sm:text-[8rem] md:text-[14rem] lg:text-[18rem] xl:text-[20rem] leading-[0.85] tracking-wide animate-neon-flash"
         >
           <span className="text-gradient-neon">WE'RE</span>
           <br />
@@ -44,17 +44,31 @@ const HeroSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="font-body text-sm md:text-base tracking-widest text-white/60 uppercase mt-6 max-w-3xl"
+          className="font-display text-lg md:text-2xl tracking-widest uppercase mt-6 max-w-3xl"
         >
-          40+ Arcade Machines · Soft Play · Prizes · Café — Opening 23 May 2026
+          <span className="text-neon-green glow-green">40+ Arcade</span>
+          <span className="text-white/80"> · </span>
+          <span className="text-neon-pink glow-pink">Soft Play</span>
+          <span className="text-white/80"> · </span>
+          <span className="text-neon-purple glow-purple">Prizes</span>
+          <span className="text-white/80"> · </span>
+          <span className="text-neon-cyan glow-cyan">Café</span>
+          <span className="text-white/80"> — </span>
+          <span className="text-white glow-pink">Opening 23 May 2026</span>
         </motion.p>
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="font-body text-xs md:text-sm tracking-widest text-white/40 uppercase mt-2 max-w-3xl"
+          className="font-display text-sm md:text-base tracking-widest uppercase mt-3 max-w-3xl"
         >
-          Unit 7, Sovereign Centre · Boscombe · Bournemouth · BH1 4SX
+          <span className="text-neon-cyan glow-cyan">Unit 7, Sovereign Centre</span>
+          <span className="text-white/70"> · </span>
+          <span className="text-neon-pink glow-pink">Boscombe</span>
+          <span className="text-white/70"> · </span>
+          <span className="text-neon-green glow-green">Bournemouth</span>
+          <span className="text-white/70"> · </span>
+          <span className="text-neon-purple glow-purple">BH1 4SX</span>
         </motion.p>
 
         <motion.div
@@ -65,13 +79,13 @@ const HeroSection = () => {
         >
           <a
             href="#presale"
-            className="inline-block font-display text-xl md:text-2xl tracking-widest px-10 md:px-14 py-4 md:py-5 bg-neon-green text-[#070710] hover:shadow-[0_0_50px_rgba(170,255,0,0.5)] transition-all duration-300 text-center"
+            className="inline-block font-display text-xl md:text-2xl tracking-widest px-10 md:px-14 py-4 md:py-5 bg-neon-green text-[#070710] animate-btn-flash-green transition-transform duration-200 hover:scale-105 text-center"
           >
             BUY CREDITS NOW
           </a>
           <a
             href="#softplay"
-            className="inline-block font-display text-xl md:text-2xl tracking-widest px-10 md:px-14 py-4 md:py-5 bg-neon-cyan text-[#070710] hover:shadow-[0_0_50px_rgba(0,238,255,0.5)] transition-all duration-300 text-center"
+            className="inline-block font-display text-xl md:text-2xl tracking-widest px-10 md:px-14 py-4 md:py-5 bg-neon-cyan text-[#070710] animate-btn-flash-cyan transition-transform duration-200 hover:scale-105 text-center"
           >
             BOOK SOFT PLAY
           </a>
