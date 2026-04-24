@@ -39,7 +39,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.15 }}
-          className="font-display text-[5.5rem] sm:text-[8rem] md:text-[14rem] lg:text-[18rem] xl:text-[20rem] leading-[0.85] tracking-wide animate-neon-flash"
+          className="font-display text-[7rem] sm:text-[10rem] md:text-[16rem] lg:text-[20rem] xl:text-[22rem] leading-[0.82] tracking-wide animate-neon-flash font-black"
         >
           <span className="text-gradient-neon hero-bold-stroke" data-text="WE'RE">WE'RE</span>
           <br />
