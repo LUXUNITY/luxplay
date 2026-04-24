@@ -14,8 +14,6 @@ interface AdminPurchaseNotificationProps {
   credits?: number
   amountPaid?: string
   redemptionCode?: string
-  childName?: string
-  childNames?: string[]
   childCount?: number
   parentName?: string
   sessionTime?: string
@@ -31,20 +29,20 @@ const AdminPurchaseNotificationEmail = ({
   credits,
   amountPaid,
   redemptionCode,
-  childName,
-  childNames,
   childCount,
   parentName,
   sessionTime,
   sessionDate,
   bookingCode,
   bookingCodes,
-}: AdminPurchaseNotificationProps) => (
+}: AdminPurchaseNotificationProps) => {
+  const count = childCount ?? (Array.isArray(bookingCodes) ? bookingCodes.length : 1)
+  return (
   <Html lang="en" dir="ltr">
     <Head />
     <Preview>
       {type === 'softplay'
-        ? `New soft play booking — ${childCount && childCount > 1 ? `${childCount} children` : childName || 'Unknown'}`
+        ? `New soft play booking — ${count} ${count === 1 ? 'child' : 'children'}`
         : `New purchase — ${packageName || 'Unknown'} package`}
     </Preview>
     <Body style={main}>
@@ -58,8 +56,7 @@ const AdminPurchaseNotificationEmail = ({
         <Section style={detailsBox}>
           {type === 'softplay' ? (
             <>
-              <Text style={detailRow}><strong>Children:</strong> {childNames && childNames.length > 0 ? childNames.join(', ') : childName || 'N/A'}</Text>
-              <Text style={detailRow}><strong>Child Count:</strong> {childCount || (childNames?.length ?? (childName ? 1 : 'N/A'))}</Text>
+              <Text style={detailRow}><strong>Number of Children:</strong> {count}</Text>
               <Text style={detailRow}><strong>Parent:</strong> {parentName || 'N/A'}</Text>
               <Text style={detailRow}><strong>Email:</strong> {customerEmail || 'N/A'}</Text>
               <Text style={detailRow}><strong>Session:</strong> {sessionTime || 'N/A'} — {sessionDate || 'N/A'}</Text>
@@ -83,14 +80,18 @@ const AdminPurchaseNotificationEmail = ({
       </Container>
     </Body>
   </Html>
-)
+  )
+}
 
 export const template = {
   component: AdminPurchaseNotificationEmail,
-  subject: (data: Record<string, any>) =>
-    data.type === 'softplay'
-      ? `New Soft Play Booking — ${data.childCount && data.childCount > 1 ? `${data.childCount} children` : data.childName || 'Unknown'}`
-      : `New Sale — ${data.packageName || 'Unknown'} Package`,
+  subject: (data: Record<string, any>) => {
+    if (data.type === 'softplay') {
+      const c = data.childCount ?? (Array.isArray(data.bookingCodes) ? data.bookingCodes.length : 1)
+      return `New Soft Play Booking — ${c} ${c === 1 ? 'child' : 'children'}`
+    }
+    return `New Sale — ${data.packageName || 'Unknown'} Package`
+  },
   displayName: 'Admin purchase notification',
   previewData: {
     type: 'credits',
