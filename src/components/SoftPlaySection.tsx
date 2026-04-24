@@ -65,6 +65,7 @@ const SoftPlaySection = () => {
   };
 
   const validChildren = childNames.map((n) => n.trim()).filter(Boolean);
+  const hasEmptyChildNames = childNames.some((name) => !name.trim());
   // Price reflects the number of child slots added (so it updates the moment
   // the parent clicks "Add child", before they've typed the name).
   const quantity = childNames.length;
@@ -74,7 +75,25 @@ const SoftPlaySection = () => {
     if (!selectedSession || quantity === 0 || !parentName.trim()) {
       toast({
         title: "Missing info",
-        description: "Please add at least one child's name, your name, and select a session.",
+        description: "Please add your children, enter one parent or guardian name, and select a session.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (hasEmptyChildNames || validChildren.length !== quantity) {
+      toast({
+        title: "Missing child names",
+        description: "Please fill in every child's name before continuing.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (/[\/,]/.test(parentName)) {
+      toast({
+        title: "One parent name only",
+        description: "Please enter one parent or guardian name in that field.",
         variant: "destructive",
       });
       return;
@@ -294,7 +313,7 @@ const SoftPlaySection = () => {
 
               <div>
                 <label className="font-display text-[10px] tracking-[0.2em] text-white/40 mb-1 block">
-                  PARENT / GUARDIAN NAME *
+                  PARENT / GUARDIAN NAME (ONE ONLY) *
                 </label>
                 <input
                   type="text"
@@ -303,6 +322,9 @@ const SoftPlaySection = () => {
                   placeholder="e.g. Sarah Johnson"
                   className="w-full bg-[#070710] border border-white/10 text-white font-body text-sm px-4 py-3 placeholder:text-white/20 focus:outline-none focus:border-neon-cyan/50"
                 />
+                <p className="mt-2 font-body text-[11px] text-white/35">
+                  Add children above. Enter one parent or guardian name only here.
+                </p>
               </div>
               <div>
                 <label className="font-display text-[10px] tracking-[0.2em] text-white/40 mb-1 block">
