@@ -16,8 +16,8 @@ const HeroSection = () => {
         decoding="async"
       />
 
-      {/* Gradient overlay — dark at top for headline, slightly lighter at bottom/middle */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#070710]/95 via-[#070710]/55 to-[#070710]/70" />
+      {/* Gradient overlay — dark at top for headline, slightly lighter middle, darker bottom */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#070710]/95 via-[#070710]/55 to-[#070710]/90" />
 
       {/* Content */}
       <div className="relative z-10 px-6 md:px-12 lg:px-20 py-24 md:py-32 w-full text-center flex flex-col items-center text-stroke-dark">
