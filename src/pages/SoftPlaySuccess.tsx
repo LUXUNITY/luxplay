@@ -1,16 +1,18 @@
-import { Check, ArrowLeft, Copy, Loader2, Baby, Clock } from "lucide-react";
+import { ArrowLeft, Copy, Loader2, Baby, Clock } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 
 interface Booking {
+  stripe_session_id?: string;
   booking_code: string;
   child_name: string;
   parent_name: string;
   parent_email: string;
   session_time: string;
   session_date: string;
+  amount_paid?: number;
 }
 
 const SESSION_LABELS: Record<string, string> = {
@@ -25,9 +27,10 @@ const SESSION_LABELS: Record<string, string> = {
 const SoftPlaySuccess = () => {
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get("session_id");
-  const [booking, setBooking] = useState<Booking | null>(null);
+  const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const booking = bookings[0] ?? null;
 
   useEffect(() => {
     if (!sessionId) {
@@ -42,22 +45,32 @@ const SoftPlaySuccess = () => {
           body: { sessionId },
         });
         if (fnError) throw fnError;
-        if (data?.booking) {
-          setBooking(data.booking);
+        if (data?.bookings?.length) {
+          const allBookings = data.bookings as Booking[];
+          const primaryBooking = allBookings[0];
+          const childNames = allBookings.map((entry) => entry.child_name);
+          const bookingCodes = allBookings.map((entry) => entry.booking_code);
+          const totalAmount = allBookings.reduce((sum, entry) => sum + (entry.amount_paid || 0), 0);
+
+          setBookings(allBookings);
           // Send confirmation email
           await supabase.functions.invoke("send-transactional-email", {
             body: {
               templateName: "softplay-booking",
-              recipientEmail: data.booking.parent_email,
-              idempotencyKey: `softplay-${data.booking.stripe_session_id || sessionId}`,
+              recipientEmail: primaryBooking.parent_email,
+              idempotencyKey: `softplay-${primaryBooking.stripe_session_id || sessionId}`,
               templateData: {
-                childName: data.booking.child_name,
-                parentName: data.booking.parent_name,
-                sessionTime: SESSION_LABELS[data.booking.session_time] || data.booking.session_time,
-                sessionDate: new Date(data.booking.session_date).toLocaleDateString("en-GB", {
+                childName: primaryBooking.child_name,
+                childNames,
+                childCount: childNames.length,
+                parentName: primaryBooking.parent_name,
+                sessionTime: SESSION_LABELS[primaryBooking.session_time] || primaryBooking.session_time,
+                sessionDate: new Date(primaryBooking.session_date).toLocaleDateString("en-GB", {
                   weekday: "long", day: "numeric", month: "long", year: "numeric",
                 }),
-                bookingCode: data.booking.booking_code,
+                bookingCode: primaryBooking.booking_code,
+                bookingCodes,
+                totalAmount: `£${(totalAmount / 100).toFixed(2)}`,
               },
             },
           });
@@ -66,21 +79,26 @@ const SoftPlaySuccess = () => {
             body: {
               templateName: "admin-purchase-notification",
               recipientEmail: "luxplayuk@gmail.com",
-              idempotencyKey: `admin-softplay-${data.booking.stripe_session_id || sessionId}`,
+              idempotencyKey: `admin-softplay-${primaryBooking.stripe_session_id || sessionId}`,
               templateData: {
                 type: "softplay",
-                customerEmail: data.booking.parent_email,
-                childName: data.booking.child_name,
-                parentName: data.booking.parent_name,
-                sessionTime: SESSION_LABELS[data.booking.session_time] || data.booking.session_time,
-                sessionDate: new Date(data.booking.session_date).toLocaleDateString("en-GB", {
+                customerEmail: primaryBooking.parent_email,
+                childName: primaryBooking.child_name,
+                childNames,
+                childCount: childNames.length,
+                parentName: primaryBooking.parent_name,
+                sessionTime: SESSION_LABELS[primaryBooking.session_time] || primaryBooking.session_time,
+                sessionDate: new Date(primaryBooking.session_date).toLocaleDateString("en-GB", {
                   weekday: "long", day: "numeric", month: "long", year: "numeric",
                 }),
-                bookingCode: data.booking.booking_code,
-                amountPaid: `£${((data.booking.amount_paid || 0) / 100).toFixed(2)}`,
+                bookingCode: primaryBooking.booking_code,
+                bookingCodes,
+                amountPaid: `£${(totalAmount / 100).toFixed(2)}`,
               },
             },
           });
+        } else if (data?.booking) {
+          setBookings([data.booking as Booking]);
         } else {
           setError(data?.error || "Could not find your booking.");
         }
@@ -136,7 +154,12 @@ const SoftPlaySuccess = () => {
             </h1>
 
             <p className="font-body text-white/70 text-base mb-2">
-              <strong className="text-white">{booking.child_name}</strong> is booked in! 🎉
+              <strong className="text-white">
+                {bookings.length === 1
+                  ? booking.child_name
+                  : `${bookings.length} children`}
+              </strong>{" "}
+              {bookings.length === 1 ? "is" : "are"} booked in! 🎉
             </p>
             <p className="font-body text-white/40 text-sm mb-6 flex items-center justify-center gap-2">
               <Clock className="w-4 h-4" />
@@ -146,23 +169,24 @@ const SoftPlaySuccess = () => {
               })}
             </p>
 
-            {/* Booking Code */}
-            <div className="border-2 border-neon-cyan/40 bg-neon-cyan/5 p-6 mb-6">
-              <p className="font-display text-xs tracking-[0.3em] text-white/50 mb-2">
-                YOUR BOOKING CODE
+            <div className="border border-white/10 bg-[#0d0d1a] p-4 mb-6 text-left space-y-2">
+              <p className="font-display text-[10px] tracking-[0.3em] text-neon-cyan/80 mb-3">
+                CHILDREN ON THIS BOOKING
               </p>
-              <p
-                className="font-display text-3xl md:text-4xl tracking-[0.2em] text-neon-cyan mb-3"
-                style={{ textShadow: "0 0 15px rgba(0,238,255,0.3)" }}
-              >
-                {booking.booking_code}
-              </p>
+              <ul className="space-y-2">
+                {bookings.map((entry) => (
+                  <li key={entry.booking_code} className="flex items-start justify-between gap-3 border-b border-white/5 pb-2 last:border-b-0 last:pb-0">
+                    <span className="font-body text-white/80 text-sm">👶 {entry.child_name}</span>
+                    <span className="font-display text-[11px] tracking-[0.2em] text-neon-cyan">{entry.booking_code}</span>
+                  </li>
+                ))}
+              </ul>
               <button
                 onClick={copyCode}
-                className="inline-flex items-center gap-2 font-display text-xs tracking-widest text-white/60 hover:text-neon-cyan transition-colors"
+                className="inline-flex items-center gap-2 pt-2 font-display text-xs tracking-widest text-white/60 hover:text-neon-cyan transition-colors"
               >
                 <Copy className="w-3.5 h-3.5" />
-                COPY CODE
+                COPY FIRST CODE
               </button>
             </div>
 
