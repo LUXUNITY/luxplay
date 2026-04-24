@@ -59,38 +59,63 @@ serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
     );
 
-    // Idempotent check
+    // Idempotent check — return all bookings already saved for this session
     const { data: existing } = await supabase
       .from("soft_play_bookings")
       .select("*")
-      .eq("stripe_session_id", sessionId)
-      .maybeSingle();
+      .eq("stripe_session_id", sessionId);
 
-    if (existing) {
-      return new Response(JSON.stringify({ booking: existing }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 200,
-      });
+    if (existing && existing.length > 0) {
+      return new Response(
+        JSON.stringify({ booking: existing[0], bookings: existing }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200 }
+      );
     }
 
     const meta = session.metadata || {};
-    const bookingCode = generateBookingCode();
 
-    const { data: booking, error } = await supabase.from("soft_play_bookings").insert({
+    // Parse children list (new flow) or fall back to single childName (legacy)
+    let children: string[] = [];
+    if (meta.children) {
+      try {
+        const parsed = JSON.parse(meta.children);
+        if (Array.isArray(parsed)) {
+          children = parsed.map((c: unknown) => String(c || "").trim()).filter(Boolean);
+        }
+      } catch (_e) {
+        // ignore
+      }
+    }
+    if (children.length === 0 && meta.childName) {
+      children = [String(meta.childName)];
+    }
+    if (children.length === 0) {
+      children = ["Unknown"];
+    }
+
+    const totalAmount = session.amount_total || 0;
+    const perChildAmount = Math.round(totalAmount / children.length);
+
+    const rows = children.map((name) => ({
       stripe_session_id: sessionId,
       session_time: meta.sessionTime || "10:00",
       session_date: meta.sessionDate || new Date().toISOString().split("T")[0],
-      child_name: meta.childName || "Unknown",
+      child_name: name,
       parent_name: meta.parentName || "Unknown",
       parent_email: session.customer_details?.email || "",
       parent_phone: meta.parentPhone || null,
-      amount_paid: session.amount_total || 250,
+      amount_paid: perChildAmount || 400,
       currency: session.currency || "gbp",
-      booking_code: bookingCode,
-    }).select().single();
+      booking_code: generateBookingCode(),
+    }));
+
+    const { data: bookings, error } = await supabase
+      .from("soft_play_bookings")
+      .insert(rows)
+      .select();
 
     if (error) {
-      console.error("Failed to insert booking:", error);
+      console.error("Failed to insert bookings:", error);
 
       // If the session filled up between checkout and payment, auto-refund.
       const isSessionFull =
@@ -124,10 +149,10 @@ serve(async (req) => {
       );
     }
 
-    return new Response(JSON.stringify({ booking }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 200,
-    });
+    return new Response(
+      JSON.stringify({ booking: bookings?.[0], bookings }),
+      { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200 }
+    );
   } catch (error) {
     return new Response(JSON.stringify({ error: error.message }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
