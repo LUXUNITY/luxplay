@@ -79,7 +79,41 @@ const FeaturesSection = () => {
     <section id="about" className="relative bg-[#070710] overflow-hidden">
 
       {/* Neon top bar */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-neon-bar z-10" />
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-neon-bar z-20" />
+
+      {/* MAIN CIRCUIT BACKGROUND — covers the whole section, sits behind everything */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          backgroundImage: `url(${neonCircuit})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.55,
+          mixBlendMode: "screen",
+        }}
+      />
+      {/* Mirrored copy on the right for symmetry */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          backgroundImage: `url(${neonCircuit})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.45,
+          mixBlendMode: "screen",
+          transform: "scaleX(-1)",
+        }}
+      />
+      {/* Soft vignette so center stays readable */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 60% at center, rgba(7,7,16,0.85) 0%, rgba(7,7,16,0.4) 50%, rgba(7,7,16,0) 100%)",
+        }}
+      />
 
       {/* Ambient glow */}
       <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-neon-purple/5 rounded-full blur-3xl pointer-events-none" />
