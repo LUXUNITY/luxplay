@@ -123,17 +123,7 @@ const FeaturesSection = () => {
       <div className="relative z-10 flex flex-col md:flex-row md:min-h-screen">
         {/* LEFT — Founder portrait with neon circuit patterns flanking it */}
         <div className="relative w-full md:w-[40%] flex flex-col items-center justify-center px-6 py-10 md:py-20">
-          {/* SVG circuit decoration — flanks Baz on both sides, faded */}
-          <CircuitPattern
-            side="left"
-            opacity={0.35}
-            className="pointer-events-none select-none absolute left-0 top-1/2 -translate-y-1/2 h-[95%] w-1/2 mix-blend-screen"
-          />
-          <CircuitPattern
-            side="right"
-            opacity={0.35}
-            className="pointer-events-none select-none absolute right-0 top-1/2 -translate-y-1/2 h-[95%] w-1/2 mix-blend-screen"
-          />
+          {/* (Circuit pattern is now provided by the section-wide background) */}
 
           <div className="relative z-10 flex flex-col items-center">
             <img
