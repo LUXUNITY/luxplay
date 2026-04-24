@@ -89,34 +89,16 @@ const FeaturesSection = () => {
       <div className="relative z-10 flex flex-col md:flex-row md:min-h-screen">
         {/* LEFT — Founder portrait with neon circuit patterns flanking it */}
         <div className="relative w-full md:w-[40%] flex flex-col items-center justify-center px-6 py-10 md:py-20">
-          {/* Circuit decoration — wraps fully around Baz, edges feathered into the background */}
-          <img
-            src={neonCircuit}
-            alt=""
-            aria-hidden="true"
-            className="pointer-events-none select-none absolute left-0 top-1/2 -translate-y-1/2 h-[95%] w-auto opacity-40 mix-blend-screen"
-            loading="lazy"
-            decoding="async"
-            style={{
-              WebkitMaskImage:
-                "radial-gradient(ellipse 70% 80% at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 45%, #000 75%, #000 100%)",
-              maskImage:
-                "radial-gradient(ellipse 70% 80% at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 45%, #000 75%, #000 100%)",
-            }}
+          {/* SVG circuit decoration — flanks Baz on both sides, faded */}
+          <CircuitPattern
+            side="left"
+            opacity={0.35}
+            className="pointer-events-none select-none absolute left-0 top-1/2 -translate-y-1/2 h-[95%] w-1/2 mix-blend-screen"
           />
-          <img
-            src={neonCircuit}
-            alt=""
-            aria-hidden="true"
-            className="pointer-events-none select-none absolute right-0 top-1/2 -translate-y-1/2 h-[95%] w-auto opacity-40 mix-blend-screen scale-x-[-1]"
-            loading="lazy"
-            decoding="async"
-            style={{
-              WebkitMaskImage:
-                "radial-gradient(ellipse 70% 80% at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 45%, #000 75%, #000 100%)",
-              maskImage:
-                "radial-gradient(ellipse 70% 80% at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 45%, #000 75%, #000 100%)",
-            }}
+          <CircuitPattern
+            side="right"
+            opacity={0.35}
+            className="pointer-events-none select-none absolute right-0 top-1/2 -translate-y-1/2 h-[95%] w-1/2 mix-blend-screen"
           />
 
           <div className="relative z-10 flex flex-col items-center">
