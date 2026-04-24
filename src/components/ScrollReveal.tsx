@@ -29,7 +29,8 @@ const ScrollReveal = ({ children, className = "", delay = 0 }: ScrollRevealProps
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+      // Trigger well before the section enters the viewport so it eases in smoothly
+      { threshold: 0, rootMargin: "0px 0px 25% 0px" }
     );
 
     observer.observe(node);
@@ -39,8 +40,8 @@ const ScrollReveal = ({ children, className = "", delay = 0 }: ScrollRevealProps
   return (
     <div
       ref={ref}
-      className={`transition-all duration-[900ms] ease-out will-change-transform ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      className={`transition-[opacity,transform] duration-700 ease-out will-change-transform motion-reduce:transition-none ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
       } ${className}`}
       style={{ transitionDelay: visible ? `${delay}ms` : "0ms" }}
     >
