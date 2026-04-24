@@ -166,7 +166,7 @@ const PreSaleSection = () => {
   };
 
   return (
-    <section id="presale" className="relative bg-[#070710] overflow-hidden">
+    <section id="presale" className="relative overflow-hidden">
       {/* Neon top bar */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-neon-bar" />
 

@@ -13,7 +13,7 @@ const venues = [
 
 const VenueSection = () => {
   return (
-    <section className="relative bg-[#070710]">
+    <section className="relative">
       {/* Header */}
       <div className="px-6 md:px-12 lg:px-20 pt-20 md:pt-28 pb-10">
         <motion.h2
