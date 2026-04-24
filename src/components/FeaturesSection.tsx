@@ -87,11 +87,12 @@ const FeaturesSection = () => {
           backgroundRepeat: "repeat",
           backgroundSize: "400px 400px",
           backgroundPosition: "center",
-          // Inverse vignette: transparent in centre, opaque at edges.
+          opacity: 0.45,
+          // Inverse vignette: transparent in centre, softer at edges.
           WebkitMaskImage:
-            "radial-gradient(ellipse 60% 55% at 50% 50%, transparent 0%, rgba(0,0,0,0.35) 35%, rgba(0,0,0,0.85) 70%, #000 100%)",
+            "radial-gradient(ellipse 60% 55% at 50% 50%, transparent 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.55) 75%, rgba(0,0,0,0.75) 100%)",
           maskImage:
-            "radial-gradient(ellipse 60% 55% at 50% 50%, transparent 0%, rgba(0,0,0,0.35) 35%, rgba(0,0,0,0.85) 70%, #000 100%)",
+            "radial-gradient(ellipse 60% 55% at 50% 50%, transparent 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.55) 75%, rgba(0,0,0,0.75) 100%)",
         }}
       />
 
