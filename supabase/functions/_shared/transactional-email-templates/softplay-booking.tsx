@@ -9,13 +9,17 @@ const SITE_NAME = "LuxPlay"
 
 interface SoftPlayBookingProps {
   childName?: string
+  childNames?: string[]
+  childCount?: number
   parentName?: string
   sessionTime?: string
   sessionDate?: string
   bookingCode?: string
+  bookingCodes?: string[]
+  totalAmount?: string
 }
 
-const SoftPlayBookingEmail = ({ childName, parentName, sessionTime, sessionDate, bookingCode }: SoftPlayBookingProps) => (
+const SoftPlayBookingEmail = ({ childName, childNames, childCount, parentName, sessionTime, sessionDate, bookingCode, bookingCodes, totalAmount }: SoftPlayBookingProps) => (
   <Html lang="en" dir="ltr">
     <Head />
     <Preview>Your LuxPlay soft play booking is confirmed! 🎉</Preview>
@@ -29,11 +33,20 @@ const SoftPlayBookingEmail = ({ childName, parentName, sessionTime, sessionDate,
 
         <Text style={text}>
           {parentName ? `Hi ${parentName}, ` : ''}
-          {childName
-            ? `${childName}'s soft play session is booked!`
-            : 'Your soft play session is booked!'
+          {childCount && childCount > 1
+            ? `your ${childCount} children are booked in for soft play!`
+            : childName
+              ? `${childName}'s soft play session is booked!`
+              : 'Your soft play session is booked!'
           }
         </Text>
+
+        {childNames && childNames.length > 0 ? (
+          <Section style={detailsBox}>
+            <Text style={detailLabel}>CHILDREN</Text>
+            <Text style={detailValue}>{childNames.join(' • ')}</Text>
+          </Section>
+        ) : null}
 
         <Section style={detailsBox}>
           <Text style={detailLabel}>SESSION</Text>
@@ -41,9 +54,11 @@ const SoftPlayBookingEmail = ({ childName, parentName, sessionTime, sessionDate,
         </Section>
 
         <Section style={codeBox}>
-          <Text style={codeLabel}>YOUR BOOKING CODE</Text>
-          <Text style={codeText}>{bookingCode || 'SP-XXX-XXX'}</Text>
+          <Text style={codeLabel}>{bookingCodes && bookingCodes.length > 1 ? 'YOUR BOOKING CODES' : 'YOUR BOOKING CODE'}</Text>
+          <Text style={codeText}>{bookingCodes && bookingCodes.length > 0 ? bookingCodes.join(' • ') : bookingCode || 'SP-XXX-XXX'}</Text>
         </Section>
+
+        {totalAmount ? <Text style={text}><strong>Total paid:</strong> {totalAmount}</Text> : null}
 
         <Text style={text}>
           Show this code at the LuxPlay soft play entrance on the day. Your child's name will be on our check-in list.
@@ -73,10 +88,14 @@ export const template = {
   displayName: 'Soft play booking',
   previewData: {
     childName: 'Sophie',
+    childNames: ['Sophie', 'Noah'],
+    childCount: 2,
     parentName: 'Sarah',
     sessionTime: '2:00 PM',
     sessionDate: 'Saturday 23rd May 2026',
     bookingCode: 'SP-AB3-K7M',
+    bookingCodes: ['SP-AB3-K7M', 'SP-HL9-P2Q'],
+    totalAmount: '£8.00',
   },
 } satisfies TemplateEntry
 
