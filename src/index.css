@@ -99,4 +99,52 @@
   .glow-purple {
     text-shadow: 0 0 20px rgba(119, 0, 255, 0.6), 0 0 40px rgba(119, 0, 255, 0.3);
   }
+
+  /* Neon flash — opacity + glow pulse, GPU-friendly, no layout thrash */
+  @keyframes neon-flash {
+    0%, 100% {
+      opacity: 1;
+      filter: drop-shadow(0 0 18px rgba(255, 0, 204, 0.85))
+              drop-shadow(0 0 36px rgba(0, 238, 255, 0.55));
+    }
+    50% {
+      opacity: 0.78;
+      filter: drop-shadow(0 0 6px rgba(255, 0, 204, 0.4))
+              drop-shadow(0 0 12px rgba(0, 238, 255, 0.25));
+    }
+  }
+  .animate-neon-flash {
+    animation: neon-flash 1.4s ease-in-out infinite;
+  }
+
+  @keyframes btn-flash {
+    0%, 100% {
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0),
+                  0 0 28px rgba(170, 255, 0, 0.65),
+                  0 0 56px rgba(170, 255, 0, 0.35);
+      transform: scale(1);
+    }
+    50% {
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0),
+                  0 0 8px rgba(170, 255, 0, 0.25);
+      transform: scale(0.985);
+    }
+  }
+  .animate-btn-flash-green {
+    animation: btn-flash 1.3s ease-in-out infinite;
+  }
+  @keyframes btn-flash-cyan {
+    0%, 100% {
+      box-shadow: 0 0 28px rgba(0, 238, 255, 0.65),
+                  0 0 56px rgba(0, 238, 255, 0.35);
+      transform: scale(1);
+    }
+    50% {
+      box-shadow: 0 0 8px rgba(0, 238, 255, 0.25);
+      transform: scale(0.985);
+    }
+  }
+  .animate-btn-flash-cyan {
+    animation: btn-flash-cyan 1.3s ease-in-out infinite;
+  }
 }
