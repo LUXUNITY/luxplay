@@ -115,17 +115,10 @@
     paint-order: stroke fill;
   }
 
-  /* Hero headline — clean neon gradient fill, thickened with stroke */
+  /* Hero headline — clean neon gradient fill, no stroke */
   .hero-bold-stroke {
     position: relative;
     display: inline-block;
-    -webkit-text-stroke: 3px currentColor;
-    paint-order: stroke fill;
-  }
-  @media (min-width: 768px) {
-    .hero-bold-stroke {
-      -webkit-text-stroke: 6px currentColor;
-    }
   }
 
   /* Neon flash — opacity + glow pulse, GPU-friendly, no layout thrash */

@@ -50,7 +50,7 @@ const HeroSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="font-display text-2xl sm:text-3xl md:text-4xl tracking-widest uppercase mt-6 max-w-4xl"
+          className="font-display text-xl sm:text-2xl md:text-3xl tracking-widest uppercase mt-6 max-w-4xl"
         >
           <span className="text-neon-green glow-green">
             40+ Arcade Games · 3 Level Soft Play · Amazing Prizes · Cozy Café
@@ -62,7 +62,7 @@ const HeroSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="font-display text-lg sm:text-xl md:text-2xl tracking-widest uppercase mt-4 max-w-4xl text-neon-cyan glow-cyan"
+          className="font-display text-base sm:text-lg md:text-xl tracking-widest uppercase mt-4 max-w-4xl text-neon-cyan glow-cyan"
         >
           Unit 7, Sovereign Centre · Boscombe · Bournemouth · BH1 4SX
         </motion.p>
@@ -70,7 +70,7 @@ const HeroSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.7 }}
-          className="font-display text-base sm:text-lg md:text-xl tracking-widest uppercase mt-3 max-w-4xl text-neon-cyan glow-cyan"
+          className="font-display text-sm sm:text-base md:text-lg tracking-widest uppercase mt-3 max-w-4xl text-neon-cyan glow-cyan"
         >
           Multi-Storey Parking On-Site · Bus Station Right Outside · Fully Indoor — Weather-Proof Fun
         </motion.p>
