@@ -42,56 +42,126 @@ const Admin = () => {
   const [acting, setActing] = useState(false);
   const [justActed, setJustActed] = useState(false);
 
+  const normalizeCode = (value: string) =>
+    value
+      .toUpperCase()
+      .trim()
+      .replace(/[‐‑‒–—−]/g, "-")
+      .replace(/\s+/g, "")
+      .replace(/[^A-Z0-9-]/g, "");
+
+  const getSoftPlayCandidates = (value: string) => {
+    const normalized = normalizeCode(value);
+    const compact = normalized.replace(/-/g, "");
+    const suffix = compact.startsWith("SP") ? compact.slice(2) : compact;
+    const candidates = new Set<string>();
+
+    if (normalized) candidates.add(normalized);
+    if (suffix.length === 6) {
+      candidates.add(`SP-${suffix.slice(0, 3)}-${suffix.slice(3)}`);
+    }
+    if (compact.length === 8 && compact.startsWith("SP")) {
+      candidates.add(`SP-${compact.slice(2, 5)}-${compact.slice(5)}`);
+    }
+
+    return Array.from(candidates);
+  };
+
+  const getOrderCandidates = (value: string) => {
+    const normalized = normalizeCode(value);
+    const compact = normalized.replace(/-/g, "");
+    const suffix = compact.startsWith("LUX") ? compact.slice(3) : compact;
+    const candidates = new Set<string>();
+
+    if (normalized) candidates.add(normalized);
+    if (suffix.length === 8) {
+      candidates.add(`LUX-${suffix.slice(0, 4)}-${suffix.slice(4)}`);
+    }
+    if (compact.length === 11 && compact.startsWith("LUX")) {
+      candidates.add(`LUX-${compact.slice(3, 7)}-${compact.slice(7)}`);
+    }
+
+    return Array.from(candidates);
+  };
+
+  const lookupBooking = async (value: string) => {
+    const candidates = getSoftPlayCandidates(value);
+    for (const candidate of candidates) {
+      const { data, error: queryError } = await supabase
+        .from("soft_play_bookings")
+        .select("*")
+        .eq("booking_code", candidate)
+        .maybeSingle();
+
+      if (queryError) {
+        throw queryError;
+      }
+
+      if (data) {
+        return data;
+      }
+    }
+
+    return null;
+  };
+
+  const lookupOrder = async (value: string) => {
+    const candidates = getOrderCandidates(value);
+    for (const candidate of candidates) {
+      const { data, error: queryError } = await supabase
+        .from("orders")
+        .select("*")
+        .eq("redemption_code", candidate)
+        .maybeSingle();
+
+      if (queryError) {
+        throw queryError;
+      }
+
+      if (data) {
+        return data;
+      }
+    }
+
+    return null;
+  };
+
   const lookupCode = async () => {
-    const trimmed = code.trim().toUpperCase();
+    const trimmed = normalizeCode(code);
     if (!trimmed) return;
     setLoading(true);
     setError(null);
     setResult(null);
     setJustActed(false);
 
-    // Try soft play booking first (SP-XXX-XXX), then credit order (LUX-XXXX-XXXX)
-    if (trimmed.startsWith("SP-")) {
-      const { data, error: queryError } = await supabase
-        .from("soft_play_bookings")
-        .select("*")
-        .eq("booking_code", trimmed)
-        .maybeSingle();
+    try {
+      if (trimmed.startsWith("SP") || getSoftPlayCandidates(trimmed).length > 1) {
+        const booking = await lookupBooking(trimmed);
 
-      if (queryError) {
-        setError("Failed to look up code.");
-      } else if (!data) {
-        setError("Booking code not found. Check spelling and try again.");
-      } else {
-        setResult({ kind: "booking", data });
-      }
-    } else {
-      // Try orders table (credit codes)
-      const { data, error: queryError } = await supabase
-        .from("orders")
-        .select("*")
-        .eq("redemption_code", trimmed)
-        .maybeSingle();
-
-      if (queryError) {
-        setError("Failed to look up code.");
-      } else if (!data) {
-        // Fallback: maybe they typed a booking code without the SP- prefix being obvious
-        const { data: bookingData } = await supabase
-          .from("soft_play_bookings")
-          .select("*")
-          .eq("booking_code", trimmed)
-          .maybeSingle();
-
-        if (bookingData) {
-          setResult({ kind: "booking", data: bookingData });
+        if (booking) {
+          setResult({ kind: "booking", data: booking });
         } else {
-          setError("Code not found. Check spelling and try again.");
+          setError("Booking code not found. Check spelling and try again.");
         }
       } else {
-        setResult({ kind: "order", data });
+        const order = await lookupOrder(trimmed);
+
+        if (order) {
+          setResult({ kind: "order", data: order });
+        } else {
+          const booking = await lookupBooking(trimmed);
+
+          if (booking) {
+            setResult({ kind: "booking", data: booking });
+          } else {
+            setError("Code not found. Check spelling and try again.");
+          }
+        }
       }
+    } catch {
+      setError("Failed to look up code.");
     }
+
     setLoading(false);
   };
 
@@ -167,7 +237,7 @@ const Admin = () => {
           <input
             type="text"
             value={code}
-            onChange={(e) => setCode(e.target.value.toUpperCase())}
+            onChange={(e) => setCode(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && lookupCode()}
             placeholder="SP-XXX-XXX or LUX-XXXX-XXXX"
             className="flex-1 bg-[#0a0a16] border border-white/10 text-white font-display text-lg tracking-widest px-4 py-3 placeholder:text-white/20 focus:outline-none focus:border-neon-green/50"
