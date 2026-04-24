@@ -5,9 +5,72 @@ import teamJack from "@/assets/team-jack.jpg";
 import teamMartin from "@/assets/team-martin.png";
 import neonCircuit from "@/assets/neon-circuit.png";
 
+const TEAM = [
+  {
+    img: teamJack,
+    alt: "Jack Oswell",
+    name: "JACK OSWELL",
+    role: "Arcade Systems & Technical Operations",
+    company: "Co-Owner & Director, JNR Innovations",
+  },
+  {
+    img: teamRares,
+    alt: "Rares Cucos",
+    name: "RARES CUCOS",
+    role: "Arcade Systems & Technical Operations",
+    company: "Co-Owner & Director, JNR Innovations",
+  },
+  {
+    img: teamMartin,
+    alt: "Martin MacGillivray",
+    name: "MARTIN MACGILLIVRAY",
+    role: "Lead Construction & Development Director",
+    company: "Owner & Director, MasterClass Exteriors",
+  },
+];
+
+const TeamGrid = () => (
+  <>
+    <p className="font-display text-xs tracking-[0.3em] text-white/30 mb-6 text-center">
+      THE TEAM
+    </p>
+    <div className="grid grid-cols-3 gap-3 sm:gap-6 md:gap-8 max-w-4xl mx-auto">
+      {TEAM.map((m) => (
+        <div key={m.name} className="text-center">
+          <div
+            className="aspect-square w-full max-w-[220px] mx-auto overflow-hidden rounded-sm border border-white/10"
+            style={{
+              boxShadow:
+                "0 0 8px rgba(119, 0, 255, 0.35), 0 0 16px rgba(119, 0, 255, 0.18)",
+            }}
+          >
+            <img
+              src={m.img}
+              alt={m.alt}
+              className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <p className="font-display text-[11px] md:text-xs tracking-[0.18em] text-white mt-3 leading-tight">
+            {m.name}
+          </p>
+          <p className="font-body text-[10px] md:text-[11px] text-neon-purple/90 mt-1 leading-snug">
+            {m.role}
+          </p>
+          <p className="font-body text-[10px] md:text-[11px] text-white/40 mt-1 leading-snug">
+            {m.company}
+          </p>
+        </div>
+      ))}
+    </div>
+  </>
+);
+
 const FeaturesSection = () => {
   return (
     <section id="about" className="relative bg-[#070710] overflow-hidden">
+
       {/* Neon top bar */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-neon-bar z-10" />
 
@@ -15,27 +78,38 @@ const FeaturesSection = () => {
       <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-neon-purple/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-neon-pink/5 rounded-full blur-3xl pointer-events-none" />
 
-      {/* LAYOUT: Portrait left | Statement right */}
-      <div className="relative z-10 flex flex-col md:flex-row min-h-screen">
+      {/* LAYOUT: Portrait left | Statement right (on mobile, team is forced between them via flex order) */}
+      <div className="relative z-10 flex flex-col md:flex-row md:min-h-screen">
         {/* LEFT — Founder portrait with neon circuit patterns flanking it */}
         <div className="relative w-full md:w-[40%] flex flex-col items-center justify-center px-6 py-10 md:py-20">
-          {/* Circuit decoration — left */}
+          {/* Circuit decoration — wraps fully around Baz, edges feathered into the background */}
           <img
             src={neonCircuit}
             alt=""
             aria-hidden="true"
-            className="pointer-events-none select-none absolute left-0 top-1/2 -translate-y-1/2 h-[80%] w-auto opacity-50 mix-blend-screen"
+            className="pointer-events-none select-none absolute left-0 top-1/2 -translate-y-1/2 h-[95%] w-auto opacity-70 mix-blend-screen"
             loading="lazy"
             decoding="async"
+            style={{
+              WebkitMaskImage:
+                "radial-gradient(ellipse 70% 80% at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 45%, #000 75%, #000 100%)",
+              maskImage:
+                "radial-gradient(ellipse 70% 80% at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 45%, #000 75%, #000 100%)",
+            }}
           />
-          {/* Circuit decoration — right (mirrored) */}
           <img
             src={neonCircuit}
             alt=""
             aria-hidden="true"
-            className="pointer-events-none select-none absolute right-0 top-1/2 -translate-y-1/2 h-[80%] w-auto opacity-50 mix-blend-screen scale-x-[-1]"
+            className="pointer-events-none select-none absolute right-0 top-1/2 -translate-y-1/2 h-[95%] w-auto opacity-70 mix-blend-screen scale-x-[-1]"
             loading="lazy"
             decoding="async"
+            style={{
+              WebkitMaskImage:
+                "radial-gradient(ellipse 70% 80% at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 45%, #000 75%, #000 100%)",
+              maskImage:
+                "radial-gradient(ellipse 70% 80% at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 45%, #000 75%, #000 100%)",
+            }}
           />
 
           <div className="relative z-10 flex flex-col items-center">
@@ -63,6 +137,11 @@ const FeaturesSection = () => {
               <p className="font-display text-xs md:text-sm tracking-[0.25em] text-white/70 mt-1.5">Owner &amp; Director of Lux Unity Ltd</p>
             </div>
           </div>
+        </div>
+
+        {/* MOBILE-ONLY team grid, sits directly under Baz */}
+        <div className="md:hidden w-full px-6 pb-12">
+          <TeamGrid />
         </div>
 
         {/* RIGHT — Statement content */}
@@ -165,68 +244,14 @@ const FeaturesSection = () => {
         </div>
       </div>
 
-      {/* THE TEAM — full-width row underneath Baz */}
+      {/* THE TEAM — desktop: full-width row below the two-column layout (mobile version is inside the flex above) */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="relative z-10 px-6 md:px-14 lg:px-20 pb-16 md:pb-24"
+        className="hidden md:block relative z-10 px-6 md:px-14 lg:px-20 pb-16 md:pb-24"
       >
-        <p className="font-display text-xs tracking-[0.3em] text-white/30 mb-6 text-center">
-          THE TEAM
-        </p>
-        <div className="grid grid-cols-3 gap-3 sm:gap-6 md:gap-8 max-w-4xl mx-auto">
-          {[
-            {
-              img: teamJack,
-              alt: "Jack Oswell",
-              name: "JACK OSWELL",
-              role: "Arcade Systems & Technical Operations",
-              company: "Co-Owner & Director, JNR Innovations",
-            },
-            {
-              img: teamRares,
-              alt: "Rares Cucos",
-              name: "RARES CUCOS",
-              role: "Arcade Systems & Technical Operations",
-              company: "Co-Owner & Director, JNR Innovations",
-            },
-            {
-              img: teamMartin,
-              alt: "Martin MacGillivray",
-              name: "MARTIN MACGILLIVRAY",
-              role: "Lead Construction & Development Director",
-              company: "Owner & Director, MasterClass Exteriors",
-            },
-          ].map((m) => (
-            <div key={m.name} className="text-center">
-              <div
-                className="aspect-square w-full max-w-[220px] mx-auto overflow-hidden rounded-sm border border-white/10"
-                style={{
-                  boxShadow:
-                    "0 0 8px rgba(119, 0, 255, 0.35), 0 0 16px rgba(119, 0, 255, 0.18)",
-                }}
-              >
-                <img
-                  src={m.img}
-                  alt={m.alt}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <p className="font-display text-[11px] md:text-xs tracking-[0.18em] text-white mt-3 leading-tight">
-                {m.name}
-              </p>
-              <p className="font-body text-[10px] md:text-[11px] text-neon-purple/90 mt-1 leading-snug">
-                {m.role}
-              </p>
-              <p className="font-body text-[10px] md:text-[11px] text-white/40 mt-1 leading-snug">
-                {m.company}
-              </p>
-            </div>
-          ))}
-        </div>
+        <TeamGrid />
       </motion.div>
     </section>
   );
