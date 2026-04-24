@@ -16,9 +16,8 @@ const HeroSection = () => {
         decoding="async"
       />
 
-      {/* Heavy gradient overlay — darker mid + top so headline pops */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#070710] via-[#070710]/85 to-[#070710]/75" />
-      <div className="absolute inset-0 bg-[#070710]/45" />
+      {/* Gradient overlay — dark at top for headline, much lighter at bottom/middle so arcade shows through */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#070710]/90 via-[#070710]/30 to-[#070710]/55" />
 
       {/* Content */}
       <div className="relative z-10 px-6 md:px-12 lg:px-20 py-24 md:py-32 w-full text-center flex flex-col items-center text-stroke-dark">
