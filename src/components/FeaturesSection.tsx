@@ -11,14 +11,14 @@ const TEAM = [
     img: teamJack,
     alt: "Jack Oswell",
     name: "JACK OSWELL",
-    role: "Arcade Systems & Technical Operations",
+    role: "Lead Engineers in Arcade Systems & Technical Operations",
     company: "Co-Owner & Director, JNR Innovations",
   },
   {
     img: teamRares,
     alt: "Rares Cucos",
     name: "RARES CUCOS",
-    role: "Arcade Systems & Technical Operations",
+    role: "Lead Engineers in Arcade Systems & Technical Operations",
     company: "Co-Owner & Director, JNR Innovations",
   },
   {
