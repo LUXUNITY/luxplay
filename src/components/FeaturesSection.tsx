@@ -1,5 +1,8 @@
 import { motion } from "framer-motion";
 import founderBaz from "@/assets/founder-baz.jpg";
+import teamRares from "@/assets/team-rares.jpg";
+import teamJack from "@/assets/team-jack.jpg";
+import teamMartin from "@/assets/team-martin.png";
 
 const FeaturesSection = () => {
   return (
@@ -130,6 +133,70 @@ const FeaturesSection = () => {
             <p className="font-display text-sm tracking-widest text-white/30 mt-4">
               — SARBAZ "BAZ" ROUSHBAIANI, FOUNDER OF LUXPLAY
             </p>
+          </motion.div>
+
+          {/* The team — supporting directors. Kept visually smaller than Baz's portrait. */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-12 md:mt-16"
+          >
+            <p className="font-display text-xs tracking-[0.3em] text-white/30 mb-5">
+              THE TEAM
+            </p>
+            <div className="grid grid-cols-3 gap-4 md:gap-6">
+              {[
+                {
+                  img: teamJack,
+                  alt: "Jack Oswell",
+                  name: "JACK OSWELL",
+                  role: "Arcade Systems & Technical Operations",
+                  company: "Co-Owner & Director, JNR Innovations",
+                },
+                {
+                  img: teamRares,
+                  alt: "Rares Cucos",
+                  name: "RARES CUCOS",
+                  role: "Arcade Systems & Technical Operations",
+                  company: "Co-Owner & Director, JNR Innovations",
+                },
+                {
+                  img: teamMartin,
+                  alt: "Martin MacGillivray",
+                  name: "MARTIN MACGILLIVRAY",
+                  role: "Lead Construction & Development Director",
+                  company: "Owner & Director, MasterClass Renovations",
+                },
+              ].map((m) => (
+                <div key={m.name} className="text-center">
+                  <div
+                    className="aspect-square w-full max-w-[140px] mx-auto overflow-hidden rounded-sm border border-white/10"
+                    style={{
+                      boxShadow:
+                        "0 0 8px rgba(119, 0, 255, 0.35), 0 0 16px rgba(119, 0, 255, 0.18)",
+                    }}
+                  >
+                    <img
+                      src={m.img}
+                      alt={m.alt}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <p className="font-display text-[11px] md:text-xs tracking-[0.18em] text-white mt-3 leading-tight">
+                    {m.name}
+                  </p>
+                  <p className="font-body text-[10px] md:text-[11px] text-neon-purple/90 mt-1 leading-snug">
+                    {m.role}
+                  </p>
+                  <p className="font-body text-[10px] md:text-[11px] text-white/40 mt-1 leading-snug">
+                    {m.company}
+                  </p>
+                </div>
+              ))}
+            </div>
           </motion.div>
         </div>
       </div>
