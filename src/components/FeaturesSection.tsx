@@ -3,6 +3,7 @@ import founderBaz from "@/assets/founder-baz.jpg";
 import teamRares from "@/assets/team-rares.jpg";
 import teamJack from "@/assets/team-jack.jpg";
 import teamMartin from "@/assets/team-martin.png";
+import teamConnor from "@/assets/team-connor.jpg";
 
 import { gridBackgroundUrl } from "@/components/circuitTile";
 
@@ -27,6 +28,13 @@ const TEAM = [
     name: "MARTIN MACGILLIVRAY",
     role: "Lead Construction & Development Director",
     company: "Owner & Director, MasterClass Exteriors",
+  },
+  {
+    img: teamConnor,
+    alt: "Connor Denton",
+    name: "CONNOR DENTON",
+    role: "Chief Coordinator",
+    company: "MasterClass Exteriors",
   },
 ];
 
