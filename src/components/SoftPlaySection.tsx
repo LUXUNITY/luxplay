@@ -337,7 +337,7 @@ const SoftPlaySection = () => {
               ) : (
                 <>
                   <Baby className="w-4 h-4" />
-                  BOOK NOW — £{(Math.max(quantity, 1) * PRICE_PER_CHILD).toFixed(2)}
+                  BOOK NOW — £{totalPrice.toFixed(2)}
                 </>
               )}
             </button>
