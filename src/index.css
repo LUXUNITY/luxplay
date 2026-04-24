@@ -180,12 +180,17 @@
     background-attachment: scroll;
   }
 
+  .defer-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 960px;
+  }
+
   @media (min-width: 768px) {
     .luxplay-pattern-bg {
       background-image:
         linear-gradient(hsl(var(--background) / 0.56), hsl(var(--background) / 0.56)),
         url("./assets/luxplay-pattern-clean-desktop.webp");
-      background-attachment: fixed;
+      background-attachment: scroll;
     }
   }
 }
