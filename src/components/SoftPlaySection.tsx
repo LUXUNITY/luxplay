@@ -1,10 +1,12 @@
-import { motion, useInView } from "framer-motion";
-import { Baby, Clock, Users, Loader2, Check, Sparkles, Star } from "lucide-react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { Baby, Clock, Users, Loader2, Check, Sparkles, Plus, X, Info } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 
 const MAX_CAPACITY = 40;
+const PRICE_PER_CHILD = 4;
+const MAX_CHILDREN_PER_BOOKING = 6;
 
 const SESSIONS = [
   { time: "10:00", label: "10:00 AM" },
@@ -21,7 +23,7 @@ const OPENING_DATE = "2026-05-01";
 const SoftPlaySection = () => {
   const [selectedSession, setSelectedSession] = useState<string | null>(null);
   const [bookedCounts, setBookedCounts] = useState<Record<string, number>>({});
-  const [childName, setChildName] = useState("");
+  const [childNames, setChildNames] = useState<string[]>([""]);
   const [parentName, setParentName] = useState("");
   const [parentPhone, setParentPhone] = useState("");
   const [loading, setLoading] = useState(false);
@@ -46,19 +48,43 @@ const SoftPlaySection = () => {
     fetchCounts();
   }, []);
 
+  const addChild = () => {
+    if (childNames.length >= MAX_CHILDREN_PER_BOOKING) return;
+    setChildNames([...childNames, ""]);
+  };
+
+  const removeChild = (index: number) => {
+    if (childNames.length === 1) return;
+    setChildNames(childNames.filter((_, i) => i !== index));
+  };
+
+  const updateChild = (index: number, value: string) => {
+    const next = [...childNames];
+    next[index] = value;
+    setChildNames(next);
+  };
+
+  const validChildren = childNames.map((n) => n.trim()).filter(Boolean);
+  const quantity = validChildren.length;
+  const totalPrice = quantity * PRICE_PER_CHILD;
+
   const handleBook = async () => {
-    if (!selectedSession || !childName.trim() || !parentName.trim()) {
+    if (!selectedSession || quantity === 0 || !parentName.trim()) {
       toast({
         title: "Missing info",
-        description: "Please fill in your child's name, your name, and select a session.",
+        description: "Please add at least one child's name, your name, and select a session.",
         variant: "destructive",
       });
       return;
     }
 
     const spotsLeft = MAX_CAPACITY - (bookedCounts[selectedSession] || 0);
-    if (spotsLeft <= 0) {
-      toast({ title: "Session full", description: "This session is fully booked. Please try another time.", variant: "destructive" });
+    if (spotsLeft < quantity) {
+      toast({
+        title: "Not enough spots",
+        description: `Only ${spotsLeft} spot${spotsLeft === 1 ? "" : "s"} left in this session.`,
+        variant: "destructive",
+      });
       return;
     }
 
@@ -68,7 +94,7 @@ const SoftPlaySection = () => {
         body: {
           sessionTime: selectedSession,
           sessionDate: OPENING_DATE,
-          childName: childName.trim(),
+          children: validChildren,
           parentName: parentName.trim(),
           parentPhone: parentPhone.trim(),
         },
@@ -216,18 +242,54 @@ const SoftPlaySection = () => {
             </p>
 
             <div className="space-y-4 mb-6">
+              {/* Children list */}
               <div>
-                <label className="font-display text-[10px] tracking-[0.2em] text-white/40 mb-1 block">
-                  CHILD'S NAME *
-                </label>
-                <input
-                  type="text"
-                  value={childName}
-                  onChange={(e) => setChildName(e.target.value)}
-                  placeholder="e.g. Sophie"
-                  className="w-full bg-[#070710] border border-white/10 text-white font-body text-sm px-4 py-3 placeholder:text-white/20 focus:outline-none focus:border-neon-cyan/50"
-                />
+                <div className="flex items-center justify-between mb-2">
+                  <label className="font-display text-[10px] tracking-[0.2em] text-white/40">
+                    CHILDREN ({childNames.length}) *
+                  </label>
+                  <button
+                    type="button"
+                    onClick={addChild}
+                    disabled={childNames.length >= MAX_CHILDREN_PER_BOOKING}
+                    className="font-display text-[10px] tracking-[0.2em] text-neon-cyan hover:text-white inline-flex items-center gap-1 disabled:opacity-30 disabled:cursor-not-allowed"
+                  >
+                    <Plus className="w-3 h-3" /> ADD CHILD
+                  </button>
+                </div>
+                <div className="space-y-2">
+                  <AnimatePresence initial={false}>
+                    {childNames.map((name, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="flex items-center gap-2"
+                      >
+                        <input
+                          type="text"
+                          value={name}
+                          onChange={(e) => updateChild(idx, e.target.value)}
+                          placeholder={idx === 0 ? "Child's name (e.g. Sophie)" : `Child ${idx + 1}`}
+                          className="flex-1 bg-[#070710] border border-white/10 text-white font-body text-sm px-4 py-3 placeholder:text-white/20 focus:outline-none focus:border-neon-cyan/50"
+                        />
+                        {childNames.length > 1 && (
+                          <button
+                            type="button"
+                            onClick={() => removeChild(idx)}
+                            aria-label="Remove child"
+                            className="shrink-0 w-10 h-10 border border-white/10 text-white/40 hover:text-neon-pink hover:border-neon-pink/50 transition-colors flex items-center justify-center"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        )}
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
+                </div>
               </div>
+
               <div>
                 <label className="font-display text-[10px] tracking-[0.2em] text-white/40 mb-1 block">
                   PARENT / GUARDIAN NAME *
@@ -255,8 +317,12 @@ const SoftPlaySection = () => {
             </div>
 
             <div className="border border-white/10 bg-[#0d0d1a] p-3 mb-6 flex items-center justify-between">
-              <span className="font-body text-white/60 text-sm">Opening Day Session</span>
-              <span className="font-display text-neon-cyan text-lg">£4.00</span>
+              <span className="font-body text-white/60 text-sm">
+                {Math.max(quantity, 1)} × £{PRICE_PER_CHILD.toFixed(2)}
+              </span>
+              <span className="font-display text-neon-cyan text-lg">
+                £{(Math.max(quantity, 1) * PRICE_PER_CHILD).toFixed(2)}
+              </span>
             </div>
 
             <button
@@ -269,19 +335,41 @@ const SoftPlaySection = () => {
               ) : (
                 <>
                   <Baby className="w-4 h-4" />
-                  BOOK NOW — £4.00
+                  BOOK NOW — £{(Math.max(quantity, 1) * PRICE_PER_CHILD).toFixed(2)}
                 </>
               )}
             </button>
           </motion.div>
         )}
 
+        {/* Policy / safety info */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mt-8 max-w-3xl mx-auto border border-white/10 bg-[#0a0a16]/60 p-4 md:p-5"
+        >
+          <div className="flex items-start gap-3">
+            <Info className="w-4 h-4 text-neon-cyan shrink-0 mt-0.5" />
+            <div className="space-y-1.5">
+              <p className="font-display text-[10px] tracking-[0.25em] text-neon-cyan/80">
+                GOOD TO KNOW
+              </p>
+              <ul className="font-body text-white/60 text-xs md:text-sm space-y-1 list-disc list-inside marker:text-white/30">
+                <li>Height limit: <span className="text-white/80">145 cm maximum</span>.</li>
+                <li>Up to <span className="text-white/80">2 adults free per child</span> — additional adults are charged on the day.</li>
+                <li>Anyone supervising a child must be <span className="text-white/80">13 years or older</span>.</li>
+              </ul>
+            </div>
+          </div>
+        </motion.div>
+
         {/* Info footer */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mt-12 max-w-3xl mx-auto border border-white/10 p-6 md:p-8 text-center bg-[#0a0a16]"
+          className="mt-6 max-w-3xl mx-auto border border-white/10 p-6 md:p-8 text-center bg-[#0a0a16]"
         >
           <p className="text-white/80 font-body text-sm md:text-base font-semibold">
             Opening day only — <strong className="text-white">normal price £8 after launch.</strong>

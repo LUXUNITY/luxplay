@@ -1,0 +1,2 @@
+ALTER TABLE public.soft_play_bookings DROP CONSTRAINT IF EXISTS soft_play_bookings_stripe_session_id_key;
+CREATE UNIQUE INDEX IF NOT EXISTS soft_play_bookings_stripe_session_child_idx ON public.soft_play_bookings (stripe_session_id, child_name);

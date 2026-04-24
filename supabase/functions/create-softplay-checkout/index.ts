@@ -12,6 +12,7 @@ const SOFTPLAY_PRICE_ID = "price_1TOvjMKDxuB13duTCKh7B9pZ";
 
 const VALID_SESSIONS = ["10:00", "12:00", "14:00", "16:00", "18:00", "20:00"];
 const MAX_CAPACITY = 40;
+const MAX_CHILDREN_PER_BOOKING = 6;
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -19,11 +20,44 @@ serve(async (req) => {
   }
 
   try {
-    const { sessionTime, sessionDate, childName, parentName, parentPhone } = await req.json();
+    const body = await req.json();
+    const { sessionTime, sessionDate, parentName, parentPhone } = body;
 
-    if (!sessionTime || !sessionDate || !childName || !parentName) {
+    // Backward-compatible: accept either `children: string[]` or single `childName`
+    let children: string[] = Array.isArray(body.children)
+      ? body.children.map((c: unknown) => String(c || "").trim()).filter(Boolean)
+      : [];
+    if (children.length === 0 && typeof body.childName === "string" && body.childName.trim()) {
+      children = [body.childName.trim()];
+    }
+
+    if (!sessionTime || !sessionDate || !parentName || children.length === 0) {
       return new Response(
         JSON.stringify({ error: "Missing required fields" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    if (children.length > MAX_CHILDREN_PER_BOOKING) {
+      return new Response(
+        JSON.stringify({ error: `Maximum ${MAX_CHILDREN_PER_BOOKING} children per booking` }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // De-duplicate child names within a single booking (DB has unique (stripe_session_id, child_name))
+    const seen = new Set<string>();
+    const uniqueChildren: string[] = [];
+    for (const c of children) {
+      const key = c.toLowerCase();
+      if (!seen.has(key)) {
+        seen.add(key);
+        uniqueChildren.push(c);
+      }
+    }
+    if (uniqueChildren.length !== children.length) {
+      return new Response(
+        JSON.stringify({ error: "Each child must have a unique name in the same booking" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
@@ -34,6 +68,8 @@ serve(async (req) => {
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
+
+    const quantity = uniqueChildren.length;
 
     // Pre-checkout capacity check (DB trigger remains the final guarantee)
     const supabase = createClient(
@@ -55,11 +91,15 @@ serve(async (req) => {
       );
     }
 
-    if ((count ?? 0) >= MAX_CAPACITY) {
+    const spotsLeft = MAX_CAPACITY - (count ?? 0);
+    if (spotsLeft < quantity) {
       return new Response(
         JSON.stringify({
           error: "SESSION_FULL",
-          message: "Sorry, this session is fully booked. Please pick another time.",
+          message:
+            spotsLeft <= 0
+              ? "Sorry, this session is fully booked. Please pick another time."
+              : `Only ${spotsLeft} spot${spotsLeft === 1 ? "" : "s"} left in this session.`,
         }),
         { status: 409, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
@@ -70,7 +110,7 @@ serve(async (req) => {
     });
 
     const session = await stripe.checkout.sessions.create({
-      line_items: [{ price: SOFTPLAY_PRICE_ID, quantity: 1 }],
+      line_items: [{ price: SOFTPLAY_PRICE_ID, quantity }],
       mode: "payment",
       success_url: `${req.headers.get("origin")}/softplay-success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${req.headers.get("origin")}/#softplay`,
@@ -78,7 +118,11 @@ serve(async (req) => {
         type: "softplay",
         sessionTime,
         sessionDate,
-        childName,
+        // Stripe metadata values must be strings (max 500 chars per value)
+        children: JSON.stringify(uniqueChildren).slice(0, 500),
+        quantity: String(quantity),
+        // Keep legacy field for backwards compatibility / convenience
+        childName: uniqueChildren[0],
         parentName,
         parentPhone: parentPhone || "",
       },
