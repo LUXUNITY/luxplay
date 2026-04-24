@@ -201,7 +201,7 @@ const FeaturesSection = () => {
           ].map((m) => (
             <div key={m.name} className="text-center">
               <div
-                className="aspect-square w-full max-w-[160px] mx-auto overflow-hidden rounded-sm border border-white/10"
+                className="aspect-square w-full max-w-[220px] mx-auto overflow-hidden rounded-sm border border-white/10"
                 style={{
                   boxShadow:
                     "0 0 8px rgba(119, 0, 255, 0.35), 0 0 16px rgba(119, 0, 255, 0.18)",
