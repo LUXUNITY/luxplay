@@ -4,7 +4,7 @@ import teamRares from "@/assets/team-rares.jpg";
 import teamJack from "@/assets/team-jack.jpg";
 import teamMartin from "@/assets/team-martin.png";
 
-import { circuitTileUrl } from "@/components/circuitTile";
+import { gridBackgroundUrl } from "@/components/circuitTile";
 
 const TEAM = [
   {
