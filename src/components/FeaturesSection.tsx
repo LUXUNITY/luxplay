@@ -3,7 +3,7 @@ import founderBaz from "@/assets/founder-baz.jpg";
 import teamRares from "@/assets/team-rares.jpg";
 import teamJack from "@/assets/team-jack.jpg";
 import teamMartin from "@/assets/team-martin.png";
-import CircuitPattern from "@/components/CircuitPattern";
+import neonCircuit from "@/assets/neon-circuit.png";
 
 const TEAM = [
   {
