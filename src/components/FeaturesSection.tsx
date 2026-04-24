@@ -4,6 +4,7 @@ import teamRares from "@/assets/team-rares.jpg";
 import teamJack from "@/assets/team-jack.jpg";
 import teamMartin from "@/assets/team-martin.png";
 import CircuitDecor from "@/components/CircuitDecor";
+import { circuitTileUrl } from "@/components/circuitTile";
 
 const TEAM = [
   {
@@ -82,26 +83,34 @@ const FeaturesSection = () => {
       {/* Neon top bar */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-neon-bar z-20" />
 
-      {/* MAIN CIRCUIT BACKGROUND — hand-drawn SVG traces (not the reference image) */}
-      <CircuitDecor
-        variant="section"
-        opacity={0.9}
-        className="pointer-events-none absolute inset-0 w-full h-full z-0"
+      {/* MAIN CIRCUIT BACKGROUND — tileable SVG via CSS background so it
+          fills the full section on both narrow mobile and wide desktop. */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          backgroundImage: circuitTileUrl(0.95),
+          backgroundRepeat: "repeat-y",
+          backgroundSize: "100% auto",
+          backgroundPosition: "top center",
+        }}
       />
-      {/* Mirrored copy for extra density on both sides */}
-      <div className="pointer-events-none absolute inset-0 z-0" style={{ transform: "scaleX(-1)" }}>
-        <CircuitDecor
-          variant="section"
-          opacity={0.6}
-          className="w-full h-full"
-        />
-      </div>
+      {/* Mirrored layer for symmetric density on both edges */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          backgroundImage: circuitTileUrl(0.7),
+          backgroundRepeat: "repeat-y",
+          backgroundSize: "100% auto",
+          backgroundPosition: "top center",
+          transform: "scaleX(-1)",
+        }}
+      />
       {/* Soft vignette so center stays readable */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
         style={{
           background:
-            "radial-gradient(ellipse 55% 55% at center, rgba(7,7,16,0.85) 0%, rgba(7,7,16,0.45) 45%, rgba(7,7,16,0) 100%)",
+            "radial-gradient(ellipse 55% 50% at center, rgba(7,7,16,0.88) 0%, rgba(7,7,16,0.5) 45%, rgba(7,7,16,0) 100%)",
         }}
       />
 
