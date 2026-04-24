@@ -4,7 +4,7 @@ import teamRares from "@/assets/team-rares.jpg";
 import teamJack from "@/assets/team-jack.jpg";
 import teamMartin from "@/assets/team-martin.png";
 
-import { circuitTileUrl } from "@/components/circuitTile";
+import { gridBackgroundUrl } from "@/components/circuitTile";
 
 const TEAM = [
   {
@@ -78,19 +78,19 @@ const FeaturesSection = () => {
       {/* Neon top bar */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-neon-bar z-20" />
 
-      {/* CLEAN NEON GRID — soft fading background */}
+      {/* CLEAN NEON GRID — fades from edges toward center */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
         style={{
-          backgroundImage: circuitTileUrl(0.9),
+          backgroundImage: gridBackgroundUrl,
           backgroundRepeat: "repeat",
-          backgroundSize: "320px 320px",
-          backgroundPosition: "top center",
-          // Fade the grid out toward the vertical center so it sits behind text cleanly
+          backgroundSize: "200px 200px",
+          backgroundPosition: "center",
+          // Vignette: keep grid visible, just fade slightly toward dead center
           WebkitMaskImage:
-            "radial-gradient(ellipse 80% 100% at 50% 50%, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.7) 55%, #000 100%)",
+            "radial-gradient(ellipse 70% 80% at 50% 50%, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.85) 60%, #000 100%)",
           maskImage:
-            "radial-gradient(ellipse 80% 100% at 50% 50%, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.7) 55%, #000 100%)",
+            "radial-gradient(ellipse 70% 80% at 50% 50%, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.85) 60%, #000 100%)",
         }}
       />
 
