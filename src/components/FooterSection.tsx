@@ -2,7 +2,7 @@ import { MapPin } from "lucide-react";
 
 const FooterSection = () => {
   return (
-    <footer className="relative bg-[#070710] py-16 md:py-24">
+    <footer className="relative py-16 md:py-24">
       {/* Neon top bar */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-neon-bar" />
 

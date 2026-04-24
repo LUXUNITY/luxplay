@@ -89,7 +89,7 @@ const SoftPlaySection = () => {
   };
 
   return (
-    <section id="softplay" className="relative bg-[#070710] overflow-hidden" ref={ref}>
+    <section id="softplay" className="relative overflow-hidden" ref={ref}>
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-neon-cyan via-neon-pink to-neon-purple" />
 
       <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-neon-cyan/5 rounded-full blur-3xl pointer-events-none" />
