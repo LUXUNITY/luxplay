@@ -20,9 +20,9 @@ const HeroSection = () => {
         />
       </picture>
 
-      {/* Heavy gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#070710] via-[#070710]/70 to-[#070710]/40" />
-      <div className="absolute inset-0 bg-[#070710]/30" />
+      {/* Heavy gradient overlay — darker mid + top so headline pops */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#070710] via-[#070710]/85 to-[#070710]/75" />
+      <div className="absolute inset-0 bg-[#070710]/45" />
 
       {/* Content */}
       <div className="relative z-10 px-6 md:px-12 lg:px-20 py-24 md:py-32 w-full text-center flex flex-col items-center text-stroke-dark">
