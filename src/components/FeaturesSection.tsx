@@ -3,7 +3,7 @@ import founderBaz from "@/assets/founder-baz.jpg";
 import teamRares from "@/assets/team-rares.jpg";
 import teamJack from "@/assets/team-jack.jpg";
 import teamMartin from "@/assets/team-martin.png";
-import CircuitPattern from "@/components/CircuitPattern";
+import neonCircuit from "@/assets/neon-circuit.png";
 
 const TEAM = [
   {
@@ -38,11 +38,7 @@ const TeamGrid = () => (
       {TEAM.map((m) => (
         <div key={m.name} className="text-center">
           <div className="relative w-full max-w-[220px] mx-auto">
-            {/* Faded SVG circuit backdrop */}
-            <CircuitPattern
-              opacity={0.18}
-              className="pointer-events-none select-none absolute -inset-4 sm:-inset-6 w-[calc(100%+2rem)] sm:w-[calc(100%+3rem)] h-[calc(100%+2rem)] sm:h-[calc(100%+3rem)] mix-blend-screen"
-            />
+            {/* (Circuit pattern is now provided by the section-wide background) */}
             <div
               className="relative aspect-square w-full overflow-hidden rounded-sm border border-white/10"
               style={{
@@ -79,7 +75,41 @@ const FeaturesSection = () => {
     <section id="about" className="relative bg-[#070710] overflow-hidden">
 
       {/* Neon top bar */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-neon-bar z-10" />
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-neon-bar z-20" />
+
+      {/* MAIN CIRCUIT BACKGROUND — covers the whole section, sits behind everything */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          backgroundImage: `url(${neonCircuit})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.55,
+          mixBlendMode: "screen",
+        }}
+      />
+      {/* Mirrored copy on the right for symmetry */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          backgroundImage: `url(${neonCircuit})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.45,
+          mixBlendMode: "screen",
+          transform: "scaleX(-1)",
+        }}
+      />
+      {/* Soft vignette so center stays readable */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 60% at center, rgba(7,7,16,0.85) 0%, rgba(7,7,16,0.4) 50%, rgba(7,7,16,0) 100%)",
+        }}
+      />
 
       {/* Ambient glow */}
       <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-neon-purple/5 rounded-full blur-3xl pointer-events-none" />
@@ -89,17 +119,7 @@ const FeaturesSection = () => {
       <div className="relative z-10 flex flex-col md:flex-row md:min-h-screen">
         {/* LEFT — Founder portrait with neon circuit patterns flanking it */}
         <div className="relative w-full md:w-[40%] flex flex-col items-center justify-center px-6 py-10 md:py-20">
-          {/* SVG circuit decoration — flanks Baz on both sides, faded */}
-          <CircuitPattern
-            side="left"
-            opacity={0.35}
-            className="pointer-events-none select-none absolute left-0 top-1/2 -translate-y-1/2 h-[95%] w-1/2 mix-blend-screen"
-          />
-          <CircuitPattern
-            side="right"
-            opacity={0.35}
-            className="pointer-events-none select-none absolute right-0 top-1/2 -translate-y-1/2 h-[95%] w-1/2 mix-blend-screen"
-          />
+          {/* (Circuit pattern is now provided by the section-wide background) */}
 
           <div className="relative z-10 flex flex-col items-center">
             <img
