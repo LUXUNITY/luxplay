@@ -1,14 +1,16 @@
+import { Suspense, lazy } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import PaymentSuccess from "./pages/PaymentSuccess";
-import Unsubscribe from "./pages/Unsubscribe";
-import Admin from "./pages/Admin";
-import SoftPlaySuccess from "./pages/SoftPlaySuccess";
+
+const NotFound = lazy(() => import("./pages/NotFound"));
+const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
+const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
+const Admin = lazy(() => import("./pages/Admin"));
+const SoftPlaySuccess = lazy(() => import("./pages/SoftPlaySuccess"));
 
 const queryClient = new QueryClient();
 
@@ -18,14 +20,16 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/payment-success" element={<PaymentSuccess />} />
-          <Route path="/unsubscribe" element={<Unsubscribe />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/softplay-success" element={<SoftPlaySuccess />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Suspense fallback={null}>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/payment-success" element={<PaymentSuccess />} />
+            <Route path="/unsubscribe" element={<Unsubscribe />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/softplay-success" element={<SoftPlaySuccess />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
