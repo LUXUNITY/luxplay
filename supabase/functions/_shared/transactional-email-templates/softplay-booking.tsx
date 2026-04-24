@@ -77,16 +77,17 @@ const SoftPlayBookingEmail = ({ childCount, parentName, sessionTime, sessionDate
       </Container>
     </Body>
   </Html>
-)
+  )
+}
 
 export const template = {
   component: SoftPlayBookingEmail,
-  subject: (data: Record<string, any>) =>
-    `Soft Play Booking Confirmed${data.childName ? ` — ${data.childName}` : ''}`,
+  subject: (data: Record<string, any>) => {
+    const c = data.childCount ?? (Array.isArray(data.bookingCodes) ? data.bookingCodes.length : 1)
+    return `Soft Play Booking Confirmed — ${c} ${c === 1 ? 'child' : 'children'}`
+  },
   displayName: 'Soft play booking',
   previewData: {
-    childName: 'Sophie',
-    childNames: ['Sophie', 'Noah'],
     childCount: 2,
     parentName: 'Sarah',
     sessionTime: '2:00 PM',
