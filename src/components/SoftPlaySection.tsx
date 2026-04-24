@@ -320,10 +320,10 @@ const SoftPlaySection = () => {
 
             <div className="border border-white/10 bg-[#0d0d1a] p-3 mb-6 flex items-center justify-between">
               <span className="font-body text-white/60 text-sm">
-                {Math.max(quantity, 1)} × £{PRICE_PER_CHILD.toFixed(2)}
+                {quantity} {quantity === 1 ? "child" : "children"} × £{PRICE_PER_CHILD.toFixed(2)}
               </span>
               <span className="font-display text-neon-cyan text-lg">
-                £{(Math.max(quantity, 1) * PRICE_PER_CHILD).toFixed(2)}
+                £{totalPrice.toFixed(2)}
               </span>
             </div>
 
