@@ -104,7 +104,7 @@ const FeaturesSection = () => {
             src={neonCircuit}
             alt=""
             aria-hidden="true"
-            className="pointer-events-none select-none absolute left-0 top-1/2 -translate-y-1/2 h-[95%] w-auto opacity-70 mix-blend-screen"
+            className="pointer-events-none select-none absolute left-0 top-1/2 -translate-y-1/2 h-[95%] w-auto opacity-40 mix-blend-screen"
             loading="lazy"
             decoding="async"
             style={{
@@ -118,7 +118,7 @@ const FeaturesSection = () => {
             src={neonCircuit}
             alt=""
             aria-hidden="true"
-            className="pointer-events-none select-none absolute right-0 top-1/2 -translate-y-1/2 h-[95%] w-auto opacity-70 mix-blend-screen scale-x-[-1]"
+            className="pointer-events-none select-none absolute right-0 top-1/2 -translate-y-1/2 h-[95%] w-auto opacity-40 mix-blend-screen scale-x-[-1]"
             loading="lazy"
             decoding="async"
             style={{
