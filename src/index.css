@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bowlby+One&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -67,6 +67,11 @@
 @layer utilities {
   .font-display {
     font-family: 'Bebas Neue', sans-serif;
+  }
+
+  .font-display-fat {
+    font-family: 'Bowlby One', 'Bebas Neue', sans-serif;
+    letter-spacing: 0.01em;
   }
 
   .font-body {
