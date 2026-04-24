@@ -4,22 +4,46 @@ import SoftPlaySection from "@/components/SoftPlaySection";
 import VenueSection from "@/components/VenueSection";
 import FeaturesSection from "@/components/FeaturesSection";
 import FooterSection from "@/components/FooterSection";
+import cardBg from "@/assets/luxplay-card-bg.jpeg";
 
 const Index = () => {
   return (
     <main className="min-h-screen bg-background">
       {/* 1. Hero — full-screen immersive, CTA front and center */}
       <HeroSection />
-      {/* 2. Credits — money section FIRST, before any explanation */}
-      <PreSaleSection />
-      {/* 3. Soft Play — opening day session bookings */}
-      <SoftPlaySection />
-      {/* 4. Venue visuals — large cinematic splits, not a grid */}
-      <VenueSection />
+
+      {/* Mid-page sections share the LuxPlay card starfield background */}
+      <div className="relative">
+        {/* Fixed starfield from the LuxPlay card art */}
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${cardBg})` }}
+        />
+        {/* Dark scrim so text stays legible over the photo */}
+        <div aria-hidden className="absolute inset-0 -z-10 bg-[#070710]/75" />
+
+        {/* 2. Credits — money section FIRST, before any explanation */}
+        <PreSaleSection />
+        {/* 3. Soft Play — opening day session bookings */}
+        <SoftPlaySection />
+        {/* 4. Venue visuals — large cinematic splits, not a grid */}
+        <VenueSection />
+      </div>
+
       {/* 5. Founder story — last, earns trust after excitement */}
       <FeaturesSection />
-      {/* 6. Footer */}
-      <FooterSection />
+
+      {/* 6. Footer — also keeps the starfield */}
+      <div className="relative">
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${cardBg})` }}
+        />
+        <div aria-hidden className="absolute inset-0 -z-10 bg-[#070710]/75" />
+        <FooterSection />
+      </div>
     </main>
   );
 };
