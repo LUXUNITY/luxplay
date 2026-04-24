@@ -175,7 +175,7 @@ const FeaturesSection = () => {
         <p className="font-display text-xs tracking-[0.3em] text-white/30 mb-6 text-center">
           THE TEAM
         </p>
-        <div className="grid grid-cols-3 gap-4 md:gap-8 max-w-3xl mx-auto">
+        <div className="grid grid-cols-3 gap-3 sm:gap-6 md:gap-8 max-w-4xl mx-auto">
           {[
             {
               img: teamJack,
