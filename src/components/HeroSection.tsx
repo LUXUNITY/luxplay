@@ -46,15 +46,15 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="font-display text-2xl sm:text-3xl md:text-4xl tracking-widest uppercase mt-6 max-w-4xl"
         >
-          <span className="text-neon-green glow-green">40+ Arcade</span>
+          <span className="text-neon-green glow-green">40+ Arcade Games</span>
           <span className="text-white/80"> · </span>
-          <span className="text-neon-pink glow-pink">Soft Play</span>
+          <span className="text-neon-pink glow-pink">3 Level Soft Play</span>
           <span className="text-white/80"> · </span>
-          <span className="text-neon-purple glow-purple">Prizes</span>
+          <span className="text-neon-purple glow-purple">Amazing Prizes</span>
           <span className="text-white/80"> · </span>
-          <span className="text-neon-cyan glow-cyan">Café</span>
+          <span className="text-neon-cyan glow-cyan">Cozy Café</span>
           <span className="text-white/80"> — </span>
-          <span className="text-white glow-pink">Opening 23 May 2026</span>
+          <span className="text-white glow-pink">Opening 23rd May 2026</span>
         </motion.p>
         <motion.p
           initial={{ opacity: 0 }}
@@ -69,6 +69,18 @@ const HeroSection = () => {
           <span className="text-neon-green glow-green">Bournemouth</span>
           <span className="text-white/70"> · </span>
           <span className="text-neon-purple glow-purple">BH1 4SX</span>
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.7 }}
+          className="font-display text-base sm:text-lg md:text-xl tracking-widest uppercase mt-3 max-w-4xl"
+        >
+          <span className="text-neon-green glow-green">Multi-Storey Parking On-Site</span>
+          <span className="text-white/70"> · </span>
+          <span className="text-neon-cyan glow-cyan">Bus Station Right Outside</span>
+          <span className="text-white/70"> · </span>
+          <span className="text-neon-pink glow-pink">Fully Indoor — Weather-Proof Fun</span>
         </motion.p>
 
         <motion.div
