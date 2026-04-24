@@ -78,19 +78,20 @@ const FeaturesSection = () => {
       {/* Neon top bar */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-neon-bar z-20" />
 
-      {/* CLEAN NEON GRID — fades from edges toward center */}
+      {/* NEON CIRCUIT BOARD — strongest at edges, fades toward centre
+          so traces appear to spread outward from the portraits. */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
         style={{
           backgroundImage: gridBackgroundUrl,
           backgroundRepeat: "repeat",
-          backgroundSize: "200px 200px",
+          backgroundSize: "400px 400px",
           backgroundPosition: "center",
-          // Vignette: keep grid visible, just fade slightly toward dead center
+          // Inverse vignette: transparent in centre, opaque at edges.
           WebkitMaskImage:
-            "radial-gradient(ellipse 70% 80% at 50% 50%, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.85) 60%, #000 100%)",
+            "radial-gradient(ellipse 60% 55% at 50% 50%, transparent 0%, rgba(0,0,0,0.35) 35%, rgba(0,0,0,0.85) 70%, #000 100%)",
           maskImage:
-            "radial-gradient(ellipse 70% 80% at 50% 50%, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.85) 60%, #000 100%)",
+            "radial-gradient(ellipse 60% 55% at 50% 50%, transparent 0%, rgba(0,0,0,0.35) 35%, rgba(0,0,0,0.85) 70%, #000 100%)",
         }}
       />
 
