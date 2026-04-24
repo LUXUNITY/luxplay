@@ -60,27 +60,17 @@ const HeroSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="font-display text-lg sm:text-xl md:text-2xl tracking-widest uppercase mt-4 max-w-4xl"
+          className="font-display text-lg sm:text-xl md:text-2xl tracking-widest uppercase mt-4 max-w-4xl text-neon-cyan glow-cyan"
         >
-          <span className="text-neon-cyan glow-cyan">Unit 7, Sovereign Centre</span>
-          <span className="text-white/70"> · </span>
-          <span className="text-neon-pink glow-pink">Boscombe</span>
-          <span className="text-white/70"> · </span>
-          <span className="text-neon-green glow-green">Bournemouth</span>
-          <span className="text-white/70"> · </span>
-          <span className="text-neon-purple glow-purple">BH1 4SX</span>
+          Unit 7, Sovereign Centre · Boscombe · Bournemouth · BH1 4SX
         </motion.p>
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.7 }}
-          className="font-display text-base sm:text-lg md:text-xl tracking-widest uppercase mt-3 max-w-4xl"
+          className="font-display text-base sm:text-lg md:text-xl tracking-widest uppercase mt-3 max-w-4xl text-neon-cyan glow-cyan"
         >
-          <span className="text-neon-green glow-green">Multi-Storey Parking On-Site</span>
-          <span className="text-white/70"> · </span>
-          <span className="text-neon-cyan glow-cyan">Bus Station Right Outside</span>
-          <span className="text-white/70"> · </span>
-          <span className="text-neon-pink glow-pink">Fully Indoor — Weather-Proof Fun</span>
+          Multi-Storey Parking On-Site · Bus Station Right Outside · Fully Indoor — Weather-Proof Fun
         </motion.p>
 
         <motion.div
