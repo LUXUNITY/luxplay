@@ -83,28 +83,51 @@ const FeaturesSection = () => {
       {/* Neon top bar */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-neon-bar z-20" />
 
-      {/* MAIN CIRCUIT BOARD BACKGROUND — tileable PCB-style SVG */}
+      {/* CLEAN NEON GRID — soft fading background */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
         style={{
           backgroundImage: circuitTileUrl(0.9),
           backgroundRepeat: "repeat",
-          backgroundSize: "100% auto",
+          backgroundSize: "320px 320px",
           backgroundPosition: "top center",
-        }}
-      />
-      {/* Soft vignette so center stays readable */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 55% 50% at center, rgba(7,7,16,0.88) 0%, rgba(7,7,16,0.5) 45%, rgba(7,7,16,0) 100%)",
+          // Fade the grid out toward the vertical center so it sits behind text cleanly
+          WebkitMaskImage:
+            "radial-gradient(ellipse 80% 100% at 50% 50%, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.7) 55%, #000 100%)",
+          maskImage:
+            "radial-gradient(ellipse 80% 100% at 50% 50%, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.7) 55%, #000 100%)",
         }}
       />
 
-      {/* Ambient glow */}
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-neon-purple/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-neon-pink/5 rounded-full blur-3xl pointer-events-none" />
+      {/* Aurora glows — soft brand-color light bleeding from corners */}
+      <div
+        className="pointer-events-none absolute -top-32 -left-32 w-[55vw] h-[55vw] max-w-[700px] max-h-[700px] rounded-full blur-3xl z-0"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(57,255,20,0.18) 0%, rgba(57,255,20,0) 70%)",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute -top-24 -right-24 w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] rounded-full blur-3xl z-0"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(124,77,255,0.22) 0%, rgba(124,77,255,0) 70%)",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute -bottom-32 -left-24 w-[55vw] h-[55vw] max-w-[700px] max-h-[700px] rounded-full blur-3xl z-0"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(0,229,255,0.18) 0%, rgba(0,229,255,0) 70%)",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute -bottom-24 -right-32 w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] rounded-full blur-3xl z-0"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(255,43,214,0.18) 0%, rgba(255,43,214,0) 70%)",
+        }}
+      />
 
       {/* LAYOUT: Portrait left | Statement right (on mobile, team is forced between them via flex order) */}
       <div className="relative z-10 flex flex-col md:flex-row md:min-h-screen">
