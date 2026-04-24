@@ -10,7 +10,7 @@ const HeroSection = () => {
       {/* Full-bleed arcade image */}
       <img
         src={arcadeHero}
-        alt="LuxPlay Arcade — 40+ machines, opening May 2026"
+        alt="LuxPlay Arcade — 40+ machines, opening 23 May 2026"
         className="absolute inset-0 w-full h-full object-cover object-center"
       />
 
@@ -46,7 +46,7 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="font-body text-sm md:text-base tracking-widest text-white/60 uppercase mt-6 max-w-3xl"
         >
-          40+ Arcade Machines · Soft Play · Prizes · Café — Opening May 2026
+          40+ Arcade Machines · Soft Play · Prizes · Café — Opening 23 May 2026
         </motion.p>
         <motion.p
           initial={{ opacity: 0 }}
