@@ -29,7 +29,8 @@ const FeaturesSection = () => {
             <p className="font-display text-sm md:text-base tracking-[0.25em] text-white/60">Sarbaz</p>
             <p className="font-display text-4xl md:text-5xl tracking-widest text-white mt-0.5">"BAZ"</p>
             <p className="font-display text-sm md:text-base tracking-[0.25em] text-white/60 mt-0.5">Roushbaiani</p>
-            <p className="font-display text-base md:text-lg tracking-[0.3em] text-neon-purple mt-2">— Founder of LUXPLAY</p>
+            <p className="font-display text-base md:text-lg tracking-[0.3em] text-neon-purple mt-3">— Founder &amp; Managing Director</p>
+            <p className="font-display text-xs md:text-sm tracking-[0.25em] text-white/50 mt-1.5">Owner &amp; Director of Lux Unity Ltd</p>
           </div>
         </div>
 
