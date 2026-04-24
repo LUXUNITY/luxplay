@@ -15,10 +15,13 @@ interface AdminPurchaseNotificationProps {
   amountPaid?: string
   redemptionCode?: string
   childName?: string
+  childNames?: string[]
+  childCount?: number
   parentName?: string
   sessionTime?: string
   sessionDate?: string
   bookingCode?: string
+  bookingCodes?: string[]
 }
 
 const AdminPurchaseNotificationEmail = ({
@@ -29,16 +32,19 @@ const AdminPurchaseNotificationEmail = ({
   amountPaid,
   redemptionCode,
   childName,
+  childNames,
+  childCount,
   parentName,
   sessionTime,
   sessionDate,
   bookingCode,
+  bookingCodes,
 }: AdminPurchaseNotificationProps) => (
   <Html lang="en" dir="ltr">
     <Head />
     <Preview>
       {type === 'softplay'
-        ? `New soft play booking — ${childName || 'Unknown'}`
+        ? `New soft play booking — ${childCount && childCount > 1 ? `${childCount} children` : childName || 'Unknown'}`
         : `New purchase — ${packageName || 'Unknown'} package`}
     </Preview>
     <Body style={main}>
@@ -52,11 +58,12 @@ const AdminPurchaseNotificationEmail = ({
         <Section style={detailsBox}>
           {type === 'softplay' ? (
             <>
-              <Text style={detailRow}><strong>Child:</strong> {childName || 'N/A'}</Text>
+              <Text style={detailRow}><strong>Children:</strong> {childNames && childNames.length > 0 ? childNames.join(', ') : childName || 'N/A'}</Text>
+              <Text style={detailRow}><strong>Child Count:</strong> {childCount || (childNames?.length ?? (childName ? 1 : 'N/A'))}</Text>
               <Text style={detailRow}><strong>Parent:</strong> {parentName || 'N/A'}</Text>
               <Text style={detailRow}><strong>Email:</strong> {customerEmail || 'N/A'}</Text>
               <Text style={detailRow}><strong>Session:</strong> {sessionTime || 'N/A'} — {sessionDate || 'N/A'}</Text>
-              <Text style={detailRow}><strong>Booking Code:</strong> {bookingCode || 'N/A'}</Text>
+              <Text style={detailRow}><strong>Booking Code{bookingCodes && bookingCodes.length > 1 ? 's' : ''}:</strong> {bookingCodes && bookingCodes.length > 0 ? bookingCodes.join(', ') : bookingCode || 'N/A'}</Text>
               <Text style={detailRow}><strong>Amount:</strong> {amountPaid || '£2.50'}</Text>
             </>
           ) : (
@@ -82,7 +89,7 @@ export const template = {
   component: AdminPurchaseNotificationEmail,
   subject: (data: Record<string, any>) =>
     data.type === 'softplay'
-      ? `New Soft Play Booking — ${data.childName || 'Unknown'}`
+      ? `New Soft Play Booking — ${data.childCount && data.childCount > 1 ? `${data.childCount} children` : data.childName || 'Unknown'}`
       : `New Sale — ${data.packageName || 'Unknown'} Package`,
   displayName: 'Admin purchase notification',
   previewData: {
