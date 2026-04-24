@@ -23,41 +23,29 @@ serve(async (req) => {
     const body = await req.json();
     const { sessionTime, sessionDate, parentName, parentPhone } = body;
 
-    // Backward-compatible: accept either `children: string[]` or single `childName`
-    let children: string[] = Array.isArray(body.children)
-      ? body.children.map((c: unknown) => String(c || "").trim()).filter(Boolean)
-      : [];
-    if (children.length === 0 && typeof body.childName === "string" && body.childName.trim()) {
-      children = [body.childName.trim()];
+    // Accept new `childCount` (preferred). Fall back to legacy `children` array
+    // or single `childName` for backwards compatibility.
+    let quantity = 0;
+    if (typeof body.childCount === "number" && Number.isFinite(body.childCount)) {
+      quantity = Math.floor(body.childCount);
+    } else if (Array.isArray(body.children)) {
+      quantity = body.children.filter((c: unknown) =>
+        typeof c === "string" ? c.trim().length > 0 : false
+      ).length;
+    } else if (typeof body.childName === "string" && body.childName.trim()) {
+      quantity = 1;
     }
 
-    if (!sessionTime || !sessionDate || !parentName || children.length === 0) {
+    if (!sessionTime || !sessionDate || !parentName || quantity < 1) {
       return new Response(
         JSON.stringify({ error: "Missing required fields" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    if (children.length > MAX_CHILDREN_PER_BOOKING) {
+    if (quantity > MAX_CHILDREN_PER_BOOKING) {
       return new Response(
         JSON.stringify({ error: `Maximum ${MAX_CHILDREN_PER_BOOKING} children per booking` }),
-        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
-
-    // De-duplicate child names within a single booking (DB has unique (stripe_session_id, child_name))
-    const seen = new Set<string>();
-    const uniqueChildren: string[] = [];
-    for (const c of children) {
-      const key = c.toLowerCase();
-      if (!seen.has(key)) {
-        seen.add(key);
-        uniqueChildren.push(c);
-      }
-    }
-    if (uniqueChildren.length !== children.length) {
-      return new Response(
-        JSON.stringify({ error: "Each child must have a unique name in the same booking" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
@@ -68,8 +56,6 @@ serve(async (req) => {
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
-
-    const quantity = uniqueChildren.length;
 
     // Pre-checkout capacity check (DB trigger remains the final guarantee)
     const supabase = createClient(
@@ -118,11 +104,8 @@ serve(async (req) => {
         type: "softplay",
         sessionTime,
         sessionDate,
-        // Stripe metadata values must be strings (max 500 chars per value)
-        children: JSON.stringify(uniqueChildren).slice(0, 500),
         quantity: String(quantity),
-        // Keep legacy field for backwards compatibility / convenience
-        childName: uniqueChildren[0],
+        childCount: String(quantity),
         parentName,
         parentPhone: parentPhone || "",
       },

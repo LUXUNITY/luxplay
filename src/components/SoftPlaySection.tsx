@@ -1,5 +1,5 @@
-import { motion, useInView, AnimatePresence } from "framer-motion";
-import { Baby, Clock, Users, Loader2, Check, Sparkles, Plus, X, Info } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { Baby, Clock, Users, Loader2, Check, Sparkles, Plus, Minus, Info } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
@@ -23,7 +23,7 @@ const OPENING_DATE = "2026-05-23";
 const SoftPlaySection = () => {
   const [selectedSession, setSelectedSession] = useState<string | null>(null);
   const [bookedCounts, setBookedCounts] = useState<Record<string, number>>({});
-  const [childNames, setChildNames] = useState<string[]>([""]);
+  const [childCount, setChildCount] = useState<number>(1);
   const [parentName, setParentName] = useState("");
   const [parentPhone, setParentPhone] = useState("");
   const [loading, setLoading] = useState(false);
@@ -48,43 +48,18 @@ const SoftPlaySection = () => {
     fetchCounts();
   }, []);
 
-  const addChild = () => {
-    if (childNames.length >= MAX_CHILDREN_PER_BOOKING) return;
-    setChildNames([...childNames, ""]);
-  };
+  const decChild = () => setChildCount((n) => Math.max(1, n - 1));
+  const incChild = () =>
+    setChildCount((n) => Math.min(MAX_CHILDREN_PER_BOOKING, n + 1));
 
-  const removeChild = (index: number) => {
-    if (childNames.length === 1) return;
-    setChildNames(childNames.filter((_, i) => i !== index));
-  };
-
-  const updateChild = (index: number, value: string) => {
-    const next = [...childNames];
-    next[index] = value;
-    setChildNames(next);
-  };
-
-  const validChildren = childNames.map((n) => n.trim()).filter(Boolean);
-  const hasEmptyChildNames = childNames.some((name) => !name.trim());
-  // Price reflects the number of child slots added (so it updates the moment
-  // the parent clicks "Add child", before they've typed the name).
-  const quantity = childNames.length;
-  const totalPrice = quantity * PRICE_PER_CHILD;
+  const totalPrice = childCount * PRICE_PER_CHILD;
 
   const handleBook = async () => {
-    if (!selectedSession || quantity === 0 || !parentName.trim()) {
+    if (!selectedSession || childCount < 1 || !parentName.trim()) {
       toast({
         title: "Missing info",
-        description: "Please add your children, enter one parent or guardian name, and select a session.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    if (hasEmptyChildNames || validChildren.length !== quantity) {
-      toast({
-        title: "Missing child names",
-        description: "Please fill in every child's name before continuing.",
+        description:
+          "Please choose a session, number of children and enter one parent or guardian name.",
         variant: "destructive",
       });
       return;
@@ -100,7 +75,7 @@ const SoftPlaySection = () => {
     }
 
     const spotsLeft = MAX_CAPACITY - (bookedCounts[selectedSession] || 0);
-    if (spotsLeft < quantity) {
+    if (spotsLeft < childCount) {
       toast({
         title: "Not enough spots",
         description: `Only ${spotsLeft} spot${spotsLeft === 1 ? "" : "s"} left in this session.`,
@@ -111,15 +86,18 @@ const SoftPlaySection = () => {
 
     setLoading(true);
     try {
-      const { data, error } = await supabase.functions.invoke("create-softplay-checkout", {
-        body: {
-          sessionTime: selectedSession,
-          sessionDate: OPENING_DATE,
-          children: validChildren,
-          parentName: parentName.trim(),
-          parentPhone: parentPhone.trim(),
+      const { data, error } = await supabase.functions.invoke(
+        "create-softplay-checkout",
+        {
+          body: {
+            sessionTime: selectedSession,
+            sessionDate: OPENING_DATE,
+            childCount,
+            parentName: parentName.trim(),
+            parentPhone: parentPhone.trim(),
+          },
         },
-      });
+      );
       if (error) throw error;
       if (data?.url) {
         window.location.href = data.url;
@@ -263,52 +241,40 @@ const SoftPlaySection = () => {
             </p>
 
             <div className="space-y-4 mb-6">
-              {/* Children list */}
+              {/* Number of children */}
               <div>
-                <div className="flex items-center justify-between mb-2">
-                  <label className="font-display text-[10px] tracking-[0.2em] text-white/40">
-                    CHILDREN ({childNames.length}) *
-                  </label>
+                <label className="font-display text-[10px] tracking-[0.2em] text-white/40 mb-2 block">
+                  NUMBER OF CHILDREN *
+                </label>
+                <div className="flex items-center justify-between bg-[#070710] border border-white/10 px-2 py-2">
                   <button
                     type="button"
-                    onClick={addChild}
-                    disabled={childNames.length >= MAX_CHILDREN_PER_BOOKING}
-                    className="font-display text-[10px] tracking-[0.2em] text-neon-cyan hover:text-white inline-flex items-center gap-1 disabled:opacity-30 disabled:cursor-not-allowed"
+                    onClick={decChild}
+                    disabled={childCount <= 1}
+                    aria-label="Decrease number of children"
+                    className="w-12 h-12 flex items-center justify-center text-white/70 hover:text-neon-cyan disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                   >
-                    <Plus className="w-3 h-3" /> ADD CHILD
+                    <Minus className="w-5 h-5" />
+                  </button>
+                  <div className="text-center">
+                    <p className="font-display text-3xl text-neon-cyan glow-cyan">{childCount}</p>
+                    <p className="font-body text-[10px] tracking-[0.2em] text-white/30 uppercase mt-0.5">
+                      {childCount === 1 ? "child" : "children"}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={incChild}
+                    disabled={childCount >= MAX_CHILDREN_PER_BOOKING}
+                    aria-label="Increase number of children"
+                    className="w-12 h-12 flex items-center justify-center text-white/70 hover:text-neon-cyan disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                  >
+                    <Plus className="w-5 h-5" />
                   </button>
                 </div>
-                <div className="space-y-2">
-                  <AnimatePresence initial={false}>
-                    {childNames.map((name, idx) => (
-                      <motion.div
-                        key={idx}
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="flex items-center gap-2"
-                      >
-                        <input
-                          type="text"
-                          value={name}
-                          onChange={(e) => updateChild(idx, e.target.value)}
-                          placeholder={idx === 0 ? "Child's name (e.g. Sophie)" : `Child ${idx + 1}`}
-                          className="flex-1 bg-[#070710] border border-white/10 text-white font-body text-sm px-4 py-3 placeholder:text-white/20 focus:outline-none focus:border-neon-cyan/50"
-                        />
-                        {childNames.length > 1 && (
-                          <button
-                            type="button"
-                            onClick={() => removeChild(idx)}
-                            aria-label="Remove child"
-                            className="shrink-0 w-10 h-10 border border-white/10 text-white/40 hover:text-neon-pink hover:border-neon-pink/50 transition-colors flex items-center justify-center"
-                          >
-                            <X className="w-4 h-4" />
-                          </button>
-                        )}
-                      </motion.div>
-                    ))}
-                  </AnimatePresence>
-                </div>
+                <p className="mt-2 font-body text-[11px] text-white/35">
+                  Max {MAX_CHILDREN_PER_BOOKING} children per booking. Names not required.
+                </p>
               </div>
 
               <div>
@@ -323,7 +289,7 @@ const SoftPlaySection = () => {
                   className="w-full bg-[#070710] border border-white/10 text-white font-body text-sm px-4 py-3 placeholder:text-white/20 focus:outline-none focus:border-neon-cyan/50"
                 />
                 <p className="mt-2 font-body text-[11px] text-white/35">
-                  Add children above. Enter one parent or guardian name only here.
+                  Enter one parent or guardian name only.
                 </p>
               </div>
               <div>
@@ -342,7 +308,7 @@ const SoftPlaySection = () => {
 
             <div className="border border-white/10 bg-[#0d0d1a] p-3 mb-6 flex items-center justify-between">
               <span className="font-body text-white/60 text-sm">
-                {quantity} {quantity === 1 ? "child" : "children"} × £{PRICE_PER_CHILD.toFixed(2)}
+                {childCount} {childCount === 1 ? "child" : "children"} × £{PRICE_PER_CHILD.toFixed(2)}
               </span>
               <span className="font-display text-neon-cyan text-lg">
                 £{totalPrice.toFixed(2)}

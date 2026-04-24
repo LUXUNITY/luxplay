@@ -18,15 +18,6 @@ function generateBookingCode(): string {
   return code;
 }
 
-const SESSION_LABELS: Record<string, string> = {
-  "10:00": "10:00 AM",
-  "12:00": "12:00 PM",
-  "14:00": "2:00 PM",
-  "16:00": "4:00 PM",
-  "18:00": "6:00 PM",
-  "20:00": "8:00 PM",
-};
-
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -74,33 +65,30 @@ serve(async (req) => {
 
     const meta = session.metadata || {};
 
-    // Parse children list (new flow) or fall back to single childName (legacy)
-    let children: string[] = [];
-    if (meta.children) {
+    // Determine quantity. New flow uses `childCount`/`quantity`. Legacy
+    // bookings carried a JSON `children` array or single `childName`.
+    let quantity = 0;
+    if (meta.childCount) quantity = parseInt(meta.childCount, 10) || 0;
+    if (!quantity && meta.quantity) quantity = parseInt(meta.quantity, 10) || 0;
+    if (!quantity && meta.children) {
       try {
         const parsed = JSON.parse(meta.children);
-        if (Array.isArray(parsed)) {
-          children = parsed.map((c: unknown) => String(c || "").trim()).filter(Boolean);
-        }
-      } catch (_e) {
-        // ignore
-      }
+        if (Array.isArray(parsed)) quantity = parsed.length;
+      } catch (_e) { /* ignore */ }
     }
-    if (children.length === 0 && meta.childName) {
-      children = [String(meta.childName)];
-    }
-    if (children.length === 0) {
-      children = ["Unknown"];
-    }
+    if (!quantity && meta.childName) quantity = 1;
+    if (!quantity) quantity = 1;
 
     const totalAmount = session.amount_total || 0;
-    const perChildAmount = Math.round(totalAmount / children.length);
+    const perChildAmount = Math.round(totalAmount / quantity);
 
-    const rows = children.map((name) => ({
+    // child_name is NOT NULL in the schema, so we store an indexed placeholder
+    // ("Child 1", "Child 2", ...). Names are no longer collected from users.
+    const rows = Array.from({ length: quantity }, (_, i) => ({
       stripe_session_id: sessionId,
       session_time: meta.sessionTime || "10:00",
       session_date: meta.sessionDate || new Date().toISOString().split("T")[0],
-      child_name: name,
+      child_name: `Child ${i + 1}`,
       parent_name: meta.parentName || "Unknown",
       parent_email: session.customer_details?.email || "",
       parent_phone: meta.parentPhone || null,
