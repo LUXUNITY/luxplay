@@ -84,25 +84,15 @@ const FeaturesSection = () => {
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-neon-bar z-20" />
 
       {/* MAIN CIRCUIT BACKGROUND — tileable SVG via CSS background so it
-          fills the full section on both narrow mobile and wide desktop. */}
+          fills the full section on both narrow mobile and wide desktop.
+          Tile height is large so trace clusters have breathing room. */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
         style={{
           backgroundImage: circuitTileUrl(0.95),
           backgroundRepeat: "repeat-y",
-          backgroundSize: "100% auto",
+          backgroundSize: "100% 1100px",
           backgroundPosition: "top center",
-        }}
-      />
-      {/* Mirrored layer for symmetric density on both edges */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          backgroundImage: circuitTileUrl(0.7),
-          backgroundRepeat: "repeat-y",
-          backgroundSize: "100% auto",
-          backgroundPosition: "top center",
-          transform: "scaleX(-1)",
         }}
       />
       {/* Soft vignette so center stays readable */}
