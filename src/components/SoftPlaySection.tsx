@@ -65,7 +65,9 @@ const SoftPlaySection = () => {
   };
 
   const validChildren = childNames.map((n) => n.trim()).filter(Boolean);
-  const quantity = validChildren.length;
+  // Price reflects the number of child slots added (so it updates the moment
+  // the parent clicks "Add child", before they've typed the name).
+  const quantity = childNames.length;
   const totalPrice = quantity * PRICE_PER_CHILD;
 
   const handleBook = async () => {
@@ -318,10 +320,10 @@ const SoftPlaySection = () => {
 
             <div className="border border-white/10 bg-[#0d0d1a] p-3 mb-6 flex items-center justify-between">
               <span className="font-body text-white/60 text-sm">
-                {Math.max(quantity, 1)} × £{PRICE_PER_CHILD.toFixed(2)}
+                {quantity} {quantity === 1 ? "child" : "children"} × £{PRICE_PER_CHILD.toFixed(2)}
               </span>
               <span className="font-display text-neon-cyan text-lg">
-                £{(Math.max(quantity, 1) * PRICE_PER_CHILD).toFixed(2)}
+                £{totalPrice.toFixed(2)}
               </span>
             </div>
 
@@ -335,7 +337,7 @@ const SoftPlaySection = () => {
               ) : (
                 <>
                   <Baby className="w-4 h-4" />
-                  BOOK NOW — £{(Math.max(quantity, 1) * PRICE_PER_CHILD).toFixed(2)}
+                  BOOK NOW — £{totalPrice.toFixed(2)}
                 </>
               )}
             </button>
