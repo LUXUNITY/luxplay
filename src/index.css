@@ -114,7 +114,7 @@
     }
   }
   .animate-neon-flash {
-    animation: neon-flash 1.4s ease-in-out infinite;
+    animation: neon-flash 2.8s ease-in-out infinite;
   }
 
   @keyframes btn-flash {
@@ -131,7 +131,7 @@
     }
   }
   .animate-btn-flash-green {
-    animation: btn-flash 1.3s ease-in-out infinite;
+    animation: btn-flash 2.6s ease-in-out infinite;
   }
   @keyframes btn-flash-cyan {
     0%, 100% {
@@ -145,6 +145,6 @@
     }
   }
   .animate-btn-flash-cyan {
-    animation: btn-flash-cyan 1.3s ease-in-out infinite;
+    animation: btn-flash-cyan 2.6s ease-in-out infinite;
   }
 }
