@@ -116,12 +116,12 @@ const FeaturesSection = () => {
             <img
               src={founderBaz}
               alt="Baz — Founder of LuxPlay"
-              className="w-full max-w-[320px] md:max-w-sm object-contain rounded-sm"
+              className="w-full max-w-[240px] md:max-w-[300px] object-contain rounded-sm"
               loading="lazy"
               decoding="async"
               style={{
                 boxShadow:
-                  '0 0 15px #7700ff, 0 0 30px rgba(119, 0, 255, 0.5), 0 0 60px rgba(119, 0, 255, 0.3)',
+                  '0 0 8px rgba(119, 0, 255, 0.5), 0 0 18px rgba(119, 0, 255, 0.25), 0 0 40px rgba(119, 0, 255, 0.12)',
               }}
             />
             <div className="mt-6 text-center">
