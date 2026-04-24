@@ -37,20 +37,37 @@ const TeamGrid = () => (
     <div className="grid grid-cols-3 gap-3 sm:gap-6 md:gap-8 max-w-4xl mx-auto">
       {TEAM.map((m) => (
         <div key={m.name} className="text-center">
-          <div
-            className="aspect-square w-full max-w-[220px] mx-auto overflow-hidden rounded-sm border border-white/10"
-            style={{
-              boxShadow:
-                "0 0 8px rgba(119, 0, 255, 0.35), 0 0 16px rgba(119, 0, 255, 0.18)",
-            }}
-          >
+          <div className="relative w-full max-w-[220px] mx-auto">
+            {/* Faded circuit backdrop */}
             <img
-              src={m.img}
-              alt={m.alt}
-              className="w-full h-full object-cover"
+              src={neonCircuit}
+              alt=""
+              aria-hidden="true"
+              className="pointer-events-none select-none absolute inset-0 -m-3 sm:-m-5 w-[calc(100%+1.5rem)] sm:w-[calc(100%+2.5rem)] h-[calc(100%+1.5rem)] sm:h-[calc(100%+2.5rem)] object-cover opacity-25 mix-blend-screen"
               loading="lazy"
               decoding="async"
+              style={{
+                WebkitMaskImage:
+                  "radial-gradient(ellipse 70% 70% at center, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.8) 50%, #000 80%, #000 100%)",
+                maskImage:
+                  "radial-gradient(ellipse 70% 70% at center, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.8) 50%, #000 80%, #000 100%)",
+              }}
             />
+            <div
+              className="relative aspect-square w-full overflow-hidden rounded-sm border border-white/10"
+              style={{
+                boxShadow:
+                  "0 0 8px rgba(119, 0, 255, 0.35), 0 0 16px rgba(119, 0, 255, 0.18)",
+              }}
+            >
+              <img
+                src={m.img}
+                alt={m.alt}
+                className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
           </div>
           <p className="font-display text-[11px] md:text-xs tracking-[0.18em] text-white mt-3 leading-tight">
             {m.name}
