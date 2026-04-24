@@ -8,8 +8,6 @@ import type { TemplateEntry } from './registry.ts'
 const SITE_NAME = "LuxPlay"
 
 interface SoftPlayBookingProps {
-  childName?: string
-  childNames?: string[]
   childCount?: number
   parentName?: string
   sessionTime?: string
@@ -19,7 +17,12 @@ interface SoftPlayBookingProps {
   totalAmount?: string
 }
 
-const SoftPlayBookingEmail = ({ childName, childNames, childCount, parentName, sessionTime, sessionDate, bookingCode, bookingCodes, totalAmount }: SoftPlayBookingProps) => (
+const SoftPlayBookingEmail = ({ childCount, parentName, sessionTime, sessionDate, bookingCode, bookingCodes, totalAmount }: SoftPlayBookingProps) => {
+  const count = childCount ?? (bookingCodes ? bookingCodes.length : 1)
+  const codes = bookingCodes && bookingCodes.length > 0
+    ? bookingCodes
+    : (bookingCode ? [bookingCode] : [])
+  return (
   <Html lang="en" dir="ltr">
     <Head />
     <Preview>Your LuxPlay soft play booking is confirmed! 🎉</Preview>
@@ -33,20 +36,15 @@ const SoftPlayBookingEmail = ({ childName, childNames, childCount, parentName, s
 
         <Text style={text}>
           {parentName ? `Hi ${parentName}, ` : ''}
-          {childCount && childCount > 1
-            ? `your ${childCount} children are booked in for soft play!`
-            : childName
-              ? `${childName}'s soft play session is booked!`
-              : 'Your soft play session is booked!'
-          }
+          {count > 1
+            ? `your ${count} children are booked in for soft play!`
+            : 'your child is booked in for soft play!'}
         </Text>
 
-        {childNames && childNames.length > 0 ? (
-          <Section style={detailsBox}>
-            <Text style={detailLabel}>CHILDREN</Text>
-            <Text style={detailValue}>{childNames.join(' • ')}</Text>
-          </Section>
-        ) : null}
+        <Section style={detailsBox}>
+          <Text style={detailLabel}>NUMBER OF CHILDREN</Text>
+          <Text style={detailValue}>{count}</Text>
+        </Section>
 
         <Section style={detailsBox}>
           <Text style={detailLabel}>SESSION</Text>
@@ -54,14 +52,14 @@ const SoftPlayBookingEmail = ({ childName, childNames, childCount, parentName, s
         </Section>
 
         <Section style={codeBox}>
-          <Text style={codeLabel}>{bookingCodes && bookingCodes.length > 1 ? 'YOUR BOOKING CODES' : 'YOUR BOOKING CODE'}</Text>
-          <Text style={codeText}>{bookingCodes && bookingCodes.length > 0 ? bookingCodes.join(' • ') : bookingCode || 'SP-XXX-XXX'}</Text>
+          <Text style={codeLabel}>{codes.length > 1 ? 'YOUR BOOKING CODES' : 'YOUR BOOKING CODE'}</Text>
+          <Text style={codeText}>{codes.length > 0 ? codes.join(' • ') : 'SP-XXX-XXX'}</Text>
         </Section>
 
         {totalAmount ? <Text style={text}><strong>Total paid:</strong> {totalAmount}</Text> : null}
 
         <Text style={text}>
-          Show this code at the LuxPlay soft play entrance on the day. Your child's name will be on our check-in list.
+          Show {codes.length > 1 ? 'these codes' : 'this code'} at the LuxPlay soft play entrance on the day.
         </Text>
 
         <Hr style={hr} />
