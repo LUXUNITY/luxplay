@@ -173,7 +173,7 @@
     background-color: hsl(var(--background));
     background-image:
       linear-gradient(hsl(var(--background) / 0.56), hsl(var(--background) / 0.56)),
-      url("./assets/luxplay-site-pattern-mobile.webp");
+      url("./assets/luxplay-pattern-clean-mobile.webp");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -184,7 +184,7 @@
     .luxplay-pattern-bg {
       background-image:
         linear-gradient(hsl(var(--background) / 0.56), hsl(var(--background) / 0.56)),
-        url("./assets/luxplay-site-pattern-desktop.webp");
+        url("./assets/luxplay-pattern-clean-desktop.webp");
       background-attachment: fixed;
     }
   }
