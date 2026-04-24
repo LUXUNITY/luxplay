@@ -168,4 +168,14 @@
   .animate-btn-flash-cyan {
     animation: btn-flash-cyan 2.6s ease-in-out infinite;
   }
+
+  .luxplay-pattern-bg {
+    background-color: hsl(var(--background));
+    background-image:
+      linear-gradient(hsl(var(--background) / 0.56), hsl(var(--background) / 0.56)),
+      url("./assets/luxplay-bg-pattern.jpeg");
+    background-position: center;
+    background-repeat: repeat;
+    background-size: 320px 320px;
+  }
 }

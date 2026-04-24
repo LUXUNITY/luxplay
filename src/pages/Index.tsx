@@ -4,7 +4,7 @@ import SoftPlaySection from "@/components/SoftPlaySection";
 import VenueSection from "@/components/VenueSection";
 import FeaturesSection from "@/components/FeaturesSection";
 import FooterSection from "@/components/FooterSection";
-import cardBg from "@/assets/luxplay-card-bg.jpeg";
+import patternBg from "@/assets/luxplay-bg-pattern.jpeg";
 
 const Index = () => {
   return (
@@ -14,13 +14,9 @@ const Index = () => {
 
       {/* Mid-page sections — LuxPlay card starfield background */}
       <div
-        className="relative"
+        className="relative luxplay-pattern-bg"
         style={{
-          backgroundImage: `linear-gradient(rgba(7,7,16,0.55), rgba(7,7,16,0.55)), url(${cardBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundAttachment: "fixed",
+          backgroundImage: `linear-gradient(hsl(var(--background) / 0.56), hsl(var(--background) / 0.56)), url(${patternBg})`,
         }}
       >
         {/* 2. Credits — money section FIRST, before any explanation */}
@@ -36,13 +32,9 @@ const Index = () => {
 
       {/* 6. Footer — also keeps the starfield */}
       <div
-        className="relative"
+        className="relative luxplay-pattern-bg"
         style={{
-          backgroundImage: `linear-gradient(rgba(7,7,16,0.55), rgba(7,7,16,0.55)), url(${cardBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundAttachment: "fixed",
+          backgroundImage: `linear-gradient(hsl(var(--background) / 0.56), hsl(var(--background) / 0.56)), url(${patternBg})`,
         }}
       >
         <FooterSection />
