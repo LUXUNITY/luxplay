@@ -65,7 +65,9 @@ const SoftPlaySection = () => {
   };
 
   const validChildren = childNames.map((n) => n.trim()).filter(Boolean);
-  const quantity = validChildren.length;
+  // Price reflects the number of child slots added (so it updates the moment
+  // the parent clicks "Add child", before they've typed the name).
+  const quantity = childNames.length;
   const totalPrice = quantity * PRICE_PER_CHILD;
 
   const handleBook = async () => {
