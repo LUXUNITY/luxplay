@@ -3,6 +3,7 @@ import founderBaz from "@/assets/founder-baz.jpg";
 import teamRares from "@/assets/team-rares.jpg";
 import teamJack from "@/assets/team-jack.jpg";
 import teamMartin from "@/assets/team-martin.png";
+import teamConnor from "@/assets/team-connor.jpg";
 
 import { gridBackgroundUrl } from "@/components/circuitTile";
 
@@ -28,6 +29,13 @@ const TEAM = [
     role: "Lead Construction & Development Director",
     company: "Owner & Director, MasterClass Exteriors",
   },
+  {
+    img: teamConnor,
+    alt: "Connor Denton",
+    name: "CONNOR DENTON",
+    role: "Chief Coordinator",
+    company: "MasterClass Exteriors",
+  },
 ];
 
 const TeamGrid = () => (
@@ -35,7 +43,7 @@ const TeamGrid = () => (
     <p className="font-display text-xs tracking-[0.3em] text-white/30 mb-6 text-center">
       THE TEAM
     </p>
-    <div className="grid grid-cols-3 gap-3 sm:gap-6 md:gap-8 max-w-5xl mx-auto">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 md:gap-6 max-w-6xl mx-auto">
       {TEAM.map((m) => (
         <div key={m.name} className="text-center">
           <div className="relative w-full max-w-[280px] md:max-w-[320px] mx-auto">
