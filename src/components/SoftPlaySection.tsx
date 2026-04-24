@@ -18,7 +18,7 @@ const SESSIONS = [
 ];
 
 // Opening day date — update this when confirmed
-const OPENING_DATE = "2026-05-01";
+const OPENING_DATE = "2026-05-23";
 
 const SoftPlaySection = () => {
   const [selectedSession, setSelectedSession] = useState<string | null>(null);

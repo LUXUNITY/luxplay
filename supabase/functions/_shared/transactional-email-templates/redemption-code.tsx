@@ -45,7 +45,7 @@ const RedemptionCodeEmail = ({ packageName, credits, redemptionCode }: Redemptio
         <Hr style={hr} />
 
         <Text style={smallText}>📍 Unit 7, Sovereign Centre, Boscombe, Bournemouth, BH1 4SX</Text>
-        <Text style={smallText}>🗓️ Opening May 2026</Text>
+        <Text style={smallText}>🗓️ Opening 23 May 2026</Text>
 
         <Hr style={hr} />
 
