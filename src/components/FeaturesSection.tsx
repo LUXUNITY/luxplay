@@ -5,9 +5,72 @@ import teamJack from "@/assets/team-jack.jpg";
 import teamMartin from "@/assets/team-martin.png";
 import neonCircuit from "@/assets/neon-circuit.png";
 
+const TEAM = [
+  {
+    img: teamJack,
+    alt: "Jack Oswell",
+    name: "JACK OSWELL",
+    role: "Arcade Systems & Technical Operations",
+    company: "Co-Owner & Director, JNR Innovations",
+  },
+  {
+    img: teamRares,
+    alt: "Rares Cucos",
+    name: "RARES CUCOS",
+    role: "Arcade Systems & Technical Operations",
+    company: "Co-Owner & Director, JNR Innovations",
+  },
+  {
+    img: teamMartin,
+    alt: "Martin MacGillivray",
+    name: "MARTIN MACGILLIVRAY",
+    role: "Lead Construction & Development Director",
+    company: "Owner & Director, MasterClass Exteriors",
+  },
+];
+
+const TeamGrid = () => (
+  <>
+    <p className="font-display text-xs tracking-[0.3em] text-white/30 mb-6 text-center">
+      THE TEAM
+    </p>
+    <div className="grid grid-cols-3 gap-3 sm:gap-6 md:gap-8 max-w-4xl mx-auto">
+      {TEAM.map((m) => (
+        <div key={m.name} className="text-center">
+          <div
+            className="aspect-square w-full max-w-[220px] mx-auto overflow-hidden rounded-sm border border-white/10"
+            style={{
+              boxShadow:
+                "0 0 8px rgba(119, 0, 255, 0.35), 0 0 16px rgba(119, 0, 255, 0.18)",
+            }}
+          >
+            <img
+              src={m.img}
+              alt={m.alt}
+              className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <p className="font-display text-[11px] md:text-xs tracking-[0.18em] text-white mt-3 leading-tight">
+            {m.name}
+          </p>
+          <p className="font-body text-[10px] md:text-[11px] text-neon-purple/90 mt-1 leading-snug">
+            {m.role}
+          </p>
+          <p className="font-body text-[10px] md:text-[11px] text-white/40 mt-1 leading-snug">
+            {m.company}
+          </p>
+        </div>
+      ))}
+    </div>
+  </>
+);
+
 const FeaturesSection = () => {
   return (
     <section id="about" className="relative bg-[#070710] overflow-hidden">
+
       {/* Neon top bar */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-neon-bar z-10" />
 
