@@ -44,7 +44,7 @@ const HeroSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="font-display text-lg md:text-2xl tracking-widest uppercase mt-6 max-w-3xl"
+          className="font-display text-2xl sm:text-3xl md:text-4xl tracking-widest uppercase mt-6 max-w-4xl"
         >
           <span className="text-neon-green glow-green">40+ Arcade</span>
           <span className="text-white/80"> · </span>
@@ -60,7 +60,7 @@ const HeroSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="font-display text-sm md:text-base tracking-widest uppercase mt-3 max-w-3xl"
+          className="font-display text-lg sm:text-xl md:text-2xl tracking-widest uppercase mt-4 max-w-4xl"
         >
           <span className="text-neon-cyan glow-cyan">Unit 7, Sovereign Centre</span>
           <span className="text-white/70"> · </span>
