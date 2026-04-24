@@ -16,8 +16,8 @@ const HeroSection = () => {
         decoding="async"
       />
 
-      {/* Gradient overlay — dark at top for headline, slightly lighter middle, darker bottom */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#070710]/95 via-[#070710]/55 to-[#070710]/90" />
+      {/* Gradient overlay — dark at top for headline, darker through mid/low */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#070710]/95 via-[#070710]/85 to-[#070710]/95" />
 
       {/* Content */}
       <div className="relative z-10 px-6 md:px-12 lg:px-20 py-24 md:py-32 w-full text-center flex flex-col items-center text-stroke-dark">
@@ -48,7 +48,7 @@ const HeroSection = () => {
           className="font-display text-xl sm:text-2xl md:text-3xl tracking-widest uppercase mt-6 max-w-4xl"
         >
           <span className="text-neon-green glow-green">
-            40+ Arcade Games · 3 Level Soft Play · Amazing Prizes · Cozy Café
+            40+ Arcade Games · 3 Level Soft Play · Amazing Prizes · Cosy Café Area
           </span>
           <br />
           <span className="text-white glow-pink">Opening 23rd May 2026</span>
