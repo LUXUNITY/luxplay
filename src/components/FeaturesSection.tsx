@@ -228,81 +228,15 @@ const FeaturesSection = () => {
         </div>
       </div>
 
-      {/* THE TEAM — appears directly under Baz on mobile (via order), full-width row below the two-column layout on desktop */}
-      {(() => {
-        const team = [
-          {
-            img: teamJack,
-            alt: "Jack Oswell",
-            name: "JACK OSWELL",
-            role: "Arcade Systems & Technical Operations",
-            company: "Co-Owner & Director, JNR Innovations",
-          },
-          {
-            img: teamRares,
-            alt: "Rares Cucos",
-            name: "RARES CUCOS",
-            role: "Arcade Systems & Technical Operations",
-            company: "Co-Owner & Director, JNR Innovations",
-          },
-          {
-            img: teamMartin,
-            alt: "Martin MacGillivray",
-            name: "MARTIN MACGILLIVRAY",
-            role: "Lead Construction & Development Director",
-            company: "Owner & Director, MasterClass Exteriors",
-          },
-        ];
-
-        const TeamGrid = () => (
-          <>
-            <p className="font-display text-xs tracking-[0.3em] text-white/30 mb-6 text-center">
-              THE TEAM
-            </p>
-            <div className="grid grid-cols-3 gap-3 sm:gap-6 md:gap-8 max-w-4xl mx-auto">
-              {team.map((m) => (
-                <div key={m.name} className="text-center">
-                  <div
-                    className="aspect-square w-full max-w-[220px] mx-auto overflow-hidden rounded-sm border border-white/10"
-                    style={{
-                      boxShadow:
-                        "0 0 8px rgba(119, 0, 255, 0.35), 0 0 16px rgba(119, 0, 255, 0.18)",
-                    }}
-                  >
-                    <img
-                      src={m.img}
-                      alt={m.alt}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                  <p className="font-display text-[11px] md:text-xs tracking-[0.18em] text-white mt-3 leading-tight">
-                    {m.name}
-                  </p>
-                  <p className="font-body text-[10px] md:text-[11px] text-neon-purple/90 mt-1 leading-snug">
-                    {m.role}
-                  </p>
-                  <p className="font-body text-[10px] md:text-[11px] text-white/40 mt-1 leading-snug">
-                    {m.company}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </>
-        );
-
-        return (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative z-10 px-6 md:px-14 lg:px-20 pb-16 md:pb-24"
-          >
-            <TeamGrid />
-          </motion.div>
-        );
-      })()}
+      {/* THE TEAM — desktop: full-width row below the two-column layout (mobile version is inside the flex above) */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="hidden md:block relative z-10 px-6 md:px-14 lg:px-20 pb-16 md:pb-24"
+      >
+        <TeamGrid />
+      </motion.div>
     </section>
   );
 };
