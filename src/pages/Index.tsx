@@ -14,14 +14,14 @@ const Index = () => {
 
       {/* Mid-page sections share the LuxPlay card starfield background */}
       <div className="relative">
-        {/* Fixed starfield from the LuxPlay card art */}
+        {/* Starfield from the LuxPlay card art — fixed so it stays put while scrolling */}
         <div
           aria-hidden
           className="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${cardBg})` }}
+          style={{ backgroundImage: `url(${cardBg})`, backgroundAttachment: "fixed" }}
         />
-        {/* Dark scrim so text stays legible over the photo */}
-        <div aria-hidden className="absolute inset-0 -z-10 bg-[#070710]/75" />
+        {/* Light scrim — keeps text readable but lets the starfield show */}
+        <div aria-hidden className="absolute inset-0 -z-10 bg-[#070710]/45" />
 
         {/* 2. Credits — money section FIRST, before any explanation */}
         <PreSaleSection />
@@ -39,9 +39,9 @@ const Index = () => {
         <div
           aria-hidden
           className="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${cardBg})` }}
+          style={{ backgroundImage: `url(${cardBg})`, backgroundAttachment: "fixed" }}
         />
-        <div aria-hidden className="absolute inset-0 -z-10 bg-[#070710]/75" />
+        <div aria-hidden className="absolute inset-0 -z-10 bg-[#070710]/45" />
         <FooterSection />
       </div>
     </main>
