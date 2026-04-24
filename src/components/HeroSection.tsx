@@ -51,7 +51,7 @@ const HeroSection = () => {
           <span className="text-neon-green glow-green">
             40+ Arcade Games · 3 Level Soft Play · Amazing Prizes · Cozy Café
           </span>
-          <span className="text-white/80"> — </span>
+          <br />
           <span className="text-white glow-pink">Opening 23rd May 2026</span>
         </motion.p>
         <motion.p
