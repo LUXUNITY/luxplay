@@ -14,6 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
+      baby_soft_play_bookings: {
+        Row: {
+          amount_paid: number
+          booking_code: string
+          checked_in: boolean
+          checked_in_at: string | null
+          created_at: string
+          currency: string
+          id: string
+          parent_email: string
+          parent_name: string
+          parent_phone: string | null
+          session_date: string
+          session_time: string
+          stripe_session_id: string
+        }
+        Insert: {
+          amount_paid?: number
+          booking_code: string
+          checked_in?: boolean
+          checked_in_at?: string | null
+          created_at?: string
+          currency?: string
+          id?: string
+          parent_email: string
+          parent_name: string
+          parent_phone?: string | null
+          session_date: string
+          session_time: string
+          stripe_session_id: string
+        }
+        Update: {
+          amount_paid?: number
+          booking_code?: string
+          checked_in?: boolean
+          checked_in_at?: string | null
+          created_at?: string
+          currency?: string
+          id?: string
+          parent_email?: string
+          parent_name?: string
+          parent_phone?: string | null
+          session_date?: string
+          session_time?: string
+          stripe_session_id?: string
+        }
+        Relationships: []
+      }
       email_send_log: {
         Row: {
           created_at: string
