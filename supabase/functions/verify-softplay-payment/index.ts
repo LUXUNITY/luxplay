@@ -8,6 +8,9 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
+const CHILD_UNIT_AMOUNT = 400; // £4.00 in pence
+const BABY_UNIT_AMOUNT = 300;  // £3.00 in pence
+
 function generateBookingCode(): string {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
   let code = "SP-";
@@ -65,26 +68,26 @@ serve(async (req) => {
 
     const meta = session.metadata || {};
 
-    // Determine quantity. New flow uses `childCount`/`quantity`. Legacy
-    // bookings carried a JSON `children` array or single `childName`.
-    let quantity = 0;
-    if (meta.childCount) quantity = parseInt(meta.childCount, 10) || 0;
-    if (!quantity && meta.quantity) quantity = parseInt(meta.quantity, 10) || 0;
-    if (!quantity && meta.children) {
+    let childCount = 0;
+    if (meta.childCount) childCount = parseInt(meta.childCount, 10) || 0;
+    if (!childCount && meta.quantity) childCount = parseInt(meta.quantity, 10) || 0;
+    if (!childCount && meta.children) {
       try {
         const parsed = JSON.parse(meta.children);
-        if (Array.isArray(parsed)) quantity = parsed.length;
+        if (Array.isArray(parsed)) childCount = parsed.length;
       } catch (_e) { /* ignore */ }
     }
-    if (!quantity && meta.childName) quantity = 1;
-    if (!quantity) quantity = 1;
+    if (!childCount && meta.childName) childCount = 1;
 
-    const totalAmount = session.amount_total || 0;
-    const perChildAmount = Math.round(totalAmount / quantity);
+    let babyCount = 0;
+    if (meta.babyCount) babyCount = parseInt(meta.babyCount, 10) || 0;
 
-    // child_name is NOT NULL in the schema, so we store an indexed placeholder
-    // ("Child 1", "Child 2", ...). Names are no longer collected from users.
-    const rows = Array.from({ length: quantity }, (_, i) => ({
+    if (childCount + babyCount === 0) childCount = 1;
+
+    // child_name is NOT NULL in the schema, so we store an indexed placeholder.
+    // "Child N" for paying children, "Baby N" for under-2s. The "Baby" prefix
+    // is what the capacity-counter uses to exclude babies from the 40-spot limit.
+    const childRows = Array.from({ length: childCount }, (_, i) => ({
       stripe_session_id: sessionId,
       session_time: meta.sessionTime || "10:00",
       session_date: meta.sessionDate || new Date().toISOString().split("T")[0],
@@ -92,10 +95,25 @@ serve(async (req) => {
       parent_name: meta.parentName || "Unknown",
       parent_email: session.customer_details?.email || "",
       parent_phone: meta.parentPhone || null,
-      amount_paid: perChildAmount || 400,
+      amount_paid: CHILD_UNIT_AMOUNT,
       currency: session.currency || "gbp",
       booking_code: generateBookingCode(),
     }));
+
+    const babyRows = Array.from({ length: babyCount }, (_, i) => ({
+      stripe_session_id: sessionId,
+      session_time: meta.sessionTime || "10:00",
+      session_date: meta.sessionDate || new Date().toISOString().split("T")[0],
+      child_name: `Baby ${i + 1}`,
+      parent_name: meta.parentName || "Unknown",
+      parent_email: session.customer_details?.email || "",
+      parent_phone: meta.parentPhone || null,
+      amount_paid: BABY_UNIT_AMOUNT,
+      currency: session.currency || "gbp",
+      booking_code: generateBookingCode(),
+    }));
+
+    const rows = [...childRows, ...babyRows];
 
     const { data: bookings, error } = await supabase
       .from("soft_play_bookings")
@@ -105,7 +123,6 @@ serve(async (req) => {
     if (error) {
       console.error("Failed to insert bookings:", error);
 
-      // If the session filled up between checkout and payment, auto-refund.
       const isSessionFull =
         (error.message || "").includes("SESSION_FULL") ||
         (error as any).code === "23514";
