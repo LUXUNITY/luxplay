@@ -10,7 +10,7 @@ const corsHeaders = {
 
 function generateBookingCode(): string {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-  let code = "SP-";
+  let code = "BSP-";
   for (let i = 0; i < 6; i++) {
     if (i === 3) code += "-";
     code += chars[Math.floor(Math.random() * chars.length)];
@@ -50,9 +50,8 @@ serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
     );
 
-    // Idempotent check — return all bookings already saved for this session
     const { data: existing } = await supabase
-      .from("soft_play_bookings")
+      .from("baby_soft_play_bookings")
       .select("*")
       .eq("stripe_session_id", sessionId);
 
@@ -64,46 +63,30 @@ serve(async (req) => {
     }
 
     const meta = session.metadata || {};
-
-    // Determine quantity. New flow uses `childCount`/`quantity`. Legacy
-    // bookings carried a JSON `children` array or single `childName`.
-    let quantity = 0;
-    if (meta.childCount) quantity = parseInt(meta.childCount, 10) || 0;
-    if (!quantity && meta.quantity) quantity = parseInt(meta.quantity, 10) || 0;
-    if (!quantity && meta.children) {
-      try {
-        const parsed = JSON.parse(meta.children);
-        if (Array.isArray(parsed)) quantity = parsed.length;
-      } catch (_e) { /* ignore */ }
-    }
-    if (!quantity && meta.childName) quantity = 1;
-    if (!quantity) quantity = 1;
+    const quantity = Math.max(1, parseInt(meta.babyCount || "1", 10) || 1);
 
     const totalAmount = session.amount_total || 0;
-    const perChildAmount = Math.round(totalAmount / quantity);
+    const perBabyAmount = Math.round(totalAmount / quantity);
 
-    // child_name is NOT NULL in the schema, so we store an indexed placeholder
-    // ("Child 1", "Child 2", ...). Names are no longer collected from users.
-    const rows = Array.from({ length: quantity }, (_, i) => ({
+    const rows = Array.from({ length: quantity }, () => ({
       stripe_session_id: sessionId,
       session_time: meta.sessionTime || "10:00",
       session_date: meta.sessionDate || new Date().toISOString().split("T")[0],
-      child_name: `Child ${i + 1}`,
       parent_name: meta.parentName || "Unknown",
       parent_email: session.customer_details?.email || "",
       parent_phone: meta.parentPhone || null,
-      amount_paid: perChildAmount || 400,
+      amount_paid: perBabyAmount || 300,
       currency: session.currency || "gbp",
       booking_code: generateBookingCode(),
     }));
 
     const { data: bookings, error } = await supabase
-      .from("soft_play_bookings")
+      .from("baby_soft_play_bookings")
       .insert(rows)
       .select();
 
     if (error) {
-      console.error("Failed to insert bookings:", error);
+      console.error("Failed to insert baby bookings:", error);
 
       const isSessionFull =
         (error.message || "").includes("SESSION_FULL") ||
@@ -115,7 +98,7 @@ serve(async (req) => {
             payment_intent: session.payment_intent as string,
             reason: "requested_by_customer",
           });
-          console.log("Auto-refunded overbooked session:", sessionId);
+          console.log("Auto-refunded overbooked baby session:", sessionId);
         } catch (refundErr) {
           console.error("Refund failed:", refundErr);
         }
@@ -124,7 +107,7 @@ serve(async (req) => {
           JSON.stringify({
             error: "SESSION_FULL",
             message:
-              "Sorry — this session filled up before your payment completed. You've been automatically refunded. Please pick another time.",
+              "Sorry — this baby session filled up before your payment completed. You've been automatically refunded. Please pick another time.",
           }),
           { status: 409, headers: { ...corsHeaders, "Content-Type": "application/json" } }
         );

@@ -8,11 +8,11 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const SOFTPLAY_PRICE_ID = "price_1TOvjMKDxuB13duTCKh7B9pZ";
+const BABY_PRICE_ID = "price_1TQbPQKDxuB13duTtnsVuyVE";
 
 const VALID_SESSIONS = ["10:00", "12:00", "14:00", "16:00", "18:00", "20:00"];
-const MAX_CAPACITY = 40;
-const MAX_CHILDREN_PER_BOOKING = 6;
+const MAX_CAPACITY = 15;
+const MAX_BABIES_PER_BOOKING = 4;
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -23,17 +23,9 @@ serve(async (req) => {
     const body = await req.json();
     const { sessionTime, sessionDate, parentName, parentPhone } = body;
 
-    // Accept new `childCount` (preferred). Fall back to legacy `children` array
-    // or single `childName` for backwards compatibility.
     let quantity = 0;
-    if (typeof body.childCount === "number" && Number.isFinite(body.childCount)) {
-      quantity = Math.floor(body.childCount);
-    } else if (Array.isArray(body.children)) {
-      quantity = body.children.filter((c: unknown) =>
-        typeof c === "string" ? c.trim().length > 0 : false
-      ).length;
-    } else if (typeof body.childName === "string" && body.childName.trim()) {
-      quantity = 1;
+    if (typeof body.babyCount === "number" && Number.isFinite(body.babyCount)) {
+      quantity = Math.floor(body.babyCount);
     }
 
     if (!sessionTime || !sessionDate || !parentName || quantity < 1) {
@@ -43,9 +35,9 @@ serve(async (req) => {
       );
     }
 
-    if (quantity > MAX_CHILDREN_PER_BOOKING) {
+    if (quantity > MAX_BABIES_PER_BOOKING) {
       return new Response(
-        JSON.stringify({ error: `Maximum ${MAX_CHILDREN_PER_BOOKING} children per booking` }),
+        JSON.stringify({ error: `Maximum ${MAX_BABIES_PER_BOOKING} babies per booking` }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
@@ -57,20 +49,19 @@ serve(async (req) => {
       );
     }
 
-    // Pre-checkout capacity check (DB trigger remains the final guarantee)
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
     );
 
     const { count, error: countError } = await supabase
-      .from("soft_play_bookings")
+      .from("baby_soft_play_bookings")
       .select("id", { count: "exact", head: true })
       .eq("session_date", sessionDate)
       .eq("session_time", sessionTime);
 
     if (countError) {
-      console.error("Capacity check failed:", countError);
+      console.error("Baby capacity check failed:", countError);
       return new Response(
         JSON.stringify({ error: "Could not verify session availability" }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
@@ -84,8 +75,8 @@ serve(async (req) => {
           error: "SESSION_FULL",
           message:
             spotsLeft <= 0
-              ? "Sorry, this session is fully booked. Please pick another time."
-              : `Only ${spotsLeft} spot${spotsLeft === 1 ? "" : "s"} left in this session.`,
+              ? "Sorry, this baby session is fully booked. Please pick another time."
+              : `Only ${spotsLeft} baby spot${spotsLeft === 1 ? "" : "s"} left in this session.`,
         }),
         { status: 409, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
@@ -96,16 +87,15 @@ serve(async (req) => {
     });
 
     const session = await stripe.checkout.sessions.create({
-      line_items: [{ price: SOFTPLAY_PRICE_ID, quantity }],
+      line_items: [{ price: BABY_PRICE_ID, quantity }],
       mode: "payment",
-      success_url: `${req.headers.get("origin")}/softplay-success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${req.headers.get("origin")}/#softplay`,
+      success_url: `${req.headers.get("origin")}/baby-softplay-success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${req.headers.get("origin")}/#baby-softplay`,
       metadata: {
-        type: "softplay",
+        type: "baby-softplay",
         sessionTime,
         sessionDate,
-        quantity: String(quantity),
-        childCount: String(quantity),
+        babyCount: String(quantity),
         parentName,
         parentPhone: parentPhone || "",
       },
