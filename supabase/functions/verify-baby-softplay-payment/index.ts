@@ -75,7 +75,7 @@ serve(async (req) => {
       parent_name: meta.parentName || "Unknown",
       parent_email: session.customer_details?.email || "",
       parent_phone: meta.parentPhone || null,
-      amount_paid: perBabyAmount || 300,
+      amount_paid: perBabyAmount || 200,
       currency: session.currency || "gbp",
       booking_code: generateBookingCode(),
     }));
