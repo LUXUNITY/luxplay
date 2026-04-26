@@ -15,6 +15,8 @@ interface Booking {
   amount_paid?: number;
 }
 
+const isBaby = (b: Booking) => (b.child_name || "").startsWith("Baby");
+
 const SESSION_LABELS: Record<string, string> = {
   "10:00": "10:00 AM",
   "12:00": "12:00 PM",
