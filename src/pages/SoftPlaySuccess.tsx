@@ -152,10 +152,20 @@ const SoftPlaySuccess = () => {
             </h1>
 
             <p className="font-body text-white/70 text-base mb-2">
-              <strong className="text-white">
-                {bookings.length} {bookings.length === 1 ? "child" : "children"}
-              </strong>{" "}
-              {bookings.length === 1 ? "is" : "are"} booked in! 🎉
+              {(() => {
+                const childN = bookings.filter((b) => !isBaby(b)).length;
+                const babyN = bookings.filter(isBaby).length;
+                const parts: string[] = [];
+                if (childN) parts.push(`${childN} ${childN === 1 ? "child" : "children"}`);
+                if (babyN) parts.push(`${babyN} ${babyN === 1 ? "baby" : "babies"}`);
+                const summary = parts.join(" + ");
+                const verb = bookings.length === 1 ? "is" : "are";
+                return (
+                  <>
+                    <strong className="text-white">{summary}</strong> {verb} booked in! 🎉
+                  </>
+                );
+              })()}
             </p>
             <p className="font-body text-white/40 text-sm mb-6 flex items-center justify-center gap-2">
               <Clock className="w-4 h-4" />
@@ -170,12 +180,19 @@ const SoftPlaySuccess = () => {
                 BOOKING CODE{bookings.length > 1 ? "S" : ""}
               </p>
               <ul className="space-y-2">
-                {bookings.map((entry, idx) => (
-                  <li key={entry.booking_code} className="flex items-start justify-between gap-3 border-b border-white/5 pb-2 last:border-b-0 last:pb-0">
-                    <span className="font-body text-white/80 text-sm">👶 Child {idx + 1}</span>
-                    <span className="font-display text-[11px] tracking-[0.2em] text-neon-cyan">{entry.booking_code}</span>
-                  </li>
-                ))}
+                {bookings.map((entry) => {
+                  const baby = isBaby(entry);
+                  return (
+                    <li key={entry.booking_code} className="flex items-start justify-between gap-3 border-b border-white/5 pb-2 last:border-b-0 last:pb-0">
+                      <span className="font-body text-white/80 text-sm">
+                        {baby ? "🍼" : "👶"} {entry.child_name}
+                      </span>
+                      <span className={`font-display text-[11px] tracking-[0.2em] ${baby ? "text-neon-pink" : "text-neon-cyan"}`}>
+                        {entry.booking_code}
+                      </span>
+                    </li>
+                  );
+                })}
               </ul>
               <button
                 onClick={copyCode}
