@@ -4,6 +4,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 const PreSaleSection = lazy(() => import("@/components/PreSaleSection"));
 const SoftPlaySection = lazy(() => import("@/components/SoftPlaySection"));
+const BabySoftPlaySection = lazy(() => import("@/components/BabySoftPlaySection"));
 const VenueSection = lazy(() => import("@/components/VenueSection"));
 const FeaturesSection = lazy(() => import("@/components/FeaturesSection"));
 const FooterSection = lazy(() => import("@/components/FooterSection"));
@@ -29,6 +30,14 @@ const Index = () => {
           <Suspense fallback={null}>
             <ScrollReveal>
               <SoftPlaySection />
+            </ScrollReveal>
+          </Suspense>
+        </div>
+        {/* 3b. Baby Soft Play — separate under-2 sessions */}
+        <div className="defer-section">
+          <Suspense fallback={null}>
+            <ScrollReveal>
+              <BabySoftPlaySection />
             </ScrollReveal>
           </Suspense>
         </div>

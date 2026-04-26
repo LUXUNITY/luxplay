@@ -7,7 +7,6 @@ import { toast } from "@/hooks/use-toast";
 interface Booking {
   stripe_session_id?: string;
   booking_code: string;
-  child_name: string;
   parent_name: string;
   parent_email: string;
   session_time: string;
@@ -24,7 +23,7 @@ const SESSION_LABELS: Record<string, string> = {
   "20:00": "8:00 PM",
 };
 
-const SoftPlaySuccess = () => {
+const BabySoftPlaySuccess = () => {
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get("session_id");
   const [bookings, setBookings] = useState<Booking[]>([]);
@@ -41,7 +40,7 @@ const SoftPlaySuccess = () => {
 
     const fetchBooking = async () => {
       try {
-        const { data, error: fnError } = await supabase.functions.invoke("verify-softplay-payment", {
+        const { data, error: fnError } = await supabase.functions.invoke("verify-baby-softplay-payment", {
           body: { sessionId },
         });
         if (fnError) throw fnError;
@@ -49,18 +48,19 @@ const SoftPlaySuccess = () => {
           const allBookings = data.bookings as Booking[];
           const primaryBooking = allBookings[0];
           const bookingCodes = allBookings.map((entry) => entry.booking_code);
-          const childCount = allBookings.length;
+          const babyCount = allBookings.length;
           const totalAmount = allBookings.reduce((sum, entry) => sum + (entry.amount_paid || 0), 0);
 
           setBookings(allBookings);
-          // Send confirmation email
+
+          // Customer confirmation — reuse the soft play email template
           await supabase.functions.invoke("send-transactional-email", {
             body: {
               templateName: "softplay-booking",
               recipientEmail: primaryBooking.parent_email,
-              idempotencyKey: `softplay-${primaryBooking.stripe_session_id || sessionId}`,
+              idempotencyKey: `baby-softplay-${primaryBooking.stripe_session_id || sessionId}`,
               templateData: {
-                childCount,
+                childCount: babyCount,
                 parentName: primaryBooking.parent_name,
                 sessionTime: SESSION_LABELS[primaryBooking.session_time] || primaryBooking.session_time,
                 sessionDate: new Date(primaryBooking.session_date).toLocaleDateString("en-GB", {
@@ -72,17 +72,17 @@ const SoftPlaySuccess = () => {
               },
             },
           });
-          // Notify admin
+          // Admin notification
           await supabase.functions.invoke("send-transactional-email", {
             body: {
               templateName: "admin-purchase-notification",
               recipientEmail: "luxplayuk@gmail.com",
-              idempotencyKey: `admin-softplay-${primaryBooking.stripe_session_id || sessionId}`,
+              idempotencyKey: `admin-baby-softplay-${primaryBooking.stripe_session_id || sessionId}`,
               templateData: {
                 type: "softplay",
                 customerEmail: primaryBooking.parent_email,
-                childCount,
-                parentName: primaryBooking.parent_name,
+                childCount: babyCount,
+                parentName: `[BABY SOFT PLAY] ${primaryBooking.parent_name}`,
                 sessionTime: SESSION_LABELS[primaryBooking.session_time] || primaryBooking.session_time,
                 sessionDate: new Date(primaryBooking.session_date).toLocaleDateString("en-GB", {
                   weekday: "long", day: "numeric", month: "long", year: "numeric",
@@ -117,10 +117,10 @@ const SoftPlaySuccess = () => {
 
   return (
     <main className="min-h-screen bg-[#070710] flex items-center justify-center px-6">
-      <div className="max-w-lg w-full text-center border border-neon-cyan/30 bg-[#0a0a16] p-10 md:p-14">
+      <div className="max-w-lg w-full text-center border border-neon-pink/30 bg-[#0a0a16] p-10 md:p-14">
         {loading ? (
           <div className="py-12">
-            <Loader2 className="w-12 h-12 text-neon-cyan animate-spin mx-auto mb-4" />
+            <Loader2 className="w-12 h-12 text-neon-pink animate-spin mx-auto mb-4" />
             <p className="font-display text-sm tracking-widest text-white/50">
               CONFIRMING YOUR BOOKING...
             </p>
@@ -130,7 +130,7 @@ const SoftPlaySuccess = () => {
             <p className="font-body text-white/70 text-base mb-6">{error}</p>
             <Link
               to="/"
-              className="inline-flex items-center gap-2 font-display text-sm tracking-widest text-[#070710] bg-neon-cyan px-8 py-3"
+              className="inline-flex items-center gap-2 font-display text-sm tracking-widest text-[#070710] bg-neon-pink px-8 py-3"
             >
               <ArrowLeft className="w-4 h-4" />
               BACK TO LUXPLAY
@@ -138,20 +138,20 @@ const SoftPlaySuccess = () => {
           </div>
         ) : booking ? (
           <>
-            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-neon-cyan/10 flex items-center justify-center">
-              <Baby className="w-10 h-10 text-neon-cyan" />
+            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-neon-pink/10 flex items-center justify-center">
+              <Baby className="w-10 h-10 text-neon-pink" />
             </div>
 
             <h1
-              className="font-display text-3xl md:text-4xl tracking-wider text-neon-cyan mb-4"
-              style={{ textShadow: "0 0 20px rgba(0,238,255,0.3)" }}
+              className="font-display text-3xl md:text-4xl tracking-wider text-neon-pink mb-4"
+              style={{ textShadow: "0 0 20px rgba(255,0,204,0.3)" }}
             >
-              BOOKING CONFIRMED
+              BABY BOOKING CONFIRMED
             </h1>
 
             <p className="font-body text-white/70 text-base mb-2">
               <strong className="text-white">
-                {bookings.length} {bookings.length === 1 ? "child" : "children"}
+                {bookings.length} {bookings.length === 1 ? "baby" : "babies"}
               </strong>{" "}
               {bookings.length === 1 ? "is" : "are"} booked in! 🎉
             </p>
@@ -164,20 +164,20 @@ const SoftPlaySuccess = () => {
             </p>
 
             <div className="border border-white/10 bg-[#0d0d1a] p-4 mb-6 text-left space-y-2">
-              <p className="font-display text-[10px] tracking-[0.3em] text-neon-cyan/80 mb-3">
+              <p className="font-display text-[10px] tracking-[0.3em] text-neon-pink/80 mb-3">
                 BOOKING CODE{bookings.length > 1 ? "S" : ""}
               </p>
               <ul className="space-y-2">
                 {bookings.map((entry, idx) => (
                   <li key={entry.booking_code} className="flex items-start justify-between gap-3 border-b border-white/5 pb-2 last:border-b-0 last:pb-0">
-                    <span className="font-body text-white/80 text-sm">👶 Child {idx + 1}</span>
-                    <span className="font-display text-[11px] tracking-[0.2em] text-neon-cyan">{entry.booking_code}</span>
+                    <span className="font-body text-white/80 text-sm">🍼 Baby {idx + 1}</span>
+                    <span className="font-display text-[11px] tracking-[0.2em] text-neon-pink">{entry.booking_code}</span>
                   </li>
                 ))}
               </ul>
               <button
                 onClick={copyCode}
-                className="inline-flex items-center gap-2 pt-2 font-display text-xs tracking-widest text-white/60 hover:text-neon-cyan transition-colors"
+                className="inline-flex items-center gap-2 pt-2 font-display text-xs tracking-widest text-white/60 hover:text-neon-pink transition-colors"
               >
                 <Copy className="w-3.5 h-3.5" />
                 COPY FIRST CODE
@@ -189,16 +189,16 @@ const SoftPlaySuccess = () => {
                 📧 Confirmation sent to <strong className="text-white/80">{booking.parent_email}</strong>
               </p>
               <p className="font-body text-white/60 text-sm">
-                🏪 Show {bookings.length > 1 ? "these codes" : "this code"} at the LuxPlay soft play entrance
+                🏪 Show {bookings.length > 1 ? "these codes" : "this code"} at the LuxPlay baby soft play entrance
               </p>
-              <p className="font-body text-neon-pink/70 text-xs mt-2">
+              <p className="font-body text-neon-cyan/70 text-xs mt-2">
                 ⚠️ Save {bookings.length > 1 ? "these codes" : "this code"} — screenshot this page or check your email
               </p>
             </div>
 
             <Link
               to="/"
-              className="inline-flex items-center gap-2 font-display text-sm tracking-widest text-[#070710] bg-neon-cyan px-8 py-3 hover:shadow-[0_0_30px_rgba(0,238,255,0.4)] transition-all duration-300"
+              className="inline-flex items-center gap-2 font-display text-sm tracking-widest text-[#070710] bg-neon-pink px-8 py-3 hover:shadow-[0_0_30px_rgba(255,0,204,0.4)] transition-all duration-300"
             >
               <ArrowLeft className="w-4 h-4" />
               BACK TO LUXPLAY
@@ -210,4 +210,4 @@ const SoftPlaySuccess = () => {
   );
 };
 
-export default SoftPlaySuccess;
+export default BabySoftPlaySuccess;
