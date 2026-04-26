@@ -48,7 +48,7 @@ const HeroSection = () => {
           className="font-display text-xl sm:text-2xl md:text-3xl tracking-widest uppercase mt-6 max-w-4xl"
         >
           <span className="text-neon-green glow-green">
-            40+ Arcade Games · 3 Level Soft Play · Amazing Prizes · Cosy Café Area
+            40+ Arcade Games · 3 Level Soft Play · Baby Soft Play · Amazing Prizes · Cosy Café Area
           </span>
           <br />
           <span className="text-white glow-pink">Opening 23rd May 2026</span>
