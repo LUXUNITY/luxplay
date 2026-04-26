@@ -8,9 +8,9 @@ import venueBabyPlay from "@/assets/baby-play.png";
 const venues = [
   { img: venueArcade, label: "ARCADE ZONE", color: "text-neon-green" },
   { img: venueSoftplay, label: "SOFT PLAY", color: "text-neon-cyan" },
+  { img: venueBabyPlay, label: "BABY SOFT PLAY", color: "text-neon-pink" },
   { img: venuePrizes, label: "PRIZE REDEMPTION", color: "text-neon-pink" },
   { img: venueCafe, label: "CAFÉ", color: "text-neon-purple" },
-  { img: venueBabyPlay, label: "BABY SOFT PLAY", color: "text-neon-pink", wide: true },
 ];
 
 const VenueSection = () => {
@@ -41,7 +41,7 @@ const VenueSection = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: i * 0.1 }}
-            className={`relative aspect-[16/10] overflow-hidden group ${v.wide ? "md:col-span-2" : ""}`}
+            className="relative aspect-[16/10] overflow-hidden group"
           >
             <img
               src={v.img}
