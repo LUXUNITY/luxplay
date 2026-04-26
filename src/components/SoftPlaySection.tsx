@@ -6,7 +6,9 @@ import { toast } from "@/hooks/use-toast";
 
 const MAX_CAPACITY = 40;
 const PRICE_PER_CHILD = 4;
+const PRICE_PER_BABY = 3;
 const MAX_CHILDREN_PER_BOOKING = 6;
+const MAX_BABIES_PER_BOOKING = 4;
 
 const SESSIONS = [
   { time: "10:00", label: "10:00 AM" },
@@ -24,6 +26,7 @@ const SoftPlaySection = () => {
   const [selectedSession, setSelectedSession] = useState<string | null>(null);
   const [bookedCounts, setBookedCounts] = useState<Record<string, number>>({});
   const [childCount, setChildCount] = useState<number>(1);
+  const [babyCount, setBabyCount] = useState<number>(0);
   const [parentName, setParentName] = useState("");
   const [parentPhone, setParentPhone] = useState("");
   const [loading, setLoading] = useState(false);
@@ -32,14 +35,16 @@ const SoftPlaySection = () => {
 
   useEffect(() => {
     const fetchCounts = async () => {
+      // Babies don't count toward capacity — exclude rows whose child_name starts with "Baby"
       const { data } = await supabase
         .from("soft_play_bookings")
-        .select("session_time")
+        .select("session_time, child_name")
         .eq("session_date", OPENING_DATE);
 
       if (data) {
         const counts: Record<string, number> = {};
         data.forEach((b) => {
+          if ((b.child_name || "").startsWith("Baby")) return;
           counts[b.session_time] = (counts[b.session_time] || 0) + 1;
         });
         setBookedCounts(counts);
@@ -48,18 +53,21 @@ const SoftPlaySection = () => {
     fetchCounts();
   }, []);
 
-  const decChild = () => setChildCount((n) => Math.max(1, n - 1));
+  const decChild = () => setChildCount((n) => Math.max(0, n - 1));
   const incChild = () =>
     setChildCount((n) => Math.min(MAX_CHILDREN_PER_BOOKING, n + 1));
+  const decBaby = () => setBabyCount((n) => Math.max(0, n - 1));
+  const incBaby = () =>
+    setBabyCount((n) => Math.min(MAX_BABIES_PER_BOOKING, n + 1));
 
-  const totalPrice = childCount * PRICE_PER_CHILD;
+  const totalPrice = childCount * PRICE_PER_CHILD + babyCount * PRICE_PER_BABY;
 
   const handleBook = async () => {
-    if (!selectedSession || childCount < 1 || !parentName.trim()) {
+    if (!selectedSession || (childCount + babyCount) < 1 || !parentName.trim()) {
       toast({
         title: "Missing info",
         description:
-          "Please choose a session, number of children and enter one parent or guardian name.",
+          "Please choose a session, add at least one child or baby, and enter a parent or guardian name.",
         variant: "destructive",
       });
       return;
@@ -93,6 +101,7 @@ const SoftPlaySection = () => {
             sessionTime: selectedSession,
             sessionDate: OPENING_DATE,
             childCount,
+            babyCount,
             parentName: parentName.trim(),
             parentPhone: parentPhone.trim(),
           },
@@ -150,7 +159,7 @@ const SoftPlaySection = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-8"
         >
           <p className="font-body text-white/50 text-sm md:text-base mb-2">
             Book your child's spot for opening day — limited to 40 kids per session
@@ -161,6 +170,28 @@ const SoftPlaySection = () => {
             <span className="bg-neon-pink text-[#070710] font-display text-xs tracking-widest px-3 py-1 animate-pulse">
               50% OFF
             </span>
+          </div>
+          <p className="font-body text-white/40 text-xs md:text-sm mt-2">
+            Babies under 2: <span className="text-neon-cyan">£3 each</span>
+          </p>
+        </motion.div>
+
+        {/* ADULTS FREE — big, in-your-face badge */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ type: "spring", stiffness: 200, damping: 15 }}
+          className="max-w-3xl mx-auto mb-12"
+        >
+          <div className="relative border-4 border-neon-pink bg-neon-pink/10 px-6 py-5 md:py-6 text-center overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-neon-pink/0 via-neon-pink/20 to-neon-pink/0 animate-pulse pointer-events-none" />
+            <p className="relative font-display text-3xl md:text-5xl lg:text-6xl tracking-wider text-neon-pink glow-pink leading-tight">
+              ADULTS GO FREE!
+            </p>
+            <p className="relative font-body text-white/80 text-xs md:text-sm tracking-[0.2em] uppercase mt-2">
+              Up to <span className="text-white font-bold">2 adults free per child</span> — no extra charge
+            </p>
           </div>
         </motion.div>
 
@@ -244,13 +275,13 @@ const SoftPlaySection = () => {
               {/* Number of children */}
               <div>
                 <label className="font-display text-[10px] tracking-[0.2em] text-white/40 mb-2 block">
-                  NUMBER OF CHILDREN *
+                  CHILDREN (2+ YEARS) — £{PRICE_PER_CHILD}
                 </label>
                 <div className="flex items-center justify-between bg-[#070710] border border-white/10 px-2 py-2">
                   <button
                     type="button"
                     onClick={decChild}
-                    disabled={childCount <= 1}
+                    disabled={childCount <= 0}
                     aria-label="Decrease number of children"
                     className="w-12 h-12 flex items-center justify-center text-white/70 hover:text-neon-cyan disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                   >
@@ -274,6 +305,42 @@ const SoftPlaySection = () => {
                 </div>
                 <p className="mt-2 font-body text-[11px] text-white/35">
                   Max {MAX_CHILDREN_PER_BOOKING} children per booking. Names not required.
+                </p>
+              </div>
+
+              {/* Babies under 2 */}
+              <div>
+                <label className="font-display text-[10px] tracking-[0.2em] text-white/40 mb-2 block">
+                  BABIES (UNDER 2 YEARS) — £{PRICE_PER_BABY}
+                </label>
+                <div className="flex items-center justify-between bg-[#070710] border border-white/10 px-2 py-2">
+                  <button
+                    type="button"
+                    onClick={decBaby}
+                    disabled={babyCount <= 0}
+                    aria-label="Decrease number of babies"
+                    className="w-12 h-12 flex items-center justify-center text-white/70 hover:text-neon-pink disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                  >
+                    <Minus className="w-5 h-5" />
+                  </button>
+                  <div className="text-center">
+                    <p className="font-display text-3xl text-neon-pink glow-pink">{babyCount}</p>
+                    <p className="font-body text-[10px] tracking-[0.2em] text-white/30 uppercase mt-0.5">
+                      {babyCount === 1 ? "baby" : "babies"}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={incBaby}
+                    disabled={babyCount >= MAX_BABIES_PER_BOOKING}
+                    aria-label="Increase number of babies"
+                    className="w-12 h-12 flex items-center justify-center text-white/70 hover:text-neon-pink disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                  >
+                    <Plus className="w-5 h-5" />
+                  </button>
+                </div>
+                <p className="mt-2 font-body text-[11px] text-white/35">
+                  Babies under 2 don't count toward the 40-kid session limit.
                 </p>
               </div>
 
@@ -306,18 +373,39 @@ const SoftPlaySection = () => {
               </div>
             </div>
 
-            <div className="border border-white/10 bg-[#0d0d1a] p-3 mb-6 flex items-center justify-between">
-              <span className="font-body text-white/60 text-sm">
-                {childCount} {childCount === 1 ? "child" : "children"} × £{PRICE_PER_CHILD.toFixed(2)}
-              </span>
-              <span className="font-display text-neon-cyan text-lg">
-                £{totalPrice.toFixed(2)}
-              </span>
+            <div className="border border-white/10 bg-[#0d0d1a] p-3 mb-2 space-y-1">
+              {childCount > 0 && (
+                <div className="flex items-center justify-between">
+                  <span className="font-body text-white/60 text-sm">
+                    {childCount} {childCount === 1 ? "child" : "children"} × £{PRICE_PER_CHILD.toFixed(2)}
+                  </span>
+                  <span className="font-display text-white/80 text-sm">
+                    £{(childCount * PRICE_PER_CHILD).toFixed(2)}
+                  </span>
+                </div>
+              )}
+              {babyCount > 0 && (
+                <div className="flex items-center justify-between">
+                  <span className="font-body text-white/60 text-sm">
+                    {babyCount} {babyCount === 1 ? "baby" : "babies"} × £{PRICE_PER_BABY.toFixed(2)}
+                  </span>
+                  <span className="font-display text-white/80 text-sm">
+                    £{(babyCount * PRICE_PER_BABY).toFixed(2)}
+                  </span>
+                </div>
+              )}
+              <div className="flex items-center justify-between pt-1 border-t border-white/10 mt-1">
+                <span className="font-body text-white/80 text-sm font-semibold">Total</span>
+                <span className="font-display text-neon-cyan text-lg">£{totalPrice.toFixed(2)}</span>
+              </div>
             </div>
+            <p className="font-display text-[10px] tracking-[0.2em] text-neon-pink/80 mb-6 text-center">
+              + ADULTS FREE
+            </p>
 
             <button
               onClick={handleBook}
-              disabled={loading}
+              disabled={loading || (childCount + babyCount) < 1}
               className="w-full font-display text-sm tracking-widest py-4 bg-neon-cyan text-[#070710] hover:shadow-[0_0_40px_rgba(0,238,255,0.4)] transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2"
             >
               {loading ? (
@@ -347,6 +435,7 @@ const SoftPlaySection = () => {
               </p>
               <ul className="font-body text-white/60 text-xs md:text-sm space-y-1 list-disc list-inside marker:text-white/30">
                 <li>Height limit: <span className="text-white/80">145 cm maximum</span>.</li>
+                <li>Babies under 2: <span className="text-white/80">£3 each</span> — don't count toward the 40-kid session limit.</li>
                 <li>Up to <span className="text-white/80">2 adults free per child</span> — additional adults are charged on the day.</li>
                 <li>Anyone supervising a child must be <span className="text-white/80">13 years or older</span>.</li>
               </ul>
