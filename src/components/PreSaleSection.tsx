@@ -215,7 +215,7 @@ const PreSaleSection = () => {
           className="text-center mb-2"
         >
           <h3 className="font-display text-5xl md:text-7xl lg:text-8xl tracking-wider">
-            <span className="text-gradient-neon">BUY YOUR CREDITS NOW</span>
+            <span className="text-gradient-neon">BUY YOUR ARCADE CREDITS NOW</span>
           </h3>
         </motion.div>
 
