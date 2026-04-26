@@ -8,7 +8,7 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const BABY_PRICE_ID = "price_1TQbPQKDxuB13duTtnsVuyVE";
+const BABY_PRICE_ID = "price_1TQc5bKDxuB13duTelrOaVZJ";
 
 const VALID_SESSIONS = ["10:00", "12:00", "14:00", "16:00", "18:00", "20:00"];
 const MAX_CAPACITY = 15;

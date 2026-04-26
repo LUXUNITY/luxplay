@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 
 const MAX_CAPACITY = 15;
-const PRICE_PER_BABY = 3;
+const PRICE_PER_BABY = 2;
 const MAX_BABIES_PER_BOOKING = 4;
 
 const SESSIONS = [
@@ -155,8 +155,8 @@ const BabySoftPlaySection = () => {
             A calmer space just for under-2s — limited to 15 babies per session
           </p>
           <div className="flex items-center justify-center gap-4 mt-3">
-            <span className="font-display text-2xl text-white/30 line-through">£6.00</span>
-            <span className="font-display text-5xl md:text-6xl text-neon-pink glow-pink">£3.00</span>
+            <span className="font-display text-2xl text-white/30 line-through">£4.00</span>
+            <span className="font-display text-5xl md:text-6xl text-neon-pink glow-pink">£2.00</span>
             <span className="bg-neon-cyan text-[#070710] font-display text-xs tracking-widest px-3 py-1 animate-pulse">
               50% OFF
             </span>
@@ -382,7 +382,7 @@ const BabySoftPlaySection = () => {
           className="mt-6 max-w-3xl mx-auto border border-white/10 p-6 md:p-8 text-center bg-[#0a0a16]"
         >
           <p className="text-white/80 font-body text-sm md:text-base font-semibold">
-            Opening day only — <strong className="text-white">normal price £6 after launch.</strong>
+            Opening day only — <strong className="text-white">normal price £4 after launch.</strong>
           </p>
           <p className="text-neon-pink font-bold mt-3 text-sm md:text-base glow-pink font-body">
             Only 15 baby spots per session. Book now to guarantee yours.
