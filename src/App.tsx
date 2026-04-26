@@ -12,6 +12,7 @@ const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
 const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
 const Admin = lazy(() => import("./pages/Admin"));
 const SoftPlaySuccess = lazy(() => import("./pages/SoftPlaySuccess"));
+const BabySoftPlaySuccess = lazy(() => import("./pages/BabySoftPlaySuccess"));
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
               <Route path="/unsubscribe" element={<Unsubscribe />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/softplay-success" element={<SoftPlaySuccess />} />
+              <Route path="/baby-softplay-success" element={<BabySoftPlaySuccess />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
