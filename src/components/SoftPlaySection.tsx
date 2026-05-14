@@ -88,7 +88,7 @@ const SoftPlaySection = () => {
         {
           body: {
             sessionTime: selectedSession,
-            sessionDate: OPENING_DATE,
+            sessionDate: selectedDate,
             childCount,
             parentName: parentName.trim(),
             parentPhone: parentPhone.trim(),
