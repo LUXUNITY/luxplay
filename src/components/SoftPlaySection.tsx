@@ -7,7 +7,7 @@ import DateStrip from "./softplay/DateStrip";
 import { getAvailableDates, getSlotsForDate } from "./softplay/dateSlots";
 
 const MAX_CAPACITY = 40;
-const PRICE_PER_CHILD = 4;
+// Price is now date-dependent — see getSoftPlayPrice in dateSlots.ts
 const MAX_CHILDREN_PER_BOOKING = 6;
 
 const SoftPlaySection = () => {
@@ -49,7 +49,10 @@ const SoftPlaySection = () => {
   const incChild = () =>
     setChildCount((n) => Math.min(MAX_CHILDREN_PER_BOOKING, n + 1));
 
-  const totalPrice = childCount * PRICE_PER_CHILD;
+  const pricePerChild = getSoftPlayPrice(selectedDate);
+  const fullPrice = getSoftPlayFullPrice(selectedDate);
+  const totalPrice = childCount * pricePerChild;
+  const isOpening = isOpeningWeekend(selectedDate);
 
   const handleBook = async () => {
     if (!selectedSession || childCount < 1 || !parentName.trim()) {
@@ -327,7 +330,7 @@ const SoftPlaySection = () => {
 
             <div className="border border-white/10 bg-[#0d0d1a] p-3 mb-6 flex items-center justify-between">
               <span className="font-body text-white/60 text-sm">
-                {childCount} {childCount === 1 ? "child" : "children"} × £{PRICE_PER_CHILD.toFixed(2)}
+                {childCount} {childCount === 1 ? "child" : "children"} × £{pricePerChild.toFixed(2)}
               </span>
               <span className="font-display text-neon-cyan text-lg">
                 £{totalPrice.toFixed(2)}
