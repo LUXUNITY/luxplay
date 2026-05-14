@@ -33,7 +33,7 @@ const toISO = (d: Date) =>
   `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 
 // Returns up to BOOKING_WINDOW_DAYS dates starting from max(today, OPENING_DATE)
-export const getAvailableDates = (): { iso: string; date: Date }[] {
+export const getAvailableDates = (): { iso: string; date: Date }[] => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const opening = new Date(OPENING_DATE + "T00:00:00");
