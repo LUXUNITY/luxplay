@@ -8,7 +8,9 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const BABY_PRICE_ID = "price_1TQc5bKDxuB13duTelrOaVZJ";
+const OPENING_PRICE_ID = "price_1TQc5bKDxuB13duTelrOaVZJ"; // £2 — opening weekend (23–24 May 2026)
+const STANDARD_PRICE_ID = "price_1TX7njKDxuB13duTFjRbQstR"; // £3.60 — standard online (25 May+)
+const NEW_SCHEDULE_FROM = "2026-05-25";
 
 const VALID_SESSIONS = [
   "09:00", "10:00", "11:00", "12:00", "13:00", "14:00",
@@ -90,7 +92,7 @@ serve(async (req) => {
     });
 
     const session = await stripe.checkout.sessions.create({
-      line_items: [{ price: BABY_PRICE_ID, quantity }],
+      line_items: [{ price: sessionDate < NEW_SCHEDULE_FROM ? OPENING_PRICE_ID : STANDARD_PRICE_ID, quantity }],
       mode: "payment",
       success_url: `${req.headers.get("origin")}/baby-softplay-success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${req.headers.get("origin")}/#baby-softplay`,

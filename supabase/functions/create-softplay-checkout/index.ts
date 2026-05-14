@@ -101,7 +101,7 @@ serve(async (req) => {
     });
 
     const session = await stripe.checkout.sessions.create({
-      line_items: [{ price: SOFTPLAY_PRICE_ID, quantity }],
+      line_items: [{ price: sessionDate < NEW_SCHEDULE_FROM ? OPENING_PRICE_ID : STANDARD_PRICE_ID, quantity }],
       mode: "payment",
       success_url: `${req.headers.get("origin")}/softplay-success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${req.headers.get("origin")}/#softplay`,
