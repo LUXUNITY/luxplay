@@ -10,7 +10,10 @@ const corsHeaders = {
 
 const BABY_PRICE_ID = "price_1TQc5bKDxuB13duTelrOaVZJ";
 
-const VALID_SESSIONS = ["10:00", "12:00", "14:00", "16:00", "18:00", "20:00"];
+const VALID_SESSIONS = [
+  "09:00", "10:00", "11:00", "12:00", "13:00", "14:00",
+  "15:00", "16:00", "17:00", "18:00", "19:00", "20:00",
+];
 const MAX_CAPACITY = 15;
 const MAX_BABIES_PER_BOOKING = 4;
 
