@@ -13,7 +13,7 @@ const creditDeals = [
     bonus: "23% off",
     worth: "Normal price £13",
     plays: "13 plays",
-    remaining: 513,
+    remaining: 878,
     total: 1000,
     features: ["23% pre-launch discount", "Valid from opening day"],
     highlight: false,
@@ -27,7 +27,7 @@ const creditDeals = [
     bonus: "29% off",
     worth: "Normal price £35",
     plays: "35 plays",
-    remaining: 451,
+    remaining: 863,
     total: 1000,
     features: ["29% pre-launch discount", "Valid from opening day"],
     highlight: false,
@@ -41,7 +41,7 @@ const creditDeals = [
     bonus: "38% off",
     worth: "Normal price £80",
     plays: "80 plays",
-    remaining: 187,
+    remaining: 797,
     total: 1000,
     features: ["38% pre-launch discount", "The smart choice", "Valid from opening day"],
     highlight: true,
@@ -58,7 +58,7 @@ const ultimateDeal = {
   bonus: "50% off",
   worth: "Normal price £200",
   plays: "200 plays",
-  remaining: 116,
+  remaining: 217,
   total: 250,
   features: [
     "50% pre-launch discount",
@@ -98,12 +98,12 @@ const AnimatedCounter = ({ target, color }: { target: number; color: string }) =
   );
 };
 
-// Base "already sold" counts hardcoded from the original design
+// Base "already sold" counts — reduced to ~1/4 for realistic pre-launch numbers
 const BASE_SOLD: Record<string, number> = {
-  explorer: 487,   // 1000 - 513
-  champion: 549,   // 1000 - 451
-  legend: 813,     // 1000 - 187
-  ultimate: 134,   // 250 - 116
+  explorer: 122,   // 1000 - 878
+  champion: 137,   // 1000 - 863
+  legend: 203,     // 1000 - 797
+  ultimate: 33,    // 250 - 217
 };
 
 const PACKAGE_TOTALS: Record<string, number> = {
