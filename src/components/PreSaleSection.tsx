@@ -98,18 +98,18 @@ const AnimatedCounter = ({ target, color }: { target: number; color: string }) =
   );
 };
 
-// Base "already sold" counts — reduced to ~1/4 for realistic pre-launch numbers
+// All caps set to 250. Remaining = 250 - real DB sales (no padding).
 const BASE_SOLD: Record<string, number> = {
-  explorer: 122,   // 1000 - 878
-  champion: 137,   // 1000 - 863
-  legend: 203,     // 1000 - 797
-  ultimate: 33,    // 250 - 217
+  explorer: 0,
+  champion: 0,
+  legend: 0,
+  ultimate: 0,
 };
 
 const PACKAGE_TOTALS: Record<string, number> = {
-  explorer: 1000,
-  champion: 1000,
-  legend: 1000,
+  explorer: 250,
+  champion: 250,
+  legend: 250,
   ultimate: 250,
 };
 
