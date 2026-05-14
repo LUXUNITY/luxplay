@@ -28,6 +28,17 @@ export const getSlotsForDate = (dateISO: string) => {
   return dateISO < NEW_SCHEDULE_FROM ? OPENING_SLOTS : STANDARD_SLOTS;
 };
 
+// Pricing helpers — opening weekend = 50% off launch price; weekdays onwards = 10% online discount
+export const getSoftPlayPrice = (dateISO: string) =>
+  dateISO < NEW_SCHEDULE_FROM ? 4 : 7.2;
+export const getBabyPrice = (dateISO: string) =>
+  dateISO < NEW_SCHEDULE_FROM ? 2 : 3.6;
+export const getSoftPlayFullPrice = (dateISO: string) =>
+  dateISO < NEW_SCHEDULE_FROM ? 8 : 8;
+export const getBabyFullPrice = (dateISO: string) =>
+  dateISO < NEW_SCHEDULE_FROM ? 4 : 4;
+export const isOpeningWeekend = (dateISO: string) => dateISO < NEW_SCHEDULE_FROM;
+
 const pad = (n: number) => String(n).padStart(2, "0");
 const toISO = (d: Date) =>
   `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;

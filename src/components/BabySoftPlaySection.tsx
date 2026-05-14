@@ -4,10 +4,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import DateStrip from "./softplay/DateStrip";
-import { getAvailableDates, getSlotsForDate } from "./softplay/dateSlots";
+import { getAvailableDates, getSlotsForDate, getBabyPrice, getBabyFullPrice, isOpeningWeekend } from "./softplay/dateSlots";
 
 const MAX_CAPACITY = 15;
-const PRICE_PER_BABY = 2;
+// Price is now date-dependent — see getBabyPrice in dateSlots.ts
 const MAX_BABIES_PER_BOOKING = 4;
 
 const BabySoftPlaySection = () => {
@@ -49,7 +49,10 @@ const BabySoftPlaySection = () => {
   const incBaby = () =>
     setBabyCount((n) => Math.min(MAX_BABIES_PER_BOOKING, n + 1));
 
-  const totalPrice = babyCount * PRICE_PER_BABY;
+  const pricePerBaby = getBabyPrice(selectedDate);
+  const fullPrice = getBabyFullPrice(selectedDate);
+  const totalPrice = babyCount * pricePerBaby;
+  const isOpening = isOpeningWeekend(selectedDate);
 
   const handleBook = async () => {
     if (!selectedSession || babyCount < 1 || !parentName.trim()) {
@@ -153,10 +156,10 @@ const BabySoftPlaySection = () => {
             A calmer space just for under-2s — limited to 15 babies per session
           </p>
           <div className="flex items-center justify-center gap-4 mt-3">
-            <span className="font-display text-2xl text-white/30 line-through">£4.00</span>
-            <span className="font-display text-5xl md:text-6xl text-neon-pink glow-pink">£2.00</span>
+            <span className="font-display text-2xl text-white/30 line-through">£{fullPrice.toFixed(2)}</span>
+            <span className="font-display text-5xl md:text-6xl text-neon-pink glow-pink">£{pricePerBaby.toFixed(2)}</span>
             <span className="bg-neon-cyan text-[#070710] font-display text-xs tracking-widest px-3 py-1 animate-pulse">
-              50% OFF
+              {isOpening ? "50% OFF" : "10% OFF"}
             </span>
           </div>
         </motion.div>
@@ -325,7 +328,7 @@ const BabySoftPlaySection = () => {
 
             <div className="border border-white/10 bg-[#0d0d1a] p-3 mb-2 flex items-center justify-between">
               <span className="font-body text-white/60 text-sm">
-                {babyCount} {babyCount === 1 ? "baby" : "babies"} × £{PRICE_PER_BABY.toFixed(2)}
+                {babyCount} {babyCount === 1 ? "baby" : "babies"} × £{pricePerBaby.toFixed(2)}
               </span>
               <span className="font-display text-neon-pink text-lg">
                 £{totalPrice.toFixed(2)}

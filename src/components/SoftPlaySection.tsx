@@ -4,10 +4,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import DateStrip from "./softplay/DateStrip";
-import { getAvailableDates, getSlotsForDate } from "./softplay/dateSlots";
+import { getAvailableDates, getSlotsForDate, getSoftPlayPrice, getSoftPlayFullPrice, isOpeningWeekend } from "./softplay/dateSlots";
 
 const MAX_CAPACITY = 40;
-const PRICE_PER_CHILD = 4;
+// Price is now date-dependent — see getSoftPlayPrice in dateSlots.ts
 const MAX_CHILDREN_PER_BOOKING = 6;
 
 const SoftPlaySection = () => {
@@ -49,7 +49,10 @@ const SoftPlaySection = () => {
   const incChild = () =>
     setChildCount((n) => Math.min(MAX_CHILDREN_PER_BOOKING, n + 1));
 
-  const totalPrice = childCount * PRICE_PER_CHILD;
+  const pricePerChild = getSoftPlayPrice(selectedDate);
+  const fullPrice = getSoftPlayFullPrice(selectedDate);
+  const totalPrice = childCount * pricePerChild;
+  const isOpening = isOpeningWeekend(selectedDate);
 
   const handleBook = async () => {
     if (!selectedSession || childCount < 1 || !parentName.trim()) {
@@ -150,13 +153,15 @@ const SoftPlaySection = () => {
           className="text-center mb-8"
         >
           <p className="font-body text-white/50 text-sm md:text-base mb-2">
-            Book your child's spot for opening day — limited to 40 kids per session
+            {isOpening
+              ? "Book your child's spot for opening weekend — limited to 40 kids per session"
+              : "Book online & save 10% — limited to 40 kids per session"}
           </p>
           <div className="flex items-center justify-center gap-4 mt-3">
-            <span className="font-display text-2xl text-white/30 line-through">£8.00</span>
-            <span className="font-display text-5xl md:text-6xl text-neon-cyan glow-cyan">£4.00</span>
+            <span className="font-display text-2xl text-white/30 line-through">£{fullPrice.toFixed(2)}</span>
+            <span className="font-display text-5xl md:text-6xl text-neon-cyan glow-cyan">£{pricePerChild.toFixed(2)}</span>
             <span className="bg-neon-pink text-[#070710] font-display text-xs tracking-widest px-3 py-1 animate-pulse">
-              50% OFF
+              {isOpening ? "50% OFF" : "10% OFF"}
             </span>
           </div>
         </motion.div>
@@ -327,7 +332,7 @@ const SoftPlaySection = () => {
 
             <div className="border border-white/10 bg-[#0d0d1a] p-3 mb-6 flex items-center justify-between">
               <span className="font-body text-white/60 text-sm">
-                {childCount} {childCount === 1 ? "child" : "children"} × £{PRICE_PER_CHILD.toFixed(2)}
+                {childCount} {childCount === 1 ? "child" : "children"} × £{pricePerChild.toFixed(2)}
               </span>
               <span className="font-display text-neon-cyan text-lg">
                 £{totalPrice.toFixed(2)}
