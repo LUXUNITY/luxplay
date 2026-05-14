@@ -180,6 +180,9 @@ const SoftPlaySection = () => {
           </div>
         </motion.div>
 
+        {/* Date Strip */}
+        <DateStrip selectedDate={selectedDate} onSelect={setSelectedDate} accent="cyan" />
+
         {/* Session Grid */}
         <div className="max-w-4xl mx-auto mb-10">
           <p className="font-display text-xs tracking-[0.3em] text-white/40 text-center mb-6">
