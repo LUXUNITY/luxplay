@@ -58,7 +58,7 @@ const ultimateDeal = {
   bonus: "50% off",
   worth: "Normal price £200",
   plays: "200 plays",
-  remaining: 217,
+  remaining: 250,
   total: 250,
   features: [
     "50% pre-launch discount",
