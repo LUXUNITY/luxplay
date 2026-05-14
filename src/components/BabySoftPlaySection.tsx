@@ -88,7 +88,7 @@ const BabySoftPlaySection = () => {
         {
           body: {
             sessionTime: selectedSession,
-            sessionDate: OPENING_DATE,
+            sessionDate: selectedDate,
             babyCount,
             parentName: parentName.trim(),
             parentPhone: parentPhone.trim(),
