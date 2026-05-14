@@ -1,25 +1,18 @@
 import { motion, useInView } from "framer-motion";
 import { Baby, Clock, Users, Loader2, Check, Sparkles, Plus, Minus, Info } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import DateStrip from "./softplay/DateStrip";
+import { getAvailableDates, getSlotsForDate } from "./softplay/dateSlots";
 
 const MAX_CAPACITY = 15;
 const PRICE_PER_BABY = 2;
 const MAX_BABIES_PER_BOOKING = 4;
 
-const SESSIONS = [
-  { time: "10:00", label: "10:00 AM" },
-  { time: "12:00", label: "12:00 PM" },
-  { time: "14:00", label: "2:00 PM" },
-  { time: "16:00", label: "4:00 PM" },
-  { time: "18:00", label: "6:00 PM" },
-  { time: "20:00", label: "8:00 PM" },
-];
-
-const OPENING_DATE = "2026-05-23";
-
 const BabySoftPlaySection = () => {
+  const initialDate = getAvailableDates()[0]?.iso;
+  const [selectedDate, setSelectedDate] = useState<string>(initialDate);
   const [selectedSession, setSelectedSession] = useState<string | null>(null);
   const [bookedCounts, setBookedCounts] = useState<Record<string, number>>({});
   const [babyCount, setBabyCount] = useState<number>(1);
@@ -29,12 +22,16 @@ const BabySoftPlaySection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
 
+  const SESSIONS = useMemo(() => getSlotsForDate(selectedDate), [selectedDate]);
+
   useEffect(() => {
+    setSelectedSession(null);
+    setBookedCounts({});
     const fetchCounts = async () => {
       const { data } = await supabase
         .from("baby_soft_play_bookings")
         .select("session_time")
-        .eq("session_date", OPENING_DATE);
+        .eq("session_date", selectedDate);
 
       if (data) {
         const counts: Record<string, number> = {};
@@ -45,7 +42,8 @@ const BabySoftPlaySection = () => {
       }
     };
     fetchCounts();
-  }, []);
+  }, [selectedDate]);
+
 
   const decBaby = () => setBabyCount((n) => Math.max(1, n - 1));
   const incBaby = () =>
