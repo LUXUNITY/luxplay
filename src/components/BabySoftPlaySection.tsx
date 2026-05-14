@@ -156,10 +156,10 @@ const BabySoftPlaySection = () => {
             A calmer space just for under-2s — limited to 15 babies per session
           </p>
           <div className="flex items-center justify-center gap-4 mt-3">
-            <span className="font-display text-2xl text-white/30 line-through">£4.00</span>
-            <span className="font-display text-5xl md:text-6xl text-neon-pink glow-pink">£2.00</span>
+            <span className="font-display text-2xl text-white/30 line-through">£{fullPrice.toFixed(2)}</span>
+            <span className="font-display text-5xl md:text-6xl text-neon-pink glow-pink">£{pricePerBaby.toFixed(2)}</span>
             <span className="bg-neon-cyan text-[#070710] font-display text-xs tracking-widest px-3 py-1 animate-pulse">
-              50% OFF
+              {isOpening ? "50% OFF" : "10% OFF"}
             </span>
           </div>
         </motion.div>
