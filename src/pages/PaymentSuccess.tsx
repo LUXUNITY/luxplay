@@ -120,7 +120,7 @@ const PaymentSuccess = () => {
               Your <strong className="text-white">{order.package_name}</strong> package is secured! 🎮
             </p>
             <p className="font-body text-white/40 text-sm mb-6">
-              {order.credits} credits ready for opening day
+              {order.credits} credits ready for opening weekend
             </p>
 
             {/* Redemption Code */}
@@ -148,7 +148,7 @@ const PaymentSuccess = () => {
                 📧 A receipt has been sent to <strong className="text-white/80">{order.customer_email}</strong>
               </p>
               <p className="font-body text-white/60 text-sm">
-                🏪 Present this code at LuxPlay on opening day
+                🏪 Present this code at LuxPlay on opening weekend
               </p>
               <p className="font-body text-white/60 text-sm">
                 💳 We'll load your credits onto your play card

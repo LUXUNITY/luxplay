@@ -15,7 +15,7 @@ const creditDeals = [
     plays: "13 plays",
     remaining: 250,
     total: 250,
-    features: ["23% pre-launch discount", "Valid from opening day"],
+    features: ["23% pre-launch discount", "Valid from opening weekend"],
     highlight: false,
     color: "neon-green",
   },
@@ -29,7 +29,7 @@ const creditDeals = [
     plays: "35 plays",
     remaining: 250,
     total: 250,
-    features: ["29% pre-launch discount", "Valid from opening day"],
+    features: ["29% pre-launch discount", "Valid from opening weekend"],
     highlight: false,
     color: "neon-cyan",
   },
@@ -43,7 +43,7 @@ const creditDeals = [
     plays: "80 plays",
     remaining: 250,
     total: 250,
-    features: ["38% pre-launch discount", "The smart choice", "Valid from opening day"],
+    features: ["38% pre-launch discount", "The smart choice", "Valid from opening weekend"],
     highlight: true,
     badge: "BEST VALUE",
     color: "neon-pink",
@@ -431,7 +431,7 @@ const PreSaleSection = () => {
             Pre-launch only — <strong className="text-white">these discounts disappear when we open.</strong>
           </p>
           <p className="text-neon-pink font-bold mt-3 text-sm md:text-base glow-pink font-body">
-            Full price from opening day. Lock in your savings now.
+            Full price from opening weekend. Lock in your savings now.
           </p>
         </motion.div>
       </div>

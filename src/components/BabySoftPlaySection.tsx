@@ -386,7 +386,7 @@ const BabySoftPlaySection = () => {
           className="mt-6 max-w-3xl mx-auto border border-white/10 p-6 md:p-8 text-center bg-[#0a0a16]"
         >
           <p className="text-white/80 font-body text-sm md:text-base font-semibold">
-            Opening day only — <strong className="text-white">normal price £4 after launch.</strong>
+            Opening weekend only (Sat & Sun) — <strong className="text-white">normal price £4 after launch.</strong>
           </p>
           <p className="text-neon-pink font-bold mt-3 text-sm md:text-base glow-pink font-body">
             Only 15 baby spots per session. Book now to guarantee yours.
