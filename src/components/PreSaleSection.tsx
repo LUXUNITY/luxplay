@@ -310,8 +310,8 @@ const PreSaleSection = () => {
               {/* Remaining counter */}
               <div className="text-center mb-4">
                 <AnimatedCounter target={getRemaining(deal.packageId)} color={deal.color} />
-                <p className="font-display text-[10px] tracking-[0.2em] text-white/30">
-                  / {PACKAGE_TOTALS[deal.packageId] || deal.total} REMAINING
+                <p className="font-display text-xs tracking-[0.25em] text-white/50">
+                  REMAINING
                 </p>
                 {/* Progress bar */}
                 <div className="w-full h-1.5 bg-white/5 mt-2 overflow-hidden">
@@ -390,8 +390,8 @@ const PreSaleSection = () => {
               <div className="flex items-center gap-4 mb-6">
                 <div>
                   <AnimatedCounter target={getRemaining("ultimate")} color="neon-purple" />
-                  <p className="font-display text-[10px] tracking-[0.2em] text-white/30">
-                    / {PACKAGE_TOTALS["ultimate"]} REMAINING
+                  <p className="font-display text-xs tracking-[0.25em] text-white/50">
+                    REMAINING
                   </p>
                 </div>
                 <div className="flex-1 h-2 bg-white/5 overflow-hidden">
