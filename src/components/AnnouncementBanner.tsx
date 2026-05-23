@@ -20,10 +20,12 @@ const AnnouncementBanner = () => {
               experience, the <strong className="text-neon-cyan">LuxPlay Arcade now opens Monday 25th May (Bank Holiday)</strong> and the
               <strong className="text-neon-pink"> Soft Play opens Saturday 30th May</strong>.
             </p>
+            <p className="font-body text-white text-sm md:text-base leading-relaxed mb-2 md:mb-3">
+              <strong className="text-neon-green">All existing bookings will be automatically moved to the new opening days</strong> (Arcade 25th May / Soft Play 30th May) unless you request otherwise.
+            </p>
             <p className="font-body text-white/90 text-sm md:text-base leading-relaxed mb-2 md:mb-3">
               As a thank-you for your patience, every affected customer will receive an
               <strong className="text-neon-green"> additional £10 Arcade Credit bonus</strong>.
-              Existing bookings &amp; bonuses remain fully valid automatically.
             </p>
             <p className="font-body text-white/70 text-xs md:text-sm leading-relaxed">
               Prefer a refund or want to discuss your booking? Email{" "}
