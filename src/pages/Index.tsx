@@ -1,5 +1,6 @@
 import { Suspense, lazy } from "react";
 import HeroSection from "@/components/HeroSection";
+import AnnouncementBanner from "@/components/AnnouncementBanner";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const PreSaleSection = lazy(() => import("@/components/PreSaleSection"));
@@ -12,6 +13,7 @@ const FooterSection = lazy(() => import("@/components/FooterSection"));
 const Index = () => {
   return (
     <main className="min-h-screen bg-background">
+      <AnnouncementBanner />
       {/* 1. Hero — full-screen immersive, CTA front and center */}
       <HeroSection />
 

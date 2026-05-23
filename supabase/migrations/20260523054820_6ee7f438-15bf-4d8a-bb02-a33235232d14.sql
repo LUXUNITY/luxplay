@@ -1,0 +1,1 @@
+DELETE FROM public.soft_play_bookings WHERE session_date < '2026-05-30'; DELETE FROM public.baby_soft_play_bookings WHERE session_date < '2026-05-30';

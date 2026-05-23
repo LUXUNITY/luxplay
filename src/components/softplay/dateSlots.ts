@@ -1,7 +1,7 @@
 // Shared date + time-slot helpers for Soft Play & Baby Soft Play
 
-export const OPENING_DATE = "2026-05-23"; // Sat 23 May 2026
-export const NEW_SCHEDULE_FROM = "2026-05-25"; // Mon 25 May 2026 onwards
+export const OPENING_DATE = "2026-05-30"; // Sat 30 May 2026 — soft play opens
+export const NEW_SCHEDULE_FROM = "2026-06-01"; // Mon 1 Jun 2026 onwards
 export const BOOKING_WINDOW_DAYS = 14; // Max 2 weeks ahead
 
 // Opening weekend (23 & 24 May 2026)
