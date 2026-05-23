@@ -77,8 +77,8 @@ const DelayNoticeEmail = () => (
 
         <Text style={text}>
           <strong>If you would prefer to discuss your booking or request a refund</strong>,
-          please simply reply directly to this email and our team will assist you as
-          soon as possible.
+          please email us at <a href="mailto:luxplayuk@gmail.com" style={{ color: '#0a0a16', fontWeight: 700 }}>luxplayuk@gmail.com</a> and
+          our team will assist you as soon as possible.
         </Text>
 
         <Text style={text}>
