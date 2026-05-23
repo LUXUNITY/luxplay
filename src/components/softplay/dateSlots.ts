@@ -4,7 +4,7 @@ export const OPENING_DATE = "2026-05-30"; // Sat 30 May 2026 — soft play opens
 export const NEW_SCHEDULE_FROM = "2026-06-01"; // Mon 1 Jun 2026 onwards
 export const BOOKING_WINDOW_DAYS = 14; // Max 2 weeks ahead
 
-// Opening weekend (23 & 24 May 2026)
+// Pre-June slots (25–31 May 2026) — shorter hourly sessions during launch period
 const OPENING_SLOTS = [
   { time: "10:00", label: "10AM" },
   { time: "12:00", label: "12PM" },
@@ -14,7 +14,7 @@ const OPENING_SLOTS = [
   { time: "20:00", label: "8PM" },
 ];
 
-// From 25 May 2026 onwards
+// From 1 June 2026 onwards
 const STANDARD_SLOTS = [
   { time: "09:00", label: "9–11AM" },
   { time: "11:00", label: "11–1PM" },

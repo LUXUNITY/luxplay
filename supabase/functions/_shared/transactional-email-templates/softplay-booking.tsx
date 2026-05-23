@@ -91,7 +91,7 @@ export const template = {
     childCount: 2,
     parentName: 'Sarah',
     sessionTime: '2:00 PM',
-    sessionDate: 'Saturday 23rd May 2026',
+    sessionDate: 'Saturday 30th May 2026',
     bookingCode: 'SP-AB3-K7M',
     bookingCodes: ['SP-AB3-K7M', 'SP-HL9-P2Q'],
     totalAmount: '£8.00',
