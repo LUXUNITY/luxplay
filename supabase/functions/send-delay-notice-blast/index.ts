@@ -62,17 +62,28 @@ Deno.serve(async (req) => {
   const errors: { email: string; error: string }[] = []
 
   for (const email of emails) {
-    const { error } = await supabase.functions.invoke('send-transactional-email', {
-      body: {
-        templateName: 'delay-notice',
-        recipientEmail: email,
-        idempotencyKey: `${BLAST_ID}-${email}`,
-      },
-    })
-    if (error) {
-      errors.push({ email, error: error.message ?? String(error) })
-    } else {
-      queued++
+    try {
+      const resp = await fetch(`${supabaseUrl}/functions/v1/send-transactional-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${serviceKey}`,
+          'apikey': serviceKey,
+        },
+        body: JSON.stringify({
+          templateName: 'delay-notice',
+          recipientEmail: email,
+          idempotencyKey: `${BLAST_ID}-${email}`,
+        }),
+      })
+      if (!resp.ok) {
+        const text = await resp.text()
+        errors.push({ email, error: `${resp.status}: ${text.slice(0, 200)}` })
+      } else {
+        queued++
+      }
+    } catch (e) {
+      errors.push({ email, error: (e as Error).message })
     }
   }
 
