@@ -27,8 +27,8 @@ const AnnouncementBanner = () => {
             </p>
             <p className="font-body text-white/70 text-xs md:text-sm leading-relaxed">
               Prefer a refund or want to discuss your booking? Email{" "}
-              <a href="mailto:hello@luxplay.uk" className="text-neon-cyan underline">
-                hello@luxplay.uk
+              <a href="mailto:luxplayuk@gmail.com" className="text-neon-cyan underline">
+                luxplayuk@gmail.com
               </a>{" "}
               and our team will assist you right away.
             </p>
