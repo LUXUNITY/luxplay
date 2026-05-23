@@ -226,7 +226,7 @@ const PreSaleSection = () => {
           className="text-center mb-4"
         >
           <p className="font-body text-white/50 text-sm md:text-base">
-            LuxPlay opens 23 May 2026. Buy before we open and
+            Arcade opens 25 May · Soft Play opens 30 May. Buy before we open and
           </p>
           <p
             className="font-display text-4xl md:text-5xl text-neon-green glow-green tracking-wider mt-1 animate-pulse"

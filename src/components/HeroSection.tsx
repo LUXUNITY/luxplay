@@ -41,7 +41,7 @@ const HeroSection = () => {
           loop
           playsInline
           preload="auto"
-          aria-label="LuxPlay — Opening 23rd May 2026 in Boscombe, Bournemouth"
+          aria-label="LuxPlay — Opening soon in Boscombe, Bournemouth"
           className="hero-video-main absolute z-[3]"
         />
 
@@ -51,7 +51,7 @@ const HeroSection = () => {
       {/* SEO-friendly hidden copy so search engines still index the key info */}
       <h1 className="sr-only">
         LuxPlay — While Everyone Is Closing, We're Opening! 40+ Arcade Games, 3 Level
-        Soft Play, Baby Soft Play, Amazing Prizes & Cosy Café. Opening 23rd May 2026
+        Soft Play, Baby Soft Play, Amazing Prizes & Cosy Café. Coming soon
         at Unit 7, Sovereign Centre, Boscombe, Bournemouth, BH1 4SX.
       </h1>
 
