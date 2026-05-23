@@ -14,7 +14,7 @@ const OPENING_SLOTS = [
   { time: "20:00", label: "8PM" },
 ];
 
-// From 25 May 2026 onwards
+// From 1 June 2026 onwards
 const STANDARD_SLOTS = [
   { time: "09:00", label: "9–11AM" },
   { time: "11:00", label: "11–1PM" },

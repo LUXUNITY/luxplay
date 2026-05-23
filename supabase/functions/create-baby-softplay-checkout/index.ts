@@ -8,8 +8,8 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const OPENING_PRICE_ID = "price_1TQc5bKDxuB13duTelrOaVZJ"; // £2 — opening weekend (23–24 May 2026)
-const STANDARD_PRICE_ID = "price_1TX7njKDxuB13duTFjRbQstR"; // £3.60 — standard online (25 May+)
+const OPENING_PRICE_ID = "price_1TQc5bKDxuB13duTelrOaVZJ"; // £2 — launch period (25–31 May 2026)
+const STANDARD_PRICE_ID = "price_1TX7njKDxuB13duTFjRbQstR"; // £3.60 — standard online (1 Jun+)
 const NEW_SCHEDULE_FROM = "2026-05-25";
 
 const VALID_SESSIONS = [
