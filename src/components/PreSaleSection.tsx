@@ -62,8 +62,7 @@ const ultimateDeal = {
   total: 250,
   features: [
     "50% pre-launch discount",
-    "VIP early access before public opening",
-    "Exclusive LuxPlay hoodie",
+    "VIP early access",
     "10% off all future top-ups for life",
   ],
   badge: "ULTIMATE",
