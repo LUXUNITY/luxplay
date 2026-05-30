@@ -26,19 +26,11 @@ const Index = () => {
             </ScrollReveal>
           </Suspense>
         </div>
-        {/* 3. Soft Play — opening day session bookings */}
+        {/* 3. Soft Play update — booking removed, walk-ins only */}
         <div className="defer-section">
           <Suspense fallback={null}>
             <ScrollReveal>
-              <SoftPlaySection />
-            </ScrollReveal>
-          </Suspense>
-        </div>
-        {/* 3b. Baby Soft Play — separate under-2 sessions */}
-        <div className="defer-section">
-          <Suspense fallback={null}>
-            <ScrollReveal>
-              <BabySoftPlaySection />
+              <SoftPlayUpdateSection />
             </ScrollReveal>
           </Suspense>
         </div>
