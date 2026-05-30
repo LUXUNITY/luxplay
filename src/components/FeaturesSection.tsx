@@ -193,15 +193,6 @@ const FeaturesSection = () => {
         </div>
       </div>
 
-      {/* THE TEAM — desktop: full-width row below the two-column layout (mobile version is inside the flex above) */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="hidden md:block relative z-10 px-6 md:px-14 lg:px-20 pb-16 md:pb-24"
-      >
-        <TeamGrid />
-      </motion.div>
     </section>
   );
 };
