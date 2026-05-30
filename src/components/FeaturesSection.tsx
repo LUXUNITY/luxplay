@@ -4,6 +4,7 @@ import founderBaz from "@/assets/founder-baz.jpg";
 import { gridBackgroundUrl } from "@/components/circuitTile";
 
 
+
 const FeaturesSection = () => {
   return (
     <section id="about" className="relative bg-[#070710] overflow-hidden">
