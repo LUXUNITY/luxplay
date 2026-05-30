@@ -4,8 +4,7 @@ import AnnouncementBanner from "@/components/AnnouncementBanner";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const PreSaleSection = lazy(() => import("@/components/PreSaleSection"));
-const SoftPlaySection = lazy(() => import("@/components/SoftPlaySection"));
-const BabySoftPlaySection = lazy(() => import("@/components/BabySoftPlaySection"));
+const SoftPlayUpdateSection = lazy(() => import("@/components/SoftPlayUpdateSection"));
 const VenueSection = lazy(() => import("@/components/VenueSection"));
 const FeaturesSection = lazy(() => import("@/components/FeaturesSection"));
 const FooterSection = lazy(() => import("@/components/FooterSection"));
@@ -27,19 +26,11 @@ const Index = () => {
             </ScrollReveal>
           </Suspense>
         </div>
-        {/* 3. Soft Play — opening day session bookings */}
+        {/* 3. Soft Play update — booking removed, walk-ins only */}
         <div className="defer-section">
           <Suspense fallback={null}>
             <ScrollReveal>
-              <SoftPlaySection />
-            </ScrollReveal>
-          </Suspense>
-        </div>
-        {/* 3b. Baby Soft Play — separate under-2 sessions */}
-        <div className="defer-section">
-          <Suspense fallback={null}>
-            <ScrollReveal>
-              <BabySoftPlaySection />
+              <SoftPlayUpdateSection />
             </ScrollReveal>
           </Suspense>
         </div>
