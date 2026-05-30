@@ -4,8 +4,7 @@ import AnnouncementBanner from "@/components/AnnouncementBanner";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const PreSaleSection = lazy(() => import("@/components/PreSaleSection"));
-const SoftPlaySection = lazy(() => import("@/components/SoftPlaySection"));
-const BabySoftPlaySection = lazy(() => import("@/components/BabySoftPlaySection"));
+const SoftPlayUpdateSection = lazy(() => import("@/components/SoftPlayUpdateSection"));
 const VenueSection = lazy(() => import("@/components/VenueSection"));
 const FeaturesSection = lazy(() => import("@/components/FeaturesSection"));
 const FooterSection = lazy(() => import("@/components/FooterSection"));
