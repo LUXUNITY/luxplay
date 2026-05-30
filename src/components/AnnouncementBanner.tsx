@@ -13,26 +13,23 @@ const AnnouncementBanner = () => {
           <AlertTriangle className="w-6 h-6 md:w-8 md:h-8 text-neon-pink shrink-0 mt-1 animate-pulse" />
           <div className="flex-1">
             <p className="font-display text-sm md:text-base tracking-[0.3em] text-neon-pink mb-2 md:mb-3">
-              IMPORTANT OPENING UPDATE
+              IMPORTANT SOFT PLAY UPDATE
             </p>
             <p className="font-body text-white text-sm md:text-lg leading-relaxed mb-2 md:mb-3">
-              With a heavy heart we must announce a short delay. To ensure the best possible
-              experience, the <strong className="text-neon-cyan">LuxPlay Arcade now opens Monday 25th May (Bank Holiday)</strong> and the
-              <strong className="text-neon-pink"> Soft Play opens Saturday 30th May</strong>.
+              The <strong className="text-neon-cyan">LuxPlay Arcade is open now</strong>. The
+              <strong className="text-neon-pink"> Soft Play opening has been delayed</strong> — once finished it will run as
+              <strong className="text-white"> walk-ins only</strong> (no booked sessions).
             </p>
             <p className="font-body text-white text-sm md:text-base leading-relaxed mb-2 md:mb-3">
-              <strong className="text-neon-green">All existing bookings will be automatically moved to the new opening days</strong> (Arcade 25th May / Soft Play 30th May) unless you request otherwise.
-            </p>
-            <p className="font-body text-white/90 text-sm md:text-base leading-relaxed mb-2 md:mb-3">
-              As a thank-you for your patience, every affected customer will receive an
-              <strong className="text-neon-green"> additional £10 Arcade Credit bonus</strong>.
+              <strong className="text-neon-green">All existing soft play bookings are being cancelled and fully refunded</strong> (10–14 days), plus
+              <strong className="text-neon-green"> £5 free arcade credit</strong> as a thank-you for your patience.
             </p>
             <p className="font-body text-white/70 text-xs md:text-sm leading-relaxed">
-              Prefer a refund or want to discuss your booking? Email{" "}
+              Read the full update below, or email{" "}
               <a href="mailto:luxplayuk@gmail.com" className="text-neon-cyan underline font-semibold">
                 luxplayuk@gmail.com
               </a>{" "}
-              and our team will assist you right away.
+              for anything urgent.
             </p>
           </div>
           <button
