@@ -291,12 +291,6 @@ const PreSaleSection = () => {
                   </p>
                 ))}
               </div>
-
-              {/* Remaining counter */}
-              <div className="text-center mb-4">
-                <AnimatedCounter target={getRemaining(deal.packageId)} color={deal.color} />
-                <p className="font-display text-xs tracking-[0.25em] text-white/50">
-                  REMAINING
                 </p>
                 {/* Progress bar */}
                 <div className="w-full h-1.5 bg-white/5 mt-2 overflow-hidden">
