@@ -93,11 +93,6 @@ const FeaturesSection = () => {
           </div>
         </div>
 
-        {/* MOBILE-ONLY team grid, sits directly under Baz */}
-        <div className="md:hidden w-full px-6 pb-12">
-          <TeamGrid />
-        </div>
-
         {/* RIGHT — Statement content */}
         <div className="w-full md:w-[60%] flex flex-col justify-center px-6 md:px-14 lg:px-20 py-16 md:py-20">
           {/* Subhead */}
