@@ -353,24 +353,7 @@ const PreSaleSection = () => {
                 ))}
               </div>
 
-              {/* Remaining */}
-              <div className="flex items-center gap-4 mb-6">
-                <div>
-                  <AnimatedCounter target={getRemaining("ultimate")} color="neon-purple" />
-                  <p className="font-display text-xs tracking-[0.25em] text-white/50">
-                    REMAINING
-                  </p>
-                </div>
-                <div className="flex-1 h-2 bg-white/5 overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${(getRemaining("ultimate") / PACKAGE_TOTALS["ultimate"]) * 100}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.5, delay: 0.8 }}
-                    className="h-full bg-neon-purple"
-                  />
-                </div>
-              </div>
+
 
               <button
                 onClick={() => handleBuy(ultimateDeal.packageId)}
