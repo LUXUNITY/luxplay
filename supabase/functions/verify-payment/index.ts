@@ -9,6 +9,15 @@ const corsHeaders = {
 };
 
 const PACKAGE_INFO: Record<string, { name: string; credits: number }> = {
+  price_1TckGFKDxuB13duTEktgvP9o: { name: "50 Credits", credits: 50 },
+  price_1TckGcKDxuB13duTaP1xmia4: { name: "110 Credits", credits: 110 },
+  price_1TckGzKDxuB13duTOhnEwiuM: { name: "160 Credits", credits: 160 },
+  price_1TckHOKDxuB13duTO8xL6hmt: { name: "230 Credits", credits: 230 },
+  price_1TckIXKDxuB13duTerIc9rna: { name: "360 Credits", credits: 360 },
+  price_1TckIvKDxuB13duTbMRJimKq: { name: "500 Credits", credits: 500 },
+  price_1TckJKKDxuB13duTlIpZPU4z: { name: "800 Credits", credits: 800 },
+  price_1TckJbKDxuB13duTNRtZ3YtY: { name: "1500 Credits", credits: 1500 },
+  // Legacy pre-sale packages
   price_1TG6CdKDxuB13duTRXf0Nj58: { name: "Explorer", credits: 130 },
   price_1TG6CtKDxuB13duTpJGgkAeF: { name: "Champion", credits: 350 },
   price_1TG6DCKDxuB13duTI7D0jZsH: { name: "Legend", credits: 800 },

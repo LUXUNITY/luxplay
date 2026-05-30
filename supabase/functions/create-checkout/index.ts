@@ -8,10 +8,14 @@ const corsHeaders = {
 };
 
 const PRICE_MAP: Record<string, string> = {
-  explorer: "price_1TG6CdKDxuB13duTRXf0Nj58",
-  champion: "price_1TG6CtKDxuB13duTpJGgkAeF",
-  legend: "price_1TG6DCKDxuB13duTI7D0jZsH",
-  ultimate: "price_1TG6DZKDxuB13duTjFD95zAE",
+  c50: "price_1TckGFKDxuB13duTEktgvP9o",
+  c110: "price_1TckGcKDxuB13duTaP1xmia4",
+  c160: "price_1TckGzKDxuB13duTOhnEwiuM",
+  c230: "price_1TckHOKDxuB13duTO8xL6hmt",
+  c360: "price_1TckIXKDxuB13duTerIc9rna",
+  c500: "price_1TckIvKDxuB13duTbMRJimKq",
+  c800: "price_1TckJKKDxuB13duTlIpZPU4z",
+  c1500: "price_1TckJbKDxuB13duTNRtZ3YtY",
 };
 
 serve(async (req) => {
