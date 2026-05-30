@@ -222,30 +222,16 @@ const PreSaleSection = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center mb-4"
+          className="text-center mb-12"
         >
           <p className="font-body text-white/50 text-sm md:text-base">
-            Arcade opens 25 May · Soft Play opens 30 May. Buy before we open and
+            The arcade is open now — top up online and
           </p>
           <p
             className="font-display text-4xl md:text-5xl text-neon-green glow-green tracking-wider mt-1 animate-pulse"
           >
             SAVE BIG.
           </p>
-        </motion.div>
-
-        {/* Going fast warning */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="flex items-center justify-center gap-3 mb-12"
-        >
-          <Clock className="w-4 h-4 text-neon-pink animate-pulse" />
-          <p className="font-display text-sm md:text-base tracking-[0.2em] text-neon-pink glow-pink">
-            SPACES ARE GOING FAST — DON'T MISS OUT
-          </p>
-          <Clock className="w-4 h-4 text-neon-pink animate-pulse" />
         </motion.div>
 
         {/* ========== THREE TIER CARDS ========== */}
