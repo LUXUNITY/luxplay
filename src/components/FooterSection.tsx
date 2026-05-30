@@ -13,7 +13,7 @@ const FooterSection = () => {
         </h2>
 
         <p className="font-display text-xl md:text-2xl tracking-widest text-white/50 mb-6">
-          ARCADE 25 MAY · SOFT PLAY 30 MAY
+          ARCADE OPEN NOW · SOFT PLAY COMING SOON (WALK-INS)
         </p>
 
         <p className="flex items-center justify-center gap-2 text-white/40 font-body text-sm">
