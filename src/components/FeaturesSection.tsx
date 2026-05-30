@@ -3,67 +3,7 @@ import founderBaz from "@/assets/founder-baz.jpg";
 
 import { gridBackgroundUrl } from "@/components/circuitTile";
 
-const TEAM = [
-  {
-    name: "JACK OSWELL",
-    role: "Lead Engineers in Arcade Systems & Technical Operations",
-    company: "Co-Owner & Director, JNR Innovations",
-  },
-  {
-    name: "RARES CUCOS",
-    role: "Lead Engineers in Arcade Systems & Technical Operations",
-    company: "Co-Owner & Director, JNR Innovations",
-  },
-  {
-    name: "MARTIN MACGILLIVRAY",
-    role: "Lead Construction & Development Director",
-    company: "Owner & Director, MasterClass Exteriors",
-  },
-  {
-    name: "CONNOR DENTON",
-    role: "Chief Coordinator",
-    company: "MasterClass Exteriors",
-  },
-];
 
-const TeamGrid = () => (
-  <>
-    <p className="font-display text-xs tracking-[0.3em] text-white/30 mb-6 text-center">
-      THE TEAM
-    </p>
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 md:gap-6 max-w-6xl mx-auto">
-      {TEAM.map((m) => (
-        <div key={m.name} className="text-center">
-          <div className="relative w-full max-w-[280px] md:max-w-[320px] mx-auto">
-            <div
-              className="relative aspect-square w-full flex items-center justify-center rounded-sm border border-white/10 bg-white/[0.03]"
-              style={{
-                boxShadow:
-                  "0 0 8px rgba(119, 0, 255, 0.35), 0 0 16px rgba(119, 0, 255, 0.18)",
-              }}
-            >
-              <p className="font-display text-3xl sm:text-4xl md:text-5xl tracking-[0.2em] text-white/20 select-none">
-                {m.name
-                  .split(" ")
-                  .map((n) => n[0])
-                  .join("")}
-              </p>
-            </div>
-          </div>
-          <p className="font-display text-[11px] sm:text-sm md:text-base tracking-[0.12em] sm:tracking-[0.15em] md:tracking-[0.18em] text-white mt-4 leading-tight whitespace-nowrap">
-            {m.name}
-          </p>
-          <p className="font-body text-xs md:text-sm text-neon-purple/90 mt-1.5 leading-snug">
-            {m.role}
-          </p>
-          <p className="font-body text-xs md:text-sm text-white/40 mt-1 leading-snug">
-            {m.company}
-          </p>
-        </div>
-      ))}
-    </div>
-  </>
-);
 
 const FeaturesSection = () => {
   return (
@@ -151,11 +91,6 @@ const FeaturesSection = () => {
               <p className="font-display text-xs md:text-sm tracking-[0.25em] text-white/70 mt-1.5">Owner &amp; Director of Lux Unity Ltd</p>
             </div>
           </div>
-        </div>
-
-        {/* MOBILE-ONLY team grid, sits directly under Baz */}
-        <div className="md:hidden w-full px-6 pb-12">
-          <TeamGrid />
         </div>
 
         {/* RIGHT — Statement content */}
@@ -258,15 +193,6 @@ const FeaturesSection = () => {
         </div>
       </div>
 
-      {/* THE TEAM — desktop: full-width row below the two-column layout (mobile version is inside the flex above) */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="hidden md:block relative z-10 px-6 md:px-14 lg:px-20 pb-16 md:pb-24"
-      >
-        <TeamGrid />
-      </motion.div>
     </section>
   );
 };
