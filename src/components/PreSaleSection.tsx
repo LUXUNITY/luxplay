@@ -62,8 +62,7 @@ const ultimateDeal = {
   total: 250,
   features: [
     "50% pre-launch discount",
-    "VIP early access before public opening",
-    "Exclusive LuxPlay hoodie",
+    "VIP early access",
     "10% off all future top-ups for life",
   ],
   badge: "ULTIMATE",
@@ -223,30 +222,16 @@ const PreSaleSection = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center mb-4"
+          className="text-center mb-12"
         >
           <p className="font-body text-white/50 text-sm md:text-base">
-            Arcade opens 25 May · Soft Play opens 30 May. Buy before we open and
+            The arcade is open now — top up online and
           </p>
           <p
             className="font-display text-4xl md:text-5xl text-neon-green glow-green tracking-wider mt-1 animate-pulse"
           >
             SAVE BIG.
           </p>
-        </motion.div>
-
-        {/* Going fast warning */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="flex items-center justify-center gap-3 mb-12"
-        >
-          <Clock className="w-4 h-4 text-neon-pink animate-pulse" />
-          <p className="font-display text-sm md:text-base tracking-[0.2em] text-neon-pink glow-pink">
-            SPACES ARE GOING FAST — DON'T MISS OUT
-          </p>
-          <Clock className="w-4 h-4 text-neon-pink animate-pulse" />
         </motion.div>
 
         {/* ========== THREE TIER CARDS ========== */}
@@ -305,24 +290,6 @@ const PreSaleSection = () => {
                     {feat}
                   </p>
                 ))}
-              </div>
-
-              {/* Remaining counter */}
-              <div className="text-center mb-4">
-                <AnimatedCounter target={getRemaining(deal.packageId)} color={deal.color} />
-                <p className="font-display text-xs tracking-[0.25em] text-white/50">
-                  REMAINING
-                </p>
-                {/* Progress bar */}
-                <div className="w-full h-1.5 bg-white/5 mt-2 overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${(getRemaining(deal.packageId) / (PACKAGE_TOTALS[deal.packageId] || deal.total)) * 100}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.5, delay: 0.5 + i * 0.1 }}
-                    className={`h-full bg-${deal.color}`}
-                  />
-                </div>
               </div>
 
               {/* Buy */}
@@ -386,24 +353,7 @@ const PreSaleSection = () => {
                 ))}
               </div>
 
-              {/* Remaining */}
-              <div className="flex items-center gap-4 mb-6">
-                <div>
-                  <AnimatedCounter target={getRemaining("ultimate")} color="neon-purple" />
-                  <p className="font-display text-xs tracking-[0.25em] text-white/50">
-                    REMAINING
-                  </p>
-                </div>
-                <div className="flex-1 h-2 bg-white/5 overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${(getRemaining("ultimate") / PACKAGE_TOTALS["ultimate"]) * 100}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.5, delay: 0.8 }}
-                    className="h-full bg-neon-purple"
-                  />
-                </div>
-              </div>
+
 
               <button
                 onClick={() => handleBuy(ultimateDeal.packageId)}
