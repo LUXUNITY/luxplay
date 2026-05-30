@@ -1,158 +1,35 @@
-import { motion, useInView } from "framer-motion";
-import { Check, Star, Zap, Flame, Clock, Loader2 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { Flame, Loader2, ChevronsRight } from "lucide-react";
+import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 
-const creditDeals = [
-  {
-    price: "£10",
-    name: "Explorer",
-    packageId: "explorer",
-    credits: "130 Credits",
-    bonus: "23% off",
-    worth: "Normal price £13",
-    plays: "13 plays",
-    remaining: 250,
-    total: 250,
-    features: ["23% pre-launch discount", "Valid from opening weekend"],
-    highlight: false,
-    color: "neon-green",
-  },
-  {
-    price: "£25",
-    name: "Champion",
-    packageId: "champion",
-    credits: "350 Credits",
-    bonus: "29% off",
-    worth: "Normal price £35",
-    plays: "35 plays",
-    remaining: 250,
-    total: 250,
-    features: ["29% pre-launch discount", "Valid from opening weekend"],
-    highlight: false,
-    color: "neon-cyan",
-  },
-  {
-    price: "£50",
-    name: "Legend",
-    packageId: "legend",
-    credits: "800 Credits",
-    bonus: "38% off",
-    worth: "Normal price £80",
-    plays: "80 plays",
-    remaining: 250,
-    total: 250,
-    features: ["38% pre-launch discount", "The smart choice", "Valid from opening weekend"],
-    highlight: true,
-    badge: "BEST VALUE",
-    color: "neon-pink",
-  },
+// In-store price → credits. Online = 10% off in-store price.
+const tiers = [
+  { id: "c50",   amount: 5,   credits: 50,   color: "neon-green" },
+  { id: "c110",  amount: 10,  credits: 110,  color: "neon-green" },
+  { id: "c160",  amount: 15,  credits: 160,  color: "neon-cyan" },
+  { id: "c230",  amount: 20,  credits: 230,  color: "neon-cyan" },
+  { id: "c360",  amount: 30,  credits: 360,  color: "neon-purple" },
+  { id: "c500",  amount: 40,  credits: 500,  color: "neon-purple" },
+  { id: "c800",  amount: 60,  credits: 800,  color: "neon-pink" },
+  { id: "c1500", amount: 100, credits: 1500, color: "neon-pink", best: true },
 ];
 
-const ultimateDeal = {
-  price: "£100",
-  name: "Ultimate Pass",
-  packageId: "ultimate",
-  credits: "2,000 Credits",
-  bonus: "50% off",
-  worth: "Normal price £200",
-  plays: "200 plays",
-  remaining: 250,
-  total: 250,
-  features: [
-    "50% pre-launch discount",
-    "VIP early access",
-    "10% off all future top-ups for life",
-  ],
-  badge: "ULTIMATE",
-  color: "neon-purple",
-};
-
-/* Animated countdown number */
-const AnimatedCounter = ({ target, color }: { target: number; color: string }) => {
-  const [count, setCount] = useState(target + Math.floor(Math.random() * 30) + 10);
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true });
-
-  useEffect(() => {
-    if (!isInView) return;
-    const start = count;
-    const duration = 2000;
-    const startTime = Date.now();
-    const tick = () => {
-      const elapsed = Date.now() - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.round(start - (start - target) * eased));
-      if (progress < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }, [isInView, target]);
-
-  return (
-    <span ref={ref} className={`font-display text-4xl md:text-5xl text-${color} tabular-nums`}>
-      {count}
-    </span>
-  );
-};
-
-// All caps set to 250. Remaining = 250 - real DB sales (no padding).
-const BASE_SOLD: Record<string, number> = {
-  explorer: 0,
-  champion: 0,
-  legend: 0,
-  ultimate: 0,
-};
-
-const PACKAGE_TOTALS: Record<string, number> = {
-  explorer: 250,
-  champion: 250,
-  legend: 250,
-  ultimate: 250,
-};
+const fmt = (n: number) =>
+  n % 1 === 0 ? `£${n.toFixed(0)}` : `£${n.toFixed(2)}`;
 
 const PreSaleSection = () => {
-  const [loadingPackage, setLoadingPackage] = useState<string | null>(null);
-  const [realSoldCounts, setRealSoldCounts] = useState<Record<string, number>>({});
+  const [loading, setLoading] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchSoldCounts = async () => {
-      const { data } = await supabase
-        .from("orders")
-        .select("package_name");
-
-      if (data) {
-        const counts: Record<string, number> = {};
-        data.forEach((order) => {
-          const key = order.package_name.toLowerCase().replace(" pass", "").replace(" ", "-");
-          counts[key] = (counts[key] || 0) + 1;
-        });
-        setRealSoldCounts(counts);
-      }
-    };
-    fetchSoldCounts();
-  }, []);
-
-  const getTotalSold = (packageId: string) => {
-    return (BASE_SOLD[packageId] || 0) + (realSoldCounts[packageId] || 0);
-  };
-
-  const getRemaining = (packageId: string) => {
-    const total = PACKAGE_TOTALS[packageId] || 1000;
-    return Math.max(total - getTotalSold(packageId), 0);
-  };
-
-  const handleBuy = async (packageId: string) => {
-    setLoadingPackage(packageId);
+  const handleBuy = async (id: string) => {
+    setLoading(id);
     try {
       const { data, error } = await supabase.functions.invoke("create-checkout", {
-        body: { packageId },
+        body: { packageId: id },
       });
       if (error) throw error;
-      if (data?.url) {
-        window.location.href = data.url;
-      }
+      if (data?.url) window.location.href = data.url;
     } catch (err: any) {
       toast({
         title: "Checkout failed",
@@ -160,228 +37,139 @@ const PreSaleSection = () => {
         variant: "destructive",
       });
     } finally {
-      setLoadingPackage(null);
+      setLoading(null);
     }
   };
 
   return (
     <section id="presale" className="relative overflow-hidden">
-      {/* Neon top bar */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-neon-bar" />
-
-      {/* Glow orbs — use smaller blur for performance */}
       <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-neon-purple/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-neon-pink/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="relative z-10 px-6 md:px-12 lg:px-20 py-20 md:py-28">
-        {/* ========== MASSIVE ANIMATED LUXPLAY LOGO ========== */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-6"
-        >
-          <h2
-            className="font-display text-[6rem] md:text-[12rem] lg:text-[16rem] leading-none tracking-[0.1em] text-gradient-neon select-none"
-            style={{ textShadow: "0 0 30px rgba(170,255,0,0.4), 0 0 60px rgba(0,238,255,0.2)" }}
-          >
-            LUXPLAY
-          </h2>
-        </motion.div>
-
-        {/* Flashing urgency badge */}
+      <div className="relative z-10 px-4 md:px-12 lg:px-20 py-16 md:py-24">
+        {/* Logo */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="text-center mb-4"
+          className="text-center mb-3"
         >
-          <span
-            className="inline-flex items-center gap-2 border-2 border-neon-pink bg-neon-pink/10 text-neon-pink font-display text-sm md:text-base tracking-[0.3em] uppercase px-6 py-3 animate-pulse"
+          <h2
+            className="font-display text-[4.5rem] md:text-[10rem] lg:text-[14rem] leading-none tracking-[0.08em] text-gradient-neon select-none"
+            style={{ textShadow: "0 0 30px rgba(170,255,0,0.4), 0 0 60px rgba(0,238,255,0.2)" }}
           >
-            <Flame className="w-4 h-4 text-neon-green" />
-            PRE-LAUNCH EXCLUSIVE
-            <Flame className="w-4 h-4 text-neon-green" />
+            LUXPLAY
+          </h2>
+          <p className="font-display text-2xl md:text-4xl tracking-[0.4em] text-gradient-neon mt-1">
+            CREDITS
+          </p>
+        </motion.div>
+
+        {/* Online discount badge */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="text-center mb-8 md:mb-10"
+        >
+          <span className="inline-flex items-center gap-2 border-2 border-neon-pink bg-neon-pink/10 text-neon-pink font-display text-xs md:text-sm tracking-[0.3em] uppercase px-5 py-2.5 animate-pulse">
+            <Flame className="w-3.5 h-3.5 text-neon-green" />
+            10% OFF WHEN YOU BOOK ONLINE
+            <Flame className="w-3.5 h-3.5 text-neon-green" />
           </span>
-        </motion.div>
-
-        {/* Headline */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-2"
-        >
-          <h3 className="font-display text-5xl md:text-7xl lg:text-8xl tracking-wider">
-            <span className="text-gradient-neon">BUY YOUR ARCADE CREDITS NOW</span>
-          </h3>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <p className="font-body text-white/50 text-sm md:text-base">
-            The arcade is open now — top up online and
-          </p>
-          <p
-            className="font-display text-4xl md:text-5xl text-neon-green glow-green tracking-wider mt-1 animate-pulse"
-          >
-            SAVE BIG.
+          <p className="font-body text-white/50 text-xs md:text-sm mt-3 max-w-md mx-auto">
+            Credits load straight to your card. Walk in, tap on, play.
           </p>
         </motion.div>
 
-        {/* ========== THREE TIER CARDS ========== */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-10">
-          {creditDeals.map((deal, i) => (
-            <motion.div
-              key={deal.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.4 }}
-              className={`relative p-6 md:p-8 flex flex-col transition-all duration-300 ${
-                deal.highlight
-                  ? "border-2 border-neon-pink bg-[#0d0d1a] shadow-[0_0_40px_rgba(255,0,204,0.2)]"
-                  : "border border-white/10 bg-[#0a0a16] hover:border-white/20"
-              }`}
-            >
-              {deal.badge && (
-                <div
-                  className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-neon-pink text-[#070710] text-xs font-display tracking-widest px-4 py-1 animate-pulse"
-                >
-                  <Star className="w-3 h-3" /> {deal.badge}
-                </div>
-              )}
+        {/* Credits table */}
+        <div className="max-w-3xl mx-auto space-y-2.5 md:space-y-3">
+          {/* Column headers */}
+          <div className="grid grid-cols-[1fr_auto_1fr_auto] md:grid-cols-[1fr_auto_1fr_auto] items-center gap-3 md:gap-6 px-3 md:px-5 pb-1">
+            <p className="font-display text-[10px] md:text-xs tracking-[0.3em] text-neon-green/80">AMOUNT</p>
+            <span className="opacity-0">»</span>
+            <p className="font-display text-[10px] md:text-xs tracking-[0.3em] text-neon-cyan/80">CREDITS</p>
+            <span className="opacity-0 font-display text-xs">BUY</span>
+          </div>
 
-              {/* Tier name */}
-              <p className={`font-display text-sm tracking-[0.3em] text-center mb-2 mt-1 text-${deal.color}`}>
-                {deal.name.toUpperCase()}
-              </p>
-
-              {/* Price */}
-              <div className="text-center mb-4">
-                <span className={`font-display text-6xl md:text-7xl tracking-wide ${
-                  deal.highlight ? "text-neon-pink glow-pink" : `text-${deal.color}`
-                } ${deal.color === 'neon-green' ? 'glow-green' : deal.color === 'neon-cyan' ? 'glow-cyan' : ''}`}>
-                  {deal.price}
-                </span>
-              </div>
-
-              {/* Credits */}
-              <h4 className={`font-display text-2xl md:text-3xl tracking-wider text-center mb-1 text-${deal.color}`}>
-                {deal.credits}
-              </h4>
-              <p className="text-white/40 text-xs text-center mb-1">
-                <span className="line-through">{deal.worth}</span> · {deal.bonus}
-              </p>
-              <p className="text-white/30 text-[10px] text-center mb-5 font-body">
-                {deal.plays}
-              </p>
-
-              {/* Features */}
-              <div className="space-y-2 mb-6 flex-1">
-                {deal.features.map((feat) => (
-                  <p key={feat} className="text-xs text-white/60 flex items-start gap-2 font-body">
-                    <Check className="w-3.5 h-3.5 text-neon-green mt-0.5 flex-shrink-0" />
-                    {feat}
-                  </p>
-                ))}
-              </div>
-
-              {/* Buy */}
-              <button
-                onClick={() => handleBuy(deal.packageId)}
-                disabled={loadingPackage === deal.packageId}
-                className={`w-full font-display text-sm tracking-widest py-3 transition-all duration-300 disabled:opacity-50 ${
-                  deal.highlight
-                    ? "bg-neon-pink text-[#070710] hover:shadow-[0_0_40px_rgba(255,0,204,0.5)]"
-                    : "bg-neon-green text-[#070710] hover:shadow-[0_0_40px_rgba(170,255,0,0.5)]"
+          {tiers.map((t, i) => {
+            const online = t.amount * 0.9;
+            return (
+              <motion.div
+                key={t.id}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.04, duration: 0.3 }}
+                className={`relative grid grid-cols-[1fr_auto_1fr_auto] items-center gap-3 md:gap-6 px-3 md:px-5 py-3 md:py-4 border bg-[#0a0a16] transition-all duration-300 ${
+                  t.best
+                    ? "border-neon-pink shadow-[0_0_25px_rgba(255,0,204,0.25)]"
+                    : "border-white/10 hover:border-white/25"
                 }`}
               >
-                {loadingPackage === deal.packageId ? (
-                  <Loader2 className="w-4 h-4 animate-spin mx-auto" />
-                ) : "BUY NOW"}
-              </button>
-            </motion.div>
-          ))}
+                {t.best && (
+                  <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-neon-pink text-[#070710] font-display text-[10px] tracking-[0.2em] px-3 py-0.5 animate-pulse">
+                    BEST VALUE
+                  </span>
+                )}
+
+                {/* Amount */}
+                <div className="flex flex-col">
+                  <span className={`font-display text-2xl md:text-4xl tracking-wide text-${t.color}`}>
+                    {fmt(t.amount)}
+                  </span>
+                  <span className="text-white/40 text-[10px] md:text-xs font-body">
+                    online <span className={`text-${t.color} font-semibold`}>{fmt(online)}</span>
+                  </span>
+                </div>
+
+                {/* Arrow */}
+                <ChevronsRight className={`w-5 h-5 md:w-7 md:h-7 text-${t.color}`} />
+
+                {/* Credits */}
+                <div className="flex flex-col">
+                  <span className={`font-display text-2xl md:text-4xl tracking-wide text-${t.color}`}>
+                    {t.credits}
+                  </span>
+                  <span className="text-white/40 text-[10px] md:text-xs font-body uppercase tracking-wider">
+                    credits
+                  </span>
+                </div>
+
+                {/* Buy */}
+                <button
+                  onClick={() => handleBuy(t.id)}
+                  disabled={loading === t.id}
+                  className={`font-display text-[11px] md:text-xs tracking-widest px-3 md:px-5 py-2 md:py-2.5 transition-all duration-300 disabled:opacity-50 whitespace-nowrap ${
+                    t.best
+                      ? "bg-neon-pink text-[#070710] hover:shadow-[0_0_30px_rgba(255,0,204,0.5)]"
+                      : "bg-neon-green text-[#070710] hover:shadow-[0_0_30px_rgba(170,255,0,0.5)]"
+                  }`}
+                >
+                  {loading === t.id ? (
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                  ) : (
+                    "BUY"
+                  )}
+                </button>
+              </motion.div>
+            );
+          })}
         </div>
 
-        {/* ========== ULTIMATE PASS — FULL WIDTH, MASSIVE ========== */}
+        {/* Footer note */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="max-w-5xl mx-auto relative border-2 border-neon-purple bg-[#0d0d1a] p-8 md:p-12 shadow-[0_0_30px_rgba(119,0,255,0.15)]"
+          className="mt-10 max-w-3xl mx-auto border border-white/10 p-5 md:p-6 text-center bg-[#0a0a16]"
         >
-          {/* Badge */}
-          <div
-            className="absolute -top-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-neon-purple text-[#070710] font-display text-sm tracking-[0.3em] px-6 py-1.5 animate-pulse"
-          >
-            <Star className="w-4 h-4" /> ULTIMATE <Star className="w-4 h-4" />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mt-4">
-            {/* Left — Price & Credits */}
-            <div className="text-center md:text-left">
-              <p className="font-display text-sm tracking-[0.3em] text-neon-purple mb-2">ULTIMATE PASS</p>
-              <span
-                className="font-display text-8xl md:text-9xl tracking-wide text-neon-purple inline-block glow-purple"
-              >
-                {ultimateDeal.price}
-              </span>
-              <h4 className="font-display text-3xl md:text-4xl tracking-wider text-neon-purple mt-2">
-                {ultimateDeal.credits}
-              </h4>
-              <p className="text-white/40 text-sm mt-1">
-                <span className="line-through">{ultimateDeal.worth}</span> · {ultimateDeal.bonus} · {ultimateDeal.plays}
-              </p>
-            </div>
-
-            {/* Right — Features + Counter */}
-            <div>
-              <div className="space-y-3 mb-6">
-                {ultimateDeal.features.map((feat) => (
-                  <p key={feat} className="text-sm text-white/70 flex items-start gap-3 font-body">
-                    <Check className="w-4 h-4 text-neon-purple mt-0.5 flex-shrink-0" />
-                    {feat}
-                  </p>
-                ))}
-              </div>
-
-
-
-              <button
-                onClick={() => handleBuy(ultimateDeal.packageId)}
-                disabled={loadingPackage === ultimateDeal.packageId}
-                className="w-full font-display text-base tracking-widest py-4 bg-neon-purple text-[#070710] hover:shadow-[0_0_50px_rgba(119,0,255,0.5)] transition-all duration-300 disabled:opacity-50"
-              >
-                {loadingPackage === ultimateDeal.packageId ? (
-                  <Loader2 className="w-4 h-4 animate-spin mx-auto" />
-                ) : "GET THE ULTIMATE PASS"}
-              </button>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* ========== URGENCY FOOTER ========== */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-12 max-w-3xl mx-auto border border-white/10 p-6 md:p-8 text-center bg-[#0a0a16]"
-        >
-          <p
-            className="text-white/80 font-body text-sm md:text-base font-semibold"
-          >
-            Pre-launch only — <strong className="text-white">these discounts disappear when we open.</strong>
+          <p className="text-white/80 font-body text-sm">
+            All online purchases save <strong className="text-neon-pink">10%</strong> vs in-store.
           </p>
-          <p className="text-neon-pink font-bold mt-3 text-sm md:text-base glow-pink font-body">
-            Full price from opening weekend. Lock in your savings now.
+          <p className="text-white/40 font-body text-xs mt-2">
+            Credits never expire. Use for any arcade or redemption game.
           </p>
         </motion.div>
       </div>
