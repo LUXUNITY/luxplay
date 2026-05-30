@@ -117,10 +117,10 @@ const PreSaleSection = () => {
                 {/* Amount */}
                 <div className="flex flex-col">
                   <span className={`font-display text-2xl md:text-4xl tracking-wide text-${t.color}`}>
-                    {fmt(t.amount)}
+                    {fmt(online)}
                   </span>
                   <span className="text-white/40 text-[10px] md:text-xs font-body">
-                    online <span className={`text-${t.color} font-semibold`}>{fmt(online)}</span>
+                    was <span className="line-through">{fmt(t.amount)}</span> in-store
                   </span>
                 </div>
 
