@@ -1,37 +1,25 @@
 import { motion } from "framer-motion";
 import founderBaz from "@/assets/founder-baz.jpg";
-import teamRares from "@/assets/team-rares.jpg";
-import teamJack from "@/assets/team-jack.jpg";
-import teamMartin from "@/assets/team-martin.png";
-import teamConnor from "@/assets/team-connor.jpg";
 
 import { gridBackgroundUrl } from "@/components/circuitTile";
 
 const TEAM = [
   {
-    img: teamJack,
-    alt: "Jack Oswell",
     name: "JACK OSWELL",
     role: "Lead Engineers in Arcade Systems & Technical Operations",
     company: "Co-Owner & Director, JNR Innovations",
   },
   {
-    img: teamRares,
-    alt: "Rares Cucos",
     name: "RARES CUCOS",
     role: "Lead Engineers in Arcade Systems & Technical Operations",
     company: "Co-Owner & Director, JNR Innovations",
   },
   {
-    img: teamMartin,
-    alt: "Martin MacGillivray",
     name: "MARTIN MACGILLIVRAY",
     role: "Lead Construction & Development Director",
     company: "Owner & Director, MasterClass Exteriors",
   },
   {
-    img: teamConnor,
-    alt: "Connor Denton",
     name: "CONNOR DENTON",
     role: "Chief Coordinator",
     company: "MasterClass Exteriors",
@@ -47,21 +35,19 @@ const TeamGrid = () => (
       {TEAM.map((m) => (
         <div key={m.name} className="text-center">
           <div className="relative w-full max-w-[280px] md:max-w-[320px] mx-auto">
-            {/* (Background grid + aurora glow lives at section level) */}
             <div
-              className="relative aspect-square w-full overflow-hidden rounded-sm border border-white/10"
+              className="relative aspect-square w-full flex items-center justify-center rounded-sm border border-white/10 bg-white/[0.03]"
               style={{
                 boxShadow:
                   "0 0 8px rgba(119, 0, 255, 0.35), 0 0 16px rgba(119, 0, 255, 0.18)",
               }}
             >
-              <img
-                src={m.img}
-                alt={m.alt}
-                className="w-full h-full object-cover"
-                loading="lazy"
-                decoding="async"
-              />
+              <p className="font-display text-3xl sm:text-4xl md:text-5xl tracking-[0.2em] text-white/20 select-none">
+                {m.name
+                  .split(" ")
+                  .map((n) => n[0])
+                  .join("")}
+              </p>
             </div>
           </div>
           <p className="font-display text-[11px] sm:text-sm md:text-base tracking-[0.12em] sm:tracking-[0.15em] md:tracking-[0.18em] text-white mt-4 leading-tight whitespace-nowrap">
