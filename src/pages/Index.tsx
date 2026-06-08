@@ -1,10 +1,8 @@
 import { Suspense, lazy } from "react";
 import HeroSection from "@/components/HeroSection";
-import AnnouncementBanner from "@/components/AnnouncementBanner";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const PreSaleSection = lazy(() => import("@/components/PreSaleSection"));
-const SoftPlayUpdateSection = lazy(() => import("@/components/SoftPlayUpdateSection"));
 const VenueSection = lazy(() => import("@/components/VenueSection"));
 const FeaturesSection = lazy(() => import("@/components/FeaturesSection"));
 const FooterSection = lazy(() => import("@/components/FooterSection"));
