@@ -4,6 +4,13 @@ import founderMartinAsset from "@/assets/founder-martin-clean.png.asset.json";
 
 import { gridBackgroundUrl } from "@/components/circuitTile";
 
+const sharedBusinesses = [
+  { name: "LuxPlay", color: "text-neon-cyan", shadow: "0 0 8px rgba(0,238,255,0.55)" },
+  { name: "MJlux cafè", color: "text-neon-pink", shadow: "0 0 8px rgba(255,0,204,0.55)" },
+  { name: "LuxKey", color: "text-neon-purple", shadow: "0 0 8px rgba(119,0,255,0.55)" },
+  { name: "LuxRenovations", color: "text-neon-green", shadow: "0 0 8px rgba(170,255,0,0.55)" },
+];
+
 const founders = [
   {
     img: founderBazAsset.url,
@@ -11,8 +18,7 @@ const founders = [
     first: "Sarbaz",
     name: '"BAZ"',
     last: "Roushbaiani",
-    role: "Founder & Managing Director",
-    sub: "Owner & Director of Lux Unity Ltd",
+    role: "Owner & Director",
     accent: "text-neon-cyan",
     shadow: "0 0 10px rgba(0, 255, 255, 0.6), 0 0 20px rgba(0, 255, 255, 0.3)",
     glow: "0 0 8px rgba(0, 229, 255, 0.5), 0 0 18px rgba(0, 229, 255, 0.25), 0 0 40px rgba(0, 229, 255, 0.12)",
@@ -23,8 +29,7 @@ const founders = [
     first: "",
     name: "MARTIN",
     last: "MacGillivray",
-    role: "Lead Construction & Development Director",
-    sub: "Owner & Director, Masterclass Exteriors",
+    role: "Owner & Director",
     accent: "text-neon-purple",
     shadow: "0 0 10px rgba(168, 85, 247, 0.6), 0 0 20px rgba(168, 85, 247, 0.3)",
     glow: "0 0 8px rgba(168, 85, 247, 0.5), 0 0 18px rgba(168, 85, 247, 0.25), 0 0 40px rgba(168, 85, 247, 0.12)",
