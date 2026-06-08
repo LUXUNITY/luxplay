@@ -1,16 +1,13 @@
 import { motion } from "framer-motion";
-import venueArcade from "@/assets/venue-arcade.webp";
-import venueSoftplay from "@/assets/softplay.webp";
-import venuePrizes from "@/assets/venue-prizes.webp";
-import venueCafe from "@/assets/venue-cafe.webp";
-import venueBabyPlay from "@/assets/baby-play.png";
+import arcadeAsset from "@/assets/real-arcade.jpeg.asset.json";
+import softplayAsset from "@/assets/real-softplay.png.asset.json";
 
 const venues = [
-  { img: venueArcade, label: "ARCADE ZONE", color: "text-neon-green" },
-  { img: venueSoftplay, label: "SOFT PLAY", color: "text-neon-cyan" },
-  { img: venueBabyPlay, label: "BABY SOFT PLAY", color: "text-neon-pink" },
-  { img: venuePrizes, label: "PRIZE REDEMPTION", color: "text-neon-pink" },
-  { img: venueCafe, label: "CAFÉ", color: "text-neon-purple" },
+  { img: arcadeAsset.url, label: "ARCADE ZONE", color: "text-neon-green", comingSoon: false },
+  { img: softplayAsset.url, label: "SOFT PLAY", color: "text-neon-cyan", comingSoon: false },
+  { img: null, label: "BABY SOFT PLAY", color: "text-neon-pink", comingSoon: true },
+  { img: null, label: "PRIZE REDEMPTION", color: "text-neon-pink", comingSoon: true },
+  { img: null, label: "CAFÉ", color: "text-neon-purple", comingSoon: true },
 ];
 
 const VenueSection = () => {
@@ -32,7 +29,7 @@ const VenueSection = () => {
         </p>
       </div>
 
-      {/* 2x2 grid */}
+      {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2">
         {venues.map((v, i) => (
           <motion.div
@@ -41,21 +38,26 @@ const VenueSection = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="relative aspect-[16/10] overflow-hidden group"
+            className="relative aspect-[16/10] overflow-hidden group bg-[#070710]"
           >
-            <img
-              src={v.img}
-              alt={v.label}
-              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              loading="lazy"
-            />
-            {/* Dark overlay */}
+            {v.img && (
+              <img
+                src={v.img}
+                alt={v.label}
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+              />
+            )}
             <div className="absolute inset-0 bg-[#070710]/50 group-hover:bg-[#070710]/40 transition-colors duration-500" />
-            {/* Label */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <h3 className={`font-display text-4xl md:text-5xl lg:text-6xl tracking-wider ${v.color} drop-shadow-[0_0_20px_currentColor]`}>
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+              <h3 className={`font-display text-4xl md:text-5xl lg:text-6xl tracking-wider ${v.color} drop-shadow-[0_0_20px_currentColor] text-center px-4`}>
                 {v.label}
               </h3>
+              {v.comingSoon && (
+                <span className="font-display text-sm md:text-base tracking-[0.3em] text-white/70 border border-white/30 px-4 py-1.5">
+                  COMING SOON
+                </span>
+              )}
             </div>
           </motion.div>
         ))}
