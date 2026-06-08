@@ -200,9 +200,6 @@ const FeaturesSection = () => {
               Because while others walk away —{" "}
               <span className="text-neon-cyan font-bold">we're doubling down on this town.</span>
             </p>
-            <p className="font-display text-sm tracking-widest text-white/30 mt-4">
-              — SARBAZ "BAZ" ROUSHBAIANI, FOUNDER OF LUXPLAY
-            </p>
           </motion.div>
         </div>
       </div>
