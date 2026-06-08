@@ -7,6 +7,7 @@ import { gridBackgroundUrl } from "@/components/circuitTile";
 const founders = [
   {
     img: founderBazAsset.url,
+    objectPos: "object-bottom",
     first: "Sarbaz",
     name: '"BAZ"',
     last: "Roushbaiani",
@@ -18,6 +19,7 @@ const founders = [
   },
   {
     img: founderMartinAsset.url,
+    objectPos: "object-top",
     first: "",
     name: "MARTIN",
     last: "MacGillivray",
