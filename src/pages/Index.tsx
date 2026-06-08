@@ -15,19 +15,19 @@ const Index = () => {
 
       {/* Mid-page sections — LuxPlay card starfield background */}
       <div className="relative luxplay-pattern-bg">
-        {/* 2. Credits — money section FIRST, before any explanation */}
-        <div className="defer-section">
-          <Suspense fallback={null}>
-            <ScrollReveal>
-              <PreSaleSection />
-            </ScrollReveal>
-          </Suspense>
-        </div>
-        {/* 3. Venue visuals — large cinematic splits, not a grid */}
+        {/* 2. Venue visuals — zones first so visitors see what they're buying */}
         <div className="defer-section">
           <Suspense fallback={null}>
             <ScrollReveal>
               <VenueSection />
+            </ScrollReveal>
+          </Suspense>
+        </div>
+        {/* 3. Credits — money section after zones explain the value */}
+        <div className="defer-section">
+          <Suspense fallback={null}>
+            <ScrollReveal>
+              <PreSaleSection />
             </ScrollReveal>
           </Suspense>
         </div>
