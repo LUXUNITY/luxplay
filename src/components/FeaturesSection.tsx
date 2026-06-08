@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import founderBazAsset from "@/assets/founder-baz-v2.png.asset.json";
-import founderMartinAsset from "@/assets/founder-martin.png.asset.json";
+import founderBazAsset from "@/assets/founder-baz-clean.png.asset.json";
+import founderMartinAsset from "@/assets/founder-martin-clean.png.asset.json";
 
 import { gridBackgroundUrl } from "@/components/circuitTile";
 
@@ -78,12 +78,12 @@ const FeaturesSection = () => {
         <div className="relative w-full md:w-[40%] flex flex-col items-center justify-center gap-12 md:gap-16 px-6 py-12 md:py-20">
           {founders.map((f) => (
             <div key={f.name + f.last} className="relative z-10 flex flex-col items-center w-full">
-              <div className="w-full max-w-[240px] md:max-w-[300px] aspect-[4/5] overflow-hidden rounded-sm bg-[#070710]"
+              <div className="w-full max-w-[260px] md:max-w-[320px] overflow-hidden rounded-sm"
                    style={{ boxShadow: f.glow }}>
                 <img
                   src={f.img}
                   alt={`${f.name} ${f.last} — LuxPlay`}
-                  className={`w-full h-full object-cover ${f.objectPos}`}
+                  className="w-full h-auto block"
                   loading="lazy"
                   decoding="async"
                 />
