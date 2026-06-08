@@ -83,7 +83,7 @@ const FeaturesSection = () => {
                 <img
                   src={f.img}
                   alt={`${f.name} ${f.last} — LuxPlay`}
-                  className="w-full h-full object-cover object-top"
+                  className={`w-full h-full object-cover ${f.objectPos}`}
                   loading="lazy"
                   decoding="async"
                 />
