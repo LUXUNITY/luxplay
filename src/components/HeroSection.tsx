@@ -1,4 +1,4 @@
-import heroAsset from "@/assets/luxplay-hero.png.asset.json";
+import heroAsset from "@/assets/luxplay-hero-v2.jpg.asset.json";
 
 const HeroSection = () => {
   return (
@@ -6,29 +6,18 @@ const HeroSection = () => {
       {/* Neon top bar */}
       <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-neon-bar z-20" />
 
-      {/* Stage — edge-to-edge hero composition for mobile and desktop */}
-      <div className="hero-video-stage relative w-full h-[100svh] min-h-[640px] md:min-h-[760px] overflow-hidden flex items-center justify-center">
-        {/* Blurred wash for ambient bleed */}
-        <img
-          src={heroAsset.url}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover z-[1] scale-[1.3] blur-2xl opacity-60"
-        />
-
-        {/* Main hero badge */}
-        <img
-          src={heroAsset.url}
-          alt="LuxPlay — Arcade, Soft Play & Café at Unit 7 Sovereign Centre, Boscombe, Bournemouth BH1 4SX"
-          className="relative z-[3] max-w-[92%] md:max-w-[640px] w-auto h-auto object-contain drop-shadow-[0_0_60px_rgba(255,0,200,0.35)]"
-        />
-      </div>
+      {/* Hero image — full width, no blur */}
+      <img
+        src={heroAsset.url}
+        alt="LuxPlay — Play More. Earn More. Level Up. Arcade, Soft Play & Café at Unit 7 Sovereign Centre, Boscombe, Bournemouth BH1 4SX"
+        className="block w-full h-auto object-contain"
+      />
 
       {/* SEO-friendly hidden copy so search engines still index the key info */}
       <h1 className="sr-only">
-        LuxPlay — While Everyone Is Closing, We're Opening! 40+ Arcade Games, 3 Level
-        Soft Play, Baby Soft Play, Amazing Prizes & Cosy Café. Coming soon
-        at Unit 7, Sovereign Centre, Boscombe, Bournemouth, BH1 4SX.
+        LuxPlay — Play More. Earn More. Level Up. 40+ Arcade Games, 3 Level
+        Soft Play, Baby Soft Play, Amazing Prizes & Cosy Café at Unit 7,
+        Sovereign Centre, Boscombe, Bournemouth, BH1 4SX.
       </h1>
 
       {/* Live, clickable CTA sits just below the hero */}
