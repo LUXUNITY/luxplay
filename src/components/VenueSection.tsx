@@ -3,13 +3,14 @@ import arcadeAsset from "@/assets/real-arcade.jpeg.asset.json";
 import softplayAsset from "@/assets/real-softplay-v2.png.asset.json";
 import babySoftplayAsset from "@/assets/real-baby-softplay.png.asset.json";
 import prizeAsset from "@/assets/real-prize-redemption.jpg.asset.json";
+import cafeAsset from "@/assets/real-cafe.png.asset.json";
 
 const venues = [
   { img: arcadeAsset.url, label: "ARCADE ZONE", color: "text-neon-green", comingSoon: false },
   { img: softplayAsset.url, label: "SOFT PLAY", color: "text-neon-cyan", comingSoon: false },
   { img: babySoftplayAsset.url, label: "BABY SOFT PLAY", color: "text-neon-pink", comingSoon: false },
   { img: prizeAsset.url, label: "PRIZE REDEMPTION", color: "text-neon-pink", comingSoon: false },
-  { img: null, label: "CAFÉ", color: "text-neon-purple", comingSoon: true },
+  { img: cafeAsset.url, label: "CAFÉ", color: "text-neon-purple", comingSoon: false },
 ];
 
 const VenueSection = () => {
