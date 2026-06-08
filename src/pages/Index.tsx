@@ -1,10 +1,8 @@
 import { Suspense, lazy } from "react";
 import HeroSection from "@/components/HeroSection";
-import AnnouncementBanner from "@/components/AnnouncementBanner";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const PreSaleSection = lazy(() => import("@/components/PreSaleSection"));
-const SoftPlayUpdateSection = lazy(() => import("@/components/SoftPlayUpdateSection"));
 const VenueSection = lazy(() => import("@/components/VenueSection"));
 const FeaturesSection = lazy(() => import("@/components/FeaturesSection"));
 const FooterSection = lazy(() => import("@/components/FooterSection"));
@@ -12,7 +10,6 @@ const FooterSection = lazy(() => import("@/components/FooterSection"));
 const Index = () => {
   return (
     <main className="min-h-screen bg-background">
-      <AnnouncementBanner />
       {/* 1. Hero — full-screen immersive, CTA front and center */}
       <HeroSection />
 
@@ -26,15 +23,7 @@ const Index = () => {
             </ScrollReveal>
           </Suspense>
         </div>
-        {/* 3. Soft Play update — booking removed, walk-ins only */}
-        <div className="defer-section">
-          <Suspense fallback={null}>
-            <ScrollReveal>
-              <SoftPlayUpdateSection />
-            </ScrollReveal>
-          </Suspense>
-        </div>
-        {/* 4. Venue visuals — large cinematic splits, not a grid */}
+        {/* 3. Venue visuals — large cinematic splits, not a grid */}
         <div className="defer-section">
           <Suspense fallback={null}>
             <ScrollReveal>
