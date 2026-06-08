@@ -1,9 +1,33 @@
 import { motion } from "framer-motion";
-import founderBaz from "@/assets/founder-baz.jpg";
+import founderBazAsset from "@/assets/founder-baz-v2.png.asset.json";
+import founderMartinAsset from "@/assets/founder-martin.png.asset.json";
 
 import { gridBackgroundUrl } from "@/components/circuitTile";
 
-
+const founders = [
+  {
+    img: founderBazAsset.url,
+    first: "Sarbaz",
+    name: '"BAZ"',
+    last: "Roushbaiani",
+    role: "Founder & Managing Director",
+    sub: "Owner & Director of Lux Unity Ltd",
+    accent: "text-neon-cyan",
+    shadow: "0 0 10px rgba(0, 255, 255, 0.6), 0 0 20px rgba(0, 255, 255, 0.3)",
+    glow: "0 0 8px rgba(0, 229, 255, 0.5), 0 0 18px rgba(0, 229, 255, 0.25), 0 0 40px rgba(0, 229, 255, 0.12)",
+  },
+  {
+    img: founderMartinAsset.url,
+    first: "",
+    name: "MARTIN",
+    last: "MacGillivray",
+    role: "Lead Construction & Development Director",
+    sub: "Owner & Director, Masterclass Exteriors",
+    accent: "text-neon-purple",
+    shadow: "0 0 10px rgba(168, 85, 247, 0.6), 0 0 20px rgba(168, 85, 247, 0.3)",
+    glow: "0 0 8px rgba(168, 85, 247, 0.5), 0 0 18px rgba(168, 85, 247, 0.25), 0 0 40px rgba(168, 85, 247, 0.12)",
+  },
+];
 
 const FeaturesSection = () => {
   return (
@@ -22,7 +46,6 @@ const FeaturesSection = () => {
           backgroundSize: "400px 400px",
           backgroundPosition: "center",
           opacity: 0.45,
-          // Inverse vignette: transparent in centre, softer at edges.
           WebkitMaskImage:
             "radial-gradient(ellipse 60% 55% at 50% 50%, transparent 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.55) 75%, rgba(0,0,0,0.75) 100%)",
           maskImage:
@@ -30,68 +53,57 @@ const FeaturesSection = () => {
         }}
       />
 
-      {/* Aurora glows — soft brand-color light bleeding from corners */}
+      {/* Aurora glows */}
       <div
         className="pointer-events-none absolute -top-32 -left-32 w-[55vw] h-[55vw] max-w-[700px] max-h-[700px] rounded-full blur-3xl z-0"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(57,255,20,0.18) 0%, rgba(57,255,20,0) 70%)",
-        }}
+        style={{ background: "radial-gradient(circle, rgba(57,255,20,0.18) 0%, rgba(57,255,20,0) 70%)" }}
       />
       <div
         className="pointer-events-none absolute -top-24 -right-24 w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] rounded-full blur-3xl z-0"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(124,77,255,0.22) 0%, rgba(124,77,255,0) 70%)",
-        }}
+        style={{ background: "radial-gradient(circle, rgba(124,77,255,0.22) 0%, rgba(124,77,255,0) 70%)" }}
       />
       <div
         className="pointer-events-none absolute -bottom-32 -left-24 w-[55vw] h-[55vw] max-w-[700px] max-h-[700px] rounded-full blur-3xl z-0"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(0,229,255,0.18) 0%, rgba(0,229,255,0) 70%)",
-        }}
+        style={{ background: "radial-gradient(circle, rgba(0,229,255,0.18) 0%, rgba(0,229,255,0) 70%)" }}
       />
       <div
         className="pointer-events-none absolute -bottom-24 -right-32 w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] rounded-full blur-3xl z-0"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(255,43,214,0.18) 0%, rgba(255,43,214,0) 70%)",
-        }}
+        style={{ background: "radial-gradient(circle, rgba(255,43,214,0.18) 0%, rgba(255,43,214,0) 70%)" }}
       />
 
-      {/* LAYOUT: Portrait left | Statement right (on mobile, team is forced between them via flex order) */}
       <div className="relative z-10 flex flex-col md:flex-row md:min-h-screen">
-        {/* LEFT — Founder portrait with neon circuit patterns flanking it */}
-        <div className="relative w-full md:w-[40%] flex flex-col items-center justify-center px-6 py-10 md:py-20">
-          {/* (Circuit pattern is now provided by the section-wide background) */}
-
-          <div className="relative z-10 flex flex-col items-center">
-            <img
-              src={founderBaz}
-              alt="Baz — Founder of LuxPlay"
-              className="w-full max-w-[240px] md:max-w-[300px] object-contain rounded-sm"
-              loading="lazy"
-              decoding="async"
-              style={{
-                boxShadow:
-                  '0 0 8px rgba(119, 0, 255, 0.5), 0 0 18px rgba(119, 0, 255, 0.25), 0 0 40px rgba(119, 0, 255, 0.12)',
-              }}
-            />
-            <div className="mt-6 text-center">
-              <p className="font-display text-sm md:text-base tracking-[0.25em] text-white/60">Sarbaz</p>
-              <p className="font-display text-4xl md:text-5xl tracking-widest text-white mt-0.5">"BAZ"</p>
-              <p className="font-display text-sm md:text-base tracking-[0.25em] text-white/60 mt-0.5">Roushbaiani</p>
-              <p
-                className="font-display text-base md:text-lg tracking-[0.3em] text-neon-cyan mt-3"
-                style={{ textShadow: '0 0 10px rgba(0, 255, 255, 0.6), 0 0 20px rgba(0, 255, 255, 0.3)' }}
-              >
-                — Founder &amp; Managing Director
-              </p>
-              <p className="font-display text-xs md:text-sm tracking-[0.25em] text-white/70 mt-1.5">Owner &amp; Director of Lux Unity Ltd</p>
+        {/* LEFT — Founders stacked, clean photo + live-text description */}
+        <div className="relative w-full md:w-[40%] flex flex-col items-center justify-center gap-12 md:gap-16 px-6 py-12 md:py-20">
+          {founders.map((f) => (
+            <div key={f.name + f.last} className="relative z-10 flex flex-col items-center w-full">
+              <div className="w-full max-w-[240px] md:max-w-[300px] aspect-[4/5] overflow-hidden rounded-sm bg-[#070710]"
+                   style={{ boxShadow: f.glow }}>
+                <img
+                  src={f.img}
+                  alt={`${f.name} ${f.last} — LuxPlay`}
+                  className="w-full h-full object-cover object-top"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div className="mt-6 text-center">
+                {f.first && (
+                  <p className="font-display text-sm md:text-base tracking-[0.25em] text-white/60">{f.first}</p>
+                )}
+                <p className="font-display text-4xl md:text-5xl tracking-widest text-white mt-0.5">{f.name}</p>
+                <p className="font-display text-sm md:text-base tracking-[0.25em] text-white/60 mt-0.5">{f.last}</p>
+                <p
+                  className={`font-display text-sm md:text-base tracking-[0.3em] ${f.accent} mt-3`}
+                  style={{ textShadow: f.shadow }}
+                >
+                  — {f.role}
+                </p>
+                <p className="font-display text-xs md:text-sm tracking-[0.25em] text-white/70 mt-1.5">{f.sub}</p>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
+
 
         {/* RIGHT — Statement content */}
         <div className="w-full md:w-[60%] flex flex-col justify-center px-6 md:px-14 lg:px-20 py-16 md:py-20">
