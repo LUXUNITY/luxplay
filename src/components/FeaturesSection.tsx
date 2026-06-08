@@ -105,7 +105,22 @@ const FeaturesSection = () => {
                 >
                   — {f.role}
                 </p>
-                <p className="font-display text-xs md:text-sm tracking-[0.25em] text-white/70 mt-1.5">{f.sub}</p>
+                <div className="mt-4 pt-3 border-t border-white/10">
+                  <p className="font-display text-[10px] md:text-xs tracking-[0.35em] text-white/30 mb-2">
+                    CO-OWNERS OF
+                  </p>
+                  <div className="grid grid-cols-2 gap-x-3 gap-y-1">
+                    {sharedBusinesses.map((b) => (
+                      <span
+                        key={b.name}
+                        className={`font-display text-xs md:text-sm tracking-wider ${b.color}`}
+                        style={{ textShadow: b.shadow }}
+                      >
+                        {b.name}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           ))}
