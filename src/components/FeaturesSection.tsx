@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import founderBazAsset from "@/assets/founder-baz-v2.png.asset.json";
-import founderMartinAsset from "@/assets/founder-martin.png.asset.json";
+import founderBazAsset from "@/assets/founder-baz-clean.png.asset.json";
+import founderMartinAsset from "@/assets/founder-martin-clean.png.asset.json";
 
 import { gridBackgroundUrl } from "@/components/circuitTile";
 
