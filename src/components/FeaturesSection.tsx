@@ -78,12 +78,12 @@ const FeaturesSection = () => {
         <div className="relative w-full md:w-[40%] flex flex-col items-center justify-center gap-12 md:gap-16 px-6 py-12 md:py-20">
           {founders.map((f) => (
             <div key={f.name + f.last} className="relative z-10 flex flex-col items-center w-full">
-              <div className="w-full max-w-[260px] md:max-w-[320px] overflow-hidden rounded-sm"
+              <div className="w-full max-w-[260px] md:max-w-[320px] aspect-[4/5] overflow-hidden rounded-sm bg-[#070710]"
                    style={{ boxShadow: f.glow }}>
                 <img
                   src={f.img}
                   alt={`${f.name} ${f.last} — LuxPlay`}
-                  className="w-full h-auto block"
+                  className="w-full h-full object-cover object-center"
                   loading="lazy"
                   decoding="async"
                 />
