@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import arcadeAsset from "@/assets/real-arcade.jpeg.asset.json";
-import softplayAsset from "@/assets/real-softplay.png.asset.json";
+import softplayAsset from "@/assets/real-softplay-v2.png.asset.json";
 
 const venues = [
   { img: arcadeAsset.url, label: "ARCADE ZONE", color: "text-neon-green", comingSoon: false },
