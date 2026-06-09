@@ -125,23 +125,23 @@ const FeaturesSection = () => {
           </div>
 
           {/* Shared co-owners */}
-          <div className="w-full max-w-[460px] pt-6 border-t border-white/10 text-center">
-            <p className="font-display text-sm md:text-base tracking-[0.35em] text-white/40 mb-5">
+          <div className="w-full max-w-[520px] pt-8 border-t border-white/10 text-center">
+            <p className="font-display text-base md:text-xl tracking-[0.35em] text-white/40 mb-6">
               CO-OWNERS OF
             </p>
-            <div className="grid grid-cols-4 gap-3 md:gap-4 items-start">
+            <div className="grid grid-cols-4 gap-4 md:gap-6 items-start">
               {sharedBusinesses.map((b) => (
-                <div key={b.name} className="flex flex-col items-center gap-2">
+                <div key={b.name} className="flex flex-col items-center gap-3">
                   <img
                     src={b.logo}
                     alt={`${b.name} logo`}
-                    className="w-16 h-16 md:w-20 md:h-20 object-contain"
+                    className="w-20 h-20 md:w-28 md:h-28 object-contain"
                     style={{ filter: b.glow }}
                     loading="lazy"
                     decoding="async"
                   />
                   <span
-                    className={`font-display text-[11px] md:text-sm tracking-wider ${b.color} text-center leading-tight`}
+                    className={`font-display text-sm md:text-lg tracking-wider ${b.color} text-center leading-tight`}
                     style={{ textShadow: b.shadow }}
                   >
                     {b.name}
