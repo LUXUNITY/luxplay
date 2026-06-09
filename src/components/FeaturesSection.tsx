@@ -29,7 +29,7 @@ const founders = [
   },
   {
     img: founderMartinAsset.url,
-    objectPos: "object-top",
+    objectPos: "object-center",
     zoom: 1.5,
     first: "",
     name: "MARTIN",
