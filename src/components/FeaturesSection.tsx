@@ -19,7 +19,7 @@ const founders = [
   {
     img: founderBazAsset.url,
     objectPos: "object-top",
-    zoom: 1.25,
+    zoom: 1.08,
     first: "",
     name: "BAZ",
     last: "Roushbaiani",
