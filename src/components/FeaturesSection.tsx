@@ -83,60 +83,73 @@ const FeaturesSection = () => {
       />
 
       <div className="relative z-10 flex flex-col md:flex-row md:min-h-screen">
-        {/* LEFT — Founders stacked, clean photo + live-text description */}
-        <div className="relative w-full md:w-[40%] flex flex-col items-center justify-center gap-12 md:gap-16 px-6 py-12 md:py-20">
-          {founders.map((f) => (
-            <div key={f.name + f.last} className="relative z-10 flex flex-col items-center w-full">
-              <div className="w-full max-w-[200px] md:max-w-[260px] aspect-[4/5] overflow-hidden rounded-sm bg-[#070710]"
-                   style={{ boxShadow: f.glow }}>
-                <img
-                  src={f.img}
-                  alt={`${f.name} ${f.last} — LuxPlay`}
-                  className="w-full h-full object-cover object-center"
-                  loading="lazy"
-                  decoding="async"
-                />
+        {/* LEFT — Founders side-by-side, details underneath, shared co-owners block */}
+        <div className="relative w-full md:w-[40%] flex flex-col items-center justify-center gap-8 md:gap-10 px-6 py-12 md:py-20">
+          {/* Photos row */}
+          <div className="w-full grid grid-cols-2 gap-4 md:gap-6 max-w-[420px]">
+            {founders.map((f) => (
+              <div key={f.name + f.last} className="flex flex-col items-center">
+                <div
+                  className="w-full aspect-[4/5] overflow-hidden rounded-sm bg-[#070710]"
+                  style={{ boxShadow: f.glow }}
+                >
+                  <img
+                    src={f.img}
+                    alt={`${f.name} ${f.last} — LuxPlay`}
+                    className="w-full h-full object-cover object-center"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
               </div>
-              <div className="mt-6 text-center">
+            ))}
+          </div>
+
+          {/* Details row */}
+          <div className="w-full grid grid-cols-2 gap-4 md:gap-6 max-w-[420px] text-center">
+            {founders.map((f) => (
+              <div key={f.name + f.last + "-info"}>
                 {f.first && (
-                  <p className="font-display text-sm md:text-base tracking-[0.25em] text-white/60">{f.first}</p>
+                  <p className="font-display text-xs md:text-sm tracking-[0.25em] text-white/60">{f.first}</p>
                 )}
-                <p className="font-display text-4xl md:text-5xl tracking-widest text-white mt-0.5">{f.name}</p>
-                <p className="font-display text-sm md:text-base tracking-[0.25em] text-white/60 mt-0.5">{f.last}</p>
+                <p className="font-display text-2xl md:text-3xl tracking-widest text-white mt-0.5">{f.name}</p>
+                <p className="font-display text-xs md:text-sm tracking-[0.25em] text-white/60 mt-0.5">{f.last}</p>
                 <p
-                  className={`font-display text-sm md:text-base tracking-[0.3em] ${f.accent} mt-3`}
+                  className={`font-display text-[11px] md:text-sm tracking-[0.25em] ${f.accent} mt-2`}
                   style={{ textShadow: f.shadow }}
                 >
                   — {f.role}
                 </p>
-                <div className="mt-5 pt-4 border-t border-white/10">
-                  <p className="font-display text-sm md:text-base tracking-[0.35em] text-white/30 mb-3">
-                    CO-OWNERS OF
-                  </p>
-                  <div className="grid grid-cols-2 gap-x-4 gap-y-4 items-start">
-                    {sharedBusinesses.map((b) => (
-                      <div key={b.name} className="flex flex-col items-center gap-2">
-                        <img
-                          src={b.logo}
-                          alt={`${b.name} logo`}
-                          className="w-20 h-20 md:w-24 md:h-24 object-contain"
-                          style={{ filter: b.glow }}
-                          loading="lazy"
-                          decoding="async"
-                        />
-                        <span
-                          className={`font-display text-base md:text-lg tracking-wider ${b.color} text-center`}
-                          style={{ textShadow: b.shadow }}
-                        >
-                          {b.name}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
               </div>
+            ))}
+          </div>
+
+          {/* Shared co-owners */}
+          <div className="w-full max-w-[460px] pt-6 border-t border-white/10 text-center">
+            <p className="font-display text-sm md:text-base tracking-[0.35em] text-white/40 mb-5">
+              CO-OWNERS OF
+            </p>
+            <div className="grid grid-cols-4 gap-3 md:gap-4 items-start">
+              {sharedBusinesses.map((b) => (
+                <div key={b.name} className="flex flex-col items-center gap-2">
+                  <img
+                    src={b.logo}
+                    alt={`${b.name} logo`}
+                    className="w-16 h-16 md:w-20 md:h-20 object-contain"
+                    style={{ filter: b.glow }}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span
+                    className={`font-display text-[11px] md:text-sm tracking-wider ${b.color} text-center leading-tight`}
+                    style={{ textShadow: b.shadow }}
+                  >
+                    {b.name}
+                  </span>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
 
 
