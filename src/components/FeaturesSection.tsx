@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import founderBaz from "@/assets/founder-baz.jpg";
+import founderBazAsset from "@/assets/baz-centered-no-text.png.asset.json";
 import founderMartinAsset from "@/assets/founder-martin-clean.png.asset.json";
 import logoLuxPlay from "@/assets/logo-luxplay.png";
 import logoMJLux from "@/assets/logo-mjlux.png";
@@ -17,7 +17,7 @@ const sharedBusinesses = [
 
 const founders = [
   {
-    img: founderBaz,
+    img: founderBazAsset.url,
     objectPos: "object-center",
     first: "",
     name: "BAZ",
