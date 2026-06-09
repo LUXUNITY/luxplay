@@ -129,7 +129,7 @@ const FeaturesSection = () => {
             <p className="font-display text-base md:text-xl tracking-[0.35em] text-white/40 mb-6">
               CO-OWNERS OF
             </p>
-            <div className="grid grid-cols-4 gap-4 md:gap-6 items-start">
+            <div className="grid grid-cols-2 gap-4 md:gap-6 items-start">
               {sharedBusinesses.map((b) => (
                 <div key={b.name} className="flex flex-col items-center gap-3">
                   <img
