@@ -18,7 +18,8 @@ const sharedBusinesses = [
 const founders = [
   {
     img: founderBazAsset.url,
-    objectPos: "object-center",
+    objectPos: "object-top",
+    zoom: 1.25,
     first: "",
     name: "BAZ",
     last: "Roushbaiani",
