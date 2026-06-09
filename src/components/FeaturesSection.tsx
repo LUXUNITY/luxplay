@@ -97,7 +97,7 @@ const FeaturesSection = () => {
                   <img
                     src={f.img}
                     alt={`${f.name} ${f.last} — LuxPlay`}
-                    className={`w-full h-full ${f.fit ?? "object-cover"} ${f.objectPos}`}
+                    className={`w-full h-full object-cover ${f.objectPos}`}
                     style={f.zoom ? { transform: `scale(${f.zoom})`, transformOrigin: f.objectPos === "object-top" ? "center top" : f.objectPos === "object-bottom" ? "center bottom" : "center center" } : undefined}
                     loading="lazy"
                     decoding="async"
