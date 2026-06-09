@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import founderBazAsset from "@/assets/founder-baz-clean.png.asset.json";
+import founderBaz from "@/assets/founder-baz.jpg";
 import founderMartinAsset from "@/assets/founder-martin-clean.png.asset.json";
 import logoLuxPlay from "@/assets/logo-luxplay.png";
 import logoMJLux from "@/assets/logo-mjlux.png";
@@ -17,10 +17,8 @@ const sharedBusinesses = [
 
 const founders = [
   {
-    img: founderBazAsset.url,
+    img: founderBaz,
     objectPos: "object-center",
-    fit: "object-contain",
-    zoom: 1.05,
     first: "",
     name: "BAZ",
     last: "Roushbaiani",
@@ -99,7 +97,7 @@ const FeaturesSection = () => {
                   <img
                     src={f.img}
                     alt={`${f.name} ${f.last} — LuxPlay`}
-                    className={`w-full h-full ${f.fit ?? "object-cover"} ${f.objectPos}`}
+                    className={`w-full h-full object-cover ${f.objectPos}`}
                     style={f.zoom ? { transform: `scale(${f.zoom})`, transformOrigin: f.objectPos === "object-top" ? "center top" : f.objectPos === "object-bottom" ? "center bottom" : "center center" } : undefined}
                     loading="lazy"
                     decoding="async"
