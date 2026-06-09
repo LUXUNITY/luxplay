@@ -125,23 +125,25 @@ const FeaturesSection = () => {
           </div>
 
           {/* Shared co-owners */}
-          <div className="w-full max-w-[520px] pt-8 border-t border-white/10 text-center">
-            <p className="font-display text-base md:text-xl tracking-[0.35em] text-white/40 mb-6">
+          <div className="w-full max-w-[560px] pt-8 border-t border-white/10 text-center">
+            <p className="font-display text-base md:text-xl tracking-[0.35em] text-white/40 mb-8">
               CO-OWNERS OF
             </p>
-            <div className="grid grid-cols-2 gap-4 md:gap-6 items-start">
+            <div className="grid grid-cols-2 gap-8 md:gap-10 items-start">
               {sharedBusinesses.map((b) => (
-                <div key={b.name} className="flex flex-col items-center gap-3">
-                  <img
-                    src={b.logo}
-                    alt={`${b.name} logo`}
-                    className="w-20 h-20 md:w-28 md:h-28 object-contain"
-                    style={{ filter: b.glow }}
-                    loading="lazy"
-                    decoding="async"
-                  />
+                <div key={b.name} className="flex flex-col items-center gap-4">
+                  <div className="w-32 h-32 md:w-44 md:h-44 flex items-center justify-center">
+                    <img
+                      src={b.logo}
+                      alt={`${b.name} logo`}
+                      className="max-w-full max-h-full object-contain"
+                      style={{ filter: b.glow, transform: `scale(${b.scale})` }}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
                   <span
-                    className={`font-display text-sm md:text-lg tracking-wider ${b.color} text-center leading-tight`}
+                    className={`font-display text-lg md:text-2xl tracking-wider ${b.color} text-center leading-tight`}
                     style={{ textShadow: b.shadow }}
                   >
                     {b.name}
