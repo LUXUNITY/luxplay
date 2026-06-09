@@ -1,14 +1,18 @@
 import { motion } from "framer-motion";
 import founderBazAsset from "@/assets/founder-baz-clean.png.asset.json";
 import founderMartinAsset from "@/assets/founder-martin-clean.png.asset.json";
+import logoLuxPlay from "@/assets/logo-luxplay.png";
+import logoMJLux from "@/assets/logo-mjlux.png";
+import logoLuxKey from "@/assets/logo-luxkey.png";
+import logoLuxReno from "@/assets/logo-luxrenovations.png";
 
 import { gridBackgroundUrl } from "@/components/circuitTile";
 
 const sharedBusinesses = [
-  { name: "LuxPlay", color: "text-neon-cyan", shadow: "0 0 8px rgba(0,238,255,0.55)" },
-  { name: "MJlux cafè", color: "text-neon-pink", shadow: "0 0 8px rgba(255,0,204,0.55)" },
-  { name: "LuxKey", color: "text-neon-purple", shadow: "0 0 8px rgba(119,0,255,0.55)" },
-  { name: "LuxRenovations", color: "text-neon-green", shadow: "0 0 8px rgba(170,255,0,0.55)" },
+  { name: "LuxPlay", logo: logoLuxPlay, color: "text-neon-cyan", shadow: "0 0 8px rgba(0,238,255,0.55)", glow: "drop-shadow(0 0 10px rgba(0,238,255,0.45))" },
+  { name: "MJlux cafè", logo: logoMJLux, color: "text-neon-pink", shadow: "0 0 8px rgba(255,0,204,0.55)", glow: "drop-shadow(0 0 10px rgba(255,170,120,0.45))" },
+  { name: "LuxKey", logo: logoLuxKey, color: "text-neon-purple", shadow: "0 0 8px rgba(119,0,255,0.55)", glow: "drop-shadow(0 0 10px rgba(255,200,60,0.45))" },
+  { name: "LuxRenovations", logo: logoLuxReno, color: "text-neon-green", shadow: "0 0 8px rgba(170,255,0,0.55)", glow: "drop-shadow(0 0 10px rgba(255,200,60,0.45))" },
 ];
 
 const founders = [
@@ -109,15 +113,24 @@ const FeaturesSection = () => {
                   <p className="font-display text-sm md:text-base tracking-[0.35em] text-white/30 mb-3">
                     CO-OWNERS OF
                   </p>
-                  <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-4 items-start">
                     {sharedBusinesses.map((b) => (
-                      <span
-                        key={b.name}
-                        className={`font-display text-xl md:text-2xl tracking-wider ${b.color}`}
-                        style={{ textShadow: b.shadow }}
-                      >
-                        {b.name}
-                      </span>
+                      <div key={b.name} className="flex flex-col items-center gap-2">
+                        <img
+                          src={b.logo}
+                          alt={`${b.name} logo`}
+                          className="w-20 h-20 md:w-24 md:h-24 object-contain"
+                          style={{ filter: b.glow }}
+                          loading="lazy"
+                          decoding="async"
+                        />
+                        <span
+                          className={`font-display text-base md:text-lg tracking-wider ${b.color} text-center`}
+                          style={{ textShadow: b.shadow }}
+                        >
+                          {b.name}
+                        </span>
+                      </div>
                     ))}
                   </div>
                 </div>
