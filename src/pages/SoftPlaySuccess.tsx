@@ -47,52 +47,8 @@ const SoftPlaySuccess = () => {
         if (fnError) throw fnError;
         if (data?.bookings?.length) {
           const allBookings = data.bookings as Booking[];
-          const primaryBooking = allBookings[0];
-          const bookingCodes = allBookings.map((entry) => entry.booking_code);
-          const childCount = allBookings.length;
-          const totalAmount = allBookings.reduce((sum, entry) => sum + (entry.amount_paid || 0), 0);
 
           setBookings(allBookings);
-          // Send confirmation email
-          await supabase.functions.invoke("send-transactional-email", {
-            body: {
-              templateName: "softplay-booking",
-              recipientEmail: primaryBooking.parent_email,
-              idempotencyKey: `softplay-${primaryBooking.stripe_session_id || sessionId}`,
-              templateData: {
-                childCount,
-                parentName: primaryBooking.parent_name,
-                sessionTime: SESSION_LABELS[primaryBooking.session_time] || primaryBooking.session_time,
-                sessionDate: new Date(primaryBooking.session_date).toLocaleDateString("en-GB", {
-                  weekday: "long", day: "numeric", month: "long", year: "numeric",
-                }),
-                bookingCode: primaryBooking.booking_code,
-                bookingCodes,
-                totalAmount: `£${(totalAmount / 100).toFixed(2)}`,
-              },
-            },
-          });
-          // Notify admin
-          await supabase.functions.invoke("send-transactional-email", {
-            body: {
-              templateName: "admin-purchase-notification",
-              recipientEmail: "luxplayuk@gmail.com",
-              idempotencyKey: `admin-softplay-${primaryBooking.stripe_session_id || sessionId}`,
-              templateData: {
-                type: "softplay",
-                customerEmail: primaryBooking.parent_email,
-                childCount,
-                parentName: primaryBooking.parent_name,
-                sessionTime: SESSION_LABELS[primaryBooking.session_time] || primaryBooking.session_time,
-                sessionDate: new Date(primaryBooking.session_date).toLocaleDateString("en-GB", {
-                  weekday: "long", day: "numeric", month: "long", year: "numeric",
-                }),
-                bookingCode: primaryBooking.booking_code,
-                bookingCodes,
-                amountPaid: `£${(totalAmount / 100).toFixed(2)}`,
-              },
-            },
-          });
         } else if (data?.booking) {
           setBookings([data.booking as Booking]);
         } else {
