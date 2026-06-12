@@ -107,7 +107,7 @@ serve(async (req) => {
           sessionDate,
           childCount: String(quantity),
           parentName: parentName.slice(0, 250),
-          parentPhone: (parentPhone || "").slice(0, 250),
+          ...(parentPhone && parentPhone.trim() ? { parentPhone: parentPhone.trim().slice(0, 250) } : {}),
         },
       },
       checkout_options: {
@@ -128,8 +128,10 @@ serve(async (req) => {
 
     const json = await resp.json();
     if (!resp.ok) {
-      console.error("Square error:", json);
-      return new Response(JSON.stringify({ error: json.errors?.[0]?.detail || "Square checkout failed" }), {
+      console.error("Square error:", JSON.stringify(json));
+      const err = json.errors?.[0];
+      const detail = err ? `${err.code || ""}: ${err.detail || ""} (field: ${err.field || "?"})` : "Square checkout failed";
+      return new Response(JSON.stringify({ error: detail }), {
         status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
