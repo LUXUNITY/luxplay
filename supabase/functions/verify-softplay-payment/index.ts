@@ -7,7 +7,7 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const SQUARE_BASE = "https://connect.squareup.com";
+const SQUARE_BASE = "https://connect.squareupsandbox.com";
 const SQUARE_VERSION = "2024-12-18";
 
 function generateBookingCode(): string {

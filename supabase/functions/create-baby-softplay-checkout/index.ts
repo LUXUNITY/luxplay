@@ -13,7 +13,7 @@ const VALID_SESSIONS = ["10:00", "12:00", "14:00", "16:00", "18:00"];
 const MAX_CAPACITY = 15;
 const MAX_BABIES_PER_BOOKING = 4;
 
-const SQUARE_BASE = "https://connect.squareup.com";
+const SQUARE_BASE = "https://connect.squareupsandbox.com";
 const SQUARE_VERSION = "2024-12-18";
 
 serve(async (req) => {
