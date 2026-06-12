@@ -79,6 +79,7 @@ serve(async (req) => {
     }
 
     // Fetch order from Square
+    console.log("Fetching Square order:", sessionId);
     const orderResp = await fetch(`${SQUARE_BASE}/v2/orders/${sessionId}`, {
       headers: {
         "Authorization": `Bearer ${accessToken}`,
@@ -87,11 +88,16 @@ serve(async (req) => {
     });
     const orderJson = await orderResp.json();
     if (!orderResp.ok) {
-      console.error("Square order fetch failed:", orderJson);
-      return new Response(JSON.stringify({ error: "Could not verify payment" }), {
+      console.error("Square order fetch failed:", JSON.stringify(orderJson));
+      const err = orderJson.errors?.[0];
+      return new Response(JSON.stringify({
+        error: `Could not verify payment: ${err?.code || ""} ${err?.detail || ""}`.trim(),
+        squareError: orderJson,
+      }), {
         status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
+    console.log("Square order state:", orderJson.order?.state, "metadata:", JSON.stringify(orderJson.order?.metadata));
 
     const order = orderJson.order;
     if (order?.state !== "COMPLETED") {
