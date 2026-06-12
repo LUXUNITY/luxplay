@@ -79,6 +79,7 @@ serve(async (req) => {
     }
 
     // Fetch order from Square
+    console.log("Fetching Square order:", sessionId);
     const orderResp = await fetch(`${SQUARE_BASE}/v2/orders/${sessionId}`, {
       headers: {
         "Authorization": `Bearer ${accessToken}`,
@@ -87,14 +88,60 @@ serve(async (req) => {
     });
     const orderJson = await orderResp.json();
     if (!orderResp.ok) {
-      console.error("Square order fetch failed:", orderJson);
-      return new Response(JSON.stringify({ error: "Could not verify payment" }), {
+      console.error("Square order fetch failed:", JSON.stringify(orderJson));
+      const err = orderJson.errors?.[0];
+      return new Response(JSON.stringify({
+        error: `Could not verify payment: ${err?.code || ""} ${err?.detail || ""}`.trim(),
+        squareError: orderJson,
+      }), {
         status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
+    console.log("Square order state:", orderJson.order?.state, "metadata:", JSON.stringify(orderJson.order?.metadata));
 
     const order = orderJson.order;
-    if (order?.state !== "COMPLETED") {
+
+    // Verify payment by looking up payments for this order (order.state can stay OPEN
+    // even after a successful payment on Square Payment Links).
+    let parentEmail = "";
+    let paymentId: string | undefined;
+    let paymentCompleted = false;
+
+    const tenderPaymentId = order?.tenders?.[0]?.payment_id || order?.tenders?.[0]?.id;
+    if (tenderPaymentId) {
+      paymentId = tenderPaymentId;
+      const payResp = await fetch(`${SQUARE_BASE}/v2/payments/${tenderPaymentId}`, {
+        headers: { "Authorization": `Bearer ${accessToken}`, "Square-Version": SQUARE_VERSION },
+      });
+      if (payResp.ok) {
+        const payJson = await payResp.json();
+        parentEmail = payJson.payment?.buyer_email_address || "";
+        if (payJson.payment?.status === "COMPLETED" || payJson.payment?.status === "APPROVED") {
+          paymentCompleted = true;
+        }
+      }
+    }
+
+    // Fallback: search payments by order id
+    if (!paymentCompleted) {
+      const searchResp = await fetch(`${SQUARE_BASE}/v2/payments?limit=10&sort_order=DESC`, {
+        headers: { "Authorization": `Bearer ${accessToken}`, "Square-Version": SQUARE_VERSION },
+      });
+      if (searchResp.ok) {
+        const searchJson = await searchResp.json();
+        const match = (searchJson.payments || []).find((p: any) => p.order_id === sessionId);
+        if (match) {
+          paymentId = match.id;
+          parentEmail = parentEmail || match.buyer_email_address || "";
+          if (match.status === "COMPLETED" || match.status === "APPROVED") {
+            paymentCompleted = true;
+          }
+        }
+      }
+    }
+
+    if (!paymentCompleted && order?.state !== "COMPLETED") {
+      console.error("Payment not completed. Order state:", order?.state);
       return new Response(JSON.stringify({ error: "Payment not completed" }), {
         status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -104,20 +151,6 @@ serve(async (req) => {
     const quantity = Math.max(1, parseInt(meta.childCount || "1", 10) || 1);
     const totalAmount = Number(order.total_money?.amount || 0);
     const perChildAmount = Math.round(totalAmount / quantity);
-
-    // Try to get buyer email from tenders/payments
-    let parentEmail = "";
-    const tenderId = order.tenders?.[0]?.id;
-    const paymentId = order.tenders?.[0]?.payment_id || tenderId;
-    if (paymentId) {
-      const payResp = await fetch(`${SQUARE_BASE}/v2/payments/${paymentId}`, {
-        headers: { "Authorization": `Bearer ${accessToken}`, "Square-Version": SQUARE_VERSION },
-      });
-      if (payResp.ok) {
-        const payJson = await payResp.json();
-        parentEmail = payJson.payment?.buyer_email_address || "";
-      }
-    }
 
     const rows = Array.from({ length: quantity }, (_, i) => ({
       stripe_session_id: sessionId,

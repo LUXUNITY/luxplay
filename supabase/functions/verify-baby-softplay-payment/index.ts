@@ -92,7 +92,45 @@ serve(async (req) => {
     }
 
     const order = orderJson.order;
-    if (order?.state !== "COMPLETED") {
+
+    let parentEmail = "";
+    let paymentId: string | undefined;
+    let paymentCompleted = false;
+
+    const tenderPaymentId = order?.tenders?.[0]?.payment_id || order?.tenders?.[0]?.id;
+    if (tenderPaymentId) {
+      paymentId = tenderPaymentId;
+      const payResp = await fetch(`${SQUARE_BASE}/v2/payments/${tenderPaymentId}`, {
+        headers: { "Authorization": `Bearer ${accessToken}`, "Square-Version": SQUARE_VERSION },
+      });
+      if (payResp.ok) {
+        const payJson = await payResp.json();
+        parentEmail = payJson.payment?.buyer_email_address || "";
+        if (payJson.payment?.status === "COMPLETED" || payJson.payment?.status === "APPROVED") {
+          paymentCompleted = true;
+        }
+      }
+    }
+
+    if (!paymentCompleted) {
+      const searchResp = await fetch(`${SQUARE_BASE}/v2/payments?limit=10&sort_order=DESC`, {
+        headers: { "Authorization": `Bearer ${accessToken}`, "Square-Version": SQUARE_VERSION },
+      });
+      if (searchResp.ok) {
+        const searchJson = await searchResp.json();
+        const match = (searchJson.payments || []).find((p: any) => p.order_id === sessionId);
+        if (match) {
+          paymentId = match.id;
+          parentEmail = parentEmail || match.buyer_email_address || "";
+          if (match.status === "COMPLETED" || match.status === "APPROVED") {
+            paymentCompleted = true;
+          }
+        }
+      }
+    }
+
+    if (!paymentCompleted && order?.state !== "COMPLETED") {
+      console.error("Payment not completed. Order state:", order?.state);
       return new Response(JSON.stringify({ error: "Payment not completed" }), {
         status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -102,19 +140,6 @@ serve(async (req) => {
     const quantity = Math.max(1, parseInt(meta.babyCount || "1", 10) || 1);
     const totalAmount = Number(order.total_money?.amount || 0);
     const perBabyAmount = Math.round(totalAmount / quantity);
-
-    let parentEmail = "";
-    const tenderId = order.tenders?.[0]?.id;
-    const paymentId = order.tenders?.[0]?.payment_id || tenderId;
-    if (paymentId) {
-      const payResp = await fetch(`${SQUARE_BASE}/v2/payments/${paymentId}`, {
-        headers: { "Authorization": `Bearer ${accessToken}`, "Square-Version": SQUARE_VERSION },
-      });
-      if (payResp.ok) {
-        const payJson = await payResp.json();
-        parentEmail = payJson.payment?.buyer_email_address || "";
-      }
-    }
 
     const rows = Array.from({ length: quantity }, () => ({
       stripe_session_id: sessionId,
