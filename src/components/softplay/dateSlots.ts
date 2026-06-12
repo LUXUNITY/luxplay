@@ -15,16 +15,12 @@ const STANDARD_SLOTS = [
 
 export const getSlotsForDate = (_dateISO: string) => STANDARD_SLOTS;
 
-// Pricing helpers — opening weekend = 50% off launch price; weekdays onwards = 10% online discount
-export const getSoftPlayPrice = (dateISO: string) =>
-  dateISO < NEW_SCHEDULE_FROM ? 4 : 7.2;
-export const getBabyPrice = (dateISO: string) =>
-  dateISO < NEW_SCHEDULE_FROM ? 2 : 3.6;
-export const getSoftPlayFullPrice = (dateISO: string) =>
-  dateISO < NEW_SCHEDULE_FROM ? 8 : 8;
-export const getBabyFullPrice = (dateISO: string) =>
-  dateISO < NEW_SCHEDULE_FROM ? 4 : 4;
-export const isOpeningWeekend = (dateISO: string) => dateISO < NEW_SCHEDULE_FROM;
+// Pricing — 10% online discount off the £8 / £4 door price
+export const getSoftPlayPrice = (_dateISO: string) => 7.2;
+export const getBabyPrice = (_dateISO: string) => 3.6;
+export const getSoftPlayFullPrice = (_dateISO: string) => 8;
+export const getBabyFullPrice = (_dateISO: string) => 4;
+export const isOpeningWeekend = (_dateISO: string) => false;
 
 const pad = (n: number) => String(n).padStart(2, "0");
 const toISO = (d: Date) =>
