@@ -29,14 +29,14 @@ const SoftPlaySection = () => {
     setBookedCounts({});
     const fetchCounts = async () => {
       const { data } = await supabase
-        .from("soft_play_bookings")
-        .select("session_time")
+        .from("soft_play_availability")
+        .select("session_time, booked_count")
         .eq("session_date", selectedDate);
 
       if (data) {
         const counts: Record<string, number> = {};
         data.forEach((b) => {
-          counts[b.session_time] = (counts[b.session_time] || 0) + 1;
+          counts[b.session_time] = Number(b.booked_count) || 0;
         });
         setBookedCounts(counts);
       }
