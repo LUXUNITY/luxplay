@@ -8,9 +8,7 @@ const corsHeaders = {
 };
 
 // Pricing (in pence) — mirrors src/components/softplay/dateSlots.ts
-const NEW_SCHEDULE_FROM = "2026-06-01";
-const OPENING_PRICE_PENCE = 400;   // £4.00
-const STANDARD_PRICE_PENCE = 720;  // £7.20
+const PRICE_PENCE = 720; // £7.20 (10% off £8 door price)
 
 const VALID_SESSIONS = ["10:00", "12:00", "14:00", "16:00", "18:00"];
 const MAX_CAPACITY = 40;
@@ -91,7 +89,7 @@ serve(async (req) => {
       });
     }
 
-    const perChildPence = sessionDate < NEW_SCHEDULE_FROM ? OPENING_PRICE_PENCE : STANDARD_PRICE_PENCE;
+    const perChildPence = PRICE_PENCE;
     const origin = req.headers.get("origin") || "https://luxplay.uk";
 
     const payload = {
