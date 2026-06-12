@@ -1,32 +1,19 @@
 // Shared date + time-slot helpers for Soft Play & Baby Soft Play
 
-export const OPENING_DATE = "2026-05-30"; // Sat 30 May 2026 — soft play opens
-export const NEW_SCHEDULE_FROM = "2026-06-01"; // Mon 1 Jun 2026 onwards
+export const OPENING_DATE = "2026-06-13"; // Sat 13 Jun 2026 — soft play opens
+export const NEW_SCHEDULE_FROM = "2026-06-13"; // single schedule from opening
 export const BOOKING_WINDOW_DAYS = 14; // Max 2 weeks ahead
 
-// Pre-June slots (25–31 May 2026) — shorter hourly sessions during launch period
-const OPENING_SLOTS = [
-  { time: "10:00", label: "10AM" },
-  { time: "12:00", label: "12PM" },
-  { time: "14:00", label: "2PM" },
-  { time: "16:00", label: "4PM" },
-  { time: "18:00", label: "6PM" },
-  { time: "20:00", label: "8PM" },
-];
-
-// From 1 June 2026 onwards
+// Daily 2-hour sessions, 10AM – 8PM
 const STANDARD_SLOTS = [
-  { time: "09:00", label: "9–11AM" },
-  { time: "11:00", label: "11–1PM" },
-  { time: "13:00", label: "1–3PM" },
-  { time: "15:00", label: "3–5PM" },
-  { time: "17:00", label: "5–7PM" },
-  { time: "19:00", label: "7–9PM" },
+  { time: "10:00", label: "10AM–12PM" },
+  { time: "12:00", label: "12–2PM" },
+  { time: "14:00", label: "2–4PM" },
+  { time: "16:00", label: "4–6PM" },
+  { time: "18:00", label: "6–8PM" },
 ];
 
-export const getSlotsForDate = (dateISO: string) => {
-  return dateISO < NEW_SCHEDULE_FROM ? OPENING_SLOTS : STANDARD_SLOTS;
-};
+export const getSlotsForDate = (_dateISO: string) => STANDARD_SLOTS;
 
 // Pricing helpers — opening weekend = 50% off launch price; weekdays onwards = 10% online discount
 export const getSoftPlayPrice = (dateISO: string) =>
