@@ -7,9 +7,7 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const NEW_SCHEDULE_FROM = "2026-06-01";
-const OPENING_PRICE_PENCE = 200;   // £2.00
-const STANDARD_PRICE_PENCE = 360;  // £3.60
+const PRICE_PENCE = 360; // £3.60 (10% off £4 door price)
 
 const VALID_SESSIONS = ["10:00", "12:00", "14:00", "16:00", "18:00"];
 const MAX_CAPACITY = 15;
