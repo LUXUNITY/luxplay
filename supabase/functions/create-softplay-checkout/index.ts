@@ -89,7 +89,7 @@ serve(async (req) => {
       });
     }
 
-    const perChildPence = sessionDate < NEW_SCHEDULE_FROM ? OPENING_PRICE_PENCE : STANDARD_PRICE_PENCE;
+    const perChildPence = PRICE_PENCE;
     const origin = req.headers.get("origin") || "https://luxplay.uk";
 
     const payload = {
