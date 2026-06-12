@@ -64,8 +64,8 @@ Deno.serve(async (req) => {
     const body = await req.json()
     templateName = body.templateName || body.template_name
     recipientEmail = body.recipientEmail || body.recipient_email
-    messageId = crypto.randomUUID()
     idempotencyKey = body.idempotencyKey || body.idempotency_key || messageId
+    messageId = idempotencyKey || crypto.randomUUID()
     if (body.templateData && typeof body.templateData === 'object') {
       templateData = body.templateData
     }
@@ -124,6 +124,23 @@ Deno.serve(async (req) => {
 
   // Create Supabase client with service role (bypasses RLS)
   const supabase = createClient(supabaseUrl, supabaseServiceKey)
+
+  const { data: alreadyQueued } = await supabase
+    .from('email_send_log')
+    .select('id,status')
+    .eq('message_id', messageId)
+    .in('status', ['pending', 'sent'])
+    .maybeSingle()
+
+  if (alreadyQueued) {
+    return new Response(
+      JSON.stringify({ success: true, queued: true, deduped: true }),
+      {
+        status: 200,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      }
+    )
+  }
 
   // 2. Check suppression list (fail-closed: if we can't verify, don't send)
   const { data: suppressed, error: suppressionError } = await supabase
