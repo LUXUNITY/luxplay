@@ -268,7 +268,22 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      baby_soft_play_availability: {
+        Row: {
+          booked_count: number | null
+          session_date: string | null
+          session_time: string | null
+        }
+        Relationships: []
+      }
+      soft_play_availability: {
+        Row: {
+          booked_count: number | null
+          session_date: string | null
+          session_time: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       delete_email: {
