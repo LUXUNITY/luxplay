@@ -20,6 +20,73 @@ function generateBookingCode(): string {
   return code;
 }
 
+const SESSION_LABELS: Record<string, string> = {
+  "10:00": "10:00 AM",
+  "12:00": "12:00 PM",
+  "14:00": "2:00 PM",
+  "16:00": "4:00 PM",
+  "18:00": "6:00 PM",
+};
+
+function formatSessionDate(dateValue: string): string {
+  return new Date(`${dateValue}T12:00:00Z`).toLocaleDateString("en-GB", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+}
+
+async function queueBookingEmails(supabase: any, rows: any[], sessionId: string) {
+  if (!rows?.length) return;
+  const primary = rows[0];
+  if (!primary?.parent_email) return;
+  const bookingCodes = rows.map((entry) => entry.booking_code);
+  const babyCount = rows.length;
+  const totalAmount = rows.reduce((sum, entry) => sum + (entry.amount_paid || 0), 0);
+  const sessionTime = SESSION_LABELS[primary.session_time] || primary.session_time;
+  const sessionDate = formatSessionDate(primary.session_date);
+
+  const customerEmail = await supabase.functions.invoke("send-transactional-email", {
+    body: {
+      templateName: "softplay-booking",
+      recipientEmail: primary.parent_email,
+      idempotencyKey: `baby-softplay-${primary.stripe_session_id || sessionId}`,
+      templateData: {
+        childCount: babyCount,
+        parentName: primary.parent_name,
+        sessionTime,
+        sessionDate,
+        bookingCode: primary.booking_code,
+        bookingCodes,
+        totalAmount: `£${(totalAmount / 100).toFixed(2)}`,
+      },
+    },
+  });
+  if (customerEmail.error) console.error("Baby customer booking email failed:", customerEmail.error);
+
+  const adminEmail = await supabase.functions.invoke("send-transactional-email", {
+    body: {
+      templateName: "admin-purchase-notification",
+      recipientEmail: "luxplayuk@gmail.com",
+      idempotencyKey: `admin-baby-softplay-${primary.stripe_session_id || sessionId}`,
+      templateData: {
+        type: "softplay",
+        customerEmail: primary.parent_email,
+        childCount: babyCount,
+        parentName: `[BABY SOFT PLAY] ${primary.parent_name}`,
+        sessionTime,
+        sessionDate,
+        bookingCode: primary.booking_code,
+        bookingCodes,
+        amountPaid: `£${(totalAmount / 100).toFixed(2)}`,
+      },
+    },
+  });
+  if (adminEmail.error) console.error("Baby admin booking email failed:", adminEmail.error);
+}
+
 async function squareRefund(accessToken: string, paymentId: string, amount: number) {
   try {
     await fetch(`${SQUARE_BASE}/v2/refunds`, {
@@ -72,6 +139,7 @@ serve(async (req) => {
       .eq("stripe_session_id", sessionId);
 
     if (existing && existing.length > 0) {
+      await queueBookingEmails(supabase, existing, sessionId);
       return new Response(JSON.stringify({ booking: existing[0], bookings: existing }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200,
       });
@@ -176,6 +244,8 @@ serve(async (req) => {
         status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
+
+    await queueBookingEmails(supabase, bookings || [], sessionId);
 
     return new Response(JSON.stringify({ booking: bookings?.[0], bookings }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200,
