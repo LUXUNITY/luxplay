@@ -26,7 +26,7 @@ const SESSION_LABELS: Record<string, string> = {
 
 const SoftPlaySuccess = () => {
   const [searchParams] = useSearchParams();
-  const sessionId = searchParams.get("session_id");
+  const sessionId = searchParams.get("orderId") || searchParams.get("session_id");
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
