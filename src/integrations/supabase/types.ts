@@ -14,6 +14,27 @@ export type Database = {
   }
   public: {
     Tables: {
+      baby_soft_play_availability: {
+        Row: {
+          booked_count: number
+          session_date: string
+          session_time: string
+          updated_at: string
+        }
+        Insert: {
+          booked_count?: number
+          session_date: string
+          session_time: string
+          updated_at?: string
+        }
+        Update: {
+          booked_count?: number
+          session_date?: string
+          session_time?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       baby_soft_play_bookings: {
         Row: {
           amount_paid: number
@@ -191,6 +212,27 @@ export type Database = {
         }
         Relationships: []
       }
+      soft_play_availability: {
+        Row: {
+          booked_count: number
+          session_date: string
+          session_time: string
+          updated_at: string
+        }
+        Insert: {
+          booked_count?: number
+          session_date: string
+          session_time: string
+          updated_at?: string
+        }
+        Update: {
+          booked_count?: number
+          session_date?: string
+          session_time?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       soft_play_bookings: {
         Row: {
           amount_paid: number
@@ -268,22 +310,7 @@ export type Database = {
       }
     }
     Views: {
-      baby_soft_play_availability: {
-        Row: {
-          booked_count: number | null
-          session_date: string | null
-          session_time: string | null
-        }
-        Relationships: []
-      }
-      soft_play_availability: {
-        Row: {
-          booked_count: number | null
-          session_date: string | null
-          session_time: string | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
       delete_email: {
