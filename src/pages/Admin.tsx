@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Search, Check, X, Loader2 } from "lucide-react";
+import { Search, Check, X, Loader2, Lock } from "lucide-react";
 
 interface Order {
   id: string;
@@ -34,7 +34,14 @@ type Result =
   | { kind: "order"; data: Order }
   | { kind: "booking"; data: Booking };
 
+const PW_STORAGE_KEY = "luxplay_admin_pw";
+
 const Admin = () => {
+  const [adminPw, setAdminPw] = useState<string | null>(null);
+  const [pwInput, setPwInput] = useState("");
+  const [pwError, setPwError] = useState<string | null>(null);
+  const [pwBusy, setPwBusy] = useState(false);
+
   const [code, setCode] = useState("");
   const [result, setResult] = useState<Result | null>(null);
   const [loading, setLoading] = useState(false);
@@ -44,13 +51,73 @@ const Admin = () => {
   const [blastBusy, setBlastBusy] = useState(false);
   const [blastStatus, setBlastStatus] = useState<string | null>(null);
 
+  useEffect(() => {
+    const stored = sessionStorage.getItem(PW_STORAGE_KEY);
+    if (stored) setAdminPw(stored);
+  }, []);
+
+  // Helper: call admin-action edge function with the password header.
+  const callAdmin = async (action: string, payload: Record<string, unknown> = {}) => {
+    if (!adminPw) throw new Error("Not authenticated");
+    const { data, error } = await supabase.functions.invoke("admin-action", {
+      body: { action, ...payload },
+      headers: { "x-admin-password": adminPw },
+    });
+    if (error) {
+      // 401 = wrong password — force re-login.
+      const ctx: any = (error as any).context;
+      if (ctx?.status === 401) {
+        sessionStorage.removeItem(PW_STORAGE_KEY);
+        setAdminPw(null);
+        throw new Error("Session expired — sign in again.");
+      }
+      throw new Error(error.message || "Request failed");
+    }
+    return data as any;
+  };
+
+  const submitPassword = async () => {
+    setPwBusy(true);
+    setPwError(null);
+    try {
+      const { data, error } = await supabase.functions.invoke("admin-action", {
+        body: { action: "lookup_order", code: "__ping__" },
+        headers: { "x-admin-password": pwInput },
+      });
+      const status = (error as any)?.context?.status;
+      if (status === 401) {
+        setPwError("Incorrect password.");
+      } else if (error && status !== 400) {
+        setPwError(error.message || "Login failed");
+      } else {
+        // 200 (found nothing) or 400 (bad code) both prove the password is good.
+        sessionStorage.setItem(PW_STORAGE_KEY, pwInput);
+        setAdminPw(pwInput);
+        setPwInput("");
+        void data;
+      }
+    } catch (e: any) {
+      setPwError(e?.message ?? "Login failed");
+    }
+    setPwBusy(false);
+  };
+
+  const signOut = () => {
+    sessionStorage.removeItem(PW_STORAGE_KEY);
+    setAdminPw(null);
+    setResult(null);
+    setCode("");
+  };
+
   const runDelayBlast = async (dryRun: boolean) => {
+    if (!adminPw) return;
     if (!dryRun && !confirm("Send the delay notice email to ALL existing customers? This cannot be undone.")) return;
     setBlastBusy(true);
     setBlastStatus(null);
     try {
       const { data, error } = await supabase.functions.invoke("send-delay-notice-blast", {
         body: { dryRun },
+        headers: { "x-admin-password": adminPw },
       });
       if (error) throw error;
       if (dryRun) {
@@ -86,7 +153,6 @@ const Admin = () => {
     if (compact.length === 8 && compact.startsWith("SP")) {
       candidates.add(`SP-${compact.slice(2, 5)}-${compact.slice(5)}`);
     }
-
     return Array.from(candidates);
   };
 
@@ -103,49 +169,22 @@ const Admin = () => {
     if (compact.length === 11 && compact.startsWith("LUX")) {
       candidates.add(`LUX-${compact.slice(3, 7)}-${compact.slice(7)}`);
     }
-
     return Array.from(candidates);
   };
 
   const lookupBooking = async (value: string) => {
-    const candidates = getSoftPlayCandidates(value);
-    for (const candidate of candidates) {
-      const { data, error: queryError } = await supabase
-        .from("soft_play_bookings")
-        .select("*")
-        .eq("booking_code", candidate)
-        .maybeSingle();
-
-      if (queryError) {
-        throw queryError;
-      }
-
-      if (data) {
-        return data;
-      }
+    for (const candidate of getSoftPlayCandidates(value)) {
+      const res = await callAdmin("lookup_booking", { code: candidate });
+      if (res?.data) return res.data as Booking;
     }
-
     return null;
   };
 
   const lookupOrder = async (value: string) => {
-    const candidates = getOrderCandidates(value);
-    for (const candidate of candidates) {
-      const { data, error: queryError } = await supabase
-        .from("orders")
-        .select("*")
-        .eq("redemption_code", candidate)
-        .maybeSingle();
-
-      if (queryError) {
-        throw queryError;
-      }
-
-      if (data) {
-        return data;
-      }
+    for (const candidate of getOrderCandidates(value)) {
+      const res = await callAdmin("lookup_order", { code: candidate });
+      if (res?.data) return res.data as Order;
     }
-
     return null;
   };
 
@@ -160,7 +199,6 @@ const Admin = () => {
     try {
       if (trimmed.startsWith("SP") || getSoftPlayCandidates(trimmed).length > 1) {
         const booking = await lookupBooking(trimmed);
-
         if (booking) {
           setResult({ kind: "booking", data: booking });
         } else {
@@ -168,12 +206,10 @@ const Admin = () => {
         }
       } else {
         const order = await lookupOrder(trimmed);
-
         if (order) {
           setResult({ kind: "order", data: order });
         } else {
           const booking = await lookupBooking(trimmed);
-
           if (booking) {
             setResult({ kind: "booking", data: booking });
           } else {
@@ -181,8 +217,8 @@ const Admin = () => {
           }
         }
       }
-    } catch {
-      setError("Failed to look up code.");
+    } catch (e: any) {
+      setError(e?.message ?? "Failed to look up code.");
     }
 
     setLoading(false);
@@ -191,19 +227,15 @@ const Admin = () => {
   const redeemOrder = async () => {
     if (!result || result.kind !== "order") return;
     setActing(true);
-    const { error: updateError } = await supabase
-      .from("orders")
-      .update({ redeemed: true, redeemed_at: new Date().toISOString() })
-      .eq("id", result.data.id);
-
-    if (updateError) {
-      setError("Failed to redeem code.");
-    } else {
+    try {
+      await callAdmin("redeem_order", { id: result.data.id });
       setJustActed(true);
       setResult({
         kind: "order",
         data: { ...result.data, redeemed: true, redeemed_at: new Date().toISOString() },
       });
+    } catch (e: any) {
+      setError(e?.message ?? "Failed to redeem code.");
     }
     setActing(false);
   };
@@ -211,19 +243,15 @@ const Admin = () => {
   const checkInBooking = async () => {
     if (!result || result.kind !== "booking") return;
     setActing(true);
-    const { error: updateError } = await supabase
-      .from("soft_play_bookings")
-      .update({ checked_in: true, checked_in_at: new Date().toISOString() })
-      .eq("id", result.data.id);
-
-    if (updateError) {
-      setError("Failed to check in booking.");
-    } else {
+    try {
+      await callAdmin("checkin_booking", { id: result.data.id });
       setJustActed(true);
       setResult({
         kind: "booking",
         data: { ...result.data, checked_in: true, checked_in_at: new Date().toISOString() },
       });
+    } catch (e: any) {
+      setError(e?.message ?? "Failed to check in booking.");
     }
     setActing(false);
   };
@@ -242,9 +270,60 @@ const Admin = () => {
       year: "numeric",
     });
 
+  // --- Password gate ---
+  if (!adminPw) {
+    return (
+      <main className="min-h-screen bg-[#070710] flex items-center justify-center px-4 py-10">
+        <div className="max-w-sm w-full">
+          <div className="flex items-center justify-center mb-3">
+            <Lock className="w-6 h-6 text-neon-green" />
+          </div>
+          <h1
+            className="font-display text-3xl tracking-wider text-neon-green text-center mb-2"
+            style={{ textShadow: "0 0 20px rgba(170,255,0,0.3)" }}
+          >
+            STAFF LOGIN
+          </h1>
+          <p className="font-body text-white/40 text-xs text-center tracking-widest mb-8">
+            ENTER ADMIN PASSWORD
+          </p>
+          <input
+            type="password"
+            autoFocus
+            value={pwInput}
+            onChange={(e) => setPwInput(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && pwInput && submitPassword()}
+            placeholder="••••••••"
+            className="w-full bg-[#0a0a16] border border-white/10 text-white font-display text-lg tracking-widest px-4 py-3 placeholder:text-white/20 focus:outline-none focus:border-neon-green/50 mb-3"
+          />
+          {pwError && (
+            <p className="font-body text-red-300 text-sm mb-3">{pwError}</p>
+          )}
+          <button
+            onClick={submitPassword}
+            disabled={pwBusy || !pwInput}
+            className="w-full font-display text-sm tracking-widest text-[#070710] bg-neon-green py-4 disabled:opacity-50 flex items-center justify-center gap-2"
+          >
+            {pwBusy ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
+            SIGN IN
+          </button>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main className="min-h-screen bg-[#070710] flex items-center justify-center px-4 py-10">
       <div className="max-w-lg w-full">
+        <div className="flex items-center justify-between mb-2">
+          <span className="font-display text-xs tracking-[0.3em] text-white/30">SIGNED IN</span>
+          <button
+            onClick={signOut}
+            className="font-display text-xs tracking-widest text-white/40 hover:text-white/70"
+          >
+            SIGN OUT
+          </button>
+        </div>
         <h1
           className="font-display text-3xl tracking-wider text-neon-green text-center mb-2"
           style={{ textShadow: "0 0 20px rgba(170,255,0,0.3)" }}
@@ -284,7 +363,6 @@ const Admin = () => {
             <p className="font-body text-xs text-white/70 mt-3">{blastStatus}</p>
           )}
         </div>
-
 
         {/* Search */}
         <div className="flex gap-2 mb-6">
