@@ -1,5 +1,6 @@
 import { Suspense, lazy } from "react";
 import HeroSection from "@/components/HeroSection";
+import MidweekPromoBanner from "@/components/MidweekPromoBanner";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const PreSaleSection = lazy(() => import("@/components/PreSaleSection"));
@@ -12,6 +13,9 @@ const BabySoftPlaySection = lazy(() => import("@/components/BabySoftPlaySection"
 const Index = () => {
   return (
     <main className="min-h-screen bg-background">
+      {/* 0. Midweek Madness — top-of-page promo to boost Wed/Thu footfall */}
+      <MidweekPromoBanner />
+
       {/* 1. Hero — full-screen immersive, CTA front and center */}
       <HeroSection />
 

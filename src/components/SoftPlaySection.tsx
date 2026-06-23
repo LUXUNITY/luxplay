@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import DateStrip from "./softplay/DateStrip";
-import { getAvailableDates, getSlotsForDate, getSoftPlayPrice, getSoftPlayFullPrice, isOpeningWeekend } from "./softplay/dateSlots";
+import { getAvailableDates, getSlotsForDate, getSoftPlayPrice, getSoftPlayFullPrice, isOpeningWeekend, isMidweekDeal } from "./softplay/dateSlots";
 
 const MAX_CAPACITY = 40;
 // Price is now date-dependent — see getSoftPlayPrice in dateSlots.ts
@@ -53,6 +53,7 @@ const SoftPlaySection = () => {
   const fullPrice = getSoftPlayFullPrice(selectedDate);
   const totalPrice = childCount * pricePerChild;
   const isOpening = isOpeningWeekend(selectedDate);
+  const isMidweek = isMidweekDeal(selectedDate);
 
   const handleBook = async () => {
     if (!selectedSession || childCount < 1 || !parentName.trim()) {
@@ -153,16 +154,20 @@ const SoftPlaySection = () => {
           className="text-center mb-8"
         >
           <p className="font-body text-white/50 text-sm md:text-base mb-2">
-            {isOpening
-              ? "Book your child's spot for opening weekend — limited to 40 kids per session"
-              : "Book online & save 10% — limited to 40 kids per session"}
+            {isMidweek
+              ? "Wed & Thu Midweek Madness — 20% OFF online & in store. Limited to 40 kids per session."
+              : "Pick a Wed or Thu for 20% OFF (Midweek Madness). Limited to 40 kids per session."}
           </p>
           <div className="flex items-center justify-center gap-4 mt-3">
-            <span className="font-display text-2xl text-white/30 line-through">£{fullPrice.toFixed(2)}</span>
+            {isMidweek && (
+              <span className="font-display text-2xl text-white/30 line-through">£{fullPrice.toFixed(2)}</span>
+            )}
             <span className="font-display text-5xl md:text-6xl text-neon-cyan glow-cyan">£{pricePerChild.toFixed(2)}</span>
-            <span className="bg-neon-pink text-[#070710] font-display text-xs tracking-widest px-3 py-1 animate-pulse">
-              {isOpening ? "50% OFF" : "10% OFF"}
-            </span>
+            {isMidweek && (
+              <span className="bg-neon-pink text-[#070710] font-display text-xs tracking-widest px-3 py-1 animate-pulse">
+                20% OFF
+              </span>
+            )}
           </div>
         </motion.div>
 
