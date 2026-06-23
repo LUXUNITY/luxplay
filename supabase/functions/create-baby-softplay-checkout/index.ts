@@ -7,7 +7,14 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const PRICE_PENCE = 360; // £3.60 (10% off £4 door price)
+// Midweek Madness: 20% off on Wed/Thu (£3.20); other days = full £4 door price.
+const FULL_PRICE_PENCE = 400;
+const MIDWEEK_PRICE_PENCE = 320;
+const isMidweekDeal = (dateISO: string) => {
+  const d = new Date(dateISO + "T12:00:00");
+  const day = d.getDay();
+  return day === 3 || day === 4;
+};
 
 const VALID_SESSIONS = ["10:00", "12:00", "14:00", "16:00", "18:00"];
 const MAX_CAPACITY = 15;
