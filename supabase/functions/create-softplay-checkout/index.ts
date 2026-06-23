@@ -96,7 +96,7 @@ serve(async (req) => {
       });
     }
 
-    const perChildPence = PRICE_PENCE;
+    const perChildPence = isMidweekDeal(sessionDate) ? MIDWEEK_PRICE_PENCE : FULL_PRICE_PENCE;
     const origin = Deno.env.get("SITE_URL") || "https://luxplay.uk";
 
     const payload = {
