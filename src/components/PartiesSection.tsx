@@ -19,6 +19,8 @@ const TIERS: Tier[] = [
     perks: [
       "2 hours of soft play",
       "£5 arcade credits per child",
+      "Hot meal: nuggets, chips & drink",
+      "Small toy inside every meal",
       "Adults go free",
     ],
   },
@@ -31,6 +33,9 @@ const TIERS: Tier[] = [
     perks: [
       "2 hours of soft play",
       "£10 arcade credits per child",
+      "Hot meal: nuggets, chips & drink",
+      "Extra snack & drink included",
+      "Small toy inside every meal",
       "Adults go free",
     ],
   },
@@ -42,11 +47,15 @@ const TIERS: Tier[] = [
     perks: [
       "2 hours of soft play",
       "£20 arcade credits per child",
+      "Hot meal: nuggets, chips & drink",
+      "Extra snack & drink included",
+      "Small toy inside every meal",
       "Birthday cake OR gift included",
       "Adults go free",
     ],
   },
 ];
+
 
 const accentMap = {
   cyan: {
