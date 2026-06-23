@@ -112,7 +112,7 @@ const PreSaleSection = () => {
             <Flame className="w-3.5 h-3.5 text-neon-green" />
           </span>
           <p className="font-body text-white/50 text-xs md:text-sm mt-3 max-w-md mx-auto">
-            8 credits = 1 play · Credits never expire · Walk in, tap on, play.
+            Most games cost <span className="text-neon-pink font-semibold">5–10 credits per play</span> · Credits never expire · Walk in, tap on, play.
           </p>
         </motion.div>
 
