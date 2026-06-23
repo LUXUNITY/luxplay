@@ -113,10 +113,45 @@ serve(async (req) => {
       );
     }
 
+    // Queue confirmation + admin notification emails server-side.
+    // (Client cannot call send-transactional-email — it requires service_role.)
+    try {
+      await supabase.functions.invoke("send-transactional-email", {
+        body: {
+          templateName: "redemption-code",
+          recipientEmail: order.customer_email,
+          idempotencyKey: `redemption-${sessionId}`,
+          templateData: {
+            packageName: order.package_name,
+            credits: order.credits,
+            redemptionCode: order.redemption_code,
+          },
+        },
+      });
+      await supabase.functions.invoke("send-transactional-email", {
+        body: {
+          templateName: "admin-purchase-notification",
+          recipientEmail: "luxplayuk@gmail.com",
+          idempotencyKey: `admin-credit-${sessionId}`,
+          templateData: {
+            type: "credits",
+            customerEmail: order.customer_email,
+            packageName: order.package_name,
+            credits: order.credits,
+            redemptionCode: order.redemption_code,
+            amountPaid: `£${((order.amount_paid || 0) / 100).toFixed(2)}`,
+          },
+        },
+      });
+    } catch (emailErr) {
+      console.error("Email enqueue failed (non-fatal):", emailErr);
+    }
+
     return new Response(JSON.stringify({ order }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
     });
+
   } catch (error) {
     return new Response(JSON.stringify({ error: error.message }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
