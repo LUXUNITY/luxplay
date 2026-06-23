@@ -13,6 +13,9 @@ const BabySoftPlaySection = lazy(() => import("@/components/BabySoftPlaySection"
 const Index = () => {
   return (
     <main className="min-h-screen bg-background">
+      {/* 0. Midweek Madness — top-of-page promo to boost Wed/Thu footfall */}
+      <MidweekPromoBanner />
+
       {/* 1. Hero — full-screen immersive, CTA front and center */}
       <HeroSection />
 
