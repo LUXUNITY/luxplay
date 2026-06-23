@@ -225,7 +225,7 @@ const PartiesSection = () => {
               <ul className="font-body text-white/60 text-xs md:text-sm space-y-1.5 list-disc list-inside marker:text-white/30">
                 <li>Minimum <span className="text-white/80">8 children</span> per party booking.</li>
                 <li>Credits load straight onto each child's LuxPlay card.</li>
-                <li>Optional <span className="text-white/80">£6 per child food portion</span> from our café.</li>
+                
                 <li>To book, message us via the contact details in the footer with your preferred date.</li>
               </ul>
             </div>
