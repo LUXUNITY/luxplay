@@ -3,6 +3,7 @@ import { Flame, Loader2, ChevronsRight } from "lucide-react";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import { isMidweekDeal } from "./softplay/dateSlots";
 
 // Pricing — matches the in-store credits poster exactly.
 const tiers = [
@@ -12,6 +13,17 @@ const tiers = [
   { id: "c800",  credits: 800,  price: 50,  color: "neon-cyan" },
   { id: "c2000", credits: 2000, price: 100, color: "neon-purple" },
 ];
+
+// Format £X.XX without trailing .00
+const fmtPrice = (n: number) =>
+  Number.isInteger(n) ? `£${n}` : `£${n.toFixed(2)}`;
+
+// Today's ISO date (local) — used to decide if the Midweek 20% off is live.
+const todayISO = () => {
+  const d = new Date();
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+};
 
 // Tailwind needs to see full class strings — map color tokens explicitly.
 const colorClasses: Record<string, { text: string; border: string; shadow: string; bg: string; arrow: string }> = {
@@ -54,6 +66,7 @@ const colorClasses: Record<string, { text: string; border: string; shadow: strin
 
 const PreSaleSection = () => {
   const [loading, setLoading] = useState<string | null>(null);
+  const midweekLive = isMidweekDeal(todayISO());
 
   const handleBuy = async (id: string) => {
     setLoading(id);
@@ -113,6 +126,11 @@ const PreSaleSection = () => {
           </span>
           <p className="font-body text-white/50 text-xs md:text-sm mt-3 max-w-md mx-auto">
             Most games cost <span className="text-neon-pink font-semibold">5–10 credits per play</span> · Credits never expire · Walk in, tap on, play.
+          </p>
+          <p className="font-body text-neon-yellow text-[11px] md:text-sm mt-2 tracking-wide">
+            {midweekLive
+              ? "★ MIDWEEK MADNESS LIVE TODAY — 20% OFF every pack ★"
+              : "★ MIDWEEK MADNESS — 20% OFF every pack every Wed & Thu ★"}
           </p>
         </motion.div>
 
@@ -185,20 +203,62 @@ const PreSaleSection = () => {
 
                 {/* Price */}
                 <div className="flex flex-col">
-                  <span
-                    className={`font-display tracking-wide ${c.text} ${
-                      isBest
-                        ? "text-5xl md:text-8xl leading-none"
-                        : "text-3xl md:text-5xl leading-none"
-                    }`}
-                    style={
-                      isBest
-                        ? { textShadow: "0 0 25px rgba(255,0,204,0.7), 0 0 50px rgba(255,0,204,0.4)" }
-                        : { textShadow: "0 0 12px currentColor" }
-                    }
-                  >
-                    £{t.price}
-                  </span>
+                  {midweekLive ? (
+                    <>
+                      <span
+                        className={`font-display tracking-wide text-white/35 line-through ${
+                          isBest ? "text-2xl md:text-4xl leading-none" : "text-base md:text-2xl leading-none"
+                        }`}
+                      >
+                        {fmtPrice(t.price)}
+                      </span>
+                      <span
+                        className={`font-display tracking-wide ${c.text} ${
+                          isBest
+                            ? "text-5xl md:text-8xl leading-none mt-1"
+                            : "text-3xl md:text-5xl leading-none mt-0.5"
+                        }`}
+                        style={
+                          isBest
+                            ? { textShadow: "0 0 25px rgba(255,0,204,0.7), 0 0 50px rgba(255,0,204,0.4)" }
+                            : { textShadow: "0 0 12px currentColor" }
+                        }
+                      >
+                        {fmtPrice(t.price * 0.8)}
+                      </span>
+                      <span
+                        className={`font-display tracking-[0.2em] text-neon-yellow uppercase ${
+                          isBest ? "text-[10px] md:text-sm mt-1" : "text-[9px] md:text-[11px] mt-0.5"
+                        }`}
+                      >
+                        20% OFF
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span
+                        className={`font-display tracking-wide ${c.text} ${
+                          isBest
+                            ? "text-5xl md:text-8xl leading-none"
+                            : "text-3xl md:text-5xl leading-none"
+                        }`}
+                        style={
+                          isBest
+                            ? { textShadow: "0 0 25px rgba(255,0,204,0.7), 0 0 50px rgba(255,0,204,0.4)" }
+                            : { textShadow: "0 0 12px currentColor" }
+                        }
+                      >
+                        {fmtPrice(t.price)}
+                      </span>
+                      <span
+                        className={`font-display tracking-[0.18em] text-neon-yellow/80 uppercase ${
+                          isBest ? "text-[10px] md:text-xs mt-1" : "text-[9px] md:text-[10px] mt-0.5"
+                        }`}
+                      >
+                        {fmtPrice(t.price * 0.8)} Wed/Thu
+                      </span>
+                    </>
+                  )}
                 </div>
 
                 {/* Buy */}
