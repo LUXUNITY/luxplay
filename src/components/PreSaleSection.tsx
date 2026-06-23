@@ -230,7 +230,7 @@ const PreSaleSection = () => {
           className="mt-10 max-w-3xl mx-auto border border-white/10 p-5 md:p-6 text-center bg-[#0a0a16]"
         >
           <p className="text-white/80 font-body text-sm">
-            Credits load straight to your LuxPlay card on opening day.
+            Credits load straight to your LuxPlay card.
           </p>
           <p className="text-white/40 font-body text-xs mt-2">
             Credits never expire. Use for any arcade or redemption game.
