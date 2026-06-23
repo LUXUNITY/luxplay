@@ -53,6 +53,7 @@ const SoftPlaySection = () => {
   const fullPrice = getSoftPlayFullPrice(selectedDate);
   const totalPrice = childCount * pricePerChild;
   const isOpening = isOpeningWeekend(selectedDate);
+  const isMidweek = isMidweekDeal(selectedDate);
 
   const handleBook = async () => {
     if (!selectedSession || childCount < 1 || !parentName.trim()) {
