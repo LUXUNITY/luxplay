@@ -130,7 +130,7 @@ const SoftPlaySection = () => {
         >
           <span className="inline-flex items-center gap-2 border-2 border-neon-cyan bg-neon-cyan/10 text-neon-cyan font-display text-sm tracking-[0.3em] uppercase px-6 py-3 animate-pulse mb-6">
             <Sparkles className="w-4 h-4" />
-            OPENING WEEKEND SPECIAL
+            SUMMER SPECIALS
             <Sparkles className="w-4 h-4" />
           </span>
         </motion.div>
@@ -386,9 +386,6 @@ const SoftPlaySection = () => {
           viewport={{ once: true }}
           className="mt-6 max-w-3xl mx-auto border border-white/10 p-6 md:p-8 text-center bg-[#0a0a16]"
         >
-          <p className="text-white/80 font-body text-sm md:text-base font-semibold">
-            Opening weekend only (Sat & Sun) — <strong className="text-white">normal price £8 after launch.</strong>
-          </p>
           <p className="text-neon-cyan font-bold mt-3 text-sm md:text-base glow-cyan font-body">
             Limited to 40 kids per session. Book now to guarantee your spot.
           </p>
