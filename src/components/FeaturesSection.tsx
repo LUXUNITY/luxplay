@@ -4,7 +4,7 @@ import founderMartinAsset from "@/assets/founder-martin-clean.png.asset.json";
 import logoLuxPlay from "@/assets/logo-luxplay.png";
 import logoMJLux from "@/assets/logo-mjlux.png";
 import logoLuxKey from "@/assets/logo-luxkey.png";
-import logoMasterclass from "@/assets/logo-masterclass-exteriors.jpg.asset.json";
+import logoMasterclass from "@/assets/logo-masterclass-exteriors.png.asset.json";
 
 import { gridBackgroundUrl } from "@/components/circuitTile";
 
