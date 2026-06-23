@@ -1,5 +1,6 @@
 import { Suspense, lazy } from "react";
 import HeroSection from "@/components/HeroSection";
+import MidweekPromoBanner from "@/components/MidweekPromoBanner";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const PreSaleSection = lazy(() => import("@/components/PreSaleSection"));
