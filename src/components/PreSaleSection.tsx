@@ -3,6 +3,7 @@ import { Flame, Loader2, ChevronsRight } from "lucide-react";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import { isMidweekDeal } from "./softplay/dateSlots";
 
 // Pricing — matches the in-store credits poster exactly.
 const tiers = [
@@ -12,6 +13,17 @@ const tiers = [
   { id: "c800",  credits: 800,  price: 50,  color: "neon-cyan" },
   { id: "c2000", credits: 2000, price: 100, color: "neon-purple" },
 ];
+
+// Format £X.XX without trailing .00
+const fmtPrice = (n: number) =>
+  Number.isInteger(n) ? `£${n}` : `£${n.toFixed(2)}`;
+
+// Today's ISO date (local) — used to decide if the Midweek 20% off is live.
+const todayISO = () => {
+  const d = new Date();
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+};
 
 // Tailwind needs to see full class strings — map color tokens explicitly.
 const colorClasses: Record<string, { text: string; border: string; shadow: string; bg: string; arrow: string }> = {
