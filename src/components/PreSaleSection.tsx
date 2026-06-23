@@ -127,6 +127,11 @@ const PreSaleSection = () => {
           <p className="font-body text-white/50 text-xs md:text-sm mt-3 max-w-md mx-auto">
             Most games cost <span className="text-neon-pink font-semibold">5–10 credits per play</span> · Credits never expire · Walk in, tap on, play.
           </p>
+          <p className="font-body text-neon-yellow text-[11px] md:text-sm mt-2 tracking-wide">
+            {midweekLive
+              ? "★ MIDWEEK MADNESS LIVE TODAY — 20% OFF every pack ★"
+              : "★ MIDWEEK MADNESS — 20% OFF every pack every Wed & Thu ★"}
+          </p>
         </motion.div>
 
         {/* Column headers */}
