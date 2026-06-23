@@ -66,6 +66,7 @@ const colorClasses: Record<string, { text: string; border: string; shadow: strin
 
 const PreSaleSection = () => {
   const [loading, setLoading] = useState<string | null>(null);
+  const midweekLive = isMidweekDeal(todayISO());
 
   const handleBuy = async (id: string) => {
     setLoading(id);
