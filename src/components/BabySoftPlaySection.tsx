@@ -154,14 +154,20 @@ const BabySoftPlaySection = () => {
           className="text-center mb-8"
         >
           <p className="font-body text-white/50 text-sm md:text-base mb-2">
-            A calmer space just for under-2s — limited to 15 babies per session
+            {isMidweek
+              ? "Wed & Thu Midweek Madness — 20% OFF online & in store. Limited to 15 babies per session."
+              : "A calmer space just for under-2s — pick Wed or Thu for 20% OFF. Limited to 15 babies per session."}
           </p>
           <div className="flex items-center justify-center gap-4 mt-3">
-            <span className="font-display text-2xl text-white/30 line-through">£{fullPrice.toFixed(2)}</span>
+            {isMidweek && (
+              <span className="font-display text-2xl text-white/30 line-through">£{fullPrice.toFixed(2)}</span>
+            )}
             <span className="font-display text-5xl md:text-6xl text-neon-pink glow-pink">£{pricePerBaby.toFixed(2)}</span>
-            <span className="bg-neon-cyan text-[#070710] font-display text-xs tracking-widest px-3 py-1 animate-pulse">
-              {isOpening ? "50% OFF" : "10% OFF"}
-            </span>
+            {isMidweek && (
+              <span className="bg-neon-cyan text-[#070710] font-display text-xs tracking-widest px-3 py-1 animate-pulse">
+                20% OFF
+              </span>
+            )}
           </div>
         </motion.div>
 
