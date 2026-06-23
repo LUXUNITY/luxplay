@@ -19,6 +19,8 @@ const TIERS: Tier[] = [
     perks: [
       "2 hours of soft play",
       "£5 arcade credits per child",
+      "Hot meal: nuggets, chips & drink",
+      "Small toy inside every meal",
       "Adults go free",
     ],
   },
@@ -31,6 +33,9 @@ const TIERS: Tier[] = [
     perks: [
       "2 hours of soft play",
       "£10 arcade credits per child",
+      "Hot meal: nuggets, chips & drink",
+      "Extra snack & drink included",
+      "Small toy inside every meal",
       "Adults go free",
     ],
   },
@@ -42,11 +47,15 @@ const TIERS: Tier[] = [
     perks: [
       "2 hours of soft play",
       "£20 arcade credits per child",
+      "Hot meal: nuggets, chips & drink",
+      "Extra snack & drink included",
+      "Small toy inside every meal",
       "Birthday cake OR gift included",
       "Adults go free",
     ],
   },
 ];
+
 
 const accentMap = {
   cyan: {
@@ -188,15 +197,15 @@ const PartiesSection = () => {
           style={{ boxShadow: "0 0 30px rgba(255,235,0,0.15)" }}
         >
           <p className="font-display text-[10px] tracking-[0.3em] text-neon-yellow/80 mb-2">
-            ★ ADD A FOOD PORTION ★
+            ★ HOT FOOD INCLUDED IN EVERY PACKAGE ★
           </p>
           <p className="font-body text-white/85 text-sm md:text-base">
-            Add a hot food portion to any party package for just{" "}
-            <span className="font-display text-neon-yellow text-lg md:text-xl tracking-wider"
+            Every child gets a{" "}
+            <span className="font-display text-neon-yellow text-base md:text-lg tracking-wider"
                   style={{ textShadow: "0 0 12px rgba(255,235,0,0.7)" }}>
-              £6 per child
+              hot meal — nuggets, chips & a drink
             </span>
-            {" "}— ordered straight from our café on the day.
+            , with a small toy tucked inside. Classic & Ultimate also include an extra snack and drink.
           </p>
         </motion.div>
 
