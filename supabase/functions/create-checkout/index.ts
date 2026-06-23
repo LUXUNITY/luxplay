@@ -8,14 +8,11 @@ const corsHeaders = {
 };
 
 const PRICE_MAP: Record<string, string> = {
-  c50: "price_1TckGFKDxuB13duTEktgvP9o",
-  c110: "price_1TckGcKDxuB13duTaP1xmia4",
-  c160: "price_1TckGzKDxuB13duTOhnEwiuM",
-  c230: "price_1TckHOKDxuB13duTO8xL6hmt",
-  c360: "price_1TckIXKDxuB13duTerIc9rna",
-  c500: "price_1TckIvKDxuB13duTbMRJimKq",
-  c800: "price_1TckJKKDxuB13duTlIpZPU4z",
-  c1500: "price_1TckJbKDxuB13duTNRtZ3YtY",
+  c50:   "price_1TckGFKDxuB13duTEktgvP9o", // 50 credits @ £5
+  c130:  "price_1TlSNKKDxuB13duT5u6Mp5k8", // 130 credits @ £10
+  c300:  "price_1TlSNgKDxuB13duTOyzobVeB", // 300 credits @ £20 (Most Popular)
+  c800:  "price_1TlSOyKDxuB13duTww8HTFly", // 800 credits @ £50
+  c2000: "price_1TlSPEKDxuB13duT0CDjJX5o", // 2000 credits @ £100
 };
 
 serve(async (req) => {
