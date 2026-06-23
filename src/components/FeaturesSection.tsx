@@ -4,7 +4,7 @@ import founderMartinAsset from "@/assets/founder-martin-clean.png.asset.json";
 import logoLuxPlay from "@/assets/logo-luxplay.png";
 import logoMJLux from "@/assets/logo-mjlux.png";
 import logoLuxKey from "@/assets/logo-luxkey.png";
-import logoLuxReno from "@/assets/logo-luxrenovations.png";
+import logoMasterclass from "@/assets/logo-masterclass-exteriors.jpg.asset.json";
 
 import { gridBackgroundUrl } from "@/components/circuitTile";
 
@@ -12,7 +12,7 @@ const sharedBusinesses = [
   { name: "LuxPlay", logo: logoLuxPlay, scale: 1, color: "text-neon-cyan", shadow: "0 0 8px rgba(0,238,255,0.55)", glow: "drop-shadow(0 0 10px rgba(0,238,255,0.45))" },
   { name: "MJlux cafè", logo: logoMJLux, scale: 1, color: "text-neon-pink", shadow: "0 0 8px rgba(255,0,204,0.55)", glow: "drop-shadow(0 0 10px rgba(255,170,120,0.45))" },
   { name: "LuxKey", logo: logoLuxKey, scale: 1, color: "text-neon-purple", shadow: "0 0 8px rgba(119,0,255,0.55)", glow: "drop-shadow(0 0 10px rgba(255,200,60,0.45))" },
-  { name: "LuxRenovations", logo: logoLuxReno, scale: 1, color: "text-neon-green", shadow: "0 0 8px rgba(170,255,0,0.55)", glow: "drop-shadow(0 0 10px rgba(255,200,60,0.45))" },
+  { name: "Masterclass Exteriors", logo: logoMasterclass.url, scale: 1, color: "text-neon-green", shadow: "0 0 8px rgba(170,255,0,0.55)", glow: "drop-shadow(0 0 10px rgba(255,200,60,0.45))" },
 ];
 
 const founders = [
