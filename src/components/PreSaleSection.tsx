@@ -201,64 +201,37 @@ const PreSaleSection = () => {
                   className={`${c.arrow} ${isBest ? "w-8 h-8 md:w-16 md:h-16" : "w-5 h-5 md:w-8 md:h-8"}`}
                 />
 
-                {/* Price */}
+                {/* Price — discounted is ALWAYS the hero number */}
                 <div className="flex flex-col">
-                  {midweekLive ? (
-                    <>
-                      <span
-                        className={`font-display tracking-wide text-white/35 line-through ${
-                          isBest ? "text-2xl md:text-4xl leading-none" : "text-base md:text-2xl leading-none"
-                        }`}
-                      >
-                        {fmtPrice(t.price)}
-                      </span>
-                      <span
-                        className={`font-display tracking-wide ${c.text} ${
-                          isBest
-                            ? "text-5xl md:text-8xl leading-none mt-1"
-                            : "text-3xl md:text-5xl leading-none mt-0.5"
-                        }`}
-                        style={
-                          isBest
-                            ? { textShadow: "0 0 25px rgba(255,0,204,0.7), 0 0 50px rgba(255,0,204,0.4)" }
-                            : { textShadow: "0 0 12px currentColor" }
-                        }
-                      >
-                        {fmtPrice(t.price * 0.8)}
-                      </span>
-                      <span
-                        className={`font-display tracking-[0.2em] text-neon-yellow uppercase ${
-                          isBest ? "text-[10px] md:text-sm mt-1" : "text-[9px] md:text-[11px] mt-0.5"
-                        }`}
-                      >
-                        20% OFF
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      <span
-                        className={`font-display tracking-wide ${c.text} ${
-                          isBest
-                            ? "text-5xl md:text-8xl leading-none"
-                            : "text-3xl md:text-5xl leading-none"
-                        }`}
-                        style={
-                          isBest
-                            ? { textShadow: "0 0 25px rgba(255,0,204,0.7), 0 0 50px rgba(255,0,204,0.4)" }
-                            : { textShadow: "0 0 12px currentColor" }
-                        }
-                      >
-                        {fmtPrice(t.price)}
-                      </span>
-                      <span
-                        className={`font-display tracking-[0.18em] text-neon-yellow/80 uppercase ${
-                          isBest ? "text-[10px] md:text-xs mt-1" : "text-[9px] md:text-[10px] mt-0.5"
-                        }`}
-                      >
-                        {fmtPrice(t.price * 0.8)} Wed/Thu
-                      </span>
-                    </>
-                  )}
+                  <span
+                    className={`font-display tracking-wide text-white/35 line-through ${
+                      isBest ? "text-2xl md:text-4xl leading-none" : "text-base md:text-2xl leading-none"
+                    }`}
+                  >
+                    {fmtPrice(t.price)}
+                  </span>
+                  <span
+                    className={`font-display tracking-wide ${c.text} ${
+                      isBest
+                        ? "text-6xl md:text-9xl leading-none mt-1"
+                        : "text-4xl md:text-6xl leading-none mt-0.5"
+                    }`}
+                    style={
+                      isBest
+                        ? { textShadow: "0 0 30px rgba(255,0,204,0.9), 0 0 60px rgba(255,0,204,0.5)" }
+                        : { textShadow: "0 0 15px currentColor" }
+                    }
+                  >
+                    {fmtPrice(t.price * 0.8)}
+                  </span>
+                  <span
+                    className={`font-display tracking-[0.2em] text-neon-yellow uppercase animate-pulse ${
+                      isBest ? "text-[11px] md:text-sm mt-1.5" : "text-[9px] md:text-[11px] mt-1"
+                    }`}
+                    style={{ textShadow: "0 0 8px rgba(255,235,0,0.8)" }}
+                  >
+                    {midweekLive ? "20% OFF TODAY" : "20% OFF Wed & Thu"}
+                  </span>
                 </div>
 
                 {/* Buy */}
