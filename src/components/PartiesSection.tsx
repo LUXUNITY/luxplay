@@ -179,12 +179,33 @@ const PartiesSection = () => {
           })}
         </div>
 
+        {/* Food add-on highlight */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-10 max-w-3xl mx-auto border-2 border-neon-yellow bg-neon-yellow/5 px-6 py-5 text-center"
+          style={{ boxShadow: "0 0 30px rgba(255,235,0,0.15)" }}
+        >
+          <p className="font-display text-[10px] tracking-[0.3em] text-neon-yellow/80 mb-2">
+            ★ ADD A FOOD PORTION ★
+          </p>
+          <p className="font-body text-white/85 text-sm md:text-base">
+            Add a hot food portion to any party package for just{" "}
+            <span className="font-display text-neon-yellow text-lg md:text-xl tracking-wider"
+                  style={{ textShadow: "0 0 12px rgba(255,235,0,0.7)" }}>
+              £6 per child
+            </span>
+            {" "}— ordered straight from our café on the day.
+          </p>
+        </motion.div>
+
         {/* Info footer */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mt-12 max-w-3xl mx-auto border border-white/10 bg-[#0a0a16]/60 p-6 md:p-7"
+          className="mt-8 max-w-3xl mx-auto border border-white/10 bg-[#0a0a16]/60 p-6 md:p-7"
         >
           <div className="flex items-start gap-3">
             <Sparkles className="w-4 h-4 text-neon-pink shrink-0 mt-1" />
@@ -195,7 +216,7 @@ const PartiesSection = () => {
               <ul className="font-body text-white/60 text-xs md:text-sm space-y-1.5 list-disc list-inside marker:text-white/30">
                 <li>Minimum <span className="text-white/80">8 children</span> per party booking.</li>
                 <li>Credits load straight onto each child's LuxPlay card.</li>
-                <li>Bring your own food and drinks — or pre-order from our café.</li>
+                <li>Optional <span className="text-white/80">£6 per child food portion</span> from our café.</li>
                 <li>To book, message us via the contact details in the footer with your preferred date.</li>
               </ul>
             </div>
