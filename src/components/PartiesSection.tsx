@@ -165,7 +165,11 @@ const PartiesSection = () => {
                 </ul>
 
                 <a
-                  href="#footer"
+                  href={`mailto:luxplayuk@gmail.com?subject=${encodeURIComponent(
+                    `Party Enquiry — ${t.name} Package (£${t.price.toFixed(2)}/child)`
+                  )}&body=${encodeURIComponent(
+                    `Hi LuxPlay,\n\nI'd like to enquire about the ${t.name} party package (£${t.price.toFixed(2)} per child).\n\nPreferred date:\nNumber of children:\nChild's name & age:\nContact number:\n\nThanks!`
+                  )}`}
                   className={`block text-center font-display text-sm tracking-widest py-4 ${a.bg} text-[#070710] hover:opacity-90 transition-all duration-300`}
                 >
                   ENQUIRE NOW
