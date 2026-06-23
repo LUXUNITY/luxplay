@@ -153,22 +153,32 @@ const SoftPlaySection = () => {
           viewport={{ once: true }}
           className="text-center mb-8"
         >
-          <p className="font-body text-white/50 text-sm md:text-base mb-2">
-            {isMidweek
-              ? "Wed & Thu Midweek Madness — 20% OFF online & in store. Limited to 40 kids per session."
-              : "Pick a Wed or Thu for 20% OFF (Midweek Madness). Limited to 40 kids per session."}
+          <p className="font-body text-white/60 text-sm md:text-base mb-3">
+            Limited to 40 kids per session · Adults go free
           </p>
-          <div className="flex items-center justify-center gap-4 mt-3">
-            {isMidweek && (
-              <span className="font-display text-2xl text-white/30 line-through">£{fullPrice.toFixed(2)}</span>
-            )}
-            <span className="font-display text-5xl md:text-6xl text-neon-cyan glow-cyan">£{pricePerChild.toFixed(2)}</span>
-            {isMidweek && (
-              <span className="bg-neon-pink text-[#070710] font-display text-xs tracking-widest px-3 py-1 animate-pulse">
-                20% OFF
-              </span>
-            )}
+          <div className="flex items-end justify-center gap-3 md:gap-5 mt-3">
+            <span className="font-display text-3xl md:text-5xl text-white/30 line-through leading-none mb-2 md:mb-3">
+              £{getSoftPlayFullPrice(selectedDate).toFixed(2)}
+            </span>
+            <span
+              className="font-display text-7xl md:text-9xl text-neon-cyan glow-cyan leading-none"
+              style={{ textShadow: "0 0 25px rgba(0,238,255,0.9), 0 0 55px rgba(0,238,255,0.5)" }}
+            >
+              £{(getSoftPlayFullPrice(selectedDate) * 0.8).toFixed(2)}
+            </span>
+            <span
+              className="bg-neon-pink text-[#070710] font-display text-sm md:text-lg tracking-widest px-3 py-2 md:px-4 md:py-2.5 animate-pulse mb-1 md:mb-2"
+              style={{ boxShadow: "0 0 20px rgba(255,0,204,0.7)" }}
+            >
+              20% OFF
+            </span>
           </div>
+          <p className="font-display text-neon-yellow text-xs md:text-base tracking-[0.2em] uppercase mt-4 animate-pulse"
+             style={{ textShadow: "0 0 10px rgba(255,235,0,0.8)" }}>
+            {isMidweek
+              ? "★ Midweek Madness Live — Discount Applied ★"
+              : "★ Pick a Wed or Thu Below to Lock In 20% OFF ★"}
+          </p>
         </motion.div>
 
         {/* ADULTS FREE — big, in-your-face badge */}
