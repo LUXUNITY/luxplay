@@ -37,13 +37,17 @@ serve(async (req) => {
       apiVersion: "2025-08-27.basil",
     });
 
+    // Hardcoded production base — never trust the caller-supplied Origin header
+    // for post-payment redirects (open-redirect / session-id exfiltration risk).
+    const siteUrl = Deno.env.get("SITE_URL") || "https://luxplay.uk";
     const session = await stripe.checkout.sessions.create({
       line_items: [{ price: PRICE_MAP[packageId], quantity: 1 }],
       mode: "payment",
-      success_url: `${req.headers.get("origin")}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${req.headers.get("origin")}/#presale`,
+      success_url: `${siteUrl}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${siteUrl}/#presale`,
       customer_creation: "always",
     });
+
 
     return new Response(JSON.stringify({ url: session.url }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },

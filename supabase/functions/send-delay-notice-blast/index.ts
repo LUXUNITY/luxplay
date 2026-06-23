@@ -21,8 +21,35 @@ function generateToken(): string {
   return Array.from(bytes).map((b) => b.toString(16).padStart(2, '0')).join('')
 }
 
+const timingSafeEqual = (a: string, b: string) => {
+  if (a.length !== b.length) return false
+  let diff = 0
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i)
+  return diff === 0
+}
+
 Deno.serve(async (req) => {
-  if (req.method === 'OPTIONS') return new Response(null, { headers: corsHeaders })
+  if (req.method === 'OPTIONS') {
+    return new Response(null, {
+      headers: {
+        ...corsHeaders,
+        'Access-Control-Allow-Headers':
+          'authorization, x-client-info, apikey, content-type, x-admin-password',
+      },
+    })
+  }
+
+  // Gate: require ADMIN_PASSWORD header — same secret the Admin UI uses.
+  const adminPassword = Deno.env.get('ADMIN_PASSWORD') ?? ''
+  const provided = req.headers.get('x-admin-password') ?? ''
+  if (!adminPassword || !provided || !timingSafeEqual(provided, adminPassword)) {
+    return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+      status: 401,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    })
+  }
+
+
 
   const supabaseUrl = Deno.env.get('SUPABASE_URL')!
   const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
@@ -53,11 +80,13 @@ Deno.serve(async (req) => {
   const emails = Array.from(set)
 
   if (dryRun) {
+    // Do NOT leak the email list in the response — only return the count.
     return new Response(
-      JSON.stringify({ dryRun: true, recipientCount: emails.length, emails }),
+      JSON.stringify({ dryRun: true, recipientCount: emails.length }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     )
   }
+
 
   const template = TEMPLATES[TEMPLATE_NAME]
   if (!template) {

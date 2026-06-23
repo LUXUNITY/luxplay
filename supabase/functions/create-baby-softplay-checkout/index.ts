@@ -83,7 +83,7 @@ serve(async (req) => {
     }
 
     const perBabyPence = PRICE_PENCE;
-    const origin = req.headers.get("origin") || "https://luxplay.uk";
+    const origin = Deno.env.get("SITE_URL") || "https://luxplay.uk";
 
     const payload = {
       idempotency_key: crypto.randomUUID(),

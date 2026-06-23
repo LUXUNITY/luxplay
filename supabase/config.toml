@@ -14,3 +14,9 @@ verify_jwt = false
 
 [functions.handle-email-suppression]
 verify_jwt = false
+
+[functions.send-delay-notice-blast]
+verify_jwt = true
+
+[functions.admin-action]
+verify_jwt = true
