@@ -34,6 +34,12 @@ const HeroSection = () => {
         >
           <span>BOOK SOFT PLAY</span>
         </a>
+        <a
+          href="#parties"
+          className="neon-cta inline-block font-display text-xl md:text-2xl tracking-widest px-10 md:px-14 py-4 md:py-5 bg-neon-pink text-[#070710] animate-btn-flash-pink transition-transform duration-200 hover:scale-110 text-center"
+        >
+          <span>PARTY PACKAGES</span>
+        </a>
       </div>
     </section>
   );
