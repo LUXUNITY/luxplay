@@ -9,6 +9,7 @@ const FeaturesSection = lazy(() => import("@/components/FeaturesSection"));
 const FooterSection = lazy(() => import("@/components/FooterSection"));
 const SoftPlaySection = lazy(() => import("@/components/SoftPlaySection"));
 const BabySoftPlaySection = lazy(() => import("@/components/BabySoftPlaySection"));
+const PartiesSection = lazy(() => import("@/components/PartiesSection"));
 
 const Index = () => {
   return (
@@ -44,7 +45,15 @@ const Index = () => {
               <SoftPlaySection />
             </ScrollReveal>
           </Suspense>
+        {/* 6. Birthday parties */}
+        <div className="defer-section">
+          <Suspense fallback={null}>
+            <ScrollReveal>
+              <PartiesSection />
+            </ScrollReveal>
+          </Suspense>
         </div>
+      </div>
         {/* 5. Baby soft play booking */}
         <div className="defer-section">
           <Suspense fallback={null}>
