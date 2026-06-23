@@ -18,7 +18,7 @@ const TIERS: Tier[] = [
     tagline: "Soft play + arcade credits",
     perks: [
       "2 hours of soft play",
-      "£5 arcade credits per child",
+      "£10 arcade credits per child",
       "Hot meal: nuggets, chips & drink",
       "Small toy inside every meal",
       "Adults go free",
@@ -32,7 +32,7 @@ const TIERS: Tier[] = [
     tagline: "Most popular party",
     perks: [
       "2 hours of soft play",
-      "£10 arcade credits per child",
+      "£15 arcade credits per child",
       "Hot meal: nuggets, chips & drink",
       "Extra snack & drink included",
       "Small toy inside every meal",
