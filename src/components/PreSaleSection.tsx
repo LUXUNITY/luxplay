@@ -3,7 +3,7 @@ import { Flame, Loader2, ChevronsRight } from "lucide-react";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
-import { isMidweekDeal } from "./softplay/dateSlots";
+
 
 // Pricing — matches the in-store credits poster exactly.
 const tiers = [
@@ -17,13 +17,6 @@ const tiers = [
 // Format £X.XX without trailing .00
 const fmtPrice = (n: number) =>
   Number.isInteger(n) ? `£${n}` : `£${n.toFixed(2)}`;
-
-// Today's ISO date (local) — used to decide if the Midweek 20% off is live.
-const todayISO = () => {
-  const d = new Date();
-  const pad = (n: number) => String(n).padStart(2, "0");
-  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
-};
 
 // Tailwind needs to see full class strings — map color tokens explicitly.
 const colorClasses: Record<string, { text: string; border: string; shadow: string; bg: string; arrow: string }> = {
@@ -66,7 +59,6 @@ const colorClasses: Record<string, { text: string; border: string; shadow: strin
 
 const PreSaleSection = () => {
   const [loading, setLoading] = useState<string | null>(null);
-  const midweekLive = isMidweekDeal(todayISO());
 
   const handleBuy = async (id: string) => {
     setLoading(id);
@@ -126,11 +118,6 @@ const PreSaleSection = () => {
           </span>
           <p className="font-body text-white/50 text-xs md:text-sm mt-3 max-w-md mx-auto">
             Most games cost <span className="text-neon-pink font-semibold">5–10 credits per play</span> · Credits never expire · Walk in, tap on, play.
-          </p>
-          <p className="font-body text-neon-yellow text-[11px] md:text-sm mt-2 tracking-wide">
-            {midweekLive
-              ? "★ MIDWEEK MADNESS LIVE TODAY — 20% OFF every pack ★"
-              : "★ MIDWEEK MADNESS — 20% OFF every pack every Wed & Thu ★"}
           </p>
         </motion.div>
 
@@ -201,20 +188,13 @@ const PreSaleSection = () => {
                   className={`${c.arrow} ${isBest ? "w-8 h-8 md:w-16 md:h-16" : "w-5 h-5 md:w-8 md:h-8"}`}
                 />
 
-                {/* Price — discounted is ALWAYS the hero number */}
+                {/* Price */}
                 <div className="flex flex-col">
-                  <span
-                    className={`font-display tracking-wide text-white/35 line-through ${
-                      isBest ? "text-2xl md:text-4xl leading-none" : "text-base md:text-2xl leading-none"
-                    }`}
-                  >
-                    {fmtPrice(t.price)}
-                  </span>
                   <span
                     className={`font-display tracking-wide ${c.text} ${
                       isBest
-                        ? "text-6xl md:text-9xl leading-none mt-1"
-                        : "text-4xl md:text-6xl leading-none mt-0.5"
+                        ? "text-6xl md:text-9xl leading-none"
+                        : "text-4xl md:text-6xl leading-none"
                     }`}
                     style={
                       isBest
@@ -222,15 +202,7 @@ const PreSaleSection = () => {
                         : { textShadow: "0 0 15px currentColor" }
                     }
                   >
-                    {fmtPrice(t.price * 0.8)}
-                  </span>
-                  <span
-                    className={`font-display tracking-[0.2em] text-neon-yellow uppercase animate-pulse ${
-                      isBest ? "text-[11px] md:text-sm mt-1.5" : "text-[9px] md:text-[11px] mt-1"
-                    }`}
-                    style={{ textShadow: "0 0 8px rgba(255,235,0,0.8)" }}
-                  >
-                    {midweekLive ? "20% OFF TODAY" : "20% OFF Wed & Thu"}
+                    {fmtPrice(t.price)}
                   </span>
                 </div>
 

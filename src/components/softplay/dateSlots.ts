@@ -15,21 +15,10 @@ const STANDARD_SLOTS = [
 
 export const getSlotsForDate = (_dateISO: string) => STANDARD_SLOTS;
 
-// MIDWEEK MADNESS — 20% off on Wednesdays & Thursdays (online + in store).
-// Other days = full door price.
-export const isMidweekDeal = (dateISO: string) => {
-  if (!dateISO) return false;
-  const d = new Date(dateISO + "T12:00:00");
-  const day = d.getDay(); // 0=Sun ... 3=Wed, 4=Thu
-  return day === 3 || day === 4;
-};
-
 export const getSoftPlayFullPrice = (_dateISO: string) => 8;
 export const getBabyFullPrice = (_dateISO: string) => 4;
-export const getSoftPlayPrice = (dateISO: string) =>
-  isMidweekDeal(dateISO) ? 6.4 : 8;
-export const getBabyPrice = (dateISO: string) =>
-  isMidweekDeal(dateISO) ? 3.2 : 4;
+export const getSoftPlayPrice = (_dateISO: string) => 8;
+export const getBabyPrice = (_dateISO: string) => 4;
 export const isOpeningWeekend = (_dateISO: string) => false;
 
 const pad = (n: number) => String(n).padStart(2, "0");
