@@ -8,12 +8,17 @@ const HeroSection = () => {
       {/* Neon top bar */}
       <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-neon-bar z-20" />
 
-      {/* Hero image — full width, no blur */}
-      <img
-        src={heroAsset.url}
-        alt="LuxPlay — Play More. Earn More. Level Up. Arcade, Soft Play & Café at Unit 7 Sovereign Centre, Boscombe, Bournemouth BH1 4SX"
-        className="block w-full h-auto object-contain"
-      />
+      {/* Hero image — full width, fades into the section below */}
+      <div className="relative">
+        <img
+          src={heroAsset.url}
+          alt="LuxPlay — Play More. Earn More. Level Up. Arcade, Soft Play & Café at Unit 7 Sovereign Centre, Boscombe, Bournemouth BH1 4SX"
+          className="block w-full h-auto object-contain"
+        />
+        {/* Bottom fade blending into the next section */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 md:h-40 bg-gradient-to-b from-transparent to-background" />
+      </div>
+
 
       {/* SEO-friendly hidden copy so search engines still index the key info */}
       <h1 className="sr-only">
