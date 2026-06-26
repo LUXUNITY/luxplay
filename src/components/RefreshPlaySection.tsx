@@ -75,27 +75,89 @@ const RefreshPlaySection = () => {
 
   return (
     <section id="refresh-play" className="relative overflow-hidden">
-      {/* Icy gradient backdrop */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#04243f] via-[#06182a] to-[#070710] pointer-events-none" />
-      {/* Aurora wash */}
-      <div className="absolute -top-20 left-1/4 w-[40rem] h-[40rem] bg-neon-cyan/25 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-1/3 -right-20 w-[32rem] h-[32rem] bg-[#7ee8ff]/20 rounded-full blur-[100px] pointer-events-none" />
+      {/* Sky → ice gradient: scorching top, frozen bottom */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#ff6a00] via-[#0a2440] to-[#070710] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#06182a]/40 to-[#070710] pointer-events-none" />
+
+      {/* ANGRY SUN — top right */}
+      <div className="absolute -top-16 -right-16 md:-top-20 md:-right-20 pointer-events-none" aria-hidden="true">
+        <div className="relative w-56 h-56 md:w-80 md:h-80 animate-sun-throb">
+          {/* Rays */}
+          <div className="absolute inset-0 animate-sun-spin">
+            <svg viewBox="0 0 200 200" className="w-full h-full">
+              {Array.from({ length: 16 }).map((_, i) => (
+                <rect key={i}
+                  x="98" y="6" width="4" height="40"
+                  fill="url(#rayGrad)"
+                  transform={`rotate(${i * 22.5} 100 100)`}
+                />
+              ))}
+              <defs>
+                <linearGradient id="rayGrad" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stopColor="#fff2a8" />
+                  <stop offset="100%" stopColor="#ff7a00" stopOpacity="0" />
+                </linearGradient>
+                <radialGradient id="sunCore">
+                  <stop offset="0%" stopColor="#fff7c2" />
+                  <stop offset="50%" stopColor="#ffd24a" />
+                  <stop offset="100%" stopColor="#ff5a00" />
+                </radialGradient>
+              </defs>
+            </svg>
+          </div>
+          {/* Sun core */}
+          <div className="absolute inset-[22%] rounded-full" style={{ background: "radial-gradient(circle at 35% 30%, #fff7c2, #ffd24a 45%, #ff5a00 85%)", boxShadow: "0 0 60px rgba(255,160,0,0.9), inset 0 0 30px rgba(255,255,200,0.6)" }} />
+        </div>
+      </div>
+
+      {/* Heat haze bands near top */}
+      <div className="absolute top-10 left-0 right-0 h-24 pointer-events-none overflow-hidden" aria-hidden="true">
+        <div className="absolute inset-0 animate-heat-haze" style={{ background: "repeating-linear-gradient(180deg, transparent 0 6px, rgba(255,180,80,0.08) 6px 8px)" }} />
+      </div>
+
+      {/* Aurora / icy wash bottom half */}
+      <div className="absolute top-1/3 -right-20 w-[32rem] h-[32rem] bg-neon-cyan/25 rounded-full blur-[110px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[28rem] h-[28rem] bg-neon-purple/20 rounded-full blur-[110px] pointer-events-none" />
 
-      {/* Drifting snowflakes */}
+      {/* Floating ice cubes */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
         {[
-          { left: "6%", size: 14, dur: 14, delay: 0, drift: "30px" },
-          { left: "14%", size: 8, dur: 18, delay: 3, drift: "-20px" },
-          { left: "22%", size: 18, dur: 12, delay: 1, drift: "40px" },
-          { left: "31%", size: 10, dur: 16, delay: 5, drift: "-30px" },
-          { left: "42%", size: 12, dur: 20, delay: 2, drift: "25px" },
-          { left: "51%", size: 16, dur: 13, delay: 6, drift: "-35px" },
-          { left: "60%", size: 9, dur: 17, delay: 4, drift: "20px" },
-          { left: "69%", size: 14, dur: 15, delay: 0, drift: "-25px" },
-          { left: "78%", size: 11, dur: 19, delay: 7, drift: "35px" },
-          { left: "87%", size: 17, dur: 11, delay: 2, drift: "-30px" },
-          { left: "94%", size: 10, dur: 16, delay: 4, drift: "25px" },
+          { left: "6%", top: "30%", size: 28, dur: 5, delay: 0 },
+          { left: "88%", top: "55%", size: 36, dur: 6, delay: 1 },
+          { left: "12%", top: "72%", size: 22, dur: 4.5, delay: 2 },
+          { left: "78%", top: "20%", size: 24, dur: 5.5, delay: 0.6 },
+          { left: "45%", top: "88%", size: 30, dur: 6.5, delay: 1.4 },
+        ].map((c, i) => (
+          <div key={i} className="absolute animate-ice-float"
+            style={{ left: c.left, top: c.top, width: c.size, height: c.size, animationDuration: `${c.dur}s`, animationDelay: `${c.delay}s` }}>
+            <div className="w-full h-full rounded-[6px] border border-white/70 bg-gradient-to-br from-white/60 via-cyan-200/40 to-cyan-400/30 backdrop-blur-sm"
+              style={{ boxShadow: "inset 0 0 12px rgba(255,255,255,0.6), 0 0 18px rgba(0,238,255,0.5)" }} />
+          </div>
+        ))}
+      </div>
+
+      {/* Water drips falling from top */}
+      <div className="absolute inset-x-0 top-0 h-40 pointer-events-none" aria-hidden="true">
+        {[
+          { left: "15%", delay: 0 },
+          { left: "30%", delay: 0.9 },
+          { left: "48%", delay: 0.3 },
+          { left: "62%", delay: 1.4 },
+          { left: "82%", delay: 0.6 },
+        ].map((d, i) => (
+          <span key={i} className="water-drip" style={{ left: d.left, top: 0, animationDelay: `${d.delay}s` }} />
+        ))}
+      </div>
+
+      {/* Drifting snowflakes (kept, fewer) */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        {[
+          { left: "8%", size: 12, dur: 16, delay: 0, drift: "30px" },
+          { left: "26%", size: 16, dur: 13, delay: 2, drift: "-25px" },
+          { left: "42%", size: 10, dur: 18, delay: 4, drift: "20px" },
+          { left: "58%", size: 14, dur: 14, delay: 1, drift: "-30px" },
+          { left: "74%", size: 11, dur: 17, delay: 3, drift: "25px" },
+          { left: "92%", size: 15, dur: 12, delay: 5, drift: "-20px" },
         ].map((f, i) => (
           <Snowflake
             key={i}
@@ -111,6 +173,14 @@ const RefreshPlaySection = () => {
           />
         ))}
       </div>
+
+      {/* Wavy water surface at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none overflow-hidden" aria-hidden="true">
+        <div className="absolute bottom-0 left-0 h-full w-[200%] animate-wave-roll"
+          style={{ background: "repeating-linear-gradient(90deg, rgba(0,238,255,0.35) 0 40px, rgba(120,230,255,0.55) 40px 80px)", clipPath: "polygon(0 60%, 5% 40%, 10% 60%, 15% 40%, 20% 60%, 25% 40%, 30% 60%, 35% 40%, 40% 60%, 45% 40%, 50% 60%, 55% 40%, 60% 60%, 65% 40%, 70% 60%, 75% 40%, 80% 60%, 85% 40%, 90% 60%, 95% 40%, 100% 60%, 100% 100%, 0 100%)" }} />
+      </div>
+
+
 
       <div className="relative z-10 px-4 md:px-12 lg:px-20 py-10 md:py-16">
         {/* Limited-time tag — frosted */}
