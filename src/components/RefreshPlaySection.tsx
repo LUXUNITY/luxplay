@@ -80,7 +80,7 @@ const RefreshPlaySection = () => {
       <div className="absolute top-10 left-10 w-72 h-72 bg-neon-cyan/20 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-72 h-72 bg-neon-pink/20 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="relative z-10 px-4 md:px-12 lg:px-20 py-12 md:py-20">
+      <div className="relative z-10 px-4 md:px-12 lg:px-20 py-10 md:py-16">
         {/* Limited-time tag */}
         <div className="flex justify-center mb-4">
           <span className="inline-flex items-center gap-2 border-2 border-yellow-400 bg-yellow-400/10 text-yellow-400 font-display text-xs md:text-sm tracking-[0.3em] uppercase px-4 py-2 animate-pulse">
@@ -90,52 +90,77 @@ const RefreshPlaySection = () => {
           </span>
         </div>
 
-        {/* Headline */}
-        <h2 className="text-center font-display tracking-wider leading-[0.9]">
-          <span className="block text-4xl md:text-7xl text-neon-cyan glow-cyan"
-            style={{ textShadow: "0 0 25px rgba(0,238,255,0.9), 0 0 55px rgba(0,238,255,0.5)" }}>
-            REFRESH
-          </span>
-          <span className="block text-3xl md:text-6xl text-white/90 my-1">&amp;</span>
-          <span className="block text-5xl md:text-8xl text-neon-green glow-green"
-            style={{ textShadow: "0 0 25px rgba(46,255,99,0.9), 0 0 55px rgba(46,255,99,0.5)" }}>
-            PLAY!
+        {/* Title — smaller, sits above the hero stack */}
+        <h2 className="text-center font-display tracking-[0.15em] leading-none mb-6">
+          <span className="block text-2xl md:text-4xl text-neon-cyan"
+            style={{ textShadow: "0 0 18px rgba(0,238,255,0.8)" }}>
+            REFRESH <span className="text-white/80">&amp;</span> <span className="text-neon-green" style={{ textShadow: "0 0 18px rgba(46,255,99,0.8)" }}>PLAY!</span>
           </span>
         </h2>
 
-        {/* Price block */}
-        <div className="mt-6 flex flex-col items-center">
-          <span className="font-display text-white/60 text-xs md:text-sm tracking-[0.4em] mb-1">ONLY</span>
-          <div className="relative inline-block bg-neon-pink px-8 py-3 md:px-12 md:py-4 border-4 border-white shadow-[0_0_50px_rgba(255,0,204,0.6)]">
-            <span className="font-display text-6xl md:text-8xl text-white leading-none"
-              style={{ textShadow: "3px 3px 0 #070710" }}>
-              £9.99
-            </span>
-          </div>
-          <span className="font-body text-white/70 text-xs md:text-sm mt-2 tracking-wider">per child · adults go free</span>
-        </div>
-
-        {/* What's included — 4 bold rows */}
-        <ul className="max-w-2xl mx-auto mt-8 space-y-3">
-          {[
-            { icon: <Clock className="w-5 h-5" />, text: "2 HOURS OF SOFT PLAY", cls: "border-neon-pink/60 text-neon-pink" },
-            { icon: <Snowflake className="w-5 h-5" />, text: "ICE-COLD DRINK", cls: "border-neon-cyan/60 text-neon-cyan" },
-            { icon: <Gift className="w-5 h-5" />, text: "ICE POP", cls: "border-neon-green/60 text-neon-green" },
-            { icon: <Zap className="w-5 h-5" />, text: "FREE 30-MIN MIDWEEK RETURN (MON–THU)", cls: "border-yellow-400/60 text-yellow-400" },
-          ].map((item) => (
-            <li key={item.text}
-              className={`flex items-center gap-4 border-2 bg-[#0a0a16]/80 px-4 py-3 md:px-6 md:py-4 ${item.cls}`}>
-              <span className="shrink-0">{item.icon}</span>
-              <span className="font-display text-base md:text-xl tracking-wider">
-                {item.text}
+        {/* HERO STACK — "what you get" is the loudest thing on the page */}
+        <div className="relative max-w-3xl mx-auto">
+          {/* Price burst — sits in the corner, smaller than the bundle */}
+          <div className="absolute -top-4 -right-2 md:-top-6 md:-right-6 z-20 rotate-[8deg]">
+            <div className="relative bg-neon-pink border-4 border-white px-4 py-2 md:px-6 md:py-3 shadow-[0_0_40px_rgba(255,0,204,0.7)] animate-pulse">
+              <span className="block font-display text-[10px] md:text-xs tracking-[0.3em] text-white/90 leading-none">ONLY</span>
+              <span className="block font-display text-3xl md:text-5xl text-white leading-none"
+                style={{ textShadow: "2px 2px 0 #070710" }}>
+                £9.99
               </span>
-            </li>
-          ))}
-        </ul>
+              <span className="block font-body text-[8px] md:text-[10px] tracking-wider text-white/90 leading-tight mt-0.5">per child</span>
+            </div>
+          </div>
 
-        <p className="text-center font-body text-white/60 text-xs mt-4 max-w-xl mx-auto">
-          Free 30-minute return session valid Mon–Thu within 14 days. Show your booking code on the day.
-        </p>
+          <div className="border-4 border-white bg-[#070710] p-5 md:p-10 shadow-[0_0_60px_rgba(0,238,255,0.25)]">
+            {/* Massive headline item */}
+            <div className="text-center">
+              <p className="font-display text-base md:text-2xl tracking-[0.3em] text-yellow-400 mb-2">YOU GET</p>
+              <p className="font-display text-[44px] leading-[0.95] sm:text-6xl md:text-8xl text-neon-cyan"
+                style={{ textShadow: "0 0 25px rgba(0,238,255,0.9), 0 0 55px rgba(0,238,255,0.5)" }}>
+                2 HOURS
+              </p>
+              <p className="font-display text-3xl sm:text-5xl md:text-7xl text-white mt-1"
+                style={{ textShadow: "0 0 18px rgba(255,255,255,0.4)" }}>
+                SOFT PLAY
+              </p>
+            </div>
+
+            {/* Big PLUS chain */}
+            <div className="my-5 md:my-8 grid gap-3 md:gap-4">
+              {[
+                { icon: <Snowflake className="w-7 h-7 md:w-10 md:h-10" />, big: "ICE-COLD DRINK", color: "text-neon-cyan", border: "border-neon-cyan", shadow: "0 0 20px rgba(0,238,255,0.7)" },
+                { icon: <Gift className="w-7 h-7 md:w-10 md:h-10" />, big: "ICE POP", color: "text-neon-green", border: "border-neon-green", shadow: "0 0 20px rgba(46,255,99,0.7)" },
+                { icon: <Zap className="w-7 h-7 md:w-10 md:h-10" />, big: "FREE 30-MIN", small: "MIDWEEK RETURN (MON–THU)", color: "text-yellow-400", border: "border-yellow-400", shadow: "0 0 20px rgba(250,204,21,0.7)" },
+              ].map((item) => (
+                <div key={item.big} className="flex items-center gap-3 md:gap-5">
+                  <span className={`font-display text-4xl md:text-6xl text-neon-pink leading-none shrink-0`}
+                    style={{ textShadow: "0 0 18px rgba(255,0,204,0.8)" }}>
+                    +
+                  </span>
+                  <div className={`flex-1 flex items-center gap-3 md:gap-5 border-2 md:border-4 ${item.border} bg-[#0a0a16] px-4 py-3 md:px-6 md:py-4`}>
+                    <span className={`shrink-0 ${item.color}`}>{item.icon}</span>
+                    <div className="flex-1 min-w-0">
+                      <p className={`font-display text-2xl sm:text-3xl md:text-5xl tracking-wider leading-none ${item.color}`}
+                        style={{ textShadow: item.shadow }}>
+                        {item.big}
+                      </p>
+                      {item.small && (
+                        <p className="font-display text-[10px] sm:text-xs md:text-sm tracking-[0.2em] text-white/70 mt-1">
+                          {item.small}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-center font-body text-white/50 text-[10px] md:text-xs">
+              Free 30-minute return valid Mon–Thu within 14 days. Show your booking code on the day. Adults go free.
+            </p>
+          </div>
+        </div>
 
         {/* Primary CTA */}
         {!open && (
@@ -148,6 +173,7 @@ const RefreshPlaySection = () => {
             </button>
           </div>
         )}
+
 
         {/* Booking flow (collapsible) */}
         {open && (
