@@ -10,6 +10,7 @@ const FooterSection = lazy(() => import("@/components/FooterSection"));
 const SoftPlaySection = lazy(() => import("@/components/SoftPlaySection"));
 const BabySoftPlaySection = lazy(() => import("@/components/BabySoftPlaySection"));
 const PartiesSection = lazy(() => import("@/components/PartiesSection"));
+const RefreshPlaySection = lazy(() => import("@/components/RefreshPlaySection"));
 
 const Index = () => {
   return (
