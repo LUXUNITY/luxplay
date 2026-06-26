@@ -213,7 +213,17 @@ const RefreshPlaySection = () => {
 
         {/* HERO STACK — "what you get" is the loudest thing on the page */}
         <div className="relative max-w-3xl mx-auto">
+          {/* Cool refreshed face with sunglasses + cold drink — sits on the deal card */}
+          <div
+            className="absolute -top-6 -left-3 md:-top-10 md:-left-8 text-5xl md:text-7xl select-none z-20 -rotate-[12deg] pointer-events-none"
+            style={{ filter: "drop-shadow(0 0 14px rgba(0,238,255,0.85))", animation: "ice-float 3s ease-in-out infinite" }}
+            aria-hidden="true"
+          >
+            😎🥤
+          </div>
+
           {/* Price burst — sits in the corner, smaller than the bundle */}
+
           <div className="absolute -top-4 -right-2 md:-top-6 md:-right-6 z-20 rotate-[8deg]">
             <div className="relative bg-neon-pink border-4 border-white px-4 py-2 md:px-6 md:py-3 shadow-[0_0_40px_rgba(255,0,204,0.7)] animate-pulse">
               <span className="block font-display text-[10px] md:text-xs tracking-[0.3em] text-white/90 leading-none">ONLY</span>
