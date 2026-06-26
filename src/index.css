@@ -177,52 +177,61 @@
   }
   .animate-chill-pulse { animation: chill-pulse 3.4s ease-in-out infinite; }
 
-  /* Angry sun — rotating rays + heat throb */
+  /* Angry sun — rotating rays + heat throb (transform/opacity only, no filter animation) */
   @keyframes sun-spin { from { transform: rotate(0deg);} to { transform: rotate(360deg);} }
   @keyframes sun-throb {
-    0%,100% { filter: drop-shadow(0 0 25px rgba(255,170,40,0.85)) drop-shadow(0 0 60px rgba(255,80,0,0.65)); transform: scale(1); }
-    50% { filter: drop-shadow(0 0 45px rgba(255,210,80,1)) drop-shadow(0 0 100px rgba(255,60,0,0.85)); transform: scale(1.06); }
+    0%,100% { transform: scale(1); opacity: 0.85; }
+    50% { transform: scale(1.06); opacity: 1; }
   }
-  .animate-sun-spin { animation: sun-spin 22s linear infinite; }
-  .animate-sun-throb { animation: sun-throb 2.2s ease-in-out infinite; transform-origin: center; }
+  .animate-sun-spin { animation: sun-spin 22s linear infinite; will-change: transform; }
+  .animate-sun-throb { animation: sun-throb 2.4s ease-in-out infinite; transform-origin: center; will-change: transform, opacity; }
 
   /* Heat haze shimmer */
   @keyframes heat-haze {
-    0% { transform: translateX(0) skewX(0deg); opacity: 0.35; }
-    50% { transform: translateX(6px) skewX(2deg); opacity: 0.55; }
-    100% { transform: translateX(0) skewX(0deg); opacity: 0.35; }
+    0%,100% { transform: translate3d(0,0,0); opacity: 0.35; }
+    50% { transform: translate3d(6px,0,0); opacity: 0.55; }
   }
-  .animate-heat-haze { animation: heat-haze 3s ease-in-out infinite; }
+  .animate-heat-haze { animation: heat-haze 3s ease-in-out infinite; will-change: transform, opacity; }
 
-  /* Water drip — droplet forms then falls */
+  /* Water drip — transform/opacity only */
   @keyframes water-drip {
-    0% { transform: translateY(-6px) scaleY(0.6); opacity: 0; }
-    20% { transform: translateY(0) scaleY(1); opacity: 1; }
-    70% { transform: translateY(40px) scaleY(1.4); opacity: 1; }
-    100% { transform: translateY(80px) scaleY(0.4); opacity: 0; }
+    0% { transform: translate3d(0,-6px,0) scaleY(0.6); opacity: 0; }
+    20% { transform: translate3d(0,0,0) scaleY(1); opacity: 1; }
+    70% { transform: translate3d(0,40px,0) scaleY(1.4); opacity: 1; }
+    100% { transform: translate3d(0,80px,0) scaleY(0.4); opacity: 0; }
   }
   .water-drip {
     position: absolute;
     width: 8px; height: 12px;
     background: linear-gradient(180deg, rgba(120,230,255,0.95), rgba(0,180,255,0.7));
     border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    filter: drop-shadow(0 0 6px rgba(0,200,255,0.8));
+    box-shadow: 0 0 6px rgba(0,200,255,0.7);
     animation: water-drip 2.4s ease-in infinite;
+    will-change: transform, opacity;
   }
 
   /* Ice cube floating */
   @keyframes ice-float {
-    0%,100% { transform: translateY(0) rotate(-8deg); }
-    50% { transform: translateY(-10px) rotate(8deg); }
+    0%,100% { transform: translate3d(0,0,0) rotate(-8deg); }
+    50% { transform: translate3d(0,-10px,0) rotate(8deg); }
   }
-  .animate-ice-float { animation: ice-float 4s ease-in-out infinite; }
+  .animate-ice-float { animation: ice-float 4s ease-in-out infinite; will-change: transform; }
 
   /* Wavy water surface */
   @keyframes wave-roll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0% { transform: translate3d(0,0,0); }
+    100% { transform: translate3d(-50%,0,0); }
   }
-  .animate-wave-roll { animation: wave-roll 8s linear infinite; }
+  .animate-wave-roll { animation: wave-roll 8s linear infinite; will-change: transform; }
+
+  /* Respect reduced-motion + kill heatwave animation on very small phones to save battery */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-sun-spin, .animate-sun-throb, .animate-heat-haze,
+    .water-drip, .animate-ice-float, .animate-wave-roll,
+    .snowflake, .frost-shimmer, .animate-chill-pulse {
+      animation: none !important;
+    }
+  }
 
   @keyframes btn-flash {
     0%, 100% {
