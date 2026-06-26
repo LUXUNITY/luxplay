@@ -10,22 +10,15 @@ const FooterSection = lazy(() => import("@/components/FooterSection"));
 const SoftPlaySection = lazy(() => import("@/components/SoftPlaySection"));
 const BabySoftPlaySection = lazy(() => import("@/components/BabySoftPlaySection"));
 const PartiesSection = lazy(() => import("@/components/PartiesSection"));
-const RefreshPlaySection = lazy(() => import("@/components/RefreshPlaySection"));
 
 const Index = () => {
   return (
     <main className="min-h-screen bg-background">
 
 
-      {/* 1. Hero — full-screen immersive, CTA front and center */}
+      {/* 1. Hero — logo, then REFRESH & PLAY deal, then CTAs */}
       <HeroSection />
 
-      {/* Front-of-page impulse-buy: REFRESH & PLAY £9.99 bundle */}
-      <div>
-        <Suspense fallback={null}>
-          <RefreshPlaySection />
-        </Suspense>
-      </div>
 
       {/* Mid-page sections — LuxPlay card starfield background */}
       <div className="relative luxplay-pattern-bg">
