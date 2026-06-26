@@ -276,7 +276,7 @@ const RefreshPlaySection = () => {
               </div>
 
               <p className="text-center font-body text-[#aef0ff]/60 text-[10px] md:text-xs">
-                Free 30-minute return valid Mon–Thu within 14 days. Show your booking code on the day. Adults go free.
+                Free 30-minute return valid Mon–Thu within 7 days. Show your booking code on the day. Adults go free.
               </p>
             </div>
           </div>
