@@ -1,6 +1,8 @@
 import heroAsset from "@/assets/luxplay-hero-v2.jpg.asset.json";
+import RefreshPlaySection from "@/components/RefreshPlaySection";
 
 const HeroSection = () => {
+
   return (
     <section className="relative w-full bg-background overflow-hidden">
       {/* Neon top bar */}
@@ -19,8 +21,11 @@ const HeroSection = () => {
         Soft Play, Baby Soft Play, Amazing Prizes & Cosy Café at Unit 7,
         Sovereign Centre, Boscombe, Bournemouth, BH1 4SX.
       </h1>
+      {/* REFRESH & PLAY deal — forefront, directly under the logo */}
+      <RefreshPlaySection />
 
       {/* Live, clickable CTAs sit just below the hero */}
+
       <div className="relative z-10 w-full flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 px-6 py-8 md:py-12">
         <a
           href="#refresh-play"
