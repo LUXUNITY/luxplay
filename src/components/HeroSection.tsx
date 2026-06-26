@@ -24,34 +24,34 @@ const HeroSection = () => {
       {/* REFRESH & PLAY deal — forefront, directly under the logo */}
       <RefreshPlaySection />
 
-      {/* Live, clickable CTAs sit just below the hero */}
-
-      <div className="relative z-10 w-full flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 px-6 py-8 md:py-12">
+      {/* Live, clickable CTAs sit just below the hero — uniform 2x2 grid, compact */}
+      <div className="relative z-10 w-full max-w-2xl mx-auto grid grid-cols-2 gap-2 sm:gap-3 px-4 py-4 md:py-6">
         <a
           href="#refresh-play"
-          className="neon-cta inline-block font-display text-xl md:text-2xl tracking-widest px-10 md:px-14 py-4 md:py-5 bg-neon-green text-[#070710] animate-btn-flash-green transition-transform duration-200 hover:scale-110 text-center"
+          className="neon-cta flex items-center justify-center font-display text-xs sm:text-sm md:text-base tracking-widest px-2 py-3 md:py-4 bg-neon-green text-[#070710] animate-btn-flash-green transition-transform duration-200 hover:scale-105 text-center h-full"
         >
           <span>REFRESH &amp; PLAY £9.99</span>
         </a>
         <a
           href="#presale"
-          className="neon-cta inline-block font-display text-xl md:text-2xl tracking-widest px-10 md:px-14 py-4 md:py-5 bg-neon-pink text-[#070710] animate-btn-flash-pink transition-transform duration-200 hover:scale-110 text-center"
+          className="neon-cta flex items-center justify-center font-display text-xs sm:text-sm md:text-base tracking-widest px-2 py-3 md:py-4 bg-neon-pink text-[#070710] animate-btn-flash-pink transition-transform duration-200 hover:scale-105 text-center h-full"
         >
           <span>BUY CREDITS</span>
         </a>
         <a
           href="#softplay"
-          className="neon-cta inline-block font-display text-xl md:text-2xl tracking-widest px-10 md:px-14 py-4 md:py-5 bg-neon-cyan text-[#070710] animate-btn-flash-cyan transition-transform duration-200 hover:scale-110 text-center"
+          className="neon-cta flex items-center justify-center font-display text-xs sm:text-sm md:text-base tracking-widest px-2 py-3 md:py-4 bg-neon-cyan text-[#070710] animate-btn-flash-cyan transition-transform duration-200 hover:scale-105 text-center h-full"
         >
           <span>BOOK SOFT PLAY</span>
         </a>
         <a
           href="#parties"
-          className="neon-cta inline-block font-display text-xl md:text-2xl tracking-widest px-10 md:px-14 py-4 md:py-5 bg-neon-pink text-[#070710] animate-btn-flash-pink transition-transform duration-200 hover:scale-110 text-center"
+          className="neon-cta flex items-center justify-center font-display text-xs sm:text-sm md:text-base tracking-widest px-2 py-3 md:py-4 bg-neon-pink text-[#070710] animate-btn-flash-pink transition-transform duration-200 hover:scale-105 text-center h-full"
         >
           <span>PARTY PACKAGES</span>
         </a>
       </div>
+
     </section>
   );
 };
