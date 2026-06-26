@@ -76,17 +76,49 @@ const RefreshPlaySection = () => {
   return (
     <section id="refresh-play" className="relative overflow-hidden">
       {/* Icy gradient backdrop */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#001a2e] via-[#070710] to-[#2a0014] opacity-90 pointer-events-none" />
-      <div className="absolute top-10 left-10 w-72 h-72 bg-neon-cyan/20 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-72 h-72 bg-neon-pink/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#04243f] via-[#06182a] to-[#070710] pointer-events-none" />
+      {/* Aurora wash */}
+      <div className="absolute -top-20 left-1/4 w-[40rem] h-[40rem] bg-neon-cyan/25 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/3 -right-20 w-[32rem] h-[32rem] bg-[#7ee8ff]/20 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[28rem] h-[28rem] bg-neon-purple/20 rounded-full blur-[110px] pointer-events-none" />
+
+      {/* Drifting snowflakes */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        {[
+          { left: "6%", size: 14, dur: 14, delay: 0, drift: "30px" },
+          { left: "14%", size: 8, dur: 18, delay: 3, drift: "-20px" },
+          { left: "22%", size: 18, dur: 12, delay: 1, drift: "40px" },
+          { left: "31%", size: 10, dur: 16, delay: 5, drift: "-30px" },
+          { left: "42%", size: 12, dur: 20, delay: 2, drift: "25px" },
+          { left: "51%", size: 16, dur: 13, delay: 6, drift: "-35px" },
+          { left: "60%", size: 9, dur: 17, delay: 4, drift: "20px" },
+          { left: "69%", size: 14, dur: 15, delay: 0, drift: "-25px" },
+          { left: "78%", size: 11, dur: 19, delay: 7, drift: "35px" },
+          { left: "87%", size: 17, dur: 11, delay: 2, drift: "-30px" },
+          { left: "94%", size: 10, dur: 16, delay: 4, drift: "25px" },
+        ].map((f, i) => (
+          <Snowflake
+            key={i}
+            className="snowflake"
+            style={{
+              left: f.left,
+              width: f.size,
+              height: f.size,
+              animationDuration: `${f.dur}s`,
+              animationDelay: `${f.delay}s`,
+              ["--drift" as any]: f.drift,
+            }}
+          />
+        ))}
+      </div>
 
       <div className="relative z-10 px-4 md:px-12 lg:px-20 py-10 md:py-16">
-        {/* Limited-time tag */}
+        {/* Limited-time tag — frosted */}
         <div className="flex justify-center mb-4">
-          <span className="inline-flex items-center gap-2 border-2 border-yellow-400 bg-yellow-400/10 text-yellow-400 font-display text-xs md:text-sm tracking-[0.3em] uppercase px-4 py-2 animate-pulse">
-            <Zap className="w-4 h-4" />
-            THIS WEEK ONLY
-            <Zap className="w-4 h-4" />
+          <span className="inline-flex items-center gap-2 border border-neon-cyan/60 bg-neon-cyan/10 backdrop-blur-md text-neon-cyan font-display text-xs md:text-sm tracking-[0.3em] uppercase px-4 py-2 shadow-[0_0_30px_rgba(0,238,255,0.35)]">
+            <Snowflake className="w-4 h-4 animate-spin" style={{ animationDuration: "6s" }} />
+            HEATWAVE RESCUE · THIS WEEK ONLY
+            <Snowflake className="w-4 h-4 animate-spin" style={{ animationDuration: "6s", animationDirection: "reverse" }} />
           </span>
         </div>
 
@@ -112,55 +144,74 @@ const RefreshPlaySection = () => {
             </div>
           </div>
 
-          <div className="border-4 border-white bg-[#070710] p-5 md:p-10 shadow-[0_0_60px_rgba(0,238,255,0.25)]">
-            {/* Massive headline item */}
-            <div className="text-center">
-              <p className="font-display text-base md:text-2xl tracking-[0.3em] text-yellow-400 mb-2">YOU GET</p>
-              <p className="font-display text-[44px] leading-[0.95] sm:text-6xl md:text-8xl text-neon-cyan"
-                style={{ textShadow: "0 0 25px rgba(0,238,255,0.9), 0 0 55px rgba(0,238,255,0.5)" }}>
-                2 HOURS
-              </p>
-              <p className="font-display text-3xl sm:text-5xl md:text-7xl text-white mt-1"
-                style={{ textShadow: "0 0 18px rgba(255,255,255,0.4)" }}>
-                SOFT PLAY
-              </p>
-            </div>
+          {/* Frosted card with shimmering icy rim */}
+          <div className="relative animate-chill-pulse">
+            {/* shimmer rim */}
+            <div className="absolute inset-0 frost-shimmer pointer-events-none opacity-70" />
+            <div
+              className="relative border-2 border-neon-cyan/50 bg-gradient-to-b from-[#0a2436]/90 via-[#070d18]/95 to-[#0a1426]/90 backdrop-blur-md p-5 md:p-10"
+              style={{ boxShadow: "inset 0 1px 0 rgba(180,240,255,0.4), inset 0 -1px 0 rgba(0,238,255,0.2)" }}
+            >
+              {/* corner frost crystals */}
+              <Snowflake className="absolute top-2 left-2 w-4 h-4 md:w-6 md:h-6 text-neon-cyan/60" />
+              <Snowflake className="absolute top-2 right-2 w-4 h-4 md:w-6 md:h-6 text-neon-cyan/60" />
+              <Snowflake className="absolute bottom-2 left-2 w-4 h-4 md:w-6 md:h-6 text-neon-cyan/60" />
+              <Snowflake className="absolute bottom-2 right-2 w-4 h-4 md:w-6 md:h-6 text-neon-cyan/60" />
 
-            {/* Big PLUS chain */}
-            <div className="my-5 md:my-8 grid gap-3 md:gap-4">
-              {[
-                { icon: <Snowflake className="w-7 h-7 md:w-10 md:h-10" />, big: "ICE-COLD DRINK", color: "text-neon-cyan", border: "border-neon-cyan", shadow: "0 0 20px rgba(0,238,255,0.7)" },
-                { icon: <Gift className="w-7 h-7 md:w-10 md:h-10" />, big: "ICE POP", color: "text-neon-green", border: "border-neon-green", shadow: "0 0 20px rgba(46,255,99,0.7)" },
-                { icon: <Zap className="w-7 h-7 md:w-10 md:h-10" />, big: "FREE 30-MIN", small: "MIDWEEK RETURN (MON–THU)", color: "text-yellow-400", border: "border-yellow-400", shadow: "0 0 20px rgba(250,204,21,0.7)" },
-              ].map((item) => (
-                <div key={item.big} className="flex items-center gap-3 md:gap-5">
-                  <span className={`font-display text-4xl md:text-6xl text-neon-pink leading-none shrink-0`}
-                    style={{ textShadow: "0 0 18px rgba(255,0,204,0.8)" }}>
-                    +
-                  </span>
-                  <div className={`flex-1 flex items-center gap-3 md:gap-5 border-2 md:border-4 ${item.border} bg-[#0a0a16] px-4 py-3 md:px-6 md:py-4`}>
-                    <span className={`shrink-0 ${item.color}`}>{item.icon}</span>
-                    <div className="flex-1 min-w-0">
-                      <p className={`font-display text-2xl sm:text-3xl md:text-5xl tracking-wider leading-none ${item.color}`}
-                        style={{ textShadow: item.shadow }}>
-                        {item.big}
-                      </p>
-                      {item.small && (
-                        <p className="font-display text-[10px] sm:text-xs md:text-sm tracking-[0.2em] text-white/70 mt-1">
-                          {item.small}
+              {/* Massive headline item */}
+              <div className="text-center">
+                <p className="font-display text-base md:text-2xl tracking-[0.3em] text-[#aef0ff] mb-2"
+                  style={{ textShadow: "0 0 12px rgba(120,230,255,0.7)" }}>
+                  ❄ YOU GET ❄
+                </p>
+                <p className="font-display text-[44px] leading-[0.95] sm:text-6xl md:text-8xl text-neon-cyan"
+                  style={{ textShadow: "0 0 25px rgba(0,238,255,0.9), 0 0 55px rgba(0,238,255,0.5)" }}>
+                  2 HOURS
+                </p>
+                <p className="font-display text-3xl sm:text-5xl md:text-7xl text-white mt-1"
+                  style={{ textShadow: "0 0 18px rgba(180,240,255,0.6)" }}>
+                  SOFT PLAY
+                </p>
+              </div>
+
+              {/* Big PLUS chain */}
+              <div className="my-5 md:my-8 grid gap-3 md:gap-4">
+                {[
+                  { icon: <Snowflake className="w-7 h-7 md:w-10 md:h-10" />, big: "ICE-COLD DRINK", color: "text-neon-cyan", border: "border-neon-cyan", shadow: "0 0 20px rgba(0,238,255,0.7)" },
+                  { icon: <Gift className="w-7 h-7 md:w-10 md:h-10" />, big: "ICE POP", color: "text-[#aef0ff]", border: "border-[#aef0ff]", shadow: "0 0 20px rgba(174,240,255,0.7)" },
+                  { icon: <Snowflake className="w-7 h-7 md:w-10 md:h-10" />, big: "FREE 30-MIN", small: "MIDWEEK RETURN (MON–THU)", color: "text-white", border: "border-white/70", shadow: "0 0 20px rgba(255,255,255,0.6)" },
+                ].map((item) => (
+                  <div key={item.big} className="flex items-center gap-3 md:gap-5">
+                    <span className={`font-display text-4xl md:text-6xl text-neon-pink leading-none shrink-0`}
+                      style={{ textShadow: "0 0 18px rgba(255,0,204,0.8)" }}>
+                      +
+                    </span>
+                    <div className={`relative flex-1 flex items-center gap-3 md:gap-5 border-2 md:border-4 ${item.border} bg-[#06141f]/80 backdrop-blur-sm px-4 py-3 md:px-6 md:py-4 overflow-hidden`}>
+                      <div className="absolute inset-0 frost-shimmer opacity-30 pointer-events-none" />
+                      <span className={`relative shrink-0 ${item.color}`}>{item.icon}</span>
+                      <div className="relative flex-1 min-w-0">
+                        <p className={`font-display text-2xl sm:text-3xl md:text-5xl tracking-wider leading-none ${item.color}`}
+                          style={{ textShadow: item.shadow }}>
+                          {item.big}
                         </p>
-                      )}
+                        {item.small && (
+                          <p className="font-display text-[10px] sm:text-xs md:text-sm tracking-[0.2em] text-white/70 mt-1">
+                            {item.small}
+                          </p>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
 
-            <p className="text-center font-body text-white/50 text-[10px] md:text-xs">
-              Free 30-minute return valid Mon–Thu within 14 days. Show your booking code on the day. Adults go free.
-            </p>
+              <p className="text-center font-body text-[#aef0ff]/60 text-[10px] md:text-xs">
+                Free 30-minute return valid Mon–Thu within 14 days. Show your booking code on the day. Adults go free.
+              </p>
+            </div>
           </div>
         </div>
+
 
         {/* Primary CTA */}
         {!open && (
