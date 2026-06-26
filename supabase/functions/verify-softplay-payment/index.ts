@@ -219,13 +219,17 @@ serve(async (req) => {
     const quantity = Math.max(1, parseInt(meta.childCount || "1", 10) || 1);
     const totalAmount = Number(order.total_money?.amount || 0);
     const perChildAmount = Math.round(totalAmount / quantity);
+    const isRefreshPlay = meta.bundle === "refresh-play";
+    const parentNameTagged = isRefreshPlay
+      ? `[REFRESH&PLAY] ${meta.parentName || "Unknown"}`
+      : meta.parentName || "Unknown";
 
     const rows = Array.from({ length: quantity }, (_, i) => ({
       stripe_session_id: sessionId,
       session_time: meta.sessionTime || "10:00",
       session_date: meta.sessionDate || new Date().toISOString().split("T")[0],
-      child_name: `Child ${i + 1}`,
-      parent_name: meta.parentName || "Unknown",
+      child_name: isRefreshPlay ? `R&P Child ${i + 1}` : `Child ${i + 1}`,
+      parent_name: parentNameTagged,
       parent_email: parentEmail,
       parent_phone: meta.parentPhone || null,
       amount_paid: perChildAmount || 400,
