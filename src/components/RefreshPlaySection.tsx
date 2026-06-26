@@ -115,23 +115,23 @@ const RefreshPlaySection = () => {
         <div className="absolute inset-0 animate-heat-haze" style={{ background: "repeating-linear-gradient(180deg, transparent 0 6px, rgba(255,180,80,0.08) 6px 8px)" }} />
       </div>
 
-      {/* Aurora / icy wash bottom half */}
-      <div className="absolute top-1/3 -right-20 w-[32rem] h-[32rem] bg-neon-cyan/25 rounded-full blur-[110px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[28rem] h-[28rem] bg-neon-purple/20 rounded-full blur-[110px] pointer-events-none" />
+      {/* Aurora / icy wash bottom half — smaller blur on mobile to save GPU */}
+      <div className="absolute top-1/3 -right-20 w-80 h-80 md:w-[32rem] md:h-[32rem] bg-neon-cyan/25 rounded-full blur-[60px] md:blur-[110px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-72 h-72 md:w-[28rem] md:h-[28rem] bg-neon-purple/20 rounded-full blur-[60px] md:blur-[110px] pointer-events-none" />
 
-      {/* Floating ice cubes */}
+      {/* Floating ice cubes — fewer on mobile, no backdrop-blur */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
         {[
-          { left: "6%", top: "30%", size: 28, dur: 5, delay: 0 },
-          { left: "88%", top: "55%", size: 36, dur: 6, delay: 1 },
-          { left: "12%", top: "72%", size: 22, dur: 4.5, delay: 2 },
-          { left: "78%", top: "20%", size: 24, dur: 5.5, delay: 0.6 },
-          { left: "45%", top: "88%", size: 30, dur: 6.5, delay: 1.4 },
+          { left: "6%", top: "30%", size: 28, dur: 5, delay: 0, mobile: true },
+          { left: "88%", top: "55%", size: 36, dur: 6, delay: 1, mobile: true },
+          { left: "12%", top: "72%", size: 22, dur: 4.5, delay: 2, mobile: false },
+          { left: "78%", top: "20%", size: 24, dur: 5.5, delay: 0.6, mobile: false },
+          { left: "45%", top: "88%", size: 30, dur: 6.5, delay: 1.4, mobile: true },
         ].map((c, i) => (
-          <div key={i} className="absolute animate-ice-float"
+          <div key={i} className={`absolute animate-ice-float ${c.mobile ? "" : "hidden md:block"}`}
             style={{ left: c.left, top: c.top, width: c.size, height: c.size, animationDuration: `${c.dur}s`, animationDelay: `${c.delay}s` }}>
-            <div className="w-full h-full rounded-[6px] border border-white/70 bg-gradient-to-br from-white/60 via-cyan-200/40 to-cyan-400/30 backdrop-blur-sm"
-              style={{ boxShadow: "inset 0 0 12px rgba(255,255,255,0.6), 0 0 18px rgba(0,238,255,0.5)" }} />
+            <div className="w-full h-full rounded-[6px] border border-white/70 bg-gradient-to-br from-white/60 via-cyan-200/40 to-cyan-400/30"
+              style={{ boxShadow: "inset 0 0 12px rgba(255,255,255,0.6), 0 0 14px rgba(0,238,255,0.45)" }} />
           </div>
         ))}
       </div>
