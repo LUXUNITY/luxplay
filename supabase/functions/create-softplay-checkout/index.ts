@@ -8,14 +8,7 @@ const corsHeaders = {
 };
 
 // Pricing (in pence) — mirrors src/components/softplay/dateSlots.ts
-// Midweek Madness: 20% off on Wed/Thu (£6.40); other days = full £8 door price.
 const FULL_PRICE_PENCE = 800;
-const MIDWEEK_PRICE_PENCE = 640;
-const isMidweekDeal = (dateISO: string) => {
-  const d = new Date(dateISO + "T12:00:00");
-  const day = d.getDay();
-  return day === 3 || day === 4;
-};
 
 const VALID_SESSIONS = ["10:00", "12:00", "14:00", "16:00", "18:00"];
 const MAX_CAPACITY = 40;

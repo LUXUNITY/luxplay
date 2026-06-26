@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import DateStrip from "./softplay/DateStrip";
-import { getAvailableDates, getSlotsForDate, getSoftPlayPrice, getSoftPlayFullPrice, isOpeningWeekend, isMidweekDeal } from "./softplay/dateSlots";
+import { getAvailableDates, getSlotsForDate, getSoftPlayPrice, getSoftPlayFullPrice, isOpeningWeekend } from "./softplay/dateSlots";
 
 const MAX_CAPACITY = 40;
 // Price is now date-dependent — see getSoftPlayPrice in dateSlots.ts
@@ -53,7 +53,7 @@ const SoftPlaySection = () => {
   const fullPrice = getSoftPlayFullPrice(selectedDate);
   const totalPrice = childCount * pricePerChild;
   const isOpening = isOpeningWeekend(selectedDate);
-  const isMidweek = isMidweekDeal(selectedDate);
+  
 
   const handleBook = async () => {
     if (!selectedSession || childCount < 1 || !parentName.trim()) {
@@ -157,28 +157,13 @@ const SoftPlaySection = () => {
             Limited to 40 kids per session · Adults go free
           </p>
           <div className="flex items-end justify-center gap-3 md:gap-5 mt-3">
-            <span className="font-display text-3xl md:text-5xl text-white/30 line-through leading-none mb-2 md:mb-3">
-              £{getSoftPlayFullPrice(selectedDate).toFixed(2)}
-            </span>
             <span
               className="font-display text-7xl md:text-9xl text-neon-cyan glow-cyan leading-none"
               style={{ textShadow: "0 0 25px rgba(0,238,255,0.9), 0 0 55px rgba(0,238,255,0.5)" }}
             >
-              £{(getSoftPlayFullPrice(selectedDate) * 0.8).toFixed(2)}
-            </span>
-            <span
-              className="bg-neon-pink text-[#070710] font-display text-sm md:text-lg tracking-widest px-3 py-2 md:px-4 md:py-2.5 animate-pulse mb-1 md:mb-2"
-              style={{ boxShadow: "0 0 20px rgba(255,0,204,0.7)" }}
-            >
-              20% OFF
+              £{getSoftPlayFullPrice(selectedDate).toFixed(2)}
             </span>
           </div>
-          <p className="font-display text-neon-yellow text-xs md:text-base tracking-[0.2em] uppercase mt-4 animate-pulse"
-             style={{ textShadow: "0 0 10px rgba(255,235,0,0.8)" }}>
-            {isMidweek
-              ? "★ Midweek Madness Live — Discount Applied ★"
-              : "★ Pick a Wed or Thu Below to Lock In 20% OFF ★"}
-          </p>
         </motion.div>
 
         {/* ADULTS FREE — big, in-your-face badge */}
