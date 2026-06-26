@@ -16,7 +16,7 @@ const HeroSection = () => {
           className="block w-full h-auto object-contain"
         />
         {/* Bottom fade blending into the next section */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 md:h-40 bg-gradient-to-b from-transparent to-background" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 md:h-40 bg-gradient-to-b from-transparent to-[#ff6a00]" />
       </div>
 
 
