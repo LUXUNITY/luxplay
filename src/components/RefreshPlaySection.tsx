@@ -180,17 +180,46 @@ const RefreshPlaySection = () => {
           style={{ background: "repeating-linear-gradient(90deg, rgba(0,238,255,0.35) 0 40px, rgba(120,230,255,0.55) 40px 80px)", clipPath: "polygon(0 60%, 5% 40%, 10% 60%, 15% 40%, 20% 60%, 25% 40%, 30% 60%, 35% 40%, 40% 60%, 45% 40%, 50% 60%, 55% 40%, 60% 60%, 65% 40%, 70% 60%, 75% 40%, 80% 60%, 85% 40%, 90% 60%, 95% 40%, 100% 60%, 100% 100%, 0 100%)" }} />
       </div>
 
+      {/* Cool refreshed face with thumbs up — near the ice/wave, bottom left */}
+      <div
+        className="absolute bottom-20 left-3 md:bottom-24 md:left-10 text-5xl md:text-7xl select-none z-10 animate-ice-float pointer-events-none"
+        style={{ filter: "drop-shadow(0 0 14px rgba(0,238,255,0.75))" }}
+        aria-hidden="true"
+      >
+        🥶
+      </div>
+      <div
+        className="absolute bottom-10 left-16 md:bottom-14 md:left-28 text-4xl md:text-6xl select-none z-10 pointer-events-none"
+        style={{ filter: "drop-shadow(0 0 12px rgba(46,255,99,0.7))", animation: "ice-float 3s ease-in-out infinite", animationDelay: "0.6s" }}
+        aria-hidden="true"
+      >
+        👍
+      </div>
+
+
 
 
       <div className="relative z-10 px-4 md:px-12 lg:px-20 py-10 md:py-16">
-        {/* Limited-time tag — frosted */}
+        {/* Hot bothered face — near the sun, top right */}
+        <div
+          className="absolute top-2 right-4 md:top-6 md:right-16 text-5xl md:text-7xl select-none z-10 animate-sun-throb"
+          style={{ filter: "drop-shadow(0 0 14px rgba(255,90,0,0.7))" }}
+          aria-hidden="true"
+        >
+          🥵
+        </div>
+
+        {/* Limited-time tag — BIGGER */}
         <div className="flex justify-center mb-4">
-          <span className="inline-flex items-center gap-2 border border-neon-cyan/60 bg-neon-cyan/10 backdrop-blur-md text-neon-cyan font-display text-xs md:text-sm tracking-[0.3em] uppercase px-4 py-2 shadow-[0_0_30px_rgba(0,238,255,0.35)]">
-            <Snowflake className="w-4 h-4 animate-spin" style={{ animationDuration: "6s" }} />
-            HEATWAVE RESCUE · THIS WEEK ONLY
-            <Snowflake className="w-4 h-4 animate-spin" style={{ animationDuration: "6s", animationDirection: "reverse" }} />
+          <span className="inline-flex items-center gap-2 md:gap-3 border-2 border-neon-cyan/70 bg-neon-cyan/10 backdrop-blur-md text-neon-cyan font-display text-lg sm:text-2xl md:text-4xl tracking-[0.2em] uppercase px-5 py-3 md:px-8 md:py-4 shadow-[0_0_40px_rgba(0,238,255,0.45)]">
+            <Snowflake className="w-5 h-5 md:w-7 md:h-7 animate-spin shrink-0" style={{ animationDuration: "6s" }} />
+            HEATWAVE RESCUE
+            <Snowflake className="w-5 h-5 md:w-7 md:h-7 animate-spin shrink-0" style={{ animationDuration: "6s", animationDirection: "reverse" }} />
           </span>
         </div>
+        <p className="text-center font-display text-[10px] md:text-xs tracking-[0.4em] text-neon-cyan/70 mb-6">
+          THIS WEEK ONLY
+        </p>
 
         {/* Title — smaller, sits above the hero stack */}
         <h2 className="text-center font-display tracking-[0.15em] leading-none mb-6">
