@@ -83,7 +83,7 @@ const RefreshPlaySection = () => {
       <div className="relative z-10 px-4 md:px-12 lg:px-20 py-12 md:py-20">
         {/* Limited-time tag */}
         <div className="flex justify-center mb-4">
-          <span className="inline-flex items-center gap-2 border-2 border-neon-yellow bg-neon-yellow/10 text-neon-yellow font-display text-xs md:text-sm tracking-[0.3em] uppercase px-4 py-2 animate-pulse">
+          <span className="inline-flex items-center gap-2 border-2 border-yellow-400 bg-yellow-400/10 text-yellow-400 font-display text-xs md:text-sm tracking-[0.3em] uppercase px-4 py-2 animate-pulse">
             <Zap className="w-4 h-4" />
             THIS WEEK ONLY
             <Zap className="w-4 h-4" />
@@ -121,7 +121,7 @@ const RefreshPlaySection = () => {
             { icon: <Clock className="w-5 h-5" />, text: "2 HOURS OF SOFT PLAY", cls: "border-neon-pink/60 text-neon-pink" },
             { icon: <Snowflake className="w-5 h-5" />, text: "ICE-COLD DRINK", cls: "border-neon-cyan/60 text-neon-cyan" },
             { icon: <Gift className="w-5 h-5" />, text: "ICE POP", cls: "border-neon-green/60 text-neon-green" },
-            { icon: <Zap className="w-5 h-5" />, text: "FREE 30-MIN MIDWEEK RETURN (MON–THU)", cls: "border-neon-yellow/60 text-neon-yellow" },
+            { icon: <Zap className="w-5 h-5" />, text: "FREE 30-MIN MIDWEEK RETURN (MON–THU)", cls: "border-yellow-400/60 text-yellow-400" },
           ].map((item) => (
             <li key={item.text}
               className={`flex items-center gap-4 border-2 bg-[#0a0a16]/80 px-4 py-3 md:px-6 md:py-4 ${item.cls}`}>
