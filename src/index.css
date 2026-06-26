@@ -177,6 +177,53 @@
   }
   .animate-chill-pulse { animation: chill-pulse 3.4s ease-in-out infinite; }
 
+  /* Angry sun — rotating rays + heat throb */
+  @keyframes sun-spin { from { transform: rotate(0deg);} to { transform: rotate(360deg);} }
+  @keyframes sun-throb {
+    0%,100% { filter: drop-shadow(0 0 25px rgba(255,170,40,0.85)) drop-shadow(0 0 60px rgba(255,80,0,0.65)); transform: scale(1); }
+    50% { filter: drop-shadow(0 0 45px rgba(255,210,80,1)) drop-shadow(0 0 100px rgba(255,60,0,0.85)); transform: scale(1.06); }
+  }
+  .animate-sun-spin { animation: sun-spin 22s linear infinite; }
+  .animate-sun-throb { animation: sun-throb 2.2s ease-in-out infinite; transform-origin: center; }
+
+  /* Heat haze shimmer */
+  @keyframes heat-haze {
+    0% { transform: translateX(0) skewX(0deg); opacity: 0.35; }
+    50% { transform: translateX(6px) skewX(2deg); opacity: 0.55; }
+    100% { transform: translateX(0) skewX(0deg); opacity: 0.35; }
+  }
+  .animate-heat-haze { animation: heat-haze 3s ease-in-out infinite; }
+
+  /* Water drip — droplet forms then falls */
+  @keyframes water-drip {
+    0% { transform: translateY(-6px) scaleY(0.6); opacity: 0; }
+    20% { transform: translateY(0) scaleY(1); opacity: 1; }
+    70% { transform: translateY(40px) scaleY(1.4); opacity: 1; }
+    100% { transform: translateY(80px) scaleY(0.4); opacity: 0; }
+  }
+  .water-drip {
+    position: absolute;
+    width: 8px; height: 12px;
+    background: linear-gradient(180deg, rgba(120,230,255,0.95), rgba(0,180,255,0.7));
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    filter: drop-shadow(0 0 6px rgba(0,200,255,0.8));
+    animation: water-drip 2.4s ease-in infinite;
+  }
+
+  /* Ice cube floating */
+  @keyframes ice-float {
+    0%,100% { transform: translateY(0) rotate(-8deg); }
+    50% { transform: translateY(-10px) rotate(8deg); }
+  }
+  .animate-ice-float { animation: ice-float 4s ease-in-out infinite; }
+
+  /* Wavy water surface */
+  @keyframes wave-roll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .animate-wave-roll { animation: wave-roll 8s linear infinite; }
+
   @keyframes btn-flash {
     0%, 100% {
       box-shadow: 0 0 12px rgba(170, 255, 0, 0.9),
