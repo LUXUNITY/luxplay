@@ -215,7 +215,7 @@ const RefreshPlaySection = () => {
         <div className="relative max-w-3xl mx-auto">
           {/* Cool refreshed face with sunglasses + cold drink — sits on the deal card */}
           <div
-            className="absolute -top-6 -left-3 md:-top-10 md:-left-8 text-5xl md:text-7xl select-none z-20 -rotate-[12deg] pointer-events-none"
+            className="absolute -top-1 -left-3 md:-top-3 md:-left-8 text-5xl md:text-7xl select-none z-20 -rotate-[12deg] pointer-events-none"
             style={{ filter: "drop-shadow(0 0 14px rgba(0,238,255,0.85))", animation: "ice-float 3s ease-in-out infinite" }}
             aria-hidden="true"
           >
