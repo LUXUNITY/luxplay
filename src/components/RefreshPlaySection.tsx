@@ -118,15 +118,15 @@ const RefreshPlaySection = () => {
         {/* What's included — 4 bold rows */}
         <ul className="max-w-2xl mx-auto mt-8 space-y-3">
           {[
-            { icon: <Clock className="w-5 h-5" />, text: "2 HOURS OF SOFT PLAY", color: "neon-pink" },
-            { icon: <Snowflake className="w-5 h-5" />, text: "ICE-COLD DRINK", color: "neon-cyan" },
-            { icon: <Gift className="w-5 h-5" />, text: "ICE POP", color: "neon-green" },
-            { icon: <Zap className="w-5 h-5" />, text: "FREE 30-MIN MIDWEEK RETURN (MON–THU)", color: "neon-yellow" },
+            { icon: <Clock className="w-5 h-5" />, text: "2 HOURS OF SOFT PLAY", cls: "border-neon-pink/60 text-neon-pink" },
+            { icon: <Snowflake className="w-5 h-5" />, text: "ICE-COLD DRINK", cls: "border-neon-cyan/60 text-neon-cyan" },
+            { icon: <Gift className="w-5 h-5" />, text: "ICE POP", cls: "border-neon-green/60 text-neon-green" },
+            { icon: <Zap className="w-5 h-5" />, text: "FREE 30-MIN MIDWEEK RETURN (MON–THU)", cls: "border-neon-yellow/60 text-neon-yellow" },
           ].map((item) => (
             <li key={item.text}
-              className={`flex items-center gap-4 border-2 border-${item.color}/60 bg-[#0a0a16]/80 px-4 py-3 md:px-6 md:py-4`}>
-              <span className={`text-${item.color} shrink-0`}>{item.icon}</span>
-              <span className={`font-display text-base md:text-xl tracking-wider text-${item.color}`}>
+              className={`flex items-center gap-4 border-2 bg-[#0a0a16]/80 px-4 py-3 md:px-6 md:py-4 ${item.cls}`}>
+              <span className="shrink-0">{item.icon}</span>
+              <span className="font-display text-base md:text-xl tracking-wider">
                 {item.text}
               </span>
             </li>
