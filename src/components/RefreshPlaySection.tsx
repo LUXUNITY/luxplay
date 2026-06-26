@@ -183,14 +183,26 @@ const RefreshPlaySection = () => {
 
 
       <div className="relative z-10 px-4 md:px-12 lg:px-20 py-10 md:py-16">
-        {/* Limited-time tag — frosted */}
+        {/* Hot bothered face — near the sun, top right */}
+        <div
+          className="absolute top-2 right-4 md:top-6 md:right-16 text-5xl md:text-7xl select-none z-10 animate-sun-throb"
+          style={{ filter: "drop-shadow(0 0 14px rgba(255,90,0,0.7))" }}
+          aria-hidden="true"
+        >
+          🥵
+        </div>
+
+        {/* Limited-time tag — BIGGER */}
         <div className="flex justify-center mb-4">
-          <span className="inline-flex items-center gap-2 border border-neon-cyan/60 bg-neon-cyan/10 backdrop-blur-md text-neon-cyan font-display text-xs md:text-sm tracking-[0.3em] uppercase px-4 py-2 shadow-[0_0_30px_rgba(0,238,255,0.35)]">
-            <Snowflake className="w-4 h-4 animate-spin" style={{ animationDuration: "6s" }} />
-            HEATWAVE RESCUE · THIS WEEK ONLY
-            <Snowflake className="w-4 h-4 animate-spin" style={{ animationDuration: "6s", animationDirection: "reverse" }} />
+          <span className="inline-flex items-center gap-2 md:gap-3 border-2 border-neon-cyan/70 bg-neon-cyan/10 backdrop-blur-md text-neon-cyan font-display text-lg sm:text-2xl md:text-4xl tracking-[0.2em] uppercase px-5 py-3 md:px-8 md:py-4 shadow-[0_0_40px_rgba(0,238,255,0.45)]">
+            <Snowflake className="w-5 h-5 md:w-7 md:h-7 animate-spin shrink-0" style={{ animationDuration: "6s" }} />
+            HEATWAVE RESCUE
+            <Snowflake className="w-5 h-5 md:w-7 md:h-7 animate-spin shrink-0" style={{ animationDuration: "6s", animationDirection: "reverse" }} />
           </span>
         </div>
+        <p className="text-center font-display text-[10px] md:text-xs tracking-[0.4em] text-neon-cyan/70 mb-6">
+          THIS WEEK ONLY
+        </p>
 
         {/* Title — smaller, sits above the hero stack */}
         <h2 className="text-center font-display tracking-[0.15em] leading-none mb-6">
