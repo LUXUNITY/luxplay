@@ -13,7 +13,20 @@ const STANDARD_SLOTS = [
   { time: "18:00", label: "6–8PM" },
 ];
 
-export const getSlotsForDate = (_dateISO: string) => STANDARD_SLOTS;
+const REMOVED_TODAY_SLOTS = ["14:00", "16:00"];
+
+const getUKTDateISO = () => {
+  const now = new Date();
+  const uk = new Date(now.toLocaleString("en-GB", { timeZone: "Europe/London" }));
+  return `${uk.getFullYear()}-${pad(uk.getMonth() + 1)}-${pad(uk.getDate())}`;
+};
+
+export const getSlotsForDate = (dateISO: string) => {
+  if (dateISO === getUKTDateISO()) {
+    return STANDARD_SLOTS.filter((s) => !REMOVED_TODAY_SLOTS.includes(s.time));
+  }
+  return STANDARD_SLOTS;
+};
 
 export const getSoftPlayFullPrice = (_dateISO: string) => 8;
 export const getBabyFullPrice = (_dateISO: string) => 4;
