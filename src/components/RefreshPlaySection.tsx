@@ -3,7 +3,7 @@ import { Loader2, Snowflake, Zap, Gift, Clock, Users, Plus, Minus, Check } from 
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import DateStrip from "./softplay/DateStrip";
-import { getAvailableDates, getSlotsForDate } from "./softplay/dateSlots";
+import { getAvailableDates, getSlotsForDate, isSlotForcedFull } from "./softplay/dateSlots";
 
 const MAX_CAPACITY = 40;
 const MAX_CHILDREN_PER_BOOKING = 6;
