@@ -16,9 +16,15 @@ const STANDARD_SLOTS = [
 const REMOVED_TODAY_SLOTS = ["14:00", "16:00"];
 
 const getUKTDateISO = () => {
-  const now = new Date();
-  const uk = new Date(now.toLocaleString("en-GB", { timeZone: "Europe/London" }));
-  return `${uk.getFullYear()}-${pad(uk.getMonth() + 1)}-${pad(uk.getDate())}`;
+  const formatter = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Europe/London",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+  const parts = formatter.formatToParts(new Date());
+  const get = (type: string) => parts.find((p) => p.type === type)?.value;
+  return `${get("year")}-${get("month")}-${get("day")}`;
 };
 
 export const getSlotsForDate = (dateISO: string) => {
