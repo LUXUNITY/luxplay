@@ -60,7 +60,7 @@ serve(async (req) => {
         status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
-    if (!VALID_SESSIONS.includes(sessionTime)) {
+    if (!getValidSessions(sessionDate).includes(sessionTime)) {
       return new Response(JSON.stringify({ error: "Invalid session time" }), {
         status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
