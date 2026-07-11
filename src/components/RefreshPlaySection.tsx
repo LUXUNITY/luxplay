@@ -334,7 +334,8 @@ const RefreshPlaySection = () => {
             </p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {SESSIONS.map((s) => {
-                const booked = bookedCounts[s.time] || 0;
+                const forcedFull = isSlotForcedFull(selectedDate, s.time);
+                const booked = forcedFull ? MAX_CAPACITY : (bookedCounts[s.time] || 0);
                 const spotsLeft = MAX_CAPACITY - booked;
                 const isFull = spotsLeft <= 0;
                 const isSelected = selectedSession === s.time;
