@@ -9,9 +9,27 @@ const corsHeaders = {
 
 const FULL_PRICE_PENCE = 400;
 
-const VALID_SESSIONS = ["10:00", "12:00", "14:00", "16:00", "18:00"];
+const STANDARD_SESSIONS = ["10:00", "12:00", "14:00", "16:00", "18:00"];
+const REMOVED_TODAY_SESSIONS = ["14:00", "16:00"];
 const MAX_CAPACITY = 15;
 const MAX_BABIES_PER_BOOKING = 4;
+
+const getUKTDateISO = () => {
+  const formatter = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Europe/London",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+  const parts = formatter.formatToParts(new Date());
+  const get = (type: string) => parts.find((p) => p.type === type)?.value;
+  return `${get("year")}-${get("month")}-${get("day")}`;
+};
+
+const getValidSessions = (sessionDate: string) =>
+  sessionDate === getUKTDateISO()
+    ? STANDARD_SESSIONS.filter((s) => !REMOVED_TODAY_SESSIONS.includes(s))
+    : STANDARD_SESSIONS;
 
 const SQUARE_BASE = "https://connect.squareup.com";
 const SQUARE_VERSION = "2024-12-18";
