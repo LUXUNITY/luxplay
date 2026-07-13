@@ -26,14 +26,14 @@ const HeroSection = () => {
             <img
               src={v.src}
               alt={v.alt}
-              className="absolute inset-0 w-full h-full object-cover opacity-30 md:opacity-40"
+              className="absolute inset-0 w-full h-full object-cover opacity-40 md:opacity-50"
               loading="eager"
             />
           </div>
         ))}
       </div>
       {/* Dark overlay so the logo and CTAs stay readable */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-[#070710]/80 via-[#070710]/70 to-[#070710]/80" />
+      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-[#070710]/70 via-[#070710]/60 to-[#070710]/70" />
 
       {/* Foreground content */}
       <div className="relative z-10">
