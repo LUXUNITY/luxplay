@@ -42,30 +42,14 @@ const HeroSection = () => {
       <div className="relative z-10">
         {/* Logo + venue photo grid combined — logo small, centered and faded so the attractions are the focus */}
         <div className="relative w-full h-72 sm:h-96 md:h-[28rem] overflow-hidden bg-[#070710]">
-          {/* Soft blurred base fills every pixel so there can never be black grid gaps */}
-          <div className="absolute -inset-8 grid grid-cols-2 grid-rows-2 scale-110 opacity-70 blur-md">
+          {/* Clean 2x2 attraction grid */}
+          <div className="absolute inset-0 grid grid-cols-2 grid-rows-2">
             {bgVenues.map((v) => (
               <div key={v.alt} className="relative overflow-hidden">
                 <img
                   src={v.src}
-                  alt=""
-                  aria-hidden="true"
+                  alt={v.alt}
                   className="absolute inset-0 h-full w-full object-cover"
-                  loading="eager"
-                />
-              </div>
-            ))}
-          </div>
-
-          {/* Overlapped feathered tiles: no borders, no crosshair seam, just a blended attraction collage */}
-          <div className="absolute inset-0">
-            {venueTiles.map((v) => (
-              <div key={v.alt} className={v.className}>
-                <img
-                  src={v.src}
-                  alt=""
-                  aria-hidden="true"
-                  className="h-full w-full object-cover opacity-95"
                   loading="eager"
                 />
               </div>
@@ -73,6 +57,7 @@ const HeroSection = () => {
           </div>
           {/* Subtle dark wash to keep the page cohesive */}
           <div className="absolute inset-0 bg-[#070710]/20" />
+
 
           {/* Small, centered LuxPlay logo with smoothly feathered edges so it sits in the middle of the attractions */}
           <div className="absolute inset-0 flex items-center justify-center z-10 px-6">
