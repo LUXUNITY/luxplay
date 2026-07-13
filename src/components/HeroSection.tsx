@@ -1,4 +1,4 @@
-import heroAsset from "@/assets/luxplay-hero-v2.jpg.asset.json";
+import logoAsset from "@/assets/logo-luxplay.png";
 import arcadeAsset from "@/assets/real-arcade.jpeg.asset.json";
 import softplayAsset from "@/assets/real-softplay-v2.png.asset.json";
 import babySoftplayAsset from "@/assets/real-baby-softplay.png.asset.json";
@@ -62,7 +62,7 @@ const HeroSection = () => {
           {/* Small, centered LuxPlay logo with smoothly feathered edges so it sits in the middle of the attractions */}
           <div className="absolute inset-0 flex items-center justify-center z-10 px-6">
             <img
-              src={heroAsset.url}
+              src={logoAsset}
               alt="LuxPlay — Play More. Earn More. Level Up. Arcade, Soft Play & Café at Unit 7 Sovereign Centre, Boscombe, Bournemouth BH1 4SX"
               className="w-full max-w-[140px] sm:max-w-[180px] md:max-w-[220px] h-auto object-contain opacity-95 rounded-full"
               style={{
