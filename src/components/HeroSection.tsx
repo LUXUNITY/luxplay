@@ -45,11 +45,11 @@ const HeroSection = () => {
             <img
               src={heroAsset.url}
               alt="LuxPlay — Play More. Earn More. Level Up. Arcade, Soft Play & Café at Unit 7 Sovereign Centre, Boscombe, Bournemouth BH1 4SX"
-              className="w-full max-w-[140px] sm:max-w-[180px] md:max-w-[220px] h-auto object-contain opacity-70 md:opacity-80"
+              className="w-full max-w-[140px] sm:max-w-[180px] md:max-w-[220px] h-auto object-contain opacity-50 md:opacity-60"
               style={{
-                maskImage: "radial-gradient(circle, black 55%, transparent 100%)",
-                WebkitMaskImage: "radial-gradient(circle, black 55%, transparent 100%)",
-                filter: "drop-shadow(0 0 12px rgba(0,0,0,0.6))",
+                maskImage: "radial-gradient(circle, black 40%, transparent 85%)",
+                WebkitMaskImage: "radial-gradient(circle, black 40%, transparent 85%)",
+                filter: "drop-shadow(0 0 10px rgba(0,0,0,0.5)) blur(0.3px)",
               }}
             />
           </div>
