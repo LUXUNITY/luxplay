@@ -23,7 +23,7 @@ const HeroSection = () => {
       <div className="relative z-10">
         {/* Logo + venue photo grid combined — logo small, centered and faded so the attractions are the focus */}
         <div className="relative w-full h-72 sm:h-96 md:h-[28rem] overflow-hidden bg-[#070710]">
-          {/* 2x2 venue photo grid — attractions are the main focus */}
+          {/* 2x2 venue photo grid — attractions are the main focus, images bleed over each other to kill visible grid lines */}
           <div className="absolute inset-0 grid grid-cols-2 grid-rows-2">
             {bgVenues.map((v) => (
               <div key={v.alt} className="relative overflow-hidden">
@@ -31,24 +31,32 @@ const HeroSection = () => {
                   src={v.src}
                   alt=""
                   aria-hidden="true"
-                  className="absolute inset-0 w-full h-full object-cover opacity-80 md:opacity-90"
+                  className="absolute -inset-1 w-[calc(100%+8px)] h-[calc(100%+8px)] object-cover opacity-80 md:opacity-90"
                   loading="eager"
                 />
               </div>
             ))}
           </div>
+          {/* Soft cross-fade overlay to hide any remaining photo seams */}
+          <div
+            className="pointer-events-none absolute inset-0 z-[1]"
+            style={{
+              background:
+                "linear-gradient(to right, transparent 48%, rgba(7,7,16,0.25) 50%, transparent 52%), linear-gradient(to bottom, transparent 48%, rgba(7,7,16,0.25) 50%, transparent 52%)",
+            }}
+          />
           {/* Subtle dark wash to keep the page cohesive */}
           <div className="absolute inset-0 bg-[#070710]/20" />
 
-          {/* Small, centered LuxPlay logo with softly feathered edges so it sits in the middle of the attractions */}
+          {/* Small, centered LuxPlay logo with smoothly feathered edges so it sits in the middle of the attractions */}
           <div className="absolute inset-0 flex items-center justify-center z-10 px-6">
             <img
               src={heroAsset.url}
               alt="LuxPlay — Play More. Earn More. Level Up. Arcade, Soft Play & Café at Unit 7 Sovereign Centre, Boscombe, Bournemouth BH1 4SX"
               className="w-full max-w-[140px] sm:max-w-[180px] md:max-w-[220px] h-auto object-contain opacity-90 md:opacity-95"
               style={{
-                maskImage: "radial-gradient(circle, black 50%, transparent 100%)",
-                WebkitMaskImage: "radial-gradient(circle, black 50%, transparent 100%)",
+                maskImage: "radial-gradient(circle, black 45%, rgba(0,0,0,0.35) 60%, transparent 80%)",
+                WebkitMaskImage: "radial-gradient(circle, black 45%, rgba(0,0,0,0.35) 60%, transparent 80%)",
                 filter: "drop-shadow(0 0 12px rgba(0,0,0,0.6))",
               }}
             />
