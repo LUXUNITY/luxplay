@@ -19,34 +19,37 @@ const HeroSection = () => {
       {/* Neon top bar */}
       <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-neon-bar z-50" />
 
-      {/* Venue photo backdrop — 2x2 grid, faint, behind the hero content */}
-      <div className="absolute inset-0 z-0 grid grid-cols-2 grid-rows-2">
-        {bgVenues.map((v) => (
-          <div key={v.alt} className="relative overflow-hidden">
-            <img
-              src={v.src}
-              alt={v.alt}
-              className="absolute inset-0 w-full h-full object-cover opacity-40 md:opacity-50"
-              loading="eager"
-            />
-          </div>
-        ))}
-      </div>
-      {/* Dark overlay so the logo and CTAs stay readable */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-[#070710]/70 via-[#070710]/60 to-[#070710]/70" />
-
       {/* Foreground content */}
       <div className="relative z-10">
-        {/* Hero image — full width, fades into the section below */}
-        <div className="relative">
+        {/* Hero image with a faint 2x2 venue photo backdrop behind it */}
+        <div className="relative overflow-hidden">
+          {/* Venue photo backdrop — 2x2 grid, faint, behind the logo */}
+          <div className="absolute inset-0 z-0 grid grid-cols-2 grid-rows-2">
+            {bgVenues.map((v) => (
+              <div key={v.alt} className="relative overflow-hidden">
+                <img
+                  src={v.src}
+                  alt=""
+                  aria-hidden="true"
+                  className="absolute inset-0 w-full h-full object-cover opacity-50 md:opacity-60"
+                  loading="eager"
+                />
+              </div>
+            ))}
+          </div>
+          {/* Dark overlay so the logo stays readable */}
+          <div className="absolute inset-0 z-[1] bg-gradient-to-b from-[#070710]/60 via-[#070710]/40 to-[#070710]/70" />
+
+          {/* Logo image on top */}
           <img
             src={heroAsset.url}
             alt="LuxPlay — Play More. Earn More. Level Up. Arcade, Soft Play & Café at Unit 7 Sovereign Centre, Boscombe, Bournemouth BH1 4SX"
-            className="block w-full h-auto object-contain"
+            className="relative z-10 block w-full h-auto object-contain"
           />
           {/* Bottom fade blending into the next section */}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 md:h-40 bg-gradient-to-b from-transparent to-[#ff6a00]" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 md:h-40 z-20 bg-gradient-to-b from-transparent to-[#ff6a00]" />
         </div>
+
 
 
         {/* SEO-friendly hidden copy so search engines still index the key info */}
