@@ -77,7 +77,7 @@ const HeroSection = () => {
           {/* Small, centered LuxPlay logo with smoothly feathered edges so it sits in the middle of the attractions */}
           <div className="absolute inset-0 flex items-center justify-center z-10 px-6">
             <img
-              src={heroLogo}
+              src={heroAsset.url}
               alt="LuxPlay — Play More. Earn More. Level Up. Arcade, Soft Play & Café at Unit 7 Sovereign Centre, Boscombe, Bournemouth BH1 4SX"
               className="w-full max-w-[140px] sm:max-w-[180px] md:max-w-[220px] h-auto object-contain opacity-90 md:opacity-95"
               style={{
