@@ -13,7 +13,7 @@ const STANDARD_SLOTS = [
   { time: "18:00", label: "6–8PM" },
 ];
 
-const FORCED_FULL_TODAY_SLOTS = ["14:00", "16:00"];
+const FORCED_FULL_TODAY_SLOTS: string[] = [];
 
 const getUKTDateISO = () => {
   const formatter = new Intl.DateTimeFormat("en-GB", {
