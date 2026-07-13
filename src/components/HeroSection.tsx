@@ -48,15 +48,15 @@ const HeroSection = () => {
           {/* Subtle dark wash to keep the page cohesive */}
           <div className="absolute inset-0 bg-[#070710]/20" />
 
-          {/* Small, centered LuxPlay logo with softly feathered edges so it sits in the middle of the attractions */}
+          {/* Small, centered LuxPlay logo with smoothly feathered edges so it sits in the middle of the attractions */}
           <div className="absolute inset-0 flex items-center justify-center z-10 px-6">
             <img
               src={heroAsset.url}
               alt="LuxPlay — Play More. Earn More. Level Up. Arcade, Soft Play & Café at Unit 7 Sovereign Centre, Boscombe, Bournemouth BH1 4SX"
               className="w-full max-w-[140px] sm:max-w-[180px] md:max-w-[220px] h-auto object-contain opacity-90 md:opacity-95"
               style={{
-                maskImage: "radial-gradient(circle, black 50%, transparent 100%)",
-                WebkitMaskImage: "radial-gradient(circle, black 50%, transparent 100%)",
+                maskImage: "radial-gradient(circle, black 45%, rgba(0,0,0,0.35) 60%, transparent 80%)",
+                WebkitMaskImage: "radial-gradient(circle, black 45%, rgba(0,0,0,0.35) 60%, transparent 80%)",
                 filter: "drop-shadow(0 0 12px rgba(0,0,0,0.6))",
               }}
             />
