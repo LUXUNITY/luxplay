@@ -21,20 +21,9 @@ const HeroSection = () => {
 
       {/* Foreground content */}
       <div className="relative z-10">
-        {/* Logo on dark background at the very top */}
-        <div className="relative overflow-hidden bg-[#070710]">
-          {/* Logo image */}
-          <img
-            src={heroAsset.url}
-            alt="LuxPlay — Play More. Earn More. Level Up. Arcade, Soft Play & Café at Unit 7 Sovereign Centre, Boscombe, Bournemouth BH1 4SX"
-            className="relative z-10 block w-full h-auto object-contain"
-          />
-          {/* Bottom fade from the logo into the venue strip */}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 md:h-24 z-20 bg-gradient-to-b from-transparent to-[#070710]" />
-        </div>
-
-        {/* Venue photo strip — 2x2 grid sitting just below the logo, integrated with the hero */}
-        <div className="relative w-full h-64 sm:h-80 md:h-96 overflow-hidden">
+        {/* Logo + venue photo grid combined — logo centered in the middle of 2x2 photos */}
+        <div className="relative w-full h-72 sm:h-96 md:h-[28rem] overflow-hidden bg-[#070710]">
+          {/* 2x2 venue photo grid behind the logo */}
           <div className="absolute inset-0 grid grid-cols-2 grid-rows-2">
             {bgVenues.map((v) => (
               <div key={v.alt} className="relative overflow-hidden">
@@ -42,18 +31,31 @@ const HeroSection = () => {
                   src={v.src}
                   alt=""
                   aria-hidden="true"
-                  className="absolute inset-0 w-full h-full object-cover opacity-60 md:opacity-70"
+                  className="absolute inset-0 w-full h-full object-cover opacity-50 md:opacity-60"
                   loading="eager"
                 />
               </div>
             ))}
           </div>
-          {/* Dark overlay to keep it readable and blend into the page */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#070710] via-[#070710]/50 to-[#ff6a00]/30" />
-          {/* Top edge fade to blend into the logo */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-16 md:h-24 z-20 bg-gradient-to-b from-[#070710] to-transparent" />
+          {/* Dark overlay to make the centered logo pop and keep everything readable */}
+          <div className="absolute inset-0 bg-[#070710]/40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#070710] via-transparent to-[#070710]/80" />
+          {/* Radial vignette to focus attention on the centered logo */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,transparent_40%,#070710_95%)]" />
+
+          {/* Centered LuxPlay logo */}
+          <div className="absolute inset-0 flex items-center justify-center z-10 px-8 sm:px-12 md:px-16">
+            <img
+              src={heroAsset.url}
+              alt="LuxPlay — Play More. Earn More. Level Up. Arcade, Soft Play & Café at Unit 7 Sovereign Centre, Boscombe, Bournemouth BH1 4SX"
+              className="w-full max-w-xs sm:max-w-sm md:max-w-md h-auto object-contain drop-shadow-[0_0_25px_rgba(255,255,255,0.25)]"
+            />
+          </div>
+
+          {/* Top edge fade from the page edge into the photo grid */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-12 md:h-20 z-20 bg-gradient-to-b from-[#070710] to-transparent" />
           {/* Bottom edge fade into the Refresh & Play section */}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 md:h-40 z-20 bg-gradient-to-b from-transparent to-[#ff6a00]" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 md:h-32 z-20 bg-gradient-to-b from-transparent to-[#ff6a00]" />
         </div>
 
 
