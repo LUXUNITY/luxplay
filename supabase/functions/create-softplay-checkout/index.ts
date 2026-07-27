@@ -11,7 +11,7 @@ const corsHeaders = {
 const FULL_PRICE_PENCE = 800;
 
 const STANDARD_SESSIONS = ["10:00", "12:00", "14:00", "16:00", "18:00"];
-const REMOVED_TODAY_SESSIONS = ["14:00", "16:00"];
+const REMOVED_TODAY_SESSIONS: string[] = [];
 const MAX_CAPACITY = 40;
 const MAX_CHILDREN_PER_BOOKING = 6;
 
