@@ -198,6 +198,16 @@ const FeaturesSection = () => {
             </p>
           </motion.div>
 
+          {/* Open statement */}
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-display text-4xl md:text-6xl lg:text-7xl tracking-wider text-neon-cyan mb-4"
+          >
+            LUXPLAY IS OPEN
+          </motion.h3>
+
           {/* About */}
           <motion.p
             initial={{ opacity: 0 }}
@@ -205,7 +215,7 @@ const FeaturesSection = () => {
             viewport={{ once: true }}
             className="font-body text-white/50 text-base md:text-lg lg:text-xl leading-relaxed mb-10 md:mb-14 max-w-2xl"
           >
-            LuxPlay is a new family entertainment centre opening right here in Sovereign Centre.
+            LuxPlay is a new family entertainment centre now open right here in Sovereign Centre.
             Built from the ground up for this community. This is just the beginning.
           </motion.p>
 
