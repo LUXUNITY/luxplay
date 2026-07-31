@@ -12,9 +12,6 @@ const FooterSection = () => {
           LUXPLAY
         </h2>
 
-        <p className="font-display text-xl md:text-2xl tracking-widest text-white/50 mb-6">
-          ARCADE OPEN NOW · SOFT PLAY COMING SOON (WALK-INS)
-        </p>
 
         <p className="flex items-center justify-center gap-2 text-white/40 font-body text-sm">
           <MapPin className="w-4 h-4 text-neon-cyan" />
