@@ -10,7 +10,7 @@ import { gridBackgroundUrl } from "@/components/circuitTile";
 
 const sharedBusinesses = [
   { name: "LuxPlay", logo: logoLuxPlay, scale: 1, color: "text-neon-cyan", shadow: "0 0 8px rgba(0,238,255,0.55)", glow: "drop-shadow(0 0 10px rgba(0,238,255,0.45))" },
-  { name: "MJlux cafè", logo: logoMJLux, scale: 1, color: "text-neon-pink", shadow: "0 0 8px rgba(255,0,204,0.55)", glow: "drop-shadow(0 0 10px rgba(255,170,120,0.45))" },
+  { name: "Cafè Lux", logo: logoCafeLux.url, scale: 1, color: "text-neon-pink", shadow: "0 0 8px rgba(255,0,204,0.55)", glow: "drop-shadow(0 0 10px rgba(255,170,120,0.45))" },
   { name: "LuxKey", logo: logoLuxKey, scale: 1, color: "text-neon-purple", shadow: "0 0 8px rgba(119,0,255,0.55)", glow: "drop-shadow(0 0 10px rgba(255,200,60,0.45))" },
   { name: "Masterclass Exteriors", logo: logoMasterclass.url, scale: 1.1, color: "text-neon-green", shadow: "0 0 8px rgba(170,255,0,0.55)", glow: "drop-shadow(0 0 10px rgba(255,200,60,0.45))" },
 ];
