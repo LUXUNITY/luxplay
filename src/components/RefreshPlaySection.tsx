@@ -335,11 +335,15 @@ const RefreshPlaySection = () => {
                   </div>
                   <span className="animate-icon-bob text-neon-pink shrink-0 text-4xl md:text-6xl leading-none" style={{ animationDelay: "0.5s" }}>🎈</span>
                 </div>
-                <div className="mt-3 flex justify-center">
+                <div className="mt-3 flex flex-wrap justify-center gap-2 md:gap-3">
                   <span className="inline-flex items-center gap-2 border-2 border-neon-cyan/70 bg-neon-cyan/10 text-neon-cyan font-display text-[11px] sm:text-sm md:text-base tracking-[0.25em] uppercase px-3 py-1.5 md:px-4 md:py-2 shadow-[0_0_20px_rgba(0,238,255,0.4)]">
                     ❄ FULLY AIR CONDITIONED ❄
                   </span>
+                  <span className="inline-flex items-center gap-2 border-2 border-neon-green bg-neon-green/15 text-neon-green font-display text-[11px] sm:text-sm md:text-base tracking-[0.25em] uppercase px-3 py-1.5 md:px-4 md:py-2 animate-big-throb shadow-[0_0_22px_rgba(170,255,0,0.5)]">
+                    👨‍👩‍👧 ADULTS GO FREE 👩‍👦
+                  </span>
                 </div>
+
               </div>
 
               {/* 60 ARCADE CREDITS — hero-size, flashing */}
