@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Loader2, Snowflake, Zap, Gift, Clock, Users, Plus, Minus, Check } from "lucide-react";
+import { Loader2, Snowflake, Gift, Clock, Users, Plus, Minus, Check } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import DateStrip from "./softplay/DateStrip";
@@ -255,14 +255,20 @@ const RefreshPlaySection = () => {
                   style={{ textShadow: "0 0 12px rgba(120,230,255,0.7)" }}>
                   ❄ YOU GET ❄
                 </p>
-                <p className="font-display text-[44px] leading-[0.95] sm:text-6xl md:text-8xl text-neon-cyan"
-                  style={{ textShadow: "0 0 25px rgba(0,238,255,0.9), 0 0 55px rgba(0,238,255,0.5)" }}>
-                  2 HOURS
-                </p>
-                <p className="font-display text-3xl sm:text-5xl md:text-7xl text-white mt-1"
-                  style={{ textShadow: "0 0 18px rgba(180,240,255,0.6)" }}>
-                  SOFT PLAY
-                </p>
+                <div className="flex items-center justify-center gap-3 md:gap-6">
+                  <span className="animate-icon-bob text-neon-green shrink-0 text-4xl md:text-6xl leading-none">🛝</span>
+                  <div className="animate-big-throb">
+                    <p className="font-display text-[52px] leading-[0.9] sm:text-7xl md:text-[7.5rem] text-neon-cyan"
+                      style={{ textShadow: "0 0 25px rgba(0,238,255,0.9), 0 0 55px rgba(0,238,255,0.5)" }}>
+                      2 HOURS
+                    </p>
+                    <p className="font-display text-4xl sm:text-6xl md:text-8xl text-white mt-1"
+                      style={{ textShadow: "0 0 18px rgba(180,240,255,0.6)" }}>
+                      SOFT PLAY
+                    </p>
+                  </div>
+                  <span className="animate-icon-bob text-neon-pink shrink-0 text-4xl md:text-6xl leading-none" style={{ animationDelay: "0.5s" }}>🎈</span>
+                </div>
                 <div className="mt-3 flex justify-center">
                   <span className="inline-flex items-center gap-2 border-2 border-neon-cyan/70 bg-neon-cyan/10 text-neon-cyan font-display text-[11px] sm:text-sm md:text-base tracking-[0.25em] uppercase px-3 py-1.5 md:px-4 md:py-2 shadow-[0_0_20px_rgba(0,238,255,0.4)]">
                     ❄ FULLY AIR CONDITIONED ❄
@@ -270,14 +276,29 @@ const RefreshPlaySection = () => {
                 </div>
               </div>
 
+              {/* 60 ARCADE CREDITS — hero-size, flashing */}
+              <div className="mt-5 md:mt-8 relative border-4 border-neon-pink bg-[#1a0418]/80 px-4 py-4 md:px-8 md:py-6 overflow-hidden">
+                <div className="absolute inset-0 frost-shimmer opacity-20 pointer-events-none" />
+                <div className="relative flex items-center justify-center gap-3 md:gap-6">
+                  <span className="animate-icon-bob shrink-0 text-4xl md:text-6xl leading-none">🕹️</span>
+                  <div className="text-center">
+                    <p className="font-display text-[46px] leading-[0.9] sm:text-6xl md:text-[6.5rem] text-neon-pink animate-credit-flash">
+                      60 CREDITS
+                    </p>
+                    <p className="font-display text-[10px] sm:text-xs md:text-base tracking-[0.2em] text-white/75 mt-1">
+                      MOST GAMES 5–10 CREDITS PER PLAY
+                    </p>
+                  </div>
+                  <span className="animate-icon-bob shrink-0 text-4xl md:text-6xl leading-none" style={{ animationDelay: "0.7s" }}>🎮</span>
+                </div>
+              </div>
 
               {/* Big PLUS chain */}
               <div className="my-5 md:my-8 grid gap-3 md:gap-4">
                 {[
-                  { icon: <Snowflake className="w-7 h-7 md:w-10 md:h-10" />, big: "ICE-COLD DRINK", color: "text-neon-cyan", border: "border-neon-cyan", shadow: "0 0 20px rgba(0,238,255,0.7)" },
-                  { icon: <Gift className="w-7 h-7 md:w-10 md:h-10" />, big: "ICE POP", color: "text-[#aef0ff]", border: "border-[#aef0ff]", shadow: "0 0 20px rgba(174,240,255,0.7)" },
-                  { icon: <Zap className="w-7 h-7 md:w-10 md:h-10" />, big: "60 ARCADE CREDITS", small: "MOST GAMES 5–10 CREDITS PER PLAY", color: "text-neon-pink", border: "border-neon-pink", shadow: "0 0 20px rgba(255,0,204,0.7)" },
-                ].map((item) => (
+                  { emoji: "🥤", icon: <Snowflake className="w-6 h-6 md:w-8 md:h-8" />, big: "ICE-COLD DRINK", color: "text-neon-cyan", border: "border-neon-cyan", shadow: "0 0 20px rgba(0,238,255,0.7)" },
+                  { emoji: "🍦", icon: <Gift className="w-6 h-6 md:w-8 md:h-8" />, big: "ICE POP", color: "text-[#aef0ff]", border: "border-[#aef0ff]", shadow: "0 0 20px rgba(174,240,255,0.7)" },
+                ].map((item, i) => (
                   <div key={item.big} className="flex items-center gap-3 md:gap-5">
                     <span className={`font-display text-4xl md:text-6xl text-neon-pink leading-none shrink-0`}
                       style={{ textShadow: "0 0 18px rgba(255,0,204,0.8)" }}>
@@ -285,22 +306,19 @@ const RefreshPlaySection = () => {
                     </span>
                     <div className={`relative flex-1 flex items-center gap-3 md:gap-5 border-2 md:border-4 ${item.border} bg-[#06141f]/80 backdrop-blur-sm px-4 py-3 md:px-6 md:py-4 overflow-hidden`}>
                       <div className="absolute inset-0 frost-shimmer opacity-30 pointer-events-none" />
-                      <span className={`relative shrink-0 ${item.color}`}>{item.icon}</span>
+                      <span className="relative shrink-0 animate-icon-bob text-3xl md:text-5xl leading-none" style={{ animationDelay: `${i * 0.4}s` }}>{item.emoji}</span>
                       <div className="relative flex-1 min-w-0">
                         <p className={`font-display text-2xl sm:text-3xl md:text-5xl tracking-wider leading-none ${item.color}`}
                           style={{ textShadow: item.shadow }}>
                           {item.big}
                         </p>
-                        {item.small && (
-                          <p className="font-display text-[10px] sm:text-xs md:text-sm tracking-[0.2em] text-white/70 mt-1">
-                            {item.small}
-                          </p>
-                        )}
                       </div>
+                      <span className={`relative shrink-0 ${item.color} opacity-70`}>{item.icon}</span>
                     </div>
                   </div>
                 ))}
               </div>
+
 
               <p className="text-center font-body text-[#aef0ff]/60 text-[10px] md:text-xs">
                 Arcade credits load straight onto your LuxPlay card. Show your booking code on the day. Adults go free.
