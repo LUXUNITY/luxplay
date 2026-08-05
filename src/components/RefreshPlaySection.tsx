@@ -280,10 +280,11 @@ const RefreshPlaySection = () => {
                       style={{ textShadow: "0 0 25px rgba(0,238,255,0.9), 0 0 55px rgba(0,238,255,0.5)" }}>
                       2 HOURS
                     </p>
-                    <p className="font-display text-4xl sm:text-6xl md:text-8xl text-white mt-1"
-                      style={{ textShadow: "0 0 18px rgba(180,240,255,0.6)" }}>
+                    <p className="font-display text-4xl sm:text-6xl md:text-8xl text-neon-green mt-1"
+                      style={{ textShadow: "0 0 20px rgba(170,255,0,0.9), 0 0 45px rgba(170,255,0,0.5)" }}>
                       SOFT PLAY
                     </p>
+
                   </div>
                   <span className="animate-icon-bob text-neon-pink shrink-0 text-4xl md:text-6xl leading-none" style={{ animationDelay: "0.5s" }}>🎈</span>
                 </div>
