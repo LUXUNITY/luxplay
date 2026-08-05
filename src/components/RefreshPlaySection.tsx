@@ -9,15 +9,22 @@ const MAX_CAPACITY = 40;
 const MAX_CHILDREN_PER_BOOKING = 6;
 const BUNDLE_PRICE = 14.99;
 
-/* Ice lolly on a stick — neon icy popsicle */
+/* Ice pole — freeze pop tube (not a stick lolly) */
 const IceLolly = () => (
-  <svg viewBox="0 0 24 40" className="w-7 h-11 md:w-10 md:h-16" aria-hidden="true">
-    <rect x="9.5" y="26" width="5" height="13" rx="2" fill="#c98a4b" />
-    <rect x="2" y="1" width="20" height="27" rx="9" fill="#7ae8ff" stroke="#aef0ff" strokeWidth="1.5" />
-    <path d="M12 1h10a0 0 0 0 1 0 0v18a9 9 0 0 1-9 9h-1z" fill="#ff2bb4" opacity="0.75" />
-    <rect x="5" y="5" width="3.2" height="10" rx="1.6" fill="#ffffff" opacity="0.65" />
+  <svg viewBox="0 0 20 44" className="w-6 h-12 md:w-9 md:h-16" aria-hidden="true">
+    {/* crimped top seal */}
+    <path d="M3 2h14v4H3z" fill="#aef0ff" />
+    <path d="M3 2v4M6 2v4M9 2v4M12 2v4M15 2v4" stroke="#6fd8ef" strokeWidth="0.9" />
+    {/* tube body */}
+    <rect x="4" y="6" width="12" height="35" rx="3" fill="#7ae8ff" stroke="#aef0ff" strokeWidth="1.3" />
+    {/* frozen fill, two-tone */}
+    <rect x="5.4" y="14" width="9.2" height="25.6" rx="2.2" fill="#ff2bb4" opacity="0.8" />
+    <rect x="5.4" y="14" width="9.2" height="12" rx="2.2" fill="#00eeff" opacity="0.55" />
+    {/* highlight */}
+    <rect x="6.3" y="9" width="2.2" height="26" rx="1.1" fill="#ffffff" opacity="0.5" />
   </svg>
 );
+
 
 
 const RefreshPlaySection = () => {
