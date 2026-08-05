@@ -399,7 +399,7 @@ const RefreshPlaySection = () => {
                 <div className="absolute inset-0 frost-shimmer opacity-20 pointer-events-none" />
                 <div className="relative text-center">
                   <p className="font-display text-[11px] md:text-sm tracking-[0.3em] text-[#e9c8ff]">
-                    ❄ BABY SOFT PLAY DEAL (0–4 YRS) ❄
+                    ❄ BABY SOFT PLAY DEAL (0–3 YRS) ❄
                   </p>
                   <p className="font-display text-4xl sm:text-5xl md:text-7xl text-neon-purple leading-none mt-1 animate-big-throb"
                     style={{ textShadow: "0 0 22px rgba(178,102,255,0.9)" }}>
