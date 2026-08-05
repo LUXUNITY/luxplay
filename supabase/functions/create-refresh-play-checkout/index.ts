@@ -7,9 +7,9 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-// REFRESH & PLAY bundle: 2hr soft play + ice-cold drink + ice pop
-// + free 30-min midweek return session (Mon–Thu)
-const BUNDLE_PRICE_PENCE = 999;
+// SUMMER CHILL & PLAY bundle: 2hr soft play + 60 arcade credits
+// + ice-cold drink + ice pop
+const BUNDLE_PRICE_PENCE = 1499;
 
 const STANDARD_SESSIONS = ["10:00", "12:00", "14:00", "16:00", "18:00"];
 const REMOVED_TODAY_SESSIONS: string[] = [];
@@ -109,7 +109,7 @@ serve(async (req) => {
       order: {
         location_id: locationId,
         line_items: [{
-          name: `Refresh & Play Bundle — 2hr Soft Play + Ice-Cold Drink + Ice Pop + FREE 30min Midweek Return — ${sessionTime}`,
+          name: `Summer Chill & Play Bundle — 2hr Soft Play + 60 Arcade Credits + Ice-Cold Drink + Ice Pop — ${sessionTime}`,
           quantity: String(quantity),
           base_price_money: { amount: BUNDLE_PRICE_PENCE, currency: "GBP" },
         }],
