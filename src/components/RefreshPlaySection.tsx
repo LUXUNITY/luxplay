@@ -9,6 +9,17 @@ const MAX_CAPACITY = 40;
 const MAX_CHILDREN_PER_BOOKING = 6;
 const BUNDLE_PRICE = 14.99;
 
+/* Ice lolly on a stick — neon icy popsicle */
+const IceLolly = () => (
+  <svg viewBox="0 0 24 40" className="w-7 h-11 md:w-10 md:h-16" aria-hidden="true">
+    <rect x="9.5" y="26" width="5" height="13" rx="2" fill="#c98a4b" />
+    <rect x="2" y="1" width="20" height="27" rx="9" fill="#7ae8ff" stroke="#aef0ff" strokeWidth="1.5" />
+    <path d="M12 1h10a0 0 0 0 1 0 0v18a9 9 0 0 1-9 9h-1z" fill="#ff2bb4" opacity="0.75" />
+    <rect x="5" y="5" width="3.2" height="10" rx="1.6" fill="#ffffff" opacity="0.65" />
+  </svg>
+);
+
+
 const RefreshPlaySection = () => {
   const initialDate = getAvailableDates()[0]?.iso;
   const [selectedDate, setSelectedDate] = useState<string>(initialDate);
