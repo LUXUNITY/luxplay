@@ -344,6 +344,43 @@
   }
   .animate-sparkle { animation: sparkle-twinkle 1.6s ease-in-out infinite; will-change: transform, opacity; }
 
+  /* Cute pastel bubbles rising — baby deal */
+  @keyframes baby-bubble {
+    0% { transform: translate3d(0, 20px, 0) scale(0.7); opacity: 0; }
+    15% { opacity: 0.9; }
+    85% { opacity: 0.7; }
+    100% { transform: translate3d(var(--bdrift, 16px), -220px, 0) scale(1.15); opacity: 0; }
+  }
+  .baby-bubble {
+    position: absolute;
+    bottom: 0;
+    border-radius: 9999px;
+    animation: baby-bubble linear infinite;
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+
+  /* Soft pastel rays behind the baby deal card */
+  .animate-baby-rays {
+    animation: party-rays 40s linear infinite reverse;
+    will-change: transform;
+    background: repeating-conic-gradient(
+      from 0deg,
+      rgba(178, 102, 255, 0.18) 0deg 8deg,
+      transparent 8deg 20deg,
+      rgba(255, 160, 230, 0.16) 20deg 28deg,
+      transparent 28deg 40deg
+    );
+  }
+
+  /* Gentle wobble for cute stickers */
+  @keyframes cute-wobble {
+    0%, 100% { transform: rotate(-7deg) translate3d(0,0,0); }
+    50% { transform: rotate(7deg) translate3d(0,-6px,0); }
+  }
+  .animate-cute-wobble { animation: cute-wobble 3s ease-in-out infinite; will-change: transform; }
+
+
 
 
   /* Respect reduced-motion + kill heatwave animation on very small phones to save battery */
