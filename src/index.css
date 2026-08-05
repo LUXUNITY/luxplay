@@ -265,7 +265,28 @@
     0% { transform: translate3d(0,0,0); }
     100% { transform: translate3d(-50%,0,0); }
   }
-  .animate-wave-roll { animation: wave-roll 8s linear infinite; will-change: transform; }
+
+  /* Icon bob — little logos next to each perk */
+  @keyframes icon-bob {
+    0%,100% { transform: translate3d(0,0,0) rotate(-6deg) scale(1); }
+    50% { transform: translate3d(0,-5px,0) rotate(6deg) scale(1.12); }
+  }
+  .animate-icon-bob { animation: icon-bob 2.2s ease-in-out infinite; will-change: transform; }
+
+  /* Big throb — makes the headline perks grab attention */
+  @keyframes big-throb {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  .animate-big-throb { animation: big-throb 1.8s ease-in-out infinite; transform-origin: center; will-change: transform; }
+
+  /* Credit flash — neon pink/cyan text glow swap */
+  @keyframes credit-flash {
+    0%,100% { text-shadow: 0 0 18px rgba(255,0,204,0.85), 0 0 45px rgba(255,0,204,0.45); opacity: 1; }
+    50% { text-shadow: 0 0 28px rgba(0,238,255,0.95), 0 0 65px rgba(0,238,255,0.55); opacity: 0.92; }
+  }
+  .animate-credit-flash { animation: credit-flash 1.4s ease-in-out infinite; }
+
 
   /* Respect reduced-motion + kill heatwave animation on very small phones to save battery */
   @media (prefers-reduced-motion: reduce) {
