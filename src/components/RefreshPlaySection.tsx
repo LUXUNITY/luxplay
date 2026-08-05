@@ -296,8 +296,8 @@ const RefreshPlaySection = () => {
               {/* Big PLUS chain */}
               <div className="my-5 md:my-8 grid gap-3 md:gap-4">
                 {[
-                  { emoji: "🥤", icon: <Snowflake className="w-6 h-6 md:w-8 md:h-8" />, big: "ICE-COLD DRINK", color: "text-neon-cyan", border: "border-neon-cyan", shadow: "0 0 20px rgba(0,238,255,0.7)" },
-                  { emoji: "🍡", icon: <Gift className="w-6 h-6 md:w-8 md:h-8" />, big: "ICE POP", color: "text-[#aef0ff]", border: "border-[#aef0ff]", shadow: "0 0 20px rgba(174,240,255,0.7)" },
+                  { art: <span className="text-3xl md:text-5xl leading-none">🥤</span>, icon: <Snowflake className="w-6 h-6 md:w-8 md:h-8" />, big: "ICE-COLD DRINK", color: "text-neon-cyan", border: "border-neon-cyan", shadow: "0 0 20px rgba(0,238,255,0.7)" },
+                  { art: <IceLolly />, icon: <Gift className="w-6 h-6 md:w-8 md:h-8" />, big: "ICE POP", color: "text-[#aef0ff]", border: "border-[#aef0ff]", shadow: "0 0 20px rgba(174,240,255,0.7)" },
                 ].map((item, i) => (
                   <div key={item.big} className="flex items-center gap-3 md:gap-5">
                     <span className={`font-display text-4xl md:text-6xl text-neon-pink leading-none shrink-0`}
@@ -306,7 +306,8 @@ const RefreshPlaySection = () => {
                     </span>
                     <div className={`relative flex-1 flex items-center gap-3 md:gap-5 border-2 md:border-4 ${item.border} bg-[#06141f]/80 backdrop-blur-sm px-4 py-3 md:px-6 md:py-4 overflow-hidden`}>
                       <div className="absolute inset-0 frost-shimmer opacity-30 pointer-events-none" />
-                      <span className="relative shrink-0 animate-icon-bob text-3xl md:text-5xl leading-none" style={{ animationDelay: `${i * 0.4}s` }}>{item.emoji}</span>
+                      <span className="relative shrink-0 animate-icon-bob flex items-center" style={{ animationDelay: `${i * 0.4}s` }}>{item.art}</span>
+
                       <div className="relative flex-1 min-w-0">
                         <p className={`font-display text-2xl sm:text-3xl md:text-5xl tracking-wider leading-none ${item.color}`}
                           style={{ textShadow: item.shadow }}>
