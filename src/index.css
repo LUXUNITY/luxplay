@@ -276,6 +276,21 @@
   }
   .animate-icon-bob { animation: icon-bob 2.2s ease-in-out infinite; will-change: transform; }
 
+  /* Cute baby — squishy hop with a happy wiggle */
+  @keyframes baby-cute {
+    0%,100% { transform: translate3d(0,0,0) rotate(-8deg) scale(1); }
+    25% { transform: translate3d(0,-7px,0) rotate(0deg) scale(1.14); }
+    50% { transform: translate3d(0,0,0) rotate(8deg) scale(0.96); }
+    75% { transform: translate3d(0,-4px,0) rotate(0deg) scale(1.08); }
+  }
+  .animate-baby-cute { animation: baby-cute 2.4s ease-in-out infinite; will-change: transform; }
+
+  @keyframes baby-sparkle {
+    0%,100% { opacity: 0.25; transform: scale(0.7); }
+    50% { opacity: 1; transform: scale(1.15); }
+  }
+  .animate-baby-sparkle { animation: baby-sparkle 1.6s ease-in-out infinite; }
+
   /* Big throb — makes the headline perks grab attention */
   @keyframes big-throb {
     0%,100% { transform: scale(1); }
