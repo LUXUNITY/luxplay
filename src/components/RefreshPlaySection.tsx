@@ -7,7 +7,7 @@ import { getAvailableDates, getSlotsForDate, isSlotForcedFull } from "./softplay
 
 const MAX_CAPACITY = 40;
 const MAX_CHILDREN_PER_BOOKING = 6;
-const BUNDLE_PRICE = 9.99;
+const BUNDLE_PRICE = 14.99;
 
 const RefreshPlaySection = () => {
   const initialDate = getAvailableDates()[0]?.iso;
@@ -195,19 +195,19 @@ const RefreshPlaySection = () => {
         <div className="flex justify-center mb-4">
           <span className="inline-flex items-center gap-2 md:gap-3 border-2 border-neon-cyan/70 bg-neon-cyan/10 backdrop-blur-md text-neon-cyan font-display text-lg sm:text-2xl md:text-4xl tracking-[0.2em] uppercase px-5 py-3 md:px-8 md:py-4 shadow-[0_0_40px_rgba(0,238,255,0.45)]">
             <Snowflake className="w-5 h-5 md:w-7 md:h-7 animate-spin shrink-0" style={{ animationDuration: "6s" }} />
-            HEATWAVE RESCUE
+            SUMMER CHILL & PLAY
             <Snowflake className="w-5 h-5 md:w-7 md:h-7 animate-spin shrink-0" style={{ animationDuration: "6s", animationDirection: "reverse" }} />
           </span>
         </div>
         <p className="text-center font-display text-[10px] md:text-xs tracking-[0.4em] text-neon-cyan/70 mb-6">
-          THIS WEEK ONLY
+          SUMMER HOLIDAYS SPECIAL
         </p>
 
         {/* Title — smaller, sits above the hero stack */}
         <h2 className="text-center font-display tracking-[0.15em] leading-none mb-6">
           <span className="block text-2xl md:text-4xl text-neon-cyan"
             style={{ textShadow: "0 0 18px rgba(0,238,255,0.8)" }}>
-            REFRESH <span className="text-white/80">&amp;</span> <span className="text-neon-green" style={{ textShadow: "0 0 18px rgba(46,255,99,0.8)" }}>PLAY!</span>
+            SUMMER CHILL <span className="text-white/80">&amp;</span> <span className="text-neon-green" style={{ textShadow: "0 0 18px rgba(46,255,99,0.8)" }}>PLAY!</span>
           </span>
         </h2>
 
@@ -229,7 +229,7 @@ const RefreshPlaySection = () => {
               <span className="block font-display text-[10px] md:text-xs tracking-[0.3em] text-white/90 leading-none">ONLY</span>
               <span className="block font-display text-3xl md:text-5xl text-white leading-none"
                 style={{ textShadow: "2px 2px 0 #070710" }}>
-                £9.99
+                £14.99
               </span>
               <span className="block font-body text-[8px] md:text-[10px] tracking-wider text-white/90 leading-tight mt-0.5">per child</span>
             </div>
@@ -276,7 +276,7 @@ const RefreshPlaySection = () => {
                 {[
                   { icon: <Snowflake className="w-7 h-7 md:w-10 md:h-10" />, big: "ICE-COLD DRINK", color: "text-neon-cyan", border: "border-neon-cyan", shadow: "0 0 20px rgba(0,238,255,0.7)" },
                   { icon: <Gift className="w-7 h-7 md:w-10 md:h-10" />, big: "ICE POP", color: "text-[#aef0ff]", border: "border-[#aef0ff]", shadow: "0 0 20px rgba(174,240,255,0.7)" },
-                  { icon: <Snowflake className="w-7 h-7 md:w-10 md:h-10" />, big: "FREE 30-MIN", small: "MIDWEEK RETURN (MON–THU)", color: "text-white", border: "border-white/70", shadow: "0 0 20px rgba(255,255,255,0.6)" },
+                  { icon: <Zap className="w-7 h-7 md:w-10 md:h-10" />, big: "60 ARCADE CREDITS", small: "MOST GAMES 5–10 CREDITS PER PLAY", color: "text-neon-pink", border: "border-neon-pink", shadow: "0 0 20px rgba(255,0,204,0.7)" },
                 ].map((item) => (
                   <div key={item.big} className="flex items-center gap-3 md:gap-5">
                     <span className={`font-display text-4xl md:text-6xl text-neon-pink leading-none shrink-0`}
@@ -303,7 +303,7 @@ const RefreshPlaySection = () => {
               </div>
 
               <p className="text-center font-body text-[#aef0ff]/60 text-[10px] md:text-xs">
-                Free 30-minute return valid Mon–Thu within 7 days. Show your booking code on the day. Adults go free.
+                Arcade credits load straight onto your LuxPlay card. Show your booking code on the day. Adults go free.
               </p>
             </div>
           </div>
@@ -317,7 +317,7 @@ const RefreshPlaySection = () => {
               onClick={() => setOpen(true)}
               className="font-display text-lg md:text-2xl tracking-widest px-10 md:px-16 py-5 md:py-6 bg-neon-green text-[#070710] animate-btn-flash-green hover:scale-105 transition-transform"
             >
-              GRAB THIS DEAL — £9.99
+              GRAB THIS DEAL — £14.99
             </button>
           </div>
         )}

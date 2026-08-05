@@ -97,7 +97,7 @@ const HeroSection = () => {
           href="#refresh-play"
           className="neon-cta flex items-center justify-center font-display text-xs sm:text-sm md:text-base tracking-widest px-2 py-3 md:py-4 bg-neon-green text-[#070710] animate-btn-flash-green transition-transform duration-200 hover:scale-105 text-center h-full"
         >
-          <span>REFRESH &amp; PLAY £9.99</span>
+          <span>SUMMER CHILL &amp; PLAY £14.99</span>
         </a>
         <a
           href="#presale"
