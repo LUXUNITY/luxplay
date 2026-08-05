@@ -390,9 +390,6 @@ const RefreshPlaySection = () => {
               <p className="text-center font-body text-[#aef0ff]/60 text-[10px] md:text-xs">
                 Arcade credits load straight onto your LuxPlay card. Show your booking code on the day. Adults go free.
               </p>
-              <p className="text-center font-display text-neon-green text-[11px] md:text-sm tracking-[0.15em] mt-2">
-                THIS DEAL IS FOR KIDS ON THE BIG SOFT PLAY — NOT BABY SOFT PLAY
-              </p>
 
               {/* Baby soft play companion deal */}
               <div className="mt-5 md:mt-8 relative border-2 md:border-4 border-neon-purple bg-[#12061f]/85 px-4 py-4 md:px-6 md:py-5 overflow-hidden">
