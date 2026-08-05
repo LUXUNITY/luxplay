@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import founderBazAsset from "@/assets/baz-new.jpg.asset.json";
 import founderMartinAsset from "@/assets/founder-martin-clean.png.asset.json";
 import logoLuxPlay from "@/assets/logo-luxplay.png";
-import logoCafeLux from "@/assets/logo-cafe-lux.png";
+import logoCafeLux from "@/assets/logo-cafe.png";
 import logoLuxKey from "@/assets/logo-luxkey.png";
 import logoMasterclass from "@/assets/logo-masterclass-exteriors.png.asset.json";
 
