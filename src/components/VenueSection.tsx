@@ -10,7 +10,7 @@ const venues = [
   { img: softplayAsset.url, label: "SOFT PLAY", color: "text-neon-cyan", comingSoon: false },
   { img: babySoftplayAsset.url, label: "BABY SOFT PLAY", color: "text-neon-pink", comingSoon: false },
   { img: prizeAsset.url, label: "PRIZE REDEMPTION", color: "text-neon-pink", comingSoon: false },
-  { img: cafeAsset.url, label: "CAFÈ LUX", color: "text-neon-purple", comingSoon: false },
+  { img: cafeAsset.url, label: "CAFÈ", color: "text-neon-purple", comingSoon: false },
 ];
 
 const VenueSection = () => {
