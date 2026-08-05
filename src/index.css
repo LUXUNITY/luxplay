@@ -295,7 +295,8 @@
   @media (prefers-reduced-motion: reduce) {
     .animate-sun-spin, .animate-sun-throb, .animate-heat-haze,
     .water-drip, .animate-ice-float, .animate-wave-roll,
-    .snowflake, .frost-shimmer, .animate-chill-pulse {
+    .snowflake, .frost-shimmer, .animate-chill-pulse,
+    .animate-icon-bob, .animate-big-throb, .animate-credit-flash {
       animation: none !important;
     }
   }
