@@ -290,6 +290,46 @@
   }
   .animate-credit-flash { animation: credit-flash 1.4s ease-in-out infinite; }
 
+  /* Party rays — slow rotating starburst behind the deal card */
+  @keyframes party-rays { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  .animate-party-rays {
+    animation: party-rays 32s linear infinite;
+    will-change: transform;
+    background: repeating-conic-gradient(
+      from 0deg,
+      rgba(0, 238, 255, 0.16) 0deg 7deg,
+      transparent 7deg 18deg,
+      rgba(255, 0, 204, 0.14) 18deg 25deg,
+      transparent 25deg 36deg
+    );
+  }
+
+  /* Confetti — falling neon flecks */
+  @keyframes confetti-fall {
+    0% { transform: translate3d(0, -20px, 0) rotate(0deg); opacity: 0; }
+    12% { opacity: 1; }
+    88% { opacity: 1; }
+    100% { transform: translate3d(var(--cdrift, 24px), 420px, 0) rotate(540deg); opacity: 0; }
+  }
+  .confetti {
+    position: absolute;
+    top: 0;
+    width: 7px;
+    height: 14px;
+    border-radius: 2px;
+    animation: confetti-fall linear infinite;
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+
+  /* Sparkle twinkle */
+  @keyframes sparkle-twinkle {
+    0%, 100% { transform: scale(0.6) rotate(0deg); opacity: 0.35; }
+    50% { transform: scale(1.25) rotate(25deg); opacity: 1; }
+  }
+  .animate-sparkle { animation: sparkle-twinkle 1.6s ease-in-out infinite; will-change: transform, opacity; }
+
+
 
   /* Respect reduced-motion + kill heatwave animation on very small phones to save battery */
   @media (prefers-reduced-motion: reduce) {
