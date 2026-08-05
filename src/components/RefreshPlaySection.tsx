@@ -297,7 +297,7 @@ const RefreshPlaySection = () => {
               <div className="my-5 md:my-8 grid gap-3 md:gap-4">
                 {[
                   { emoji: "🥤", icon: <Snowflake className="w-6 h-6 md:w-8 md:h-8" />, big: "ICE-COLD DRINK", color: "text-neon-cyan", border: "border-neon-cyan", shadow: "0 0 20px rgba(0,238,255,0.7)" },
-                  { emoji: "🍦", icon: <Gift className="w-6 h-6 md:w-8 md:h-8" />, big: "ICE POP", color: "text-[#aef0ff]", border: "border-[#aef0ff]", shadow: "0 0 20px rgba(174,240,255,0.7)" },
+                  { emoji: "🍡", icon: <Gift className="w-6 h-6 md:w-8 md:h-8" />, big: "ICE POP", color: "text-[#aef0ff]", border: "border-[#aef0ff]", shadow: "0 0 20px rgba(174,240,255,0.7)" },
                 ].map((item, i) => (
                   <div key={item.big} className="flex items-center gap-3 md:gap-5">
                     <span className={`font-display text-4xl md:text-6xl text-neon-pink leading-none shrink-0`}
