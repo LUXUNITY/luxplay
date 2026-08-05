@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Loader2, Snowflake, Zap, Gift, Clock, Users, Plus, Minus, Check } from "lucide-react";
+import { Loader2, Snowflake, Gift, Clock, Users, Plus, Minus, Check } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import DateStrip from "./softplay/DateStrip";
