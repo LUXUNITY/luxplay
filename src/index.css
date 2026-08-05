@@ -336,10 +336,12 @@
     .animate-sun-spin, .animate-sun-throb, .animate-heat-haze,
     .water-drip, .animate-ice-float, .animate-wave-roll,
     .snowflake, .frost-shimmer, .animate-chill-pulse,
-    .animate-icon-bob, .animate-big-throb, .animate-credit-flash {
+    .animate-icon-bob, .animate-big-throb, .animate-credit-flash,
+    .animate-party-rays, .confetti, .animate-sparkle {
       animation: none !important;
     }
   }
+
 
   @keyframes btn-flash {
     0%, 100% {
