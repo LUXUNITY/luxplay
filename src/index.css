@@ -265,6 +265,9 @@
     0% { transform: translate3d(0,0,0); }
     100% { transform: translate3d(-50%,0,0); }
   }
+  .animate-wave-roll { animation: wave-roll 8s linear infinite; will-change: transform; }
+
+
 
   /* Icon bob — little logos next to each perk */
   @keyframes icon-bob {
