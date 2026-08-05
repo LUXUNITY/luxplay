@@ -9,6 +9,17 @@ const MAX_CAPACITY = 40;
 const MAX_CHILDREN_PER_BOOKING = 6;
 const BUNDLE_PRICE = 14.99;
 
+/* Ice lolly on a stick — neon icy popsicle */
+const IceLolly = () => (
+  <svg viewBox="0 0 24 40" className="w-7 h-11 md:w-10 md:h-16" aria-hidden="true">
+    <rect x="9.5" y="26" width="5" height="13" rx="2" fill="#c98a4b" />
+    <rect x="2" y="1" width="20" height="27" rx="9" fill="#7ae8ff" stroke="#aef0ff" strokeWidth="1.5" />
+    <path d="M12 1h10a0 0 0 0 1 0 0v18a9 9 0 0 1-9 9h-1z" fill="#ff2bb4" opacity="0.75" />
+    <rect x="5" y="5" width="3.2" height="10" rx="1.6" fill="#ffffff" opacity="0.65" />
+  </svg>
+);
+
+
 const RefreshPlaySection = () => {
   const initialDate = getAvailableDates()[0]?.iso;
   const [selectedDate, setSelectedDate] = useState<string>(initialDate);
@@ -296,8 +307,8 @@ const RefreshPlaySection = () => {
               {/* Big PLUS chain */}
               <div className="my-5 md:my-8 grid gap-3 md:gap-4">
                 {[
-                  { emoji: "🥤", icon: <Snowflake className="w-6 h-6 md:w-8 md:h-8" />, big: "ICE-COLD DRINK", color: "text-neon-cyan", border: "border-neon-cyan", shadow: "0 0 20px rgba(0,238,255,0.7)" },
-                  { emoji: "🍦", icon: <Gift className="w-6 h-6 md:w-8 md:h-8" />, big: "ICE POP", color: "text-[#aef0ff]", border: "border-[#aef0ff]", shadow: "0 0 20px rgba(174,240,255,0.7)" },
+                  { art: <span className="text-3xl md:text-5xl leading-none">🥤</span>, icon: <Snowflake className="w-6 h-6 md:w-8 md:h-8" />, big: "ICE-COLD DRINK", color: "text-neon-cyan", border: "border-neon-cyan", shadow: "0 0 20px rgba(0,238,255,0.7)" },
+                  { art: <IceLolly />, icon: <Gift className="w-6 h-6 md:w-8 md:h-8" />, big: "ICE POP", color: "text-[#aef0ff]", border: "border-[#aef0ff]", shadow: "0 0 20px rgba(174,240,255,0.7)" },
                 ].map((item, i) => (
                   <div key={item.big} className="flex items-center gap-3 md:gap-5">
                     <span className={`font-display text-4xl md:text-6xl text-neon-pink leading-none shrink-0`}
@@ -306,7 +317,8 @@ const RefreshPlaySection = () => {
                     </span>
                     <div className={`relative flex-1 flex items-center gap-3 md:gap-5 border-2 md:border-4 ${item.border} bg-[#06141f]/80 backdrop-blur-sm px-4 py-3 md:px-6 md:py-4 overflow-hidden`}>
                       <div className="absolute inset-0 frost-shimmer opacity-30 pointer-events-none" />
-                      <span className="relative shrink-0 animate-icon-bob text-3xl md:text-5xl leading-none" style={{ animationDelay: `${i * 0.4}s` }}>{item.emoji}</span>
+                      <span className="relative shrink-0 animate-icon-bob flex items-center" style={{ animationDelay: `${i * 0.4}s` }}>{item.art}</span>
+
                       <div className="relative flex-1 min-w-0">
                         <p className={`font-display text-2xl sm:text-3xl md:text-5xl tracking-wider leading-none ${item.color}`}
                           style={{ textShadow: item.shadow }}>
