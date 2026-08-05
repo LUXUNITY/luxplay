@@ -389,7 +389,9 @@
     .water-drip, .animate-ice-float, .animate-wave-roll,
     .snowflake, .frost-shimmer, .animate-chill-pulse,
     .animate-icon-bob, .animate-big-throb, .animate-credit-flash,
-    .animate-party-rays, .confetti, .animate-sparkle {
+    .animate-party-rays, .confetti, .animate-sparkle,
+    .baby-bubble, .animate-baby-rays, .animate-cute-wobble,
+    .animate-baby-cute, .animate-baby-sparkle {
       animation: none !important;
     }
   }
