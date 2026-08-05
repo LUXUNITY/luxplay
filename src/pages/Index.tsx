@@ -46,7 +46,15 @@ const Index = () => {
             </ScrollReveal>
           </Suspense>
         </div>
-        {/* 5. Baby soft play booking */}
+        {/* 5. Baby soft play deal */}
+        <div className="defer-section">
+          <Suspense fallback={null}>
+            <ScrollReveal>
+              <BabyDealSection />
+            </ScrollReveal>
+          </Suspense>
+        </div>
+        {/* 6. Baby soft play booking */}
         <div className="defer-section">
           <Suspense fallback={null}>
             <ScrollReveal>
@@ -54,6 +62,7 @@ const Index = () => {
             </ScrollReveal>
           </Suspense>
         </div>
+
         {/* 6. Birthday parties */}
         <div className="defer-section">
           <Suspense fallback={null}>
