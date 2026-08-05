@@ -75,7 +75,7 @@ const BabyDealSection = () => {
             <span>ICE-COLD DRINK</span>
             <span className="text-neon-pink">+</span>
             <span>ICE POP</span>
-            <span className="animate-icon-bob text-2xl md:text-4xl" style={{ animationDelay: "0.5s" }}>🥤</span>
+            <span className="animate-icon-bob text-2xl md:text-4xl" style={{ animationDelay: "0.5s" }}>👶</span>
           </div>
           <div className="mt-4 flex justify-center">
             <span className="inline-flex items-center gap-2 border-2 border-neon-green bg-neon-green/15 text-neon-green font-display text-[11px] sm:text-sm md:text-base tracking-[0.25em] uppercase px-3 py-1.5 md:px-4 md:py-2 animate-big-throb">
