@@ -231,14 +231,61 @@ const RefreshPlaySection = () => {
 
         {/* HERO STACK — "what you get" is the loudest thing on the page */}
         <div className="relative max-w-3xl mx-auto">
+          {/* Rotating party starburst behind the card */}
+          <div className="absolute -inset-16 md:-inset-28 pointer-events-none overflow-hidden" aria-hidden="true">
+            <div className="absolute inset-0 animate-party-rays rounded-full opacity-70"
+              style={{ maskImage: "radial-gradient(circle at center, #000 25%, transparent 72%)", WebkitMaskImage: "radial-gradient(circle at center, #000 25%, transparent 72%)" }} />
+          </div>
+
+          {/* Neon confetti raining over the deal */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden z-10" aria-hidden="true">
+            {[
+              { left: "7%", color: "#aaff00", dur: 4.5, delay: 0, drift: "26px", mobile: true },
+              { left: "23%", color: "#00eeff", dur: 5.5, delay: 1.2, drift: "-30px", mobile: true },
+              { left: "39%", color: "#ff00cc", dur: 5, delay: 2.4, drift: "18px", mobile: false },
+              { left: "56%", color: "#aaff00", dur: 6, delay: 0.6, drift: "-22px", mobile: true },
+              { left: "72%", color: "#7700ff", dur: 4.8, delay: 1.8, drift: "28px", mobile: false },
+              { left: "89%", color: "#00eeff", dur: 5.2, delay: 3, drift: "-18px", mobile: true },
+            ].map((c, i) => (
+              <span key={i}
+                className={`confetti ${c.mobile ? "" : "hidden md:block"}`}
+                style={{
+                  left: c.left,
+                  background: c.color,
+                  boxShadow: `0 0 10px ${c.color}`,
+                  animationDuration: `${c.dur}s`,
+                  animationDelay: `${c.delay}s`,
+                  ["--cdrift" as any]: c.drift,
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Twinkling sparkles around the card edges */}
+          <div className="absolute inset-0 pointer-events-none z-20" aria-hidden="true">
+            {[
+              { left: "-3%", top: "18%", size: "text-2xl md:text-4xl", delay: "0s" },
+              { left: "101%", top: "42%", size: "text-xl md:text-3xl", delay: "0.5s" },
+              { left: "-2%", top: "78%", size: "text-xl md:text-3xl", delay: "0.9s" },
+              { left: "97%", top: "88%", size: "text-2xl md:text-4xl", delay: "1.3s" },
+            ].map((s, i) => (
+              <span key={i}
+                className={`absolute animate-sparkle leading-none ${s.size}`}
+                style={{ left: s.left, top: s.top, animationDelay: s.delay, filter: "drop-shadow(0 0 10px rgba(255,255,255,0.8))" }}>
+                ✨
+              </span>
+            ))}
+          </div>
+
           {/* Cool refreshed face with sunglasses + cold drink — sits on the deal card */}
           <div
-            className="absolute -top-1 -left-3 md:-top-3 md:-left-8 text-5xl md:text-7xl select-none z-20 -rotate-[12deg] pointer-events-none"
+            className="absolute -top-1 -left-3 md:-top-3 md:-left-8 text-5xl md:text-7xl select-none z-30 -rotate-[12deg] pointer-events-none"
             style={{ filter: "drop-shadow(0 0 14px rgba(0,238,255,0.85))", animation: "ice-float 3s ease-in-out infinite" }}
             aria-hidden="true"
           >
             😎🥤
           </div>
+
 
           {/* Price burst — sits in the corner, smaller than the bundle */}
 
@@ -280,10 +327,11 @@ const RefreshPlaySection = () => {
                       style={{ textShadow: "0 0 25px rgba(0,238,255,0.9), 0 0 55px rgba(0,238,255,0.5)" }}>
                       2 HOURS
                     </p>
-                    <p className="font-display text-4xl sm:text-6xl md:text-8xl text-white mt-1"
-                      style={{ textShadow: "0 0 18px rgba(180,240,255,0.6)" }}>
+                    <p className="font-display text-4xl sm:text-6xl md:text-8xl text-neon-green mt-1"
+                      style={{ textShadow: "0 0 20px rgba(170,255,0,0.9), 0 0 45px rgba(170,255,0,0.5)" }}>
                       SOFT PLAY
                     </p>
+
                   </div>
                   <span className="animate-icon-bob text-neon-pink shrink-0 text-4xl md:text-6xl leading-none" style={{ animationDelay: "0.5s" }}>🎈</span>
                 </div>
