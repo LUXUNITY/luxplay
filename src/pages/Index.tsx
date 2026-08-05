@@ -9,6 +9,7 @@ const FeaturesSection = lazy(() => import("@/components/FeaturesSection"));
 const FooterSection = lazy(() => import("@/components/FooterSection"));
 const SoftPlaySection = lazy(() => import("@/components/SoftPlaySection"));
 const BabySoftPlaySection = lazy(() => import("@/components/BabySoftPlaySection"));
+const BabyDealSection = lazy(() => import("@/components/BabyDealSection"));
 const PartiesSection = lazy(() => import("@/components/PartiesSection"));
 
 const Index = () => {
