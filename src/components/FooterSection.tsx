@@ -66,6 +66,30 @@ const FooterSection = () => {
         </a>
       </div>
 
+      {/* Site links — helps visitors and search engines find every page */}
+      <nav
+        aria-label="LuxPlay pages"
+        className="relative z-10 mt-10 max-w-3xl mx-auto flex flex-wrap justify-center gap-x-5 gap-y-3 px-6"
+      >
+        {[
+          { href: "/", label: "HOME" },
+          { href: "/soft-play-bournemouth", label: "SOFT PLAY BOURNEMOUTH" },
+          { href: "/arcade-bournemouth", label: "ARCADE BOURNEMOUTH" },
+          { href: "/things-to-do-in-bournemouth-with-kids", label: "THINGS TO DO WITH KIDS" },
+          { href: "/parties", label: "BIRTHDAY PARTIES" },
+        ].map((l) => (
+          <a
+            key={l.href}
+            href={l.href}
+            className="font-display text-[10px] md:text-xs tracking-[0.25em] text-white/60 hover:text-neon-cyan transition-colors"
+          >
+            {l.label}
+          </a>
+        ))}
+      </nav>
+
+
+
 
 
       {/* Neon bottom bar */}
