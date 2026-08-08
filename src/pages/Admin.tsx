@@ -48,8 +48,6 @@ const Admin = () => {
   const [error, setError] = useState<string | null>(null);
   const [acting, setActing] = useState(false);
   const [justActed, setJustActed] = useState(false);
-  const [blastBusy, setBlastBusy] = useState(false);
-  const [blastStatus, setBlastStatus] = useState<string | null>(null);
 
   useEffect(() => {
     const stored = sessionStorage.getItem(PW_STORAGE_KEY);
