@@ -18,6 +18,7 @@ const Parties = lazy(() => import("./pages/Parties"));
 const SoftPlayBournemouth = lazy(() => import("./pages/SoftPlayBournemouth"));
 const ArcadeBournemouth = lazy(() => import("./pages/ArcadeBournemouth"));
 const ThingsToDoBournemouth = lazy(() => import("./pages/ThingsToDoBournemouth"));
+const ThingsToDoInBournemouth = lazy(() => import("./pages/ThingsToDoInBournemouth"));
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ const App = () => (
               <Route path="/soft-play-bournemouth" element={<SoftPlayBournemouth />} />
               <Route path="/arcade-bournemouth" element={<ArcadeBournemouth />} />
               <Route path="/things-to-do-in-bournemouth-with-kids" element={<ThingsToDoBournemouth />} />
+              <Route path="/things-to-do-in-bournemouth" element={<ThingsToDoInBournemouth />} />
 
               <Route path="/payment-success" element={<><RouteHead title="Credits Purchase Confirmed — LUXPLAY" description="Your LUXPLAY arcade credits purchase is confirmed. Show your redemption code in store to load credits onto your card." path="/payment-success" noindex /><PaymentSuccess /></>} />
               <Route path="/unsubscribe" element={<><RouteHead title="Email Preferences — LUXPLAY" description="Manage or unsubscribe from LUXPLAY email updates." path="/unsubscribe" noindex /><Unsubscribe /></>} />
