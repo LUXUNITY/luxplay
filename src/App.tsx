@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
+import RouteHead from "@/components/RouteHead";
 
 const NotFound = lazy(() => import("./pages/NotFound"));
 const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
@@ -25,13 +26,13 @@ const App = () => (
         <BrowserRouter>
           <Suspense fallback={null}>
             <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/payment-success" element={<PaymentSuccess />} />
-              <Route path="/unsubscribe" element={<Unsubscribe />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/softplay-success" element={<SoftPlaySuccess />} />
-              <Route path="/baby-softplay-success" element={<BabySoftPlaySuccess />} />
-              <Route path="*" element={<NotFound />} />
+              <Route path="/" element={<><RouteHead title="LUXPLAY — Family Entertainment Centre in Bournemouth" description="LUXPLAY in Boscombe, Bournemouth: 40+ arcade games, 3-level soft play, baby soft play, prize redemption and Cafè Lux. Book soft play or buy credits online." path="/" /><Index /></>} />
+              <Route path="/payment-success" element={<><RouteHead title="Credits Purchase Confirmed — LUXPLAY" description="Your LUXPLAY arcade credits purchase is confirmed. Show your redemption code in store to load credits onto your card." path="/payment-success" noindex /><PaymentSuccess /></>} />
+              <Route path="/unsubscribe" element={<><RouteHead title="Email Preferences — LUXPLAY" description="Manage or unsubscribe from LUXPLAY email updates." path="/unsubscribe" noindex /><Unsubscribe /></>} />
+              <Route path="/admin" element={<><RouteHead title="Staff Code Lookup — LUXPLAY" description="Internal LUXPLAY staff tool for looking up and checking in redemption and booking codes." path="/admin" noindex /><Admin /></>} />
+              <Route path="/softplay-success" element={<><RouteHead title="Soft Play Booking Confirmed — LUXPLAY" description="Your LUXPLAY soft play session is booked. Show your booking code on the day." path="/softplay-success" noindex /><SoftPlaySuccess /></>} />
+              <Route path="/baby-softplay-success" element={<><RouteHead title="Baby Soft Play Booking Confirmed — LUXPLAY" description="Your LUXPLAY baby soft play session is booked. Show your booking code on the day." path="/baby-softplay-success" noindex /><BabySoftPlaySuccess /></>} />
+              <Route path="*" element={<><RouteHead title="Page Not Found — LUXPLAY" description="This LUXPLAY page could not be found." path="/404" noindex /><NotFound /></>} />
             </Routes>
           </Suspense>
         </BrowserRouter>
