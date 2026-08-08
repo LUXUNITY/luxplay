@@ -33,12 +33,15 @@ const FooterSection = () => {
               OPENING HOURS
             </p>
             <p className="font-body text-white/70 text-sm leading-relaxed">
-              Monday – Sunday
+              Sun – Thu
               <br />
               <span className="text-neon-green font-semibold">10:00 – 20:00</span>
               <br />
-              Open every day
+              Fri &amp; Sat
+              <br />
+              <span className="text-neon-green font-semibold">10:00 – 21:00</span>
             </p>
+
           </div>
         </div>
       </div>

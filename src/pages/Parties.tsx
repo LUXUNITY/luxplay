@@ -75,19 +75,18 @@ const Parties = () => {
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday",
-        ],
+        dayOfWeek: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
         opens: "10:00",
         closes: "20:00",
       },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Friday", "Saturday"],
+        opens: "10:00",
+        closes: "21:00",
+      },
     ],
+
     amenityFeature: [
       { "@type": "LocationFeatureSpecification", name: "Air conditioning", value: true },
       { "@type": "LocationFeatureSpecification", name: "On-site café", value: true },
