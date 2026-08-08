@@ -332,7 +332,10 @@ const Admin = () => {
         {result?.kind === "booking" && (
           <div className="border border-white/10 bg-[#0a0a16] p-6">
             <div className="flex items-center justify-between mb-4">
-              <p className="font-display text-xs tracking-[0.3em] text-white/40">SOFT PLAY BOOKING</p>
+              <p className="font-display text-xs tracking-[0.3em] text-white/40">
+                {result.baby ? "BABY SOFT PLAY BOOKING" : "SOFT PLAY BOOKING"}
+              </p>
+
               {result.data.checked_in ? (
                 <span className="font-display text-xs tracking-widest text-red-400 bg-red-500/10 px-3 py-1">
                   ALREADY CHECKED IN
