@@ -14,6 +14,7 @@ const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
 const Admin = lazy(() => import("./pages/Admin"));
 const SoftPlaySuccess = lazy(() => import("./pages/SoftPlaySuccess"));
 const BabySoftPlaySuccess = lazy(() => import("./pages/BabySoftPlaySuccess"));
+const Parties = lazy(() => import("./pages/Parties"));
 
 const queryClient = new QueryClient();
 
