@@ -32,6 +32,15 @@ export const getSlotsForDate = (_dateISO: string) => STANDARD_SLOTS;
 export const isSlotForcedFull = (dateISO: string, time: string) =>
   dateISO === getUKTDateISO() && FORCED_FULL_TODAY_SLOTS.includes(time);
 
+// Private-party closures — big soft play only (incl. deal bundles that share capacity)
+const SOFT_PLAY_BLOCKED_SLOTS: Record<string, string[]> = {
+  "2026-09-05": ["10:00"], // private party
+};
+
+export const isSoftPlaySlotBlocked = (dateISO: string, time: string) =>
+  (SOFT_PLAY_BLOCKED_SLOTS[dateISO] ?? []).includes(time);
+
+
 
 export const getSoftPlayFullPrice = (_dateISO: string) => 8;
 export const getBabyFullPrice = (_dateISO: string) => 4;
