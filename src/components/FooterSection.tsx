@@ -75,6 +75,7 @@ const FooterSection = () => {
           { href: "/", label: "HOME" },
           { href: "/soft-play-bournemouth", label: "SOFT PLAY BOURNEMOUTH" },
           { href: "/arcade-bournemouth", label: "ARCADE BOURNEMOUTH" },
+          { href: "/things-to-do-in-bournemouth", label: "THINGS TO DO IN BOURNEMOUTH" },
           { href: "/things-to-do-in-bournemouth-with-kids", label: "THINGS TO DO WITH KIDS" },
           { href: "/parties", label: "BIRTHDAY PARTIES" },
         ].map((l) => (
