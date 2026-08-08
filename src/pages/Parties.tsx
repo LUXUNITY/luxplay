@@ -48,6 +48,105 @@ const Parties = () => {
     ],
   };
 
+  const businessJsonLd = {
+    "@context": "https://schema.org",
+    "@type": ["LocalBusiness", "AmusementPark"],
+    "@id": "https://luxplay.uk/#business",
+    name: "LUXPLAY",
+    url: "https://luxplay.uk/parties",
+    email: "luxplayuk@gmail.com",
+    description:
+      "Children's birthday party venue in Boscombe, Bournemouth with a 3-level soft play, 40+ arcade games, baby soft play and Cafè Lux on site.",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Unit 7, Sovereign Centre",
+      addressLocality: "Boscombe, Bournemouth",
+      addressRegion: "Dorset",
+      postalCode: "BH1 4SX",
+      addressCountry: "GB",
+    },
+    areaServed: [
+      { "@type": "City", name: "Bournemouth" },
+      { "@type": "City", name: "Poole" },
+      { "@type": "City", name: "Christchurch" },
+    ],
+    priceRange: "££",
+    currenciesAccepted: "GBP",
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
+        opens: "10:00",
+        closes: "20:00",
+      },
+    ],
+    amenityFeature: [
+      { "@type": "LocationFeatureSpecification", name: "Air conditioning", value: true },
+      { "@type": "LocationFeatureSpecification", name: "On-site café", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Private party hosting", value: true },
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "LUXPLAY children's birthday party packages",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          url: "https://luxplay.uk/parties",
+          priceCurrency: "GBP",
+          price: "19.99",
+          eligibleQuantity: { "@type": "QuantitativeValue", minValue: 8, unitText: "children" },
+          availability: "https://schema.org/InStock",
+          itemOffered: {
+            "@type": "Service",
+            name: "Essential party package",
+            description:
+              "2 hours soft play, £10 of arcade credits and a hot meal with a toy, per child. Adults go free.",
+            serviceType: "Children's birthday party",
+          },
+        },
+        {
+          "@type": "Offer",
+          url: "https://luxplay.uk/parties",
+          priceCurrency: "GBP",
+          price: "24.99",
+          eligibleQuantity: { "@type": "QuantitativeValue", minValue: 8, unitText: "children" },
+          availability: "https://schema.org/InStock",
+          itemOffered: {
+            "@type": "Service",
+            name: "Classic party package",
+            description:
+              "2 hours soft play, £15 of arcade credits, a hot meal with a toy plus an extra snack and drink, per child. Adults go free.",
+            serviceType: "Children's birthday party",
+          },
+        },
+        {
+          "@type": "Offer",
+          url: "https://luxplay.uk/parties",
+          priceCurrency: "GBP",
+          price: "29.99",
+          eligibleQuantity: { "@type": "QuantitativeValue", minValue: 8, unitText: "children" },
+          availability: "https://schema.org/InStock",
+          itemOffered: {
+            "@type": "Service",
+            name: "Ultimate party package",
+            description:
+              "Our biggest package: 2 hours soft play, the most arcade credits, a hot meal with a toy plus an extra snack and drink, per child. Adults go free.",
+            serviceType: "Children's birthday party",
+          },
+        },
+      ],
+    },
+  };
+
+
   return (
     <main className="min-h-screen bg-background">
       <Helmet>
