@@ -334,35 +334,8 @@ const Admin = () => {
           CODE VERIFICATION
         </p>
 
-        {/* Opening delay email blast */}
-        <div className="border border-neon-pink/30 bg-[#0a0a16] p-4 mb-6">
-          <p className="font-display text-xs tracking-[0.25em] text-neon-pink mb-2">
-            OPENING DELAY NOTICE
-          </p>
-          <p className="font-body text-white/60 text-xs mb-3 leading-relaxed">
-            Send the delay-notice email to every unique customer email across orders &amp; bookings.
-            Idempotent — safe to re-run.
-          </p>
-          <div className="flex gap-2">
-            <button
-              onClick={() => runDelayBlast(true)}
-              disabled={blastBusy}
-              className="flex-1 font-display text-xs tracking-widest text-white/80 border border-white/20 py-3 hover:border-white/40 disabled:opacity-50"
-            >
-              {blastBusy ? "..." : "DRY RUN"}
-            </button>
-            <button
-              onClick={() => runDelayBlast(false)}
-              disabled={blastBusy}
-              className="flex-1 font-display text-xs tracking-widest text-[#070710] bg-neon-pink py-3 disabled:opacity-50"
-            >
-              {blastBusy ? "SENDING..." : "SEND TO ALL"}
-            </button>
-          </div>
-          {blastStatus && (
-            <p className="font-body text-xs text-white/70 mt-3">{blastStatus}</p>
-          )}
-        </div>
+
+
 
         {/* Search */}
         <div className="flex gap-2 mb-6">
