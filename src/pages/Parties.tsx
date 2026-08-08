@@ -170,6 +170,8 @@ const Parties = () => {
         />
         <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
         <script type="application/ld+json">{JSON.stringify(breadcrumbJsonLd)}</script>
+        <script type="application/ld+json">{JSON.stringify(businessJsonLd)}</script>
+
       </Helmet>
 
       {/* Intro / hero */}
