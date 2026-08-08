@@ -115,7 +115,7 @@ const HeroSection = () => {
           <span>BOOK SOFT PLAY</span>
         </a>
         <a
-          href="#parties"
+          href="/parties"
           className="neon-cta flex items-center justify-center font-display text-xs sm:text-sm md:text-base tracking-widest px-2 py-3 md:py-4 bg-neon-pink text-[#070710] animate-btn-flash-pink transition-transform duration-200 hover:scale-105 text-center h-full"
         >
           <span>PARTY PACKAGES</span>

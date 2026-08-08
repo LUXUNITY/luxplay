@@ -14,6 +14,7 @@ const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
 const Admin = lazy(() => import("./pages/Admin"));
 const SoftPlaySuccess = lazy(() => import("./pages/SoftPlaySuccess"));
 const BabySoftPlaySuccess = lazy(() => import("./pages/BabySoftPlaySuccess"));
+const Parties = lazy(() => import("./pages/Parties"));
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
           <Suspense fallback={null}>
             <Routes>
               <Route path="/" element={<><RouteHead title="LUXPLAY — Family Entertainment Centre in Bournemouth" description="LUXPLAY in Boscombe, Bournemouth: 40+ arcade games, 3-level soft play, baby soft play, prize redemption and Cafè Lux. Book soft play or buy credits online." path="/" /><Index /></>} />
+              <Route path="/parties" element={<Parties />} />
               <Route path="/payment-success" element={<><RouteHead title="Credits Purchase Confirmed — LUXPLAY" description="Your LUXPLAY arcade credits purchase is confirmed. Show your redemption code in store to load credits onto your card." path="/payment-success" noindex /><PaymentSuccess /></>} />
               <Route path="/unsubscribe" element={<><RouteHead title="Email Preferences — LUXPLAY" description="Manage or unsubscribe from LUXPLAY email updates." path="/unsubscribe" noindex /><Unsubscribe /></>} />
               <Route path="/admin" element={<><RouteHead title="Staff Code Lookup — LUXPLAY" description="Internal LUXPLAY staff tool for looking up and checking in redemption and booking codes." path="/admin" noindex /><Admin /></>} />
