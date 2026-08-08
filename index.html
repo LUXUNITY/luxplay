@@ -53,8 +53,111 @@
             "postalCode": "BH1 4SX",
             "addressCountry": "GB"
           },
+          "addressRegion": "Dorset",
+          "areaServed": [
+            { "@type": "City", "name": "Bournemouth" },
+            { "@type": "City", "name": "Poole" },
+            { "@type": "City", "name": "Christchurch" }
+          ],
+          "priceRange": "££",
+          "currenciesAccepted": "GBP",
+          "paymentAccepted": "Cash, Credit Card, Debit Card",
+          "isAccessibleForFree": false,
+          "publicAccess": true,
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday"
+              ],
+              "opens": "10:00",
+              "closes": "20:00"
+            }
+          ],
+          "amenityFeature": [
+            { "@type": "LocationFeatureSpecification", "name": "Air conditioning", "value": true },
+            { "@type": "LocationFeatureSpecification", "name": "On-site café", "value": true },
+            { "@type": "LocationFeatureSpecification", "name": "Baby soft play area", "value": true },
+            { "@type": "LocationFeatureSpecification", "name": "Prize redemption", "value": true }
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "LUXPLAY sessions, credits and parties",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "url": "https://luxplay.uk/#softplay",
+                "priceCurrency": "GBP",
+                "price": "8.00",
+                "availability": "https://schema.org/InStock",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Soft play session (2 hours)",
+                  "description": "Two-hour session on the 3-level soft play frame. Adults go free.",
+                  "serviceType": "Soft play"
+                }
+              },
+              {
+                "@type": "Offer",
+                "url": "https://luxplay.uk/#baby-softplay",
+                "priceCurrency": "GBP",
+                "price": "4.00",
+                "availability": "https://schema.org/InStock",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Baby soft play session (0–3 years, 2 hours)",
+                  "description": "Two-hour session in the dedicated baby soft play area for under-3s. Adults go free.",
+                  "serviceType": "Baby soft play"
+                }
+              },
+              {
+                "@type": "Offer",
+                "url": "https://luxplay.uk/#presale",
+                "priceCurrency": "GBP",
+                "price": "20.00",
+                "availability": "https://schema.org/InStock",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Arcade credits",
+                  "description": "Credits loaded onto your LuxPlay card for 40+ arcade and redemption games. Most games cost 5–10 credits per play.",
+                  "serviceType": "Arcade games"
+                }
+              },
+              {
+                "@type": "Offer",
+                "url": "https://luxplay.uk/parties",
+                "priceCurrency": "GBP",
+                "price": "19.99",
+                "availability": "https://schema.org/InStock",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Children's birthday party package",
+                  "description": "Party packages from £19.99 per child: 2 hours soft play, arcade credits, hot meal with a toy. Adults go free, minimum 8 children.",
+                  "serviceType": "Children's birthday party"
+                }
+              },
+              {
+                "@type": "Offer",
+                "url": "https://luxplay.uk/#venue",
+                "priceCurrency": "GBP",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Cafè Lux",
+                  "description": "On-site café serving hot drinks, hot food and snacks while the children play.",
+                  "serviceType": "Café"
+                }
+              }
+            ]
+          },
           "parentOrganization": { "@id": "https://luxplay.uk/#organization" }
         }
+
       ]
     }
     </script>
