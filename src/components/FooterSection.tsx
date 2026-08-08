@@ -44,7 +44,28 @@ const FooterSection = () => {
 
           </div>
         </div>
+
+        {/* Map */}
+        <div className="mt-6 max-w-2xl mx-auto border-2 border-neon-cyan/40 bg-[#0a0a16] p-1">
+          <iframe
+            title="LuxPlay location map - Unit 7 Sovereign Centre, Boscombe, Bournemouth BH1 4SX"
+            src="https://www.google.com/maps?q=Sovereign%20Centre%2C%20Boscombe%2C%20Bournemouth%2C%20BH1%204SX&output=embed"
+            className="w-full h-64 md:h-80 grayscale-[0.2] contrast-125"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </div>
+
+        <a
+          href="https://www.google.com/maps/dir/?api=1&destination=Sovereign+Centre,+Boscombe,+Bournemouth,+BH1+4SX"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block mt-4 font-display text-sm tracking-[0.25em] text-neon-green border-2 border-neon-green px-6 py-3 hover:bg-neon-green hover:text-[#070710] transition-colors"
+        >
+          GET DIRECTIONS
+        </a>
       </div>
+
 
 
       {/* Neon bottom bar */}
