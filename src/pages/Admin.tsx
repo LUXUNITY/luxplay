@@ -109,28 +109,8 @@ const Admin = () => {
     setCode("");
   };
 
-  const runDelayBlast = async (dryRun: boolean) => {
-    if (!adminPw) return;
-    if (!dryRun && !confirm("Send the delay notice email to ALL existing customers? This cannot be undone.")) return;
-    setBlastBusy(true);
-    setBlastStatus(null);
-    try {
-      const { data, error } = await supabase.functions.invoke("send-delay-notice-blast", {
-        body: { dryRun },
-        headers: { "x-admin-password": adminPw },
-      });
-      if (error) throw error;
-      if (dryRun) {
-        setBlastStatus(`Dry run: ${data.recipientCount} unique recipient(s) would be emailed.`);
-      } else {
-        setBlastStatus(`Queued ${data.queued} of ${data.recipientCount} emails.${data.errors?.length ? ` ${data.errors.length} failed.` : ""}`);
-      }
-    } catch (e: any) {
-      setBlastStatus(`Error: ${e.message ?? e}`);
-    } finally {
-      setBlastBusy(false);
-    }
-  };
+
+
 
   const normalizeCode = (value: string) =>
     value
