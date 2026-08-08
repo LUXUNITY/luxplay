@@ -261,7 +261,7 @@ const Admin = () => {
             value={code}
             onChange={(e) => setCode(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && lookupCode()}
-            placeholder="SP-XXX-XXX or LUX-XXXX-XXXX"
+            placeholder="Just type the code e.g. vv8b9c"
             className="flex-1 bg-[#0a0a16] border border-white/10 text-white font-display text-lg tracking-widest px-4 py-3 placeholder:text-white/20 focus:outline-none focus:border-neon-green/50"
           />
           <button
