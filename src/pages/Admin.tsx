@@ -48,8 +48,6 @@ const Admin = () => {
   const [error, setError] = useState<string | null>(null);
   const [acting, setActing] = useState(false);
   const [justActed, setJustActed] = useState(false);
-  const [blastBusy, setBlastBusy] = useState(false);
-  const [blastStatus, setBlastStatus] = useState<string | null>(null);
 
   useEffect(() => {
     const stored = sessionStorage.getItem(PW_STORAGE_KEY);
@@ -109,28 +107,8 @@ const Admin = () => {
     setCode("");
   };
 
-  const runDelayBlast = async (dryRun: boolean) => {
-    if (!adminPw) return;
-    if (!dryRun && !confirm("Send the delay notice email to ALL existing customers? This cannot be undone.")) return;
-    setBlastBusy(true);
-    setBlastStatus(null);
-    try {
-      const { data, error } = await supabase.functions.invoke("send-delay-notice-blast", {
-        body: { dryRun },
-        headers: { "x-admin-password": adminPw },
-      });
-      if (error) throw error;
-      if (dryRun) {
-        setBlastStatus(`Dry run: ${data.recipientCount} unique recipient(s) would be emailed.`);
-      } else {
-        setBlastStatus(`Queued ${data.queued} of ${data.recipientCount} emails.${data.errors?.length ? ` ${data.errors.length} failed.` : ""}`);
-      }
-    } catch (e: any) {
-      setBlastStatus(`Error: ${e.message ?? e}`);
-    } finally {
-      setBlastBusy(false);
-    }
-  };
+
+
 
   const normalizeCode = (value: string) =>
     value
@@ -334,35 +312,8 @@ const Admin = () => {
           CODE VERIFICATION
         </p>
 
-        {/* Opening delay email blast */}
-        <div className="border border-neon-pink/30 bg-[#0a0a16] p-4 mb-6">
-          <p className="font-display text-xs tracking-[0.25em] text-neon-pink mb-2">
-            OPENING DELAY NOTICE
-          </p>
-          <p className="font-body text-white/60 text-xs mb-3 leading-relaxed">
-            Send the delay-notice email to every unique customer email across orders &amp; bookings.
-            Idempotent — safe to re-run.
-          </p>
-          <div className="flex gap-2">
-            <button
-              onClick={() => runDelayBlast(true)}
-              disabled={blastBusy}
-              className="flex-1 font-display text-xs tracking-widest text-white/80 border border-white/20 py-3 hover:border-white/40 disabled:opacity-50"
-            >
-              {blastBusy ? "..." : "DRY RUN"}
-            </button>
-            <button
-              onClick={() => runDelayBlast(false)}
-              disabled={blastBusy}
-              className="flex-1 font-display text-xs tracking-widest text-[#070710] bg-neon-pink py-3 disabled:opacity-50"
-            >
-              {blastBusy ? "SENDING..." : "SEND TO ALL"}
-            </button>
-          </div>
-          {blastStatus && (
-            <p className="font-body text-xs text-white/70 mt-3">{blastStatus}</p>
-          )}
-        </div>
+
+
 
         {/* Search */}
         <div className="flex gap-2 mb-6">
