@@ -1,2 +1,10 @@
 User-agent: *
 Allow: /
+
+Disallow: /admin
+Disallow: /payment-success
+Disallow: /softplay-success
+Disallow: /baby-softplay-success
+Disallow: /unsubscribe
+
+Sitemap: https://luxplay.uk/sitemap.xml
