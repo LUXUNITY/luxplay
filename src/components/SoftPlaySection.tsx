@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import DateStrip from "./softplay/DateStrip";
-import { getAvailableDates, getSlotsForDate, getSoftPlayPrice, getSoftPlayFullPrice, isOpeningWeekend, isSlotForcedFull } from "./softplay/dateSlots";
+import { getAvailableDates, getSlotsForDate, getSoftPlayPrice, getSoftPlayFullPrice, isOpeningWeekend, isSlotForcedFull, isSoftPlaySlotBlocked } from "./softplay/dateSlots";
 
 const MAX_CAPACITY = 40;
 // Price is now date-dependent — see getSoftPlayPrice in dateSlots.ts

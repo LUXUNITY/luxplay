@@ -3,7 +3,7 @@ import { Loader2, Snowflake, Gift, Clock, Users, Plus, Minus, Check } from "luci
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import DateStrip from "./softplay/DateStrip";
-import { getAvailableDates, getSlotsForDate, isSlotForcedFull } from "./softplay/dateSlots";
+import { getAvailableDates, getSlotsForDate, isSlotForcedFull, isSoftPlaySlotBlocked } from "./softplay/dateSlots";
 
 const MAX_CAPACITY = 40;
 const MAX_CHILDREN_PER_BOOKING = 6;
@@ -426,7 +426,7 @@ const RefreshPlaySection = () => {
             </p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {SESSIONS.map((s) => {
-                const forcedFull = isSlotForcedFull(selectedDate, s.time);
+                const forcedFull = isSlotForcedFull(selectedDate, s.time) || isSoftPlaySlotBlocked(selectedDate, s.time);
                 const booked = forcedFull ? MAX_CAPACITY : (bookedCounts[s.time] || 0);
                 const spotsLeft = MAX_CAPACITY - booked;
                 const isFull = spotsLeft <= 0;
