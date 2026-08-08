@@ -111,64 +111,8 @@ const Admin = () => {
 
 
 
-  const normalizeCode = (value: string) =>
-    value
-      .toUpperCase()
-      .trim()
-      .replace(/[‐‑‒–—−]/g, "-")
-      .replace(/\s+/g, "")
-      .replace(/[^A-Z0-9-]/g, "");
-
-  const getSoftPlayCandidates = (value: string) => {
-    const normalized = normalizeCode(value);
-    const compact = normalized.replace(/-/g, "");
-    const suffix = compact.startsWith("SP") ? compact.slice(2) : compact;
-    const candidates = new Set<string>();
-
-    if (normalized) candidates.add(normalized);
-    if (suffix.length === 6) {
-      candidates.add(`SP-${suffix.slice(0, 3)}-${suffix.slice(3)}`);
-    }
-    if (compact.length === 8 && compact.startsWith("SP")) {
-      candidates.add(`SP-${compact.slice(2, 5)}-${compact.slice(5)}`);
-    }
-    return Array.from(candidates);
-  };
-
-  const getOrderCandidates = (value: string) => {
-    const normalized = normalizeCode(value);
-    const compact = normalized.replace(/-/g, "");
-    const suffix = compact.startsWith("LUX") ? compact.slice(3) : compact;
-    const candidates = new Set<string>();
-
-    if (normalized) candidates.add(normalized);
-    if (suffix.length === 8) {
-      candidates.add(`LUX-${suffix.slice(0, 4)}-${suffix.slice(4)}`);
-    }
-    if (compact.length === 11 && compact.startsWith("LUX")) {
-      candidates.add(`LUX-${compact.slice(3, 7)}-${compact.slice(7)}`);
-    }
-    return Array.from(candidates);
-  };
-
-  const lookupBooking = async (value: string) => {
-    for (const candidate of getSoftPlayCandidates(value)) {
-      const res = await callAdmin("lookup_booking", { code: candidate });
-      if (res?.data) return res.data as Booking;
-    }
-    return null;
-  };
-
-  const lookupOrder = async (value: string) => {
-    for (const candidate of getOrderCandidates(value)) {
-      const res = await callAdmin("lookup_order", { code: candidate });
-      if (res?.data) return res.data as Order;
-    }
-    return null;
-  };
-
   const lookupCode = async () => {
-    const trimmed = normalizeCode(code);
+    const trimmed = code.trim();
     if (!trimmed) return;
     setLoading(true);
     setError(null);
@@ -176,25 +120,18 @@ const Admin = () => {
     setJustActed(false);
 
     try {
-      if (trimmed.startsWith("SP") || getSoftPlayCandidates(trimmed).length > 1) {
-        const booking = await lookupBooking(trimmed);
-        if (booking) {
-          setResult({ kind: "booking", data: booking });
-        } else {
-          setError("Booking code not found. Check spelling and try again.");
-        }
+      const res = await callAdmin("lookup", { code: trimmed });
+      if (res?.kind === "order") {
+        setResult({ kind: "order", data: res.data as Order });
+      } else if (res?.kind === "booking" || res?.kind === "baby_booking") {
+        setResult({
+          kind: "booking",
+          table: res.table,
+          baby: res.kind === "baby_booking",
+          data: res.data as Booking,
+        });
       } else {
-        const order = await lookupOrder(trimmed);
-        if (order) {
-          setResult({ kind: "order", data: order });
-        } else {
-          const booking = await lookupBooking(trimmed);
-          if (booking) {
-            setResult({ kind: "booking", data: booking });
-          } else {
-            setError("Code not found. Check spelling and try again.");
-          }
-        }
+        setError("Code not found. Check the letters and try again.");
       }
     } catch (e: any) {
       setError(e?.message ?? "Failed to look up code.");
@@ -223,10 +160,10 @@ const Admin = () => {
     if (!result || result.kind !== "booking") return;
     setActing(true);
     try {
-      await callAdmin("checkin_booking", { id: result.data.id });
+      await callAdmin("checkin_booking", { id: result.data.id, table: result.table });
       setJustActed(true);
       setResult({
-        kind: "booking",
+        ...result,
         data: { ...result.data, checked_in: true, checked_in_at: new Date().toISOString() },
       });
     } catch (e: any) {
@@ -234,6 +171,7 @@ const Admin = () => {
     }
     setActing(false);
   };
+
 
   const formatAmount = (amount: number, currency: string) =>
     new Intl.NumberFormat("en-GB", {
