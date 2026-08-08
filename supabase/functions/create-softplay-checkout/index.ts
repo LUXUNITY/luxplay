@@ -27,10 +27,17 @@ const getUKTDateISO = () => {
   return `${get("year")}-${get("month")}-${get("day")}`;
 };
 
-const getValidSessions = (sessionDate: string) =>
-  sessionDate === getUKTDateISO()
+const BLOCKED_SLOTS: Record<string, string[]> = {
+  "2026-09-05": ["10:00"], // private party
+};
+
+const getValidSessions = (sessionDate: string) => {
+  const base = sessionDate === getUKTDateISO()
     ? STANDARD_SESSIONS.filter((s) => !REMOVED_TODAY_SESSIONS.includes(s))
     : STANDARD_SESSIONS;
+  const blocked = BLOCKED_SLOTS[sessionDate] ?? [];
+  return base.filter((s) => !blocked.includes(s));
+};
 
 const SQUARE_BASE = "https://connect.squareup.com";
 const SQUARE_VERSION = "2024-12-18";
