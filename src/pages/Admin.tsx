@@ -32,7 +32,8 @@ interface Booking {
 
 type Result =
   | { kind: "order"; data: Order }
-  | { kind: "booking"; data: Booking };
+  | { kind: "booking"; table: string; baby?: boolean; data: Booking };
+
 
 const PW_STORAGE_KEY = "luxplay_admin_pw";
 
