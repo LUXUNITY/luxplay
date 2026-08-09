@@ -12,9 +12,8 @@ const SQUARE_VERSION = "2024-12-18";
 
 function generateBookingCode(): string {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-  let code = "BSP-";
+  let code = "";
   for (let i = 0; i < 6; i++) {
-    if (i === 3) code += "-";
     code += chars[Math.floor(Math.random() * chars.length)];
   }
   return code;

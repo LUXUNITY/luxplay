@@ -26,9 +26,8 @@ const PACKAGE_INFO: Record<string, { name: string; credits: number }> = {
 
 function generateRedemptionCode(): string {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-  let code = "LUX-";
-  for (let i = 0; i < 8; i++) {
-    if (i === 4) code += "-";
+  let code = "";
+  for (let i = 0; i < 6; i++) {
     code += chars[Math.floor(Math.random() * chars.length)];
   }
   return code;
