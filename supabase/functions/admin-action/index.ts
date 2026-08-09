@@ -86,6 +86,21 @@ Deno.serve(async (req) => {
     const typedBaby = c.startsWith("BSP");
     const typedBig = !typedBaby && c.startsWith("SP");
 
+    // 0. New-style plain codes (no dashes, no prefix) — exact match on the
+    // compacted characters across all three tables.
+    {
+      const { data } = await supabase
+        .from("orders").select("*").eq("redemption_code", c).maybeSingle();
+      if (data) return json(200, { kind: "order", data });
+      const { data: b0 } = await supabase
+        .from("soft_play_bookings").select("*").eq("booking_code", c).maybeSingle();
+      if (b0) return json(200, { kind: "booking", table: "soft_play_bookings", data: b0 });
+      const { data: bb0 } = await supabase
+        .from("baby_soft_play_bookings").select("*").eq("booking_code", c).maybeSingle();
+      if (bb0) return json(200, { kind: "baby_booking", table: "baby_soft_play_bookings", data: bb0 });
+    }
+
+
     // 1. Orders (LUX-XXXX-XXXX)
     for (const code of orderCandidates(c)) {
       const { data } = await supabase
