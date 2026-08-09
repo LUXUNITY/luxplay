@@ -24,9 +24,33 @@ const timingSafeEqual = (a: string, b: string) => {
 // Strip everything except A-Z0-9 and uppercase — staff can type "vv8b9c".
 const compact = (v: string) => v.toUpperCase().replace(/[^A-Z0-9]/g, "");
 
-const bookingCandidates = (core: string, prefix: string) => {
+// Build every plausible booking code from a compacted string, without assuming
+// whether the staff member typed the prefix or not. Codes whose core itself
+// begins with "SP"/"B" (e.g. SP-SPH-6R4) broke the old prefix-stripping logic.
+const bookingCandidates = (c: string, prefix: string) => {
   const out = new Set<string>();
-  if (core.length === 6) out.add(`${prefix}-${core.slice(0, 3)}-${core.slice(3)}`);
+  const cores = new Set<string>();
+  if (c.length >= 6) cores.add(c.slice(-6)); // last 6 chars = the core
+  if (c.length === 6) cores.add(c);
+  if (c.startsWith(prefix)) {
+    const stripped = c.slice(prefix.length);
+    if (stripped.length >= 6) cores.add(stripped.slice(0, 6));
+  }
+  for (const core of cores) {
+    if (core.length === 6) out.add(`${prefix}-${core.slice(0, 3)}-${core.slice(3)}`);
+  }
+  return Array.from(out);
+};
+
+const orderCandidates = (c: string) => {
+  const out = new Set<string>();
+  const cores = new Set<string>();
+  if (c.length >= 8) cores.add(c.slice(-8));
+  if (c.length === 8) cores.add(c);
+  if (c.startsWith("LUX") && c.length >= 11) cores.add(c.slice(3, 11));
+  for (const core of cores) {
+    if (core.length === 8) out.add(`LUX-${core.slice(0, 4)}-${core.slice(4)}`);
+  }
   return Array.from(out);
 };
 
@@ -59,35 +83,48 @@ Deno.serve(async (req) => {
     const c = compact(raw);
     if (!c) return json(400, { error: "code required" });
 
-    const isOrderish = c.startsWith("LUX") || c.replace(/^LUX/, "").length === 8;
-    const orderCore = c.startsWith("LUX") ? c.slice(3) : c;
-    const bspCore = c.startsWith("BSP") ? c.slice(3) : c.startsWith("SP") ? c.slice(2) : c;
+    const typedBaby = c.startsWith("BSP");
+    const typedBig = !typedBaby && c.startsWith("SP");
 
     // 1. Orders (LUX-XXXX-XXXX)
-    if (isOrderish && orderCore.length === 8) {
-      const code = `LUX-${orderCore.slice(0, 4)}-${orderCore.slice(4)}`;
+    for (const code of orderCandidates(c)) {
       const { data } = await supabase
         .from("orders").select("*").eq("redemption_code", code).maybeSingle();
       if (data) return json(200, { kind: "order", data });
     }
 
-    // 2. Big soft play (SP-XXX-XXX) — skip if the user explicitly typed BSP
-    if (!c.startsWith("BSP")) {
-      for (const code of bookingCandidates(bspCore, "SP")) {
+    // 2. Big soft play (SP-XXX-XXX) — skip only if the user explicitly typed BSP
+    if (!typedBaby) {
+      for (const code of bookingCandidates(c, "SP")) {
         const { data } = await supabase
           .from("soft_play_bookings").select("*").eq("booking_code", code).maybeSingle();
         if (data) return json(200, { kind: "booking", table: "soft_play_bookings", data });
       }
     }
 
-    // 3. Baby soft play (BSP-XXX-XXX)
-    for (const code of bookingCandidates(bspCore, "BSP")) {
-      const { data } = await supabase
-        .from("baby_soft_play_bookings").select("*").eq("booking_code", code).maybeSingle();
-      if (data) return json(200, { kind: "baby_booking", table: "baby_soft_play_bookings", data });
+    // 3. Baby soft play (BSP-XXX-XXX) — skip only if they explicitly typed SP
+    if (!typedBig) {
+      for (const code of bookingCandidates(c, "BSP")) {
+        const { data } = await supabase
+          .from("baby_soft_play_bookings").select("*").eq("booking_code", code).maybeSingle();
+        if (data) return json(200, { kind: "baby_booking", table: "baby_soft_play_bookings", data });
+      }
     }
 
-    // 4. Last resort: exact match on whatever was typed
+    // 4. Fallback: suffix match on the raw characters typed (handles partials
+    // and any prefix confusion, e.g. "sph6r4" for SP-SPH-6R4).
+    const tail = c.length >= 4 ? c.slice(-6) : "";
+    if (tail) {
+      const like = `%${tail.slice(0, 3)}-${tail.slice(3)}`;
+      const { data: b2 } = await supabase
+        .from("soft_play_bookings").select("*").ilike("booking_code", like).limit(1);
+      if (b2?.[0]) return json(200, { kind: "booking", table: "soft_play_bookings", data: b2[0] });
+      const { data: bb2 } = await supabase
+        .from("baby_soft_play_bookings").select("*").ilike("booking_code", like).limit(1);
+      if (bb2?.[0]) return json(200, { kind: "baby_booking", table: "baby_soft_play_bookings", data: bb2[0] });
+    }
+
+    // 5. Last resort: exact match on whatever was typed
     const typed = raw.toUpperCase().trim();
     const { data: o } = await supabase
       .from("orders").select("*").eq("redemption_code", typed).maybeSingle();
@@ -101,6 +138,7 @@ Deno.serve(async (req) => {
 
     return json(200, { kind: null, data: null });
   }
+
 
   if (action === "redeem_order") {
     const id = String(body.id ?? "");
