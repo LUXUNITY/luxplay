@@ -372,7 +372,7 @@ const SoftPlaySection = () => {
               </p>
               <ul className="font-body text-white/60 text-xs md:text-sm space-y-1 list-disc list-inside marker:text-white/30">
                 <li>Height limit: <span className="text-white/80">145 cm maximum</span>.</li>
-                <li>Babies under 2: see our separate <span className="text-white/80">Baby Soft Play</span> section below — £4 per baby.</li>
+                <li>Babies under 3: see our separate <span className="text-white/80">Baby Soft Play</span> section below — £4 per baby.</li>
                 <li>Up to <span className="text-white/80">2 adults free per child</span> — additional adults are charged on the day.</li>
                 <li>Anyone supervising a child must be <span className="text-white/80">13 years or older</span>.</li>
               </ul>

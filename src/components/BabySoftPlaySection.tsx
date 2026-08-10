@@ -131,7 +131,7 @@ const BabySoftPlaySection = () => {
         >
           <span className="inline-flex items-center gap-2 border-2 border-neon-pink bg-neon-pink/10 text-neon-pink font-display text-sm tracking-[0.3em] uppercase px-6 py-3 animate-pulse mb-6">
             <Sparkles className="w-4 h-4" />
-            UNDER 2'S ONLY
+            UNDER 3'S ONLY
             <Sparkles className="w-4 h-4" />
           </span>
         </motion.div>
@@ -154,7 +154,7 @@ const BabySoftPlaySection = () => {
           className="text-center mb-8"
         >
           <p className="font-body text-white/60 text-sm md:text-base mb-3">
-            A calmer space just for under-2s · Limited to 15 babies per session
+            A calmer space just for under-3s · Limited to 15 babies per session
           </p>
           <div className="flex items-end justify-center gap-3 md:gap-5 mt-3">
             <span
@@ -372,10 +372,10 @@ const BabySoftPlaySection = () => {
                 GOOD TO KNOW
               </p>
               <ul className="font-body text-white/60 text-xs md:text-sm space-y-1 list-disc list-inside marker:text-white/30">
-                <li>For <span className="text-white/80">babies under 2 years old</span> only.</li>
+                <li>For <span className="text-white/80">babies under 3 years old</span> only.</li>
                 <li>Up to <span className="text-white/80">2 adults free per baby</span> — additional adults are charged on the day.</li>
                 <li>Limited to <span className="text-white/80">15 babies per session</span> — separate from the main soft play.</li>
-                <li>Children 2+ should book the main <span className="text-white/80">Soft Play</span> session instead.</li>
+                <li>Children 3+ should book the main <span className="text-white/80">Soft Play</span> session instead.</li>
               </ul>
             </div>
           </div>
