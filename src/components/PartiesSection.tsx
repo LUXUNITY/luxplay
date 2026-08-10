@@ -81,6 +81,25 @@ const accentMap = {
   },
 } as const;
 
+const BALLOONS = [
+  { left: "6%", color: "rgba(255,0,204,0.45)", dur: "13s", delay: "0s", drift: "30px" },
+  { left: "18%", color: "rgba(0,238,255,0.4)", dur: "16s", delay: "2.5s", drift: "-24px" },
+  { left: "34%", color: "rgba(170,255,0,0.35)", dur: "14.5s", delay: "5s", drift: "18px" },
+  { left: "52%", color: "rgba(119,0,255,0.45)", dur: "17s", delay: "1.2s", drift: "-32px" },
+  { left: "68%", color: "rgba(255,0,204,0.35)", dur: "15s", delay: "6.5s", drift: "26px" },
+  { left: "84%", color: "rgba(0,238,255,0.4)", dur: "18s", delay: "3.6s", drift: "-20px" },
+  { left: "93%", color: "rgba(255,235,0,0.32)", dur: "14s", delay: "8s", drift: "16px" },
+];
+
+const CONFETTI = [
+  { left: "10%", color: "#ff00cc", dur: "6.5s", delay: "0s", drift: "40px" },
+  { left: "25%", color: "#00eeff", dur: "8s", delay: "1.5s", drift: "-30px" },
+  { left: "40%", color: "#aaff00", dur: "7s", delay: "3s", drift: "25px" },
+  { left: "58%", color: "#7700ff", dur: "9s", delay: "0.8s", drift: "-45px" },
+  { left: "72%", color: "#ff00cc", dur: "7.5s", delay: "4.2s", drift: "35px" },
+  { left: "88%", color: "#00eeff", dur: "8.5s", delay: "2.2s", drift: "-28px" },
+];
+
 const PartiesSection = () => {
   return (
     <section id="parties" className="relative overflow-hidden">
@@ -88,6 +107,36 @@ const PartiesSection = () => {
 
       <div className="absolute top-1/4 left-1/4 w-[420px] h-[420px] bg-neon-pink/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-[420px] h-[420px] bg-neon-purple/5 rounded-full blur-3xl pointer-events-none" />
+
+      {/* Floating balloons */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        {BALLOONS.map((b, i) => (
+          <span
+            key={i}
+            className="party-balloon"
+            style={{
+              left: b.left,
+              background: b.color,
+              animationDuration: b.dur,
+              animationDelay: b.delay,
+              ["--bx" as string]: b.drift,
+            }}
+          />
+        ))}
+        {CONFETTI.map((c, i) => (
+          <span
+            key={`c${i}`}
+            className="confetti"
+            style={{
+              left: c.left,
+              background: c.color,
+              animationDuration: c.dur,
+              animationDelay: c.delay,
+              ["--cdrift" as string]: c.drift,
+            }}
+          />
+        ))}
+      </div>
 
       <div className="relative z-10 px-6 md:px-12 lg:px-20 py-20 md:py-28">
         {/* Header */}
@@ -98,9 +147,9 @@ const PartiesSection = () => {
           className="text-center mb-4"
         >
           <span className="inline-flex items-center gap-2 border-2 border-neon-pink bg-neon-pink/10 text-neon-pink font-display text-sm tracking-[0.3em] uppercase px-6 py-3 animate-pulse">
-            <PartyPopper className="w-4 h-4" />
+            <PartyPopper className="w-4 h-4 animate-icon-bob" />
             BIRTHDAY PARTIES
-            <PartyPopper className="w-4 h-4" />
+            <PartyPopper className="w-4 h-4 animate-icon-bob" />
           </span>
         </motion.div>
 
@@ -111,7 +160,7 @@ const PartiesSection = () => {
           className="text-center mb-3 mt-6"
         >
           <h2 className="font-display text-5xl md:text-7xl lg:text-8xl tracking-wider">
-            <span className="text-gradient-neon">PARTY PACKAGES</span>
+            <span className="text-gradient-neon animate-big-throb inline-block">PARTY PACKAGES</span>
           </h2>
         </motion.div>
 
@@ -135,13 +184,19 @@ const PartiesSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className={`relative bg-[#0a0a16] border-2 ${a.border} p-7 md:p-8 flex flex-col ${
+                className={`party-card bg-[#0a0a16] border-2 ${a.border} p-7 md:p-8 flex flex-col ${
                   t.highlight ? a.shadow + " md:-translate-y-3" : ""
                 }`}
               >
                 {t.highlight && (
+                  <div
+                    className="absolute -inset-24 animate-party-rays opacity-40 pointer-events-none"
+                    aria-hidden="true"
+                  />
+                )}
+                {t.highlight && (
                   <span
-                    className={`absolute -top-4 left-1/2 -translate-x-1/2 ${a.bg} text-[#070710] font-display text-[10px] tracking-[0.3em] px-4 py-1.5`}
+                    className={`absolute -top-4 left-1/2 -translate-x-1/2 ${a.bg} text-[#070710] font-display text-[10px] tracking-[0.3em] px-4 py-1.5 animate-party-tag whitespace-nowrap`}
                   >
                     ★ MOST POPULAR ★
                   </span>
@@ -154,8 +209,10 @@ const PartiesSection = () => {
 
                 <div className="flex items-end gap-2 mb-6">
                   <span
-                    className={`font-display text-6xl md:text-7xl ${a.text} leading-none`}
-                    style={{ textShadow: a.glow }}
+                    className={`font-display text-6xl md:text-7xl ${a.text} leading-none ${
+                      t.highlight ? "animate-credit-flash" : ""
+                    }`}
+                    style={t.highlight ? undefined : { textShadow: a.glow }}
                   >
                     £{t.price.toFixed(2)}
                   </span>
@@ -179,7 +236,9 @@ const PartiesSection = () => {
                   )}&body=${encodeURIComponent(
                     `Hi LuxPlay,\n\nI'd like to enquire about the ${t.name} party package (£${t.price.toFixed(2)} per child).\n\nPreferred date:\nNumber of children:\nChild's name & age:\nContact number:\n\nThanks!`
                   )}`}
-                  className={`block text-center font-display text-sm tracking-widest py-4 ${a.bg} text-[#070710] hover:opacity-90 transition-all duration-300`}
+                  className={`neon-cta block text-center font-display text-sm tracking-widest py-4 ${a.bg} text-[#070710] hover:scale-105 transition-transform duration-300 ${
+                    t.highlight ? "animate-btn-flash-pink" : ""
+                  }`}
                 >
                   ENQUIRE NOW
                 </a>
@@ -187,6 +246,7 @@ const PartiesSection = () => {
             );
           })}
         </div>
+
 
         {/* Food add-on highlight */}
         <motion.div
