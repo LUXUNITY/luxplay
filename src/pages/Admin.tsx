@@ -34,6 +34,13 @@ type Result =
   | { kind: "order"; data: Order }
   | { kind: "booking"; table: string; baby?: boolean; data: Booking };
 
+interface Match {
+  kind: "order" | "booking" | "baby_booking";
+  table: string | null;
+  data: any;
+}
+
+
 
 const PW_STORAGE_KEY = "luxplay_admin_pw";
 
