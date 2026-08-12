@@ -180,7 +180,7 @@ serve(async (req) => {
     }
 
     if (!paymentCompleted) {
-      const searchResp = await fetch(`${SQUARE_BASE}/v2/payments?limit=10&sort_order=DESC`, {
+      const searchResp = await fetch(`${SQUARE_BASE}/v2/payments?limit=100&sort_order=DESC`, {
         headers: { "Authorization": `Bearer ${accessToken}`, "Square-Version": SQUARE_VERSION },
       });
       if (searchResp.ok) {
@@ -196,12 +196,30 @@ serve(async (req) => {
       }
     }
 
+    // Final safety net: nothing left due on the order means it was paid.
+    if (!paymentCompleted) {
+      const due = order?.net_amount_due_money?.amount;
+      const total = Number(order?.total_money?.amount || 0);
+      if ((due !== undefined && Number(due) === 0 && total > 0) || (order?.tenders?.length && total > 0)) {
+        paymentCompleted = true;
+      }
+    }
+
+    if (!parentEmail) {
+      parentEmail =
+        order?.fulfillments?.[0]?.pickup_details?.recipient?.email_address ||
+        order?.fulfillments?.[0]?.shipment_details?.recipient?.email_address ||
+        order?.metadata?.parentEmail ||
+        "";
+    }
+
     if (!paymentCompleted && order?.state !== "COMPLETED") {
       console.error("Payment not completed. Order state:", order?.state);
       return new Response(JSON.stringify({ error: "Payment not completed" }), {
         status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
+
 
     const meta = order.metadata || {};
     const quantity = Math.max(1, parseInt(meta.babyCount || "1", 10) || 1);
