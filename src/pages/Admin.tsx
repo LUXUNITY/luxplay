@@ -34,6 +34,13 @@ type Result =
   | { kind: "order"; data: Order }
   | { kind: "booking"; table: string; baby?: boolean; data: Booking };
 
+interface Match {
+  kind: "order" | "booking" | "baby_booking";
+  table: string | null;
+  data: any;
+}
+
+
 
 const PW_STORAGE_KEY = "luxplay_admin_pw";
 
@@ -45,6 +52,8 @@ const Admin = () => {
 
   const [code, setCode] = useState("");
   const [result, setResult] = useState<Result | null>(null);
+  const [matches, setMatches] = useState<Match[] | null>(null);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [acting, setActing] = useState(false);
@@ -117,6 +126,7 @@ const Admin = () => {
     setLoading(true);
     setError(null);
     setResult(null);
+    setMatches(null);
     setJustActed(false);
 
     try {
@@ -130,12 +140,15 @@ const Admin = () => {
           baby: res.kind === "baby_booking",
           data: res.data as Booking,
         });
+      } else if (res?.kind === "matches") {
+        setMatches(res.matches as Match[]);
       } else {
-        setError("Code not found. Check the letters and try again.");
+        setError("Nothing found. Try their booking code, receipt number, email or name.");
       }
     } catch (e: any) {
       setError(e?.message ?? "Failed to look up code.");
     }
+
 
     setLoading(false);
   };
@@ -247,12 +260,12 @@ const Admin = () => {
         >
           LUXPLAY STAFF
         </h1>
-        <p className="font-body text-white/40 text-xs text-center tracking-widest mb-8">
-          CODE VERIFICATION
+        <p className="font-body text-white/40 text-xs text-center tracking-widest mb-3">
+          CODE · RECEIPT NUMBER · EMAIL · NAME
         </p>
-
-
-
+        <p className="font-body text-white/30 text-[11px] text-center mb-8">
+          No code? Search their receipt number, email address or name instead.
+        </p>
 
         {/* Search */}
         <div className="flex gap-2 mb-6">
@@ -261,7 +274,7 @@ const Admin = () => {
             value={code}
             onChange={(e) => setCode(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && lookupCode()}
-            placeholder="Just type the code e.g. vv8b9c"
+            placeholder="Code, receipt no., email or name"
             className="flex-1 bg-[#0a0a16] border border-white/10 text-white font-display text-lg tracking-widest px-4 py-3 placeholder:text-white/20 focus:outline-none focus:border-neon-green/50"
           />
           <button
@@ -280,6 +293,56 @@ const Admin = () => {
             <p className="font-body text-red-300 text-sm">{error}</p>
           </div>
         )}
+
+        {/* MULTIPLE MATCHES — pick the right customer */}
+        {matches && !result && (
+          <div className="border border-white/10 bg-[#0a0a16] p-4 mb-4">
+            <p className="font-display text-xs tracking-[0.3em] text-white/40 mb-3">
+              {matches.length} MATCHES — SELECT ONE
+            </p>
+            <div className="space-y-2">
+              {matches.map((m, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    setMatches(null);
+                    setJustActed(false);
+                    if (m.kind === "order") setResult({ kind: "order", data: m.data as Order });
+                    else
+                      setResult({
+                        kind: "booking",
+                        table: m.table ?? "soft_play_bookings",
+                        baby: m.kind === "baby_booking",
+                        data: m.data as Booking,
+                      });
+                  }}
+                  className="w-full text-left border border-white/10 hover:border-neon-green/50 px-3 py-3"
+                >
+                  <span className="font-display text-sm tracking-widest text-neon-green">
+                    {m.kind === "order" ? m.data.redemption_code : m.data.booking_code}
+                  </span>
+                  <span className="block font-body text-white/60 text-xs mt-1">
+                    {m.kind === "order"
+                      ? `${m.data.package_name} · ${m.data.customer_email}`
+                      : `${m.kind === "baby_booking" ? "Baby soft play" : "Soft play"} · ${formatSessionDate(
+                          m.data.session_date,
+                        )} · ${m.data.session_time} · ${m.data.parent_name}`}
+                  </span>
+                  <span className="block font-body text-white/30 text-[11px] mt-0.5">
+                    {m.kind === "order"
+                      ? m.data.redeemed
+                        ? "Already redeemed"
+                        : "Not redeemed"
+                      : m.data.checked_in
+                        ? "Already checked in"
+                        : "Not checked in"}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
 
         {/* CREDIT ORDER */}
         {result?.kind === "order" && (
