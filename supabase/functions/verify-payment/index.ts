@@ -17,11 +17,27 @@ const PACKAGE_INFO: Record<string, { name: string; credits: number }> = {
   price_1TckIvKDxuB13duTbMRJimKq: { name: "500 Credits", credits: 500 },
   price_1TckJKKDxuB13duTlIpZPU4z: { name: "800 Credits", credits: 800 },
   price_1TckJbKDxuB13duTNRtZ3YtY: { name: "1500 Credits", credits: 1500 },
+  // Current live credit packages (must stay in sync with create-checkout PRICE_MAP)
+  price_1TlSNKKDxuB13duT5u6Mp5k8: { name: "130 Credits", credits: 130 },
+  price_1TlSNgKDxuB13duTOyzobVeB: { name: "300 Credits", credits: 300 },
+  price_1TlSOyKDxuB13duTww8HTFly: { name: "800 Credits", credits: 800 },
+  price_1TlSPEKDxuB13duT0CDjJX5o: { name: "2000 Credits", credits: 2000 },
   // Legacy pre-sale packages
   price_1TG6CdKDxuB13duTRXf0Nj58: { name: "Explorer", credits: 130 },
   price_1TG6CtKDxuB13duTpJGgkAeF: { name: "Champion", credits: 350 },
   price_1TG6DCKDxuB13duTI7D0jZsH: { name: "Legend", credits: 800 },
   price_1TG6DZKDxuB13duTjFD95zAE: { name: "Ultimate Pass", credits: 2000 },
+};
+
+// Safety net: if a price id isn't in the map (e.g. new package added to
+// checkout but not here), derive credits from what the customer actually paid
+// so a paying customer NEVER ends up without a code.
+const AMOUNT_CREDITS: Record<number, number> = {
+  500: 50,
+  1000: 130,
+  2000: 300,
+  5000: 800,
+  10000: 2000,
 };
 
 function generateRedemptionCode(): string {
@@ -83,7 +99,21 @@ serve(async (req) => {
     // Get line items to find the price
     const lineItems = await stripe.checkout.sessions.listLineItems(sessionId);
     const priceId = lineItems.data[0]?.price?.id;
-    const packageInfo = priceId ? PACKAGE_INFO[priceId] : null;
+    let packageInfo = priceId ? PACKAGE_INFO[priceId] : null;
+
+    if (!packageInfo) {
+      // Fallback 1: derive from the amount actually paid.
+      const paid = session.amount_total || 0;
+      const credits = AMOUNT_CREDITS[paid];
+      if (credits) {
+        packageInfo = { name: `${credits} Credits`, credits };
+      } else if (paid > 0) {
+        // Fallback 2: 10 credits per £1 paid, rounded down.
+        const derived = Math.max(1, Math.floor((paid / 100) * 10));
+        packageInfo = { name: `${derived} Credits`, credits: derived };
+      }
+      console.error("Unknown price id, used fallback:", priceId, paid, packageInfo);
+    }
 
     if (!packageInfo) {
       return new Response(
@@ -91,6 +121,7 @@ serve(async (req) => {
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
+
 
     const redemptionCode = generateRedemptionCode();
 

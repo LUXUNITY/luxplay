@@ -38,29 +38,39 @@ const BabySoftPlaySuccess = () => {
       return;
     }
 
-    const fetchBooking = async () => {
-      try {
-        const { data, error: fnError } = await supabase.functions.invoke("verify-baby-softplay-payment", {
-          body: { sessionId },
-        });
-        if (fnError) throw fnError;
-        if (data?.bookings?.length) {
-          const allBookings = data.bookings as Booking[];
+    const FALLBACK =
+      "Your payment went through, but we couldn't load your booking code just yet. Please email luxplayuk@gmail.com with your payment receipt and we'll send it over — or just show your receipt at the desk and we'll check you in.";
 
-          setBookings(allBookings);
-        } else if (data?.booking) {
-          setBookings([data.booking as Booking]);
-        } else {
-          setError(data?.error || "Could not find your booking.");
+    const fetchBooking = async () => {
+      for (let attempt = 0; attempt < 4; attempt++) {
+        try {
+          const { data, error: fnError } = await supabase.functions.invoke("verify-baby-softplay-payment", {
+            body: { sessionId },
+          });
+          if (fnError) throw fnError;
+          if (data?.bookings?.length) {
+            setBookings(data.bookings as Booking[]);
+            setError(null);
+            setLoading(false);
+            return;
+          }
+          if (data?.booking) {
+            setBookings([data.booking as Booking]);
+            setError(null);
+            setLoading(false);
+            return;
+          }
+          setError(data?.error || FALLBACK);
+        } catch {
+          setError(FALLBACK);
         }
-      } catch (err: any) {
-        setError(err.message || "Something went wrong.");
-      } finally {
-        setLoading(false);
+        if (attempt < 3) await new Promise((r) => setTimeout(r, 2000));
       }
+      setLoading(false);
     };
 
     fetchBooking();
+
   }, [sessionId]);
 
   const copyCode = () => {
