@@ -13,7 +13,7 @@ interface Order {
 
 const PaymentSuccess = () => {
   const [searchParams] = useSearchParams();
-  const sessionId = searchParams.get("session_id");
+  const sessionId = searchParams.get("orderId") || searchParams.get("session_id");
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

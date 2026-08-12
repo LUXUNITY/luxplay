@@ -1,5 +1,4 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import Stripe from "https://esm.sh/stripe@18.5.0";
 import { createClient } from "npm:@supabase/supabase-js@2.57.2";
 
 const corsHeaders = {
@@ -8,30 +7,11 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const PACKAGE_INFO: Record<string, { name: string; credits: number }> = {
-  price_1TckGFKDxuB13duTEktgvP9o: { name: "50 Credits", credits: 50 },
-  price_1TckGcKDxuB13duTaP1xmia4: { name: "110 Credits", credits: 110 },
-  price_1TckGzKDxuB13duTOhnEwiuM: { name: "160 Credits", credits: 160 },
-  price_1TckHOKDxuB13duTO8xL6hmt: { name: "230 Credits", credits: 230 },
-  price_1TckIXKDxuB13duTerIc9rna: { name: "360 Credits", credits: 360 },
-  price_1TckIvKDxuB13duTbMRJimKq: { name: "500 Credits", credits: 500 },
-  price_1TckJKKDxuB13duTlIpZPU4z: { name: "800 Credits", credits: 800 },
-  price_1TckJbKDxuB13duTNRtZ3YtY: { name: "1500 Credits", credits: 1500 },
-  // Current live credit packages (must stay in sync with create-checkout PRICE_MAP)
-  price_1TlSNKKDxuB13duT5u6Mp5k8: { name: "130 Credits", credits: 130 },
-  price_1TlSNgKDxuB13duTOyzobVeB: { name: "300 Credits", credits: 300 },
-  price_1TlSOyKDxuB13duTww8HTFly: { name: "800 Credits", credits: 800 },
-  price_1TlSPEKDxuB13duT0CDjJX5o: { name: "2000 Credits", credits: 2000 },
-  // Legacy pre-sale packages
-  price_1TG6CdKDxuB13duTRXf0Nj58: { name: "Explorer", credits: 130 },
-  price_1TG6CtKDxuB13duTpJGgkAeF: { name: "Champion", credits: 350 },
-  price_1TG6DCKDxuB13duTI7D0jZsH: { name: "Legend", credits: 800 },
-  price_1TG6DZKDxuB13duTjFD95zAE: { name: "Ultimate Pass", credits: 2000 },
-};
+const SQUARE_BASE = "https://connect.squareup.com";
+const SQUARE_VERSION = "2024-12-18";
 
-// Safety net: if a price id isn't in the map (e.g. new package added to
-// checkout but not here), derive credits from what the customer actually paid
-// so a paying customer NEVER ends up without a code.
+// Safety net: if metadata is missing, derive credits from what was actually
+// paid so a paying customer NEVER ends up without a code.
 const AMOUNT_CREDITS: Record<number, number> = {
   500: 50,
   1000: 130,
@@ -49,6 +29,41 @@ function generateRedemptionCode(): string {
   return code;
 }
 
+async function queueOrderEmails(supabase: any, order: any, sessionId: string) {
+  if (!order?.customer_email) return;
+  try {
+    await supabase.functions.invoke("send-transactional-email", {
+      body: {
+        templateName: "redemption-code",
+        recipientEmail: order.customer_email,
+        idempotencyKey: `redemption-${sessionId}`,
+        templateData: {
+          packageName: order.package_name,
+          credits: order.credits,
+          redemptionCode: order.redemption_code,
+        },
+      },
+    });
+    await supabase.functions.invoke("send-transactional-email", {
+      body: {
+        templateName: "admin-purchase-notification",
+        recipientEmail: "luxplayuk@gmail.com",
+        idempotencyKey: `admin-credit-${sessionId}`,
+        templateData: {
+          type: "credits",
+          customerEmail: order.customer_email,
+          packageName: order.package_name,
+          credits: order.credits,
+          redemptionCode: order.redemption_code,
+          amountPaid: `£${((order.amount_paid || 0) / 100).toFixed(2)}`,
+        },
+      },
+    });
+  } catch (emailErr) {
+    console.error("Email enqueue failed (non-fatal):", emailErr);
+  }
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -57,32 +72,26 @@ serve(async (req) => {
   try {
     const { sessionId } = await req.json();
     if (!sessionId) {
-      return new Response(
-        JSON.stringify({ error: "Missing session ID" }),
-        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
+      return new Response(JSON.stringify({ error: "Missing order ID" }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
     }
 
-    const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", {
-      apiVersion: "2025-08-27.basil",
-    });
-
-    // Verify payment directly with Stripe
-    const session = await stripe.checkout.sessions.retrieve(sessionId);
-
-    if (session.payment_status !== "paid") {
-      return new Response(
-        JSON.stringify({ error: "Payment not completed" }),
-        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
+    const accessToken = Deno.env.get("SQUARE_ACCESS_TOKEN");
+    if (!accessToken) {
+      return new Response(JSON.stringify({ error: "Square not configured" }), {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
     }
 
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
     );
 
-    // Check if order already exists (idempotent)
+    // Idempotent — stripe_session_id column stores the Square order ID.
     const { data: existing } = await supabase
       .from("orders")
       .select("*")
@@ -90,100 +99,127 @@ serve(async (req) => {
       .maybeSingle();
 
     if (existing) {
+      await queueOrderEmails(supabase, existing, sessionId);
       return new Response(JSON.stringify({ order: existing }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 200,
       });
     }
 
-    // Get line items to find the price
-    const lineItems = await stripe.checkout.sessions.listLineItems(sessionId);
-    const priceId = lineItems.data[0]?.price?.id;
-    let packageInfo = priceId ? PACKAGE_INFO[priceId] : null;
+    // Fetch the order from Square.
+    const orderResp = await fetch(`${SQUARE_BASE}/v2/orders/${sessionId}`, {
+      headers: { Authorization: `Bearer ${accessToken}`, "Square-Version": SQUARE_VERSION },
+    });
+    const orderJson = await orderResp.json();
+    if (!orderResp.ok) {
+      console.error("Square order fetch failed:", JSON.stringify(orderJson));
+      const err = orderJson.errors?.[0];
+      return new Response(JSON.stringify({
+        error: `Could not verify payment: ${err?.code || ""} ${err?.detail || ""}`.trim(),
+      }), { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    }
 
-    if (!packageInfo) {
-      // Fallback 1: derive from the amount actually paid.
-      const paid = session.amount_total || 0;
-      const credits = AMOUNT_CREDITS[paid];
-      if (credits) {
-        packageInfo = { name: `${credits} Credits`, credits };
-      } else if (paid > 0) {
-        // Fallback 2: 10 credits per £1 paid, rounded down.
-        const derived = Math.max(1, Math.floor((paid / 100) * 10));
-        packageInfo = { name: `${derived} Credits`, credits: derived };
+    const order = orderJson.order;
+    let customerEmail = "";
+    let paymentCompleted = false;
+
+    const tenderPaymentId = order?.tenders?.[0]?.payment_id || order?.tenders?.[0]?.id;
+    if (tenderPaymentId) {
+      const payResp = await fetch(`${SQUARE_BASE}/v2/payments/${tenderPaymentId}`, {
+        headers: { Authorization: `Bearer ${accessToken}`, "Square-Version": SQUARE_VERSION },
+      });
+      if (payResp.ok) {
+        const payJson = await payResp.json();
+        customerEmail = payJson.payment?.buyer_email_address || "";
+        const status = payJson.payment?.status;
+        if (status === "COMPLETED" || status === "APPROVED") paymentCompleted = true;
       }
-      console.error("Unknown price id, used fallback:", priceId, paid, packageInfo);
     }
 
-    if (!packageInfo) {
-      return new Response(
-        JSON.stringify({ error: "Unknown package" }),
-        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
+    // Fallback: search recent payments for this order id.
+    if (!paymentCompleted) {
+      const searchResp = await fetch(`${SQUARE_BASE}/v2/payments?limit=100&sort_order=DESC`, {
+        headers: { Authorization: `Bearer ${accessToken}`, "Square-Version": SQUARE_VERSION },
+      });
+      if (searchResp.ok) {
+        const searchJson = await searchResp.json();
+        const match = (searchJson.payments || []).find((p: any) => p.order_id === sessionId);
+        if (match) {
+          customerEmail = customerEmail || match.buyer_email_address || "";
+          if (match.status === "COMPLETED" || match.status === "APPROVED") paymentCompleted = true;
+        }
+      }
     }
 
+    // Final safety net: Square leaves a paid Payment Link order OPEN even when
+    // nothing is left due.
+    if (!paymentCompleted) {
+      const due = order?.net_amount_due_money?.amount;
+      const total = Number(order?.total_money?.amount || 0);
+      if ((due !== undefined && Number(due) === 0 && total > 0) || (order?.tenders?.length && total > 0)) {
+        paymentCompleted = true;
+      }
+    }
 
+    if (!customerEmail) {
+      customerEmail =
+        order?.fulfillments?.[0]?.pickup_details?.recipient?.email_address ||
+        order?.fulfillments?.[0]?.shipment_details?.recipient?.email_address ||
+        order?.metadata?.customerEmail ||
+        "";
+    }
+
+    if (!paymentCompleted && order?.state !== "COMPLETED") {
+      console.error("Payment not completed. Order state:", order?.state);
+      return new Response(JSON.stringify({ error: "Payment not completed" }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const meta = order?.metadata || {};
+    const paid = Number(order?.total_money?.amount || 0);
+    let credits = parseInt(meta.credits || "", 10);
+    if (!Number.isFinite(credits) || credits <= 0) {
+      credits = AMOUNT_CREDITS[paid] || (paid > 0 ? Math.max(1, Math.floor((paid / 100) * 10)) : 0);
+      console.error("Credits missing from metadata, used fallback:", paid, credits);
+    }
+    if (!credits) {
+      return new Response(JSON.stringify({ error: "Unknown package" }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const packageName = meta.packageName || `${credits} Credits`;
     const redemptionCode = generateRedemptionCode();
 
-    const { data: order, error } = await supabase.from("orders").insert({
+    const { data: newOrder, error } = await supabase.from("orders").insert({
       stripe_session_id: sessionId,
-      customer_email: session.customer_details?.email || "",
-      package_name: packageInfo.name,
-      credits: packageInfo.credits,
-      amount_paid: session.amount_total || 0,
-      currency: session.currency || "gbp",
+      customer_email: customerEmail,
+      package_name: packageName,
+      credits,
+      amount_paid: paid,
+      currency: (order?.total_money?.currency || "GBP").toLowerCase(),
       redemption_code: redemptionCode,
     }).select().single();
 
     if (error) {
       console.error("Failed to insert order:", error);
-      return new Response(
-        JSON.stringify({ error: "Failed to save order" }),
-        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
+      return new Response(JSON.stringify({ error: "Failed to save order" }), {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
     }
 
-    // Queue confirmation + admin notification emails server-side.
-    // (Client cannot call send-transactional-email — it requires service_role.)
-    try {
-      await supabase.functions.invoke("send-transactional-email", {
-        body: {
-          templateName: "redemption-code",
-          recipientEmail: order.customer_email,
-          idempotencyKey: `redemption-${sessionId}`,
-          templateData: {
-            packageName: order.package_name,
-            credits: order.credits,
-            redemptionCode: order.redemption_code,
-          },
-        },
-      });
-      await supabase.functions.invoke("send-transactional-email", {
-        body: {
-          templateName: "admin-purchase-notification",
-          recipientEmail: "luxplayuk@gmail.com",
-          idempotencyKey: `admin-credit-${sessionId}`,
-          templateData: {
-            type: "credits",
-            customerEmail: order.customer_email,
-            packageName: order.package_name,
-            credits: order.credits,
-            redemptionCode: order.redemption_code,
-            amountPaid: `£${((order.amount_paid || 0) / 100).toFixed(2)}`,
-          },
-        },
-      });
-    } catch (emailErr) {
-      console.error("Email enqueue failed (non-fatal):", emailErr);
-    }
+    await queueOrderEmails(supabase, newOrder, sessionId);
 
-    return new Response(JSON.stringify({ order }), {
+    return new Response(JSON.stringify({ order: newOrder }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
     });
-
   } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), {
+    return new Response(JSON.stringify({ error: (error as Error).message }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 500,
     });
