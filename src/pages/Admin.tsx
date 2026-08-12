@@ -52,6 +52,8 @@ const Admin = () => {
 
   const [code, setCode] = useState("");
   const [result, setResult] = useState<Result | null>(null);
+  const [matches, setMatches] = useState<Match[] | null>(null);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [acting, setActing] = useState(false);
