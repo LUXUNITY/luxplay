@@ -55,13 +55,21 @@ Deno.serve(async (req) => {
     return new Response(null, { headers: corsHeaders })
   }
 
-  const callerRole = parseJwtRole(req.headers.get('Authorization'))
-  if (callerRole !== 'service_role') {
+  // Accept either a legacy service_role JWT or the raw service key / secret key
+  // (new Supabase signing-keys format is not a JWT, so role parsing fails).
+  const authHeader = req.headers.get('Authorization') ?? ''
+  const bearer = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : ''
+  const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
+  const isServiceKey =
+    !!serviceKey && bearer.length === serviceKey.length && bearer === serviceKey
+  const callerRole = parseJwtRole(authHeader)
+  if (callerRole !== 'service_role' && !isServiceKey) {
     return new Response(
       JSON.stringify({ error: 'Forbidden: service role required' }),
       { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     )
   }
+
 
 
 
