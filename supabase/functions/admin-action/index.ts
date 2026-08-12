@@ -151,6 +151,64 @@ Deno.serve(async (req) => {
       .from("baby_soft_play_bookings").select("*").eq("booking_code", typed).maybeSingle();
     if (bb) return json(200, { kind: "baby_booking", table: "baby_soft_play_bookings", data: bb });
 
+    // 6. Broad fallback: receipt / transaction ID, email address, or name.
+    // Customers who never received their code email can still be found this way.
+    {
+      const term = raw.trim();
+      const matches: any[] = [];
+      const push = (kind: string, table: string | null, rows: any[] | null) => {
+        for (const r of rows ?? []) matches.push({ kind, table, data: r });
+      };
+
+      // Receipt / Square transaction or order id (often long, mixed case)
+      if (term.length >= 6) {
+        const like = `%${term}%`;
+        const [o1, s1, b1] = await Promise.all([
+          supabase.from("orders").select("*").ilike("stripe_session_id", like).limit(5),
+          supabase.from("soft_play_bookings").select("*").ilike("stripe_session_id", like).limit(5),
+          supabase.from("baby_soft_play_bookings").select("*").ilike("stripe_session_id", like).limit(5),
+        ]);
+        push("order", null, o1.data);
+        push("booking", "soft_play_bookings", s1.data);
+        push("baby_booking", "baby_soft_play_bookings", b1.data);
+      }
+
+      // Email address
+      if (!matches.length && term.includes("@")) {
+        const like = `%${term}%`;
+        const [o2, s2, b2] = await Promise.all([
+          supabase.from("orders").select("*").ilike("customer_email", like)
+            .order("created_at", { ascending: false }).limit(10),
+          supabase.from("soft_play_bookings").select("*").ilike("parent_email", like)
+            .order("created_at", { ascending: false }).limit(10),
+          supabase.from("baby_soft_play_bookings").select("*").ilike("parent_email", like)
+            .order("created_at", { ascending: false }).limit(10),
+        ]);
+        push("order", null, o2.data);
+        push("booking", "soft_play_bookings", s2.data);
+        push("baby_booking", "baby_soft_play_bookings", b2.data);
+      }
+
+      // Customer name (bookings only)
+      if (!matches.length && /[a-z]/i.test(term) && term.length >= 3) {
+        const like = `%${term}%`;
+        const [s3, b3] = await Promise.all([
+          supabase.from("soft_play_bookings").select("*").ilike("parent_name", like)
+            .order("session_date", { ascending: false }).limit(10),
+          supabase.from("baby_soft_play_bookings").select("*").ilike("parent_name", like)
+            .order("session_date", { ascending: false }).limit(10),
+        ]);
+        push("booking", "soft_play_bookings", s3.data);
+        push("baby_booking", "baby_soft_play_bookings", b3.data);
+      }
+
+      if (matches.length === 1) {
+        const m = matches[0];
+        return json(200, { kind: m.kind, table: m.table, data: m.data });
+      }
+      if (matches.length > 1) return json(200, { kind: "matches", matches });
+    }
+
     return json(200, { kind: null, data: null });
   }
 
