@@ -25,29 +25,36 @@ const PaymentSuccess = () => {
       return;
     }
 
-    const fetchOrder = async () => {
-      try {
-        const { data, error: fnError } = await supabase.functions.invoke("verify-payment", {
-          body: { sessionId },
-        });
-        if (fnError) throw fnError;
-        if (data?.order) {
-          // Confirmation + admin notification emails are queued server-side
-          // by verify-payment (the client no longer has permission to call
-          // send-transactional-email directly).
-          setOrder(data.order);
-        } else {
-          setError(data?.error || "Could not find your order.");
-        }
+    const FALLBACK =
+      "Your payment went through, but we couldn't load your code just yet. Please email luxplayuk@gmail.com with your payment receipt and we'll send it straight over — or show your receipt at the desk.";
 
-      } catch (err: any) {
-        setError(err.message || "Something went wrong.");
-      } finally {
-        setLoading(false);
+    const fetchOrder = async () => {
+      for (let attempt = 0; attempt < 4; attempt++) {
+        try {
+          const { data, error: fnError } = await supabase.functions.invoke("verify-payment", {
+            body: { sessionId },
+          });
+          if (fnError) throw fnError;
+          if (data?.order) {
+            // Confirmation + admin notification emails are queued server-side
+            // by verify-payment (the client no longer has permission to call
+            // send-transactional-email directly).
+            setOrder(data.order);
+            setError(null);
+            setLoading(false);
+            return;
+          }
+          setError(data?.error || FALLBACK);
+        } catch {
+          setError(FALLBACK);
+        }
+        if (attempt < 3) await new Promise((r) => setTimeout(r, 2000));
       }
+      setLoading(false);
     };
 
     fetchOrder();
+
   }, [sessionId]);
 
   const copyCode = () => {
