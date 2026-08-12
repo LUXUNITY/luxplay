@@ -126,6 +126,7 @@ const Admin = () => {
     setLoading(true);
     setError(null);
     setResult(null);
+    setMatches(null);
     setJustActed(false);
 
     try {
@@ -139,12 +140,15 @@ const Admin = () => {
           baby: res.kind === "baby_booking",
           data: res.data as Booking,
         });
+      } else if (res?.kind === "matches") {
+        setMatches(res.matches as Match[]);
       } else {
-        setError("Code not found. Check the letters and try again.");
+        setError("Nothing found. Try their booking code, receipt number, email or name.");
       }
     } catch (e: any) {
       setError(e?.message ?? "Failed to look up code.");
     }
+
 
     setLoading(false);
   };
