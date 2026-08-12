@@ -1,5 +1,4 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import Stripe from "https://esm.sh/stripe@18.5.0";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -7,12 +6,16 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const PRICE_MAP: Record<string, string> = {
-  c50:   "price_1TckGFKDxuB13duTEktgvP9o", // 50 credits @ £5
-  c130:  "price_1TlSNKKDxuB13duT5u6Mp5k8", // 130 credits @ £10
-  c300:  "price_1TlSNgKDxuB13duTOyzobVeB", // 300 credits @ £20 (Most Popular)
-  c800:  "price_1TlSOyKDxuB13duTww8HTFly", // 800 credits @ £50
-  c2000: "price_1TlSPEKDxuB13duT0CDjJX5o", // 2000 credits @ £100
+const SQUARE_BASE = "https://connect.squareup.com";
+const SQUARE_VERSION = "2024-12-18";
+
+// Arcade credit packages — priced in pence, charged through Square.
+const PACKAGES: Record<string, { name: string; credits: number; amount: number }> = {
+  c50:   { name: "50 Credits",   credits: 50,   amount: 500 },
+  c130:  { name: "130 Credits",  credits: 130,  amount: 1000 },
+  c300:  { name: "300 Credits",  credits: 300,  amount: 2000 },
+  c800:  { name: "800 Credits",  credits: 800,  amount: 5000 },
+  c2000: { name: "2000 Credits", credits: 2000, amount: 10000 },
 };
 
 serve(async (req) => {
@@ -22,36 +25,66 @@ serve(async (req) => {
 
   try {
     const { packageId } = await req.json();
+    const pkg = typeof packageId === "string" ? PACKAGES[packageId] : undefined;
 
-    if (!packageId || !PRICE_MAP[packageId]) {
-      return new Response(
-        JSON.stringify({ error: "Invalid package selected" }),
-        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
+    if (!pkg) {
+      return new Response(JSON.stringify({ error: "Invalid package selected" }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
     }
 
-    const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", {
-      apiVersion: "2025-08-27.basil",
-    });
+    const accessToken = Deno.env.get("SQUARE_ACCESS_TOKEN");
+    const locationId = Deno.env.get("SQUARE_LOCATION_ID");
+    if (!accessToken || !locationId) throw new Error("Square not configured");
 
-    // Hardcoded production base — never trust the caller-supplied Origin header
-    // for post-payment redirects (open-redirect / session-id exfiltration risk).
+    // Hardcoded production base — never trust a caller-supplied Origin header
+    // for post-payment redirects (open-redirect risk).
     const siteUrl = Deno.env.get("SITE_URL") || "https://luxplay.uk";
-    const session = await stripe.checkout.sessions.create({
-      line_items: [{ price: PRICE_MAP[packageId], quantity: 1 }],
-      mode: "payment",
-      success_url: `${siteUrl}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${siteUrl}/#presale`,
-      customer_creation: "always",
+
+    const payload = {
+      idempotency_key: crypto.randomUUID(),
+      order: {
+        location_id: locationId,
+        line_items: [{
+          name: `LuxPlay Arcade — ${pkg.name}`,
+          quantity: "1",
+          base_price_money: { amount: pkg.amount, currency: "GBP" },
+        }],
+        metadata: {
+          type: "credits",
+          packageId,
+          packageName: pkg.name,
+          credits: String(pkg.credits),
+        },
+      },
+      checkout_options: {
+        redirect_url: `${siteUrl}/payment-success`,
+        ask_for_shipping_address: false,
+      },
+    };
+
+    const response = await fetch(`${SQUARE_BASE}/v2/online-checkout/payment-links`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Square-Version": SQUARE_VERSION,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
     });
+    const result = await response.json();
+    if (!response.ok) {
+      console.error("Square credits checkout error:", JSON.stringify(result));
+      throw new Error(result.errors?.[0]?.detail || "Square checkout failed");
+    }
 
-
-    return new Response(JSON.stringify({ url: session.url }), {
+    return new Response(JSON.stringify({ url: result.payment_link?.url }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
     });
   } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), {
+    return new Response(JSON.stringify({ error: (error as Error).message }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 500,
     });
