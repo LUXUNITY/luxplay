@@ -99,7 +99,21 @@ serve(async (req) => {
     // Get line items to find the price
     const lineItems = await stripe.checkout.sessions.listLineItems(sessionId);
     const priceId = lineItems.data[0]?.price?.id;
-    const packageInfo = priceId ? PACKAGE_INFO[priceId] : null;
+    let packageInfo = priceId ? PACKAGE_INFO[priceId] : null;
+
+    if (!packageInfo) {
+      // Fallback 1: derive from the amount actually paid.
+      const paid = session.amount_total || 0;
+      const credits = AMOUNT_CREDITS[paid];
+      if (credits) {
+        packageInfo = { name: `${credits} Credits`, credits };
+      } else if (paid > 0) {
+        // Fallback 2: 10 credits per £1 paid, rounded down.
+        const derived = Math.max(1, Math.floor((paid / 100) * 10));
+        packageInfo = { name: `${derived} Credits`, credits: derived };
+      }
+      console.error("Unknown price id, used fallback:", priceId, paid, packageInfo);
+    }
 
     if (!packageInfo) {
       return new Response(
@@ -107,6 +121,7 @@ serve(async (req) => {
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
+
 
     const redemptionCode = generateRedemptionCode();
 
