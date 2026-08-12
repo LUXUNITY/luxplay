@@ -43,6 +43,27 @@ const getValidSessions = (sessionDate: string) => {
 const SQUARE_BASE = "https://connect.squareup.com";
 const SQUARE_VERSION = "2024-12-18";
 
+const BOOKING_WINDOW_DAYS = 14;
+const OPENING_DATE = "2026-06-13";
+const ukTodayISO = () => {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Europe/London", year: "numeric", month: "2-digit", day: "2-digit",
+  }).formatToParts(new Date());
+  const get = (t: string) => parts.find((p) => p.type === t)?.value;
+  return `${get("year")}-${get("month")}-${get("day")}`;
+};
+// Reject past dates, pre-opening dates and dates beyond the booking window so a
+// stale tab or tampered request can never take money for an unbookable session.
+const isBookableDate = (d: unknown): boolean => {
+  if (typeof d !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(d)) return false;
+  const today = ukTodayISO();
+  if (d < today || d < OPENING_DATE) return false;
+  const max = new Date(`${today}T00:00:00Z`);
+  max.setUTCDate(max.getUTCDate() + BOOKING_WINDOW_DAYS - 1);
+  return d <= max.toISOString().slice(0, 10);
+};
+
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -59,6 +80,12 @@ serve(async (req) => {
 
     if (!sessionTime || !sessionDate || !parentName || quantity < 1) {
       return new Response(JSON.stringify({ error: "Missing required fields" }), {
+        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    if (!isBookableDate(sessionDate)) {
+      return new Response(JSON.stringify({ error: "That session is no longer available — please pick another date." }), {
         status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
