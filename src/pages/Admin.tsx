@@ -122,8 +122,8 @@ const Admin = () => {
 
 
 
-  const lookupCode = async () => {
-    const trimmed = code.trim();
+  const lookupCode = async (override?: string) => {
+    const trimmed = (override ?? code).trim();
     if (!trimmed) return;
     setLoading(true);
     setError(null);
