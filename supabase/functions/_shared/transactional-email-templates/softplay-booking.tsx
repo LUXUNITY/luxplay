@@ -1,7 +1,7 @@
 /// <reference types="npm:@types/react@18.3.1" />
 import * as React from 'npm:react@18.3.1'
 import {
-  Body, Container, Head, Heading, Html, Preview, Text, Section, Hr,
+  Body, Container, Head, Heading, Html, Img, Preview, Text, Section, Hr,
 } from 'npm:@react-email/components@0.0.22'
 import type { TemplateEntry } from './registry.ts'
 
@@ -51,15 +51,32 @@ const SoftPlayBookingEmail = ({ childCount, parentName, sessionTime, sessionDate
           <Text style={detailValue}>{sessionTime || 'TBC'} — {sessionDate || 'Opening Day'}</Text>
         </Section>
 
-        <Section style={codeBox}>
-          <Text style={codeLabel}>{codes.length > 1 ? 'YOUR BOOKING CODES' : 'YOUR BOOKING CODE'}</Text>
-          <Text style={codeText}>{codes.length > 0 ? codes.join(' • ') : 'SP-XXX-XXX'}</Text>
-        </Section>
+        {codes.length > 0 ? codes.map((c, i) => (
+          <Section key={c} style={codeBox}>
+            <Text style={codeLabel}>
+              {codes.length > 1 ? `CHILD ${i + 1} — SCAN AT THE DOOR` : 'SCAN AT THE DOOR'}
+            </Text>
+            <Img
+              src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=10&data=${encodeURIComponent(c)}`}
+              width="180"
+              height="180"
+              alt={`QR code for booking ${c}`}
+              style={qrImg}
+            />
+            <Text style={codeText}>{c}</Text>
+          </Section>
+        )) : (
+          <Section style={codeBox}>
+            <Text style={codeLabel}>YOUR BOOKING CODE</Text>
+            <Text style={codeText}>SP-XXX-XXX</Text>
+          </Section>
+        )}
 
         {totalAmount ? <Text style={text}><strong>Total paid:</strong> {totalAmount}</Text> : null}
 
         <Text style={text}>
-          Show {codes.length > 1 ? 'these codes' : 'this code'} at the LuxPlay soft play entrance on the day.
+          Just show this email at the LuxPlay soft play entrance — we'll scan the QR code above.
+          The code underneath works too if our scanner is busy.
         </Text>
 
         <Hr style={hr} />
@@ -109,6 +126,7 @@ const detailValue = { fontSize: '16px', fontWeight: '700' as const, color: '#070
 const codeBox = { backgroundColor: '#070710', borderRadius: '4px', padding: '24px', textAlign: 'center' as const, margin: '0 0 24px' }
 const codeLabel = { fontSize: '10px', letterSpacing: '3px', color: '#888888', margin: '0 0 8px', fontWeight: '600' as const }
 const codeText = { fontSize: '28px', fontWeight: '800' as const, letterSpacing: '4px', color: '#00eeff', margin: '0' }
+const qrImg = { display: 'block', margin: '0 auto 12px', backgroundColor: '#ffffff', borderRadius: '4px' }
 const hr = { borderColor: '#eeeeee', margin: '20px 0' }
 const smallText = { fontSize: '13px', color: '#777777', lineHeight: '1.4', margin: '0 0 4px' }
 const footer = { fontSize: '13px', color: '#999999', margin: '20px 0 4px', lineHeight: '1.5' }

@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import BookingQr from "@/components/BookingQr";
 
 interface Order {
   redemption_code: string;
@@ -107,15 +108,13 @@ const PaymentSuccess = () => {
 
             {/* Redemption Code */}
             <div className="border-2 border-neon-green/40 bg-neon-green/5 p-6 mb-6">
-              <p className="font-display text-xs tracking-[0.3em] text-white/50 mb-2">
-                YOUR REDEMPTION CODE
-              </p>
-              <p
-                className="font-display text-3xl md:text-4xl tracking-[0.2em] text-neon-green mb-3"
-                style={{ textShadow: "0 0 15px rgba(170,255,0,0.3)" }}
-              >
-                {order.redemption_code}
-              </p>
+              <div className="mb-4">
+                <BookingQr
+                  value={order.redemption_code}
+                  label="SCAN AT THE COUNTER"
+                  accent="#aaff00"
+                />
+              </div>
               <button
                 onClick={copyCode}
                 className="inline-flex items-center gap-2 font-display text-xs tracking-widest text-white/60 hover:text-neon-green transition-colors"

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Search, Check, X, Loader2, Lock } from "lucide-react";
+import { Search, Check, X, Loader2, Lock, ScanLine } from "lucide-react";
+import QrScanner from "@/components/QrScanner";
 
 interface Order {
   id: string;
@@ -58,6 +59,7 @@ const Admin = () => {
   const [error, setError] = useState<string | null>(null);
   const [acting, setActing] = useState(false);
   const [justActed, setJustActed] = useState(false);
+  const [scanning, setScanning] = useState(false);
 
   useEffect(() => {
     const stored = sessionStorage.getItem(PW_STORAGE_KEY);
@@ -120,8 +122,8 @@ const Admin = () => {
 
 
 
-  const lookupCode = async () => {
-    const trimmed = code.trim();
+  const lookupCode = async (override?: string) => {
+    const trimmed = (override ?? code).trim();
     if (!trimmed) return;
     setLoading(true);
     setError(null);
@@ -267,6 +269,26 @@ const Admin = () => {
           No code? Search their receipt number, email address or name instead.
         </p>
 
+        {/* Scan QR */}
+        <button
+          onClick={() => setScanning(true)}
+          className="w-full font-display text-sm tracking-widest text-[#070710] bg-neon-cyan py-4 mb-3 flex items-center justify-center gap-2 hover:shadow-[0_0_30px_rgba(0,238,255,0.4)] transition-all duration-300"
+        >
+          <ScanLine className="w-5 h-5" />
+          SCAN QR CODE
+        </button>
+
+        {scanning && (
+          <QrScanner
+            onClose={() => setScanning(false)}
+            onScan={(value) => {
+              setScanning(false);
+              setCode(value);
+              void lookupCode(value);
+            }}
+          />
+        )}
+
         {/* Search */}
         <div className="flex gap-2 mb-6">
           <input
@@ -278,7 +300,7 @@ const Admin = () => {
             className="flex-1 bg-[#0a0a16] border border-white/10 text-white font-display text-lg tracking-widest px-4 py-3 placeholder:text-white/20 focus:outline-none focus:border-neon-green/50"
           />
           <button
-            onClick={lookupCode}
+            onClick={() => lookupCode()}
             disabled={loading}
             className="bg-neon-green text-[#070710] px-4 py-3 disabled:opacity-50"
           >
