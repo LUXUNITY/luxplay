@@ -1,7 +1,7 @@
 /// <reference types="npm:@types/react@18.3.1" />
 import * as React from 'npm:react@18.3.1'
 import {
-  Body, Container, Head, Heading, Html, Preview, Text, Section, Hr,
+  Body, Container, Head, Heading, Html, Img, Preview, Text, Section, Hr,
 } from 'npm:@react-email/components@0.0.22'
 import type { TemplateEntry } from './registry.ts'
 
@@ -34,12 +34,22 @@ const RedemptionCodeEmail = ({ packageName, credits, redemptionCode }: Redemptio
         </Text>
 
         <Section style={codeBox}>
-          <Text style={codeLabel}>YOUR REDEMPTION CODE</Text>
+          <Text style={codeLabel}>SCAN AT THE COUNTER</Text>
+          {redemptionCode ? (
+            <Img
+              src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=10&data=${encodeURIComponent(redemptionCode)}`}
+              width="180"
+              height="180"
+              alt={`QR code for redemption ${redemptionCode}`}
+              style={qrImg}
+            />
+          ) : null}
           <Text style={codeText}>{redemptionCode || 'LUX-XXXX-XXXX'}</Text>
         </Section>
 
         <Text style={text}>
-          Present this code at the LuxPlay counter on opening day and we'll load the credits onto your play card.
+          Show this email at the LuxPlay counter and we'll scan the QR code to load your credits.
+          The code underneath works too if our scanner is busy.
         </Text>
 
         <Hr style={hr} />
@@ -79,6 +89,7 @@ const text = { fontSize: '14px', color: '#55575d', lineHeight: '1.6', margin: '0
 const codeBox = { backgroundColor: '#070710', borderRadius: '4px', padding: '24px', textAlign: 'center' as const, margin: '0 0 24px' }
 const codeLabel = { fontSize: '10px', letterSpacing: '3px', color: '#888888', margin: '0 0 8px', fontWeight: '600' as const }
 const codeText = { fontSize: '28px', fontWeight: '800' as const, letterSpacing: '4px', color: '#aaff00', margin: '0' }
+const qrImg = { display: 'block', margin: '0 auto 12px', backgroundColor: '#ffffff', borderRadius: '4px' }
 const hr = { borderColor: '#eeeeee', margin: '20px 0' }
 const smallText = { fontSize: '13px', color: '#777777', lineHeight: '1.4', margin: '0 0 4px' }
 const footer = { fontSize: '13px', color: '#999999', margin: '20px 0 4px', lineHeight: '1.5' }
