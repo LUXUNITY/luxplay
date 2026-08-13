@@ -59,6 +59,7 @@ const Admin = () => {
   const [error, setError] = useState<string | null>(null);
   const [acting, setActing] = useState(false);
   const [justActed, setJustActed] = useState(false);
+  const [scanning, setScanning] = useState(false);
 
   useEffect(() => {
     const stored = sessionStorage.getItem(PW_STORAGE_KEY);
