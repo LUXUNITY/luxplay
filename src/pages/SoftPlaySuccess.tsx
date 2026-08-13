@@ -129,18 +129,21 @@ const SoftPlaySuccess = () => {
               })}
             </p>
 
-            <div className="border border-white/10 bg-[#0d0d1a] p-4 mb-6 text-left space-y-2">
+            <div className="border border-white/10 bg-[#0d0d1a] p-4 mb-6 text-center space-y-2">
               <p className="font-display text-[10px] tracking-[0.3em] text-neon-cyan/80 mb-3">
-                BOOKING CODE{bookings.length > 1 ? "S" : ""}
+                SCAN AT THE DOOR
               </p>
-              <ul className="space-y-2">
+              <div className="space-y-6">
                 {bookings.map((entry, idx) => (
-                  <li key={entry.booking_code} className="flex items-start justify-between gap-3 border-b border-white/5 pb-2 last:border-b-0 last:pb-0">
-                    <span className="font-body text-white/80 text-sm">👶 Child {idx + 1}</span>
-                    <span className="font-display text-[11px] tracking-[0.2em] text-neon-cyan">{entry.booking_code}</span>
-                  </li>
+                  <div key={entry.booking_code} className="border-b border-white/5 pb-6 last:border-b-0 last:pb-0">
+                    <BookingQr
+                      value={entry.booking_code}
+                      label={`👶 CHILD ${idx + 1}`}
+                      accent="#00eeff"
+                    />
+                  </div>
                 ))}
-              </ul>
+              </div>
               <button
                 onClick={copyCode}
                 className="inline-flex items-center gap-2 pt-2 font-display text-xs tracking-widest text-white/60 hover:text-neon-cyan transition-colors"
