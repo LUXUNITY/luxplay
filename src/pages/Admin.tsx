@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Search, Check, X, Loader2, Lock } from "lucide-react";
+import { Search, Check, X, Loader2, Lock, ScanLine } from "lucide-react";
+import QrScanner from "@/components/QrScanner";
 
 interface Order {
   id: string;
