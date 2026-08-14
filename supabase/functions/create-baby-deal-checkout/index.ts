@@ -25,6 +25,10 @@ const ukTodayISO = () => {
 };
 // Reject past dates, pre-opening dates and dates beyond the booking window so a
 // stale tab or tampered request can never take money for an unbookable session.
+const BLOCKED_SLOTS: Record<string, string[]> = {
+  "2026-08-15": ["14:00"], // private party
+};
+
 const isBookableDate = (d: unknown): boolean => {
   if (typeof d !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(d)) return false;
   const today = ukTodayISO();
@@ -45,7 +49,7 @@ serve(async (req) => {
       ? Math.floor(body.babyCount)
       : 0;
 
-    if (!sessionDate || !parentName?.trim() || !STANDARD_SESSIONS.includes(sessionTime) || quantity < 1) {
+    if (!sessionDate || !parentName?.trim() || !STANDARD_SESSIONS.includes(sessionTime) || (BLOCKED_SLOTS[sessionDate] ?? []).includes(sessionTime) || quantity < 1) {
       return new Response(JSON.stringify({ error: "Missing or invalid booking details" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
