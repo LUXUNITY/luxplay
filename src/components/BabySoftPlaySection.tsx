@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import DateStrip from "./softplay/DateStrip";
-import { getAvailableDates, getSlotsForDate, getBabyPrice, getBabyFullPrice, isOpeningWeekend, isSlotForcedFull } from "./softplay/dateSlots";
+import { getAvailableDates, getSlotsForDate, getBabyPrice, getBabyFullPrice, isOpeningWeekend, isSlotForcedFull, isBabySlotBlocked } from "./softplay/dateSlots";
 
 const MAX_CAPACITY = 15;
 // Price is now date-dependent — see getBabyPrice in dateSlots.ts
@@ -197,7 +197,7 @@ const BabySoftPlaySection = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
             {SESSIONS.map((s, i) => {
-              const forcedFull = isSlotForcedFull(selectedDate, s.time);
+              const forcedFull = isSlotForcedFull(selectedDate, s.time) || isBabySlotBlocked(selectedDate, s.time);
               const booked = forcedFull ? MAX_CAPACITY : (bookedCounts[s.time] || 0);
               const spotsLeft = MAX_CAPACITY - booked;
               const isFull = spotsLeft <= 0;
