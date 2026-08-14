@@ -155,6 +155,20 @@ const Admin = () => {
     setLoading(false);
   };
 
+  // Deep link support: /admin?code=XXXXXX auto-runs the lookup once signed in.
+  const autoRan = useRef(false);
+  useEffect(() => {
+    if (!adminPw || autoRan.current) return;
+    const q = new URLSearchParams(window.location.search).get("code");
+    if (!q) return;
+    autoRan.current = true;
+    setCode(q);
+    void lookupCode(q);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [adminPw]);
+
+
+
   const redeemOrder = async () => {
     if (!result || result.kind !== "order") return;
     setActing(true);
