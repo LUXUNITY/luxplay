@@ -34,11 +34,21 @@ export const isSlotForcedFull = (dateISO: string, time: string) =>
 
 // Private-party closures — big soft play only (incl. deal bundles that share capacity)
 const SOFT_PLAY_BLOCKED_SLOTS: Record<string, string[]> = {
+  "2026-08-15": ["14:00"], // private party
   "2026-09-05": ["10:00"], // private party
 };
 
 export const isSoftPlaySlotBlocked = (dateISO: string, time: string) =>
   (SOFT_PLAY_BLOCKED_SLOTS[dateISO] ?? []).includes(time);
+
+// Private-party closures — baby (under 3s) soft play
+const BABY_BLOCKED_SLOTS: Record<string, string[]> = {
+  "2026-08-15": ["14:00"], // private party
+};
+
+export const isBabySlotBlocked = (dateISO: string, time: string) =>
+  (BABY_BLOCKED_SLOTS[dateISO] ?? []).includes(time);
+
 
 
 
