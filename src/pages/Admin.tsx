@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Search, Check, X, Loader2, Lock, ScanLine } from "lucide-react";
 import QrScanner from "@/components/QrScanner";
@@ -154,6 +154,20 @@ const Admin = () => {
 
     setLoading(false);
   };
+
+  // Deep link support: /admin?code=XXXXXX auto-runs the lookup once signed in.
+  const autoRan = useRef(false);
+  useEffect(() => {
+    if (!adminPw || autoRan.current) return;
+    const q = new URLSearchParams(window.location.search).get("code");
+    if (!q) return;
+    autoRan.current = true;
+    setCode(q);
+    void lookupCode(q);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [adminPw]);
+
+
 
   const redeemOrder = async () => {
     if (!result || result.kind !== "order") return;
