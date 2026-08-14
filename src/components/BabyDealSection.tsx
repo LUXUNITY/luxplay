@@ -3,7 +3,7 @@ import { Check, Clock, Loader2, Minus, Plus, Users } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import DateStrip from "./softplay/DateStrip";
-import { getAvailableDates, getSlotsForDate, isSlotForcedFull } from "./softplay/dateSlots";
+import { getAvailableDates, getSlotsForDate, isSlotForcedFull, isBabySlotBlocked } from "./softplay/dateSlots";
 
 const DEAL_PRICE = 5.99;
 const MAX_CAPACITY = 15;
@@ -161,7 +161,7 @@ const BabyDealSection = () => {
           <p className="font-display text-xs tracking-[0.3em] text-white/40 text-center mb-4"><Clock className="w-4 h-4 inline mr-2" />PICK YOUR BABY SESSION</p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {sessions.map((session) => {
-              const booked = isSlotForcedFull(selectedDate, session.time) ? MAX_CAPACITY : (bookedCounts[session.time] || 0);
+              const booked = (isSlotForcedFull(selectedDate, session.time) || isBabySlotBlocked(selectedDate, session.time)) ? MAX_CAPACITY : (bookedCounts[session.time] || 0);
               const spotsLeft = MAX_CAPACITY - booked;
               const isFull = spotsLeft <= 0;
               const selected = selectedSession === session.time;
