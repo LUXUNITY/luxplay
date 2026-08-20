@@ -11,6 +11,7 @@ const SoftPlaySection = lazy(() => import("@/components/SoftPlaySection"));
 const BabySoftPlaySection = lazy(() => import("@/components/BabySoftPlaySection"));
 const PartiesSection = lazy(() => import("@/components/PartiesSection"));
 const DealsSection = lazy(() => import("@/components/DealsSection"));
+const BabyDealSection = lazy(() => import("@/components/BabyDealSection"));
 
 
 const Index = () => {
@@ -27,6 +28,10 @@ const Index = () => {
         {/* 2. Deals — Play Deal & All-In Deal, straight after the hero */}
         <Suspense fallback={null}>
           <DealsSection />
+        </Suspense>
+        {/* Under-3s deal — after the main upsell deals */}
+        <Suspense fallback={null}>
+          <BabyDealSection />
         </Suspense>
         {/* 3. Venue visuals — zones so visitors see what they're buying */}
         <div className="defer-section">

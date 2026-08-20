@@ -3,7 +3,6 @@ import arcadeAsset from "@/assets/real-arcade.jpeg.asset.json";
 import softplayAsset from "@/assets/real-softplay-v2.png.asset.json";
 import babySoftplayAsset from "@/assets/real-baby-softplay.png.asset.json";
 import prizeAsset from "@/assets/real-prize-redemption.jpg.asset.json";
-import BabyDealSection from "@/components/BabyDealSection";
 
 const bgVenues = [
   { src: arcadeAsset.url, alt: "Arcade Zone" },
@@ -88,9 +87,6 @@ const HeroSection = () => {
           Soft Play, Baby Soft Play, Amazing Prizes & Cosy Café at Unit 7,
           Sovereign Centre, Boscombe, Bournemouth, BH1 4SX.
         </h1>
-        {/* Separate baby deal and booking, immediately below the main summer deal */}
-        <BabyDealSection />
-
         {/* Live, clickable CTAs sit just below the hero — uniform 2x2 grid, compact */}
         <div className="relative z-10 w-full max-w-2xl mx-auto grid grid-cols-2 gap-2 sm:gap-3 px-4 py-4 md:py-6">
         <a
