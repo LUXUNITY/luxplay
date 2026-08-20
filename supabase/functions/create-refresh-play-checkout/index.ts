@@ -158,13 +158,14 @@ serve(async (req) => {
       order: {
         location_id: locationId,
         line_items: [{
-          name: `Summer Chill & Play Bundle — 2hr Soft Play + 60 Arcade Credits + Ice-Cold Drink + Ice Pop — ${sessionTime}`,
+          name: `${deal.label} — ${sessionTime}`,
           quantity: String(quantity),
-          base_price_money: { amount: BUNDLE_PRICE_PENCE, currency: "GBP" },
+          base_price_money: { amount: deal.price, currency: "GBP" },
         }],
         metadata: {
           type: "softplay",
-          bundle: "refresh-play",
+          bundle: dealKey === "allin" ? "all-in-deal" : "play-deal",
+
           sessionTime,
           sessionDate,
           childCount: String(quantity),
