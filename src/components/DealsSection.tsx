@@ -20,19 +20,6 @@ const DEALS: {
   tag?: string;
 }[] = [
   {
-    id: "play",
-    name: "PLAY DEAL",
-    price: 14.99,
-    accent: "#00eeff",
-    glow: "rgba(0,238,255,0.6)",
-    items: [
-      { emoji: "🛝", text: "2 HOURS SOFT PLAY" },
-      { emoji: "🕹️", text: "60 ARCADE CREDITS" },
-      { emoji: "🧃", text: "JUICE" },
-      { emoji: "🍡", text: "ICE POP" },
-    ],
-  },
-  {
     id: "allin",
     name: "ALL-IN DEAL",
     price: 19.99,
@@ -45,6 +32,19 @@ const DEALS: {
       { emoji: "🥤", text: "CAN / SOFT DRINK" },
       { emoji: "🥪", text: "SANDWICH" },
       { emoji: "🧁", text: "CUPCAKE + ICE POP" },
+    ],
+  },
+  {
+    id: "play",
+    name: "PLAY DEAL",
+    price: 14.99,
+    accent: "#00eeff",
+    glow: "rgba(0,238,255,0.6)",
+    items: [
+      { emoji: "🛝", text: "2 HOURS SOFT PLAY" },
+      { emoji: "🕹️", text: "60 ARCADE CREDITS" },
+      { emoji: "🧃", text: "JUICE" },
+      { emoji: "🍡", text: "ICE POP" },
     ],
   },
 ];
@@ -136,35 +136,56 @@ const DealsSection = () => {
         <div className="grid gap-6 md:grid-cols-2 max-w-5xl mx-auto">
           {DEALS.map((d) => {
             const active = selectedDeal === d.id;
+            const isBest = d.id === "allin";
             return (
               <div
                 key={d.id}
-                className="relative border-2 p-5 md:p-8 bg-[#0b0b18]/90 transition-transform hover:scale-[1.02]"
+                className={`relative border-2 p-5 md:p-8 bg-[#0b0b18]/90 transition-transform hover:scale-[1.03] overflow-hidden ${
+                  isBest ? "animate-chill-pulse md:-mt-3" : ""
+                }`}
                 style={{
                   borderColor: d.accent,
-                  boxShadow: active ? `0 0 45px ${d.glow}` : `0 0 22px ${d.glow}`,
+                  boxShadow: active ? `0 0 55px ${d.glow}` : `0 0 26px ${d.glow}`,
                 }}
               >
+                {isBest && (
+                  <div className="pointer-events-none absolute -top-24 -right-24 w-64 h-64 rounded-full blur-[60px] opacity-40" style={{ background: d.accent }} />
+                )}
+                {isBest && (
+                  <>
+                    <span className="pointer-events-none absolute top-3 left-4 text-lg animate-sparkle">✨</span>
+                    <span className="pointer-events-none absolute bottom-6 right-5 text-lg animate-sparkle" style={{ animationDelay: "0.7s" }}>✨</span>
+                  </>
+                )}
+
                 {d.tag && (
                   <span
-                    className="absolute -top-3.5 right-4 font-display text-[10px] md:text-xs tracking-[0.25em] px-3 py-1.5 text-[#070710] animate-pulse"
-                    style={{ background: d.accent }}
+                    className="absolute -top-3.5 right-4 font-display text-[10px] md:text-xs tracking-[0.25em] px-3 py-1.5 text-[#070710] animate-party-tag z-10"
+                    style={{ background: d.accent, boxShadow: `0 0 26px ${d.glow}` }}
                   >
                     {d.tag}
                   </span>
                 )}
 
-                <p className="font-display text-2xl md:text-4xl tracking-[0.15em]" style={{ color: d.accent, textShadow: `0 0 18px ${d.glow}` }}>
+                <p className="relative font-display text-2xl md:text-4xl tracking-[0.15em]" style={{ color: d.accent, textShadow: `0 0 18px ${d.glow}` }}>
                   {d.name}
                 </p>
-                <p className="font-display text-5xl md:text-7xl text-white leading-none mt-1 animate-pulse">
+                <p
+                  className={`relative font-display text-5xl md:text-7xl text-white leading-none mt-1 ${isBest ? "animate-big-throb" : "animate-pulse"}`}
+                  style={{ textShadow: `0 0 26px ${d.glow}` }}
+                >
                   £{d.price.toFixed(2)}
                 </p>
 
-                <div className="mt-5 space-y-2.5">
-                  {d.items.map((it) => (
+                <div className="relative mt-5 space-y-2.5">
+                  {d.items.map((it, i) => (
                     <div key={it.text} className="flex items-center gap-3">
-                      <span className="text-2xl md:text-3xl leading-none shrink-0">{it.emoji}</span>
+                      <span
+                        className="text-2xl md:text-3xl leading-none shrink-0 animate-icon-bob"
+                        style={{ animationDelay: `${i * 0.18}s` }}
+                      >
+                        {it.emoji}
+                      </span>
                       <span className="font-display text-base md:text-2xl tracking-wider text-white/90">{it.text}</span>
                     </div>
                   ))}
@@ -176,7 +197,9 @@ const DealsSection = () => {
                     setChildCount(1);
                     setTimeout(() => document.getElementById("deal-booking")?.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
                   }}
-                  className="mt-6 w-full font-display text-base md:text-xl tracking-widest py-4 text-[#070710] hover:scale-[1.03] transition-transform"
+                  className={`relative mt-6 w-full font-display text-base md:text-xl tracking-widest py-4 text-[#070710] hover:scale-[1.03] transition-transform ${
+                    isBest ? "animate-btn-flash-pink" : "animate-btn-flash-cyan"
+                  }`}
                   style={{ background: d.accent, boxShadow: `0 0 30px ${d.glow}` }}
                 >
                   {active ? "SELECTED ✓" : `BOOK — £${d.price.toFixed(2)}`}
