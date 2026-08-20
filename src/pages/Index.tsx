@@ -33,6 +33,15 @@ const Index = () => {
           </Suspense>
         </div>
         {/* 3. Credits — money section after zones explain the value */}
+        {/* 3. Deals — Play Deal & All-In Deal */}
+        <div className="defer-section">
+          <Suspense fallback={null}>
+            <ScrollReveal>
+              <DealsSection />
+            </ScrollReveal>
+          </Suspense>
+        </div>
+        {/* 4. Credits — money section after zones explain the value */}
         <div className="defer-section">
           <Suspense fallback={null}>
             <ScrollReveal>
@@ -40,7 +49,8 @@ const Index = () => {
             </ScrollReveal>
           </Suspense>
         </div>
-        {/* 4. Soft play booking */}
+        {/* 5. Soft play booking */}
+
         <div className="defer-section">
           <Suspense fallback={null}>
             <ScrollReveal>
