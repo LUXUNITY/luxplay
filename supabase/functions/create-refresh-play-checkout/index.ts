@@ -84,7 +84,11 @@ serve(async (req) => {
     const body = await req.json();
     const { sessionTime, sessionDate, parentName, parentPhone } = body;
 
+    const dealKey = typeof body.deal === "string" && DEALS[body.deal] ? body.deal : "play";
+    const deal = DEALS[dealKey];
+
     let quantity = 0;
+
     if (typeof body.childCount === "number" && Number.isFinite(body.childCount)) {
       quantity = Math.floor(body.childCount);
     }
