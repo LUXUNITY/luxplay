@@ -1,0 +1,16 @@
+{
+  "name": "LUXPLAY Bournemouth",
+  "short_name": "LUXPLAY",
+  "description": "Arcade, soft play and party bookings at LUXPLAY, Boscombe, Bournemouth.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#070710",
+  "theme_color": "#070710",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
