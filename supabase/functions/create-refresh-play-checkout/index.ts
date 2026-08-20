@@ -7,9 +7,19 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-// SUMMER CHILL & PLAY bundle: 2hr soft play + 60 arcade credits
-// + ice-cold drink + ice pop
-const BUNDLE_PRICE_PENCE = 1499;
+// Deal bundles (2hr soft play + 60 arcade credits + extras)
+const DEALS: Record<string, { price: number; label: string }> = {
+  play: {
+    price: 1499,
+    label: "Play Deal — 2hr Soft Play + 60 Arcade Credits + Juice + Ice Pop",
+  },
+  allin: {
+    price: 1999,
+    label: "All-In Deal — 2hr Soft Play + 60 Arcade Credits + Can/Soft Drink + Sandwich + Cupcake + Ice Pop",
+  },
+};
+const BUNDLE_PRICE_PENCE = DEALS.play.price;
+
 
 const STANDARD_SESSIONS = ["10:00", "12:00", "14:00", "16:00", "18:00"];
 const REMOVED_TODAY_SESSIONS: string[] = [];
@@ -74,7 +84,11 @@ serve(async (req) => {
     const body = await req.json();
     const { sessionTime, sessionDate, parentName, parentPhone } = body;
 
+    const dealKey = typeof body.deal === "string" && DEALS[body.deal] ? body.deal : "play";
+    const deal = DEALS[dealKey];
+
     let quantity = 0;
+
     if (typeof body.childCount === "number" && Number.isFinite(body.childCount)) {
       quantity = Math.floor(body.childCount);
     }
@@ -144,13 +158,14 @@ serve(async (req) => {
       order: {
         location_id: locationId,
         line_items: [{
-          name: `Summer Chill & Play Bundle — 2hr Soft Play + 60 Arcade Credits + Ice-Cold Drink + Ice Pop — ${sessionTime}`,
+          name: `${deal.label} — ${sessionTime}`,
           quantity: String(quantity),
-          base_price_money: { amount: BUNDLE_PRICE_PENCE, currency: "GBP" },
+          base_price_money: { amount: deal.price, currency: "GBP" },
         }],
         metadata: {
           type: "softplay",
-          bundle: "refresh-play",
+          bundle: dealKey === "allin" ? "all-in-deal" : "play-deal",
+
           sessionTime,
           sessionDate,
           childCount: String(quantity),
