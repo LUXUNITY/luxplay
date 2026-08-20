@@ -140,46 +140,60 @@ const DealsSection = () => {
             return (
               <div
                 key={d.id}
-                className={`relative border-2 p-5 md:p-8 bg-[#0b0b18]/90 transition-transform hover:scale-[1.03] overflow-hidden ${
-                  isBest ? "animate-chill-pulse md:-mt-3" : ""
+                className={`deal-card p-5 md:p-8 bg-[#0b0b18]/95 transition-transform hover:scale-[1.03] ${
+                  isBest ? "animate-chill-pulse md:-mt-4" : ""
                 }`}
                 style={{
-                  borderColor: d.accent,
-                  boxShadow: active ? `0 0 55px ${d.glow}` : `0 0 26px ${d.glow}`,
+                  ["--deal-accent" as any]: d.accent,
+                  boxShadow: active ? `0 0 65px ${d.glow}` : `0 0 30px ${d.glow}`,
                 }}
               >
-                {isBest && (
-                  <div className="pointer-events-none absolute -top-24 -right-24 w-64 h-64 rounded-full blur-[60px] opacity-40" style={{ background: d.accent }} />
-                )}
+                <div className="deal-stripes" />
+                <div className="deal-shine" />
+                <div
+                  className="pointer-events-none absolute -top-28 left-1/2 -translate-x-1/2 w-72 h-72 rounded-full blur-[60px] opacity-40"
+                  style={{ background: d.accent }}
+                />
                 {isBest && (
                   <>
-                    <span className="pointer-events-none absolute top-3 left-4 text-lg animate-sparkle">✨</span>
-                    <span className="pointer-events-none absolute bottom-6 right-5 text-lg animate-sparkle" style={{ animationDelay: "0.7s" }}>✨</span>
+                    <span className="pointer-events-none absolute top-3 left-4 text-lg animate-sparkle z-[2]">✨</span>
+                    <span className="pointer-events-none absolute bottom-6 right-5 text-lg animate-sparkle z-[2]" style={{ animationDelay: "0.7s" }}>✨</span>
+                    <span className="pointer-events-none absolute top-1/3 right-8 text-base animate-sparkle z-[2]" style={{ animationDelay: "1.2s" }}>⭐</span>
                   </>
                 )}
 
                 {d.tag && (
                   <span
-                    className="absolute -top-3.5 right-4 font-display text-[10px] md:text-xs tracking-[0.25em] px-3 py-1.5 text-[#070710] animate-party-tag z-10"
-                    style={{ background: d.accent, boxShadow: `0 0 26px ${d.glow}` }}
+                    className="absolute top-4 left-1/2 font-display text-[10px] md:text-xs tracking-[0.25em] px-4 py-1.5 text-[#070710] animate-party-tag z-10"
+                    style={{ background: d.accent, boxShadow: `0 0 30px ${d.glow}` }}
                   >
-                    {d.tag}
+                    🔥 {d.tag} 🔥
                   </span>
                 )}
 
-                <p className="relative font-display text-2xl md:text-4xl tracking-[0.15em]" style={{ color: d.accent, textShadow: `0 0 18px ${d.glow}` }}>
-                  {d.name}
-                </p>
-                <p
-                  className={`relative font-display text-5xl md:text-7xl text-white leading-none mt-1 ${isBest ? "animate-big-throb" : "animate-pulse"}`}
-                  style={{ textShadow: `0 0 26px ${d.glow}` }}
-                >
-                  £{d.price.toFixed(2)}
-                </p>
+                <div className="relative z-[2] text-center pt-8">
+                  <p
+                    className="font-display text-2xl md:text-4xl tracking-[0.18em]"
+                    style={{ color: d.accent, textShadow: `0 0 20px ${d.glow}` }}
+                  >
+                    {d.name}
+                  </p>
+                  <p
+                    className={`deal-price-shimmer font-display text-6xl md:text-8xl leading-none mt-1 ${isBest ? "animate-big-throb" : ""}`}
+                    style={{ filter: `drop-shadow(0 0 22px ${d.glow})` }}
+                  >
+                    £{d.price.toFixed(2)}
+                  </p>
+                  <p className="font-body text-[10px] tracking-[0.3em] uppercase text-white/40 mt-2">per child</p>
+                </div>
 
-                <div className="relative mt-5 space-y-2.5">
+                <div className="relative z-[2] mt-6 space-y-2">
                   {d.items.map((it, i) => (
-                    <div key={it.text} className="flex items-center gap-3">
+                    <div
+                      key={it.text}
+                      className="animate-deal-row flex items-center gap-3 border border-white/10 bg-white/[0.04] px-3 py-2"
+                      style={{ animationDelay: `${i * 0.25}s`, borderLeft: `3px solid ${d.accent}` }}
+                    >
                       <span
                         className="text-2xl md:text-3xl leading-none shrink-0 animate-icon-bob"
                         style={{ animationDelay: `${i * 0.18}s` }}
@@ -197,14 +211,15 @@ const DealsSection = () => {
                     setChildCount(1);
                     setTimeout(() => document.getElementById("deal-booking")?.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
                   }}
-                  className={`relative mt-6 w-full font-display text-base md:text-xl tracking-widest py-4 text-[#070710] hover:scale-[1.03] transition-transform ${
+                  className={`relative z-[2] mt-6 w-full font-display text-lg md:text-2xl tracking-widest py-4 text-[#070710] hover:scale-[1.04] transition-transform ${
                     isBest ? "animate-btn-flash-pink" : "animate-btn-flash-cyan"
                   }`}
-                  style={{ background: d.accent, boxShadow: `0 0 30px ${d.glow}` }}
+                  style={{ background: d.accent, boxShadow: `0 0 34px ${d.glow}` }}
                 >
-                  {active ? "SELECTED ✓" : `BOOK — £${d.price.toFixed(2)}`}
+                  {active ? "SELECTED ✓" : `BOOK NOW → £${d.price.toFixed(2)}`}
                 </button>
               </div>
+
             );
           })}
         </div>
