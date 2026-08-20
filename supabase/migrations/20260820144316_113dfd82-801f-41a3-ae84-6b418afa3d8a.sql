@@ -1,0 +1,1 @@
+select public.delete_email('transactional_emails', msg_id) from pgmq.q_transactional_emails where message->>'label' = 'pipeline-test';
