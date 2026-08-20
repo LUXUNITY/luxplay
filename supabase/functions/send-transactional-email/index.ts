@@ -400,6 +400,24 @@ Deno.serve(async (req) => {
 
   console.log('Transactional email enqueued', { templateName, effectiveRecipient })
 
+  // Kick the dispatcher immediately so queued mail goes out without waiting for a schedule.
+  try {
+    const dispatchUrl = `${Deno.env.get('SUPABASE_URL')}/functions/v1/process-email-queue`
+    const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
+    const res = await fetch(dispatchUrl, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${serviceKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ queue: 'transactional_emails' }),
+    })
+    console.log('Dispatcher kick status', res.status)
+  } catch (kickError) {
+    console.error('Failed to kick email dispatcher', kickError)
+  }
+
+
   return new Response(
     JSON.stringify({ success: true, queued: true }),
     {
