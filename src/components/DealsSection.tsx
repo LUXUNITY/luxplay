@@ -20,19 +20,6 @@ const DEALS: {
   tag?: string;
 }[] = [
   {
-    id: "play",
-    name: "PLAY DEAL",
-    price: 14.99,
-    accent: "#00eeff",
-    glow: "rgba(0,238,255,0.6)",
-    items: [
-      { emoji: "🛝", text: "2 HOURS SOFT PLAY" },
-      { emoji: "🕹️", text: "60 ARCADE CREDITS" },
-      { emoji: "🧃", text: "JUICE" },
-      { emoji: "🍡", text: "ICE POP" },
-    ],
-  },
-  {
     id: "allin",
     name: "ALL-IN DEAL",
     price: 19.99,
@@ -45,6 +32,19 @@ const DEALS: {
       { emoji: "🥤", text: "CAN / SOFT DRINK" },
       { emoji: "🥪", text: "SANDWICH" },
       { emoji: "🧁", text: "CUPCAKE + ICE POP" },
+    ],
+  },
+  {
+    id: "play",
+    name: "PLAY DEAL",
+    price: 14.99,
+    accent: "#00eeff",
+    glow: "rgba(0,238,255,0.6)",
+    items: [
+      { emoji: "🛝", text: "2 HOURS SOFT PLAY" },
+      { emoji: "🕹️", text: "60 ARCADE CREDITS" },
+      { emoji: "🧃", text: "JUICE" },
+      { emoji: "🍡", text: "ICE POP" },
     ],
   },
 ];
