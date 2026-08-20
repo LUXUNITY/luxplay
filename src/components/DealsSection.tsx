@@ -148,8 +148,9 @@ const DealsSection = () => {
                   boxShadow: active ? `0 0 65px ${d.glow}` : `0 0 30px ${d.glow}`,
                 }}
               >
-                <div className="deal-stripes" />
+                <DealCircuit accent={d.accent} />
                 <div className="deal-shine" />
+
                 <div
                   className="pointer-events-none absolute -top-28 left-1/2 -translate-x-1/2 w-72 h-72 rounded-full blur-[60px] opacity-40"
                   style={{ background: d.accent }}
