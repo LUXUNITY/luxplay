@@ -512,6 +512,90 @@
   }
   .animate-party-tag { animation: party-tag-swing 2.4s ease-in-out infinite; transform-origin: top center; }
 
+  /* ===== Exciting deal cards ===== */
+  .deal-card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  /* animated racing neon border */
+  .deal-card::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    padding: 2px;
+    border-radius: inherit;
+    background: conic-gradient(from var(--deal-angle, 0deg), transparent 0deg, var(--deal-accent) 70deg, #ffffff 90deg, var(--deal-accent) 110deg, transparent 200deg, transparent 360deg);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    animation: deal-spin 4s linear infinite;
+    pointer-events: none;
+    z-index: 3;
+  }
+  @property --deal-angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+  }
+  @keyframes deal-spin {
+    to { --deal-angle: 360deg; }
+  }
+  /* diagonal moving stripes inside the card */
+  .deal-stripes {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.055) 0 12px, transparent 12px 28px);
+    background-size: 200% 200%;
+    animation: deal-stripe-slide 8s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+  @keyframes deal-stripe-slide {
+    from { background-position: 0 0; }
+    to { background-position: 56px 56px; }
+  }
+  /* light sweep across the card */
+  .deal-shine {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 45%;
+    background: linear-gradient(105deg, transparent, rgba(255,255,255,0.16), transparent);
+    animation: deal-shine-sweep 4.5s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+  @keyframes deal-shine-sweep {
+    0% { transform: translateX(-160%) skewX(-12deg); }
+    55%, 100% { transform: translateX(320%) skewX(-12deg); }
+  }
+  .deal-price-shimmer {
+    background: linear-gradient(100deg, #fff 20%, var(--deal-accent) 45%, #fff 70%);
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: deal-price-slide 2.6s linear infinite;
+  }
+  @keyframes deal-price-slide {
+    to { background-position: -250% 0; }
+  }
+  @keyframes deal-row-pop {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(4px); }
+  }
+  .animate-deal-row { animation: deal-row-pop 3s ease-in-out infinite; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .deal-card::before, .deal-stripes, .deal-shine,
+    .deal-price-shimmer, .animate-deal-row {
+      animation: none !important;
+    }
+    .deal-price-shimmer { color: #fff; -webkit-text-fill-color: #fff; }
+  }
+
+
 
   .neon-cta {
     position: relative;
