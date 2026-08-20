@@ -7,9 +7,19 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-// SUMMER CHILL & PLAY bundle: 2hr soft play + 60 arcade credits
-// + ice-cold drink + ice pop
-const BUNDLE_PRICE_PENCE = 1499;
+// Deal bundles (2hr soft play + 60 arcade credits + extras)
+const DEALS: Record<string, { price: number; label: string }> = {
+  play: {
+    price: 1499,
+    label: "Play Deal — 2hr Soft Play + 60 Arcade Credits + Juice + Ice Pop",
+  },
+  allin: {
+    price: 1999,
+    label: "All-In Deal — 2hr Soft Play + 60 Arcade Credits + Can/Soft Drink + Sandwich + Cupcake + Ice Pop",
+  },
+};
+const BUNDLE_PRICE_PENCE = DEALS.play.price;
+
 
 const STANDARD_SESSIONS = ["10:00", "12:00", "14:00", "16:00", "18:00"];
 const REMOVED_TODAY_SESSIONS: string[] = [];
