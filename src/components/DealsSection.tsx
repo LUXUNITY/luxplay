@@ -49,7 +49,50 @@ const DEALS: {
   },
 ];
 
+const CIRCUIT_TRACES = [
+  "M0 26 L54 26 Q66 26 66 38 L66 74 Q66 86 78 86 L200 86",
+  "M300 8 L300 52 Q300 64 288 64 L214 64 Q202 64 202 76 L202 150",
+  "M300 220 L236 220 Q224 220 224 232 L224 268 Q224 280 212 280 L120 280 Q108 280 108 292 L108 360",
+  "M0 300 L44 300 Q56 300 56 288 L56 232 Q56 220 44 220 L0 220",
+  "M0 150 L28 150 Q40 150 40 162 L40 200",
+  "M300 330 L250 330 Q238 330 238 342 L238 380",
+];
+
+const CIRCUIT_PADS = [
+  [66, 38],
+  [78, 86],
+  [202, 76],
+  [224, 232],
+  [108, 292],
+  [56, 288],
+  [40, 162],
+  [238, 342],
+] as const;
+
+const DealCircuit = ({ accent }: { accent: string }) => (
+  <svg
+    className="pointer-events-none absolute inset-0 w-full h-full z-0 opacity-60"
+    viewBox="0 0 300 400"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <g fill="none" stroke={accent} strokeLinecap="round" strokeLinejoin="round">
+      {CIRCUIT_TRACES.map((d, i) => (
+        <g key={d}>
+          <path d={d} strokeWidth={4} strokeOpacity={0.1} />
+          <path d={d} strokeWidth={1} strokeOpacity={0.45} />
+          <path d={d} strokeWidth={2} strokeOpacity={0.95} className="deal-trace-pulse" style={{ animationDelay: `${i * 0.55}s` }} />
+        </g>
+      ))}
+    </g>
+    {CIRCUIT_PADS.map(([cx, cy], i) => (
+      <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={2.6} fill={accent} className="deal-pad-blink" style={{ animationDelay: `${i * 0.3}s` }} />
+    ))}
+  </svg>
+);
+
 const DealsSection = () => {
+
   const initialDate = getAvailableDates()[0]?.iso;
   const [selectedDeal, setSelectedDeal] = useState<DealId | null>(null);
   const [selectedDate, setSelectedDate] = useState<string>(initialDate);
@@ -148,8 +191,9 @@ const DealsSection = () => {
                   boxShadow: active ? `0 0 65px ${d.glow}` : `0 0 30px ${d.glow}`,
                 }}
               >
-                <div className="deal-stripes" />
+                <DealCircuit accent={d.accent} />
                 <div className="deal-shine" />
+
                 <div
                   className="pointer-events-none absolute -top-28 left-1/2 -translate-x-1/2 w-72 h-72 rounded-full blur-[60px] opacity-40"
                   style={{ background: d.accent }}

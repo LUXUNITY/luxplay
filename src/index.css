@@ -587,11 +587,31 @@
   }
   .animate-deal-row { animation: deal-row-pop 3s ease-in-out infinite; }
 
+  /* electric circuit traces */
+  .deal-trace-pulse {
+    stroke-dasharray: 34 420;
+    stroke-dashoffset: 454;
+    filter: drop-shadow(0 0 4px currentColor);
+    animation: deal-trace-run 3.6s linear infinite;
+  }
+  @keyframes deal-trace-run {
+    to { stroke-dashoffset: -34; }
+  }
+  .deal-pad-blink {
+    animation: deal-pad-blink 2.4s ease-in-out infinite;
+  }
+  @keyframes deal-pad-blink {
+    0%, 100% { opacity: 0.35; r: 2.2px; }
+    50% { opacity: 1; r: 3.4px; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .deal-card::before, .deal-stripes, .deal-shine,
-    .deal-price-shimmer, .animate-deal-row {
+    .deal-price-shimmer, .animate-deal-row,
+    .deal-trace-pulse, .deal-pad-blink {
       animation: none !important;
     }
+
     .deal-price-shimmer { color: #fff; -webkit-text-fill-color: #fff; }
   }
 
