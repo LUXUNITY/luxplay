@@ -1,0 +1,9 @@
+{
+  "appId": "app.lovable.p5b30e61c1e8640d0a31102e3c242ebc5",
+  "appName": "luxplay",
+  "webDir": "dist",
+  "server": {
+    "url": "https://5b30e61c-1e86-40d0-a311-02e3c242ebc5.lovableproject.com?forceHideBadge=true",
+    "cleartext": true
+  }
+}
