@@ -3,7 +3,6 @@ import arcadeAsset from "@/assets/real-arcade.jpeg.asset.json";
 import softplayAsset from "@/assets/real-softplay-v2.png.asset.json";
 import babySoftplayAsset from "@/assets/real-baby-softplay.png.asset.json";
 import prizeAsset from "@/assets/real-prize-redemption.jpg.asset.json";
-import RefreshPlaySection from "@/components/RefreshPlaySection";
 import BabyDealSection from "@/components/BabyDealSection";
 
 const bgVenues = [
@@ -89,18 +88,16 @@ const HeroSection = () => {
           Soft Play, Baby Soft Play, Amazing Prizes & Cosy Café at Unit 7,
           Sovereign Centre, Boscombe, Bournemouth, BH1 4SX.
         </h1>
-        {/* REFRESH & PLAY deal — forefront, directly under the logo */}
-        <RefreshPlaySection />
         {/* Separate baby deal and booking, immediately below the main summer deal */}
         <BabyDealSection />
 
         {/* Live, clickable CTAs sit just below the hero — uniform 2x2 grid, compact */}
         <div className="relative z-10 w-full max-w-2xl mx-auto grid grid-cols-2 gap-2 sm:gap-3 px-4 py-4 md:py-6">
         <a
-          href="#refresh-play"
+          href="#deals"
           className="neon-cta flex items-center justify-center font-display text-xs sm:text-sm md:text-base tracking-widest px-2 py-3 md:py-4 bg-neon-green text-[#070710] animate-btn-flash-green transition-transform duration-200 hover:scale-105 text-center h-full"
         >
-          <span>SUMMER CHILL &amp; PLAY £14.99</span>
+          <span>PLAY DEALS FROM £14.99</span>
         </a>
         <a
           href="#presale"
