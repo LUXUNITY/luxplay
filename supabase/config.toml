@@ -20,3 +20,6 @@ verify_jwt = true
 
 [functions.admin-action]
 verify_jwt = true
+
+[functions.redeem-loyalty-session]
+verify_jwt = true
