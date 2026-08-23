@@ -111,6 +111,16 @@ serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
     );
 
+    // Loyalty: if the buyer is signed in, tag the order with their account id
+    // so stamps get credited once the payment is verified.
+    let loyaltyUserId = "";
+    const authHeader = req.headers.get("Authorization") || "";
+    const jwt = authHeader.replace("Bearer ", "");
+    if (jwt && jwt.split(".").length === 3) {
+      const { data: userData } = await supabase.auth.getUser(jwt);
+      if (userData?.user?.id) loyaltyUserId = userData.user.id;
+    }
+
     const { count, error: countError } = await supabase
       .from("soft_play_bookings")
       .select("id", { count: "exact", head: true })
@@ -160,6 +170,7 @@ serve(async (req) => {
           sessionDate,
           childCount: String(quantity),
           parentName: parentName.slice(0, 250),
+          ...(loyaltyUserId ? { loyaltyUserId } : {}),
           ...(parentPhone && parentPhone.trim() ? { parentPhone: parentPhone.trim().slice(0, 250) } : {}),
         },
       },
