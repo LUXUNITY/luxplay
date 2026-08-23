@@ -283,6 +283,19 @@ serve(async (req) => {
       });
     }
 
+    // Loyalty stamps — one per paid child session, credited to the signed-in account.
+    if (meta.loyaltyUserId && bookings?.length) {
+      const { error: stampError } = await supabase.from("loyalty_stamps").insert(
+        bookings.map((b: any) => ({
+          user_id: meta.loyaltyUserId,
+          source: "softplay",
+          booking_code: b.booking_code,
+          session_date: b.session_date,
+        })),
+      );
+      if (stampError) console.error("Loyalty stamp insert failed:", stampError);
+    }
+
     await queueBookingEmails(supabase, bookings || [], sessionId);
 
     return new Response(JSON.stringify({ booking: bookings?.[0], bookings }), {
