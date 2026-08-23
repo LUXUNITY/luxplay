@@ -19,6 +19,8 @@ const SoftPlayBournemouth = lazy(() => import("./pages/SoftPlayBournemouth"));
 const ArcadeBournemouth = lazy(() => import("./pages/ArcadeBournemouth"));
 const ThingsToDoBournemouth = lazy(() => import("./pages/ThingsToDoBournemouth"));
 const ThingsToDoInBournemouth = lazy(() => import("./pages/ThingsToDoInBournemouth"));
+const AuthPage = lazy(() => import("./pages/Auth"));
+const Loyalty = lazy(() => import("./pages/Loyalty"));
 
 const queryClient = new QueryClient();
 
