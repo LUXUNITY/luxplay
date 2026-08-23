@@ -50,6 +50,7 @@ export type Database = {
           session_date: string
           session_time: string
           stripe_session_id: string
+          user_id: string | null
         }
         Insert: {
           amount_paid?: number
@@ -65,6 +66,7 @@ export type Database = {
           session_date: string
           session_time: string
           stripe_session_id: string
+          user_id?: string | null
         }
         Update: {
           amount_paid?: number
@@ -80,6 +82,7 @@ export type Database = {
           session_date?: string
           session_time?: string
           stripe_session_id?: string
+          user_id?: string | null
         }
         Relationships: []
       }
@@ -170,6 +173,66 @@ export type Database = {
         }
         Relationships: []
       }
+      loyalty_redemptions: {
+        Row: {
+          booking_code: string
+          created_at: string
+          id: string
+          reward_type: string
+          session_date: string
+          session_time: string
+          user_id: string
+        }
+        Insert: {
+          booking_code: string
+          created_at?: string
+          id?: string
+          reward_type?: string
+          session_date: string
+          session_time: string
+          user_id: string
+        }
+        Update: {
+          booking_code?: string
+          created_at?: string
+          id?: string
+          reward_type?: string
+          session_date?: string
+          session_time?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      loyalty_stamps: {
+        Row: {
+          booking_code: string | null
+          consumed: boolean
+          created_at: string
+          id: string
+          session_date: string | null
+          source: string
+          user_id: string
+        }
+        Insert: {
+          booking_code?: string | null
+          consumed?: boolean
+          created_at?: string
+          id?: string
+          session_date?: string | null
+          source?: string
+          user_id: string
+        }
+        Update: {
+          booking_code?: string | null
+          consumed?: boolean
+          created_at?: string
+          id?: string
+          session_date?: string | null
+          source?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       orders: {
         Row: {
           amount_paid: number
@@ -249,6 +312,7 @@ export type Database = {
           session_date: string
           session_time: string
           stripe_session_id: string
+          user_id: string | null
         }
         Insert: {
           amount_paid?: number
@@ -265,6 +329,7 @@ export type Database = {
           session_date: string
           session_time: string
           stripe_session_id: string
+          user_id?: string | null
         }
         Update: {
           amount_paid?: number
@@ -281,6 +346,7 @@ export type Database = {
           session_date?: string
           session_time?: string
           stripe_session_id?: string
+          user_id?: string | null
         }
         Relationships: []
       }
