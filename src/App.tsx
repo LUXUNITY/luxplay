@@ -46,9 +46,12 @@ const App = () => (
               <Route path="/admin" element={<><RouteHead title="Staff Code Lookup — LUXPLAY" description="Internal LUXPLAY staff tool for looking up and checking in redemption and booking codes." path="/admin" noindex /><Admin /></>} />
               <Route path="/softplay-success" element={<><RouteHead title="Soft Play Booking Confirmed — LUXPLAY" description="Your LUXPLAY soft play session is booked. Show your booking code on the day." path="/softplay-success" noindex /><SoftPlaySuccess /></>} />
               <Route path="/baby-softplay-success" element={<><RouteHead title="Baby Soft Play Booking Confirmed — LUXPLAY" description="Your LUXPLAY baby soft play session is booked. Show your booking code on the day." path="/baby-softplay-success" noindex /><BabySoftPlaySuccess /></>} />
+              <Route path="/auth" element={<><RouteHead title="LUXPLAY Rewards — Sign In or Join Free" description="Sign in to your LUXPLAY Rewards account to collect soft play stamps — every 7th session is free per child." path="/auth" noindex /><AuthPage /></>} />
+              <Route path="/loyalty" element={<><RouteHead title="My LUXPLAY Rewards" description="Your LUXPLAY loyalty stamp card — 6 paid soft play sessions and the 7th is free." path="/loyalty" noindex /><Loyalty /></>} />
               <Route path="*" element={<><RouteHead title="Page Not Found — LUXPLAY" description="This LUXPLAY page could not be found." path="/404" noindex /><NotFound /></>} />
             </Routes>
           </Suspense>
+        </AuthProvider>
         </BrowserRouter>
       </TooltipProvider>
     </MotionConfig>
