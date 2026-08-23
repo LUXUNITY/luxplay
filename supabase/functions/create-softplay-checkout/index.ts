@@ -170,6 +170,7 @@ serve(async (req) => {
           sessionDate,
           childCount: String(quantity),
           parentName: parentName.slice(0, 250),
+          ...(loyaltyUserId ? { loyaltyUserId } : {}),
           ...(parentPhone && parentPhone.trim() ? { parentPhone: parentPhone.trim().slice(0, 250) } : {}),
         },
       },
