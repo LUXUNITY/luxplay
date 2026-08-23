@@ -256,6 +256,7 @@ serve(async (req) => {
       amount_paid: perChildAmount || 400,
       currency: (order.total_money?.currency || "GBP").toLowerCase(),
       booking_code: generateBookingCode(),
+      ...(meta.loyaltyUserId ? { user_id: meta.loyaltyUserId } : {}),
     }));
 
     const { data: bookings, error } = await supabase
