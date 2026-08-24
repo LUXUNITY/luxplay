@@ -3,7 +3,7 @@
   "appName": "luxplay",
   "webDir": "dist",
   "server": {
-    "url": "https://luxplay.uk/app",
+    "url": "https://id-preview--5b30e61c-1e86-40d0-a311-02e3c242ebc5.lovable.app/app",
     "cleartext": true
   }
 }
