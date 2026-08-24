@@ -37,8 +37,16 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
         <AuthProvider>
+          <AppShellRedirect />
           <Suspense fallback={null}>
             <Routes>
+              {/* Native app shell — separate look from the website */}
+              <Route path="/app" element={<><RouteHead title="LUXPLAY App" description="Book soft play, buy arcade credits and collect LUXPLAY Rewards stamps." path="/app" noindex /><AppLayout /></>}>
+                <Route index element={<AppHome />} />
+                <Route path="book" element={<AppBook />} />
+                <Route path="rewards" element={<Loyalty />} />
+                <Route path="account" element={<AppAccount />} />
+              </Route>
               <Route path="/" element={<><RouteHead title="LUXPLAY — Family Entertainment Centre in Bournemouth" description="LUXPLAY in Boscombe, Bournemouth: 40+ arcade games, 3-level soft play, baby soft play, prize redemption and Cafè Lux. Book soft play or buy credits online." path="/" /><Index /></>} />
               <Route path="/parties" element={<Parties />} />
               <Route path="/soft-play-bournemouth" element={<SoftPlayBournemouth />} />
