@@ -3,7 +3,7 @@
   "appName": "luxplay",
   "webDir": "dist",
   "server": {
-    "url": "https://luxplay.uk",
+    "url": "https://luxplay.uk/app",
     "cleartext": true
   }
 }
