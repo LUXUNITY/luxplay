@@ -27,7 +27,7 @@ const AppHome = () => {
       .from("loyalty_stamps")
       .select("id", { count: "exact", head: true })
       .eq("user_id", user.id)
-      .is("consumed_by", null)
+      .eq("consumed", false)
       .then(({ count }) => setStamps(count ?? 0));
   }, [user]);
 
