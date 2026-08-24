@@ -22,6 +22,10 @@ const ThingsToDoBournemouth = lazy(() => import("./pages/ThingsToDoBournemouth")
 const ThingsToDoInBournemouth = lazy(() => import("./pages/ThingsToDoInBournemouth"));
 const AuthPage = lazy(() => import("./pages/Auth"));
 const Loyalty = lazy(() => import("./pages/Loyalty"));
+const AppLayout = lazy(() => import("@/components/app/AppLayout"));
+const AppHome = lazy(() => import("./pages/app/AppHome"));
+const AppBook = lazy(() => import("./pages/app/AppBook"));
+const AppAccount = lazy(() => import("./pages/app/AppAccount"));
 
 const queryClient = new QueryClient();
 
