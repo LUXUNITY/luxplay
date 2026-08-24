@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import RouteHead from "@/components/RouteHead";
+import AppShellRedirect from "@/components/app/AppShellRedirect";
 import { AuthProvider } from "@/hooks/useAuth";
 
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -22,6 +23,10 @@ const ThingsToDoBournemouth = lazy(() => import("./pages/ThingsToDoBournemouth")
 const ThingsToDoInBournemouth = lazy(() => import("./pages/ThingsToDoInBournemouth"));
 const AuthPage = lazy(() => import("./pages/Auth"));
 const Loyalty = lazy(() => import("./pages/Loyalty"));
+const AppLayout = lazy(() => import("@/components/app/AppLayout"));
+const AppHome = lazy(() => import("./pages/app/AppHome"));
+const AppBook = lazy(() => import("./pages/app/AppBook"));
+const AppAccount = lazy(() => import("./pages/app/AppAccount"));
 
 const queryClient = new QueryClient();
 
@@ -33,8 +38,16 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
         <AuthProvider>
+          <AppShellRedirect />
           <Suspense fallback={null}>
             <Routes>
+              {/* Native app shell — separate look from the website */}
+              <Route path="/app" element={<><RouteHead title="LUXPLAY App" description="Book soft play, buy arcade credits and collect LUXPLAY Rewards stamps." path="/app" noindex /><AppLayout /></>}>
+                <Route index element={<AppHome />} />
+                <Route path="book" element={<AppBook />} />
+                <Route path="rewards" element={<Loyalty />} />
+                <Route path="account" element={<AppAccount />} />
+              </Route>
               <Route path="/" element={<><RouteHead title="LUXPLAY — Family Entertainment Centre in Bournemouth" description="LUXPLAY in Boscombe, Bournemouth: 40+ arcade games, 3-level soft play, baby soft play, prize redemption and Cafè Lux. Book soft play or buy credits online." path="/" /><Index /></>} />
               <Route path="/parties" element={<Parties />} />
               <Route path="/soft-play-bournemouth" element={<SoftPlayBournemouth />} />
