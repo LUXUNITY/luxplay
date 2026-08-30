@@ -28,7 +28,7 @@ const VenueSection = () => {
           <span className="text-neon-cyan">VENUE.</span>
           <br />
           <span className="text-neon-green">ENDLESS</span>{" "}
-          <span className="animate-fun-bubble inline-block rounded-full px-5 pb-1 text-ink align-middle">
+          <span className="animate-fun-bubble inline-block rounded-full px-6 pb-1 text-[1.15em] leading-none text-ink align-middle">
             FUN!
           </span>
         </motion.h2>

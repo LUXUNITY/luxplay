@@ -145,7 +145,7 @@ const HeroSection = () => {
               <p className="text-[11px] font-bold uppercase tracking-tight text-muted-foreground">
                 Parties from
               </p>
-              <p className="font-display text-xl text-neon-cyan">£19.99pp</p>
+              <p className="font-display text-xl text-neon-cyan">£19.99<span className="text-[11px] align-top">pp</span></p>
             </div>
           </div>
 

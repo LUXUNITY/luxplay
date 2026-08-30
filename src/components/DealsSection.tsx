@@ -147,8 +147,10 @@ const DealsSection = () => {
                 className={`relative cursor-pointer rounded-3xl p-5 md:p-6 ${d.bg} transition-transform duration-150 active:translate-y-1 hover:-translate-y-1 ${isBest ? "md:-mt-3 animate-deal-glow-cyan" : "animate-deal-glow-green"} ${active ? "ring-4 ring-neon-pink" : ""}`}
               >
                 {d.tag && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 animate-fun-bubble text-ink font-display font-extrabold text-xs tracking-tighter px-4 py-1 rounded-full whitespace-nowrap">
-                    ⭐ {d.tag}
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <span className="block animate-fun-bubble text-ink font-display font-extrabold text-xs tracking-tighter px-4 py-1 rounded-full whitespace-nowrap">
+                      ⭐ {d.tag}
+                    </span>
                   </span>
                 )}
 

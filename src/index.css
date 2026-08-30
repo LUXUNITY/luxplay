@@ -428,6 +428,7 @@
   /* Rainbow neon bubble — cycles LUXPLAY brand colours */
   @keyframes fun-bubble {
     0%, 100% {
+      transform: scale(1.06);
       background-color: #FF10F0;
       box-shadow: 0 0 18px rgba(255, 16, 240, 0.75), 0 0 48px rgba(255, 16, 240, 0.45);
     }
@@ -436,6 +437,7 @@
       box-shadow: 0 0 18px rgba(0, 229, 255, 0.75), 0 0 48px rgba(0, 229, 255, 0.45);
     }
     50% {
+      transform: scale(1.14);
       background-color: #39FF14;
       box-shadow: 0 0 18px rgba(57, 255, 20, 0.75), 0 0 48px rgba(57, 255, 20, 0.45);
     }
