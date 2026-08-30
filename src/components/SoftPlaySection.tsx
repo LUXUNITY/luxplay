@@ -330,7 +330,7 @@ const SoftPlaySection = () => {
             <Info className="w-4 h-4 text-foreground/50 shrink-0 mt-0.5" />
             <ul className="font-body text-foreground/70 text-xs space-y-1 list-disc list-inside">
               <li>Height limit 140cm</li>
-              <li>Under 3s: £4 (Baby Soft Play)</li>
+              <li>Under 3s: £4 (separate area)</li>
               <li>Up to 2 adults free per child</li>
               <li>Supervisors must be 13+</li>
             </ul>

@@ -128,7 +128,7 @@ const BabySoftPlaySection = () => {
             UNDER 3'S ONLY
           </span>
           <h2 className="font-display text-4xl tracking-tighter font-extrabold text-foreground mb-2">
-            BABY SOFT PLAY
+            UNDER 3S PLAY
           </h2>
           <p className="font-body text-foreground/60 text-sm">
             Max 15 babies/session
