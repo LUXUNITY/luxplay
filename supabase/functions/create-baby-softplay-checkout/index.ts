@@ -28,6 +28,7 @@ const getUKTDateISO = () => {
 
 const BLOCKED_SLOTS: Record<string, string[]> = {
   "2026-08-15": ["14:00"], // private party
+  "2026-09-05": ["10:00"], // private party
 };
 
 const getValidSessions = (sessionDate: string) => {
