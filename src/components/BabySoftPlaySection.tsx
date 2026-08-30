@@ -115,7 +115,7 @@ const BabySoftPlaySection = () => {
   };
 
   return (
-    <section id="baby-softplay" className="relative overflow-hidden bg-white" ref={ref}>
+    <section id="baby-softplay" className="relative overflow-hidden bg-card" ref={ref}>
       <div className="relative z-10 px-4 py-14 max-w-md mx-auto">
         {/* Header */}
         <motion.div
@@ -145,7 +145,7 @@ const BabySoftPlaySection = () => {
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="mb-8 rounded-3xl bg-neon-cyan text-foreground text-center py-4 px-4"
+          className="mb-8 rounded-3xl bg-neon-cyan text-ink text-center py-4 px-4"
           style={{ boxShadow: "0 8px 0 0 #00A3B8" }}
         >
           <p className="font-display text-xl font-extrabold tracking-tight">2 ADULTS FREE</p>
@@ -158,7 +158,7 @@ const BabySoftPlaySection = () => {
         {/* Step 2: Time */}
         <div className="mb-6">
           <p className="font-display text-xs tracking-widest text-foreground/50 mb-3 flex items-center gap-2">
-            <span className="w-6 h-6 rounded-full bg-neon-cyan text-foreground flex items-center justify-center text-[11px] font-extrabold">2</span>
+            <span className="w-6 h-6 rounded-full bg-neon-cyan text-ink flex items-center justify-center text-[11px] font-extrabold">2</span>
             PICK A TIME
           </p>
 
@@ -193,7 +193,7 @@ const BabySoftPlaySection = () => {
                       ? "none"
                       : isSelected
                       ? "0 6px 0 0 #B80AAA"
-                      : "0 6px 0 0 #D9D9DE",
+                      : "0 6px 0 0 #241C3D",
                   }}
                 >
                   <p className="font-display text-base font-extrabold tracking-tight mb-0.5">
@@ -228,10 +228,10 @@ const BabySoftPlaySection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="rounded-3xl bg-muted p-5"
-            style={{ boxShadow: "0 8px 0 0 #D9D9DE" }}
+            style={{ boxShadow: "0 8px 0 0 #241C3D" }}
           >
             <p className="font-display text-xs tracking-widest text-foreground/50 mb-4 flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-neon-cyan text-foreground flex items-center justify-center text-[11px] font-extrabold">3</span>
+              <span className="w-6 h-6 rounded-full bg-neon-cyan text-ink flex items-center justify-center text-[11px] font-extrabold">3</span>
               NUMBERS & DETAILS
             </p>
 
@@ -240,7 +240,7 @@ const BabySoftPlaySection = () => {
                 <label className="font-display text-[11px] tracking-widest text-foreground/50 mb-2 block">
                   BABIES
                 </label>
-                <div className="flex items-center justify-between bg-white rounded-2xl px-2 py-2">
+                <div className="flex items-center justify-between bg-card rounded-2xl px-2 py-2">
                   <button
                     type="button"
                     onClick={decBaby}
@@ -277,7 +277,7 @@ const BabySoftPlaySection = () => {
                   value={parentName}
                   onChange={(e) => setParentName(e.target.value)}
                   placeholder="e.g. Sarah Johnson"
-                  className="w-full bg-white rounded-2xl text-foreground font-body text-sm px-4 py-3 placeholder:text-foreground/30 focus:outline-none focus:ring-2 focus:ring-neon-pink"
+                  className="w-full bg-card rounded-2xl text-foreground font-body text-sm px-4 py-3 placeholder:text-foreground/30 focus:outline-none focus:ring-2 focus:ring-neon-pink"
                 />
               </div>
               <div>
@@ -289,12 +289,12 @@ const BabySoftPlaySection = () => {
                   value={parentPhone}
                   onChange={(e) => setParentPhone(e.target.value)}
                   placeholder="e.g. 07700 900000"
-                  className="w-full bg-white rounded-2xl text-foreground font-body text-sm px-4 py-3 placeholder:text-foreground/30 focus:outline-none focus:ring-2 focus:ring-neon-pink"
+                  className="w-full bg-card rounded-2xl text-foreground font-body text-sm px-4 py-3 placeholder:text-foreground/30 focus:outline-none focus:ring-2 focus:ring-neon-pink"
                 />
               </div>
             </div>
 
-            <div className="rounded-2xl bg-white px-4 py-3 mb-2 flex items-center justify-between">
+            <div className="rounded-2xl bg-card px-4 py-3 mb-2 flex items-center justify-between">
               <span className="font-body text-foreground/60 text-sm">
                 {babyCount} × £{pricePerBaby.toFixed(2)}
               </span>

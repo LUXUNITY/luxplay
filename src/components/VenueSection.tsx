@@ -15,18 +15,18 @@ const venues = [
 
 const VenueSection = () => {
   return (
-    <section className="relative bg-white py-16 md:py-24">
+    <section className="relative bg-background py-16 md:py-24">
       {/* Header */}
       <div className="px-6 max-w-md mx-auto text-center mb-10">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-display text-4xl md:text-5xl font-extrabold tracking-tighter text-foreground"
+          className="font-display text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter text-foreground leading-[0.92]"
         >
           ONE VENUE. ENDLESS FUN.
         </motion.h2>
-        <p className="mt-3 font-body text-xs tracking-wide text-foreground/60">
+        <p className="mt-4 font-body text-base sm:text-lg font-bold tracking-wide text-neon-cyan">
           Sovereign Centre · Boscombe
         </p>
       </div>
@@ -52,7 +52,7 @@ const VenueSection = () => {
               />
             )}
             <span
-              className={`absolute bottom-2 left-2 ${v.bg} text-foreground font-display font-extrabold text-xs tracking-tight px-3 py-1 rounded-full`}
+              className={`absolute bottom-2 left-2 ${v.bg} text-ink font-display font-extrabold text-base sm:text-lg tracking-tight px-4 py-1.5 rounded-full`}
             >
               {v.label}
             </span>

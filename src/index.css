@@ -7,32 +7,32 @@
 @layer base {
   :root {
     /* Bright layout, LUXPLAY neon brand colours */
-    --background: 0 0% 100%;
-    --foreground: 250 15% 10%;
+    --background: 252 30% 5%;
+    --foreground: 0 0% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 250 15% 10%;
+    --card: 252 25% 9%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 250 15% 10%;
+    --popover: 252 25% 9%;
+    --popover-foreground: 0 0% 98%;
 
     --primary: 312 100% 53%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 187 100% 50%;
-    --secondary-foreground: 250 15% 10%;
+    --secondary-foreground: 252 30% 6%;
 
-    --muted: 220 20% 96%;
-    --muted-foreground: 220 10% 42%;
+    --muted: 252 22% 14%;
+    --muted-foreground: 240 10% 68%;
 
     --accent: 111 100% 54%;
-    --accent-foreground: 250 15% 10%;
+    --accent-foreground: 252 30% 6%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 16% 90%;
-    --input: 220 16% 90%;
+    --border: 252 18% 20%;
+    --input: 252 18% 20%;
     --ring: 312 100% 53%;
 
     --radius: 1.5rem;
@@ -62,14 +62,14 @@
 
   body {
     @apply bg-background text-foreground font-body;
-    background-color: #ffffff;
+    background-color: hsl(252 30% 5%);
   }
 }
 
 @layer utilities {
   /* Chunky tap tile — Memphis style drop shadow, presses down on touch */
   .tile-pop {
-    box-shadow: 0 8px 0 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 0 0 rgba(0, 0, 0, 0.5);
     transition: transform 140ms ease, box-shadow 140ms ease;
   }
   .tile-pop:active {
@@ -156,20 +156,20 @@
   }
 
   .glow-green {
-    text-shadow: none;
-    color: #1A1A1A;
+    text-shadow: 0 0 18px rgba(57,255,20,0.6);
+    color: #39FF14;
   }
 
   .glow-pink {
-    text-shadow: none;
+    text-shadow: 0 0 18px rgba(255,16,240,0.6);
   }
 
   .glow-cyan {
-    text-shadow: none;
+    text-shadow: 0 0 18px rgba(0,229,255,0.6);
   }
 
   .glow-purple {
-    text-shadow: none;
+    text-shadow: 0 0 18px rgba(176,38,255,0.6);
   }
 
   /* Bright theme — no dark letter outlines needed on white */
@@ -719,7 +719,7 @@
 
   /* Bright playful page backdrop — soft confetti dots on white */
   .luxplay-pattern-bg {
-    background-color: #ffffff;
+    background-color: hsl(252 30% 5%);
     background-image:
       radial-gradient(circle at 12% 8%, rgba(255, 225, 86, 0.28) 0, transparent 28%),
       radial-gradient(circle at 88% 22%, rgba(0, 194, 255, 0.18) 0, transparent 26%),

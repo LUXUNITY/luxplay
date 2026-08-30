@@ -2,7 +2,7 @@ import { MapPin, Clock } from "lucide-react";
 
 const FooterSection = () => {
   return (
-    <footer className="relative bg-white py-12">
+    <footer className="relative bg-card py-12">
       <div className="px-6 max-w-md mx-auto text-center">
         <h2 className="font-display text-4xl font-extrabold tracking-tighter text-foreground mb-6">
           LUXPLAY
@@ -31,7 +31,7 @@ const FooterSection = () => {
         </div>
 
         {/* Map */}
-        <div className="mt-4 rounded-3xl overflow-hidden" style={{ boxShadow: "0 8px 0 0 #D9D9D9" }}>
+        <div className="mt-4 rounded-3xl overflow-hidden" style={{ boxShadow: "0 8px 0 0 #241C3D" }}>
           <iframe
             title="LuxPlay location map - Unit 7 Sovereign Centre, Boscombe, Bournemouth BH1 4SX"
             src="https://www.google.com/maps?q=Sovereign%20Centre%2C%20Boscombe%2C%20Bournemouth%2C%20BH1%204SX&output=embed"
@@ -45,7 +45,7 @@ const FooterSection = () => {
           href="https://www.google.com/maps/dir/?api=1&destination=Sovereign+Centre,+Boscombe,+Bournemouth,+BH1+4SX"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block mt-4 font-display text-sm font-extrabold tracking-wide text-foreground bg-neon-green rounded-full px-6 py-3"
+          className="inline-block mt-4 font-display text-sm font-extrabold tracking-wide text-ink bg-neon-green rounded-full px-6 py-3"
           style={{ boxShadow: "0 6px 0 0 #24B00C" }}
         >
           GET DIRECTIONS

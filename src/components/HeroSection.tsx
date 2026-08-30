@@ -7,7 +7,7 @@ const tiles = [
     line1: "Book",
     line2: "Soft Play",
     bg: "bg-neon-green",
-    text: "text-foreground",
+    text: "text-ink",
     shadow: "0 8px 0 0 #24B00C",
   },
   {
@@ -16,7 +16,7 @@ const tiles = [
     line1: "Arcade",
     line2: "Credits",
     bg: "bg-neon-cyan",
-    text: "text-foreground",
+    text: "text-ink",
     shadow: "0 8px 0 0 #00A3B8",
   },
   {
@@ -35,7 +35,7 @@ const tiles = [
     line2: "All Deals",
     bg: "bg-muted",
     text: "text-foreground",
-    shadow: "0 8px 0 0 #E2E8F0",
+    shadow: "0 8px 0 0 #241C3D",
   },
 ];
 
@@ -112,7 +112,7 @@ const HeroSection = () => {
             </a>
             <a
               href="#deals"
-              className="flex-shrink-0 w-48 rounded-3xl bg-gradient-to-br from-neon-cyan to-[#7DF9FF] p-4 text-foreground"
+              className="flex-shrink-0 w-48 rounded-3xl bg-gradient-to-br from-neon-cyan to-[#7DF9FF] p-4 text-ink"
             >
               <p className="text-[10px] font-bold uppercase opacity-80">All-In Deal</p>
               <p className="font-display text-2xl">£19.99</p>

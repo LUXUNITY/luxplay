@@ -61,28 +61,28 @@ const BabyDealSection = () => {
           className="relative rounded-3xl bg-neon-pink px-5 py-8 text-center"
           style={{ boxShadow: "0 8px 0 0 #B80AAA" }}
         >
-          <span className="inline-block bg-white text-foreground font-display font-extrabold text-xs tracking-tighter uppercase px-4 py-1.5 rounded-full">
+          <span className="inline-block bg-card text-foreground font-display font-extrabold text-xs tracking-tighter uppercase px-4 py-1.5 rounded-full">
             👶 Under 3s deal
           </span>
 
           <div className="mt-4 flex items-center justify-center gap-2">
-            <span className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-2xl shrink-0">🛝</span>
+            <span className="w-12 h-12 rounded-full bg-card flex items-center justify-center text-2xl shrink-0">🛝</span>
             <span className="font-display font-extrabold text-2xl md:text-3xl tracking-tighter text-white">2hr under 3s soft play</span>
           </div>
 
           <div className="mt-3 flex flex-wrap items-center justify-center gap-3">
-            <span className="flex items-center gap-2 bg-white/80 rounded-full px-3 py-1.5">
+            <span className="flex items-center gap-2 bg-card/80 rounded-full px-3 py-1.5">
               <span className="text-lg">🥤</span>
               <span className="font-display font-bold text-sm text-foreground">Drink</span>
             </span>
-            <span className="flex items-center gap-2 bg-white/80 rounded-full px-3 py-1.5">
+            <span className="flex items-center gap-2 bg-card/80 rounded-full px-3 py-1.5">
               <span className="text-lg">🧊</span>
               <span className="font-display font-bold text-sm text-foreground">Ice pop</span>
             </span>
           </div>
 
           <div className="mt-6 flex justify-center">
-            <div className="rounded-3xl bg-white px-6 py-3" style={{ boxShadow: "0 8px 0 0 #d9d9d9" }}>
+            <div className="rounded-3xl bg-card px-6 py-3" style={{ boxShadow: "0 8px 0 0 #241C3D" }}>
               <span className="block font-display font-bold text-[10px] tracking-tighter text-foreground/60">Only</span>
               <span className="block font-display font-extrabold text-5xl text-foreground leading-none">£5.99</span>
               <span className="block font-body text-[10px] text-foreground/60 mt-0.5">per baby</span>
@@ -90,10 +90,10 @@ const BabyDealSection = () => {
           </div>
 
           <div className="mt-4 flex flex-wrap justify-center gap-2">
-            <span className="inline-flex items-center gap-1 bg-neon-green text-foreground font-display font-bold text-xs tracking-tighter px-3 py-1.5 rounded-full">
+            <span className="inline-flex items-center gap-1 bg-neon-green text-ink font-display font-bold text-xs tracking-tighter px-3 py-1.5 rounded-full">
               👨‍👩‍👧 Adults go free
             </span>
-            <span className="inline-flex items-center gap-1 bg-neon-cyan text-foreground font-display font-bold text-xs tracking-tighter px-3 py-1.5 rounded-full">
+            <span className="inline-flex items-center gap-1 bg-neon-cyan text-ink font-display font-bold text-xs tracking-tighter px-3 py-1.5 rounded-full">
               ❄️ Air conditioned
             </span>
           </div>
@@ -101,7 +101,7 @@ const BabyDealSection = () => {
           {!open && (
             <button
               onClick={() => setOpen(true)}
-              className="mt-6 w-full min-h-[56px] rounded-2xl font-display font-extrabold text-base tracking-tighter bg-foreground text-white active:translate-y-1 transition-transform"
+              className="mt-6 w-full min-h-[56px] rounded-2xl font-display font-extrabold text-base tracking-tighter bg-ink text-white active:translate-y-1 transition-transform"
               style={{ boxShadow: "0 8px 0 0 #000000" }}
             >
               👶 Grab under 3s deal — £5.99
@@ -126,24 +126,24 @@ const BabyDealSection = () => {
                     key={session.time}
                     disabled={isFull}
                     onClick={() => setSelectedSession(session.time)}
-                    className={`relative rounded-2xl p-3 min-h-[56px] ${isFull ? "bg-white opacity-40" : selected ? "bg-neon-pink" : "bg-white hover:bg-neon-pink/20"}`}
+                    className={`relative rounded-2xl p-3 min-h-[56px] ${isFull ? "bg-card opacity-40" : selected ? "bg-neon-pink" : "bg-card hover:bg-neon-pink/20"}`}
                   >
                     <p className={`font-display font-bold text-base ${selected ? "text-white" : "text-foreground"}`}>{session.label}</p>
                     <span className={`font-body text-[10px] ${selected ? "text-white/80" : "text-foreground/50"}`}><Users className="inline w-3 h-3 mr-1" />{isFull ? "Full" : `${spotsLeft} left`}</span>
-                    {selected && <span className="absolute -top-2 -right-2 w-5 h-5 bg-foreground rounded-full flex items-center justify-center"><Check className="w-3 h-3 text-white" /></span>}
+                    {selected && <span className="absolute -top-2 -right-2 w-5 h-5 bg-ink rounded-full flex items-center justify-center"><Check className="w-3 h-3 text-white" /></span>}
                   </button>
                 );
               })}
             </div>
 
             {selectedSession && (
-              <div className="mt-6 rounded-3xl bg-white p-5 space-y-4">
+              <div className="mt-6 rounded-3xl bg-card p-5 space-y-4">
                 <div>
                   <label className="font-display font-bold text-xs text-foreground/60 block mb-2">Number of babies *</label>
                   <div className="flex items-center justify-between rounded-2xl bg-muted p-2">
-                    <button aria-label="Decrease babies" onClick={() => setBabyCount((count) => Math.max(1, count - 1))} className="w-12 h-12 flex items-center justify-center rounded-full active:bg-white text-foreground"><Minus /></button>
+                    <button aria-label="Decrease babies" onClick={() => setBabyCount((count) => Math.max(1, count - 1))} className="w-12 h-12 flex items-center justify-center rounded-full active:bg-card text-foreground"><Minus /></button>
                     <span className="font-display font-extrabold text-3xl text-foreground">{babyCount}</span>
-                    <button aria-label="Increase babies" onClick={() => setBabyCount((count) => Math.min(MAX_BABIES, count + 1))} className="w-12 h-12 flex items-center justify-center rounded-full active:bg-white text-foreground"><Plus /></button>
+                    <button aria-label="Increase babies" onClick={() => setBabyCount((count) => Math.min(MAX_BABIES, count + 1))} className="w-12 h-12 flex items-center justify-center rounded-full active:bg-card text-foreground"><Plus /></button>
                   </div>
                 </div>
                 <input value={parentName} onChange={(event) => setParentName(event.target.value)} placeholder="Parent / guardian name *" className="w-full bg-muted rounded-2xl text-foreground px-4 py-3 placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-neon-pink" />

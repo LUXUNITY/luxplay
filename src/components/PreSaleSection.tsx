@@ -48,7 +48,7 @@ const PreSaleSection = () => {
   };
 
   return (
-    <section id="presale" className="relative bg-white">
+    <section id="presale" className="relative bg-card">
       <div className="relative z-10 px-4 py-16 md:py-20 max-w-md mx-auto">
         {/* Logo */}
         <motion.div
@@ -73,7 +73,7 @@ const PreSaleSection = () => {
           className="text-center mb-8"
         >
           <span
-            className="inline-block bg-neon-cyan text-foreground font-display font-extrabold text-xs uppercase px-5 py-2.5 rounded-full"
+            className="inline-block bg-neon-cyan text-ink font-display font-extrabold text-xs uppercase px-5 py-2.5 rounded-full"
             style={{ boxShadow: "0 6px 0 0 #00A3B8" }}
           >
             🎮 Buy online, play instantly
@@ -104,26 +104,26 @@ const PreSaleSection = () => {
                 }}
               >
                 {isBest && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-foreground text-white font-display font-extrabold text-[10px] tracking-wide px-4 py-1 rounded-full whitespace-nowrap">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-ink text-white font-display font-extrabold text-[10px] tracking-wide px-4 py-1 rounded-full whitespace-nowrap">
                     ⭐ BEST VALUE
                   </span>
                 )}
 
                 <div className="flex flex-col">
                   <span
-                    className={`font-display font-extrabold tracking-tighter text-foreground leading-none ${
+                    className={`font-display font-extrabold tracking-tighter text-ink leading-none ${
                       isBest ? "text-4xl" : "text-2xl"
                     }`}
                   >
                     {t.credits.toLocaleString()}
                   </span>
-                  <span className="font-body text-foreground/70 text-[11px] uppercase tracking-wide">
+                  <span className="font-body text-ink/70 text-[11px] uppercase tracking-wide">
                     credits
                   </span>
                 </div>
 
                 <span
-                  className={`font-display font-extrabold text-foreground ${
+                  className={`font-display font-extrabold text-ink ${
                     isBest ? "text-4xl" : "text-2xl"
                   }`}
                 >
@@ -133,7 +133,7 @@ const PreSaleSection = () => {
                 <button
                   onClick={() => handleBuy(t.id)}
                   disabled={loading === t.id}
-                  className={`rounded-full bg-foreground text-white font-display font-extrabold tracking-wide active:translate-y-1 transition-transform disabled:opacity-50 whitespace-nowrap ${
+                  className={`rounded-full bg-ink text-white font-display font-extrabold tracking-wide active:translate-y-1 transition-transform disabled:opacity-50 whitespace-nowrap ${
                     isBest ? "text-sm px-6 py-3" : "text-xs px-4 py-2.5"
                   }`}
                 >

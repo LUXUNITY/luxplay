@@ -54,7 +54,7 @@ const accentMap = {
 
 const PartiesSection = () => {
   return (
-    <section id="parties" className="relative bg-white">
+    <section id="parties" className="relative bg-card">
       <div className="relative z-10 px-4 py-16 md:py-20 max-w-md mx-auto">
         {/* Header */}
         <motion.div
@@ -63,7 +63,7 @@ const PartiesSection = () => {
           viewport={{ once: true }}
           className="text-center mb-2"
         >
-          <span className="inline-block bg-neon-pink text-foreground font-display font-extrabold text-xs uppercase px-5 py-2 rounded-full">
+          <span className="inline-block bg-neon-pink text-ink font-display font-extrabold text-xs uppercase px-5 py-2 rounded-full">
             🎉 Birthday Parties
           </span>
         </motion.div>
@@ -92,13 +92,13 @@ const PartiesSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className={`relative rounded-3xl bg-white border-2 border-foreground/10 p-6 flex flex-col ${
+                className={`relative rounded-3xl bg-card border-2 border-foreground/10 p-6 flex flex-col ${
                   t.highlight ? "scale-[1.03]" : ""
                 }`}
                 style={{ boxShadow: `0 8px 0 0 ${a.shadow}` }}
               >
                 {t.highlight && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-foreground text-white font-display font-extrabold text-[10px] tracking-wide px-4 py-1 rounded-full whitespace-nowrap">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-ink text-white font-display font-extrabold text-[10px] tracking-wide px-4 py-1 rounded-full whitespace-nowrap">
                     ⭐ MOST POPULAR
                   </span>
                 )}
@@ -137,7 +137,7 @@ const PartiesSection = () => {
                   )}&body=${encodeURIComponent(
                     `Hi LuxPlay,\n\nI'd like to enquire about the ${t.name} party package (£${t.price.toFixed(2)} per child).\n\nPreferred date:\nNumber of children:\nChild's name & age:\nContact number:\n\nThanks!`
                   )}`}
-                  className={`block text-center rounded-full font-display font-extrabold text-sm tracking-wide py-3.5 ${a.bg} text-foreground active:translate-y-1 transition-transform`}
+                  className={`block text-center rounded-full font-display font-extrabold text-sm tracking-wide py-3.5 ${a.bg} text-ink active:translate-y-1 transition-transform`}
                 >
                   ENQUIRE NOW
                 </a>
@@ -154,7 +154,7 @@ const PartiesSection = () => {
           className="mt-8 rounded-3xl bg-neon-green px-5 py-5 text-center"
           style={{ boxShadow: "0 8px 0 0 #24B00C" }}
         >
-          <p className="font-body text-foreground text-sm">
+          <p className="font-body text-ink text-sm font-bold">
             🍟 Hot meal included in every package
           </p>
         </motion.div>
