@@ -197,7 +197,8 @@ const SoftPlaySection = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
             {SESSIONS.map((s, i) => {
-              const forcedFull = isSlotForcedFull(selectedDate, s.time) || isSoftPlaySlotBlocked(selectedDate, s.time);
+              const partyBooked = isSoftPlaySlotBlocked(selectedDate, s.time);
+              const forcedFull = isSlotForcedFull(selectedDate, s.time) || partyBooked;
               const booked = forcedFull ? MAX_CAPACITY : (bookedCounts[s.time] || 0);
               const spotsLeft = MAX_CAPACITY - booked;
               const isFull = spotsLeft <= 0;
