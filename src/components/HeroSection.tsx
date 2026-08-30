@@ -75,7 +75,7 @@ const HeroSection = () => {
             className="relative mx-auto mb-4 h-20 w-20 rounded-full object-contain"
             loading="eager"
           />
-          <h1 className="relative font-display text-5xl sm:text-6xl tracking-tighter mb-2">
+          <h1 className="relative font-logo text-5xl sm:text-6xl tracking-tighter mb-2">
             {LOGO_LETTERS.map((l, i) => (
               <span key={i} className={l.cls}>
                 {l.char}

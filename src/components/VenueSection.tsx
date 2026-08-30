@@ -32,7 +32,7 @@ const VenueSection = () => {
       </div>
 
       {/* Grid */}
-      <div className="px-6 max-w-md mx-auto grid grid-cols-2 gap-4">
+      <div className="px-6 max-w-md mx-auto flex flex-col gap-6">
         {venues.map((v, i) => (
           <motion.div
             key={v.altLabel}
@@ -40,7 +40,7 @@ const VenueSection = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: i * 0.08 }}
-            className="relative aspect-square overflow-hidden rounded-3xl"
+            className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl"
             style={{ boxShadow: `0 8px 0 0 ${v.shadow}` }}
           >
             {v.img && (
@@ -52,7 +52,7 @@ const VenueSection = () => {
               />
             )}
             <span
-              className={`absolute bottom-2 left-2 ${v.bg} text-ink font-display font-extrabold text-base sm:text-lg tracking-tight px-4 py-1.5 rounded-full`}
+              className={`absolute bottom-3 left-3 ${v.bg} text-ink font-display text-2xl sm:text-3xl tracking-tight px-5 py-1.5 rounded-full`}
             >
               {v.label}
             </span>
