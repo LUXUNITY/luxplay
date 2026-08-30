@@ -152,7 +152,7 @@ const BabyDealSection = () => {
                 <button
                   onClick={handleBook}
                   disabled={loading}
-                  className="w-full min-h-[56px] py-4 rounded-2xl bg-neon-pink text-white font-display font-extrabold tracking-tighter flex justify-center items-center gap-2 disabled:opacity-50 active:translate-y-1 transition-transform"
+                  className="w-full min-h-[56px] py-4 rounded-2xl bg-neon-pink text-ink font-display font-extrabold tracking-tighter flex justify-center items-center gap-2 disabled:opacity-50 active:translate-y-1 transition-transform"
                   style={{ boxShadow: "0 8px 0 0 #B80AAA" }}
                 >
                   {loading ? <Loader2 className="animate-spin" /> : `Pay £${(babyCount * DEAL_PRICE).toFixed(2)} & book`}

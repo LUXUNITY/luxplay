@@ -13,7 +13,7 @@ const DateStrip = ({ selectedDate, onSelect, accent }: Props) => {
   return (
     <div className="mb-6">
       <p className="font-display text-xs tracking-widest text-foreground/50 mb-3 flex items-center gap-2">
-        <span className="w-6 h-6 rounded-full bg-neon-pink text-white flex items-center justify-center text-[11px] font-extrabold">1</span>
+        <span className="w-6 h-6 rounded-full bg-neon-pink text-ink flex items-center justify-center text-[11px] font-extrabold">1</span>
         PICK A DATE
       </p>
       <div className="overflow-x-auto -mx-1 px-1 pb-2 scrollbar-hide">
@@ -27,7 +27,7 @@ const DateStrip = ({ selectedDate, onSelect, accent }: Props) => {
                 onClick={() => onSelect(iso)}
                 className={`relative shrink-0 w-[64px] h-[76px] rounded-2xl flex flex-col items-center justify-center transition-transform active:translate-y-1 ${
                   isSelected
-                    ? "bg-neon-pink text-white"
+                    ? "bg-neon-pink text-ink"
                     : "bg-muted text-foreground"
                 }`}
                 style={{
