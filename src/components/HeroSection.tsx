@@ -134,10 +134,13 @@ const HeroSection = () => {
               </p>
               <p className="font-display text-xl text-neon-pink">£4.00</p>
             </div>
-            <div className="text-center">
-              <p className="font-display text-xl text-neon-green leading-none">ADULTS</p>
-              <p className="font-display text-xl text-neon-green leading-none">FREE</p>
+            <div className="flex justify-center">
+              <div className="animate-[pulse_1.2s_cubic-bezier(0.4,0,0.6,1)_infinite] rounded-full bg-neon-green px-4 py-3 text-center text-ink shadow-[0_0_24px_6px_rgba(57,255,20,0.5)]">
+                <p className="font-display text-2xl leading-none">ADULTS</p>
+                <p className="font-display text-2xl leading-none">FREE</p>
+              </div>
             </div>
+
             <div className="text-right">
               <p className="text-[11px] font-bold uppercase tracking-tight text-muted-foreground">
                 Parties from
