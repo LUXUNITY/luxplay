@@ -142,7 +142,7 @@ const SoftPlaySection = () => {
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="mb-8 rounded-3xl bg-neon-pink text-white text-center py-4 px-4"
+          className="mb-8 rounded-3xl bg-neon-pink text-ink text-center py-4 px-4"
           style={{ boxShadow: "0 8px 0 0 #B80AAA" }}
         >
           <p className="font-display text-xl font-extrabold tracking-tight">ADULTS GO FREE!</p>
@@ -155,7 +155,7 @@ const SoftPlaySection = () => {
         {/* Step 2: Time */}
         <div className="mb-6">
           <p className="font-display text-xs tracking-widest text-foreground/50 mb-3 flex items-center gap-2">
-            <span className="w-6 h-6 rounded-full bg-neon-pink text-white flex items-center justify-center text-[11px] font-extrabold">2</span>
+            <span className="w-6 h-6 rounded-full bg-neon-pink text-ink flex items-center justify-center text-[11px] font-extrabold">2</span>
             PICK A TIME
           </p>
 
@@ -182,7 +182,7 @@ const SoftPlaySection = () => {
                     isFull
                       ? "bg-muted opacity-40 cursor-not-allowed"
                       : isSelected
-                      ? "bg-neon-pink text-white"
+                      ? "bg-neon-pink text-ink"
                       : "bg-muted text-foreground"
                   }`}
                   style={{
@@ -228,7 +228,7 @@ const SoftPlaySection = () => {
             style={{ boxShadow: "0 8px 0 0 #241C3D" }}
           >
             <p className="font-display text-xs tracking-widest text-foreground/50 mb-4 flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-neon-pink text-white flex items-center justify-center text-[11px] font-extrabold">3</span>
+              <span className="w-6 h-6 rounded-full bg-neon-pink text-ink flex items-center justify-center text-[11px] font-extrabold">3</span>
               NUMBERS & DETAILS
             </p>
 

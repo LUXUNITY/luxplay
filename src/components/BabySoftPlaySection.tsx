@@ -185,7 +185,7 @@ const BabySoftPlaySection = () => {
                     isFull
                       ? "bg-muted opacity-40 cursor-not-allowed"
                       : isSelected
-                      ? "bg-neon-pink text-white"
+                      ? "bg-neon-pink text-ink"
                       : "bg-muted text-foreground"
                   }`}
                   style={{
@@ -309,7 +309,7 @@ const BabySoftPlaySection = () => {
             <button
               onClick={handleBook}
               disabled={loading}
-              className="w-full rounded-2xl font-display text-base font-extrabold tracking-tight py-4 bg-neon-pink text-white active:translate-y-1 transition-transform disabled:opacity-50 flex items-center justify-center gap-2"
+              className="w-full rounded-2xl font-display text-base font-extrabold tracking-tight py-4 bg-neon-pink text-ink active:translate-y-1 transition-transform disabled:opacity-50 flex items-center justify-center gap-2"
               style={{ boxShadow: "0 8px 0 0 #B80AAA" }}
             >
               {loading ? (

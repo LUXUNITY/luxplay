@@ -67,7 +67,7 @@ const BabyDealSection = () => {
 
           <div className="mt-4 flex items-center justify-center gap-2">
             <span className="w-12 h-12 rounded-full bg-card flex items-center justify-center text-2xl shrink-0">🛝</span>
-            <span className="font-display font-extrabold text-2xl md:text-3xl tracking-tighter text-white">2hr under 3s soft play</span>
+            <span className="font-display font-extrabold text-2xl md:text-3xl tracking-tighter text-ink">2hr under 3s soft play</span>
           </div>
 
           <div className="mt-3 flex flex-wrap items-center justify-center gap-3">
@@ -128,8 +128,8 @@ const BabyDealSection = () => {
                     onClick={() => setSelectedSession(session.time)}
                     className={`relative rounded-2xl p-3 min-h-[56px] ${isFull ? "bg-card opacity-40" : selected ? "bg-neon-pink" : "bg-card hover:bg-neon-pink/20"}`}
                   >
-                    <p className={`font-display font-bold text-base ${selected ? "text-white" : "text-foreground"}`}>{session.label}</p>
-                    <span className={`font-body text-[10px] ${selected ? "text-white/80" : "text-foreground/50"}`}><Users className="inline w-3 h-3 mr-1" />{isFull ? "Full" : `${spotsLeft} left`}</span>
+                    <p className={`font-display font-bold text-base ${selected ? "text-ink" : "text-foreground"}`}>{session.label}</p>
+                    <span className={`font-body text-[10px] ${selected ? "text-ink/70" : "text-foreground/50"}`}><Users className="inline w-3 h-3 mr-1" />{isFull ? "Full" : `${spotsLeft} left`}</span>
                     {selected && <span className="absolute -top-2 -right-2 w-5 h-5 bg-ink rounded-full flex items-center justify-center"><Check className="w-3 h-3 text-white" /></span>}
                   </button>
                 );
@@ -152,7 +152,7 @@ const BabyDealSection = () => {
                 <button
                   onClick={handleBook}
                   disabled={loading}
-                  className="w-full min-h-[56px] py-4 rounded-2xl bg-neon-pink text-white font-display font-extrabold tracking-tighter flex justify-center items-center gap-2 disabled:opacity-50 active:translate-y-1 transition-transform"
+                  className="w-full min-h-[56px] py-4 rounded-2xl bg-neon-pink text-ink font-display font-extrabold tracking-tighter flex justify-center items-center gap-2 disabled:opacity-50 active:translate-y-1 transition-transform"
                   style={{ boxShadow: "0 8px 0 0 #B80AAA" }}
                 >
                   {loading ? <Loader2 className="animate-spin" /> : `Pay £${(babyCount * DEAL_PRICE).toFixed(2)} & book`}

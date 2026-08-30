@@ -119,7 +119,7 @@ const DealsSection = () => {
     <section id="deals" className="relative bg-background py-12 md:py-20 px-4">
       <div className="max-w-md md:max-w-3xl mx-auto">
         <div className="flex justify-center mb-4">
-          <span className="bg-neon-pink text-white font-display font-extrabold text-sm tracking-tighter uppercase px-5 py-2 rounded-full">
+          <span className="bg-neon-pink text-ink font-display font-extrabold text-sm tracking-tighter uppercase px-5 py-2 rounded-full">
             🎉 Deals
           </span>
         </div>
