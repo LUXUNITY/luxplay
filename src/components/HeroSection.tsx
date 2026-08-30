@@ -153,25 +153,6 @@ const HeroSection = () => {
           </div>
 
 
-          {/* Deals strip */}
-          <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
-            <a
-              href="#deals"
-              className="flex-shrink-0 w-48 rounded-2xl bg-neon-pink p-4 text-ink"
-            >
-              <p className="text-[10px] font-extrabold uppercase opacity-70">Play Deal</p>
-              <p className="font-display text-2xl">£14.99</p>
-              <p className="mt-1 text-[11px] font-semibold leading-tight">Soft play + drink + treat</p>
-            </a>
-            <a
-              href="#deals"
-              className="flex-shrink-0 w-48 rounded-2xl bg-neon-cyan p-4 text-ink"
-            >
-              <p className="text-[10px] font-extrabold uppercase opacity-70">All-In Deal</p>
-              <p className="font-display text-2xl">£19.99</p>
-              <p className="mt-1 text-[11px] font-semibold leading-tight">Plus 60 credits + food</p>
-            </a>
-          </div>
         </div>
       </div>
     </section>
