@@ -169,15 +169,6 @@ const HeroSection = () => {
               <p className="mt-1 text-[11px] font-semibold leading-tight">Plus 60 credits + food</p>
             </a>
           </div>
-
-          <a
-            href="/loyalty"
-            className="block w-full rounded-2xl border-2 border-neon-green py-4 text-center"
-          >
-            <span className="text-sm font-bold">
-              Every 7th soft play <span className="text-neon-pink">FREE</span> with LUXPLAY Rewards
-            </span>
-          </a>
         </div>
       </div>
     </section>
