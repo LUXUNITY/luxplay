@@ -14,8 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['Syne', 'sans-serif'],
-        body: ['"Plus Jakarta Sans"', 'sans-serif'],
+        display: ['"Bebas Neue"', 'Montserrat', 'sans-serif'],
+        body: ['Montserrat', 'sans-serif'],
+        logo: ['Syne', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
