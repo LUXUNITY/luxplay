@@ -33,7 +33,7 @@ const DateStrip = ({ selectedDate, onSelect, accent }: Props) => {
                 style={{
                   boxShadow: isSelected
                     ? "0 6px 0 0 #B80AAA"
-                    : "0 6px 0 0 #D9D9DE",
+                    : "0 6px 0 0 #241C3D",
                 }}
               >
                 <span className="font-display text-[10px] tracking-widest mb-0.5 opacity-70">

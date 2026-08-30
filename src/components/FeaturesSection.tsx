@@ -54,7 +54,7 @@ const FeaturesSection = () => {
             <div key={f.name} className="flex flex-col items-center text-center">
               <div
                 className="w-full aspect-square overflow-hidden rounded-3xl mb-3"
-                style={{ boxShadow: "0 8px 0 0 #D9D9D9" }}
+                style={{ boxShadow: "0 8px 0 0 #241C3D" }}
               >
                 <img
                   src={f.img}
@@ -73,7 +73,7 @@ const FeaturesSection = () => {
         </div>
 
         {/* Shared co-owners */}
-        <div className="bg-card rounded-3xl p-5" style={{ boxShadow: "0 8px 0 0 #D9D9D9" }}>
+        <div className="bg-card rounded-3xl p-5" style={{ boxShadow: "0 8px 0 0 #241C3D" }}>
           <p className="font-display text-xs font-extrabold tracking-wide text-foreground/50 text-center mb-4">
             CO-OWNERS OF
           </p>

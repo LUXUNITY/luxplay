@@ -82,7 +82,7 @@ const BabyDealSection = () => {
           </div>
 
           <div className="mt-6 flex justify-center">
-            <div className="rounded-3xl bg-card px-6 py-3" style={{ boxShadow: "0 8px 0 0 #d9d9d9" }}>
+            <div className="rounded-3xl bg-card px-6 py-3" style={{ boxShadow: "0 8px 0 0 #241C3D" }}>
               <span className="block font-display font-bold text-[10px] tracking-tighter text-foreground/60">Only</span>
               <span className="block font-display font-extrabold text-5xl text-foreground leading-none">£5.99</span>
               <span className="block font-body text-[10px] text-foreground/60 mt-0.5">per baby</span>

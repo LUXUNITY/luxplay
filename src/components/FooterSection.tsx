@@ -31,7 +31,7 @@ const FooterSection = () => {
         </div>
 
         {/* Map */}
-        <div className="mt-4 rounded-3xl overflow-hidden" style={{ boxShadow: "0 8px 0 0 #D9D9D9" }}>
+        <div className="mt-4 rounded-3xl overflow-hidden" style={{ boxShadow: "0 8px 0 0 #241C3D" }}>
           <iframe
             title="LuxPlay location map - Unit 7 Sovereign Centre, Boscombe, Bournemouth BH1 4SX"
             src="https://www.google.com/maps?q=Sovereign%20Centre%2C%20Boscombe%2C%20Bournemouth%2C%20BH1%204SX&output=embed"

@@ -111,19 +111,19 @@ const PreSaleSection = () => {
 
                 <div className="flex flex-col">
                   <span
-                    className={`font-display font-extrabold tracking-tighter text-foreground leading-none ${
+                    className={`font-display font-extrabold tracking-tighter text-ink leading-none ${
                       isBest ? "text-4xl" : "text-2xl"
                     }`}
                   >
                     {t.credits.toLocaleString()}
                   </span>
-                  <span className="font-body text-foreground/70 text-[11px] uppercase tracking-wide">
+                  <span className="font-body text-ink/70 text-[11px] uppercase tracking-wide">
                     credits
                   </span>
                 </div>
 
                 <span
-                  className={`font-display font-extrabold text-foreground ${
+                  className={`font-display font-extrabold text-ink ${
                     isBest ? "text-4xl" : "text-2xl"
                   }`}
                 >
