@@ -25,15 +25,7 @@ const Index = () => {
 
       {/* Mid-page sections — LuxPlay card starfield background */}
       <div className="relative luxplay-pattern-bg">
-        {/* 2. Deals — Play Deal & All-In Deal, straight after the hero */}
-        <Suspense fallback={null}>
-          <DealsSection />
-        </Suspense>
-        {/* Under-3s deal — after the main upsell deals */}
-        <Suspense fallback={null}>
-          <BabyDealSection />
-        </Suspense>
-        {/* 3. Venue visuals — zones so visitors see what they're buying */}
+        {/* 2. Venue visuals — zones so visitors see what they're buying */}
         <div className="defer-section">
           <Suspense fallback={null}>
             <ScrollReveal>
@@ -41,6 +33,14 @@ const Index = () => {
             </ScrollReveal>
           </Suspense>
         </div>
+        {/* 3. Deals — Play Deal & All-In Deal, right under the venue zones */}
+        <Suspense fallback={null}>
+          <DealsSection />
+        </Suspense>
+        {/* Under-3s deal — after the main upsell deals */}
+        <Suspense fallback={null}>
+          <BabyDealSection />
+        </Suspense>
         {/* 4. Credits — money section after zones explain the value */}
         <div className="defer-section">
           <Suspense fallback={null}>
