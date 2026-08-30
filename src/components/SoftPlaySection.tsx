@@ -131,7 +131,7 @@ const SoftPlaySection = () => {
             Max 40 kids/session · Adults go free
           </p>
           <div className="mt-3 inline-block rounded-2xl bg-neon-green px-6 py-2" style={{ boxShadow: "0 6px 0 0 #24B00C" }}>
-            <span className="font-display text-3xl font-extrabold text-foreground">
+            <span className="font-display text-3xl font-extrabold text-ink">
               £{getSoftPlayFullPrice(selectedDate).toFixed(2)}
             </span>
           </div>
