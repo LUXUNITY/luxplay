@@ -16,7 +16,7 @@ const tiles = [
     line1: "Arcade",
     line2: "Credits",
     bg: "bg-neon-cyan",
-    text: "text-white",
+    text: "text-foreground",
     shadow: "0 8px 0 0 #00A3B8",
   },
   {
