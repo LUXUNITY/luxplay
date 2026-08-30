@@ -115,7 +115,7 @@ const SoftPlaySection = () => {
   };
 
   return (
-    <section id="softplay" className="relative overflow-hidden bg-white" ref={ref}>
+    <section id="softplay" className="relative overflow-hidden bg-card" ref={ref}>
       <div className="relative z-10 px-4 py-14 max-w-md mx-auto">
         {/* Header */}
         <motion.div
@@ -238,7 +238,7 @@ const SoftPlaySection = () => {
                 <label className="font-display text-[11px] tracking-widest text-foreground/50 mb-2 block">
                   CHILDREN
                 </label>
-                <div className="flex items-center justify-between bg-white rounded-2xl px-2 py-2">
+                <div className="flex items-center justify-between bg-card rounded-2xl px-2 py-2">
                   <button
                     type="button"
                     onClick={decChild}
@@ -275,7 +275,7 @@ const SoftPlaySection = () => {
                   value={parentName}
                   onChange={(e) => setParentName(e.target.value)}
                   placeholder="e.g. Sarah Johnson"
-                  className="w-full bg-white rounded-2xl text-foreground font-body text-sm px-4 py-3 placeholder:text-foreground/30 focus:outline-none focus:ring-2 focus:ring-neon-cyan"
+                  className="w-full bg-card rounded-2xl text-foreground font-body text-sm px-4 py-3 placeholder:text-foreground/30 focus:outline-none focus:ring-2 focus:ring-neon-cyan"
                 />
               </div>
               <div>
@@ -287,12 +287,12 @@ const SoftPlaySection = () => {
                   value={parentPhone}
                   onChange={(e) => setParentPhone(e.target.value)}
                   placeholder="e.g. 07700 900000"
-                  className="w-full bg-white rounded-2xl text-foreground font-body text-sm px-4 py-3 placeholder:text-foreground/30 focus:outline-none focus:ring-2 focus:ring-neon-cyan"
+                  className="w-full bg-card rounded-2xl text-foreground font-body text-sm px-4 py-3 placeholder:text-foreground/30 focus:outline-none focus:ring-2 focus:ring-neon-cyan"
                 />
               </div>
             </div>
 
-            <div className="rounded-2xl bg-white px-4 py-3 mb-5 flex items-center justify-between">
+            <div className="rounded-2xl bg-card px-4 py-3 mb-5 flex items-center justify-between">
               <span className="font-body text-foreground/60 text-sm">
                 {childCount} × £{pricePerChild.toFixed(2)}
               </span>
@@ -304,7 +304,7 @@ const SoftPlaySection = () => {
             <button
               onClick={handleBook}
               disabled={loading}
-              className="w-full rounded-2xl font-display text-base font-extrabold tracking-tight py-4 bg-neon-green text-foreground active:translate-y-1 transition-transform disabled:opacity-50 flex items-center justify-center gap-2"
+              className="w-full rounded-2xl font-display text-base font-extrabold tracking-tight py-4 bg-neon-green text-ink active:translate-y-1 transition-transform disabled:opacity-50 flex items-center justify-center gap-2"
               style={{ boxShadow: "0 8px 0 0 #24B00C" }}
             >
               {loading ? (

@@ -15,7 +15,7 @@ const venues = [
 
 const VenueSection = () => {
   return (
-    <section className="relative bg-white py-16 md:py-24">
+    <section className="relative bg-card py-16 md:py-24">
       {/* Header */}
       <div className="px-6 max-w-md mx-auto text-center mb-10">
         <motion.h2

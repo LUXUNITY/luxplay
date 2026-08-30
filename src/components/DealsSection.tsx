@@ -116,7 +116,7 @@ const DealsSection = () => {
   };
 
   return (
-    <section id="deals" className="relative bg-white py-12 md:py-20 px-4">
+    <section id="deals" className="relative bg-card py-12 md:py-20 px-4">
       <div className="max-w-md md:max-w-3xl mx-auto">
         <div className="flex justify-center mb-4">
           <span className="bg-neon-pink text-white font-display font-extrabold text-sm tracking-tighter uppercase px-5 py-2 rounded-full">
@@ -159,8 +159,8 @@ const DealsSection = () => {
 
                 <div className="mt-5 space-y-2">
                   {d.items.map((it) => (
-                    <div key={it.text} className="flex items-center gap-3 bg-white/70 rounded-2xl px-3 py-2">
-                      <span className="w-9 h-9 shrink-0 rounded-full bg-white flex items-center justify-center text-lg">
+                    <div key={it.text} className="flex items-center gap-3 bg-card/70 rounded-2xl px-3 py-2">
+                      <span className="w-9 h-9 shrink-0 rounded-full bg-card flex items-center justify-center text-lg">
                         {it.emoji}
                       </span>
                       <span className="font-display font-bold text-sm md:text-base text-foreground">{it.text}</span>
@@ -236,7 +236,7 @@ const DealsSection = () => {
               <div className="mt-6 rounded-3xl bg-muted p-5 space-y-4">
                 <div>
                   <label className="font-display font-bold text-xs text-foreground/60 mb-2 block">Number of children *</label>
-                  <div className="flex items-center justify-between bg-white rounded-2xl px-2 py-2">
+                  <div className="flex items-center justify-between bg-card rounded-2xl px-2 py-2">
                     <button type="button" onClick={() => setChildCount((n) => Math.max(1, n - 1))} className="w-12 h-12 flex items-center justify-center text-foreground/70 rounded-full active:bg-muted">
                       <Minus className="w-5 h-5" />
                     </button>
@@ -257,7 +257,7 @@ const DealsSection = () => {
                     value={parentName}
                     onChange={(e) => setParentName(e.target.value)}
                     placeholder="e.g. Sarah Johnson"
-                    className="w-full bg-white rounded-2xl text-foreground font-body text-sm px-4 py-3 placeholder:text-foreground/30 focus:outline-none focus:ring-2 focus:ring-neon-cyan"
+                    className="w-full bg-card rounded-2xl text-foreground font-body text-sm px-4 py-3 placeholder:text-foreground/30 focus:outline-none focus:ring-2 focus:ring-neon-cyan"
                   />
                 </div>
                 <div>
@@ -267,11 +267,11 @@ const DealsSection = () => {
                     value={parentPhone}
                     onChange={(e) => setParentPhone(e.target.value)}
                     placeholder="e.g. 07700 900000"
-                    className="w-full bg-white rounded-2xl text-foreground font-body text-sm px-4 py-3 placeholder:text-foreground/30 focus:outline-none focus:ring-2 focus:ring-neon-cyan"
+                    className="w-full bg-card rounded-2xl text-foreground font-body text-sm px-4 py-3 placeholder:text-foreground/30 focus:outline-none focus:ring-2 focus:ring-neon-cyan"
                   />
                 </div>
 
-                <div className="rounded-2xl bg-white p-3 flex items-center justify-between">
+                <div className="rounded-2xl bg-card p-3 flex items-center justify-between">
                   <span className="font-body text-foreground/60 text-sm">{childCount} × £{deal.price.toFixed(2)}</span>
                   <span className="font-display font-extrabold text-foreground text-lg">£{totalPrice.toFixed(2)}</span>
                 </div>
@@ -279,7 +279,7 @@ const DealsSection = () => {
                 <button
                   onClick={handleBook}
                   disabled={loading}
-                  className="w-full min-h-[56px] rounded-2xl font-display font-extrabold text-base tracking-tighter py-4 bg-neon-green text-foreground active:translate-y-1 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="w-full min-h-[56px] rounded-2xl font-display font-extrabold text-base tracking-tighter py-4 bg-neon-green text-ink active:translate-y-1 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
                   style={{ boxShadow: "0 8px 0 0 #24B00C" }}
                 >
                   {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <>Pay £{totalPrice.toFixed(2)} & lock it in</>}

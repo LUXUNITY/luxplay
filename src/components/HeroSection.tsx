@@ -112,7 +112,7 @@ const HeroSection = () => {
             </a>
             <a
               href="#deals"
-              className="flex-shrink-0 w-48 rounded-3xl bg-gradient-to-br from-neon-cyan to-[#7DF9FF] p-4 text-foreground"
+              className="flex-shrink-0 w-48 rounded-3xl bg-gradient-to-br from-neon-cyan to-[#7DF9FF] p-4 text-ink"
             >
               <p className="text-[10px] font-bold uppercase opacity-80">All-In Deal</p>
               <p className="font-display text-2xl">£19.99</p>

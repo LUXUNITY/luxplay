@@ -54,7 +54,7 @@ const accentMap = {
 
 const PartiesSection = () => {
   return (
-    <section id="parties" className="relative bg-white">
+    <section id="parties" className="relative bg-card">
       <div className="relative z-10 px-4 py-16 md:py-20 max-w-md mx-auto">
         {/* Header */}
         <motion.div
@@ -63,7 +63,7 @@ const PartiesSection = () => {
           viewport={{ once: true }}
           className="text-center mb-2"
         >
-          <span className="inline-block bg-neon-pink text-foreground font-display font-extrabold text-xs uppercase px-5 py-2 rounded-full">
+          <span className="inline-block bg-neon-pink text-ink font-display font-extrabold text-xs uppercase px-5 py-2 rounded-full">
             🎉 Birthday Parties
           </span>
         </motion.div>
@@ -92,7 +92,7 @@ const PartiesSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className={`relative rounded-3xl bg-white border-2 border-foreground/10 p-6 flex flex-col ${
+                className={`relative rounded-3xl bg-card border-2 border-foreground/10 p-6 flex flex-col ${
                   t.highlight ? "scale-[1.03]" : ""
                 }`}
                 style={{ boxShadow: `0 8px 0 0 ${a.shadow}` }}

@@ -48,7 +48,7 @@ const PreSaleSection = () => {
   };
 
   return (
-    <section id="presale" className="relative bg-white">
+    <section id="presale" className="relative bg-card">
       <div className="relative z-10 px-4 py-16 md:py-20 max-w-md mx-auto">
         {/* Logo */}
         <motion.div
@@ -73,7 +73,7 @@ const PreSaleSection = () => {
           className="text-center mb-8"
         >
           <span
-            className="inline-block bg-neon-cyan text-foreground font-display font-extrabold text-xs uppercase px-5 py-2.5 rounded-full"
+            className="inline-block bg-neon-cyan text-ink font-display font-extrabold text-xs uppercase px-5 py-2.5 rounded-full"
             style={{ boxShadow: "0 6px 0 0 #00A3B8" }}
           >
             🎮 Buy online, play instantly
