@@ -6,62 +6,56 @@ import prizeAsset from "@/assets/real-prize-redemption.jpg.asset.json";
 import cafeAsset from "@/assets/real-cafe.png.asset.json";
 
 const venues = [
-  { img: arcadeAsset.url, label: "ARCADE ZONE", color: "text-neon-green", comingSoon: false },
-  { img: softplayAsset.url, label: "SOFT PLAY", color: "text-neon-cyan", comingSoon: false },
-  { img: babySoftplayAsset.url, label: "BABY SOFT PLAY", color: "text-neon-pink", comingSoon: false },
-  { img: prizeAsset.url, label: "PRIZE REDEMPTION", color: "text-neon-pink", comingSoon: false },
-  { img: cafeAsset.url, label: "CAFÈ", color: "text-neon-purple", comingSoon: false },
+  { img: arcadeAsset.url, label: "ARCADE", altLabel: "ARCADE ZONE", bg: "bg-neon-green", shadow: "#C9B01E" },
+  { img: softplayAsset.url, label: "PLAY", altLabel: "SOFT PLAY", bg: "bg-neon-cyan", shadow: "#0090BF" },
+  { img: babySoftplayAsset.url, label: "BABIES", altLabel: "BABY SOFT PLAY", bg: "bg-neon-pink", shadow: "#C4266F" },
+  { img: prizeAsset.url, label: "PRIZES", altLabel: "PRIZE REDEMPTION", bg: "bg-neon-pink", shadow: "#C4266F" },
+  { img: cafeAsset.url, label: "CAFÉ", altLabel: "CAFÈ", bg: "bg-neon-cyan", shadow: "#0090BF" },
 ];
 
 const VenueSection = () => {
   return (
-    <section className="relative">
+    <section className="relative bg-white py-16 md:py-24">
       {/* Header */}
-      <div className="px-6 md:px-12 lg:px-20 pt-20 md:pt-28 pb-10">
+      <div className="px-6 max-w-md mx-auto text-center mb-10">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-display text-5xl md:text-7xl lg:text-8xl tracking-wider text-center"
+          className="font-display text-4xl md:text-5xl font-extrabold tracking-tighter text-foreground"
         >
-          <span className="text-white">ONE VENUE. </span>
-          <span className="text-gradient-neon">ENDLESS FUN.</span>
+          ONE VENUE. ENDLESS FUN.
         </motion.h2>
-        <p className="mt-6 text-center font-body text-sm md:text-base tracking-widest text-white/40 uppercase">
-          Unit 7, Sovereign Centre · Boscombe · Bournemouth · BH1 4SX
+        <p className="mt-3 font-body text-xs tracking-wide text-foreground/60">
+          Sovereign Centre · Boscombe
         </p>
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2">
+      <div className="px-6 max-w-md mx-auto grid grid-cols-2 gap-4">
         {venues.map((v, i) => (
           <motion.div
-            key={v.label}
+            key={v.altLabel}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="relative aspect-[16/10] overflow-hidden group bg-[#070710]"
+            transition={{ duration: 0.5, delay: i * 0.08 }}
+            className="relative aspect-square overflow-hidden rounded-3xl"
+            style={{ boxShadow: `0 8px 0 0 ${v.shadow}` }}
           >
             {v.img && (
               <img
                 src={v.img}
-                alt={v.label}
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                alt={v.altLabel}
+                className="absolute inset-0 w-full h-full object-cover"
                 loading="lazy"
               />
             )}
-            <div className="absolute inset-0 bg-[#070710]/50 group-hover:bg-[#070710]/40 transition-colors duration-500" />
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-              <h3 className={`font-display text-4xl md:text-5xl lg:text-6xl tracking-wider ${v.color} drop-shadow-[0_0_20px_currentColor] text-center px-4`}>
-                {v.label}
-              </h3>
-              {v.comingSoon && (
-                <span className="font-display text-sm md:text-base tracking-[0.3em] text-white/70 border border-white/30 px-4 py-1.5">
-                  COMING SOON
-                </span>
-              )}
-            </div>
+            <span
+              className={`absolute bottom-2 left-2 ${v.bg} text-foreground font-display font-extrabold text-xs tracking-tight px-3 py-1 rounded-full`}
+            >
+              {v.label}
+            </span>
           </motion.div>
         ))}
       </div>
