@@ -27,9 +27,9 @@ const DEALS: {
     shadow: "#00A3B8",
     tag: "BEST VALUE",
     items: [
-      { emoji: "🛝", text: "2hr soft play" },
+      { emoji: "🛝", text: "2 hours soft play" },
       { emoji: "🕹️", text: "60 arcade credits" },
-      { emoji: "🥤", text: "Drink" },
+      { emoji: "🥤", text: "Can / soft drink" },
       { emoji: "🥪", text: "Sandwich" },
       { emoji: "🧁", text: "Cupcake + ice pop" },
     ],
@@ -41,11 +41,12 @@ const DEALS: {
     bg: "bg-neon-green",
     shadow: "#24B00C",
     items: [
-      { emoji: "🛝", text: "2hr soft play" },
+      { emoji: "🛝", text: "2 hours soft play" },
       { emoji: "🕹️", text: "60 arcade credits" },
       { emoji: "🧃", text: "Juice" },
       { emoji: "🍡", text: "Ice pop" },
     ],
+
   },
 ];
 
