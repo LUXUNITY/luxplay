@@ -67,7 +67,7 @@ const BabyDealSection = () => {
 
           <div className="mt-4 flex items-center justify-center gap-2">
             <span className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-2xl shrink-0">🛝</span>
-            <span className="font-display font-extrabold text-2xl md:text-3xl tracking-tighter text-white">2hr baby soft play</span>
+            <span className="font-display font-extrabold text-2xl md:text-3xl tracking-tighter text-white">2hr under 3s soft play</span>
           </div>
 
           <div className="mt-3 flex flex-wrap items-center justify-center gap-3">
@@ -104,7 +104,7 @@ const BabyDealSection = () => {
               className="mt-6 w-full min-h-[56px] rounded-2xl font-display font-extrabold text-base tracking-tighter bg-foreground text-white active:translate-y-1 transition-transform"
               style={{ boxShadow: "0 8px 0 0 #000000" }}
             >
-              👶 Grab baby deal — £5.99
+              👶 Grab under 3s deal — £5.99
             </button>
           )}
         </div>
