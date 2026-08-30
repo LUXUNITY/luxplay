@@ -139,11 +139,15 @@ const DealsSection = () => {
             return (
               <div
                 key={d.id}
-                className={`relative rounded-3xl p-5 md:p-6 ${d.bg} active:translate-y-1 transition-transform ${isBest ? "md:-mt-3" : ""}`}
-                style={{ boxShadow: `0 8px 0 0 ${d.shadow}` }}
+                onClick={() => {
+                  setSelectedDeal(d.id);
+                  setChildCount(1);
+                  setTimeout(() => document.getElementById("deal-booking")?.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
+                }}
+                className={`relative cursor-pointer rounded-3xl p-5 md:p-6 ${d.bg} transition-transform duration-150 active:translate-y-1 hover:-translate-y-1 ${isBest ? "md:-mt-3 animate-deal-glow-cyan" : "animate-deal-glow-green"} ${active ? "ring-4 ring-neon-pink" : ""}`}
               >
                 {d.tag && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-ink text-white font-display font-extrabold text-xs tracking-tighter px-4 py-1 rounded-full">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 animate-fun-bubble text-ink font-display font-extrabold text-xs tracking-tighter px-4 py-1 rounded-full whitespace-nowrap">
                     ⭐ {d.tag}
                   </span>
                 )}
@@ -152,7 +156,7 @@ const DealsSection = () => {
                   <p className="font-display font-extrabold tracking-tighter text-xl md:text-2xl text-ink">
                     {d.name}
                   </p>
-                  <p className="font-display font-extrabold text-5xl md:text-6xl leading-none mt-1 text-ink">
+                  <p className="animate-price-throb font-display font-extrabold text-5xl md:text-6xl leading-none mt-1 text-ink">
                     £{d.price.toFixed(2)}
                   </p>
                   <p className="font-body text-xs text-ink/60 mt-1">per child</p>
@@ -170,17 +174,20 @@ const DealsSection = () => {
                 </div>
 
                 <button
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     setSelectedDeal(d.id);
                     setChildCount(1);
                     setTimeout(() => document.getElementById("deal-booking")?.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
                   }}
-                  className="mt-5 w-full min-h-[56px] rounded-2xl font-display font-extrabold text-lg tracking-tighter bg-ink text-white active:translate-y-1 transition-transform"
-                  style={{ boxShadow: "0 8px 0 0 #000000" }}
+                  className={`mt-5 w-full min-h-[56px] rounded-2xl font-display font-extrabold text-lg tracking-tighter bg-ink text-white active:translate-y-1 transition-transform ${
+                    d.id === "allin" ? "animate-btn-flash-cyan" : "animate-btn-flash-green"
+                  }`}
                 >
                   {active ? "Selected ✓" : `Book now → £${d.price.toFixed(2)}`}
                 </button>
               </div>
+
 
             );
           })}
