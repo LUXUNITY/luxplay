@@ -14,7 +14,7 @@ const collage = [
 const tiles = [
   {
     href: "#softplay",
-    emoji: "🏃",
+    emoji: "🛝",
     line1: "Book",
     line2: "Soft Play",
     bg: "bg-neon-green",
