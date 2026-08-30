@@ -46,7 +46,7 @@ const FooterSection = () => {
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block mt-4 font-display text-sm font-extrabold tracking-wide text-foreground bg-neon-green rounded-full px-6 py-3"
-          style={{ boxShadow: "0 6px 0 0 #C9B01E" }}
+          style={{ boxShadow: "0 6px 0 0 #24B00C" }}
         >
           GET DIRECTIONS
         </a>
