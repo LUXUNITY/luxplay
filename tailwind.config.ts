@@ -51,6 +51,7 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        ink: "#0A0714",
         neon: {
           green: "#39FF14",
           pink: "#FF10F0",
