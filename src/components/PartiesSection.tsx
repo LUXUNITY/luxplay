@@ -16,8 +16,10 @@ const TIERS: Tier[] = [
     accent: "cyan",
     emojis: ["🕹️", "🍟", "🧸"],
     perks: [
-      "2hrs soft play + £10 credits",
-      "Hot meal & drink",
+      "2 hours of soft play",
+      "£10 arcade credits per child",
+      "Hot meal: nuggets, chips & drink",
+      "Small toy inside every meal",
       "Adults go free",
     ],
   },
@@ -28,8 +30,11 @@ const TIERS: Tier[] = [
     highlight: true,
     emojis: ["🎮", "🍕", "🥤"],
     perks: [
-      "2hrs soft play + £15 credits",
-      "Hot meal + extra snack",
+      "2 hours of soft play",
+      "£15 arcade credits per child",
+      "Hot meal: nuggets, chips & drink",
+      "Extra snack & drink included",
+      "Small toy inside every meal",
       "Adults go free",
     ],
   },
@@ -39,9 +44,13 @@ const TIERS: Tier[] = [
     accent: "green",
     emojis: ["🏆", "🎂", "🎁"],
     perks: [
-      "2hrs soft play + £20 credits",
-      "Hot meal + snack",
-      "Cake OR gift included",
+      "2 hours of soft play",
+      "£20 arcade credits per child",
+      "Hot meal: nuggets, chips & drink",
+      "Extra snack & drink included",
+      "Small toy inside every meal",
+      "Birthday cake OR gift included",
+      "Adults go free",
     ],
   },
 ];
@@ -155,7 +164,7 @@ const PartiesSection = () => {
           style={{ boxShadow: "0 8px 0 0 #24B00C" }}
         >
           <p className="font-body text-ink text-sm font-bold">
-            🍟 Hot meal included in every package
+            🍟 Hot meal — nuggets, chips & a drink — in every package, with a small toy tucked inside. Classic & Ultimate also include an extra snack and drink.
           </p>
         </motion.div>
 

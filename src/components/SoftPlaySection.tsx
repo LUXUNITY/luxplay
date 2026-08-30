@@ -208,6 +208,20 @@ const SoftPlaySection = () => {
                       </>
                     )}
                   </div>
+                  <div className="mt-2 h-1.5 w-full rounded-full bg-foreground/10 overflow-hidden">
+                    <div
+                      className="h-full rounded-full transition-all"
+                      style={{
+                        width: `${Math.max(4, Math.round((booked / MAX_CAPACITY) * 100))}%`,
+                        backgroundColor: isFull ? "#FF2D4B" : isLow ? "#FFD400" : "#00E5FF",
+                        boxShadow: isFull
+                          ? "0 0 8px #FF2D4B"
+                          : isLow
+                          ? "0 0 8px #FFD400"
+                          : "0 0 8px #00E5FF",
+                      }}
+                    />
+                  </div>
                   {isSelected && (
                     <div className="absolute -top-2 -right-2 w-5 h-5 bg-neon-cyan rounded-full flex items-center justify-center">
                       <Check className="w-3 h-3 text-foreground" />
