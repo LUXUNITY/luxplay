@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['"Bebas Neue"', 'sans-serif'],
-        body: ['Montserrat', 'sans-serif'],
+        display: ['Syne', 'sans-serif'],
+        body: ['"Plus Jakarta Sans"', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -52,10 +52,10 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         neon: {
-          green: "#aaff00",
-          pink: "#ff00cc",
-          cyan: "#00eeff",
-          purple: "#7700ff",
+          green: "#FFE156",
+          pink: "#FF4D9D",
+          cyan: "#00C2FF",
+          purple: "#FF7EB3",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",

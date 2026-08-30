@@ -14,8 +14,8 @@ const DEALS: {
   id: DealId;
   name: string;
   price: number;
-  accent: string;
-  glow: string;
+  bg: string;
+  shadow: string;
   items: { emoji: string; text: string }[];
   tag?: string;
 }[] = [
@@ -23,73 +23,31 @@ const DEALS: {
     id: "allin",
     name: "ALL-IN DEAL",
     price: 19.99,
-    accent: "#ff00cc",
-    glow: "rgba(255,0,204,0.6)",
+    bg: "bg-neon-cyan",
+    shadow: "#0090c4",
     tag: "BEST VALUE",
     items: [
-      { emoji: "🛝", text: "2 HOURS SOFT PLAY" },
-      { emoji: "🕹️", text: "60 ARCADE CREDITS" },
-      { emoji: "🥤", text: "CAN / SOFT DRINK" },
-      { emoji: "🥪", text: "SANDWICH" },
-      { emoji: "🧁", text: "CUPCAKE + ICE POP" },
+      { emoji: "🛝", text: "2hr soft play" },
+      { emoji: "🕹️", text: "60 arcade credits" },
+      { emoji: "🥤", text: "Drink" },
+      { emoji: "🥪", text: "Sandwich" },
+      { emoji: "🧁", text: "Cupcake + ice pop" },
     ],
   },
   {
     id: "play",
     name: "PLAY DEAL",
     price: 14.99,
-    accent: "#00eeff",
-    glow: "rgba(0,238,255,0.6)",
+    bg: "bg-neon-green",
+    shadow: "#c9ac1f",
     items: [
-      { emoji: "🛝", text: "2 HOURS SOFT PLAY" },
-      { emoji: "🕹️", text: "60 ARCADE CREDITS" },
-      { emoji: "🧃", text: "JUICE" },
-      { emoji: "🍡", text: "ICE POP" },
+      { emoji: "🛝", text: "2hr soft play" },
+      { emoji: "🕹️", text: "60 arcade credits" },
+      { emoji: "🧃", text: "Juice" },
+      { emoji: "🍡", text: "Ice pop" },
     ],
   },
 ];
-
-const CIRCUIT_TRACES = [
-  "M0 26 L54 26 Q66 26 66 38 L66 74 Q66 86 78 86 L200 86",
-  "M300 8 L300 52 Q300 64 288 64 L214 64 Q202 64 202 76 L202 150",
-  "M300 220 L236 220 Q224 220 224 232 L224 268 Q224 280 212 280 L120 280 Q108 280 108 292 L108 360",
-  "M0 300 L44 300 Q56 300 56 288 L56 232 Q56 220 44 220 L0 220",
-  "M0 150 L28 150 Q40 150 40 162 L40 200",
-  "M300 330 L250 330 Q238 330 238 342 L238 380",
-];
-
-const CIRCUIT_PADS = [
-  [66, 38],
-  [78, 86],
-  [202, 76],
-  [224, 232],
-  [108, 292],
-  [56, 288],
-  [40, 162],
-  [238, 342],
-] as const;
-
-const DealCircuit = ({ accent }: { accent: string }) => (
-  <svg
-    className="pointer-events-none absolute inset-0 w-full h-full z-0 opacity-60"
-    viewBox="0 0 300 400"
-    preserveAspectRatio="none"
-    aria-hidden="true"
-  >
-    <g fill="none" stroke={accent} strokeLinecap="round" strokeLinejoin="round">
-      {CIRCUIT_TRACES.map((d, i) => (
-        <g key={d}>
-          <path d={d} strokeWidth={4} strokeOpacity={0.1} />
-          <path d={d} strokeWidth={1} strokeOpacity={0.45} />
-          <path d={d} strokeWidth={2} strokeOpacity={0.95} className="deal-trace-pulse" style={{ animationDelay: `${i * 0.55}s` }} />
-        </g>
-      ))}
-    </g>
-    {CIRCUIT_PADS.map(([cx, cy], i) => (
-      <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={2.6} fill={accent} className="deal-pad-blink" style={{ animationDelay: `${i * 0.3}s` }} />
-    ))}
-  </svg>
-);
 
 const DealsSection = () => {
 
@@ -158,93 +116,54 @@ const DealsSection = () => {
   };
 
   return (
-    <section id="deals" className="relative overflow-hidden bg-[#070710]">
-      <div className="absolute top-0 -right-24 w-72 h-72 md:w-[26rem] md:h-[26rem] bg-neon-cyan/20 rounded-full blur-[70px] pointer-events-none" />
-      <div className="absolute bottom-0 -left-24 w-72 h-72 md:w-[26rem] md:h-[26rem] bg-neon-pink/20 rounded-full blur-[70px] pointer-events-none" />
-
-      <div className="relative z-10 px-4 md:px-12 lg:px-20 py-12 md:py-20">
-        <div className="flex justify-center mb-3">
-          <span className="border-2 border-neon-green/70 bg-neon-green/10 text-neon-green font-display text-sm md:text-2xl tracking-[0.25em] uppercase px-5 py-2.5 md:px-8 md:py-3 shadow-[0_0_30px_rgba(170,255,0,0.35)]">
-            🎉 LUXPLAY DEALS 🎉
+    <section id="deals" className="relative bg-white py-12 md:py-20 px-4">
+      <div className="max-w-md md:max-w-3xl mx-auto">
+        <div className="flex justify-center mb-4">
+          <span className="bg-neon-pink text-white font-display font-extrabold text-sm tracking-tighter uppercase px-5 py-2 rounded-full">
+            🎉 Deals
           </span>
         </div>
-        <h2 className="text-center font-display tracking-[0.15em] text-3xl md:text-6xl text-white mb-2">
-          PICK YOUR <span className="text-neon-pink" style={{ textShadow: "0 0 20px rgba(255,0,204,0.7)" }}>DEAL</span>
+        <h2 className="text-center font-display font-extrabold tracking-tighter text-3xl md:text-5xl text-foreground mb-1">
+          Pick your deal
         </h2>
-        <p className="text-center font-body text-white/50 text-xs md:text-sm mb-8 md:mb-12">
+        <p className="text-center font-body text-foreground/60 text-sm mb-8">
           Per child · adults go free
         </p>
 
         {/* Deal cards */}
-        <div className="grid gap-6 md:grid-cols-2 max-w-5xl mx-auto">
+        <div className="grid gap-6 md:grid-cols-2">
           {DEALS.map((d) => {
             const active = selectedDeal === d.id;
             const isBest = d.id === "allin";
             return (
               <div
                 key={d.id}
-                className={`deal-card p-5 md:p-8 bg-[#0b0b18]/95 transition-transform hover:scale-[1.03] ${
-                  isBest ? "animate-chill-pulse md:-mt-4" : ""
-                }`}
-                style={{
-                  ["--deal-accent" as any]: d.accent,
-                  boxShadow: active ? `0 0 65px ${d.glow}` : `0 0 30px ${d.glow}`,
-                }}
+                className={`relative rounded-3xl p-5 md:p-6 ${d.bg} active:translate-y-1 transition-transform ${isBest ? "md:-mt-3" : ""}`}
+                style={{ boxShadow: `0 8px 0 0 ${d.shadow}` }}
               >
-                <DealCircuit accent={d.accent} />
-                <div className="deal-shine" />
-
-                <div
-                  className="pointer-events-none absolute -top-28 left-1/2 -translate-x-1/2 w-72 h-72 rounded-full blur-[60px] opacity-40"
-                  style={{ background: d.accent }}
-                />
-                {isBest && (
-                  <>
-                    <span className="pointer-events-none absolute top-3 left-4 text-lg animate-sparkle z-[2]">✨</span>
-                    <span className="pointer-events-none absolute bottom-6 right-5 text-lg animate-sparkle z-[2]" style={{ animationDelay: "0.7s" }}>✨</span>
-                    <span className="pointer-events-none absolute top-1/3 right-8 text-base animate-sparkle z-[2]" style={{ animationDelay: "1.2s" }}>⭐</span>
-                  </>
-                )}
-
                 {d.tag && (
-                  <span
-                    className="absolute top-4 left-1/2 font-display text-[10px] md:text-xs tracking-[0.25em] px-4 py-1.5 text-[#070710] animate-party-tag z-10"
-                    style={{ background: d.accent, boxShadow: `0 0 30px ${d.glow}` }}
-                  >
-                    🔥 {d.tag} 🔥
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-foreground text-white font-display font-extrabold text-xs tracking-tighter px-4 py-1 rounded-full">
+                    ⭐ {d.tag}
                   </span>
                 )}
 
-                <div className="relative z-[2] text-center pt-8">
-                  <p
-                    className="font-display text-2xl md:text-4xl tracking-[0.18em]"
-                    style={{ color: d.accent, textShadow: `0 0 20px ${d.glow}` }}
-                  >
+                <div className="text-center pt-3">
+                  <p className="font-display font-extrabold tracking-tighter text-xl md:text-2xl text-foreground">
                     {d.name}
                   </p>
-                  <p
-                    className={`deal-price-shimmer font-display text-6xl md:text-8xl leading-none mt-1 ${isBest ? "animate-big-throb" : ""}`}
-                    style={{ filter: `drop-shadow(0 0 22px ${d.glow})` }}
-                  >
+                  <p className="font-display font-extrabold text-5xl md:text-6xl leading-none mt-1 text-foreground">
                     £{d.price.toFixed(2)}
                   </p>
-                  <p className="font-body text-[10px] tracking-[0.3em] uppercase text-white/40 mt-2">per child</p>
+                  <p className="font-body text-xs text-foreground/60 mt-1">per child</p>
                 </div>
 
-                <div className="relative z-[2] mt-6 space-y-2">
-                  {d.items.map((it, i) => (
-                    <div
-                      key={it.text}
-                      className="animate-deal-row flex items-center gap-3 border border-white/10 bg-white/[0.04] px-3 py-2"
-                      style={{ animationDelay: `${i * 0.25}s`, borderLeft: `3px solid ${d.accent}` }}
-                    >
-                      <span
-                        className="text-2xl md:text-3xl leading-none shrink-0 animate-icon-bob"
-                        style={{ animationDelay: `${i * 0.18}s` }}
-                      >
+                <div className="mt-5 space-y-2">
+                  {d.items.map((it) => (
+                    <div key={it.text} className="flex items-center gap-3 bg-white/70 rounded-2xl px-3 py-2">
+                      <span className="w-9 h-9 shrink-0 rounded-full bg-white flex items-center justify-center text-lg">
                         {it.emoji}
                       </span>
-                      <span className="font-display text-base md:text-2xl tracking-wider text-white/90">{it.text}</span>
+                      <span className="font-display font-bold text-sm md:text-base text-foreground">{it.text}</span>
                     </div>
                   ))}
                 </div>
@@ -255,12 +174,10 @@ const DealsSection = () => {
                     setChildCount(1);
                     setTimeout(() => document.getElementById("deal-booking")?.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
                   }}
-                  className={`relative z-[2] mt-6 w-full font-display text-lg md:text-2xl tracking-widest py-4 text-[#070710] hover:scale-[1.04] transition-transform ${
-                    isBest ? "animate-btn-flash-pink" : "animate-btn-flash-cyan"
-                  }`}
-                  style={{ background: d.accent, boxShadow: `0 0 34px ${d.glow}` }}
+                  className="mt-5 w-full min-h-[56px] rounded-2xl font-display font-extrabold text-lg tracking-tighter bg-foreground text-white active:translate-y-1 transition-transform"
+                  style={{ boxShadow: "0 8px 0 0 #000000" }}
                 >
-                  {active ? "SELECTED ✓" : `BOOK NOW → £${d.price.toFixed(2)}`}
+                  {active ? "Selected ✓" : `Book now → £${d.price.toFixed(2)}`}
                 </button>
               </div>
 
@@ -270,15 +187,15 @@ const DealsSection = () => {
 
         {/* Booking flow */}
         {deal && (
-          <div id="deal-booking" className="mt-12 max-w-2xl mx-auto scroll-mt-8">
-            <p className="text-center font-display text-sm md:text-lg tracking-[0.2em] mb-5" style={{ color: deal.accent }}>
-              {deal.name} · £{deal.price.toFixed(2)} PER CHILD
+          <div id="deal-booking" className="mt-10 scroll-mt-8">
+            <p className="text-center font-display font-extrabold text-base tracking-tighter mb-4 text-foreground">
+              {deal.name} · £{deal.price.toFixed(2)} per child
             </p>
             <DateStrip selectedDate={selectedDate} onSelect={setSelectedDate} accent="cyan" />
 
-            <p className="font-display text-xs tracking-[0.3em] text-white/40 text-center mt-6 mb-4">
-              <Clock className="w-4 h-4 inline mr-2" />
-              PICK YOUR SESSION
+            <p className="font-display font-bold text-xs text-foreground/60 text-center mt-6 mb-3">
+              <Clock className="w-4 h-4 inline mr-1" />
+              Pick your session
             </p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {SESSIONS.map((s) => {
@@ -292,22 +209,22 @@ const DealsSection = () => {
                     key={s.time}
                     disabled={isFull}
                     onClick={() => setSelectedSession(s.time)}
-                    className={`relative p-3 transition-all ${
+                    className={`relative rounded-2xl p-3 min-h-[56px] transition-all ${
                       isFull
-                        ? "border border-white/5 bg-white/[0.02] opacity-40 cursor-not-allowed"
+                        ? "bg-muted opacity-40 cursor-not-allowed"
                         : isSelected
-                        ? "border-2 border-neon-green bg-neon-green/10 shadow-[0_0_25px_rgba(46,255,99,0.3)]"
-                        : "border border-white/10 bg-[#0a0a16] hover:border-neon-green/40"
+                        ? "bg-neon-green"
+                        : "bg-muted hover:bg-neon-green/30"
                     }`}
                   >
-                    <p className={`font-display text-base tracking-wider ${isSelected ? "text-neon-green" : "text-white/80"}`}>{s.label}</p>
+                    <p className="font-display font-bold text-base text-foreground">{s.label}</p>
                     <div className="flex items-center justify-center gap-1.5 mt-1">
-                      <Users className="w-3 h-3 text-white/40" />
-                      <span className="font-display text-[10px] text-white/40">{isFull ? "FULL" : `${spotsLeft} LEFT`}</span>
+                      <Users className="w-3 h-3 text-foreground/50" />
+                      <span className="font-body text-[10px] text-foreground/50">{isFull ? "Full" : `${spotsLeft} left`}</span>
                     </div>
                     {isSelected && (
-                      <div className="absolute -top-2 -right-2 w-5 h-5 bg-neon-green rounded-full flex items-center justify-center">
-                        <Check className="w-3 h-3 text-[#070710]" />
+                      <div className="absolute -top-2 -right-2 w-5 h-5 bg-foreground rounded-full flex items-center justify-center">
+                        <Check className="w-3 h-3 text-white" />
                       </div>
                     )}
                   </button>
@@ -316,55 +233,56 @@ const DealsSection = () => {
             </div>
 
             {selectedSession && (
-              <div className="mt-6 border border-neon-green/30 bg-[#0a0a16] p-6 space-y-4">
+              <div className="mt-6 rounded-3xl bg-muted p-5 space-y-4">
                 <div>
-                  <label className="font-display text-[10px] tracking-[0.2em] text-white/40 mb-2 block">NUMBER OF CHILDREN *</label>
-                  <div className="flex items-center justify-between bg-[#070710] border border-white/10 px-2 py-2">
-                    <button type="button" onClick={() => setChildCount((n) => Math.max(1, n - 1))} className="w-12 h-12 flex items-center justify-center text-white/70 hover:text-neon-green">
+                  <label className="font-display font-bold text-xs text-foreground/60 mb-2 block">Number of children *</label>
+                  <div className="flex items-center justify-between bg-white rounded-2xl px-2 py-2">
+                    <button type="button" onClick={() => setChildCount((n) => Math.max(1, n - 1))} className="w-12 h-12 flex items-center justify-center text-foreground/70 rounded-full active:bg-muted">
                       <Minus className="w-5 h-5" />
                     </button>
                     <div className="text-center">
-                      <p className="font-display text-3xl text-neon-green glow-green">{childCount}</p>
-                      <p className="font-body text-[10px] tracking-[0.2em] text-white/30 uppercase mt-0.5">{childCount === 1 ? "child" : "children"}</p>
+                      <p className="font-display font-extrabold text-3xl text-foreground">{childCount}</p>
+                      <p className="font-body text-[10px] text-foreground/50 uppercase mt-0.5">{childCount === 1 ? "child" : "children"}</p>
                     </div>
-                    <button type="button" onClick={() => setChildCount((n) => Math.min(MAX_CHILDREN_PER_BOOKING, n + 1))} className="w-12 h-12 flex items-center justify-center text-white/70 hover:text-neon-green">
+                    <button type="button" onClick={() => setChildCount((n) => Math.min(MAX_CHILDREN_PER_BOOKING, n + 1))} className="w-12 h-12 flex items-center justify-center text-foreground/70 rounded-full active:bg-muted">
                       <Plus className="w-5 h-5" />
                     </button>
                   </div>
                 </div>
 
                 <div>
-                  <label className="font-display text-[10px] tracking-[0.2em] text-white/40 mb-1 block">PARENT NAME *</label>
+                  <label className="font-display font-bold text-xs text-foreground/60 mb-1 block">Parent name *</label>
                   <input
                     type="text"
                     value={parentName}
                     onChange={(e) => setParentName(e.target.value)}
                     placeholder="e.g. Sarah Johnson"
-                    className="w-full bg-[#070710] border border-white/10 text-white font-body text-sm px-4 py-3 placeholder:text-white/20 focus:outline-none focus:border-neon-green/50"
+                    className="w-full bg-white rounded-2xl text-foreground font-body text-sm px-4 py-3 placeholder:text-foreground/30 focus:outline-none focus:ring-2 focus:ring-neon-cyan"
                   />
                 </div>
                 <div>
-                  <label className="font-display text-[10px] tracking-[0.2em] text-white/40 mb-1 block">PHONE (OPTIONAL)</label>
+                  <label className="font-display font-bold text-xs text-foreground/60 mb-1 block">Phone (optional)</label>
                   <input
                     type="tel"
                     value={parentPhone}
                     onChange={(e) => setParentPhone(e.target.value)}
                     placeholder="e.g. 07700 900000"
-                    className="w-full bg-[#070710] border border-white/10 text-white font-body text-sm px-4 py-3 placeholder:text-white/20 focus:outline-none focus:border-neon-green/50"
+                    className="w-full bg-white rounded-2xl text-foreground font-body text-sm px-4 py-3 placeholder:text-foreground/30 focus:outline-none focus:ring-2 focus:ring-neon-cyan"
                   />
                 </div>
 
-                <div className="border border-white/10 bg-[#0d0d1a] p-3 flex items-center justify-between">
-                  <span className="font-body text-white/60 text-sm">{childCount} × £{deal.price.toFixed(2)}</span>
-                  <span className="font-display text-neon-green text-lg">£{totalPrice.toFixed(2)}</span>
+                <div className="rounded-2xl bg-white p-3 flex items-center justify-between">
+                  <span className="font-body text-foreground/60 text-sm">{childCount} × £{deal.price.toFixed(2)}</span>
+                  <span className="font-display font-extrabold text-foreground text-lg">£{totalPrice.toFixed(2)}</span>
                 </div>
 
                 <button
                   onClick={handleBook}
                   disabled={loading}
-                  className="w-full font-display text-base tracking-widest py-4 bg-neon-green text-[#070710] hover:shadow-[0_0_40px_rgba(46,255,99,0.5)] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="w-full min-h-[56px] rounded-2xl font-display font-extrabold text-base tracking-tighter py-4 bg-neon-green text-foreground active:translate-y-1 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                  style={{ boxShadow: "0 8px 0 0 #c9ac1f" }}
                 >
-                  {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <>PAY £{totalPrice.toFixed(2)} & LOCK IT IN</>}
+                  {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <>Pay £{totalPrice.toFixed(2)} & lock it in</>}
                 </button>
               </div>
             )}

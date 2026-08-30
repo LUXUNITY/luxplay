@@ -6,265 +6,98 @@ import logoCafeLux from "@/assets/logo-cafe-lux.png";
 import logoLuxKey from "@/assets/logo-luxkey.png";
 import logoMasterclass from "@/assets/logo-masterclass-exteriors.png.asset.json";
 
-import { gridBackgroundUrl } from "@/components/circuitTile";
-
 const sharedBusinesses = [
-  { name: "LuxPlay", logo: logoLuxPlay, scale: 1, color: "text-neon-cyan", shadow: "0 0 8px rgba(0,238,255,0.55)", glow: "drop-shadow(0 0 10px rgba(0,238,255,0.45))" },
-  { name: "Cafè Lux", logo: logoCafeLux, scale: 1, color: "text-neon-pink", shadow: "0 0 8px rgba(255,0,204,0.55)", glow: "drop-shadow(0 0 10px rgba(255,170,120,0.45))" },
-  { name: "LuxKey", logo: logoLuxKey, scale: 1, color: "text-neon-purple", shadow: "0 0 8px rgba(119,0,255,0.55)", glow: "drop-shadow(0 0 10px rgba(255,200,60,0.45))" },
-  { name: "Masterclass Exteriors", logo: logoMasterclass.url, scale: 1.1, color: "text-neon-green", shadow: "0 0 8px rgba(170,255,0,0.55)", glow: "drop-shadow(0 0 10px rgba(255,200,60,0.45))" },
+  { name: "LuxPlay", logo: logoLuxPlay, scale: 1 },
+  { name: "Cafè Lux", logo: logoCafeLux, scale: 1 },
+  { name: "LuxKey", logo: logoLuxKey, scale: 1 },
+  { name: "Masterclass Exteriors", logo: logoMasterclass.url, scale: 1.1 },
 ];
 
 const founders = [
   {
     img: founderBazAsset.url,
     objectPos: "object-center",
-    first: "",
-    name: "BAZ",
-    last: "Roushbaiani",
+    name: "Baz Roushbaiani",
     role: "Owner & Director",
-    accent: "text-neon-cyan",
-    shadow: "0 0 10px rgba(0, 255, 255, 0.6), 0 0 20px rgba(0, 255, 255, 0.3)",
-    glow: "0 0 8px rgba(0, 229, 255, 0.5), 0 0 18px rgba(0, 229, 255, 0.25), 0 0 40px rgba(0, 229, 255, 0.12)",
+    bio: "Local through and through. Built LuxPlay for Bournemouth families.",
   },
   {
     img: founderMartinAsset.url,
     objectPos: "object-center",
     zoom: 1.5,
     offsetY: 30,
-    first: "",
-    name: "MARTIN",
-    last: "MacGillivray",
+    name: "Martin MacGillivray",
     role: "Owner & Director",
-    accent: "text-neon-purple",
-    shadow: "0 0 10px rgba(168, 85, 247, 0.6), 0 0 20px rgba(168, 85, 247, 0.3)",
-    glow: "0 0 8px rgba(168, 85, 247, 0.5), 0 0 18px rgba(168, 85, 247, 0.25), 0 0 40px rgba(168, 85, 247, 0.12)",
+    bio: "Believes in local jobs and a better high street.",
   },
 ];
 
 const FeaturesSection = () => {
   return (
-    <section id="about" className="relative bg-[#070710] overflow-hidden">
+    <section id="about" className="relative bg-muted py-16 md:py-24">
+      <div className="px-6 max-w-md mx-auto">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="font-display text-4xl font-extrabold tracking-tighter text-foreground text-center mb-2"
+        >
+          LUXPLAY IS OPEN
+        </motion.h2>
+        <p className="font-body text-sm text-foreground/70 text-center mb-10">
+          Built for Bournemouth. Local jobs, local families, local community.
+        </p>
 
-      {/* Neon top bar */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-neon-bar z-20" />
+        {/* Founders */}
+        <div className="grid grid-cols-2 gap-4 mb-10">
+          {founders.map((f) => (
+            <div key={f.name} className="flex flex-col items-center text-center">
+              <div
+                className="w-full aspect-square overflow-hidden rounded-3xl mb-3"
+                style={{ boxShadow: "0 8px 0 0 #D9D9D9" }}
+              >
+                <img
+                  src={f.img}
+                  alt={`${f.name} — LuxPlay`}
+                  className={`w-full h-full object-cover ${f.objectPos}`}
+                  style={f.zoom ? { transform: `translateY(${f.offsetY ?? 0}px) scale(${f.zoom})` } : undefined}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <p className="font-display text-sm font-extrabold tracking-tight text-foreground">{f.name}</p>
+              <p className="font-body text-xs text-foreground/50 mb-1">{f.role}</p>
+              <p className="font-body text-xs text-foreground/70">{f.bio}</p>
+            </div>
+          ))}
+        </div>
 
-      {/* NEON CIRCUIT BOARD — strongest at edges, fades toward centre
-          so traces appear to spread outward from the portraits. */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          backgroundImage: gridBackgroundUrl,
-          backgroundRepeat: "repeat",
-          backgroundSize: "400px 400px",
-          backgroundPosition: "center",
-          opacity: 0.45,
-          WebkitMaskImage:
-            "radial-gradient(ellipse 60% 55% at 50% 50%, transparent 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.55) 75%, rgba(0,0,0,0.75) 100%)",
-          maskImage:
-            "radial-gradient(ellipse 60% 55% at 50% 50%, transparent 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.55) 75%, rgba(0,0,0,0.75) 100%)",
-        }}
-      />
-
-      {/* Aurora glows */}
-      <div
-        className="pointer-events-none absolute -top-32 -left-32 w-[55vw] h-[55vw] max-w-[700px] max-h-[700px] rounded-full blur-3xl z-0"
-        style={{ background: "radial-gradient(circle, rgba(57,255,20,0.18) 0%, rgba(57,255,20,0) 70%)" }}
-      />
-      <div
-        className="pointer-events-none absolute -top-24 -right-24 w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] rounded-full blur-3xl z-0"
-        style={{ background: "radial-gradient(circle, rgba(124,77,255,0.22) 0%, rgba(124,77,255,0) 70%)" }}
-      />
-      <div
-        className="pointer-events-none absolute -bottom-32 -left-24 w-[55vw] h-[55vw] max-w-[700px] max-h-[700px] rounded-full blur-3xl z-0"
-        style={{ background: "radial-gradient(circle, rgba(0,229,255,0.18) 0%, rgba(0,229,255,0) 70%)" }}
-      />
-      <div
-        className="pointer-events-none absolute -bottom-24 -right-32 w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] rounded-full blur-3xl z-0"
-        style={{ background: "radial-gradient(circle, rgba(255,43,214,0.18) 0%, rgba(255,43,214,0) 70%)" }}
-      />
-
-      <div className="relative z-10 flex flex-col md:flex-row md:min-h-screen">
-        {/* LEFT — Founders side-by-side, details underneath, shared co-owners block */}
-        <div className="relative w-full md:w-[40%] flex flex-col items-center justify-center gap-8 md:gap-10 px-6 py-12 md:py-20">
-          {/* Photos row */}
-          <div className="w-full grid grid-cols-2 gap-4 md:gap-6 max-w-[420px]">
-            {founders.map((f) => (
-              <div key={f.name + f.last} className="flex flex-col items-center">
-                <div
-                  className="w-full aspect-[4/5] overflow-hidden rounded-sm bg-[#070710]"
-                  style={{ boxShadow: f.glow }}
-                >
+        {/* Shared co-owners */}
+        <div className="bg-white rounded-3xl p-5" style={{ boxShadow: "0 8px 0 0 #D9D9D9" }}>
+          <p className="font-display text-xs font-extrabold tracking-wide text-foreground/50 text-center mb-4">
+            CO-OWNERS OF
+          </p>
+          <div className="grid grid-cols-2 gap-4 items-center">
+            {sharedBusinesses.map((b) => (
+              <div key={b.name} className="flex flex-col items-center gap-2">
+                <div className="w-16 h-16 flex items-center justify-center">
                   <img
-                    src={f.img}
-                    alt={`${f.name} ${f.last} — LuxPlay`}
-                    className={`w-full h-full object-cover ${f.objectPos}`}
-                    style={f.zoom ? { transform: `translateY(${f.offsetY ?? 0}px) scale(${f.zoom})`, transformOrigin: f.objectPos === "object-top" ? "center top" : f.objectPos === "object-bottom" ? "center bottom" : "center center" } : undefined}
+                    src={b.logo}
+                    alt={`${b.name} logo`}
+                    className="max-w-full max-h-full object-contain"
+                    style={{ transform: `scale(${b.scale})` }}
                     loading="lazy"
                     decoding="async"
                   />
                 </div>
+                <span className="font-display text-xs font-extrabold text-foreground text-center leading-tight">
+                  {b.name}
+                </span>
               </div>
             ))}
           </div>
-
-          {/* Details row */}
-          <div className="w-full grid grid-cols-2 gap-4 md:gap-6 max-w-[420px] text-center">
-            {founders.map((f) => (
-              <div key={f.name + f.last + "-info"}>
-                {f.first && (
-                  <p className="font-display text-xs md:text-sm tracking-[0.25em] text-white/60">{f.first}</p>
-                )}
-                <p className="font-display text-2xl md:text-3xl tracking-widest text-white mt-0.5">{f.name}</p>
-                <p className="font-display text-xs md:text-sm tracking-[0.25em] text-white/60 mt-0.5">{f.last}</p>
-                <p
-                  className={`font-display text-[11px] md:text-sm tracking-[0.25em] ${f.accent} mt-2`}
-                  style={{ textShadow: f.shadow }}
-                >
-                  — {f.role}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* Shared co-owners */}
-          <div className="w-full max-w-[560px] pt-8 border-t border-white/10 text-center">
-            <p className="font-display text-base md:text-xl tracking-[0.35em] text-white/40 mb-8">
-              CO-OWNERS OF
-            </p>
-            <div className="grid grid-cols-2 gap-8 md:gap-10 items-start">
-              {sharedBusinesses.map((b) => (
-                <div key={b.name} className="flex flex-col items-center gap-4">
-                  <div className="w-32 h-32 md:w-44 md:h-44 flex items-center justify-center">
-                    <img
-                      src={b.logo}
-                      alt={`${b.name} logo`}
-                      className="max-w-full max-h-full object-contain"
-                      style={{ filter: b.glow, transform: `scale(${b.scale})` }}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                  <span
-                    className={`font-display text-lg md:text-2xl tracking-wider ${b.color} text-center leading-tight`}
-                    style={{ textShadow: b.shadow }}
-                  >
-                    {b.name}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-
-        {/* RIGHT — Statement content */}
-        <div className="w-full md:w-[60%] flex flex-col justify-center px-6 md:px-14 lg:px-20 py-16 md:py-20">
-          {/* Subhead */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-display text-2xl md:text-3xl lg:text-4xl tracking-wider text-white/70 mb-2"
-          >
-            While others wait for better times —
-          </motion.p>
-
-          {/* Main headline */}
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-display text-6xl md:text-8xl lg:text-9xl tracking-wider leading-[0.9] mb-10 md:mb-14"
-          >
-            <span className="text-gradient-neon">WE'RE CREATING THEM!</span>
-          </motion.h2>
-
-          {/* Statements */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="space-y-4 md:space-y-5 mb-10 md:mb-14"
-          >
-            <p className="font-body text-white/50 text-lg md:text-xl lg:text-2xl">
-              Yes, the economy is tough.
-            </p>
-            <p className="font-body text-white/50 text-lg md:text-xl lg:text-2xl">
-              Yes, the high street is struggling.
-            </p>
-            <p className="font-body text-white text-xl md:text-2xl lg:text-3xl font-bold">
-              But we refuse to give up on Bournemouth.
-            </p>
-          </motion.div>
-
-          {/* Open statement */}
-          <motion.h3
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-display text-4xl md:text-6xl lg:text-7xl tracking-wider text-neon-cyan mb-4"
-          >
-            LUXPLAY IS OPEN
-          </motion.h3>
-
-          {/* About */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="font-body text-white/50 text-base md:text-lg lg:text-xl leading-relaxed mb-10 md:mb-14 max-w-2xl"
-          >
-            LuxPlay is a new family entertainment centre now open right here in Sovereign Centre.
-            Built from the ground up for this community. This is just the beginning.
-          </motion.p>
-
-          {/* Value bullets — BIG neon */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-10 md:mb-14"
-          >
-            <p className="font-display text-sm tracking-[0.3em] text-white/30 mb-4">
-              WHAT WE STAND FOR
-            </p>
-            <div className="space-y-2">
-              {[
-                { text: "LOCAL JOBS.", color: "text-neon-green" },
-                { text: "LOCAL FAMILIES.", color: "text-neon-cyan" },
-                { text: "LOCAL COMMUNITY.", color: "text-neon-pink" },
-              ].map((item, i) => (
-                <motion.p
-                  key={item.text}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className={`font-display text-4xl md:text-5xl lg:text-7xl tracking-wider ${item.color}`}
-                >
-                  {item.text}
-                </motion.p>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Quote */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="border-l-4 border-neon-purple pl-6 md:pl-8"
-          >
-            <p className="font-body text-white/90 font-semibold text-lg md:text-xl lg:text-2xl leading-relaxed">
-              We're not afraid to work hard and build a better Bournemouth.
-              Because while others walk away —{" "}
-              <span className="text-neon-cyan font-bold">we're doubling down on this town.</span>
-            </p>
-          </motion.div>
         </div>
       </div>
-
     </section>
   );
 };

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bowlby+One&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,50 +6,51 @@
 
 @layer base {
   :root {
-    --background: 240 40% 4%;
-    --foreground: 0 0% 95%;
+    /* Bright Play Pop — white base, sunny yellow, hot pink, bright cyan */
+    --background: 0 0% 100%;
+    --foreground: 250 15% 12%;
 
-    --card: 240 30% 8%;
-    --card-foreground: 0 0% 95%;
+    --card: 0 0% 100%;
+    --card-foreground: 250 15% 12%;
 
-    --popover: 240 30% 8%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 250 15% 12%;
 
-    --primary: 312 100% 50%;
+    --primary: 333 100% 65%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 186 100% 47%;
-    --secondary-foreground: 240 40% 4%;
+    --secondary: 194 100% 50%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 240 20% 12%;
-    --muted-foreground: 240 10% 55%;
+    --muted: 220 20% 96%;
+    --muted-foreground: 220 10% 45%;
 
-    --accent: 186 100% 47%;
-    --accent-foreground: 240 40% 4%;
+    --accent: 49 100% 67%;
+    --accent-foreground: 250 15% 12%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 20% 14%;
-    --input: 240 20% 14%;
-    --ring: 312 100% 50%;
+    --border: 220 16% 90%;
+    --input: 220 16% 90%;
+    --ring: 333 100% 65%;
 
-    --radius: 0.25rem;
+    --radius: 1.5rem;
 
-    /* Neon palette — exact hex conversions */
-    --neon-pink: 312 100% 50%;
-    --neon-cyan: 186 100% 47%;
-    --neon-green: 76 100% 50%;
-    --neon-purple: 267 100% 50%;
+    /* Bright play palette */
+    --neon-pink: 333 100% 65%;
+    --neon-cyan: 194 100% 50%;
+    --neon-green: 49 100% 67%;
+    --neon-purple: 335 100% 75%;
 
-    --sidebar-background: 240 30% 8%;
-    --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 312 100% 50%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 250 15% 12%;
+    --sidebar-primary: 333 100% 65%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 20% 12%;
-    --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 240 20% 14%;
-    --sidebar-ring: 312 100% 50%;
+    --sidebar-accent: 220 20% 96%;
+    --sidebar-accent-foreground: 250 15% 12%;
+    --sidebar-border: 220 16% 90%;
+    --sidebar-ring: 333 100% 65%;
   }
 }
 
@@ -60,22 +61,43 @@
 
   body {
     @apply bg-background text-foreground font-body;
-    background-color: #070710;
+    background-color: #ffffff;
   }
 }
 
 @layer utilities {
-  .font-display {
-    font-family: 'Bebas Neue', sans-serif;
+  /* Chunky tap tile — Memphis style drop shadow, presses down on touch */
+  .tile-pop {
+    box-shadow: 0 8px 0 0 rgba(0, 0, 0, 0.12);
+    transition: transform 140ms ease, box-shadow 140ms ease;
+  }
+  .tile-pop:active {
+    transform: translateY(6px);
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.12);
   }
 
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .font-display {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+  }
+
+
   .font-display-fat {
-    font-family: 'Bowlby One', 'Bebas Neue', sans-serif;
-    letter-spacing: 0.01em;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
   }
 
   .font-body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
   }
 
   .venue-photo-tile {
@@ -122,40 +144,39 @@
   }
 
   .text-gradient-neon {
-    background: linear-gradient(90deg, #aaff00, #00eeff, #7700ff, #ff00cc);
+    background: linear-gradient(90deg, #FF4D9D, #00C2FF);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .bg-gradient-neon-bar {
-    background: linear-gradient(90deg, #ff00cc, #7700ff, #00eeff, #aaff00);
+    background: linear-gradient(90deg, #FF4D9D, #FFE156, #00C2FF);
   }
 
   .glow-green {
-    text-shadow: 0 0 20px rgba(170, 255, 0, 0.6), 0 0 40px rgba(170, 255, 0, 0.3);
+    text-shadow: none;
+    color: #1A1A1A;
   }
 
   .glow-pink {
-    text-shadow: 0 0 20px rgba(255, 0, 204, 0.6), 0 0 40px rgba(255, 0, 204, 0.3);
+    text-shadow: none;
   }
 
   .glow-cyan {
-    text-shadow: 0 0 20px rgba(0, 238, 255, 0.6), 0 0 40px rgba(0, 238, 255, 0.3);
+    text-shadow: none;
   }
 
   .glow-purple {
-    text-shadow: 0 0 20px rgba(119, 0, 255, 0.6), 0 0 40px rgba(119, 0, 255, 0.3);
+    text-shadow: none;
   }
 
-  /* Crisp thin black outline around every letter for legibility on busy backgrounds */
+  /* Bright theme — no dark letter outlines needed on white */
   .text-stroke-dark {
-    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.9);
-    paint-order: stroke fill;
+    -webkit-text-stroke: 0;
   }
   .text-stroke-dark .text-gradient-neon:not(.hero-bold-stroke) {
-    -webkit-text-stroke: 2px rgba(0, 0, 0, 0.95);
-    paint-order: stroke fill;
+    -webkit-text-stroke: 0;
   }
 
   /* Hero headline — neon gradient with subtle thickness */
@@ -163,9 +184,9 @@
     position: relative;
     display: inline-block;
     -webkit-text-stroke: 0 !important;
-    font-family: 'Bebas Neue', sans-serif;
-    font-weight: 400;
-    letter-spacing: 0.01em;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
   }
 
   /* Neon flash — opacity + glow pulse, GPU-friendly, no layout thrash */
@@ -695,28 +716,20 @@
     }
   }
 
+  /* Bright playful page backdrop — soft confetti dots on white */
   .luxplay-pattern-bg {
-    background-color: hsl(var(--background));
+    background-color: #ffffff;
     background-image:
-      linear-gradient(hsl(var(--background) / 0.56), hsl(var(--background) / 0.56)),
-      url("./assets/luxplay-pattern-clean-mobile.webp");
-    background-position: center;
+      radial-gradient(circle at 12% 8%, rgba(255, 225, 86, 0.28) 0, transparent 28%),
+      radial-gradient(circle at 88% 22%, rgba(0, 194, 255, 0.18) 0, transparent 26%),
+      radial-gradient(circle at 20% 72%, rgba(255, 77, 157, 0.16) 0, transparent 24%),
+      radial-gradient(circle at 92% 88%, rgba(255, 225, 86, 0.22) 0, transparent 26%);
     background-repeat: no-repeat;
-    background-size: cover;
     background-attachment: scroll;
   }
 
   .defer-section {
     content-visibility: auto;
     contain-intrinsic-size: 960px;
-  }
-
-  @media (min-width: 768px) {
-    .luxplay-pattern-bg {
-      background-image:
-        linear-gradient(hsl(var(--background) / 0.56), hsl(var(--background) / 0.56)),
-        url("./assets/luxplay-pattern-clean-desktop.webp");
-      background-attachment: scroll;
-    }
   }
 }

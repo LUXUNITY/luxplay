@@ -1,121 +1,135 @@
 import logoAsset from "@/assets/logo-luxplay.png";
-import arcadeAsset from "@/assets/real-arcade.jpeg.asset.json";
-import softplayAsset from "@/assets/real-softplay-v2.png.asset.json";
-import babySoftplayAsset from "@/assets/real-baby-softplay.png.asset.json";
-import prizeAsset from "@/assets/real-prize-redemption.jpg.asset.json";
 
-const bgVenues = [
-  { src: arcadeAsset.url, alt: "Arcade Zone" },
-  { src: softplayAsset.url, alt: "Soft Play" },
-  { src: babySoftplayAsset.url, alt: "Baby Soft Play" },
-  { src: prizeAsset.url, alt: "Prize Redemption" },
-];
-
-const venueTiles = [
+const tiles = [
   {
-    ...bgVenues[0],
-    className: "venue-photo-tile venue-photo-tile-tl",
+    href: "#softplay",
+    emoji: "🏃",
+    line1: "Book",
+    line2: "Soft Play",
+    bg: "bg-neon-green",
+    text: "text-foreground",
+    shadow: "0 8px 0 0 #E5CA4D",
   },
   {
-    ...bgVenues[1],
-    className: "venue-photo-tile venue-photo-tile-tr",
+    href: "#presale",
+    emoji: "🕹️",
+    line1: "Arcade",
+    line2: "Credits",
+    bg: "bg-neon-cyan",
+    text: "text-white",
+    shadow: "0 8px 0 0 #00AEE5",
   },
   {
-    ...bgVenues[2],
-    className: "venue-photo-tile venue-photo-tile-bl",
+    href: "/parties",
+    emoji: "🎂",
+    line1: "Party",
+    line2: "Packages",
+    bg: "bg-neon-pink",
+    text: "text-white",
+    shadow: "0 8px 0 0 #E5458D",
   },
   {
-    ...bgVenues[3],
-    className: "venue-photo-tile venue-photo-tile-br",
+    href: "#deals",
+    emoji: "🔥",
+    line1: "View",
+    line2: "All Deals",
+    bg: "bg-muted",
+    text: "text-foreground",
+    shadow: "0 8px 0 0 #E2E8F0",
   },
 ];
 
 const HeroSection = () => {
-
   return (
     <section className="relative w-full bg-background overflow-hidden">
-      {/* Neon top bar */}
-      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-neon-bar z-50" />
+      <div className="w-full max-w-md mx-auto">
+        {/* Hero */}
+        <div className="relative px-6 pt-10 pb-8 text-center overflow-hidden">
+          <div className="pointer-events-none absolute -top-10 -right-10 h-32 w-32 rounded-full bg-neon-green opacity-30" />
+          <div className="pointer-events-none absolute top-24 -left-6 h-20 w-20 rotate-12 rounded-2xl bg-neon-cyan opacity-20" />
 
-      {/* Foreground content */}
-      <div className="relative z-10">
-        {/* Logo + venue photo grid combined — logo small, centered and faded so the attractions are the focus */}
-        <div className="relative w-full h-72 sm:h-96 md:h-[28rem] overflow-hidden bg-[#070710]">
-          {/* Clean 2x2 attraction grid */}
-          <div className="absolute inset-0 grid grid-cols-2 grid-rows-2">
-            {bgVenues.map((v) => (
-              <div key={v.alt} className="relative overflow-hidden">
-                <img
-                  src={v.src}
-                  alt={v.alt}
-                  className="absolute inset-0 h-full w-full object-cover"
-                  loading="eager"
-                />
-              </div>
-            ))}
-          </div>
-          {/* Subtle dark wash to keep the page cohesive */}
-          <div className="absolute inset-0 bg-[#070710]/20" />
-
-
-          {/* Small, centered LuxPlay logo with smoothly feathered edges so it sits in the middle of the attractions */}
-          <div className="absolute inset-0 flex items-center justify-center z-10 px-6">
-            <img
-              src={logoAsset}
-              alt="LuxPlay — Play More. Earn More. Level Up. Arcade, Soft Play & Café at Unit 7 Sovereign Centre, Boscombe, Bournemouth BH1 4SX"
-              className="w-full max-w-[100px] sm:max-w-[140px] md:max-w-[180px] h-auto object-contain opacity-95 rounded-full"
-              style={{
-                clipPath: "circle(48% at 50% 50%)",
-                maskImage: "radial-gradient(circle at center, black 70%, rgba(0,0,0,0.95) 82%, transparent 98%)",
-                WebkitMaskImage: "radial-gradient(circle at center, black 70%, rgba(0,0,0,0.95) 82%, transparent 98%)",
-                filter: "drop-shadow(0 0 18px rgba(0,0,0,0.55))",
-              }}
-            />
-          </div>
-
-          {/* Soft top edge fade */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-10 md:h-16 z-20 bg-gradient-to-b from-[#070710] to-transparent" />
-          {/* Soft bottom edge fade into the Refresh & Play section */}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 md:h-28 z-20 bg-gradient-to-b from-transparent to-[#ff6a00]" />
+          <img
+            src={logoAsset}
+            alt="LuxPlay — arcade, soft play and café at Unit 7 Sovereign Centre, Boscombe, Bournemouth"
+            className="relative mx-auto mb-4 h-20 w-20 rounded-full object-contain"
+            loading="eager"
+          />
+          <h1 className="relative font-display text-5xl sm:text-6xl tracking-tighter text-neon-pink mb-2">
+            LUXPLAY
+          </h1>
+          <p className="relative text-sm sm:text-base font-bold uppercase tracking-[0.18em] text-neon-cyan">
+            Bournemouth&apos;s Ultimate Play
+          </p>
         </div>
 
+        {/* Quick actions */}
+        <div className="grid grid-cols-2 gap-4 px-6 mb-8">
+          {tiles.map((t) => (
+            <a
+              key={t.line2}
+              href={t.href}
+              style={{ boxShadow: t.shadow }}
+              className={`aspect-square flex flex-col items-center justify-center rounded-3xl p-4 transition-transform duration-150 active:translate-y-1.5 ${t.bg} ${t.text}`}
+            >
+              <span className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-background text-2xl">
+                {t.emoji}
+              </span>
+              <span className="text-center text-sm font-extrabold uppercase leading-tight">
+                {t.line1}
+                <br />
+                {t.line2}
+              </span>
+            </a>
+          ))}
+        </div>
 
+        {/* Price snapshot */}
+        <div className="px-6 space-y-3 pb-8">
+          <div className="flex items-center justify-between rounded-3xl border-2 border-dashed border-border bg-muted/60 p-4">
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-tight text-muted-foreground">
+                Under 3s
+              </p>
+              <p className="font-display text-xl text-neon-pink">£4.00</p>
+            </div>
+            <div className="text-right">
+              <p className="text-[11px] font-bold uppercase tracking-tight text-muted-foreground">
+                Parties from
+              </p>
+              <p className="font-display text-xl text-neon-cyan">£19.99pp</p>
+            </div>
+          </div>
 
-        {/* SEO-friendly hidden copy so search engines still index the key info */}
-        <h1 className="sr-only">
-          LuxPlay — Play More. Earn More. Level Up. 40+ Arcade Games, 3 Level
-          Soft Play, Baby Soft Play, Amazing Prizes & Cosy Café at Unit 7,
-          Sovereign Centre, Boscombe, Bournemouth, BH1 4SX.
-        </h1>
-        {/* Live, clickable CTAs sit just below the hero — uniform 2x2 grid, compact */}
-        <div className="relative z-10 w-full max-w-2xl mx-auto grid grid-cols-2 gap-2 sm:gap-3 px-4 py-4 md:py-6">
-        <a
-          href="#deals"
-          className="neon-cta flex items-center justify-center font-display text-xs sm:text-sm md:text-base tracking-widest px-2 py-3 md:py-4 bg-neon-green text-[#070710] animate-btn-flash-green transition-transform duration-200 hover:scale-105 text-center h-full"
-        >
-          <span>PLAY DEALS FROM £14.99</span>
-        </a>
-        <a
-          href="#presale"
-          className="neon-cta flex items-center justify-center font-display text-xs sm:text-sm md:text-base tracking-widest px-2 py-3 md:py-4 bg-neon-pink text-[#070710] animate-btn-flash-pink transition-transform duration-200 hover:scale-105 text-center h-full"
-        >
-          <span>BUY CREDITS</span>
-        </a>
-        <a
-          href="#softplay"
-          className="neon-cta flex items-center justify-center font-display text-xs sm:text-sm md:text-base tracking-widest px-2 py-3 md:py-4 bg-neon-cyan text-[#070710] animate-btn-flash-cyan transition-transform duration-200 hover:scale-105 text-center h-full"
-        >
-          <span>BOOK SOFT PLAY</span>
-        </a>
-        <a
-          href="/parties"
-          className="neon-cta flex items-center justify-center font-display text-xs sm:text-sm md:text-base tracking-widest px-2 py-3 md:py-4 bg-neon-pink text-[#070710] animate-btn-flash-pink transition-transform duration-200 hover:scale-105 text-center h-full"
-        >
-          <span>PARTY PACKAGES</span>
-        </a>
+          {/* Deals strip */}
+          <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
+            <a
+              href="#deals"
+              className="flex-shrink-0 w-48 rounded-3xl bg-gradient-to-br from-neon-pink to-neon-purple p-4 text-white"
+            >
+              <p className="text-[10px] font-bold uppercase opacity-80">Play Deal</p>
+              <p className="font-display text-2xl">£14.99</p>
+              <p className="mt-1 text-[11px] leading-tight">Soft play + drink + treat</p>
+            </a>
+            <a
+              href="#deals"
+              className="flex-shrink-0 w-48 rounded-3xl bg-gradient-to-br from-neon-cyan to-[#60DFFF] p-4 text-white"
+            >
+              <p className="text-[10px] font-bold uppercase opacity-80">All-In Deal</p>
+              <p className="font-display text-2xl">£19.99</p>
+              <p className="mt-1 text-[11px] leading-tight">Plus 60 credits + food</p>
+            </a>
+          </div>
+
+          <a
+            href="/loyalty"
+            className="block w-full rounded-3xl border-2 border-neon-green py-4 text-center"
+          >
+            <span className="text-sm font-bold">
+              Every 7th soft play <span className="text-neon-pink">FREE</span> with LUXPLAY Rewards
+            </span>
+          </a>
+        </div>
       </div>
-
-    </div>
     </section>
   );
 };
