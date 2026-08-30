@@ -110,6 +110,25 @@ const HeroSection = () => {
           </p>
         </div>
 
+        {/* Quick actions */}
+        <div className="grid grid-cols-2 gap-4 px-6 mb-8">
+          {tiles.map((t) => (
+            <a
+              key={t.line2}
+              href={t.href}
+              style={{ boxShadow: t.shadow }}
+              className={`flex flex-col items-center justify-center gap-2 rounded-2xl py-6 px-4 transition-transform duration-150 active:translate-y-1.5 ${t.bg} ${t.text}`}
+            >
+              <span className="text-3xl leading-none">{t.emoji}</span>
+              <span className="text-center text-sm font-extrabold uppercase leading-tight">
+                {t.line1}
+                <br />
+                {t.line2}
+              </span>
+            </a>
+          ))}
+        </div>
+
 
         {/* Price snapshot */}
         <div className="px-6 space-y-3 pb-8">
