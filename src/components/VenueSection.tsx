@@ -22,10 +22,17 @@ const VenueSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-display text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter text-foreground leading-[0.92]"
+          className="font-display text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter leading-[0.92]"
         >
-          ONE VENUE. ENDLESS FUN.
+          <span className="text-neon-pink">ONE</span>{" "}
+          <span className="text-neon-cyan">VENUE.</span>
+          <br />
+          <span className="text-neon-green">ENDLESS</span>{" "}
+          <span className="animate-fun-bubble inline-block rounded-full px-5 pb-1 text-ink align-middle">
+            FUN!
+          </span>
         </motion.h2>
+
         <p className="mt-4 font-body text-base sm:text-lg font-bold tracking-wide text-neon-cyan">
           Sovereign Centre · Boscombe
         </p>
