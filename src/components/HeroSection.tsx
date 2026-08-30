@@ -5,10 +5,10 @@ import babySoftplayAsset from "@/assets/real-baby-softplay.png.asset.json";
 import prizeAsset from "@/assets/real-prize-redemption.jpg.asset.json";
 
 const collage = [
-  { img: arcadeAsset.url, label: "ARCADE", bg: "bg-neon-green", shadow: "#24B00C" },
-  { img: softplayAsset.url, label: "SOFT PLAY", bg: "bg-neon-cyan", shadow: "#00A3B8" },
-  { img: babySoftplayAsset.url, label: "UNDER 3s", bg: "bg-neon-pink", shadow: "#B80AAA" },
-  { img: prizeAsset.url, label: "PRIZES", bg: "bg-neon-purple", shadow: "#7A16BF" },
+  { img: arcadeAsset.url, label: "ARCADE", bg: "bg-neon-green", text: "text-ink", shadow: "#24B00C" },
+  { img: softplayAsset.url, label: "SOFT PLAY", bg: "bg-neon-cyan", text: "text-ink", shadow: "#00A3B8" },
+  { img: babySoftplayAsset.url, label: "UNDER 3s", bg: "bg-neon-pink", text: "text-ink", shadow: "#B80AAA" },
+  { img: prizeAsset.url, label: "PRIZES", bg: "bg-neon-purple", text: "text-white", shadow: "#7A16BF" },
 ];
 
 const tiles = [
@@ -18,6 +18,7 @@ const tiles = [
     line1: "Book",
     line2: "Soft Play",
     bg: "bg-neon-green",
+    text: "text-ink",
     shadow: "0 6px 0 0 #24B00C",
   },
   {
@@ -26,6 +27,7 @@ const tiles = [
     line1: "Arcade",
     line2: "Credits",
     bg: "bg-neon-cyan",
+    text: "text-ink",
     shadow: "0 6px 0 0 #00A3B8",
   },
   {
@@ -34,6 +36,7 @@ const tiles = [
     line1: "Party",
     line2: "Packages",
     bg: "bg-neon-pink",
+    text: "text-ink",
     shadow: "0 6px 0 0 #B80AAA",
   },
   {
@@ -42,6 +45,7 @@ const tiles = [
     line1: "View",
     line2: "All Deals",
     bg: "bg-neon-purple",
+    text: "text-white",
     shadow: "0 6px 0 0 #7A16BF",
   },
 ];
@@ -98,7 +102,7 @@ const HeroSection = () => {
                 loading="eager"
               />
               <span
-                className={`absolute bottom-2 left-2 ${c.bg} text-ink font-display font-extrabold text-sm tracking-tight px-3 py-1 rounded-full`}
+                className={`absolute bottom-2 left-2 ${c.bg} ${c.text} font-display font-extrabold text-sm tracking-tight px-3 py-1 rounded-full`}
               >
                 {c.label}
               </span>
@@ -113,7 +117,7 @@ const HeroSection = () => {
               key={t.line2}
               href={t.href}
               style={{ boxShadow: t.shadow }}
-              className={`flex flex-col items-center justify-center gap-2 rounded-2xl py-6 px-4 transition-transform duration-150 active:translate-y-1.5 ${t.bg} text-ink`}
+              className={`flex flex-col items-center justify-center gap-2 rounded-2xl py-6 px-4 transition-transform duration-150 active:translate-y-1.5 ${t.bg} ${t.text}`}
             >
               <span className="text-3xl leading-none">{t.emoji}</span>
               <span className="text-center text-sm font-extrabold uppercase leading-tight">
