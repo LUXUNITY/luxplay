@@ -24,7 +24,7 @@ const DEALS: {
     name: "ALL-IN DEAL",
     price: 19.99,
     bg: "bg-neon-cyan",
-    shadow: "#0090c4",
+    shadow: "#00A3B8",
     tag: "BEST VALUE",
     items: [
       { emoji: "🛝", text: "2hr soft play" },
@@ -39,7 +39,7 @@ const DEALS: {
     name: "PLAY DEAL",
     price: 14.99,
     bg: "bg-neon-green",
-    shadow: "#c9ac1f",
+    shadow: "#24B00C",
     items: [
       { emoji: "🛝", text: "2hr soft play" },
       { emoji: "🕹️", text: "60 arcade credits" },
@@ -280,7 +280,7 @@ const DealsSection = () => {
                   onClick={handleBook}
                   disabled={loading}
                   className="w-full min-h-[56px] rounded-2xl font-display font-extrabold text-base tracking-tighter py-4 bg-neon-green text-foreground active:translate-y-1 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
-                  style={{ boxShadow: "0 8px 0 0 #c9ac1f" }}
+                  style={{ boxShadow: "0 8px 0 0 #24B00C" }}
                 >
                   {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <>Pay £{totalPrice.toFixed(2)} & lock it in</>}
                 </button>

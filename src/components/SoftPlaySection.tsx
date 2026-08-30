@@ -130,7 +130,7 @@ const SoftPlaySection = () => {
           <p className="font-body text-foreground/60 text-sm">
             Max 40 kids/session · Adults go free
           </p>
-          <div className="mt-3 inline-block rounded-2xl bg-neon-green px-6 py-2" style={{ boxShadow: "0 6px 0 0 #C9A800" }}>
+          <div className="mt-3 inline-block rounded-2xl bg-neon-green px-6 py-2" style={{ boxShadow: "0 6px 0 0 #24B00C" }}>
             <span className="font-display text-3xl font-extrabold text-foreground">
               £{getSoftPlayFullPrice(selectedDate).toFixed(2)}
             </span>
@@ -143,7 +143,7 @@ const SoftPlaySection = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           className="mb-8 rounded-3xl bg-neon-pink text-white text-center py-4 px-4"
-          style={{ boxShadow: "0 8px 0 0 #C7106F" }}
+          style={{ boxShadow: "0 8px 0 0 #B80AAA" }}
         >
           <p className="font-display text-xl font-extrabold tracking-tight">ADULTS GO FREE!</p>
           <p className="font-body text-xs mt-1 opacity-90">Up to 2 adults free per child</p>
@@ -189,7 +189,7 @@ const SoftPlaySection = () => {
                     boxShadow: isFull
                       ? "none"
                       : isSelected
-                      ? "0 6px 0 0 #C7106F"
+                      ? "0 6px 0 0 #B80AAA"
                       : "0 6px 0 0 #D9D9DE",
                   }}
                 >
@@ -305,7 +305,7 @@ const SoftPlaySection = () => {
               onClick={handleBook}
               disabled={loading}
               className="w-full rounded-2xl font-display text-base font-extrabold tracking-tight py-4 bg-neon-green text-foreground active:translate-y-1 transition-transform disabled:opacity-50 flex items-center justify-center gap-2"
-              style={{ boxShadow: "0 8px 0 0 #C9A800" }}
+              style={{ boxShadow: "0 8px 0 0 #24B00C" }}
             >
               {loading ? (
                 <Loader2 className="w-5 h-5 animate-spin" />

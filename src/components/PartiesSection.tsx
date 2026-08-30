@@ -47,9 +47,9 @@ const TIERS: Tier[] = [
 ];
 
 const accentMap = {
-  cyan: { bg: "bg-neon-cyan", shadow: "#0089B3" },
-  pink: { bg: "bg-neon-pink", shadow: "#C22B72" },
-  green: { bg: "bg-neon-green", shadow: "#C9AC1F" },
+  cyan: { bg: "bg-neon-cyan", shadow: "#00A3B8" },
+  pink: { bg: "bg-neon-pink", shadow: "#B80AAA" },
+  green: { bg: "bg-neon-green", shadow: "#24B00C" },
 } as const;
 
 const PartiesSection = () => {
@@ -152,7 +152,7 @@ const PartiesSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="mt-8 rounded-3xl bg-neon-green px-5 py-5 text-center"
-          style={{ boxShadow: "0 8px 0 0 #C9AC1F" }}
+          style={{ boxShadow: "0 8px 0 0 #24B00C" }}
         >
           <p className="font-body text-foreground text-sm">
             🍟 Hot meal included in every package

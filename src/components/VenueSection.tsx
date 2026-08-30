@@ -6,11 +6,11 @@ import prizeAsset from "@/assets/real-prize-redemption.jpg.asset.json";
 import cafeAsset from "@/assets/real-cafe.png.asset.json";
 
 const venues = [
-  { img: arcadeAsset.url, label: "ARCADE", altLabel: "ARCADE ZONE", bg: "bg-neon-green", shadow: "#C9B01E" },
-  { img: softplayAsset.url, label: "PLAY", altLabel: "SOFT PLAY", bg: "bg-neon-cyan", shadow: "#0090BF" },
-  { img: babySoftplayAsset.url, label: "BABIES", altLabel: "BABY SOFT PLAY", bg: "bg-neon-pink", shadow: "#C4266F" },
-  { img: prizeAsset.url, label: "PRIZES", altLabel: "PRIZE REDEMPTION", bg: "bg-neon-pink", shadow: "#C4266F" },
-  { img: cafeAsset.url, label: "CAFÉ", altLabel: "CAFÈ", bg: "bg-neon-cyan", shadow: "#0090BF" },
+  { img: arcadeAsset.url, label: "ARCADE", altLabel: "ARCADE ZONE", bg: "bg-neon-green", shadow: "#24B00C" },
+  { img: softplayAsset.url, label: "PLAY", altLabel: "SOFT PLAY", bg: "bg-neon-cyan", shadow: "#00A3B8" },
+  { img: babySoftplayAsset.url, label: "BABIES", altLabel: "BABY SOFT PLAY", bg: "bg-neon-pink", shadow: "#B80AAA" },
+  { img: prizeAsset.url, label: "PRIZES", altLabel: "PRIZE REDEMPTION", bg: "bg-neon-pink", shadow: "#B80AAA" },
+  { img: cafeAsset.url, label: "CAFÉ", altLabel: "CAFÈ", bg: "bg-neon-cyan", shadow: "#00A3B8" },
 ];
 
 const VenueSection = () => {
