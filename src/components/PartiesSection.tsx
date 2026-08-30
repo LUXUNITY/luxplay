@@ -137,7 +137,7 @@ const PartiesSection = () => {
                   )}&body=${encodeURIComponent(
                     `Hi LuxPlay,\n\nI'd like to enquire about the ${t.name} party package (£${t.price.toFixed(2)} per child).\n\nPreferred date:\nNumber of children:\nChild's name & age:\nContact number:\n\nThanks!`
                   )}`}
-                  className={`block text-center rounded-full font-display font-extrabold text-sm tracking-wide py-3.5 ${a.bg} text-foreground active:translate-y-1 transition-transform`}
+                  className={`block text-center rounded-full font-display font-extrabold text-sm tracking-wide py-3.5 ${a.bg} text-ink active:translate-y-1 transition-transform`}
                 >
                   ENQUIRE NOW
                 </a>
@@ -154,7 +154,7 @@ const PartiesSection = () => {
           className="mt-8 rounded-3xl bg-neon-green px-5 py-5 text-center"
           style={{ boxShadow: "0 8px 0 0 #24B00C" }}
         >
-          <p className="font-body text-foreground text-sm">
+          <p className="font-body text-ink text-sm font-bold">
             🍟 Hot meal included in every package
           </p>
         </motion.div>
