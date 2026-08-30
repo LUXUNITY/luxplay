@@ -116,7 +116,7 @@ const DealsSection = () => {
   };
 
   return (
-    <section id="deals" className="relative bg-card py-12 md:py-20 px-4">
+    <section id="deals" className="relative bg-background py-12 md:py-20 px-4">
       <div className="max-w-md md:max-w-3xl mx-auto">
         <div className="flex justify-center mb-4">
           <span className="bg-neon-pink text-white font-display font-extrabold text-sm tracking-tighter uppercase px-5 py-2 rounded-full">
@@ -142,28 +142,28 @@ const DealsSection = () => {
                 style={{ boxShadow: `0 8px 0 0 ${d.shadow}` }}
               >
                 {d.tag && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-foreground text-white font-display font-extrabold text-xs tracking-tighter px-4 py-1 rounded-full">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-ink text-white font-display font-extrabold text-xs tracking-tighter px-4 py-1 rounded-full">
                     ⭐ {d.tag}
                   </span>
                 )}
 
                 <div className="text-center pt-3">
-                  <p className="font-display font-extrabold tracking-tighter text-xl md:text-2xl text-foreground">
+                  <p className="font-display font-extrabold tracking-tighter text-xl md:text-2xl text-ink">
                     {d.name}
                   </p>
-                  <p className="font-display font-extrabold text-5xl md:text-6xl leading-none mt-1 text-foreground">
+                  <p className="font-display font-extrabold text-5xl md:text-6xl leading-none mt-1 text-ink">
                     £{d.price.toFixed(2)}
                   </p>
-                  <p className="font-body text-xs text-foreground/60 mt-1">per child</p>
+                  <p className="font-body text-xs text-ink/60 mt-1">per child</p>
                 </div>
 
                 <div className="mt-5 space-y-2">
                   {d.items.map((it) => (
-                    <div key={it.text} className="flex items-center gap-3 bg-card/70 rounded-2xl px-3 py-2">
-                      <span className="w-9 h-9 shrink-0 rounded-full bg-card flex items-center justify-center text-lg">
+                    <div key={it.text} className="flex items-center gap-3 bg-ink/15 rounded-2xl px-3 py-2">
+                      <span className="w-9 h-9 shrink-0 rounded-full bg-background flex items-center justify-center text-lg">
                         {it.emoji}
                       </span>
-                      <span className="font-display font-bold text-sm md:text-base text-foreground">{it.text}</span>
+                      <span className="font-display font-bold text-sm md:text-base text-ink">{it.text}</span>
                     </div>
                   ))}
                 </div>
@@ -174,7 +174,7 @@ const DealsSection = () => {
                     setChildCount(1);
                     setTimeout(() => document.getElementById("deal-booking")?.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
                   }}
-                  className="mt-5 w-full min-h-[56px] rounded-2xl font-display font-extrabold text-lg tracking-tighter bg-foreground text-white active:translate-y-1 transition-transform"
+                  className="mt-5 w-full min-h-[56px] rounded-2xl font-display font-extrabold text-lg tracking-tighter bg-ink text-white active:translate-y-1 transition-transform"
                   style={{ boxShadow: "0 8px 0 0 #000000" }}
                 >
                   {active ? "Selected ✓" : `Book now → £${d.price.toFixed(2)}`}
@@ -223,7 +223,7 @@ const DealsSection = () => {
                       <span className="font-body text-[10px] text-foreground/50">{isFull ? "Full" : `${spotsLeft} left`}</span>
                     </div>
                     {isSelected && (
-                      <div className="absolute -top-2 -right-2 w-5 h-5 bg-foreground rounded-full flex items-center justify-center">
+                      <div className="absolute -top-2 -right-2 w-5 h-5 bg-ink rounded-full flex items-center justify-center">
                         <Check className="w-3 h-3 text-white" />
                       </div>
                     )}

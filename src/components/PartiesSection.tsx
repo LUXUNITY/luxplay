@@ -98,7 +98,7 @@ const PartiesSection = () => {
                 style={{ boxShadow: `0 8px 0 0 ${a.shadow}` }}
               >
                 {t.highlight && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-foreground text-white font-display font-extrabold text-[10px] tracking-wide px-4 py-1 rounded-full whitespace-nowrap">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-ink text-white font-display font-extrabold text-[10px] tracking-wide px-4 py-1 rounded-full whitespace-nowrap">
                     ⭐ MOST POPULAR
                   </span>
                 )}

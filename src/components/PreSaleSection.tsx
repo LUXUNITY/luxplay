@@ -104,7 +104,7 @@ const PreSaleSection = () => {
                 }}
               >
                 {isBest && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-foreground text-white font-display font-extrabold text-[10px] tracking-wide px-4 py-1 rounded-full whitespace-nowrap">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-ink text-white font-display font-extrabold text-[10px] tracking-wide px-4 py-1 rounded-full whitespace-nowrap">
                     ⭐ BEST VALUE
                   </span>
                 )}
@@ -133,7 +133,7 @@ const PreSaleSection = () => {
                 <button
                   onClick={() => handleBuy(t.id)}
                   disabled={loading === t.id}
-                  className={`rounded-full bg-foreground text-white font-display font-extrabold tracking-wide active:translate-y-1 transition-transform disabled:opacity-50 whitespace-nowrap ${
+                  className={`rounded-full bg-ink text-white font-display font-extrabold tracking-wide active:translate-y-1 transition-transform disabled:opacity-50 whitespace-nowrap ${
                     isBest ? "text-sm px-6 py-3" : "text-xs px-4 py-2.5"
                   }`}
                 >

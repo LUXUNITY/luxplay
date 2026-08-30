@@ -101,7 +101,7 @@ const BabyDealSection = () => {
           {!open && (
             <button
               onClick={() => setOpen(true)}
-              className="mt-6 w-full min-h-[56px] rounded-2xl font-display font-extrabold text-base tracking-tighter bg-foreground text-white active:translate-y-1 transition-transform"
+              className="mt-6 w-full min-h-[56px] rounded-2xl font-display font-extrabold text-base tracking-tighter bg-ink text-white active:translate-y-1 transition-transform"
               style={{ boxShadow: "0 8px 0 0 #000000" }}
             >
               👶 Grab under 3s deal — £5.99
@@ -130,7 +130,7 @@ const BabyDealSection = () => {
                   >
                     <p className={`font-display font-bold text-base ${selected ? "text-white" : "text-foreground"}`}>{session.label}</p>
                     <span className={`font-body text-[10px] ${selected ? "text-white/80" : "text-foreground/50"}`}><Users className="inline w-3 h-3 mr-1" />{isFull ? "Full" : `${spotsLeft} left`}</span>
-                    {selected && <span className="absolute -top-2 -right-2 w-5 h-5 bg-foreground rounded-full flex items-center justify-center"><Check className="w-3 h-3 text-white" /></span>}
+                    {selected && <span className="absolute -top-2 -right-2 w-5 h-5 bg-ink rounded-full flex items-center justify-center"><Check className="w-3 h-3 text-white" /></span>}
                   </button>
                 );
               })}
