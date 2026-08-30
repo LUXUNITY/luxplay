@@ -75,11 +75,6 @@ const HeroSection = () => {
                   className="absolute inset-0 h-full w-full object-cover"
                   loading="eager"
                 />
-                <span
-                  className={`absolute bottom-2 left-2 ${c.bg} ${c.text} font-display font-extrabold text-sm tracking-tight px-3 py-1 rounded-full`}
-                >
-                  {c.label}
-                </span>
               </div>
             ))}
           </div>
