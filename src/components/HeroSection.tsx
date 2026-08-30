@@ -64,17 +64,40 @@ const HeroSection = () => {
   return (
     <section className="relative w-full bg-background overflow-hidden">
       <div className="w-full max-w-md mx-auto">
-        {/* Hero */}
-        <div className="relative px-6 pt-10 pb-6 text-center overflow-hidden">
-          <div className="pointer-events-none absolute -top-10 -right-10 h-32 w-32 rounded-full bg-neon-green opacity-25" />
-          <div className="pointer-events-none absolute top-24 -left-6 h-20 w-20 rounded-full bg-neon-cyan opacity-20" />
+        {/* Full-bleed four-way venue picture with logo badge */}
+        <div className="relative w-full">
+          <div className="grid grid-cols-2 gap-0">
+            {collage.map((c) => (
+              <div key={c.label} className="relative aspect-square overflow-hidden">
+                <img
+                  src={c.img}
+                  alt={`LuxPlay ${c.label}`}
+                  className="absolute inset-0 h-full w-full object-cover"
+                  loading="eager"
+                />
+                <span
+                  className={`absolute bottom-2 left-2 ${c.bg} ${c.text} font-display font-extrabold text-sm tracking-tight px-3 py-1 rounded-full`}
+                >
+                  {c.label}
+                </span>
+              </div>
+            ))}
+          </div>
 
-          <img
-            src={logoAsset}
-            alt="LuxPlay — arcade, soft play and café at Unit 7 Sovereign Centre, Boscombe, Bournemouth"
-            className="relative mx-auto mb-4 h-20 w-20 rounded-full object-contain"
-            loading="eager"
-          />
+          {/* Centre logo badge */}
+          <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            <img
+              src={logoAsset}
+              alt="LuxPlay — arcade, soft play and café at Unit 7 Sovereign Centre, Boscombe, Bournemouth"
+              className="h-28 w-28 sm:h-32 sm:w-32 rounded-full object-contain bg-background/80 p-1"
+              style={{ boxShadow: "0 0 0 3px hsl(var(--background)), 0 0 30px 6px rgba(255,16,240,0.45)" }}
+              loading="eager"
+            />
+          </div>
+        </div>
+
+        {/* Wordmark */}
+        <div className="relative px-6 pt-6 pb-6 text-center">
           <h1 className="relative font-logo text-5xl sm:text-6xl tracking-tighter mb-2">
             {LOGO_LETTERS.map((l, i) => (
               <span key={i} className={l.cls}>
@@ -85,29 +108,6 @@ const HeroSection = () => {
           <p className="relative text-sm sm:text-base font-bold uppercase tracking-[0.18em] text-neon-cyan">
             Bournemouth&apos;s Ultimate Play
           </p>
-        </div>
-
-        {/* Four-way venue picture */}
-        <div className="grid grid-cols-2 gap-3 px-6 mb-8">
-          {collage.map((c) => (
-            <div
-              key={c.label}
-              className="relative aspect-square overflow-hidden rounded-2xl"
-              style={{ boxShadow: `0 6px 0 0 ${c.shadow}` }}
-            >
-              <img
-                src={c.img}
-                alt={`LuxPlay ${c.label}`}
-                className="absolute inset-0 h-full w-full object-cover"
-                loading="eager"
-              />
-              <span
-                className={`absolute bottom-2 left-2 ${c.bg} ${c.text} font-display font-extrabold text-sm tracking-tight px-3 py-1 rounded-full`}
-              >
-                {c.label}
-              </span>
-            </div>
-          ))}
         </div>
 
         {/* Quick actions */}
@@ -128,6 +128,7 @@ const HeroSection = () => {
             </a>
           ))}
         </div>
+
 
         {/* Price snapshot */}
         <div className="px-6 space-y-3 pb-8">
