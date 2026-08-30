@@ -27,6 +27,7 @@ const ukTodayISO = () => {
 // stale tab or tampered request can never take money for an unbookable session.
 const BLOCKED_SLOTS: Record<string, string[]> = {
   "2026-08-15": ["14:00"], // private party
+  "2026-09-05": ["10:00"], // private party
 };
 
 const isBookableDate = (d: unknown): boolean => {
