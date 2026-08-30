@@ -144,40 +144,39 @@
   }
 
   .text-gradient-neon {
-    background: linear-gradient(90deg, #aaff00, #00eeff, #7700ff, #ff00cc);
+    background: linear-gradient(90deg, #FF4D9D, #00C2FF);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .bg-gradient-neon-bar {
-    background: linear-gradient(90deg, #ff00cc, #7700ff, #00eeff, #aaff00);
+    background: linear-gradient(90deg, #FF4D9D, #FFE156, #00C2FF);
   }
 
   .glow-green {
-    text-shadow: 0 0 20px rgba(170, 255, 0, 0.6), 0 0 40px rgba(170, 255, 0, 0.3);
+    text-shadow: none;
+    color: #1A1A1A;
   }
 
   .glow-pink {
-    text-shadow: 0 0 20px rgba(255, 0, 204, 0.6), 0 0 40px rgba(255, 0, 204, 0.3);
+    text-shadow: none;
   }
 
   .glow-cyan {
-    text-shadow: 0 0 20px rgba(0, 238, 255, 0.6), 0 0 40px rgba(0, 238, 255, 0.3);
+    text-shadow: none;
   }
 
   .glow-purple {
-    text-shadow: 0 0 20px rgba(119, 0, 255, 0.6), 0 0 40px rgba(119, 0, 255, 0.3);
+    text-shadow: none;
   }
 
-  /* Crisp thin black outline around every letter for legibility on busy backgrounds */
+  /* Bright theme — no dark letter outlines needed on white */
   .text-stroke-dark {
-    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.9);
-    paint-order: stroke fill;
+    -webkit-text-stroke: 0;
   }
   .text-stroke-dark .text-gradient-neon:not(.hero-bold-stroke) {
-    -webkit-text-stroke: 2px rgba(0, 0, 0, 0.95);
-    paint-order: stroke fill;
+    -webkit-text-stroke: 0;
   }
 
   /* Hero headline — neon gradient with subtle thickness */
