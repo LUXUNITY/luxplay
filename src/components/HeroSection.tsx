@@ -7,7 +7,7 @@ const tiles = [
     line1: "Book",
     line2: "Soft Play",
     bg: "bg-neon-green",
-    text: "text-foreground",
+    text: "text-ink",
     shadow: "0 8px 0 0 #24B00C",
   },
   {
@@ -16,7 +16,7 @@ const tiles = [
     line1: "Arcade",
     line2: "Credits",
     bg: "bg-neon-cyan",
-    text: "text-foreground",
+    text: "text-ink",
     shadow: "0 8px 0 0 #00A3B8",
   },
   {
@@ -35,7 +35,7 @@ const tiles = [
     line2: "All Deals",
     bg: "bg-muted",
     text: "text-foreground",
-    shadow: "0 8px 0 0 #E2E8F0",
+    shadow: "0 8px 0 0 #241C3D",
   },
 ];
 
