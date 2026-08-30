@@ -52,10 +52,10 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         neon: {
-          green: "#FFE156",
-          pink: "#FF4D9D",
-          cyan: "#00C2FF",
-          purple: "#FF7EB3",
+          green: "#39FF14",
+          pink: "#FF10F0",
+          cyan: "#00E5FF",
+          purple: "#B026FF",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
