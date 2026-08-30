@@ -127,12 +127,16 @@ const HeroSection = () => {
 
         {/* Price snapshot */}
         <div className="px-6 space-y-3 pb-8">
-          <div className="flex items-center justify-between rounded-2xl border-2 border-dashed border-border bg-muted/60 p-4">
-            <div>
+          <div className="grid grid-cols-3 items-center gap-2 rounded-2xl border-2 border-dashed border-border bg-muted/60 p-4">
+            <div className="text-left">
               <p className="text-[11px] font-bold uppercase tracking-tight text-muted-foreground">
-                Under 3s
+                Soft play from
               </p>
               <p className="font-display text-xl text-neon-pink">£4.00</p>
+            </div>
+            <div className="text-center">
+              <p className="font-display text-xl text-neon-green leading-none">ADULTS</p>
+              <p className="font-display text-xl text-neon-green leading-none">FREE</p>
             </div>
             <div className="text-right">
               <p className="text-[11px] font-bold uppercase tracking-tight text-muted-foreground">
@@ -141,6 +145,7 @@ const HeroSection = () => {
               <p className="font-display text-xl text-neon-cyan">£19.99pp</p>
             </div>
           </div>
+
 
           {/* Deals strip */}
           <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
