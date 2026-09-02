@@ -14,7 +14,7 @@ const SQUARE_VERSION = "2024-12-18";
 // paid so a paying customer NEVER ends up without a code.
 const AMOUNT_CREDITS: Record<number, number> = {
   500: 50,
-  1000: 130,
+  1000: 100,
   2000: 350,
   5000: 900,
   10000: 2500,

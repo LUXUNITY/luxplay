@@ -12,7 +12,7 @@ const SQUARE_VERSION = "2024-12-18";
 // Arcade credit packages — priced in pence, charged through Square.
 const PACKAGES: Record<string, { name: string; credits: number; amount: number }> = {
   c50:   { name: "50 Credits",   credits: 50,   amount: 500 },
-  c130:  { name: "130 Credits",  credits: 130,  amount: 1000 },
+  c130:  { name: "100 Credits",  credits: 100,  amount: 1000 },
   c300:  { name: "350 Credits",  credits: 350,  amount: 2000 },
   c800:  { name: "900 Credits",  credits: 900,  amount: 5000 },
   c2000: { name: "2500 Credits", credits: 2500, amount: 10000 },
