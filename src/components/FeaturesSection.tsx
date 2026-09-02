@@ -19,7 +19,6 @@ const founders = [
     objectPos: "object-center",
     name: "Baz Roushbaiani",
     role: "Owner & Director",
-    bio: "Local through and through. Built LuxPlay for Bournemouth families.",
   },
   {
     img: founderMartinAsset.url,
@@ -28,9 +27,9 @@ const founders = [
     offsetY: 30,
     name: "Martin MacGillivray",
     role: "Owner & Director",
-    bio: "Believes in local jobs and a better high street.",
   },
 ];
+
 
 const FeaturesSection = () => {
   return (
@@ -49,7 +48,7 @@ const FeaturesSection = () => {
         </p>
 
         {/* Founders */}
-        <div className="grid grid-cols-2 gap-4 mb-10">
+        <div className="grid grid-cols-2 gap-4 mb-5">
           {founders.map((f) => (
             <div key={f.name} className="flex flex-col items-center text-center">
               <div
@@ -66,11 +65,17 @@ const FeaturesSection = () => {
                 />
               </div>
               <p className="font-display text-sm font-extrabold tracking-tight text-foreground">{f.name}</p>
-              <p className="font-body text-xs text-foreground/50 mb-1">{f.role}</p>
-              <p className="font-body text-xs text-foreground/70">{f.bio}</p>
+              <p className="font-body text-xs text-foreground/50">{f.role}</p>
             </div>
           ))}
         </div>
+
+        {/* Shared founder quote */}
+        <p className="font-display text-lg sm:text-xl font-extrabold tracking-tight text-center text-neon-cyan leading-snug mb-10 px-2">
+          “We&apos;re here to build a better Bournemouth — real jobs, safe fun and somewhere
+          families are proud to call their own.”
+        </p>
+
 
         {/* Shared co-owners */}
         <div className="bg-card rounded-3xl p-5" style={{ boxShadow: "0 8px 0 0 #241C3D" }}>
