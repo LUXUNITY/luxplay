@@ -8,7 +8,7 @@ import { toast } from "@/hooks/use-toast";
 // Pricing — matches the in-store credits poster exactly.
 const tiers = [
   { id: "c50",   credits: 50,   price: 5,   color: "green" },
-  { id: "c130",  credits: 130,  price: 10,  color: "cyan" },
+  { id: "c130",  credits: 100,  price: 10,  color: "cyan" },
   { id: "c300",  credits: 350,  price: 20,  color: "pink",   best: true },
   { id: "c800",  credits: 900,  price: 50,  color: "cyan" },
   { id: "c2000", credits: 2500, price: 100, color: "green" },
