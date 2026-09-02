@@ -16,11 +16,11 @@ const sharedBusinesses = [
 const founders = [
   {
     img: founderBazAsset.url,
-    objectPos: "object-center",
-    zoom: 0.85,
+    objectPos: "object-top",
     name: "Baz Roushbaiani",
     role: "Owner & Director",
   },
+
 
   {
     img: founderMartinAsset.url,
@@ -54,9 +54,10 @@ const FeaturesSection = () => {
           {founders.map((f) => (
             <div key={f.name} className="flex flex-col items-center text-center">
               <div
-                className="w-full aspect-square overflow-hidden rounded-3xl mb-3 bg-card"
+                className="w-full aspect-[3/4] overflow-hidden rounded-3xl mb-3"
                 style={{ boxShadow: "0 8px 0 0 #241C3D" }}
               >
+
 
                 <img
                   src={f.img}
