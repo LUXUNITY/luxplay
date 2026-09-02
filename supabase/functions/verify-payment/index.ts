@@ -15,9 +15,9 @@ const SQUARE_VERSION = "2024-12-18";
 const AMOUNT_CREDITS: Record<number, number> = {
   500: 50,
   1000: 130,
-  2000: 300,
-  5000: 800,
-  10000: 2000,
+  2000: 350,
+  5000: 900,
+  10000: 2500,
 };
 
 function generateRedemptionCode(): string {
