@@ -13,7 +13,8 @@ const STANDARD_SLOTS = [
   { time: "18:00", label: "6–8PM" },
 ];
 
-const FORCED_FULL_TODAY_SLOTS: string[] = ["14:00"];
+// No repeating closures: one-off private parties belong in the dated maps below.
+const FORCED_FULL_TODAY_SLOTS: string[] = [];
 
 const getUKTDateISO = () => {
   const formatter = new Intl.DateTimeFormat("en-GB", {
