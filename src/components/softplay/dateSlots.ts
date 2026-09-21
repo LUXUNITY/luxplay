@@ -59,6 +59,7 @@ const BABY_BLOCKED_SLOTS: Record<string, string[]> = {
   "2026-08-15": ["14:00"], // private party
   "2026-09-01": ["14:00"], // private party
   "2026-09-05": ["10:00"], // private party
+  "2026-10-10": ["12:00"], // private party — whole session
 };
 
 export const isBabySlotBlocked = (dateISO: string, time: string) =>
