@@ -33,13 +33,15 @@ const BabySoftPlaySection = () => {
         .select("session_time, booked_count")
         .eq("session_date", selectedDate);
 
-      if (data) {
-        const counts: Record<string, number> = {};
-        data.forEach((b) => {
-          counts[b.session_time] = Number(b.booked_count) || 0;
-        });
-        setBookedCounts(counts);
-      }
+      const counts: Record<string, number> = {};
+      (data ?? []).forEach((b) => {
+        counts[b.session_time] = Number(b.booked_count) || 0;
+      });
+      getSlotsForDate(selectedDate).forEach((s) => {
+        const held = getHeldSpots(selectedDate, s.time);
+        if (held > 0) counts[s.time] = (counts[s.time] || 0) + held;
+      });
+      setBookedCounts(counts);
     };
     fetchCounts();
   }, [selectedDate]);
