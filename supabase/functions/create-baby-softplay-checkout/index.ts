@@ -31,7 +31,16 @@ const BLOCKED_SLOTS: Record<string, string[]> = {
   "2026-09-01": ["14:00"], // private party
   "2026-09-05": ["10:00"], // private party
   "2026-09-12": ["14:00"], // fully booked
+  "2026-10-10": ["12:00"], // private party — whole session
 };
+
+// Spots held back for part-booked private parties
+const HELD_SPOTS: Record<string, Record<string, number>> = {
+  "2026-10-03": { "12:00": 12 },
+  "2026-10-11": { "12:00": 10 },
+  "2026-10-31": { "12:00": 10 },
+};
+const getHeldSpots = (d: string, t: string) => HELD_SPOTS[d]?.[t] ?? 0;
 
 const getValidSessions = (sessionDate: string) => {
   const base = sessionDate === getUKTDateISO()
@@ -119,7 +128,7 @@ serve(async (req) => {
       });
     }
 
-    const spotsLeft = MAX_CAPACITY - (count ?? 0);
+    const spotsLeft = MAX_CAPACITY - (count ?? 0) - getHeldSpots(sessionDate, sessionTime);
     if (spotsLeft < quantity) {
       return new Response(JSON.stringify({
         error: "SESSION_FULL",
