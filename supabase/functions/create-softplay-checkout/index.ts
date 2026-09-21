@@ -145,7 +145,7 @@ serve(async (req) => {
       });
     }
 
-    const spotsLeft = MAX_CAPACITY - (count ?? 0);
+    const spotsLeft = MAX_CAPACITY - (count ?? 0) - getHeldSpots(sessionDate, sessionTime);
     if (spotsLeft < quantity) {
       return new Response(JSON.stringify({
         error: "SESSION_FULL",
