@@ -39,11 +39,12 @@ const SOFT_PLAY_BLOCKED_SLOTS: Record<string, string[]> = {
   "2026-09-01": ["14:00"], // private party
   "2026-09-05": ["10:00"], // private party
   "2026-10-10": ["12:00"], // private party — whole session
+  "2026-10-28": ["12:00"], // private party — whole session
 };
 
 // Part-booked private parties: spots held back from public availability
 export const HELD_SPOTS: Record<string, Record<string, number>> = {
-  "2026-10-03": { "12:00": 12 },
+  "2026-10-03": { "12:00": 12, "14:00": 15 },
   "2026-10-11": { "12:00": 10 },
   "2026-10-31": { "12:00": 10 },
 };
@@ -60,6 +61,7 @@ const BABY_BLOCKED_SLOTS: Record<string, string[]> = {
   "2026-09-01": ["14:00"], // private party
   "2026-09-05": ["10:00"], // private party
   "2026-10-10": ["12:00"], // private party — whole session
+  "2026-10-28": ["12:00"], // private party — whole session
 };
 
 export const isBabySlotBlocked = (dateISO: string, time: string) =>
