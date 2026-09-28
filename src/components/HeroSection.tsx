@@ -1,3 +1,4 @@
+import WackyWednesdaySection from "@/components/WackyWednesdaySection";
 import logoAsset from "@/assets/logo-luxplay.png";
 import arcadeAsset from "@/assets/real-arcade.jpeg.asset.json";
 import softplayAsset from "@/assets/real-softplay-v2.png.asset.json";
@@ -105,6 +106,9 @@ const HeroSection = () => {
             Bournemouth&apos;s Ultimate Play
           </p>
         </div>
+
+        {/* Wacky Wednesday promo — between logo and booking buttons */}
+        <WackyWednesdaySection />
 
         {/* Quick actions */}
         <div className="grid grid-cols-2 gap-4 px-6 mb-8">
