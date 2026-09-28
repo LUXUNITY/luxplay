@@ -2,7 +2,6 @@ import { Suspense, lazy } from "react";
 import HeroSection from "@/components/HeroSection";
 
 import ScrollReveal from "@/components/ScrollReveal";
-import WackyWednesdaySection from "@/components/WackyWednesdaySection";
 
 const PreSaleSection = lazy(() => import("@/components/PreSaleSection"));
 const VenueSection = lazy(() => import("@/components/VenueSection"));
@@ -22,9 +21,6 @@ const Index = () => {
 
       {/* 1. Hero — logo, then REFRESH & PLAY deal, then CTAs */}
       <HeroSection />
-
-      {/* Wacky Wednesday promo poster */}
-      <WackyWednesdaySection />
 
 
       {/* Mid-page sections — LuxPlay card starfield background */}

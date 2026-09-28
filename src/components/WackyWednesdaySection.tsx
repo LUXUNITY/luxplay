@@ -28,7 +28,7 @@ const WackyWednesdaySection = () => {
   const [cd, setCd] = useState(getCountdown);
   useEffect(() => { const t = setInterval(() => setCd(getCountdown()), 1000); return () => clearInterval(t); }, []);
   return (
-    <section id="wacky-wednesday" className="relative bg-background py-10 md:py-16 px-4 overflow-hidden">
+    <section id="wacky-wednesday" className="relative bg-background pb-8 px-4 overflow-hidden">
       <style>{`
         @keyframes ww-wobble { 0%,100%{transform:rotate(-3deg) scale(1)} 50%{transform:rotate(3deg) scale(1.06)} }
         @keyframes ww-hue { 0%{color:#FF10F0} 33%{color:#00E5FF} 66%{color:#39FF14} 100%{color:#FF10F0} }
