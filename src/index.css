@@ -811,3 +811,22 @@
     .animate-deals-tile, .animate-deals-text { animation: none; }
   }
 }
+
+/* ===== Halloween theme (temporary) ===== */
+@layer utilities {
+  @keyframes spooky-float { 0%,100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-14px) rotate(6deg); } }
+  @keyframes spooky-flicker { 0%,19%,22%,62%,64%,100% { opacity: 1; } 20%,63% { opacity: .35; } }
+  @keyframes spooky-ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes spooky-pulse { 0%,100% { transform: scale(1); box-shadow: 0 0 24px 4px rgba(155,48,255,.6); } 50% { transform: scale(1.08); box-shadow: 0 0 40px 10px rgba(255,122,26,.6); } }
+  @keyframes spooky-glow { 0%,100% { box-shadow: 0 0 20px rgba(255,122,26,.35); } 50% { box-shadow: 0 0 40px rgba(157,255,46,.45); } }
+  @keyframes spooky-pulse-btn { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+  .animate-spooky-float { animation: spooky-float 4s ease-in-out infinite; display: inline-block; }
+  .animate-spooky-flicker { animation: spooky-flicker 3s linear infinite; }
+  .animate-spooky-ticker { animation: spooky-ticker 22s linear infinite; }
+  .animate-spooky-pulse { animation: spooky-pulse 1.6s ease-in-out infinite; }
+  .animate-spooky-glow { animation: spooky-glow 3s ease-in-out infinite; }
+  .animate-spooky-pulse-btn { animation: spooky-pulse-btn 1.2s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-spooky-float, .animate-spooky-flicker, .animate-spooky-ticker, .animate-spooky-pulse, .animate-spooky-glow, .animate-spooky-pulse-btn { animation: none; }
+  }
+}

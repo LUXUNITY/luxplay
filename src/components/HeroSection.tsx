@@ -1,4 +1,4 @@
-import WackyWednesdaySection from "@/components/WackyWednesdaySection";
+import HalloweenPoster from "@/components/halloween/HalloweenPoster";
 import logoAsset from "@/assets/logo-luxplay.png";
 import arcadeAsset from "@/assets/real-arcade.jpeg.asset.json";
 import softplayAsset from "@/assets/real-softplay-v2.png.asset.json";
@@ -41,10 +41,10 @@ const tiles = [
     shadow: "0 6px 0 0 #B34A00",
   },
   {
-    href: "#deals",
-    emoji: "🔥",
-    line1: "View",
-    line2: "All Deals",
+    href: "#halloween",
+    emoji: "🎃",
+    line1: "Halloween",
+    line2: "Tickets",
     bg: "bg-neon-purple",
     text: "text-white",
     shadow: "0 6px 0 0 #7A16BF",
@@ -103,12 +103,12 @@ const HeroSection = () => {
             ))}
           </h1>
           <p className="relative text-sm sm:text-base font-bold uppercase tracking-[0.18em] text-neon-cyan">
-            Bournemouth&apos;s Ultimate Play
+            🎃 Bournemouth&apos;s Spookiest Play 🦇
           </p>
         </div>
 
-        {/* Wacky Wednesday promo — between logo and booking buttons */}
-        <WackyWednesdaySection />
+        {/* Halloween event poster — between logo and booking buttons */}
+        <HalloweenPoster />
 
         {/* Quick actions */}
         <div className="grid grid-cols-2 gap-4 px-6 mb-8">
