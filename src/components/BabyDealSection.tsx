@@ -3,7 +3,7 @@ import { Check, Clock, Loader2, Minus, Plus, Users } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import DateStrip from "./softplay/DateStrip";
-import { getAvailableDates, getSlotsForDate, isSlotForcedFull, isBabySlotBlocked } from "./softplay/dateSlots";
+import { getAvailableDates, getSlotsForDate, isSlotForcedFull, isBabySlotBlocked, getHeldSpots } from "./softplay/dateSlots";
 
 const DEAL_PRICE = 5.99;
 const MAX_CAPACITY = 15;
@@ -30,6 +30,7 @@ const BabyDealSection = () => {
       .then(({ data }) => {
         const counts: Record<string, number> = {};
         data?.forEach((row) => { counts[row.session_time] = Number(row.booked_count) || 0; });
+        getSlotsForDate(selectedDate).forEach((s) => { counts[s.time] = (counts[s.time] || 0) + getHeldSpots(selectedDate, s.time); });
         setBookedCounts(counts);
       });
   }, [selectedDate, open]);

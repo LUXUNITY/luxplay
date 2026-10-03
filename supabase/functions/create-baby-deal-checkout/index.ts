@@ -25,6 +25,12 @@ const ukTodayISO = () => {
 };
 // Reject past dates, pre-opening dates and dates beyond the booking window so a
 // stale tab or tampered request can never take money for an unbookable session.
+const HELD_SPOTS: Record<string, Record<string, number>> = {
+  "2026-10-03": { "12:00": 15, "14:00": 15 },
+  "2026-10-11": { "12:00": 10 },
+  "2026-10-31": { "12:00": 10 },
+};
+const getHeldSpots = (d: string, t: string) => HELD_SPOTS[d]?.[t] ?? 0;
 const BLOCKED_SLOTS: Record<string, string[]> = {
   "2026-08-15": ["14:00"], // private party
   "2026-09-01": ["14:00"], // private party
@@ -81,7 +87,7 @@ serve(async (req) => {
       .eq("session_time", sessionTime);
 
     if (countError) throw new Error("Could not verify baby session availability");
-    const spotsLeft = MAX_CAPACITY - (count ?? 0);
+    const spotsLeft = MAX_CAPACITY - (count ?? 0) - getHeldSpots(sessionDate, sessionTime);
     if (spotsLeft < quantity) {
       return new Response(JSON.stringify({
         error: "SESSION_FULL",
