@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1791052350900,
+      "tag": "0000_halloween_event_capacity",
+      "breakpoints": true
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import HalloweenDecor from "@/components/halloween/HalloweenDecor";
 import { Suspense, lazy } from "react";
 import { MotionConfig } from "framer-motion";
 import { Toaster } from "@/components/ui/toaster";
@@ -37,6 +38,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <HalloweenDecor />
         <AuthProvider>
           <AppShellRedirect />
           <Suspense fallback={null}>

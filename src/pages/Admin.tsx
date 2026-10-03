@@ -286,7 +286,7 @@ const Admin = () => {
         {/* Scan QR */}
         <button
           onClick={() => setScanning(true)}
-          className="w-full font-display text-sm tracking-widest text-[#070710] bg-neon-cyan py-4 mb-3 flex items-center justify-center gap-2 hover:shadow-[0_0_30px_rgba(0,238,255,0.4)] transition-all duration-300"
+          className="w-full font-display text-sm tracking-widest text-[#070710] bg-neon-cyan py-4 mb-3 flex items-center justify-center gap-2 hover:shadow-[0_0_30px_rgba(255,182,39,0.4)] transition-all duration-300"
         >
           <ScanLine className="w-5 h-5" />
           SCAN QR CODE

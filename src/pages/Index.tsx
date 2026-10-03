@@ -1,5 +1,6 @@
 import { Suspense, lazy } from "react";
 import HeroSection from "@/components/HeroSection";
+import HalloweenBookingSection from "@/components/halloween/HalloweenBookingSection";
 
 import ScrollReveal from "@/components/ScrollReveal";
 
@@ -21,6 +22,9 @@ const Index = () => {
 
       {/* 1. Hero — logo, then REFRESH & PLAY deal, then CTAs */}
       <HeroSection />
+
+      {/* Halloween Spooktacular ticket booking — 100 per night */}
+      <HalloweenBookingSection />
 
 
       {/* Mid-page sections — LuxPlay card starfield background */}

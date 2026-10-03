@@ -10,7 +10,7 @@ type Pad = { cx: number; cy: number; fill: string; opacity: number; r: number };
 
 const TRACES: Trace[] = [
   // Cyan horizontal — top band
-  { d: "M0 60 L80 60 Q90 60 90 70 L90 110 Q90 120 100 120 L280 120 Q290 120 290 110 L290 70 Q290 60 300 60 L400 60", stroke: "#00e5ff", opacity: 0.6, width: 1.4 },
+  { d: "M0 60 L80 60 Q90 60 90 70 L90 110 Q90 120 100 120 L280 120 Q290 120 290 110 L290 70 Q290 60 300 60 L400 60", stroke: "#FFB627", opacity: 0.6, width: 1.4 },
   // Purple vertical-then-horizontal — left side
   { d: "M40 0 L40 150 Q40 160 50 160 L130 160 Q140 160 140 170 L140 400", stroke: "#7c4dff", opacity: 0.55, width: 1.3 },
   // Green — bottom-right routing
@@ -18,19 +18,19 @@ const TRACES: Trace[] = [
   // Pink connector — bottom-left
   { d: "M0 320 L70 320 Q80 320 80 310 L80 260", stroke: "#ff2bd6", opacity: 0.5, width: 1.1 },
   // Cyan vertical — right
-  { d: "M360 0 L360 90 Q360 100 350 100 L240 100", stroke: "#00e5ff", opacity: 0.45, width: 1.1 },
+  { d: "M360 0 L360 90 Q360 100 350 100 L240 100", stroke: "#FFB627", opacity: 0.45, width: 1.1 },
   // Purple — bottom strand
   { d: "M0 380 L110 380 Q120 380 120 370 L120 340", stroke: "#7c4dff", opacity: 0.45, width: 1.1 },
 ];
 
 const PADS: Pad[] = [
-  { cx: 90, cy: 70, fill: "#00e5ff", opacity: 0.8, r: 3.2 },
-  { cx: 290, cy: 110, fill: "#00e5ff", opacity: 0.8, r: 3.2 },
+  { cx: 90, cy: 70, fill: "#FFB627", opacity: 0.8, r: 3.2 },
+  { cx: 290, cy: 110, fill: "#FFB627", opacity: 0.8, r: 3.2 },
   { cx: 140, cy: 170, fill: "#7c4dff", opacity: 0.8, r: 3.2 },
   { cx: 310, cy: 270, fill: "#39ff14", opacity: 0.8, r: 3.2 },
   { cx: 190, cy: 350, fill: "#39ff14", opacity: 0.8, r: 3.2 },
   { cx: 80, cy: 310, fill: "#ff2bd6", opacity: 0.8, r: 2.8 },
-  { cx: 240, cy: 100, fill: "#00e5ff", opacity: 0.7, r: 2.8 },
+  { cx: 240, cy: 100, fill: "#FFB627", opacity: 0.7, r: 2.8 },
   { cx: 120, cy: 370, fill: "#7c4dff", opacity: 0.7, r: 2.8 },
 ];
 

@@ -20,9 +20,9 @@ const fmtPrice = (n: number) =>
 
 // Bright Play Pop palette + matching darker Memphis shadow tones.
 const colorClasses: Record<string, { bg: string; shadow: string }> = {
-  green: { bg: "bg-neon-green", shadow: "#24B00C" },
-  pink: { bg: "bg-neon-pink", shadow: "#B80AAA" },
-  cyan: { bg: "bg-neon-cyan", shadow: "#00A3B8" },
+  green: { bg: "bg-neon-green", shadow: "#5EA80F" },
+  pink: { bg: "bg-neon-pink", shadow: "#B34A00" },
+  cyan: { bg: "bg-neon-cyan", shadow: "#B37A00" },
 };
 
 const PreSaleSection = () => {
@@ -74,7 +74,7 @@ const PreSaleSection = () => {
         >
           <span
             className="inline-block bg-neon-cyan text-ink font-display font-extrabold text-xs uppercase px-5 py-2.5 rounded-full"
-            style={{ boxShadow: "0 6px 0 0 #00A3B8" }}
+            style={{ boxShadow: "0 6px 0 0 #B37A00" }}
           >
             🎮 Buy online, play instantly
           </span>

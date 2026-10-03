@@ -28,7 +28,7 @@ const AppTabBar = () => (
           >
             {({ isActive }) => (
               <>
-                <Icon className={`w-5 h-5 ${isActive ? "drop-shadow-[0_0_8px_#00eeff]" : ""}`} />
+                <Icon className={`w-5 h-5 ${isActive ? "drop-shadow-[0_0_8px_#FFB627]" : ""}`} />
                 {label}
               </>
             )}

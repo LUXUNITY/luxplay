@@ -19,7 +19,7 @@ const IceLolly = () => (
     <rect x="4" y="6" width="12" height="35" rx="3" fill="#7ae8ff" stroke="#aef0ff" strokeWidth="1.3" />
     {/* frozen fill, two-tone */}
     <rect x="5.4" y="14" width="9.2" height="25.6" rx="2.2" fill="#ff2bb4" opacity="0.8" />
-    <rect x="5.4" y="14" width="9.2" height="12" rx="2.2" fill="#00eeff" opacity="0.55" />
+    <rect x="5.4" y="14" width="9.2" height="12" rx="2.2" fill="#FFB627" opacity="0.55" />
     {/* highlight */}
     <rect x="6.3" y="9" width="2.2" height="26" rx="1.1" fill="#ffffff" opacity="0.5" />
   </svg>
@@ -149,7 +149,7 @@ const RefreshPlaySection = () => {
           <div key={i} className={`absolute animate-ice-float ${c.mobile ? "" : "hidden md:block"}`}
             style={{ left: c.left, top: c.top, width: c.size, height: c.size, animationDuration: `${c.dur}s`, animationDelay: `${c.delay}s` }}>
             <div className="w-full h-full rounded-[6px] border border-white/70 bg-gradient-to-br from-white/60 via-cyan-200/40 to-cyan-400/30"
-              style={{ boxShadow: "inset 0 0 12px rgba(255,255,255,0.6), 0 0 14px rgba(0,238,255,0.45)" }} />
+              style={{ boxShadow: "inset 0 0 12px rgba(255,255,255,0.6), 0 0 14px rgba(255,182,39,0.45)" }} />
           </div>
         ))}
       </div>
@@ -195,7 +195,7 @@ const RefreshPlaySection = () => {
       {/* Wavy water surface at bottom */}
       <div className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none overflow-hidden" aria-hidden="true">
         <div className="absolute bottom-0 left-0 h-full w-[200%] animate-wave-roll"
-          style={{ background: "repeating-linear-gradient(90deg, rgba(0,238,255,0.35) 0 40px, rgba(120,230,255,0.55) 40px 80px)", clipPath: "polygon(0 60%, 5% 40%, 10% 60%, 15% 40%, 20% 60%, 25% 40%, 30% 60%, 35% 40%, 40% 60%, 45% 40%, 50% 60%, 55% 40%, 60% 60%, 65% 40%, 70% 60%, 75% 40%, 80% 60%, 85% 40%, 90% 60%, 95% 40%, 100% 60%, 100% 100%, 0 100%)" }} />
+          style={{ background: "repeating-linear-gradient(90deg, rgba(255,182,39,0.35) 0 40px, rgba(120,230,255,0.55) 40px 80px)", clipPath: "polygon(0 60%, 5% 40%, 10% 60%, 15% 40%, 20% 60%, 25% 40%, 30% 60%, 35% 40%, 40% 60%, 45% 40%, 50% 60%, 55% 40%, 60% 60%, 65% 40%, 70% 60%, 75% 40%, 80% 60%, 85% 40%, 90% 60%, 95% 40%, 100% 60%, 100% 100%, 0 100%)" }} />
       </div>
 
       <div className="relative z-10 px-4 md:px-12 lg:px-20 py-10 md:py-16">
@@ -211,7 +211,7 @@ const RefreshPlaySection = () => {
 
         {/* Limited-time tag — BIGGER */}
         <div className="flex justify-center mb-4">
-          <span className="inline-flex items-center gap-2 md:gap-3 border-2 border-neon-cyan/70 bg-neon-cyan/10 backdrop-blur-md text-neon-cyan font-display text-lg sm:text-2xl md:text-4xl tracking-[0.2em] uppercase px-5 py-3 md:px-8 md:py-4 shadow-[0_0_40px_rgba(0,238,255,0.45)]">
+          <span className="inline-flex items-center gap-2 md:gap-3 border-2 border-neon-cyan/70 bg-neon-cyan/10 backdrop-blur-md text-neon-cyan font-display text-lg sm:text-2xl md:text-4xl tracking-[0.2em] uppercase px-5 py-3 md:px-8 md:py-4 shadow-[0_0_40px_rgba(255,182,39,0.45)]">
             <Snowflake className="w-5 h-5 md:w-7 md:h-7 animate-spin shrink-0" style={{ animationDuration: "6s" }} />
             SUMMER CHILL & PLAY
             <Snowflake className="w-5 h-5 md:w-7 md:h-7 animate-spin shrink-0" style={{ animationDuration: "6s", animationDirection: "reverse" }} />
@@ -224,7 +224,7 @@ const RefreshPlaySection = () => {
         {/* Title — smaller, sits above the hero stack */}
         <h2 className="text-center font-display tracking-[0.15em] leading-none mb-6">
           <span className="block text-2xl md:text-4xl text-neon-cyan"
-            style={{ textShadow: "0 0 18px rgba(0,238,255,0.8)" }}>
+            style={{ textShadow: "0 0 18px rgba(255,182,39,0.8)" }}>
             SUMMER CHILL <span className="text-white/80">&amp;</span> <span className="text-neon-green" style={{ textShadow: "0 0 18px rgba(46,255,99,0.8)" }}>PLAY!</span>
           </span>
         </h2>
@@ -241,11 +241,11 @@ const RefreshPlaySection = () => {
           <div className="absolute inset-0 pointer-events-none overflow-hidden z-10" aria-hidden="true">
             {[
               { left: "7%", color: "#aaff00", dur: 4.5, delay: 0, drift: "26px", mobile: true },
-              { left: "23%", color: "#00eeff", dur: 5.5, delay: 1.2, drift: "-30px", mobile: true },
+              { left: "23%", color: "#FFB627", dur: 5.5, delay: 1.2, drift: "-30px", mobile: true },
               { left: "39%", color: "#ff00cc", dur: 5, delay: 2.4, drift: "18px", mobile: false },
               { left: "56%", color: "#aaff00", dur: 6, delay: 0.6, drift: "-22px", mobile: true },
               { left: "72%", color: "#7700ff", dur: 4.8, delay: 1.8, drift: "28px", mobile: false },
-              { left: "89%", color: "#00eeff", dur: 5.2, delay: 3, drift: "-18px", mobile: true },
+              { left: "89%", color: "#FFB627", dur: 5.2, delay: 3, drift: "-18px", mobile: true },
             ].map((c, i) => (
               <span key={i}
                 className={`confetti ${c.mobile ? "" : "hidden md:block"}`}
@@ -280,7 +280,7 @@ const RefreshPlaySection = () => {
           {/* Cool refreshed face with sunglasses + cold drink — sits on the deal card */}
           <div
             className="absolute -top-1 -left-3 md:-top-3 md:-left-8 text-5xl md:text-7xl select-none z-30 -rotate-[12deg] pointer-events-none"
-            style={{ filter: "drop-shadow(0 0 14px rgba(0,238,255,0.85))", animation: "ice-float 3s ease-in-out infinite" }}
+            style={{ filter: "drop-shadow(0 0 14px rgba(255,182,39,0.85))", animation: "ice-float 3s ease-in-out infinite" }}
             aria-hidden="true"
           >
             😎🥤
@@ -306,7 +306,7 @@ const RefreshPlaySection = () => {
             <div className="absolute inset-0 frost-shimmer pointer-events-none opacity-70" />
             <div
               className="relative border-2 border-neon-cyan/50 bg-gradient-to-b from-[#0a2436]/90 via-[#070d18]/95 to-[#0a1426]/90 backdrop-blur-md p-5 md:p-10"
-              style={{ boxShadow: "inset 0 1px 0 rgba(180,240,255,0.4), inset 0 -1px 0 rgba(0,238,255,0.2)" }}
+              style={{ boxShadow: "inset 0 1px 0 rgba(180,240,255,0.4), inset 0 -1px 0 rgba(255,182,39,0.2)" }}
             >
               {/* corner frost crystals */}
               <Snowflake className="absolute top-2 left-2 w-4 h-4 md:w-6 md:h-6 text-neon-cyan/60" />
@@ -324,7 +324,7 @@ const RefreshPlaySection = () => {
                   <span className="animate-icon-bob text-neon-green shrink-0 text-4xl md:text-6xl leading-none">🛝</span>
                   <div className="animate-big-throb">
                     <p className="font-display text-[52px] leading-[0.9] sm:text-7xl md:text-[7.5rem] text-neon-cyan"
-                      style={{ textShadow: "0 0 25px rgba(0,238,255,0.9), 0 0 55px rgba(0,238,255,0.5)" }}>
+                      style={{ textShadow: "0 0 25px rgba(255,182,39,0.9), 0 0 55px rgba(255,182,39,0.5)" }}>
                       2 HOURS
                     </p>
                     <p className="font-display text-4xl sm:text-6xl md:text-8xl text-neon-green mt-1"
@@ -336,7 +336,7 @@ const RefreshPlaySection = () => {
                   <span className="animate-icon-bob text-neon-pink shrink-0 text-4xl md:text-6xl leading-none" style={{ animationDelay: "0.5s" }}>🎈</span>
                 </div>
                 <div className="mt-3 flex flex-wrap justify-center gap-2 md:gap-3">
-                  <span className="inline-flex items-center gap-2 border-2 border-neon-cyan/70 bg-neon-cyan/10 text-neon-cyan font-display text-[11px] sm:text-sm md:text-base tracking-[0.25em] uppercase px-3 py-1.5 md:px-4 md:py-2 shadow-[0_0_20px_rgba(0,238,255,0.4)]">
+                  <span className="inline-flex items-center gap-2 border-2 border-neon-cyan/70 bg-neon-cyan/10 text-neon-cyan font-display text-[11px] sm:text-sm md:text-base tracking-[0.25em] uppercase px-3 py-1.5 md:px-4 md:py-2 shadow-[0_0_20px_rgba(255,182,39,0.4)]">
                     ❄ FULLY AIR CONDITIONED ❄
                   </span>
                   <span className="inline-flex items-center gap-2 border-2 border-neon-green bg-neon-green/15 text-neon-green font-display text-[11px] sm:text-sm md:text-base tracking-[0.25em] uppercase px-3 py-1.5 md:px-4 md:py-2 animate-big-throb shadow-[0_0_22px_rgba(170,255,0,0.5)]">
@@ -366,7 +366,7 @@ const RefreshPlaySection = () => {
               {/* Big PLUS chain */}
               <div className="my-5 md:my-8 grid gap-3 md:gap-4">
                 {[
-                  { art: <span className="text-3xl md:text-5xl leading-none">🥤</span>, icon: <Snowflake className="w-6 h-6 md:w-8 md:h-8" />, big: "ICE-COLD DRINK", color: "text-neon-cyan", border: "border-neon-cyan", shadow: "0 0 20px rgba(0,238,255,0.7)" },
+                  { art: <span className="text-3xl md:text-5xl leading-none">🥤</span>, icon: <Snowflake className="w-6 h-6 md:w-8 md:h-8" />, big: "ICE-COLD DRINK", color: "text-neon-cyan", border: "border-neon-cyan", shadow: "0 0 20px rgba(255,182,39,0.7)" },
                   { art: <IceLolly />, icon: <Gift className="w-6 h-6 md:w-8 md:h-8" />, big: "ICE POP", color: "text-[#aef0ff]", border: "border-[#aef0ff]", shadow: "0 0 20px rgba(174,240,255,0.7)" },
                 ].map((item, i) => (
                   <div key={item.big} className="flex items-center gap-3 md:gap-5">

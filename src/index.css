@@ -7,22 +7,22 @@
 @layer base {
   :root {
     /* Bright layout, LUXPLAY neon brand colours */
-    --background: 252 30% 5%;
+    --background: 270 40% 4%;
     --foreground: 0 0% 98%;
 
-    --card: 252 25% 9%;
+    --card: 270 35% 8%;
     --card-foreground: 0 0% 98%;
 
     --popover: 252 25% 9%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 312 100% 53%;
+    --primary: 24 100% 55%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 187 100% 50%;
     --secondary-foreground: 252 30% 6%;
 
-    --muted: 252 22% 14%;
+    --muted: 270 28% 13%;
     --muted-foreground: 240 10% 68%;
 
     --accent: 111 100% 54%;
@@ -33,14 +33,14 @@
 
     --border: 252 18% 20%;
     --input: 252 18% 20%;
-    --ring: 312 100% 53%;
+    --ring: 24 100% 55%;
 
     --radius: 1.5rem;
 
     /* LUXPLAY neon palette */
-    --neon-pink: 312 100% 53%;
-    --neon-cyan: 187 100% 50%;
-    --neon-green: 111 100% 54%;
+    --neon-pink: 24 100% 55%;
+    --neon-cyan: 39 100% 58%;
+    --neon-green: 88 100% 59%;
     --neon-purple: 276 100% 58%;
 
 
@@ -62,7 +62,7 @@
 
   body {
     @apply bg-background text-foreground font-body;
-    background-color: hsl(252 30% 5%);
+    background-color: hsl(270 40% 4%);
   }
 }
 
@@ -169,11 +169,11 @@
   }
 
   .glow-pink {
-    text-shadow: 0 0 18px rgba(255,16,240,0.6);
+    text-shadow: 0 0 18px rgba(255,122,26,0.6);
   }
 
   .glow-cyan {
-    text-shadow: 0 0 18px rgba(0,229,255,0.6);
+    text-shadow: 0 0 18px rgba(255,182,39,0.6);
   }
 
   .glow-purple {
@@ -202,12 +202,12 @@
     0%, 100% {
       opacity: 1;
       filter: drop-shadow(0 0 18px rgba(255, 0, 204, 0.85))
-              drop-shadow(0 0 36px rgba(0, 238, 255, 0.55));
+              drop-shadow(0 0 36px rgba(255,182,39, 0.55));
     }
     50% {
       opacity: 0.78;
       filter: drop-shadow(0 0 6px rgba(255, 0, 204, 0.4))
-              drop-shadow(0 0 12px rgba(0, 238, 255, 0.25));
+              drop-shadow(0 0 12px rgba(255,182,39, 0.25));
     }
   }
   .animate-neon-flash {
@@ -225,7 +225,7 @@
     position: absolute;
     top: 0;
     color: rgba(220, 245, 255, 0.85);
-    filter: drop-shadow(0 0 6px rgba(0, 238, 255, 0.7));
+    filter: drop-shadow(0 0 6px rgba(255,182,39, 0.7));
     animation: snowfall linear infinite;
     pointer-events: none;
     will-change: transform, opacity;
@@ -244,8 +244,8 @@
 
   /* Icy chill pulse — gentle scale + cyan halo */
   @keyframes chill-pulse {
-    0%, 100% { box-shadow: 0 0 40px rgba(0, 238, 255, 0.35), inset 0 0 30px rgba(0, 238, 255, 0.08); }
-    50% { box-shadow: 0 0 70px rgba(120, 230, 255, 0.55), inset 0 0 50px rgba(0, 238, 255, 0.15); }
+    0%, 100% { box-shadow: 0 0 40px rgba(255,182,39, 0.35), inset 0 0 30px rgba(255,182,39, 0.08); }
+    50% { box-shadow: 0 0 70px rgba(120, 230, 255, 0.55), inset 0 0 50px rgba(255,182,39, 0.15); }
   }
   .animate-chill-pulse { animation: chill-pulse 3.4s ease-in-out infinite; }
 
@@ -330,7 +330,7 @@
   /* Credit flash — neon pink/cyan text glow swap */
   @keyframes credit-flash {
     0%,100% { text-shadow: 0 0 18px rgba(255,0,204,0.85), 0 0 45px rgba(255,0,204,0.45); opacity: 1; }
-    50% { text-shadow: 0 0 28px rgba(0,238,255,0.95), 0 0 65px rgba(0,238,255,0.55); opacity: 0.92; }
+    50% { text-shadow: 0 0 28px rgba(255,182,39,0.95), 0 0 65px rgba(255,182,39,0.55); opacity: 0.92; }
   }
   .animate-credit-flash { animation: credit-flash 1.4s ease-in-out infinite; }
 
@@ -341,7 +341,7 @@
     will-change: transform;
     background: repeating-conic-gradient(
       from 0deg,
-      rgba(0, 238, 255, 0.16) 0deg 7deg,
+      rgba(255,182,39, 0.16) 0deg 7deg,
       transparent 7deg 18deg,
       rgba(255, 0, 204, 0.14) 18deg 25deg,
       transparent 25deg 36deg
@@ -429,12 +429,12 @@
   @keyframes fun-bubble {
     0%, 100% {
       transform: scale(1.06);
-      background-color: #FF10F0;
-      box-shadow: 0 0 18px rgba(255, 16, 240, 0.75), 0 0 48px rgba(255, 16, 240, 0.45);
+      background-color: #FF7A1A;
+      box-shadow: 0 0 18px rgba(255,122,26, 0.75), 0 0 48px rgba(255,122,26, 0.45);
     }
     25% {
-      background-color: #00E5FF;
-      box-shadow: 0 0 18px rgba(0, 229, 255, 0.75), 0 0 48px rgba(0, 229, 255, 0.45);
+      background-color: #FFB627;
+      box-shadow: 0 0 18px rgba(255,182,39, 0.75), 0 0 48px rgba(255,182,39, 0.45);
     }
     50% {
       transform: scale(1.14);
@@ -450,16 +450,16 @@
 
   /* Card glow throb for deal cards */
   @keyframes deal-glow-pink {
-    0%, 100% { box-shadow: 0 8px 0 0 #B80AAA, 0 0 22px rgba(255, 16, 240, 0.35); }
-    50% { box-shadow: 0 8px 0 0 #B80AAA, 0 0 46px rgba(255, 16, 240, 0.7); }
+    0%, 100% { box-shadow: 0 8px 0 0 #B34A00, 0 0 22px rgba(255,122,26, 0.35); }
+    50% { box-shadow: 0 8px 0 0 #B34A00, 0 0 46px rgba(255,122,26, 0.7); }
   }
   @keyframes deal-glow-cyan {
-    0%, 100% { box-shadow: 0 8px 0 0 #00A3B8, 0 0 22px rgba(0, 229, 255, 0.35); }
-    50% { box-shadow: 0 8px 0 0 #00A3B8, 0 0 46px rgba(0, 229, 255, 0.7); }
+    0%, 100% { box-shadow: 0 8px 0 0 #B37A00, 0 0 22px rgba(255,182,39, 0.35); }
+    50% { box-shadow: 0 8px 0 0 #B37A00, 0 0 46px rgba(255,182,39, 0.7); }
   }
   @keyframes deal-glow-green {
-    0%, 100% { box-shadow: 0 8px 0 0 #24B00C, 0 0 22px rgba(57, 255, 20, 0.35); }
-    50% { box-shadow: 0 8px 0 0 #24B00C, 0 0 46px rgba(57, 255, 20, 0.7); }
+    0%, 100% { box-shadow: 0 8px 0 0 #5EA80F, 0 0 22px rgba(57, 255, 20, 0.35); }
+    50% { box-shadow: 0 8px 0 0 #5EA80F, 0 0 46px rgba(57, 255, 20, 0.7); }
   }
   .animate-deal-glow-cyan { animation: deal-glow-cyan 2s ease-in-out infinite; }
   .animate-deal-glow-green { animation: deal-glow-green 2s ease-in-out infinite; }
@@ -498,15 +498,15 @@
   }
   @keyframes btn-flash-cyan {
     0%, 100% {
-      box-shadow: 0 0 12px rgba(0, 238, 255, 0.9),
-                  0 0 32px rgba(0, 238, 255, 0.75),
-                  0 0 64px rgba(0, 238, 255, 0.55),
+      box-shadow: 0 0 12px rgba(255,182,39, 0.9),
+                  0 0 32px rgba(255,182,39, 0.75),
+                  0 0 64px rgba(255,182,39, 0.55),
                   0 0 110px rgba(255, 0, 200, 0.4),
                   inset 0 0 18px rgba(255, 255, 255, 0.25);
       transform: scale(1);
     }
     50% {
-      box-shadow: 0 0 6px rgba(0, 238, 255, 0.55),
+      box-shadow: 0 0 6px rgba(255,182,39, 0.55),
                   0 0 14px rgba(255, 0, 200, 0.35),
                   inset 0 0 6px rgba(255, 255, 255, 0.1);
       transform: scale(0.97);
@@ -777,7 +777,7 @@
 
   /* Bright playful page backdrop — soft confetti dots on white */
   .luxplay-pattern-bg {
-    background-color: hsl(252 30% 5%);
+    background-color: hsl(270 40% 4%);
     background-image:
       radial-gradient(circle at 12% 8%, rgba(255, 225, 86, 0.28) 0, transparent 28%),
       radial-gradient(circle at 88% 22%, rgba(0, 194, 255, 0.18) 0, transparent 26%),
@@ -801,7 +801,7 @@
   @keyframes deals-text-pop {
     0% { transform: scale(1); color: #FFFFFF; text-shadow: 0 0 10px rgba(255,255,255,0.6); }
     25% { transform: scale(1.1); color: #39FF14; text-shadow: 0 0 16px rgba(57,255,20,0.9); }
-    50% { transform: scale(1); color: #00E5FF; text-shadow: 0 0 16px rgba(0,229,255,0.9); }
+    50% { transform: scale(1); color: #FFB627; text-shadow: 0 0 16px rgba(255,182,39,0.9); }
     75% { transform: scale(1.1); color: #FFD400; text-shadow: 0 0 16px rgba(255,212,0,0.9); }
     100% { transform: scale(1); color: #FFFFFF; text-shadow: 0 0 10px rgba(255,255,255,0.6); }
   }
@@ -809,5 +809,24 @@
   .animate-deals-text { display: inline-block; animation: deals-text-pop 2.6s ease-in-out infinite; }
   @media (prefers-reduced-motion: reduce) {
     .animate-deals-tile, .animate-deals-text { animation: none; }
+  }
+}
+
+/* ===== Halloween theme (temporary) ===== */
+@layer utilities {
+  @keyframes spooky-float { 0%,100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-14px) rotate(6deg); } }
+  @keyframes spooky-flicker { 0%,19%,22%,62%,64%,100% { opacity: 1; } 20%,63% { opacity: .35; } }
+  @keyframes spooky-ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes spooky-pulse { 0%,100% { transform: scale(1); box-shadow: 0 0 24px 4px rgba(155,48,255,.6); } 50% { transform: scale(1.08); box-shadow: 0 0 40px 10px rgba(255,122,26,.6); } }
+  @keyframes spooky-glow { 0%,100% { box-shadow: 0 0 20px rgba(255,122,26,.35); } 50% { box-shadow: 0 0 40px rgba(157,255,46,.45); } }
+  @keyframes spooky-pulse-btn { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+  .animate-spooky-float { animation: spooky-float 4s ease-in-out infinite; display: inline-block; }
+  .animate-spooky-flicker { animation: spooky-flicker 3s linear infinite; }
+  .animate-spooky-ticker { animation: spooky-ticker 22s linear infinite; }
+  .animate-spooky-pulse { animation: spooky-pulse 1.6s ease-in-out infinite; }
+  .animate-spooky-glow { animation: spooky-glow 3s ease-in-out infinite; }
+  .animate-spooky-pulse-btn { animation: spooky-pulse-btn 1.2s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-spooky-float, .animate-spooky-flicker, .animate-spooky-ticker, .animate-spooky-pulse, .animate-spooky-glow, .animate-spooky-pulse-btn { animation: none; }
   }
 }

@@ -32,7 +32,7 @@ const DateStrip = ({ selectedDate, onSelect, accent }: Props) => {
                 }`}
                 style={{
                   boxShadow: isSelected
-                    ? "0 6px 0 0 #B80AAA"
+                    ? "0 6px 0 0 #B34A00"
                     : "0 6px 0 0 #241C3D",
                 }}
               >

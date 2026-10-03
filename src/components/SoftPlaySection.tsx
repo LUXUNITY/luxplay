@@ -132,7 +132,7 @@ const SoftPlaySection = () => {
           <p className="font-body text-foreground/60 text-sm">
             Max 40 kids/session · Adults go free
           </p>
-          <div className="mt-3 inline-block rounded-2xl bg-neon-green px-6 py-2" style={{ boxShadow: "0 6px 0 0 #24B00C" }}>
+          <div className="mt-3 inline-block rounded-2xl bg-neon-green px-6 py-2" style={{ boxShadow: "0 6px 0 0 #5EA80F" }}>
             <span className="font-display text-3xl font-extrabold text-ink">
               £{getSoftPlayFullPrice(selectedDate).toFixed(2)}
             </span>
@@ -145,7 +145,7 @@ const SoftPlaySection = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           className="mb-8 rounded-3xl bg-neon-pink text-ink text-center py-4 px-4"
-          style={{ boxShadow: "0 8px 0 0 #B80AAA" }}
+          style={{ boxShadow: "0 8px 0 0 #B34A00" }}
         >
           <p className="font-display text-xl font-extrabold tracking-tight">ADULTS GO FREE!</p>
           <p className="font-body text-xs mt-1 opacity-90">Up to 2 adults free per child</p>
@@ -191,7 +191,7 @@ const SoftPlaySection = () => {
                     boxShadow: isFull
                       ? "none"
                       : isSelected
-                      ? "0 6px 0 0 #B80AAA"
+                      ? "0 6px 0 0 #B34A00"
                       : "0 6px 0 0 #241C3D",
                   }}
                 >
@@ -215,12 +215,12 @@ const SoftPlaySection = () => {
                       className="h-full rounded-full transition-all"
                       style={{
                         width: `${Math.max(4, Math.round((booked / MAX_CAPACITY) * 100))}%`,
-                        backgroundColor: isFull ? "#FF2D4B" : isLow ? "#FFD400" : "#00E5FF",
+                        backgroundColor: isFull ? "#FF2D4B" : isLow ? "#FFD400" : "#FFB627",
                         boxShadow: isFull
                           ? "0 0 8px #FF2D4B"
                           : isLow
                           ? "0 0 8px #FFD400"
-                          : "0 0 8px #00E5FF",
+                          : "0 0 8px #FFB627",
                       }}
                     />
                   </div>
@@ -321,7 +321,7 @@ const SoftPlaySection = () => {
               onClick={handleBook}
               disabled={loading}
               className="w-full rounded-2xl font-display text-base font-extrabold tracking-tight py-4 bg-neon-green text-ink active:translate-y-1 transition-transform disabled:opacity-50 flex items-center justify-center gap-2"
-              style={{ boxShadow: "0 8px 0 0 #24B00C" }}
+              style={{ boxShadow: "0 8px 0 0 #5EA80F" }}
             >
               {loading ? (
                 <Loader2 className="w-5 h-5 animate-spin" />
