@@ -37,7 +37,7 @@ const BLOCKED_SLOTS: Record<string, string[]> = {
 
 // Spots held back for part-booked private parties
 const HELD_SPOTS: Record<string, Record<string, number>> = {
-  "2026-10-03": { "12:00": 12, "14:00": 15 },
+  "2026-10-03": { "12:00": 15, "14:00": 15 },
   "2026-10-11": { "12:00": 10 },
   "2026-10-31": { "12:00": 10 },
 };
