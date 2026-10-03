@@ -10,6 +10,12 @@ const corsHeaders = {
 const STAMPS_PER_REWARD = 6;
 const MAX_CAPACITY = 40;
 const STANDARD_SESSIONS = ["10:00", "12:00", "14:00", "16:00", "18:00"];
+const HELD_SPOTS: Record<string, Record<string, number>> = {
+  "2026-10-03": { "12:00": 15, "14:00": 15 },
+  "2026-10-11": { "12:00": 10 },
+  "2026-10-31": { "12:00": 10 },
+};
+const getHeldSpots = (d: string, t: string) => HELD_SPOTS[d]?.[t] ?? 0;
 const BLOCKED_SLOTS: Record<string, string[]> = {
   "2026-08-15": ["14:00"],
   "2026-09-01": ["14:00"], // private party
@@ -122,7 +128,7 @@ serve(async (req) => {
       console.error("Capacity check failed:", countError);
       return json({ error: "Could not verify session availability" }, 500);
     }
-    if (MAX_CAPACITY - (count ?? 0) < 1) {
+    if (MAX_CAPACITY - (count ?? 0) - getHeldSpots(sessionDate, sessionTime) < 1) {
       return json({ error: "Sorry, that session is fully booked. Please pick another time." }, 409);
     }
 
