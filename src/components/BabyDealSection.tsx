@@ -60,7 +60,7 @@ const BabyDealSection = () => {
       <div className="max-w-md mx-auto">
         <div
           className="relative rounded-3xl bg-neon-pink px-5 py-8 text-center"
-          style={{ boxShadow: "0 8px 0 0 #B80AAA" }}
+          style={{ boxShadow: "0 8px 0 0 #B34A00" }}
         >
           <span className="inline-block bg-card text-foreground font-display font-extrabold text-xs tracking-tighter uppercase px-4 py-1.5 rounded-full">
             👶 Under 3s deal
@@ -154,7 +154,7 @@ const BabyDealSection = () => {
                   onClick={handleBook}
                   disabled={loading}
                   className="w-full min-h-[56px] py-4 rounded-2xl bg-neon-pink text-ink font-display font-extrabold tracking-tighter flex justify-center items-center gap-2 disabled:opacity-50 active:translate-y-1 transition-transform"
-                  style={{ boxShadow: "0 8px 0 0 #B80AAA" }}
+                  style={{ boxShadow: "0 8px 0 0 #B34A00" }}
                 >
                   {loading ? <Loader2 className="animate-spin" /> : `Pay £${(babyCount * DEAL_PRICE).toFixed(2)} & book`}
                 </button>

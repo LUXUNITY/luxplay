@@ -111,7 +111,7 @@ const SoftPlaySuccess = () => {
 
             <h1
               className="font-display text-3xl md:text-4xl tracking-wider text-neon-cyan mb-4"
-              style={{ textShadow: "0 0 20px rgba(0,238,255,0.3)" }}
+              style={{ textShadow: "0 0 20px rgba(255,182,39,0.3)" }}
             >
               BOOKING CONFIRMED
             </h1>
@@ -140,7 +140,7 @@ const SoftPlaySuccess = () => {
                     <BookingQr
                       value={entry.booking_code}
                       label={`👶 CHILD ${idx + 1}`}
-                      accent="#00eeff"
+                      accent="#FFB627"
                     />
                   </div>
                 ))}
@@ -168,7 +168,7 @@ const SoftPlaySuccess = () => {
 
             <Link
               to="/"
-              className="inline-flex items-center gap-2 font-display text-sm tracking-widest text-[#070710] bg-neon-cyan px-8 py-3 hover:shadow-[0_0_30px_rgba(0,238,255,0.4)] transition-all duration-300"
+              className="inline-flex items-center gap-2 font-display text-sm tracking-widest text-[#070710] bg-neon-cyan px-8 py-3 hover:shadow-[0_0_30px_rgba(255,182,39,0.4)] transition-all duration-300"
             >
               <ArrowLeft className="w-4 h-4" />
               BACK TO LUXPLAY

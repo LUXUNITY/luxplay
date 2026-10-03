@@ -6,9 +6,9 @@ import babySoftplayAsset from "@/assets/real-baby-softplay.png.asset.json";
 import prizeAsset from "@/assets/real-prize-redemption.jpg.asset.json";
 
 const collage = [
-  { img: arcadeAsset.url, label: "ARCADE", bg: "bg-neon-green", text: "text-ink", shadow: "#24B00C" },
-  { img: softplayAsset.url, label: "SOFT PLAY", bg: "bg-neon-cyan", text: "text-ink", shadow: "#00A3B8" },
-  { img: babySoftplayAsset.url, label: "UNDER 3s", bg: "bg-neon-pink", text: "text-ink", shadow: "#B80AAA" },
+  { img: arcadeAsset.url, label: "ARCADE", bg: "bg-neon-green", text: "text-ink", shadow: "#5EA80F" },
+  { img: softplayAsset.url, label: "SOFT PLAY", bg: "bg-neon-cyan", text: "text-ink", shadow: "#B37A00" },
+  { img: babySoftplayAsset.url, label: "UNDER 3s", bg: "bg-neon-pink", text: "text-ink", shadow: "#B34A00" },
   { img: prizeAsset.url, label: "PRIZES", bg: "bg-neon-purple", text: "text-white", shadow: "#7A16BF" },
 ];
 
@@ -20,7 +20,7 @@ const tiles = [
     line2: "Soft Play",
     bg: "bg-neon-green",
     text: "text-ink",
-    shadow: "0 6px 0 0 #24B00C",
+    shadow: "0 6px 0 0 #5EA80F",
   },
   {
     href: "#presale",
@@ -29,7 +29,7 @@ const tiles = [
     line2: "Credits",
     bg: "bg-neon-cyan",
     text: "text-ink",
-    shadow: "0 6px 0 0 #00A3B8",
+    shadow: "0 6px 0 0 #B37A00",
   },
   {
     href: "/parties",
@@ -38,7 +38,7 @@ const tiles = [
     line2: "Packages",
     bg: "bg-neon-pink",
     text: "text-ink",
-    shadow: "0 6px 0 0 #B80AAA",
+    shadow: "0 6px 0 0 #B34A00",
   },
   {
     href: "#deals",
@@ -87,7 +87,7 @@ const HeroSection = () => {
               src={logoAsset}
               alt="LuxPlay — arcade, soft play and café at Unit 7 Sovereign Centre, Boscombe, Bournemouth"
               className="h-28 w-28 sm:h-32 sm:w-32 rounded-full object-contain bg-background/80 p-1"
-              style={{ boxShadow: "0 0 0 3px hsl(var(--background)), 0 0 30px 6px rgba(255,16,240,0.45)" }}
+              style={{ boxShadow: "0 0 0 3px hsl(var(--background)), 0 0 30px 6px rgba(255,122,26,0.45)" }}
               loading="eager"
             />
           </div>

@@ -31,8 +31,8 @@ const WackyWednesdaySection = () => {
     <section id="wacky-wednesday" className="relative bg-background pb-8 px-4 overflow-hidden">
       <style>{`
         @keyframes ww-wobble { 0%,100%{transform:rotate(-3deg) scale(1)} 50%{transform:rotate(3deg) scale(1.06)} }
-        @keyframes ww-hue { 0%{color:#FF10F0} 33%{color:#00E5FF} 66%{color:#39FF14} 100%{color:#FF10F0} }
-        @keyframes ww-border { 0%,100%{box-shadow:0 0 0 4px #FF10F0,0 0 36px #FF10F0} 33%{box-shadow:0 0 0 4px #00E5FF,0 0 36px #00E5FF} 66%{box-shadow:0 0 0 4px #39FF14,0 0 36px #39FF14} }
+        @keyframes ww-hue { 0%{color:#FF7A1A} 33%{color:#FFB627} 66%{color:#39FF14} 100%{color:#FF7A1A} }
+        @keyframes ww-border { 0%,100%{box-shadow:0 0 0 4px #FF7A1A,0 0 36px #FF7A1A} 33%{box-shadow:0 0 0 4px #FFB627,0 0 36px #FFB627} 66%{box-shadow:0 0 0 4px #39FF14,0 0 36px #39FF14} }
         @keyframes ww-float { 0%,100%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-12px) rotate(12deg)} }
         @keyframes ww-blink { 0%,49%{opacity:1} 50%,100%{opacity:.35} }
         .ww-wobble{animation:ww-wobble 1.6s ease-in-out infinite}
@@ -48,7 +48,7 @@ const WackyWednesdaySection = () => {
         .ww-spin{animation:ww-spin 12s linear infinite}
         .ww-shake{animation:ww-shake 2.5s ease-in-out infinite}
         .ww-pop{animation:ww-pop 1.8s ease-in-out infinite}
-        .ww-burst{background:repeating-conic-gradient(#FF10F0 0 10deg,transparent 10deg 20deg,#00E5FF 20deg 30deg,transparent 30deg 40deg,#39FF14 40deg 50deg,transparent 50deg 60deg);mask:radial-gradient(circle,#000 30%,transparent 70%);-webkit-mask:radial-gradient(circle,#000 30%,transparent 70%)}
+        .ww-burst{background:repeating-conic-gradient(#FF7A1A 0 10deg,transparent 10deg 20deg,#FFB627 20deg 30deg,transparent 30deg 40deg,#39FF14 40deg 50deg,transparent 50deg 60deg);mask:radial-gradient(circle,#000 30%,transparent 70%);-webkit-mask:radial-gradient(circle,#000 30%,transparent 70%)}
         @media (prefers-reduced-motion: reduce){.ww-wobble,.ww-hue,.ww-border,.ww-float,.ww-blink,.ww-marquee,.ww-spin,.ww-shake,.ww-pop{animation:none}}
       `}</style>
 

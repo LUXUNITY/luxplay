@@ -25,6 +25,7 @@ const SESSION_LABELS: Record<string, string> = {
   "14:00": "2:00 PM",
   "16:00": "4:00 PM",
   "18:00": "6:00 PM",
+  "HALLOWEEN": "4PM–9PM 🎃 Halloween Spooktacular",
 };
 
 function formatSessionDate(dateValue: string): string {

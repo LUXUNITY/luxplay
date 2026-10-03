@@ -54,10 +54,10 @@ export default {
         },
         ink: "#0A0714",
         neon: {
-          green: "#39FF14",
-          pink: "#FF10F0",
-          cyan: "#00E5FF",
-          purple: "#B026FF",
+          green: "#9DFF2E",
+          pink: "#FF7A1A",
+          cyan: "#FFB627",
+          purple: "#9B30FF",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",

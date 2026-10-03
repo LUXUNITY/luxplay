@@ -135,7 +135,7 @@ const BabySoftPlaySection = () => {
           <p className="font-body text-foreground/60 text-sm">
             Max 15 babies/session
           </p>
-          <div className="mt-3 inline-block rounded-2xl bg-neon-pink px-6 py-2" style={{ boxShadow: "0 6px 0 0 #B80AAA" }}>
+          <div className="mt-3 inline-block rounded-2xl bg-neon-pink px-6 py-2" style={{ boxShadow: "0 6px 0 0 #B34A00" }}>
             <span className="font-display text-3xl font-extrabold text-white">
               £{getBabyFullPrice(selectedDate).toFixed(2)}
             </span>
@@ -148,7 +148,7 @@ const BabySoftPlaySection = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           className="mb-8 rounded-3xl bg-neon-cyan text-ink text-center py-4 px-4"
-          style={{ boxShadow: "0 8px 0 0 #00A3B8" }}
+          style={{ boxShadow: "0 8px 0 0 #B37A00" }}
         >
           <p className="font-display text-xl font-extrabold tracking-tight">2 ADULTS FREE</p>
           <p className="font-body text-xs mt-1 opacity-80">Per baby — no extra charge</p>
@@ -194,7 +194,7 @@ const BabySoftPlaySection = () => {
                     boxShadow: isFull
                       ? "none"
                       : isSelected
-                      ? "0 6px 0 0 #B80AAA"
+                      ? "0 6px 0 0 #B34A00"
                       : "0 6px 0 0 #241C3D",
                   }}
                 >
@@ -218,12 +218,12 @@ const BabySoftPlaySection = () => {
                       className="h-full rounded-full transition-all"
                       style={{
                         width: `${Math.max(4, Math.round((booked / MAX_CAPACITY) * 100))}%`,
-                        backgroundColor: isFull ? "#FF2D4B" : isLow ? "#FFD400" : "#00E5FF",
+                        backgroundColor: isFull ? "#FF2D4B" : isLow ? "#FFD400" : "#FFB627",
                         boxShadow: isFull
                           ? "0 0 8px #FF2D4B"
                           : isLow
                           ? "0 0 8px #FFD400"
-                          : "0 0 8px #00E5FF",
+                          : "0 0 8px #FFB627",
                       }}
                     />
                   </div>
@@ -326,7 +326,7 @@ const BabySoftPlaySection = () => {
               onClick={handleBook}
               disabled={loading}
               className="w-full rounded-2xl font-display text-base font-extrabold tracking-tight py-4 bg-neon-pink text-ink active:translate-y-1 transition-transform disabled:opacity-50 flex items-center justify-center gap-2"
-              style={{ boxShadow: "0 8px 0 0 #B80AAA" }}
+              style={{ boxShadow: "0 8px 0 0 #B34A00" }}
             >
               {loading ? (
                 <Loader2 className="w-5 h-5 animate-spin" />

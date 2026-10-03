@@ -56,9 +56,9 @@ const TIERS: Tier[] = [
 ];
 
 const accentMap = {
-  cyan: { bg: "bg-neon-cyan", shadow: "#00A3B8" },
-  pink: { bg: "bg-neon-pink", shadow: "#B80AAA" },
-  green: { bg: "bg-neon-green", shadow: "#24B00C" },
+  cyan: { bg: "bg-neon-cyan", shadow: "#B37A00" },
+  pink: { bg: "bg-neon-pink", shadow: "#B34A00" },
+  green: { bg: "bg-neon-green", shadow: "#5EA80F" },
 } as const;
 
 const PartiesSection = () => {
@@ -161,7 +161,7 @@ const PartiesSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="mt-8 rounded-3xl bg-neon-green px-5 py-5 text-center"
-          style={{ boxShadow: "0 8px 0 0 #24B00C" }}
+          style={{ boxShadow: "0 8px 0 0 #5EA80F" }}
         >
           <p className="font-body text-ink text-sm font-bold">
             🍟 Hot meal — nuggets, chips & a drink — in every package, with a small toy tucked inside. Classic & Ultimate also include an extra snack and drink.
