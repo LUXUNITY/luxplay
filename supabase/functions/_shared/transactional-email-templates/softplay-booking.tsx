@@ -19,6 +19,8 @@ interface SoftPlayBookingProps {
 
 const SoftPlayBookingEmail = ({ childCount, parentName, sessionTime, sessionDate, bookingCode, bookingCodes, totalAmount }: SoftPlayBookingProps) => {
   const count = childCount ?? (bookingCodes ? bookingCodes.length : 1)
+  const isHalloween = (sessionTime || '').includes('Halloween')
+  const name = (parentName || '').replace(/^\[[^\]]+\]\s*/, '')
   const codes = bookingCodes && bookingCodes.length > 0
     ? bookingCodes
     : (bookingCode ? [bookingCode] : [])
@@ -35,14 +37,16 @@ const SoftPlayBookingEmail = ({ childCount, parentName, sessionTime, sessionDate
         </Heading>
 
         <Text style={text}>
-          {parentName ? `Hi ${parentName}, ` : ''}
-          {count > 1
+          {name ? `Hi ${name}, ` : ''}
+          {isHalloween
+            ? `your ${count} ticket${count > 1 ? 's are' : ' is'} booked for the Halloween Spooktacular! 🎃 Unlimited free play arcade + spooky soft play, 4PM–9PM. Fancy dress is a must — no costume, no entry!`
+            : count > 1
             ? `your ${count} children are booked in for soft play!`
             : 'your child is booked in for soft play!'}
         </Text>
 
         <Section style={detailsBox}>
-          <Text style={detailLabel}>NUMBER OF CHILDREN</Text>
+          <Text style={detailLabel}>{isHalloween ? 'NUMBER OF TICKETS' : 'NUMBER OF CHILDREN'}</Text>
           <Text style={detailValue}>{count}</Text>
         </Section>
 
@@ -54,7 +58,7 @@ const SoftPlayBookingEmail = ({ childCount, parentName, sessionTime, sessionDate
         {codes.length > 0 ? codes.map((c, i) => (
           <Section key={c} style={codeBox}>
             <Text style={codeLabel}>
-              {codes.length > 1 ? `CHILD ${i + 1} — SCAN AT THE DOOR` : 'SCAN AT THE DOOR'}
+              {codes.length > 1 ? `${isHalloween ? 'TICKET' : 'CHILD'} ${i + 1} — SCAN AT THE DOOR` : 'SCAN AT THE DOOR'}
             </Text>
             <Img
               src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=10&data=${encodeURIComponent(c)}`}
