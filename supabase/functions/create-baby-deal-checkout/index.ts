@@ -35,6 +35,10 @@ const BLOCKED_SLOTS: Record<string, string[]> = {
   "2026-08-15": ["14:00"], // private party
   "2026-09-01": ["14:00"], // private party
   "2026-09-05": ["10:00"], // private party
+  "2026-10-10": ["12:00"],
+  "2026-10-28": ["12:00"],
+  "2026-10-30": ["16:00", "18:00"],
+  "2026-10-31": ["16:00", "18:00"],
 };
 
 const isBookableDate = (d: unknown): boolean => {
