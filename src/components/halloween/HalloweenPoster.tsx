@@ -44,30 +44,30 @@ const HalloweenPoster = () => {
           <p className="mt-3 font-display text-2xl text-foreground">FRI 30TH &amp; SAT 31ST OCTOBER</p>
           <p className="font-display text-xl text-neon-cyan">4PM – 9PM</p>
 
-          {/* Price burst */}
-          <div className="relative mx-auto my-5 flex h-36 w-36 items-center justify-center">
-            <div className="absolute inset-0 rounded-full bg-neon-purple animate-spooky-pulse" />
-            <div className="relative text-center text-foreground">
-              <p className="font-display text-sm tracking-widest">ALL THIS FOR</p>
-              <p className="font-display text-5xl leading-none">£19.99</p>
-              <p className="font-body text-[10px] font-bold uppercase">per ticket</p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-3 text-left">
-            {PERKS.map((p) => (
-              <div key={p.t} className="rounded-2xl bg-muted p-3">
-                <p className="text-2xl leading-none">{p.e}</p>
-                <p className="mt-1 font-display text-base leading-tight text-neon-green">{p.t}</p>
-                <p className="font-body text-[11px] text-muted-foreground">{p.sub}</p>
+          <div className="mt-5 space-y-3 text-left">
+            {PERKS.map((p, i) => (
+              <div
+                key={p.t}
+                className="flex items-center gap-4 rounded-2xl bg-muted p-4 animate-spooky-glow"
+                style={{ animationDelay: `${i * 0.4}s` }}
+              >
+                <span className="text-5xl leading-none animate-spooky-float" style={{ animationDelay: `${i * 0.6}s` }}>{p.e}</span>
+                <div>
+                  <p className="font-display text-3xl leading-[0.9] text-neon-green">{p.t}</p>
+                  <p className="font-body text-sm text-foreground/80">{p.sub}</p>
+                </div>
               </div>
             ))}
           </div>
 
-          <div className="mt-4 rounded-2xl border-2 border-dashed border-neon-green px-3 py-3">
-            <p className="font-display text-xl text-neon-green">🧟 FANCY DRESS IS A MUST! 🧛</p>
-            <p className="font-body text-xs text-foreground/80">No costume, no entry. Dress up, scare us silly, win the prize!</p>
+          <div className="mt-4 rounded-2xl border-2 border-dashed border-neon-green px-3 py-4 animate-spooky-flicker">
+            <p className="font-display text-3xl leading-none text-neon-green">🧟 FANCY DRESS IS A MUST! 🧛</p>
+            <p className="mt-1 font-body text-sm text-foreground/80">No costume, no entry. Dress up, scare us silly, win the prize!</p>
           </div>
+
+          <p className="mt-4 font-body text-sm text-foreground/70">
+            All this for just <span className="font-display text-xl text-neon-pink">£19.99</span> per ticket
+          </p>
 
           {/* Countdown */}
           <p className="mt-5 font-display text-xs tracking-[0.3em] text-muted-foreground">DOORS OPEN IN</p>
