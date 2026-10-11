@@ -239,5 +239,20 @@ Deno.serve(async (req) => {
     return json(200, { ok: true });
   }
 
+  // Find Square payments in a time window (for customers whose booking never saved)
+  if (action === "square_payments") {
+    const token = Deno.env.get("SQUARE_ACCESS_TOKEN") ?? "";
+    const q = new URLSearchParams({ begin_time: String(body.begin), end_time: String(body.end), limit: "50" });
+    const r = await fetch(`https://connect.squareup.com/v2/payments?${q}`, {
+      headers: { Authorization: `Bearer ${token}`, "Square-Version": "2024-12-18" },
+    });
+    const j = await r.json();
+    const out = (j.payments ?? []).map((p: any) => ({
+      order_id: p.order_id, receipt: p.receipt_number, amount: p.amount_money?.amount,
+      status: p.status, email: p.buyer_email_address, at: p.created_at,
+    }));
+    return json(200, { payments: out });
+  }
+
   return json(400, { error: "Unknown action" });
 });
