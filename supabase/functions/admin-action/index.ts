@@ -254,5 +254,30 @@ Deno.serve(async (req) => {
     return json(200, { payments: out });
   }
 
+  // Re-send the booking confirmation (QR codes) for a booking's order
+  if (action === "send_booking_email") {
+    const code = String(body.code ?? "");
+    const { data: row } = await supabase.from("soft_play_bookings").select("*").eq("booking_code", code).maybeSingle();
+    if (!row) return json(404, { error: "not found" });
+    const { data: rows } = await supabase.from("soft_play_bookings").select("*").eq("stripe_session_id", row.stripe_session_id);
+    const all = rows ?? [row];
+    const labels: Record<string, string> = { "10:00": "10:00 AM", "12:00": "12:00 PM", "14:00": "2:00 PM", "16:00": "4:00 PM", "18:00": "6:00 PM", "HALLOWEEN": "4PM–9PM 🎃 Halloween Spooktacular" };
+    const sessionDate = new Date(`${row.session_date}T12:00:00Z`).toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+    const { data, error } = await supabase.functions.invoke("send-transactional-email", {
+      body: {
+        templateName: "softplay-booking",
+        recipientEmail: row.parent_email,
+        idempotencyKey: `softplay-${row.stripe_session_id}-${Date.now()}`,
+        templateData: {
+          childCount: all.length, parentName: row.parent_name, sessionTime: labels[row.session_time] || row.session_time,
+          sessionDate, bookingCode: all[0].booking_code, bookingCodes: all.map((r: any) => r.booking_code),
+          totalAmount: all.reduce((a: number, r: any) => a + (r.amount_paid || 0), 0),
+        },
+      },
+    });
+    if (error) return json(500, { error: error.message });
+    return json(200, { ok: true, data });
+  }
+
   return json(400, { error: "Unknown action" });
 });
