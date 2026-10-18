@@ -22,14 +22,17 @@ const Index = () => {
         <div className="mx-auto flex max-w-xl items-center justify-center gap-3 px-3 py-3 sm:gap-5">
           <span aria-hidden="true" className="shrink-0 text-4xl motion-safe:animate-pulse">🥶</span>
           <div>
-            <p className="font-display text-2xl leading-none text-neon-cyan sm:text-3xl">FREEZING OUTSIDE?</p>
-            <p className="mt-1 font-display text-3xl leading-none text-neon-green sm:text-4xl">WARM INSIDE!</p>
+            <p className="font-display text-2xl leading-none text-neon-cyan sm:text-3xl">COLD OUTSIDE?</p>
+            <p className="mt-1 font-display text-3xl leading-none text-neon-green sm:text-4xl">OUR HEATERS ARE ON!</p>
           </div>
           <span aria-hidden="true" className="shrink-0 text-4xl motion-safe:animate-pulse">🔥</span>
         </div>
-        <p className="bg-neon-cyan px-3 py-1.5 font-body text-xs font-extrabold uppercase text-ink sm:text-sm">
-          Fully heated. Let’s play! 🕹️
-        </p>
+        <div className="bg-neon-cyan px-5 py-3 text-ink">
+          <p className="mx-auto max-w-xl font-body text-sm font-semibold leading-relaxed">
+            Let the kids play, join the arcade fun, or enjoy a tea or coffee while you catch up with friends and family.
+          </p>
+          <p className="mt-1 font-body text-xs font-extrabold uppercase sm:text-sm">Warm drinks. Happy kids. Good company. ☕🕹️</p>
+        </div>
       </aside>
       {/* 1. Hero — logo, then REFRESH & PLAY deal, then CTAs */}
       <HeroSection />
