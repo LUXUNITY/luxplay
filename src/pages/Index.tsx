@@ -18,8 +18,12 @@ const BabyDealSection = lazy(() => import("@/components/BabyDealSection"));
 const Index = () => {
   return (
     <main className="min-h-screen bg-background">
-
-
+      <aside className="w-full border-b-4 border-neon-pink bg-neon-cyan px-4 py-3 text-center text-ink" aria-label="Fully heated venue">
+        <p className="font-body text-sm font-extrabold leading-snug sm:text-base">
+          🥶 Cold outside? Toasty inside! 🔥
+          <span className="block text-xs font-bold sm:inline sm:text-sm"> Fully heated, all winter long.</span>
+        </p>
+      </aside>
       {/* 1. Hero — logo, then REFRESH & PLAY deal, then CTAs */}
       <HeroSection />
 
