@@ -1,4 +1,4 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import HeroSection from "@/components/HeroSection";
 import HeatedVenueBanner from "@/components/HeatedVenueBanner";
 import HalloweenBookingSection from "@/components/halloween/HalloweenBookingSection";
@@ -17,6 +17,19 @@ const BabyDealSection = lazy(() => import("@/components/BabyDealSection"));
 
 
 const Index = () => {
+  // Jump straight to a section when opened via /halloween or a #hash link (e.g. counter QR code)
+  useEffect(() => {
+    const id = window.location.pathname === "/halloween" ? "halloween" : window.location.hash.slice(1);
+    if (!id) return;
+    let tries = 0;
+    const t = setInterval(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ block: "start" });
+      if (++tries >= 6) clearInterval(t);
+    }, 300);
+    return () => clearInterval(t);
+  }, []);
+
   return (
     <main className="min-h-screen bg-background">
       <HeatedVenueBanner />
