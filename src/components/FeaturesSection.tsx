@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import founderBazAsset from "@/assets/baz-new.jpg.asset.json";
+import founderBazAsset from "@/assets/baz-updated.jpg.asset.json";
 import founderMartinAsset from "@/assets/founder-martin-clean.png.asset.json";
 import logoLuxPlay from "@/assets/logo-luxplay.png";
 import logoCafeLux from "@/assets/logo-cafe-lux.png";
