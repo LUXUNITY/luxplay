@@ -15,16 +15,24 @@ const HalloweenBookingSection = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    supabase
-      .from("soft_play_availability")
-      .select("session_date, booked_count")
-      .eq("session_time", HALLOWEEN_SESSION)
-      .in("session_date", HALLOWEEN_NIGHTS.map((n) => n.iso))
-      .then(({ data }) => {
-        const c: Record<string, number> = {};
-        data?.forEach((r) => (c[r.session_date] = Number(r.booked_count) || 0));
-        setBooked(c);
-      });
+    let cancelled = false;
+    const load = async (attempt = 0) => {
+      const { data, error } = await supabase
+        .from("soft_play_availability")
+        .select("session_date, booked_count")
+        .eq("session_time", HALLOWEEN_SESSION)
+        .in("session_date", HALLOWEEN_NIGHTS.map((n) => n.iso));
+      if (cancelled) return;
+      if (error && attempt < 4) {
+        setTimeout(() => load(attempt + 1), 1500 * (attempt + 1));
+        return;
+      }
+      const c: Record<string, number> = {};
+      data?.forEach((r) => (c[r.session_date] = Number(r.booked_count) || 0));
+      setBooked(c);
+    };
+    load();
+    return () => { cancelled = true; };
   }, []);
 
   const left = (iso: string) => Math.max(0, HALLOWEEN_CAPACITY - (booked[iso] || 0));

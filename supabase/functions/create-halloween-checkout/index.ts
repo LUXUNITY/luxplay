@@ -57,17 +57,24 @@ serve(async (req) => {
       Deno.env.get("SUPABASE_URL") ?? "",
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
     );
-    const { count, error: countError } = await supabase
-      .from("soft_play_bookings")
-      .select("id", { count: "exact", head: true })
-      .eq("session_date", sessionDate)
-      .eq("session_time", EVENT_SESSION);
-    if (countError) {
-      console.error("Halloween capacity check failed:", countError);
-      return json({ error: "Could not check tickets left — please try again." }, 500);
+    // Retry the capacity check a few times — short backend blips must not
+    // stop customers paying. If it still can't be read, let the sale through
+    // (the database trigger enforces the hard 100 cap when the ticket is saved).
+    let count: number | null = null;
+    for (let attempt = 0; attempt < 3 && count === null; attempt++) {
+      const res = await supabase
+        .from("soft_play_bookings")
+        .select("id", { count: "exact", head: true })
+        .eq("session_date", sessionDate)
+        .eq("session_time", EVENT_SESSION);
+      if (!res.error) count = res.count ?? 0;
+      else {
+        console.error(`Halloween capacity check failed (attempt ${attempt + 1}):`, res.error);
+        await new Promise((r) => setTimeout(r, 600 * (attempt + 1)));
+      }
     }
     const left = MAX_CAPACITY - (count ?? 0);
-    if (left < quantity) {
+    if (count !== null && left < quantity) {
       return json({
         error: "SESSION_FULL",
         message: left <= 0
