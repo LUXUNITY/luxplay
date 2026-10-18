@@ -18,10 +18,17 @@ const BabyDealSection = lazy(() => import("@/components/BabyDealSection"));
 const Index = () => {
   return (
     <main className="min-h-screen bg-background">
-      <aside className="w-full border-b-4 border-neon-pink bg-neon-cyan px-4 py-3 text-center text-ink" aria-label="Fully heated venue">
-        <p className="font-body text-sm font-extrabold leading-snug sm:text-base">
-          🥶 Cold outside? Toasty inside! 🔥
-          <span className="block text-xs font-bold sm:inline sm:text-sm"> Fully heated, all winter long.</span>
+      <aside className="w-full border-b-4 border-neon-pink bg-background text-center" aria-label="Fully heated venue">
+        <div className="mx-auto flex max-w-xl items-center justify-center gap-3 px-3 py-3 sm:gap-5">
+          <span aria-hidden="true" className="shrink-0 text-4xl motion-safe:animate-pulse">🥶</span>
+          <div>
+            <p className="font-display text-2xl leading-none text-neon-cyan sm:text-3xl">FREEZING OUTSIDE?</p>
+            <p className="mt-1 font-display text-3xl leading-none text-neon-green sm:text-4xl">WARM INSIDE!</p>
+          </div>
+          <span aria-hidden="true" className="shrink-0 text-4xl motion-safe:animate-pulse">🔥</span>
+        </div>
+        <p className="bg-neon-cyan px-3 py-1.5 font-body text-xs font-extrabold uppercase text-ink sm:text-sm">
+          Fully heated. Let’s play! 🕹️
         </p>
       </aside>
       {/* 1. Hero — logo, then REFRESH & PLAY deal, then CTAs */}
