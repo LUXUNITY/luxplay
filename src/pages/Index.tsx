@@ -18,20 +18,24 @@ const BabyDealSection = lazy(() => import("@/components/BabyDealSection"));
 const Index = () => {
   return (
     <main className="min-h-screen bg-background">
-      <aside className="w-full border-b-4 border-neon-pink bg-background text-center" aria-label="Fully heated venue">
+      <aside className="w-full border-b-4 border-neon-pink bg-neon-pink/10 text-center" aria-label="Fully heated venue">
         <div className="mx-auto flex max-w-xl items-center justify-center gap-3 px-3 py-3 sm:gap-5">
           <span aria-hidden="true" className="shrink-0 text-4xl motion-safe:animate-pulse">🥶</span>
           <div>
             <p className="font-display text-2xl leading-none text-neon-cyan sm:text-3xl">COLD OUTSIDE?</p>
-            <p className="mt-1 font-display text-3xl leading-none text-neon-green sm:text-4xl">OUR HEATERS ARE ON!</p>
+            <p className="mt-1 font-display text-3xl leading-none text-neon-cyan sm:text-4xl">OUR HEATERS ARE ON!</p>
           </div>
           <span aria-hidden="true" className="shrink-0 text-4xl motion-safe:animate-pulse">🔥</span>
         </div>
-        <div className="bg-neon-cyan px-5 py-3 text-ink">
-          <p className="mx-auto max-w-xl font-body text-sm font-semibold leading-relaxed">
-            Let the kids play, join the arcade fun, or enjoy a tea or coffee while you catch up with friends and family.
+        <div className="bg-neon-cyan px-5 py-4 text-ink">
+          <p className="font-display text-3xl leading-none sm:text-4xl">COME IN FROM THE COLD ☕</p>
+          <p className="mx-auto mt-3 max-w-lg font-body text-sm font-medium leading-relaxed sm:text-base">
+            Let the kids burn off some energy in soft play, get stuck into the arcade, and make time for a catch-up with friends and family.
           </p>
-          <p className="mt-1 font-body text-xs font-extrabold uppercase sm:text-sm">Warm drinks. Happy kids. Good company. ☕🕹️</p>
+          <p className="mx-auto mt-2 max-w-lg font-body text-sm leading-relaxed sm:text-base">
+            We’ve got <strong className="font-extrabold">hot food, tea and coffee</strong> to keep everyone warm and happy.
+          </p>
+          <p className="mt-4 border-t border-ink/20 pt-3 font-display text-xl leading-tight sm:text-2xl">HOT FOOD · WARM DRINKS · BIG SMILES</p>
         </div>
       </aside>
       {/* 1. Hero — logo, then REFRESH & PLAY deal, then CTAs */}
