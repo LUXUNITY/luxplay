@@ -271,7 +271,7 @@ Deno.serve(async (req) => {
         templateData: {
           childCount: all.length, parentName: row.parent_name, sessionTime: labels[row.session_time] || row.session_time,
           sessionDate, bookingCode: all[0].booking_code, bookingCodes: all.map((r: any) => r.booking_code),
-          totalAmount: all.reduce((a: number, r: any) => a + (r.amount_paid || 0), 0),
+          totalAmount: `£${(all.reduce((a: number, r: any) => a + (r.amount_paid || 0), 0) / 100).toFixed(2)}`,
         },
       },
     });
