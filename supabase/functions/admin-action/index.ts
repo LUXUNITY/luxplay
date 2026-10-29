@@ -279,5 +279,19 @@ Deno.serve(async (req) => {
     return json(200, { ok: true, data });
   }
 
+  // One-off custom ticket email (no booking row) — staff supply template data directly
+  if (action === "send_custom_ticket_email") {
+    const { data, error } = await supabase.functions.invoke("send-transactional-email", {
+      body: {
+        templateName: "softplay-booking",
+        recipientEmail: String(body.email ?? ""),
+        idempotencyKey: `custom-${Date.now()}`,
+        templateData: body.templateData ?? {},
+      },
+    });
+    if (error) return json(500, { error: error.message });
+    return json(200, { ok: true, data });
+  }
+
   return json(400, { error: "Unknown action" });
 });
