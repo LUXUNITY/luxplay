@@ -205,7 +205,7 @@ const BabySoftPlaySection = () => {
                     {partyBooked ? (
                       <span className="font-display text-[10px] text-center leading-snug">
                         {selectedDate === "2026-10-30" || selectedDate === "2026-10-31"
-                          ? "🎃 HALLOWEEN PARTY EVENT"
+                          ? "🎃 HALLOWEEN PARTY"
                           : "🎉 PARTY BOOKED"}
                       </span>
                     ) : (
