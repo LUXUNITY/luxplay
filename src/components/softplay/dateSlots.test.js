@@ -15,7 +15,7 @@ describe("Halloween 31 October session closure", () => {
       const source = readFileSync(`supabase/functions/${name}/index.ts`, "utf8");
       const map = source.match(/const BLOCKED_SLOTS: Record<string, string\[\]> = (\{[\s\S]*?\n\});/);
       if (!map) throw new Error("Missing closure map");
-      const blocked = Function(`return (${map[1]})`)() as Record<string, string[]>;
+      const blocked = Function(`return (${map[1]})`)();
       expect(blocked["2026-10-31"].includes("14:00")).toBe(true);
       expect(blocked["2026-11-01"]?.includes("14:00") ?? false).toBe(false);
     });
