@@ -280,6 +280,27 @@ Deno.serve(async (req) => {
   }
 
   // One-off custom ticket email (no booking row) — staff supply template data directly
+  if (action === "send_booking_contact") {
+    const code = String(body.code ?? "");
+    const message = String(body.message ?? "").trim();
+    if (!message) return json(400, { error: "Message required" });
+    const { data: row, error: lookupError } = await supabase.from("soft_play_bookings")
+      .select("parent_name,parent_email,stripe_session_id").eq("booking_code", code).maybeSingle();
+    if (lookupError) return json(500, { error: "Could not find booking" });
+    if (!row) return json(404, { error: "Booking not found" });
+    const { data, error } = await supabase.functions.invoke("send-transactional-email", {
+      body: {
+        templateName: "booking-contact",
+        recipientEmail: row.parent_email,
+        idempotencyKey: `booking-contact-${row.stripe_session_id}-${String(body.reference ?? "update")}`,
+        templateData: { parentName: row.parent_name, message },
+      },
+    });
+    if (error || !data?.success) return json(500, { error: "Could not queue customer message" });
+    return json(200, { ok: true, data });
+  }
+
+  // One-off custom ticket email (no booking row) — staff supply template data directly
   if (action === "send_custom_ticket_email") {
     const { data, error } = await supabase.functions.invoke("send-transactional-email", {
       body: {

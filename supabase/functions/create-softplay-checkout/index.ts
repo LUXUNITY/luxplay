@@ -34,7 +34,7 @@ const BLOCKED_SLOTS: Record<string, string[]> = {
   "2026-09-12": ["14:00"], // fully booked
   "2026-10-10": ["12:00"], // private party — whole session
   "2026-10-28": ["12:00"], // private party — whole session
-  "2026-10-30": ["16:00", "18:00"], // Halloween Spooktacular — event only
+  "2026-10-30": ["14:00", "16:00", "18:00"], // Halloween Spooktacular — event only
   "2026-10-31": ["14:00", "16:00", "18:00"], // Halloween Spooktacular — event only
 };
 
