@@ -200,7 +200,11 @@ const SoftPlaySection = () => {
                   </p>
                   <div className="flex items-center justify-center gap-1">
                     {partyBooked ? (
-                      <span className="font-display text-[10px] tracking-wide">🎉 PARTY BOOKED</span>
+                      <span className="font-display text-[10px] text-center leading-snug">
+                        {selectedDate === "2026-10-30" || selectedDate === "2026-10-31"
+                          ? "🎃 HALLOWEEN PARTY EVENT"
+                          : "🎉 PARTY BOOKED"}
+                      </span>
                     ) : (
                       <>
                         <Users className="w-3 h-3" />
