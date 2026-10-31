@@ -868,10 +868,31 @@
   background: hsl(var(--background));
   border-top: 2px solid hsl(var(--neon-cyan) / .6);
   border-bottom: 2px solid hsl(var(--neon-pink) / .6);
-  box-shadow: inset 0 0 36px hsl(var(--neon-purple) / .18);
+  box-shadow: inset 0 0 48px hsl(var(--neon-purple) / .3);
   letter-spacing: 0;
 }
-.winter-title { text-shadow: var(--winter-glow); letter-spacing: 0; }
+.winter-title { text-shadow: var(--winter-glow); letter-spacing: 0; line-height: .82; }
+.winter-word { font-size: 78px; color: hsl(var(--foreground)); text-shadow: 3px 3px 0 hsl(var(--neon-purple)), var(--winter-glow); }
+.wonder-word { font-size: 88px; color: hsl(var(--neon-cyan)); text-shadow: 3px 4px 0 hsl(var(--neon-purple)), var(--winter-glow); margin-top: 7px; }
+.land-word { position: relative; width: fit-content; margin: 5px auto 0; font-size: 90px; color: hsl(var(--neon-pink)); text-shadow: 3px 4px 0 hsl(var(--neon-purple)); }
+.winter-title-star { position: absolute; right: -40px; top: 18px; font-size: 36px; color: hsl(var(--neon-green)); animation: winter-bob 3s ease-in-out infinite; }
+.winter-eyebrow { letter-spacing: 0; }
+.winter-baubles { position: absolute; inset: 0; pointer-events: none; }
+.winter-baubles span { position: absolute; top: 34px; left: 10px; width: 34px; height: 34px; border: 1px solid hsl(var(--neon-cyan)); border-radius: 50%; color: hsl(var(--neon-cyan)); background: hsl(var(--background)); font-size: 22px; animation: winter-swing 4s ease-in-out infinite; transform-origin: center -34px; }
+.winter-baubles span::before { content: ''; position: absolute; bottom: 100%; height: 34px; left: 50%; border-left: 1px solid hsl(var(--foreground) / .5); }
+.winter-baubles span:nth-child(2) { left: auto; right: 10px; top: 52px; color: hsl(var(--neon-pink)); border-color: currentColor; animation-delay: -2s; }
+.winter-scene { position: relative; display: flex; align-items: end; justify-content: center; gap: 7px; height: 142px; padding-bottom: 12px; margin-top: 3px; }
+.winter-scene::after { content: ''; position: absolute; bottom: 0; left: -16px; right: -16px; height: 12px; background: hsl(var(--foreground)); border-radius: 50% 50% 0 0; }
+.winter-tree { position: relative; width: 67px; height: 115px; flex-shrink: 0; }
+.winter-tree span { position: absolute; top: 0; left: 24px; font-size: 22px; color: hsl(var(--neon-cyan)); text-shadow: var(--winter-glow); animation: winter-twinkle 2s ease-in-out infinite; }
+.winter-tree i { position: absolute; left: 0; bottom: 0; width: 67px; height: 60px; background: hsl(var(--neon-green)); clip-path: polygon(50% 0,100% 100%,0 100%); }
+.winter-tree i:nth-of-type(2) { bottom: 23px; left: 9px; width: 49px; height: 50px; opacity: .85; }
+.winter-tree i:nth-of-type(3) { bottom: 49px; left: 17px; width: 33px; height: 40px; }
+.winter-tree b { position: absolute; bottom: 14px; left: 7px; font-size: 16px; color: hsl(var(--neon-pink)); transform: rotate(-12deg); animation: winter-twinkle 3s ease-in-out infinite; }
+.winter-ticker { color: hsl(var(--ink)); background: hsl(var(--neon-cyan)); border-top: 3px solid hsl(var(--neon-pink)); }
+.winter-ticker > div { animation: winter-scroll 24s linear infinite; }
+@keyframes winter-scroll { to { transform: translateX(-50%); } }
+@keyframes winter-swing { 0%,100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
 .winter-lights { position: absolute; top: 0; inset-inline: -5px; display: flex; justify-content: space-around; border-top: 2px solid hsl(var(--foreground) / .4); }
 .winter-lights span { width: 12px; height: 21px; border-radius: 3px 3px 50% 50%; background: hsl(var(--neon-pink)); color: hsl(var(--neon-pink)); box-shadow: 0 0 14px currentColor; transform-origin: top; animation: winter-twinkle 2.5s ease-in-out infinite; }
 .winter-lights span:nth-child(3n) { background: hsl(var(--neon-green)); color: hsl(var(--neon-green)); animation-delay: -.8s; }
@@ -886,11 +907,12 @@
 .winter-icons span { animation: winter-bob 3s ease-in-out infinite; }
 .winter-icons span:nth-child(2) { animation-delay: -.8s; }
 .winter-icons span:nth-child(3) { animation-delay: -1.6s; }
-.winter-coming { animation: winter-twinkle 3s ease-in-out infinite; }
+.winter-coming { position: relative; background: hsl(var(--neon-green)); box-shadow: 5px 5px 0 hsl(var(--neon-pink)); transform: rotate(-3deg); animation: winter-ribbon 3s ease-in-out infinite; }
+@keyframes winter-ribbon { 0%,100% { transform: rotate(-3deg) translateY(0); } 50% { transform: rotate(-1deg) translateY(-3px); } }
 @keyframes winter-fall { to { transform: translate3d(18px, 520px, 0) rotate(120deg); } }
 @keyframes winter-bob { 0%,100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-6px) rotate(5deg); } }
 @keyframes winter-twinkle { 0%,100% { opacity: 1; } 50% { opacity: .65; } }
 @media (prefers-reduced-motion: reduce) {
-  .winter-lights span, .winter-snow span, .winter-icons span, .winter-coming { animation: none; }
+  .winter-lights span, .winter-snow span, .winter-icons span, .winter-coming, .winter-baubles span, .winter-tree span, .winter-tree b, .winter-title-star, .winter-ticker > div { animation: none; }
   .winter-snow span { top: 25%; }
 }
