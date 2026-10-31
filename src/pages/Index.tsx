@@ -1,7 +1,6 @@
 import { Suspense, lazy, useEffect } from "react";
 import HeroSection from "@/components/HeroSection";
 import HeatedVenueBanner from "@/components/HeatedVenueBanner";
-import HalloweenBookingSection from "@/components/halloween/HalloweenBookingSection";
 
 import ScrollReveal from "@/components/ScrollReveal";
 
@@ -17,9 +16,10 @@ const BabyDealSection = lazy(() => import("@/components/BabyDealSection"));
 
 
 const Index = () => {
-  // Jump straight to a section when opened via /halloween or a #hash link (e.g. counter QR code)
+  // Old counter links now lead to the next seasonal announcement.
   useEffect(() => {
-    const id = window.location.pathname === "/halloween" ? "halloween" : window.location.hash.slice(1);
+    const hash = window.location.hash.slice(1);
+    const id = window.location.pathname === "/halloween" || hash === "halloween" ? "winter-wonderland" : hash;
     if (!id) return;
     let tries = 0;
     const t = setInterval(() => {
@@ -35,10 +35,6 @@ const Index = () => {
       <HeatedVenueBanner />
       {/* 1. Hero — logo, then REFRESH & PLAY deal, then CTAs */}
       <HeroSection />
-
-      {/* Halloween Spooktacular ticket booking — 100 per night */}
-      <HalloweenBookingSection />
-
 
       {/* Mid-page sections — LuxPlay card starfield background */}
       <div className="relative luxplay-pattern-bg">

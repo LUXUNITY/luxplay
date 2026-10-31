@@ -1,0 +1,3 @@
+- [x] Replace Halloween poster and public booking section with a Christmas Winter Wonderland coming-soon announcement.
+- [x] Remove Halloween decorations and ticket links; preserve existing paid tickets and staff tools.
+- [x] Verify the announcement and regular booking links in the preview.

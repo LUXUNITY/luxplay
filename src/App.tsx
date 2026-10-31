@@ -1,4 +1,3 @@
-import HalloweenDecor from "@/components/halloween/HalloweenDecor";
 import { Suspense, lazy } from "react";
 import { MotionConfig } from "framer-motion";
 import { Toaster } from "@/components/ui/toaster";
@@ -38,7 +37,6 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <HalloweenDecor />
         <AuthProvider>
           <AppShellRedirect />
           <Suspense fallback={null}>
@@ -51,7 +49,7 @@ const App = () => (
                 <Route path="account" element={<AppAccount />} />
               </Route>
               <Route path="/" element={<><RouteHead title="LUXPLAY — Family Entertainment Centre in Bournemouth" description="LUXPLAY in Boscombe, Bournemouth: 40+ arcade games, 3-level soft play, baby soft play, prize redemption and Cafè Lux. Book soft play or buy credits online." path="/" /><Index /></>} />
-              <Route path="/halloween" element={<><RouteHead title="Halloween Spooktacular Tickets — LUXPLAY" description="Book Halloween Spooktacular tickets at LUXPLAY Bournemouth — 30th & 31st October, 4PM–9PM." path="/halloween" /><Index /></>} />
+              <Route path="/halloween" element={<><RouteHead title="Winter Wonderland Coming Soon — LUXPLAY" description="LuxPlay Winter Wonderland is coming soon to Bournemouth. Stay tuned for more information!" path="/halloween" /><Index /></>} />
               <Route path="/parties" element={<Parties />} />
               <Route path="/soft-play-bournemouth" element={<SoftPlayBournemouth />} />
               <Route path="/arcade-bournemouth" element={<ArcadeBournemouth />} />
