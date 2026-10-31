@@ -1,4 +1,4 @@
-import HalloweenPoster from "@/components/halloween/HalloweenPoster";
+import WinterWonderland from "@/components/WinterWonderland";
 import logoAsset from "@/assets/logo-luxplay.png";
 import arcadeAsset from "@/assets/real-arcade.jpeg.asset.json";
 import softplayAsset from "@/assets/real-softplay-v2.png.asset.json";
@@ -41,12 +41,12 @@ const tiles = [
     shadow: "0 6px 0 0 #B34A00",
   },
   {
-    href: "#halloween",
-    emoji: "🎃",
-    line1: "Halloween",
-    line2: "Tickets",
+    href: "#deals",
+    emoji: "🤩",
+    line1: "Play",
+    line2: "Deals",
     bg: "bg-neon-purple",
-    text: "text-white",
+    text: "text-ink",
     shadow: "0 6px 0 0 #7A16BF",
     flash: true,
   },
@@ -103,12 +103,12 @@ const HeroSection = () => {
             ))}
           </h1>
           <p className="relative text-sm sm:text-base font-bold uppercase tracking-[0.18em] text-neon-cyan">
-            🎃 Bournemouth&apos;s Spookiest Play 🦇
+            40+ ARCADE MACHINES · SOFT PLAY · PRIZES · CAFÉ
           </p>
         </div>
 
-        {/* Halloween event poster — between logo and booking buttons */}
-        <HalloweenPoster />
+        {/* Seasonal teaser — no ticket sales until the event is announced */}
+        <WinterWonderland />
 
         {/* Quick actions */}
         <div className="grid grid-cols-2 gap-4 px-6 mb-8">

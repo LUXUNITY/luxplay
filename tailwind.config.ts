@@ -52,12 +52,12 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        ink: "#0A0714",
+        ink: "hsl(var(--ink))",
         neon: {
-          green: "#9DFF2E",
-          pink: "#FF7A1A",
-          cyan: "#FFB627",
-          purple: "#9B30FF",
+          green: "hsl(var(--neon-green))",
+          pink: "hsl(var(--neon-pink))",
+          cyan: "hsl(var(--neon-cyan))",
+          purple: "hsl(var(--neon-purple))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",

@@ -16,7 +16,7 @@
     --popover: 252 25% 9%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 24 100% 55%;
+    --primary: 304 100% 53%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 187 100% 50%;
@@ -33,15 +33,17 @@
 
     --border: 252 18% 20%;
     --input: 252 18% 20%;
-    --ring: 24 100% 55%;
+    --ring: 186 100% 50%;
 
     --radius: 1.5rem;
 
     /* LUXPLAY neon palette */
-    --neon-pink: 24 100% 55%;
-    --neon-cyan: 39 100% 58%;
-    --neon-green: 88 100% 59%;
-    --neon-purple: 276 100% 58%;
+    --neon-pink: 304 100% 53%;
+    --neon-cyan: 186 100% 50%;
+    --neon-green: 111 100% 54%;
+    --neon-purple: 277 100% 57%;
+    --ink: 252 48% 5%;
+    --winter-glow: 0 0 22px hsl(var(--neon-cyan) / .35);
 
 
     --sidebar-background: 0 0% 100%;
@@ -842,7 +844,7 @@
   .heat-headline, .heat-flame, .heat-shiver, .heat-treat, .heat-ticker, .heat-steam::before, .heat-steam::after { animation: none; }
 }
 
-/* ===== Halloween theme (temporary) ===== */
+/* ===== Archived Halloween motion (existing tickets remain valid) ===== */
 @layer utilities {
   @keyframes spooky-float { 0%,100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-14px) rotate(6deg); } }
   @keyframes spooky-flicker { 0%,19%,22%,62%,64%,100% { opacity: 1; } 20%,63% { opacity: .35; } }
@@ -859,4 +861,36 @@
   @media (prefers-reduced-motion: reduce) {
     .animate-spooky-float, .animate-spooky-flicker, .animate-spooky-ticker, .animate-spooky-pulse, .animate-spooky-glow, .animate-spooky-pulse-btn { animation: none; }
   }
+}
+
+/* Winter announcement: live type, neon fairy lights and CSS-only snowfall. */
+.winter-wonderland {
+  background: hsl(var(--background));
+  border-top: 2px solid hsl(var(--neon-cyan) / .6);
+  border-bottom: 2px solid hsl(var(--neon-pink) / .6);
+  box-shadow: inset 0 0 36px hsl(var(--neon-purple) / .18);
+  letter-spacing: 0;
+}
+.winter-title { text-shadow: var(--winter-glow); letter-spacing: 0; }
+.winter-lights { position: absolute; top: 0; inset-inline: -5px; display: flex; justify-content: space-around; border-top: 2px solid hsl(var(--foreground) / .4); }
+.winter-lights span { width: 12px; height: 21px; border-radius: 3px 3px 50% 50%; background: hsl(var(--neon-pink)); color: hsl(var(--neon-pink)); box-shadow: 0 0 14px currentColor; transform-origin: top; animation: winter-twinkle 2.5s ease-in-out infinite; }
+.winter-lights span:nth-child(3n) { background: hsl(var(--neon-green)); color: hsl(var(--neon-green)); animation-delay: -.8s; }
+.winter-lights span:nth-child(3n + 2) { background: hsl(var(--neon-cyan)); color: hsl(var(--neon-cyan)); animation-delay: -1.6s; }
+.winter-snow { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.winter-snow span { position: absolute; top: -24px; left: 5%; color: hsl(var(--foreground) / .55); font-size: 14px; animation: winter-fall 9s linear infinite; }
+.winter-snow span:nth-child(4n + 1) { left: 12%; animation-delay: -3s; animation-duration: 10s; }
+.winter-snow span:nth-child(4n + 2) { left: 38%; animation-delay: -7s; animation-duration: 12s; }
+.winter-snow span:nth-child(4n + 3) { left: 65%; animation-delay: -2s; animation-duration: 8s; }
+.winter-snow span:nth-child(4n) { left: 88%; animation-delay: -5s; animation-duration: 11s; }
+.winter-snow span:nth-child(n + 9) { margin-left: 6%; animation-delay: -9s; font-size: 9px; }
+.winter-icons span { animation: winter-bob 3s ease-in-out infinite; }
+.winter-icons span:nth-child(2) { animation-delay: -.8s; }
+.winter-icons span:nth-child(3) { animation-delay: -1.6s; }
+.winter-coming { animation: winter-twinkle 3s ease-in-out infinite; }
+@keyframes winter-fall { to { transform: translate3d(18px, 520px, 0) rotate(120deg); } }
+@keyframes winter-bob { 0%,100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-6px) rotate(5deg); } }
+@keyframes winter-twinkle { 0%,100% { opacity: 1; } 50% { opacity: .65; } }
+@media (prefers-reduced-motion: reduce) {
+  .winter-lights span, .winter-snow span, .winter-icons span, .winter-coming { animation: none; }
+  .winter-snow span { top: 25%; }
 }
