@@ -51,7 +51,7 @@ export default function SteveMemorial({ full = false }: { full?: boolean }) {
           <div className="memorial-words">
             {(full ? tribute : tribute.slice(0, 3)).map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
             {!full && <p>He brought laughter, kindness and a sense of family into this place that no amount of money could ever buy.</p>}
-            <blockquote>Steve, we will never forget you. Thank you for everything you gave us. We love you, mate. <span aria-label="love">❤️</span></blockquote>
+            <blockquote>Steve, we will never forget you. Thank you for everything you gave us. We love you so much.</blockquote>
             {!full && <Button asChild variant="link" className="memorial-read"><Link to="/remembering-steve">Read our full tribute to Steve <ArrowRight /></Link></Button>}
           </div>
         </div>
