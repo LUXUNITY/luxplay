@@ -130,7 +130,7 @@
   .memorial-support h2 { font-size: 26px; }
   .memorial-words blockquote { font-size: 23px; }
 }
-@media (prefers-reduced-motion: reduce) { .memorial-candle, .memorial-preview-photo, .memorial-preview-copy h2, .memorial-preview-copy h2 span, .memorial-preview-copy p, .memorial-preview-copy .memorial-read, .memorial-preview-copy .memorial-read svg { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .memorial-candle, .memorial-preview-photo, .memorial-preview-copy h2, .memorial-preview-copy h2 span, .memorial-preview-copy p, .memorial-preview-copy .memorial-preview-support, .memorial-preview-copy .memorial-read, .memorial-preview-copy .memorial-read svg { animation: none; } }
 
 @layer utilities {
   /* Chunky tap tile — Memphis style drop shadow, presses down on touch */
