@@ -74,6 +74,14 @@
   }
 }
 
+.steve-support-banner { width: 100%; background: hsl(var(--memorial-gold)); border-bottom: 1px solid hsl(var(--memorial-ink) / .2); padding-top: env(safe-area-inset-top, 0px); }
+.steve-support-banner .steve-support-banner-link { display: flex; width: 100%; height: auto; min-height: 54px; padding: 12px 22px; border-radius: 0; white-space: normal; text-align: center; }
+.steve-support-banner-message { display: inline-flex; align-items: center; justify-content: center; gap: 10px; max-width: 100%; font-size: 14px; line-height: 1.5; font-weight: 600; animation: steve-support-sway 5s ease-in-out infinite; }
+.steve-support-banner-heart { animation: memorial-heart 4s ease-in-out infinite; fill: hsl(var(--memorial-ink) / .15); }
+@keyframes steve-support-sway { 0%,100% { transform: translateX(-5px); } 50% { transform: translateX(5px); } }
+@media (max-width: 360px) { .steve-support-banner-message { font-size: 12px; gap: 8px; } }
+@media (prefers-reduced-motion: reduce) { .steve-support-banner-message, .steve-support-banner-heart { animation: none; } }
+
 .steve-memorial { background: var(--memorial-light), hsl(var(--memorial-background)); color: hsl(var(--memorial-foreground)); border-bottom: 1px solid hsl(var(--memorial-gold) / .25); }
 .memorial-inner { max-width: 1120px; margin: auto; padding: 48px 28px 52px; }
 .memorial-preview { max-width: 720px; margin: auto; padding: 28px 22px; display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; }
