@@ -76,6 +76,20 @@
 
 .steve-memorial { background: var(--memorial-light), hsl(var(--memorial-background)); color: hsl(var(--memorial-foreground)); border-bottom: 1px solid hsl(var(--memorial-gold) / .25); }
 .memorial-inner { max-width: 1120px; margin: auto; padding: 48px 28px 52px; }
+.memorial-preview { max-width: 850px; margin: auto; padding: 22px; display: flex; align-items: center; gap: 24px; }
+.memorial-preview-photo { display: block; width: 105px; flex-shrink: 0; }
+.memorial-preview-photo img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block; }
+.memorial-preview-copy { min-width: 0; }
+.memorial-preview-copy h2 { font-family: Georgia, 'Times New Roman', serif; font-size: 27px; line-height: 1.3; color: hsl(var(--memorial-gold)); }
+.memorial-preview-copy p { font-size: 14px; line-height: 1.7; margin-top: 8px; color: hsl(var(--memorial-muted)); }
+.memorial-preview-copy .memorial-read { margin-top: 8px; }
+@media (max-width: 767px) {
+  .memorial-preview { gap: 16px; padding: 18px; }
+  .memorial-preview-photo { width: 86px; }
+  .memorial-preview-copy h2 { font-size: 21px; }
+  .memorial-preview-copy p { font-size: 12px; margin-top: 6px; }
+  .memorial-preview-copy .memorial-read { font-size: 12px; margin-top: 4px; }
+}
 .memorial-header { text-align: center; margin-bottom: 36px; }
 .memorial-candle { display: inline-block; font-size: 32px; animation: memorial-candle 4s ease-in-out infinite; }
 .memorial-eyebrow { margin: 12px 0 16px; font-size: 12px; text-transform: uppercase; color: hsl(var(--memorial-gold)); font-weight: 600; }
