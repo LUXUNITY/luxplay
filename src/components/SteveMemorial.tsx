@@ -15,6 +15,22 @@ const tribute = [
 ];
 
 export default function SteveMemorial({ full = false }: { full?: boolean }) {
+  if (!full) {
+    return (
+      <section id="remembering-steve" className="steve-memorial" aria-labelledby="steve-preview-title">
+        <div className="memorial-preview">
+          <Link to="/remembering-steve" aria-label="Read Steve’s memorial" className="memorial-preview-photo">
+            <img src={stevePhoto.url} alt="Steve at LuxPlay" fetchPriority="high" />
+          </Link>
+          <div className="memorial-preview-copy">
+            <h2 id="steve-preview-title">In Loving Memory of Steve <span aria-hidden="true">❤️</span></h2>
+            <p>Our manager. Our friend. Forever part of our family.</p>
+            <Button asChild variant="link" className="memorial-read"><Link to="/remembering-steve">Read Steve’s tribute <ArrowRight /></Link></Button>
+          </div>
+        </div>
+      </section>
+    );
+  }
   return (
     <section id="remembering-steve" className="steve-memorial" aria-labelledby="steve-title">
       <div className="memorial-inner">
