@@ -1,3 +1,6 @@
 - [x] Replace Halloween poster and public booking section with a Christmas Winter Wonderland coming-soon announcement.
 - [x] Remove Halloween decorations and ticket links; preserve existing paid tickets and staff tools.
 - [x] Verify the announcement and regular booking links in the preview.
+- [x] Add Steve’s photograph and respectful tribute above all homepage content, with a permanent memorial page.
+- [ ] Verify the memorial on desktop and mobile, preserving Christmas and booking links.
+- [ ] Activate the donation button — waiting for the family’s GoFundMe URL.

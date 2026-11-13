@@ -11,6 +11,7 @@ import AppShellRedirect from "@/components/app/AppShellRedirect";
 import { AuthProvider } from "@/hooks/useAuth";
 
 const NotFound = lazy(() => import("./pages/NotFound"));
+const RememberingSteve = lazy(() => import("./pages/RememberingSteve"));
 const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
 const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
 const Admin = lazy(() => import("./pages/Admin"));
@@ -51,6 +52,7 @@ const App = () => (
               <Route path="/" element={<><RouteHead title="LUXPLAY — Family Entertainment Centre in Bournemouth" description="LUXPLAY in Boscombe, Bournemouth: 40+ arcade games, 3-level soft play, baby soft play, prize redemption and Cafè Lux. Book soft play or buy credits online." path="/" /><Index /></>} />
               <Route path="/halloween" element={<><RouteHead title="Winter Wonderland Coming Soon — LUXPLAY" description="LuxPlay Winter Wonderland is coming soon to Bournemouth. Stay tuned for more information!" path="/halloween" /><Index /></>} />
               <Route path="/parties" element={<Parties />} />
+              <Route path="/remembering-steve" element={<><RouteHead title="In Loving Memory of Steve — LUXPLAY" description="Remembering Steve, our beloved manager, friend and part of the LuxPlay family. Read our tribute and help support his family." path="/remembering-steve" /><RememberingSteve /></>} />
               <Route path="/soft-play-bournemouth" element={<SoftPlayBournemouth />} />
               <Route path="/arcade-bournemouth" element={<ArcadeBournemouth />} />
               <Route path="/things-to-do-in-bournemouth-with-kids" element={<ThingsToDoBournemouth />} />
