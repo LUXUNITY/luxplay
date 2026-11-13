@@ -2,7 +2,7 @@ import { Heart, ArrowRight, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import stevePhoto from "@/assets/steve-memorial.jpg.asset.json";
-import stevePortrait from "@/assets/steve-portrait.jpg.asset.json";
+import stevePortrait from "@/assets/steve-arcade-portrait.jpg.asset.json";
 
 const tribute = [
   "It is with the heaviest of hearts that we share the devastating loss of our beloved manager and dear friend, Steve.",
@@ -21,12 +21,13 @@ export default function SteveMemorial({ full = false }: { full?: boolean }) {
       <section id="remembering-steve" className="steve-memorial" aria-labelledby="steve-preview-title">
         <div className="memorial-preview">
           <Link to="/remembering-steve" aria-label="Read Steve’s memorial" className="memorial-preview-photo">
-            <img src={stevePortrait.url} alt="Steve smiling at LuxPlay" fetchPriority="high" />
+            <img src={stevePortrait.url} alt="Steve among the arcade machines at the LuxPlay he loved" fetchPriority="high" />
           </Link>
           <div className="memorial-preview-copy">
             <h2 id="steve-preview-title">In Loving Memory of Steve <span aria-hidden="true">❤️</span></h2>
-            <p>Our manager. Our friend. Forever part of our family.</p>
-            <Button asChild variant="link" className="memorial-read"><Link to="/remembering-steve">Read Steve’s tribute &amp; support his family <ArrowRight /></Link></Button>
+            <p>Our manager. Our friend. Forever part of LuxPlay.</p>
+            <p className="memorial-preview-support">Let’s come together for Steve’s family ❤️</p>
+            <Button asChild variant="memorial" className="memorial-read"><Link to="/remembering-steve">Read his tribute &amp; help his family <ArrowRight /></Link></Button>
           </div>
         </div>
       </section>
