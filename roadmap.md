@@ -3,4 +3,4 @@
 - [x] Verify the announcement and regular booking links in the preview.
 - [x] Add Steve’s photograph and respectful tribute above all homepage content, with a permanent memorial page.
 - [ ] Verify the memorial on desktop and mobile, preserving Christmas and booking links.
-- [ ] Activate the donation button — waiting for the family’s GoFundMe URL.
+- [x] Activate the donation button with the family’s supplied GoFundMe URL.
