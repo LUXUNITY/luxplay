@@ -25,7 +25,7 @@ export default function SteveMemorial({ full = false }: { full?: boolean }) {
           <div className="memorial-preview-copy">
             <h2 id="steve-preview-title">In Loving Memory of Steve <span aria-hidden="true">❤️</span></h2>
             <p>Our manager. Our friend. Forever part of our family.</p>
-            <Button asChild variant="link" className="memorial-read"><Link to="/remembering-steve">Read Steve’s tribute <ArrowRight /></Link></Button>
+            <Button asChild variant="link" className="memorial-read"><Link to="/remembering-steve">Read Steve’s tribute &amp; support his family <ArrowRight /></Link></Button>
           </div>
         </div>
       </section>
