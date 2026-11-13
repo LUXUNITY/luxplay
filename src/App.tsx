@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import RouteHead from "@/components/RouteHead";
 import AppShellRedirect from "@/components/app/AppShellRedirect";
 import { AuthProvider } from "@/hooks/useAuth";
+import SteveSupportBanner from "@/components/SteveSupportBanner";
 
 const NotFound = lazy(() => import("./pages/NotFound"));
 const RememberingSteve = lazy(() => import("./pages/RememberingSteve"));
@@ -40,6 +41,7 @@ const App = () => (
         <BrowserRouter>
         <AuthProvider>
           <AppShellRedirect />
+          <SteveSupportBanner />
           <Suspense fallback={null}>
             <Routes>
               {/* Native app shell — separate look from the website */}
