@@ -43,8 +43,8 @@ export default function SteveMemorial({ full = false }: { full?: boolean }) {
           <p>Steve spent his life looking after the people he loved. Now, in his absence, we want to do everything we can to look after them.</p>
           {full && <p>His family are facing an incredibly difficult time, both emotionally and financially. We are asking our wonderful community to come together and help support them with funeral expenses and the difficult road ahead.</p>}
           <p>Whether you can spare £1, £5, £10 or £100, every single contribution will mean something. No donation is too small.</p>
-          <Button variant="memorial" disabled className="memorial-donate"><Heart /> Support Steve’s Family – GoFundMe</Button>
-          <p className="memorial-note">The family’s GoFundMe link will be shared here soon.</p>
+          <Button asChild variant="memorial" className="memorial-donate"><a href="https://gofund.me/54a0d4f77" target="_blank" rel="noopener noreferrer"><Heart /> Support Steve’s Family – GoFundMe</a></Button>
+          <p className="memorial-note">All donations go through the family’s GoFundMe fundraising page.</p>
           <p>And if you’re unable to donate, simply sharing this page would mean the world.</p>
           {full && <p className="memorial-closing">Steve gave so much to everyone around him. Now it’s our turn to give something back.</p>}
         </div>
