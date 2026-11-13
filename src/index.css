@@ -77,15 +77,22 @@
 .steve-memorial { background: var(--memorial-light), hsl(var(--memorial-background)); color: hsl(var(--memorial-foreground)); border-bottom: 1px solid hsl(var(--memorial-gold) / .25); }
 .memorial-inner { max-width: 1120px; margin: auto; padding: 48px 28px 52px; }
 .memorial-preview { max-width: 850px; margin: auto; padding: 22px; display: flex; align-items: center; gap: 24px; }
-.memorial-preview-photo { display: block; width: 105px; flex-shrink: 0; }
-.memorial-preview-photo img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block; }
+.memorial-preview-photo { display: block; width: 120px; flex-shrink: 0; border: 1px solid hsl(var(--memorial-gold) / .6); padding: 3px; animation: memorial-photo-glow 5s ease-in-out infinite; }
+.memorial-preview-photo img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center top; display: block; }
 .memorial-preview-copy { min-width: 0; }
-.memorial-preview-copy h2 { font-family: Georgia, 'Times New Roman', serif; font-size: 27px; line-height: 1.3; color: hsl(var(--memorial-gold)); }
+.memorial-preview-copy h2 { font-family: Georgia, 'Times New Roman', serif; font-size: 27px; line-height: 1.3; color: hsl(var(--memorial-gold)); animation: memorial-copy-enter 900ms ease-out both; }
+.memorial-preview-copy h2 span { display: inline-block; font-size: .75em; animation: memorial-heart 4s ease-in-out infinite; }
 .memorial-preview-copy p { font-size: 14px; line-height: 1.7; margin-top: 8px; color: hsl(var(--memorial-muted)); }
-.memorial-preview-copy .memorial-read { margin-top: 8px; }
+.memorial-preview-copy .memorial-read { margin-top: 8px; animation: memorial-copy-enter 1100ms ease-out both; }
+.memorial-preview-copy .memorial-read svg { animation: memorial-arrow 3s ease-in-out infinite; }
+.memorial-preview-copy p { animation: memorial-copy-enter 1000ms ease-out both; }
+@keyframes memorial-copy-enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes memorial-photo-glow { 0%,100% { box-shadow: 0 0 8px hsl(var(--memorial-gold) / .1); } 50% { box-shadow: 0 0 20px hsl(var(--memorial-gold) / .3); } }
+@keyframes memorial-heart { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+@keyframes memorial-arrow { 0%,100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
 @media (max-width: 767px) {
   .memorial-preview { gap: 16px; padding: 18px; }
-  .memorial-preview-photo { width: 86px; }
+  .memorial-preview-photo { width: 100px; }
   .memorial-preview-copy h2 { font-size: 21px; }
   .memorial-preview-copy p { font-size: 12px; margin-top: 6px; }
   .memorial-preview-copy .memorial-read { font-size: 12px; margin-top: 4px; }
@@ -122,7 +129,7 @@
   .memorial-support h2 { font-size: 26px; }
   .memorial-words blockquote { font-size: 23px; }
 }
-@media (prefers-reduced-motion: reduce) { .memorial-candle { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .memorial-candle, .memorial-preview-photo, .memorial-preview-copy h2, .memorial-preview-copy h2 span, .memorial-preview-copy p, .memorial-preview-copy .memorial-read, .memorial-preview-copy .memorial-read svg { animation: none; } }
 
 @layer utilities {
   /* Chunky tap tile — Memphis style drop shadow, presses down on touch */

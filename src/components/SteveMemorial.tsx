@@ -2,6 +2,7 @@ import { Heart, ArrowRight, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import stevePhoto from "@/assets/steve-memorial.jpg.asset.json";
+import stevePortrait from "@/assets/steve-portrait.jpg.asset.json";
 
 const tribute = [
   "It is with the heaviest of hearts that we share the devastating loss of our beloved manager and dear friend, Steve.",
@@ -20,7 +21,7 @@ export default function SteveMemorial({ full = false }: { full?: boolean }) {
       <section id="remembering-steve" className="steve-memorial" aria-labelledby="steve-preview-title">
         <div className="memorial-preview">
           <Link to="/remembering-steve" aria-label="Read Steve’s memorial" className="memorial-preview-photo">
-            <img src={stevePhoto.url} alt="Steve at LuxPlay" fetchPriority="high" />
+            <img src={stevePortrait.url} alt="Steve smiling at LuxPlay" fetchPriority="high" />
           </Link>
           <div className="memorial-preview-copy">
             <h2 id="steve-preview-title">In Loving Memory of Steve <span aria-hidden="true">❤️</span></h2>
