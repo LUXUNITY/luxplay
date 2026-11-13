@@ -53,6 +53,10 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         ink: "hsl(var(--ink))",
+        memorial: {
+          gold: "hsl(var(--memorial-gold))",
+          ink: "hsl(var(--memorial-ink))",
+        },
         neon: {
           green: "hsl(var(--neon-green))",
           pink: "hsl(var(--neon-pink))",

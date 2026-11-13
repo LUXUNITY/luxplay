@@ -1,4 +1,5 @@
 ## Presentation
+- Keep Steve’s homepage tribute and permanent memorial page in one shared presentation component; memorial-specific tokens isolate its respectful appearance from promotions and booking logic.
 - Keep the heated-venue promotion in its own component with CSS-only motion and reduced-motion support, so seasonal presentation stays isolated from booking logic.
 - Keep seasonal coming-soon announcements in an isolated live-text component with CSS-only motion and reduced-motion support; removing a promotion must preserve paid tickets and staff check-in flows.
 

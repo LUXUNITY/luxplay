@@ -44,6 +44,12 @@
     --neon-purple: 277 100% 57%;
     --ink: 252 48% 5%;
     --winter-glow: 0 0 22px hsl(var(--neon-cyan) / .35);
+    --memorial-background: 30 13% 8%;
+    --memorial-foreground: 40 30% 92%;
+    --memorial-muted: 36 15% 73%;
+    --memorial-gold: 40 52% 68%;
+    --memorial-ink: 30 18% 10%;
+    --memorial-light: radial-gradient(ellipse at 50% 0%, hsl(var(--memorial-gold) / .1), transparent 65%);
 
 
     --sidebar-background: 0 0% 100%;
@@ -67,6 +73,42 @@
     background-color: hsl(270 40% 4%);
   }
 }
+
+.steve-memorial { background: var(--memorial-light), hsl(var(--memorial-background)); color: hsl(var(--memorial-foreground)); border-bottom: 1px solid hsl(var(--memorial-gold) / .25); }
+.memorial-inner { max-width: 1120px; margin: auto; padding: 48px 28px 52px; }
+.memorial-header { text-align: center; margin-bottom: 36px; }
+.memorial-candle { display: inline-block; font-size: 32px; animation: memorial-candle 4s ease-in-out infinite; }
+.memorial-eyebrow { margin: 12px 0 16px; font-size: 12px; text-transform: uppercase; color: hsl(var(--memorial-gold)); font-weight: 600; }
+.memorial-header h1 { font-family: Georgia, 'Times New Roman', serif; font-size: 46px; font-weight: 400; line-height: 1.15; letter-spacing: 0; }
+.memorial-header h1 span { display: block; color: hsl(var(--memorial-gold)); font-size: 76px; margin-top: 8px; }
+.memorial-header h1 svg { display: inline; width: 30px; height: 30px; stroke-width: 1; vertical-align: middle; }
+.memorial-subtitle { color: hsl(var(--memorial-muted)); margin-top: 20px; font-size: 16px; }
+.memorial-story { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 48px; align-items: start; }
+.memorial-photo img { width: 100%; aspect-ratio: 3 / 4; object-fit: contain; display: block; }
+.memorial-photo figcaption { text-align: center; font-size: 11px; color: hsl(var(--memorial-muted)); margin-top: 12px; }
+.memorial-words p, .memorial-support p { font-size: 15px; line-height: 1.9; margin-bottom: 18px; }
+.memorial-words blockquote { border-left: 1px solid hsl(var(--memorial-gold) / .6); padding-left: 24px; margin: 26px 0 16px; font-family: Georgia, 'Times New Roman', serif; font-size: 25px; line-height: 1.6; color: hsl(var(--memorial-gold)); }
+.memorial-read, .memorial-back { color: hsl(var(--memorial-gold)); white-space: normal; height: auto; padding: 8px 0; text-align: left; }
+.memorial-support { border-top: 1px solid hsl(var(--memorial-gold) / .25); margin-top: 40px; padding-top: 32px; text-align: center; }
+.memorial-support-heart { margin: 0 auto 14px; color: hsl(var(--memorial-gold)); stroke-width: 1; }
+.memorial-support h2 { font-family: Georgia, 'Times New Roman', serif; font-size: 30px; line-height: 1.3; margin-bottom: 18px; }
+.memorial-support p { max-width: 720px; margin-left: auto; margin-right: auto; }
+.memorial-donate { white-space: normal; min-height: 52px; height: auto; padding: 14px 24px; border-radius: 4px; max-width: 100%; }
+.memorial-donate:disabled { opacity: .75; }
+.memorial-support .memorial-note { color: hsl(var(--memorial-muted)); font-size: 12px; margin-top: 12px; }
+.memorial-closing { color: hsl(var(--memorial-gold)); }
+@keyframes memorial-candle { 0%,100% { opacity: .8; } 50% { opacity: 1; } }
+@media (max-width: 767px) {
+  .memorial-inner { padding: 30px 22px 36px; }
+  .memorial-header h1 { font-size: 30px; }
+  .memorial-header h1 span { font-size: 58px; }
+  .memorial-subtitle { font-size: 13px; }
+  .memorial-story { grid-template-columns: minmax(0, 1fr); gap: 26px; }
+  .memorial-photo { max-width: 380px; margin: auto; }
+  .memorial-support h2 { font-size: 26px; }
+  .memorial-words blockquote { font-size: 23px; }
+}
+@media (prefers-reduced-motion: reduce) { .memorial-candle { animation: none; } }
 
 @layer utilities {
   /* Chunky tap tile — Memphis style drop shadow, presses down on touch */
