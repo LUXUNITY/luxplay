@@ -4,3 +4,6 @@
 - [x] Add Steve’s photograph and respectful tribute above all homepage content, with a permanent memorial page.
 - [x] Verify the memorial on desktop and mobile, preserving Christmas and booking links.
 - [x] Activate the donation button with the family’s supplied GoFundMe URL.
+- [x] Add a separate £24.99 unlimited soft play membership preview with a clearly labelled sample pass; do not sell or activate memberships.
+- [x] Verify the membership preview and price test.
+- [ ] Live membership billing, paid-status checks, member reservations and staff scanning: awaiting agreement to proceed beyond the preview and a live Square connection; the linked connection is test-only.
