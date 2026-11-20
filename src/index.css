@@ -55,6 +55,9 @@
     --membership-letter-shadow: 0 3px 0 hsl(var(--ink)), 0 6px 0 hsl(var(--neon-purple)), 0 9px 18px hsl(var(--neon-purple) / .25);
     --membership-brand-shadow: 2px 3px 0 hsl(var(--neon-purple));
     --family-heading-depth: 0 2px 0 hsl(var(--ink)), 0 4px 0 hsl(var(--neon-purple)), 0 8px 16px hsl(var(--neon-purple) / .2);
+    --family-confetti-pattern: radial-gradient(ellipse 3px 7px at 12px 14px, hsl(var(--neon-pink) / .48) 95%, transparent), radial-gradient(ellipse 6px 2px at 18px 22px, hsl(var(--neon-cyan) / .42) 95%, transparent), radial-gradient(ellipse 2px 5px at 24px 12px, hsl(var(--neon-green) / .35) 95%, transparent), radial-gradient(ellipse 5px 2px at 14px 24px, hsl(var(--neon-purple) / .5) 95%, transparent);
+    --family-colour-wash: repeating-linear-gradient(125deg, hsl(var(--neon-cyan) / .055) 0 90px, hsl(var(--neon-purple) / .1) 90px 180px, hsl(var(--neon-pink) / .055) 180px 270px, hsl(var(--neon-green) / .035) 270px 360px);
+    --family-playful-background: var(--family-confetti-pattern), var(--family-colour-wash);
     --memorial-background: 30 13% 8%;
     --memorial-foreground: 40 30% 92%;
     --memorial-muted: 36 15% 73%;
@@ -86,6 +89,21 @@
 }
 
 /* Public promotional type only: never restyle staff tools, app, memorials or booking inputs. */
+.family-website { background-color: hsl(var(--background)); }
+.family-website :is(main, section, footer, .membership-heading, nav[aria-label="Back to homepage"]):not(.steve-memorial, .steve-memorial *, .funeral-closure-banner, .funeral-closure-banner *, .membership-pass-section, .membership-benefits, .membership-notice) {
+  background-image: var(--family-playful-background);
+  background-repeat: repeat;
+  /* Each little sprinkle lives in a larger transparent tile. */
+  background-size: 173px 151px, 211px 179px, 257px 223px, 293px 257px, 720px 720px;
+  animation: family-confetti-drift 40s linear infinite;
+}
+@keyframes family-confetti-drift {
+  from { background-position: 0 0, 60px 30px, 110px 70px, 35px 120px, 0 0; }
+  to { background-position: 173px 151px, -151px 209px, 367px 293px, -258px 377px, 720px 720px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .family-website :is(main, section, footer, .membership-heading, nav[aria-label="Back to homepage"]) { animation: none !important; }
+}
 .family-website :is(h1, h2, h3):not(.steve-memorial *, .funeral-closure-banner *, .membership-heading *) {
   font-family: 'Montserrat', sans-serif;
   font-weight: 900;

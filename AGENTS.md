@@ -1,5 +1,5 @@
 ## Presentation
-- Scope playful promotional typography through the public-page style boundary; exclude the app, staff tools, transaction screens, memorials and booking controls so typography changes cannot compromise practical workflows.
+- Scope playful promotional typography and CSS-only animated backgrounds through the public-page style boundary; exclude the app, staff tools, transaction screens, memorials and booking controls so presentation changes cannot compromise practical workflows.
 - Keep the membership preview separate from existing checkouts; sample passes link only to membership information and must never grant entry before real billing and staff checks exist.
 - Keep the homepage membership promotion in its own live-text component with reduced-motion-aware CSS and shared membership terms, so marketing remains separate from billing and entry checks.
 - Render membership tier prices and benefits from one shared typed catalog and comparison component on both pages to prevent conflicting offers.
