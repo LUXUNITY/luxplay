@@ -12,9 +12,9 @@ export default function MembershipTiers() {
           <div className="flex flex-1 flex-col px-5 py-6">
             <span className="play-pass-heart mb-3 inline-block self-start text-4xl" aria-hidden="true">{tier.emoji}</span>
             <h3 id={`${tier.id}-title`} className={`font-display text-4xl leading-none ${tier.colour}`}>{tier.name}</h3>
-            <p className="mt-2 min-h-10 font-body text-xs leading-relaxed text-muted-foreground">{tier.tagline}</p>
+            <p className={`mt-2 min-h-10 font-body text-lg leading-snug ${tier.colour}`}>{tier.tagline}</p>
             <p className={`play-pass-price mt-4 font-display !text-5xl leading-none ${tier.colour}`}>{formatMembershipPrice(tier.pricePence)}</p>
-            <p className="mt-2 font-body text-xs text-muted-foreground">per child / month</p>
+            <p className="mt-2 font-body text-base text-foreground">per child / month</p>
             <ul className="mt-5 space-y-4 border-t border-border pt-5 font-body text-sm leading-relaxed">
               <li className="flex items-start gap-2"><Check className={`mt-1 h-4 w-4 shrink-0 ${tier.colour}`} /><span><strong>Unlimited soft play</strong><br />{MEMBERSHIP_SESSION_HOURS}-hour sessions for one child</span></li>
               {tier.foodDrinkDiscountPercent > 0 && <li className="flex items-start gap-2"><Utensils className={`mt-1 h-4 w-4 shrink-0 ${tier.colour}`} /><span><strong>{tier.foodDrinkDiscountPercent}% off</strong> food &amp; drinks</span></li>}
