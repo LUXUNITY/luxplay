@@ -1272,3 +1272,9 @@
 .promo-rainbow { animation: promo-border 3s linear infinite; }
 @keyframes promo-border { 0%,100% { border-color: hsl(var(--neon-pink)); box-shadow: 0 0 24px hsl(var(--neon-pink) / .45); } 33% { border-color: hsl(var(--neon-cyan)); box-shadow: 0 0 24px hsl(var(--neon-cyan) / .45); } 66% { border-color: hsl(var(--neon-green)); box-shadow: 0 0 24px hsl(var(--neon-green) / .45); } }
 @media (prefers-reduced-motion: reduce) { .promo-hello-title > span, .promo-price-burst, .promo-free, .promo-pill, .promo-shout-cta, .promo-rainbow { animation: none !important; } }
+.family-website .promo-rainbow { background-image: linear-gradient(160deg, hsl(var(--neon-pink) / .38), hsl(var(--neon-purple) / .32) 45%, hsl(var(--neon-cyan) / .34)) !important; }
+.family-website .promo-hello-title { font-size: 42px; }
+.promo-price-burst { width: 220px; height: 220px; background: radial-gradient(circle, hsl(0 0% 100%) 0%, hsl(var(--neon-green)) 55%); }
+.family-website .promo-price-burst .font-display { font-size: 50px; }
+.family-website .promo-price-burst span:first-child { font-size: 20px; }
+.family-website .promo-price-burst span:last-child { font-size: 14px; }

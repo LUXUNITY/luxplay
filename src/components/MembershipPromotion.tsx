@@ -10,13 +10,14 @@ export default function MembershipPromotion() {
         <div className="play-pass-sparkles pointer-events-none absolute inset-0" aria-hidden="true">
           {Array.from({ length: 4 }, (_, i) => <Sparkles key={i} className="play-pass-sparkle absolute h-5 w-5 text-neon-cyan" />)}
         </div>
-        <p className="relative inline-block rounded-full bg-neon-pink px-4 py-1 font-body text-xs text-ink">💚 NEW · MEMBERSHIPS</p>
+        <p className="relative inline-block rounded-full bg-neon-pink px-4 py-1 font-body text-xs text-ink">💚 NEW AT LUXPLAY 💚</p>
         <h2 id="play-pass-title" className="promo-hello-title relative mt-5 font-display leading-none">
-          <span className="block text-neon-cyan">Unlimited</span>
-          <span className="block text-neon-pink">soft play!</span>
+          <span className="block text-neon-cyan">Soft Play</span>
+          <span className="block text-neon-pink">Memberships!</span>
         </h2>
-        <div className="promo-price-burst relative mx-auto mt-6"><span className="block font-body text-sm text-ink">ONLY</span><span className="block font-display text-ink">{MEMBERSHIP_MONTHLY_PRICE}</span><span className="block font-body text-xs text-ink">a month</span></div>
-        <p className="promo-free relative mt-5 font-body text-lg text-neon-green">Grown-ups go FREE! 🤩</p>
+        <div className="promo-price-burst relative mx-auto mt-6"><span className="block font-body text-ink">FROM</span><span className="block font-display text-ink">{MEMBERSHIP_MONTHLY_PRICE}</span><span className="block font-body text-ink">per child / month</span></div>
+        <p className="relative mt-5 font-body text-lg text-foreground">Unlimited 2-hour soft play, every month! 🎉</p>
+        <p className="promo-free relative mt-2 font-body text-lg text-neon-green">Grown-ups go FREE! 🤩</p>
         <div className="relative mt-5 flex flex-wrap justify-center gap-2">
           {MEMBERSHIP_TIERS.map(tier => <span key={tier.id} className={`promo-pill rounded-full border-2 ${tier.border} px-3 py-1 font-body text-sm ${tier.colour}`}>{tier.emoji} {tier.name}</span>)}
         </div>
