@@ -28,6 +28,7 @@ const ArcadeBournemouth = lazy(() => import("./pages/ArcadeBournemouth"));
 const ThingsToDoBournemouth = lazy(() => import("./pages/ThingsToDoBournemouth"));
 const ThingsToDoInBournemouth = lazy(() => import("./pages/ThingsToDoInBournemouth"));
 const AuthPage = lazy(() => import("./pages/Auth"));
+const ResetPasswordPage = lazy(() => import("./pages/ResetPassword"));
 const Loyalty = lazy(() => import("./pages/Loyalty"));
 const AppLayout = lazy(() => import("@/components/app/AppLayout"));
 const AppHome = lazy(() => import("./pages/app/AppHome"));
@@ -76,6 +77,7 @@ const App = () => (
               <Route path="/softplay-success" element={<><RouteHead title="Soft Play Booking Confirmed — LUXPLAY" description="Your LUXPLAY soft play session is booked. Show your booking code on the day." path="/softplay-success" noindex /><SoftPlaySuccess /></>} />
               <Route path="/baby-softplay-success" element={<><RouteHead title="Baby Soft Play Booking Confirmed — LUXPLAY" description="Your LUXPLAY baby soft play session is booked. Show your booking code on the day." path="/baby-softplay-success" noindex /><BabySoftPlaySuccess /></>} />
               <Route path="/auth" element={<><RouteHead title="LUXPLAY Rewards — Sign In or Join Free" description="Sign in to your LUXPLAY Rewards account to collect soft play stamps — every 7th session is free per child." path="/auth" noindex /><AuthPage /></>} />
+              <Route path="/reset-password" element={<><RouteHead title="Reset your password — LUXPLAY" description="Choose a new password for your LUXPLAY account." path="/reset-password" noindex /><ResetPasswordPage /></>} />
               <Route path="/my-membership" element={<><RouteHead title="My LuxPlay Membership" description="Your LuxPlay membership pass, QR code and session bookings." path="/my-membership" noindex /><MyMembership /></>} />
               <Route path="/loyalty" element={<><RouteHead title="My LUXPLAY Rewards" description="Your LUXPLAY loyalty stamp card — 6 paid soft play sessions and the 7th is free." path="/loyalty" noindex /><Loyalty /></>} />
               <Route path="*" element={<><RouteHead title="Page Not Found — LUXPLAY" description="This LUXPLAY page could not be found." path="/404" noindex /><NotFound /></>} />
