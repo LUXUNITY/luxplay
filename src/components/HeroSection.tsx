@@ -32,13 +32,14 @@ export default function HeroSection() {
         <div className="relative mx-auto -mt-14 flex h-28 w-28 items-center justify-center rounded-full border-4 border-background bg-background">
           <img src={logoAsset} alt="LuxPlay logo" className="h-full w-full object-contain" />
         </div>
-        <h1 className="home-cute-logo mt-3 font-logo" aria-label="LUXPLAY">{"LUXPLAY".split("").map((letter, i) => <span key={i} aria-hidden="true" className={letters[i]} style={{ animationDelay: `${i * 0.12}s` }}>{letter}</span>)}</h1>
-        <ul className="home-fun-list mx-auto mt-4 flex max-w-md flex-wrap justify-center gap-2 px-4 font-body text-sm" aria-label="What's inside LuxPlay">
-          <li className="border-neon-cyan text-neon-cyan">🕹️ 60+ arcade games</li>
-          <li className="border-neon-pink text-neon-pink">🏰 3-level soft play</li>
-          <li className="border-neon-green text-neon-green">🍼 Baby soft play</li>
-          <li className="border-neon-purple text-foreground">🎁 Prizes to win</li>
-          <li className="border-neon-cyan text-neon-cyan">🍔 Delicious hot food</li>
+        <div className="home-logo-wrap relative mx-auto mt-3 inline-block"><span className="home-sparkle home-sparkle-a" aria-hidden="true">✨</span><span className="home-sparkle home-sparkle-b" aria-hidden="true">⭐</span><span className="home-sparkle home-sparkle-c" aria-hidden="true">💖</span>
+        <h1 className="home-cute-logo font-logo" aria-label="LUXPLAY">{"LUXPLAY".split("").map((letter, i) => <span key={i} aria-hidden="true" className={letters[i]} style={{ animationDelay: `${i * 0.12}s` }}>{letter}</span>)}</h1></div>
+        <ul className="home-fun-list mx-auto mt-5 flex max-w-md flex-wrap justify-center gap-2.5 px-4 font-body text-sm" aria-label="What's inside LuxPlay">
+          <li className="bg-neon-cyan text-ink" style={{ animationDelay: "0.0s" }}><span className="home-fun-emoji" aria-hidden="true">🕹️</span> 60+ arcade games</li>
+          <li className="bg-neon-pink text-ink" style={{ animationDelay: "0.3s" }}><span className="home-fun-emoji" aria-hidden="true">🏰</span> 3-level soft play</li>
+          <li className="bg-neon-green text-ink" style={{ animationDelay: "0.6s" }}><span className="home-fun-emoji" aria-hidden="true">🍼</span> Baby soft play</li>
+          <li className="bg-neon-purple text-ink" style={{ animationDelay: "0.8999999999999999s" }}><span className="home-fun-emoji" aria-hidden="true">🎁</span> Prizes to win</li>
+          <li className="bg-neon-cyan text-ink" style={{ animationDelay: "1.2s" }}><span className="home-fun-emoji" aria-hidden="true">🍔</span> Delicious hot food</li>
         </ul>
         <p className="mt-3 inline-flex items-center gap-1 font-body text-xs text-muted-foreground"><MapPin size={14} /> Sovereign Centre · Boscombe, Bournemouth</p>
       </header>

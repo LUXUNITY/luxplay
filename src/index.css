@@ -1303,6 +1303,14 @@
 .home-cute-logo > span:nth-child(odd) { rotate: -6deg; } .home-cute-logo > span:nth-child(even) { rotate: 5deg; }
 .home-cute-logo > span:nth-child(4) { color: hsl(var(--foreground)); }
 @keyframes logo-bounce { 0%,100% { translate: 0 0; } 30% { translate: 0 -10px; } 50% { translate: 0 0; } }
-.home-fun-list li { border-width: 2px; border-radius: 999px; padding: 4px 12px; background: hsl(var(--card)); }
+.home-fun-list li { display: inline-flex; align-items: center; gap: 6px; border: 3px solid hsl(var(--foreground)); border-radius: 999px; padding: 6px 14px 6px 8px; font-weight: 900; box-shadow: 0 4px 0 hsl(var(--ink)), 0 0 16px hsl(var(--foreground) / .25); animation: fun-wiggle 3s ease-in-out infinite; }
+.home-fun-list li:nth-child(odd) { rotate: -2deg; } .home-fun-list li:nth-child(even) { rotate: 2deg; }
+.home-fun-emoji { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 999px; background: hsl(var(--foreground)); font-size: 16px; animation: fun-hop 1.8s ease-in-out infinite; }
+@keyframes fun-wiggle { 0%,100% { translate: 0 0; } 50% { translate: 0 -3px; } }
+@keyframes fun-hop { 0%,100% { transform: scale(1) rotate(0); } 40% { transform: scale(1.18) rotate(-10deg); } 60% { transform: scale(1.1) rotate(8deg); } }
+.home-sparkle { position: absolute; font-size: 22px; animation: sparkle-twinkle 2s ease-in-out infinite; pointer-events: none; }
+.home-sparkle-a { left: -22px; top: 0; } .home-sparkle-b { right: -20px; top: -6px; animation-delay: .7s; } .home-sparkle-c { right: 18%; bottom: -10px; font-size: 16px; animation-delay: 1.3s; }
+@keyframes sparkle-twinkle { 0%,100% { opacity: .4; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.2); } }
+@media (prefers-reduced-motion: reduce) { .home-fun-list li, .home-fun-emoji, .home-sparkle { animation: none !important; } }
 @media (min-width: 768px) { .family-website .home-hub h1.home-cute-logo { font-size: 80px; } }
 @media (prefers-reduced-motion: reduce) { .home-cute-logo > span { animation: none !important; } }
