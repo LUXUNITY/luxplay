@@ -17,7 +17,11 @@ export default function MembershipPromotion() {
         </h2>
         <div className="promo-price-burst relative mx-auto mt-6"><span className="block font-body text-ink">FROM</span><span className="block font-display text-ink">{MEMBERSHIP_MONTHLY_PRICE}</span><span className="block font-body text-ink">per child / month</span></div>
         <p className="promo-unlimited relative mx-auto mt-6 max-w-sm font-display leading-none">
-          <span className="promo-unlimited-word block text-neon-pink">UNLIMITED</span>
+          <span className="promo-unlimited-word block" aria-label="UNLIMITED">
+            <span className="promo-unlimited-star" aria-hidden="true">⭐</span>
+            {"UNLIMITED".split("").map((ch, i) => <span key={i} aria-hidden="true" className={`promo-unlimited-letter ${["text-neon-pink","text-neon-cyan","text-neon-green","text-neon-purple"][i % 4]}`} style={{ animationDelay: `${i * 0.09}s` }}>{ch}</span>)}
+            <span className="promo-unlimited-star" aria-hidden="true">⭐</span>
+          </span>
           <span className="mt-1 block text-2xl text-neon-cyan">soft play sessions</span>
           <span className="promo-unlimited-tag mt-3 inline-block rounded-full bg-neon-cyan px-4 py-1.5 font-body text-base text-ink">ALL MONTH LONG! <span className="promo-cute-emoji" aria-hidden="true">🎉</span></span>
         </p>
