@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
@@ -23,6 +23,13 @@ export default function MyMembership() {
   const [msg, setMsg] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [pick, setPick] = useState<Record<string, { d: string; t: string }>>({});
+  const [spaces, setSpaces] = useState<Record<string, Record<string, number>>>({});
+  const asked = useRef(new Set<string>());
+  const loadSpaces = useCallback(async (d: string) => {
+    if (asked.current.has(d)) return; asked.current.add(d);
+    const { data } = await supabase.functions.invoke("membership", { body: { action: "spaces", sessionDate: d } });
+    if (data?.spaces) setSpaces(s => ({ ...s, [d]: data.spaces }));
+  }, []);
 
   const load = useCallback(async () => {
     const { data, error } = await supabase.functions.invoke("membership", { body: { action: "mine" } });
@@ -43,6 +50,7 @@ export default function MyMembership() {
     setBusy(true); setMsg(null);
     const { error } = await supabase.functions.invoke("membership", { body });
     setMsg(error ? await readFnError(error) : ok);
+    asked.current.clear(); setSpaces({});
     await load(); setBusy(false);
   };
 
@@ -61,6 +69,8 @@ export default function MyMembership() {
           const tier = MEMBERSHIP_TIERS.find(t => t.id === p.tier);
           const live = p.status === "active" || p.status === "grace";
           const sel = pick[p.id] ?? { d: days()[0], t: "" };
+          const daySpaces = spaces[sel.d];
+          if (live && !daySpaces) void loadSpaces(sel.d);
           return (
             <section key={p.id} className={`mt-6 rounded-lg border-2 ${tier?.border ?? "border-border"} bg-card p-5 font-body`}>
               <p className={`font-display text-3xl ${tier?.colour}`}>{tier?.emoji} {p.child_name}</p>
@@ -81,12 +91,21 @@ export default function MyMembership() {
               )) : live && (
                 <div className="mt-4 rounded-lg border border-border p-3">
                   <p className="font-extrabold">Book a free session</p>
-                  <select aria-label="Date" className="mt-2 w-full rounded-md border border-border bg-background p-2" value={sel.d} onChange={e => setPick({ ...pick, [p.id]: { ...sel, d: e.target.value } })}>
+                  <select aria-label="Date" className="mt-2 w-full rounded-md border border-border bg-background p-2" value={sel.d} onChange={e => setPick({ ...pick, [p.id]: { d: e.target.value, t: "" } })}>
                     {days().map(d => <option key={d} value={d}>{new Date(d).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" })}</option>)}
                   </select>
                   <div className="mt-2 grid grid-cols-3 gap-2">
-                    {SESSIONS.map(t => <button key={t} type="button" onClick={() => setPick({ ...pick, [p.id]: { ...sel, t } })}
-                      className={`rounded-md border px-2 py-2 text-xs font-extrabold ${sel.t === t ? "border-foreground bg-neon-green text-ink" : "border-border"}`}>{label(t)}</button>)}
+                    {SESSIONS.map(t => {
+                      const left = daySpaces?.[t];
+                      const full = left !== undefined && left <= 0;
+                      return <button key={t} type="button" disabled={full || left === undefined} onClick={() => setPick({ ...pick, [p.id]: { ...sel, t } })}
+                        className={`rounded-md border px-2 py-2 text-xs font-extrabold disabled:opacity-40 ${sel.t === t ? "border-foreground bg-neon-green text-ink" : "border-border"}`}>
+                        {label(t)}
+                        <span className={`mt-0.5 block text-[11px] font-bold ${sel.t === t ? "" : left !== undefined && left <= 10 ? "text-neon-pink" : "text-neon-green"}`}>
+                          {left === undefined ? "…" : left === -1 ? "Finished" : full ? "Full" : `${left} spaces left`}
+                        </span>
+                      </button>;
+                    })}
                   </div>
                   <Button disabled={busy || !sel.t} className="mt-3 w-full bg-neon-cyan text-ink hover:bg-neon-cyan/90"
                     onClick={() => act({ action: "book", membershipId: p.id, sessionDate: sel.d, sessionTime: sel.t }, "🎉 Session booked! Just scan the pass when you arrive.")}>Book session</Button>

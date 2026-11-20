@@ -123,6 +123,20 @@ Deno.serve(async (req) => {
       return json(200, { url: link.payment_link?.url });
     }
 
+    if (action === "spaces") {
+      const d = String(body.sessionDate ?? "");
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(d)) return json(400, { error: "Bad date" });
+      const { data: bk } = await db.from("soft_play_bookings").select("session_time").eq("session_date", d);
+      const ukHour = Number(new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", hour: "2-digit", hour12: false }).format(new Date()));
+      const spaces: Record<string, number> = {};
+      for (const t of STANDARD_SESSIONS) {
+        const ended = d === ukToday() && ukHour >= Number(t.slice(0, 2)) + 2;
+        const left = MAX_CAPACITY - (bk ?? []).filter((b: any) => b.session_time === t).length - (HELD_SPOTS[d]?.[t] ?? 0);
+        spaces[t] = ended ? -1 : !isBookable(d, t) ? 0 : Math.max(0, left);
+      }
+      return json(200, { spaces });
+    }
+
     const { data: rows } = await db.from("memberships").select("*").eq("user_id", user.id).order("created_at");
     const mine = rows ?? [];
 
