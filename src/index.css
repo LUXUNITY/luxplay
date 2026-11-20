@@ -55,6 +55,8 @@
     --membership-letter-shadow: 0 3px 0 hsl(var(--ink)), 0 6px 0 hsl(var(--neon-purple)), 0 9px 18px hsl(var(--neon-purple) / .25);
     --membership-brand-shadow: 2px 3px 0 hsl(var(--neon-purple));
     --family-heading-depth: 0 2px 0 hsl(var(--ink)), 0 4px 0 hsl(var(--neon-purple)), 0 8px 16px hsl(var(--neon-purple) / .2);
+    --family-font-heading: 'Fredoka', 'Montserrat', sans-serif;
+    --family-font-body: 'Nunito', 'Montserrat', sans-serif;
     --family-colour-wash: linear-gradient(135deg, hsl(var(--neon-green) / .065), transparent 45%, hsl(var(--neon-pink) / .065));
     --family-playful-background: var(--family-colour-wash);
     --family-snow-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='200' viewBox='0 0 180 200'%3E%3Cg stroke='black' stroke-width='1.3' fill='none' stroke-linecap='round'%3E%3Cpath d='M28 15v22M18.5 20.5l19 11M18.5 31.5l19-11M25 18l3 3 3-3M25 34l3-3 3 3'/%3E%3Cpath d='M126 112v16M119 116l14 8M119 124l14-8'/%3E%3C/g%3E%3C/svg%3E");
@@ -158,6 +160,25 @@
   .family-website .winter-title .wonder-word { font-size: 40px; }
   .family-website .winter-title .land-word { font-size: 48px; }
 }
+
+/* Rounded family typography, with quiet memorial and operational exclusions. */
+.family-website { font-family: var(--family-font-body); }
+.family-website :is(p, li, a, label, input, .font-body):not(.steve-memorial *, .funeral-closure-banner *) { font-family: var(--family-font-body); letter-spacing: 0; }
+.family-website :is(h1, h2, h3, .font-display, .font-logo, .membership-soft-play, .membership-heading-perks strong, .membership-repeat-ribbon, .winter-coming):not(.steve-memorial *, .funeral-closure-banner *) { font-family: var(--family-font-heading); font-weight: 600; letter-spacing: 0; }
+.family-website .home-offer-button .font-display { font-family: var(--family-font-heading); font-weight: 600; }
+.family-website .membership-heading h1 .membership-brand { font-family: var(--family-font-heading); font-weight: 700; }
+.family-website .membership-title-label { font-family: var(--family-font-heading); font-weight: 500; font-size: 22px; }
+.family-website .membership-soft-play { font-weight: 700; }
+.family-website .membership-repeat-ribbon { font-size: 36px; padding: 10px 16px; }
+.family-website .membership-heading-perks strong { font-size: 16px; line-height: 1.4; }
+.family-website .membership-heading-perks span { font-size: 11px; line-height: 1.5; }
+.family-website .membership-benefits h2 { font-family: var(--family-font-heading); font-weight: 600; }
+.family-website .membership-spotlight-title > span:first-child { font-family: var(--family-font-heading); font-weight: 600; }
+.family-website .membership-price-amount { font-size: 80px; font-weight: 600; }
+.family-website .membership-price p { line-height: 1.6; }
+.family-website .membership-pass .font-display { font-size: 25px; line-height: 1.15; }
+@media (min-width: 768px) { .family-website .membership-repeat-ribbon { font-size: 48px; } .family-website .membership-heading-perks strong { font-size: 20px; } }
+@media (max-width: 359px) { .family-website .membership-repeat-ribbon { font-size: 28px; } .family-website .membership-heading-perks strong { font-size: 13px; } .family-website .membership-heading-perks span { font-size: 10px; } .family-website .membership-price-amount { font-size: 70px; } }
 
 .membership-page { min-height: 100vh; }
 .membership-heading { padding: 16px 0 8px; background-image: var(--membership-heading-pattern); letter-spacing: 0; }
