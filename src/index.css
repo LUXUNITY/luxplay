@@ -1251,3 +1251,7 @@
 .family-website :is(main, section) h2:not(.steve-memorial *, .funeral-closure-banner *, .membership-heading *, [class*="text-neon"], [class*="text-ink"]) { color: hsl(var(--neon-cyan)); }
 .family-website :is(main, section) h3:not(.steve-memorial *, .funeral-closure-banner *, .membership-heading *, [class*="text-neon"], [class*="text-ink"], .bg-neon-cyan *, .bg-neon-green *, .bg-neon-pink *) { color: hsl(var(--neon-pink)); }
 .family-website :is(.bg-neon-cyan, .bg-neon-green, .bg-neon-pink, .bg-neon-purple) :is(h1, h2, h3, h4, .font-display) { text-shadow: none; }
+.family-website .promo-hello-title { font-size: 46px; line-height: 1.05; }
+.family-website .promo-hello-title > span:first-child { transform: rotate(-3deg); }
+.family-website .promo-hello-title > span:last-child { transform: rotate(2deg); margin-top: 4px; }
+@media (min-width: 768px) { .family-website .promo-hello-title { font-size: 68px; } }
