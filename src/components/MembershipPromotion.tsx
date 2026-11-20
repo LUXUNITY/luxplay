@@ -13,17 +13,20 @@ const perks = [
 export default function MembershipPromotion() {
   return (
     <section id="play-pass" className="play-pass-promo relative isolate overflow-hidden border-y-4 border-neon-purple bg-background text-center text-foreground" aria-labelledby="play-pass-title">
+      <div className="play-pass-sparkles pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        {Array.from({ length: 8 }, (_, i) => <Sparkles key={i} className="play-pass-sparkle absolute h-5 w-5 text-neon-cyan" />)}
+      </div>
       <div className="play-pass-ribbon bg-neon-green py-2 text-ink">
         <p className="flex items-center justify-center gap-2 px-4 font-body text-xs font-extrabold uppercase sm:text-sm"><Sparkles size={16} aria-hidden="true" /> Little adventurers. Endless play. <Sparkles size={16} aria-hidden="true" /></p>
       </div>
       <div className="relative mx-auto max-w-4xl px-5 py-8 sm:px-8 sm:py-10">
-        <p className="font-display text-2xl text-neon-pink">THE LUXPLAY MEMBERSHIP 💚</p>
+        <p className="play-pass-eyebrow font-display text-2xl text-neon-pink">THE LUXPLAY MEMBERSHIP <span className="play-pass-heart inline-block">💚</span></p>
         <h2 id="play-pass-title" className="play-pass-title mt-2 font-display leading-none">ONE PASS.<br /><span className="play-pass-unlimited text-neon-cyan">UNLIMITED FUN.</span></h2>
         <div className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
           <p className="play-pass-price font-display leading-none text-neon-green">{MEMBERSHIP_MONTHLY_PRICE}</p>
           <p className="text-left font-body text-sm font-bold leading-relaxed">PER CHILD<br />PER MONTH</p>
         </div>
-        <p className="mt-4 font-body text-sm font-semibold sm:text-base">Around the price of 3 visits.<br /><span className="font-display text-3xl text-neon-pink sm:text-4xl">BUT THE PLAY? UNLIMITED! 🤩</span></p>
+        <p className="mt-4 font-body text-sm font-semibold sm:text-base">Around the price of 3 visits.<br /><span className="play-pass-wow inline-block font-display text-3xl text-neon-pink sm:text-4xl">BUT THE PLAY? UNLIMITED! 🤩</span></p>
         <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
           {perks.map(({ Icon, title, detail, colour }) => (
             <div key={title} className="play-pass-perk flex items-center gap-4 rounded-lg border border-neon-purple/50 bg-card px-4 py-4 text-left">

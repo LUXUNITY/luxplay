@@ -96,20 +96,46 @@
 @media (prefers-reduced-motion: reduce) { .membership-pass { animation: none; transform: none; } }
 
 .play-pass-promo { background-image: var(--membership-promo-pattern); }
+.play-pass-ribbon { position: relative; }
+.play-pass-ribbon svg { animation: play-pass-twinkle 2.6s ease-in-out infinite; }
+.play-pass-heart { animation: play-pass-hop 2.8s ease-in-out infinite; }
 .play-pass-title { font-size: 60px; letter-spacing: 0; }
-.play-pass-unlimited { display: inline-block; text-shadow: var(--membership-promo-glow); animation: play-pass-glow 3s ease-in-out infinite; }
-.play-pass-price { font-size: 76px; letter-spacing: 0; }
-.play-pass-perk-icon { animation: play-pass-bob 4s ease-in-out infinite; }
+.play-pass-unlimited { display: inline-block; text-shadow: var(--membership-promo-glow); animation: play-pass-glow 3s ease-in-out infinite, play-pass-heading 4s ease-in-out infinite; }
+.play-pass-price { font-size: 76px; letter-spacing: 0; animation: play-pass-price-pop 3.8s ease-in-out infinite; }
+.play-pass-wow { animation: play-pass-heading 4s ease-in-out -2s infinite; }
+.play-pass-perk { animation: play-pass-lift 5s ease-in-out infinite; }
+.play-pass-perk:nth-child(2) { animation-delay: -1.25s; }
+.play-pass-perk:nth-child(3) { animation-delay: -2.5s; }
+.play-pass-perk:nth-child(4) { animation-delay: -3.75s; }
+.play-pass-perk-icon { animation: play-pass-bob 2.6s ease-in-out infinite; }
 .play-pass-perk:nth-child(even) .play-pass-perk-icon { animation-delay: -2s; }
-.play-pass-cta { height: auto; border-radius: 8px; box-shadow: var(--membership-cta-shadow); }
-.play-pass-ticker { animation: play-pass-scroll 26s linear infinite; }
+.play-pass-perk h3 { animation: play-pass-glow 4s ease-in-out infinite; }
+.play-pass-cta { height: auto; border-radius: 8px; box-shadow: var(--membership-cta-shadow); animation: play-pass-price-pop 3.8s ease-in-out -1.9s infinite; }
+.play-pass-cta svg { animation: play-pass-arrow 1.8s ease-in-out infinite; }
+.play-pass-cta:hover, .play-pass-cta:focus-visible { animation-play-state: paused; }
+.play-pass-ticker { animation: play-pass-scroll 20s linear infinite; }
 .play-pass-promo:hover .play-pass-ticker { animation-play-state: paused; }
+.play-pass-sparkle { left: 3%; top: 12%; animation: play-pass-sparkle-drift 6s ease-in-out infinite; }
+.play-pass-sparkle:nth-child(2) { left: 90%; top: 18%; color: hsl(var(--neon-pink)); animation-delay: -1s; }
+.play-pass-sparkle:nth-child(3) { left: 8%; top: 32%; color: hsl(var(--neon-green)); animation-delay: -3s; }
+.play-pass-sparkle:nth-child(4) { left: 94%; top: 40%; animation-delay: -4s; }
+.play-pass-sparkle:nth-child(5) { left: 2%; top: 58%; color: hsl(var(--neon-pink)); animation-delay: -2s; }
+.play-pass-sparkle:nth-child(6) { left: 91%; top: 68%; color: hsl(var(--neon-green)); animation-delay: -5s; }
+.play-pass-sparkle:nth-child(7) { left: 6%; top: 82%; animation-delay: -2.5s; }
+.play-pass-sparkle:nth-child(8) { left: 92%; top: 90%; color: hsl(var(--neon-purple)); animation-delay: -4.5s; }
+@keyframes play-pass-sparkle-drift { 0%,100% { transform: translateY(8px) rotate(-15deg) scale(.6); opacity: .25; } 50% { transform: translateY(-14px) rotate(20deg) scale(1.15); opacity: .8; } }
+@keyframes play-pass-twinkle { 0%,100% { transform: rotate(-10deg) scale(.85); } 50% { transform: rotate(15deg) scale(1.2); } }
+@keyframes play-pass-hop { 0%,65%,100% { transform: translateY(0) rotate(0); } 75% { transform: translateY(-6px) rotate(-12deg); } 85% { transform: translateY(-2px) rotate(10deg); } }
+@keyframes play-pass-heading { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@keyframes play-pass-price-pop { 0%,70%,100% { transform: scale(1); } 82% { transform: scale(1.035); } }
+@keyframes play-pass-lift { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@keyframes play-pass-arrow { 0%,100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
 @keyframes play-pass-scroll { to { transform: translateX(-50%); } }
 @keyframes play-pass-bob { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-4px) rotate(4deg); } }
 @keyframes play-pass-glow { 0%,100% { opacity: 1; } 50% { opacity: .8; } }
 @media (min-width: 640px) { .play-pass-title { font-size: 88px; } .play-pass-price { font-size: 90px; } }
 @media (max-width: 359px) { .play-pass-title { font-size: 48px; } .play-pass-price { font-size: 64px; } }
-@media (prefers-reduced-motion: reduce) { .play-pass-unlimited, .play-pass-perk-icon, .play-pass-ticker { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .play-pass-promo *, .play-pass-promo *::before, .play-pass-promo *::after { animation: none !important; } }
 
 .steve-support-banner { position: sticky; top: 0; z-index: 40; width: 100%; background: hsl(var(--memorial-gold)); border-bottom: 1px solid hsl(var(--memorial-ink) / .2); padding-top: env(safe-area-inset-top, 0px); }
 .steve-support-banner .steve-support-banner-link { display: flex; width: 100%; height: auto; min-height: 54px; padding: 12px 22px; border-radius: 0; white-space: normal; text-align: center; }
