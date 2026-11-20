@@ -18,5 +18,19 @@ export default function FamilyWebsiteStyle({ children }: { children: ReactNode }
     link.href = "https://fonts.googleapis.com/css2?family=Lilita+One&family=Chewy&family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;500;600;700;800;900&display=swap";
     document.head.appendChild(link);
   }, []);
-  return <div className={familyPages.has(pathname) ? "family-website" : undefined}>{children}</div>;
+  const family = familyPages.has(pathname);
+  return (
+    <div className={family ? "family-website" : undefined}>
+      {family && (
+        <div className="xmas-scene" aria-hidden="true">
+          <div className="xmas-snow">{Array.from({ length: 18 }, (_, i) => <span key={i}>{i % 3 ? "❄" : "•"}</span>)}</div>
+          <span className="xmas-santa">🎅🦌🦌</span>
+          <span className="xmas-elf xmas-elf-l">🧝</span>
+          <span className="xmas-elf xmas-elf-r">🧝‍♀️</span>
+          <div className="xmas-ground" />
+        </div>
+      )}
+      {children}
+    </div>
+  );
 }

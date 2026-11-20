@@ -1327,7 +1327,23 @@
 
 /* calmer free badge, readable logo, cloud bubbles */
 .family-website .promo-free { animation: promo-cta 2.6s ease-in-out infinite !important; background: hsl(var(--neon-green)) !important; }
-.family-website .home-hub h1.home-cute-logo > span { -webkit-text-stroke: 2px hsl(var(--ink)); text-shadow: 0 3px 0 hsl(var(--foreground)), 0 6px 0 hsl(var(--ink)), 0 0 16px currentColor; margin: 0 1px; }
+.family-website .home-hub h1.home-cute-logo > span { -webkit-text-stroke: 2px hsl(var(--foreground)); text-shadow: 0 4px 0 hsl(var(--ink)), 0 7px 0 currentColor, 0 0 14px currentColor; margin: 0 1px; }
 .home-fun-list { gap: 14px; }
 .home-fun-list li { border-radius: 999px; border-width: 3px; padding: 10px 18px 10px 10px; font-size: 17px; letter-spacing: .01em; text-shadow: 0 1px 0 hsl(var(--foreground) / .6); box-shadow: 0 5px 0 hsl(var(--ink)), 0 0 18px hsl(var(--foreground) / .2); }
 .home-fun-list li { white-space: nowrap; text-shadow: none; max-width: 270px; font-size: 16px; }
+
+/* Winter wonderland scene on every public page */
+.family-website { --background: 226 48% 10%; background: linear-gradient(180deg, hsl(228 55% 9%), hsl(220 50% 14%) 60%, hsl(210 45% 18%)); }
+.xmas-scene { position: fixed; inset: 0; z-index: 30; pointer-events: none; overflow: hidden; }
+.xmas-snow span { position: absolute; top: -20px; color: hsl(var(--foreground) / .7); font-size: 14px; animation: xmas-fall 12s linear infinite; }
+.xmas-snow span:nth-child(1){left:3%;animation-delay:-1s}.xmas-snow span:nth-child(2){left:9%;animation-delay:-6s;font-size:9px}.xmas-snow span:nth-child(3){left:15%;animation-delay:-3s}.xmas-snow span:nth-child(4){left:21%;animation-delay:-9s;font-size:18px}.xmas-snow span:nth-child(5){left:27%;animation-delay:-4s}.xmas-snow span:nth-child(6){left:33%;animation-delay:-11s;font-size:10px}.xmas-snow span:nth-child(7){left:39%;animation-delay:-2s}.xmas-snow span:nth-child(8){left:45%;animation-delay:-7s}.xmas-snow span:nth-child(9){left:51%;animation-delay:-5s;font-size:18px}.xmas-snow span:nth-child(10){left:57%;animation-delay:-10s}.xmas-snow span:nth-child(11){left:63%;animation-delay:-1.5s;font-size:9px}.xmas-snow span:nth-child(12){left:69%;animation-delay:-8s}.xmas-snow span:nth-child(13){left:75%;animation-delay:-3.5s}.xmas-snow span:nth-child(14){left:81%;animation-delay:-6.5s;font-size:18px}.xmas-snow span:nth-child(15){left:87%;animation-delay:-2.5s}.xmas-snow span:nth-child(16){left:92%;animation-delay:-9.5s;font-size:10px}.xmas-snow span:nth-child(17){left:96%;animation-delay:-4.5s}.xmas-snow span:nth-child(18){left:48%;animation-delay:-11.5s}
+.xmas-snow span:nth-child(odd){animation-duration:15s}
+@keyframes xmas-fall { from { transform: translate(0,0); } 50% { transform: translate(14px,52vh); } to { transform: translate(-8px,105vh); } }
+.xmas-santa { position: absolute; top: 14%; left: 0; font-size: 34px; white-space: nowrap; transform: translateX(-200px); animation: xmas-santa 26s linear infinite; filter: drop-shadow(0 0 8px hsl(var(--foreground) / .5)); }
+@keyframes xmas-santa { 0%,70% { transform: translate(-220px,0) scaleX(-1); } 85% { transform: translate(55vw,-30px) scaleX(-1); } 100% { transform: translate(110vw,10px) scaleX(-1); } }
+.xmas-elf { position: absolute; top: 140px; font-size: 30px; transform-origin: top center; animation: xmas-swing 3s ease-in-out infinite; }
+.xmas-elf::before { content: ""; position: absolute; left: 50%; bottom: 100%; width: 2px; height: 70px; background: hsl(var(--foreground) / .45); }
+.xmas-elf-l { left: 2px; } .xmas-elf-r { right: 2px; top: 170px; animation-delay: -1.5s; }
+@keyframes xmas-swing { 0%,100% { rotate: -10deg; } 50% { rotate: 10deg; } }
+.xmas-ground { position: absolute; left: 0; right: 0; bottom: 0; height: 10px; background: linear-gradient(transparent, hsl(var(--foreground) / .25)); }
+@media (prefers-reduced-motion: reduce) { .xmas-snow span, .xmas-santa, .xmas-elf { animation: none !important; } .xmas-santa { display: none; } .xmas-snow span { top: 30%; } }
