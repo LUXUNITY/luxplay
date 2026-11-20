@@ -107,6 +107,14 @@ async function squareRefund(accessToken: string, paymentId: string, amount: numb
   }
 }
 
+
+// Square order IDs are short alphanumeric tokens; reject anything else before calling Square.
+const VALID_ORDER_ID = /^[A-Za-z0-9_-]{10,64}$/;
+const maskEmail = (e: string) => { const [u, d] = String(e || "").split("@"); return d ? `${u.slice(0, 1)}***@${d}` : ""; };
+// Only return what the thank-you page needs — never full contact details.
+// deno-lint-ignore no-explicit-any
+const publicRow = (r: any) => { if (!r) return r; const { parent_phone: _p, user_id: _u, ...rest } = r; return { ...rest, ...(r.parent_email !== undefined ? { parent_email: maskEmail(r.parent_email) } : {}), ...(r.customer_email !== undefined ? { customer_email: maskEmail(r.customer_email) } : {}) }; };
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -114,7 +122,7 @@ serve(async (req) => {
 
   try {
     const { sessionId } = await req.json();
-    if (!sessionId) {
+    if (!sessionId || typeof sessionId !== "string" || !VALID_ORDER_ID.test(sessionId)) {
       return new Response(JSON.stringify({ error: "Missing order ID" }), {
         status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -139,7 +147,7 @@ serve(async (req) => {
 
     if (existing && existing.length > 0) {
       await queueBookingEmails(supabase, existing, sessionId);
-      return new Response(JSON.stringify({ booking: existing[0], bookings: existing }), {
+      return new Response(JSON.stringify({ booking: publicRow(existing[0]), bookings: (existing ?? []).map(publicRow) }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200,
       });
     }
@@ -221,6 +229,11 @@ serve(async (req) => {
     }
 
 
+    if (order?.metadata?.type !== "baby-softplay") {
+      return new Response(JSON.stringify({ error: "This payment isn't for this type of purchase." }), {
+        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
     const meta = order.metadata || {};
     const quantity = Math.max(1, parseInt(meta.babyCount || "1", 10) || 1);
     const totalAmount = Number(order.total_money?.amount || 0);
@@ -264,7 +277,7 @@ serve(async (req) => {
 
     await queueBookingEmails(supabase, bookings || [], sessionId);
 
-    return new Response(JSON.stringify({ booking: bookings?.[0], bookings }), {
+    return new Response(JSON.stringify({ booking: publicRow(bookings?.[0]), bookings: (bookings ?? []).map(publicRow) }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200,
     });
   } catch (error) {

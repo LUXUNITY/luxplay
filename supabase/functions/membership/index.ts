@@ -93,8 +93,10 @@ Deno.serve(async (req) => {
 
     if (action === "join") {
       const tier = String(body.tier ?? "");
-      const childName = String(body.childName ?? "").trim().slice(0, 80);
-      const parentName = String(body.parentName ?? "").trim().slice(0, 80);
+      // Names may only start with a letter or number (blocks spreadsheet formulas in staff exports).
+      const clean = (v: unknown) => String(v ?? "").trim().replace(/^[=+\-@\t\r\s]+/, "").slice(0, 80);
+      const childName = clean(body.childName);
+      const parentName = clean(body.parentName);
       const parentPhone = String(body.parentPhone ?? "").trim().slice(0, 30);
       const childDob = /^\d{4}-\d{2}-\d{2}$/.test(String(body.childDob ?? "")) ? body.childDob : null;
       if (!MEMBERSHIP_PLANS[tier] || !childName || !parentName) return json(400, { error: "Please fill in the child's name, your name and pick a pass." });

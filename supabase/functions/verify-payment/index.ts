@@ -64,6 +64,14 @@ async function queueOrderEmails(supabase: any, order: any, sessionId: string) {
   }
 }
 
+
+// Square order IDs are short alphanumeric tokens; reject anything else before calling Square.
+const VALID_ORDER_ID = /^[A-Za-z0-9_-]{10,64}$/;
+const maskEmail = (e: string) => { const [u, d] = String(e || "").split("@"); return d ? `${u.slice(0, 1)}***@${d}` : ""; };
+// Only return what the thank-you page needs — never full contact details.
+// deno-lint-ignore no-explicit-any
+const publicRow = (r: any) => { if (!r) return r; const { parent_phone: _p, user_id: _u, ...rest } = r; return { ...rest, ...(r.parent_email !== undefined ? { parent_email: maskEmail(r.parent_email) } : {}), ...(r.customer_email !== undefined ? { customer_email: maskEmail(r.customer_email) } : {}) }; };
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -71,7 +79,7 @@ serve(async (req) => {
 
   try {
     const { sessionId } = await req.json();
-    if (!sessionId) {
+    if (!sessionId || typeof sessionId !== "string" || !VALID_ORDER_ID.test(sessionId)) {
       return new Response(JSON.stringify({ error: "Missing order ID" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -100,7 +108,7 @@ serve(async (req) => {
 
     if (existing) {
       await queueOrderEmails(supabase, existing, sessionId);
-      return new Response(JSON.stringify({ order: existing }), {
+      return new Response(JSON.stringify({ order: publicRow(existing) }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 200,
       });
@@ -177,11 +185,22 @@ serve(async (req) => {
       });
     }
 
+    // Only credits checkouts may create credit orders. Legacy orders without a type
+    // are accepted only when the amount matches a known credits package exactly.
+    {
+      const t = order?.metadata?.type;
+      const amt = Number(order?.total_money?.amount || 0);
+      if (t ? t !== "credits" : !AMOUNT_CREDITS[amt]) {
+        return new Response(JSON.stringify({ error: "This payment isn't for this type of purchase." }), {
+          status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+    }
     const meta = order?.metadata || {};
     const paid = Number(order?.total_money?.amount || 0);
     let credits = parseInt(meta.credits || "", 10);
     if (!Number.isFinite(credits) || credits <= 0) {
-      credits = AMOUNT_CREDITS[paid] || (paid > 0 ? Math.max(1, Math.floor((paid / 100) * 10)) : 0);
+      credits = AMOUNT_CREDITS[paid] || 0;
       console.error("Credits missing from metadata, used fallback:", paid, credits);
     }
     if (!credits) {
@@ -214,7 +233,7 @@ serve(async (req) => {
 
     await queueOrderEmails(supabase, newOrder, sessionId);
 
-    return new Response(JSON.stringify({ order: newOrder }), {
+    return new Response(JSON.stringify({ order: publicRow(newOrder) }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
     });

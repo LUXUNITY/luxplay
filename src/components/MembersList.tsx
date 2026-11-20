@@ -28,7 +28,7 @@ export default function MembersList({ callAdmin }: { callAdmin: (a: string, p?: 
     if (!members) return;
     const head = ["Pass", "Child", "Parent", "Email", "Phone", "Pass type", "Status", "Paid until", "Card saved", "Joined", "Sessions booked", "Sessions used"];
     const rows = members.map((m) => [m.pass_code, m.child_name, m.parent_name, m.parent_email, m.parent_phone ?? "", m.tier, m.status, m.paid_until ?? "", m.card_on_file ? "yes" : "no", m.joined.slice(0, 10), m.sessions_booked, m.sessions_used]);
-    const text = [head, ...rows].map((r) => r.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("\n");
+    const text = [head, ...rows].map((r) => r.map((v) => { let c = String(v); if (/^[=+\-@\t\r]/.test(c)) c = `'${c}`; return `"${c.replace(/"/g, '""')}"`; }).join(",")).join("\n");
     const a = document.createElement("a");
     a.href = URL.createObjectURL(new Blob([text], { type: "text/csv" }));
     a.download = "luxplay-members.csv"; a.click();
