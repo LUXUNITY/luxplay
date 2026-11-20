@@ -11,6 +11,7 @@ import RouteHead from "@/components/RouteHead";
 import AppShellRedirect from "@/components/app/AppShellRedirect";
 import { AuthProvider } from "@/hooks/useAuth";
 import SteveSupportBanner from "@/components/SteveSupportBanner";
+import MemberCornerButton from "@/components/MemberCornerButton";
 import FamilyWebsiteStyle from "@/components/FamilyWebsiteStyle";
 
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -47,6 +48,7 @@ const App = () => (
         <AuthProvider>
           <AppShellRedirect />
           <SteveSupportBanner />
+          <MemberCornerButton />
           <FamilyWebsiteStyle>
           <Suspense fallback={null}>
             <Routes>
