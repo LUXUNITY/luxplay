@@ -16,9 +16,8 @@ export default function Memberships() {
           <p className="inline-flex items-center gap-2 font-semibold text-neon-green"><Sparkles size={18} /> COMING SOON</p>
           <h1 className="font-display">LUXPLAY<br /><span className="text-neon-cyan">MEMBERSHIPS</span></h1>
           <p className="play-pass-unlimited mt-4 font-display text-4xl text-neon-pink">SOFT PLAY. ON REPEAT! 🤩</p>
-          <div className="membership-price font-display text-neon-pink">{MEMBERSHIP_MONTHLY_PRICE}<span className="font-body text-sm text-foreground">from · per child / month</span></div>
-          <p className="text-muted-foreground">Unlimited {MEMBERSHIP_SESSION_HOURS}-hour soft play sessions. One child. Their very own pass.</p>
-          <p className="mt-4 font-display text-3xl text-neon-green">AROUND THE PRICE OF 3 VISITS. ENDLESS PLAY! 🤩</p>
+          <div className="membership-price font-display text-neon-pink"><p className="mb-3 font-body text-base font-bold text-neon-green">Starting from as little as</p>{MEMBERSHIP_MONTHLY_PRICE}<span className="font-body text-sm text-foreground">per child, per month</span></div>
+          <p className="mx-auto max-w-md text-sm font-semibold leading-relaxed text-foreground">Unlimited {MEMBERSHIP_SESSION_HOURS}-hour soft play sessions.<br />Their own pass. Free entry for grown-ups. Endless smiles. 💚</p>
         </header>
 
         <section className="play-pass-promo py-6" aria-label="Choose your membership"><MembershipTiers /></section>
