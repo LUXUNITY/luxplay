@@ -177,6 +177,8 @@
 .family-website .membership-price-amount { font-size: 80px; font-weight: 600; }
 .family-website .membership-price p { line-height: 1.6; }
 .family-website .membership-pass .font-display { font-size: 25px; line-height: 1.15; }
+.family-website .membership-heading .membership-repeat .membership-soft-play { font-family: 'Montserrat', sans-serif; font-weight: 900; }
+.family-website .membership-heading .membership-repeat .membership-repeat-ribbon { font-family: 'Bebas Neue', sans-serif; font-weight: 400; }
 .family-website :is(h1, h2, h3, .font-display, .font-logo, .membership-heading-perks strong, .winter-coming):not(.steve-memorial *, .funeral-closure-banner *, .membership-heading h1, .membership-repeat-ribbon) { font-weight: 400; }
 .family-website .home-offer-button .font-display, .family-website .membership-benefits h2, .family-website .membership-spotlight-title > span:first-child { font-weight: 400; }
 .family-website :is(p, li, label):not(.steve-memorial *, .funeral-closure-banner *) { font-weight: 600; }
