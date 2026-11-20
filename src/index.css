@@ -1348,10 +1348,10 @@
 @media (prefers-reduced-motion: reduce) { .xmas-snow span, .xmas-santa, .xmas-elf { animation: none !important; } }
 
 /* Membership "Unlimited" shout */
-.promo-unlimited-word { font-size: clamp(2.5rem, 13vw, 4.6rem); letter-spacing: -.04em; text-shadow: 3px 3px 0 hsl(var(--neon-cyan)), 6px 6px 0 hsl(var(--neon-purple)), 0 0 22px hsl(var(--neon-pink) / .7); white-space: nowrap; }
-.promo-unlimited-letter { display: inline-block; -webkit-text-stroke: 5px hsl(var(--foreground)); paint-order: stroke fill; text-shadow: 0 5px 0 hsl(var(--neon-purple) / .55), 0 0 16px currentColor; animation: unlimited-bounce 2.2s ease-in-out infinite; }
+.promo-unlimited-word { font-size: clamp(2.4rem, 11.5vw, 4.4rem); letter-spacing: .01em; font-family: 'Montserrat', sans-serif; font-weight: 900; text-shadow: 3px 3px 0 hsl(var(--neon-cyan)), 6px 6px 0 hsl(var(--neon-purple)), 0 0 22px hsl(var(--neon-pink) / .7); white-space: nowrap; }
+.promo-unlimited-letter { display: inline-block; font-weight: 900; text-shadow: 2px 2px 0 hsl(var(--foreground)), -2px -2px 0 hsl(var(--foreground)), 2px -2px 0 hsl(var(--foreground)), -2px 2px 0 hsl(var(--foreground)), 0 6px 0 hsl(var(--neon-purple)), 0 0 18px currentColor; animation: unlimited-bounce 2.2s ease-in-out infinite; }
 .promo-unlimited-star { display: none; font-size: .28em; margin: 0 .05em; vertical-align: middle; animation: promo-burst 1.8s ease-in-out infinite; }
-@keyframes unlimited-bounce { 0%,100% { translate: 0 0; rotate: -4deg; } 50% { translate: 0 -6px; rotate: 4deg; } }
+@keyframes unlimited-bounce { 0%,100% { translate: 0 0; } 50% { translate: 0 -5px; } }
 .promo-unlimited-hearts { margin-bottom: .35rem; animation: promo-jump 2.6s ease-in-out infinite; }
 .promo-unlimited { animation: promo-border 3s linear infinite; }
 .promo-unlimited-tag { rotate: -3deg; box-shadow: 0 0 16px hsl(var(--neon-green) / .6); animation: promo-wiggle 2.8s ease-in-out infinite; }
