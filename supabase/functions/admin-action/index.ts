@@ -1,6 +1,7 @@
 // Admin-only actions: lookup + redeem orders, lookup + check-in bookings.
 // Gated by ADMIN_PASSWORD secret sent in the `x-admin-password` header.
 import { createClient } from "npm:@supabase/supabase-js@2.57.2";
+import { MEMBERSHIP_PLANS, decideStatus, canEnter, creditsLeft } from "../_shared/membership-rules.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -78,6 +79,78 @@ Deno.serve(async (req) => {
 
   // Single smart lookup: accepts full codes, codes without dashes, or just the
   // 6/8 character core without any prefix. Searches orders + both booking tables.
+  // ---- Memberships: scan pass (LMxxxxxx), check in, give monthly credits ----
+  const ukNow = () => {
+    const p = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", hour12: false }).formatToParts(new Date());
+    const g = (t: string) => p.find((x) => x.type === t)?.value ?? "";
+    return { date: `${g("year")}-${g("month")}-${g("day")}`, hour: Number(g("hour")) };
+  };
+  const currentSession = (h: number) => (["10:00", "12:00", "14:00", "16:00", "18:00"].find((s) => h >= Number(s.slice(0, 2)) && h < Number(s.slice(0, 2)) + 2) ?? null);
+  const memberView = async (m: any) => {
+    // Re-check payment state with Square on every scan.
+    if (m.square_subscription_id) {
+      try {
+        const sq = (path: string) => fetch(`https://connect.squareup.com/v2/${path}`, { headers: { Authorization: `Bearer ${Deno.env.get("SQUARE_ACCESS_TOKEN")}`, "Square-Version": "2024-12-18" } }).then((r) => r.json());
+        const { subscription: sub } = await sq(`subscriptions/${m.square_subscription_id}`);
+        let unpaidSince: string | null = null;
+        for (const id of (sub?.invoice_ids ?? []).slice(0, 3)) {
+          const { invoice } = await sq(`invoices/${id}`);
+          const due = invoice?.payment_requests?.[0]?.due_date;
+          if ((invoice?.status === "UNPAID" || invoice?.status === "PARTIALLY_PAID") && due && `${due}T00:00:00Z` <= new Date().toISOString()) unpaidSince = unpaidSince && unpaidSince < `${due}T00:00:00Z` ? unpaidSince : `${due}T00:00:00Z`;
+        }
+        if (sub) {
+          const paidUntil = sub.charged_through_date ?? sub.canceled_date ?? null;
+          m.status = decideStatus({ subscriptionStatus: sub.status, paidUntil, unpaidSince });
+          m.paid_until = paidUntil;
+          await supabase.from("memberships").update({ status: m.status, paid_until: paidUntil, payment_issue_since: unpaidSince, updated_at: new Date().toISOString() }).eq("id", m.id);
+        }
+      } catch (e) { console.error("member refresh failed", e); }
+    }
+    const now = ukNow();
+    const session = currentSession(now.hour);
+    const { data: booking } = await supabase.from("soft_play_bookings").select("booking_code, session_time, checked_in")
+      .eq("stripe_session_id", `membership:${m.id}`).eq("session_date", now.date).order("session_time");
+    const { data: checkins } = await supabase.from("membership_checkins").select("session_time").eq("membership_id", m.id).eq("session_date", now.date);
+    const plan = MEMBERSHIP_PLANS[m.tier];
+    return { id: m.id, pass_code: m.pass_code, child_name: m.child_name, child_dob: m.child_dob, parent_name: m.parent_name, tier: plan?.name ?? m.tier,
+      status: m.status, can_enter: canEnter(m.status), paid_until: m.paid_until, cafe_discount: plan?.discount ?? 0,
+      credits_left: creditsLeft(m.tier, m.credits_month, m.credits_given), credits_total: plan?.credits ?? 0,
+      today_bookings: booking ?? [], current_session: session, checked_in_this_session: (checkins ?? []).some((c: any) => c.session_time === session) };
+  };
+
+  if (action === "lookup_membership" || ((action === "lookup" || action === "lookup_booking") && /^LM[A-Z0-9]{6}$/.test(compact(String(body.code ?? ""))))) {
+    const { data: m } = await supabase.from("memberships").select("*").eq("pass_code", compact(String(body.code ?? ""))).maybeSingle();
+    if (!m) return json(404, { error: "Membership pass not found" });
+    return json(200, { kind: "membership", data: await memberView(m) });
+  }
+
+  if (action === "membership_checkin") {
+    const { data: m } = await supabase.from("memberships").select("*").eq("id", String(body.id ?? "")).maybeSingle();
+    if (!m) return json(404, { error: "Membership not found" });
+    const v = await memberView(m);
+    if (!v.can_enter) return json(403, { error: `Pass is ${v.status.toUpperCase()} — payment needed before entry.` });
+    if (!v.current_session) return json(400, { error: "No soft play session is running right now." });
+    const now = ukNow();
+    const { error } = await supabase.from("membership_checkins").insert({ membership_id: m.id, session_date: now.date, session_time: v.current_session });
+    if (error) return json(409, { error: `${m.child_name} is already checked in for this session.` });
+    await supabase.from("soft_play_bookings").update({ checked_in: true, checked_in_at: new Date().toISOString() })
+      .eq("stripe_session_id", `membership:${m.id}`).eq("session_date", now.date).eq("session_time", v.current_session);
+    return json(200, { ok: true, data: await memberView(m) });
+  }
+
+  if (action === "membership_give_credits") {
+    const { data: m } = await supabase.from("memberships").select("*").eq("id", String(body.id ?? "")).maybeSingle();
+    if (!m) return json(404, { error: "Membership not found" });
+    if (!canEnter(m.status)) return json(403, { error: "Pass is not active." });
+    const amount = Math.floor(Number(body.amount ?? 0));
+    const left = creditsLeft(m.tier, m.credits_month, m.credits_given);
+    if (amount < 1 || amount > left) return json(400, { error: `Only ${left} credits left this month.` });
+    const month = new Date().toISOString().slice(0, 7);
+    const given = (m.credits_month === month ? m.credits_given : 0) + amount;
+    await supabase.from("memberships").update({ credits_month: month, credits_given: given }).eq("id", m.id);
+    return json(200, { ok: true, data: await memberView({ ...m, credits_month: month, credits_given: given }) });
+  }
+
   if (action === "lookup" || action === "lookup_order" || action === "lookup_booking") {
     const raw = String(body.code ?? "");
     const c = compact(raw);

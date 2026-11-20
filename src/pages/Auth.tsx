@@ -12,10 +12,11 @@ const Auth = () => {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const next = (() => { const n = new URLSearchParams(window.location.search).get("next") || ""; return n.startsWith("/") && !n.startsWith("//") ? n : "/loyalty"; })();
   const { user } = useAuth();
 
   useEffect(() => {
-    if (user) navigate("/loyalty", { replace: true });
+    if (user) navigate(next, { replace: true });
   }, [user, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -36,7 +37,7 @@ const Auth = () => {
           email: email.trim(),
           password,
           options: {
-            emailRedirectTo: `${window.location.origin}/loyalty`,
+            emailRedirectTo: `${window.location.origin}${next}`,
             data: { full_name: name.trim() },
           },
         });
@@ -52,7 +53,7 @@ const Auth = () => {
           password,
         });
         if (error) throw error;
-        navigate("/loyalty", { replace: true });
+        navigate(next, { replace: true });
       }
     } catch (err: any) {
       toast({

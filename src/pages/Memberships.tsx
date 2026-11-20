@@ -4,6 +4,7 @@ import { QRCodeSVG } from "qrcode.react";
 import { Button } from "@/components/ui/button";
 import { MEMBERSHIP_MONTHLY_PRICE, MEMBERSHIP_SESSION_HOURS } from "@/lib/membership";
 import MembershipTiers from "@/components/MembershipTiers";
+import MembershipJoin from "@/components/MembershipJoin";
 
 export default function Memberships() {
   return (
@@ -13,7 +14,7 @@ export default function Memberships() {
           <Link to="/"><ArrowLeft /> Back to LuxPlay</Link>
         </Button>
         <header className="membership-heading text-center">
-          <p className="membership-launch inline-flex items-center gap-2 font-body text-xs font-extrabold text-neon-green"><Sparkles size={16} aria-hidden="true" /> BIG LITTLE ADVENTURES · COMING SOON</p>
+          <p className="membership-launch inline-flex items-center gap-2 font-body text-xs font-extrabold text-neon-green"><Sparkles size={16} aria-hidden="true" /> BIG LITTLE ADVENTURES · JOIN TODAY</p>
           <h1 className="font-body"><span className="membership-brand">LUX<span>PLAY</span></span><span className="membership-title-label">MEMBERSHIPS</span></h1>
           <div className="membership-repeat">
             <Sparkles className="membership-heading-spark membership-heading-spark-left text-neon-green" aria-hidden="true" />
@@ -31,10 +32,10 @@ export default function Memberships() {
             <div><Users className="text-neon-green" aria-hidden="true" /><p><strong>ADULTS FREE</strong><span>Grown-ups included</span></p></div>
           </div>
           <p className="membership-heading-signoff font-body text-sm font-bold text-foreground">Little feet. Big adventures. Endless smiles. 💚</p>
-          <a href="#membership-options" className="membership-explore inline-flex items-center gap-2 font-body text-xs font-extrabold text-neon-cyan">MEET YOUR CHILD’S PLAY PASS <ArrowRight size={16} aria-hidden="true" /></a>
+          <a href="#membership-options" className="membership-explore inline-flex items-center gap-2 font-body text-xs font-extrabold text-neon-cyan">CHOOSE YOUR CHILD’S PLAY PASS <ArrowRight size={16} aria-hidden="true" /></a>
         </header>
 
-        <section id="membership-options" className="play-pass-promo scroll-mt-20 py-6" aria-label="Choose your membership"><MembershipTiers /></section>
+        <section id="membership-options" className="play-pass-promo scroll-mt-20 py-6" aria-label="Choose your membership"><MembershipTiers /><MembershipJoin /></section>
 
         <section className="membership-pass-section" aria-label="Membership pass preview">
           <div className="membership-pass">
@@ -50,10 +51,10 @@ export default function Memberships() {
               </div>
               <div className="membership-sample-qr" aria-label="Sample QR linking to the membership information, not an entry pass">
                 <QRCodeSVG value="https://luxplay.uk/memberships" size={116} bgColor="transparent" fgColor="currentColor" marginSize={1} />
-                <p className="mt-2 text-[10px] font-bold text-center">SAMPLE PASS</p>
+                <p className="mt-2 text-[10px] font-bold text-center">EXAMPLE</p>
               </div>
             </div>
-            <p className="border-t border-ink/20 pt-3 mt-4 text-xs">Preview only · Not valid for entry</p>
+            <p className="border-t border-ink/20 pt-3 mt-4 text-xs">Example pass · your real pass appears in My Membership</p>
           </div>
         </section>
 
@@ -68,10 +69,10 @@ export default function Memberships() {
           <ShieldCheck className="mx-auto text-neon-cyan mb-3" />
           <h2 className="font-display text-3xl">ONE PASS. ONE CHILD.</h2>
           <p className="mx-auto max-w-lg mt-2 text-sm text-muted-foreground">Memberships aren’t transferable. Other children need their own membership or a separate paid booking.</p>
-          <p className="inline-flex items-center gap-2 mt-7 text-neon-green font-semibold"><Heart size={18} /> Memberships are not on sale yet</p>
+          <p className="inline-flex items-center gap-2 mt-7 text-neon-green font-semibold"><Heart size={18} /> Billed monthly · cancel any time</p>
           <div className="mt-5">
             <Button asChild variant="secondary" size="lg" className="bg-neon-cyan text-ink hover:bg-neon-cyan/90">
-              <Link to="/#softplay">Book a regular soft play session <ArrowRight /></Link>
+              <Link to="/my-membership">Go to My Membership <ArrowRight /></Link>
             </Button>
           </div>
         </section>

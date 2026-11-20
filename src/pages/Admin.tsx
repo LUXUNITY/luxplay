@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import MembershipAdminCard, { type MemberPass } from "@/components/MembershipAdminCard";
 import { supabase } from "@/integrations/supabase/client";
 import { Search, Check, X, Loader2, Lock, ScanLine } from "lucide-react";
 import QrScanner from "@/components/QrScanner";
@@ -33,7 +34,8 @@ interface Booking {
 
 type Result =
   | { kind: "order"; data: Order }
-  | { kind: "booking"; table: string; baby?: boolean; data: Booking };
+  | { kind: "booking"; table: string; baby?: boolean; data: Booking }
+  | { kind: "membership"; data: MemberPass };
 
 interface Match {
   kind: "order" | "booking" | "baby_booking";
@@ -133,7 +135,9 @@ const Admin = () => {
 
     try {
       const res = await callAdmin("lookup", { code: trimmed });
-      if (res?.kind === "order") {
+      if (res?.kind === "membership") {
+        setResult({ kind: "membership", data: res.data as MemberPass });
+      } else if (res?.kind === "order") {
         setResult({ kind: "order", data: res.data as Order });
       } else if (res?.kind === "booking" || res?.kind === "baby_booking") {
         setResult({
@@ -426,6 +430,8 @@ const Admin = () => {
             )}
           </div>
         )}
+
+        {result?.kind === "membership" && <MembershipAdminCard key={result.data.id} pass={result.data} callAdmin={callAdmin} />}
 
         {/* SOFT PLAY BOOKING */}
         {result?.kind === "booking" && (

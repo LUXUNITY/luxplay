@@ -24,7 +24,7 @@ export default function MembershipPromotion() {
         <Button asChild variant="secondary" size="lg" className="play-pass-cta promo-shout-cta relative mt-6 min-h-14 w-full max-w-sm rounded-full bg-neon-green px-4 font-body text-ink hover:bg-neon-green/90">
           <Link to="/memberships">GRAB YOUR PASS! <ArrowRight aria-hidden="true" /></Link>
         </Button>
-        <p className="relative mt-3 font-body text-xs text-muted-foreground">Coming soon · one pass per child</p>
+        <p className="relative mt-3 font-body text-xs text-muted-foreground">Join today · one pass per child</p>
       </div>
     </section>
   );

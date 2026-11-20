@@ -233,6 +233,131 @@ export type Database = {
         }
         Relationships: []
       }
+      membership_checkins: {
+        Row: {
+          created_at: string
+          id: string
+          membership_id: string
+          session_date: string
+          session_time: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          membership_id: string
+          session_date: string
+          session_time: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          membership_id?: string
+          session_date?: string
+          session_time?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "membership_checkins_membership_id_fkey"
+            columns: ["membership_id"]
+            isOneToOne: false
+            referencedRelation: "memberships"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      membership_square_plans: {
+        Row: {
+          created_at: string
+          plan_id: string
+          price_pence: number
+          tier: string
+          variation_id: string
+        }
+        Insert: {
+          created_at?: string
+          plan_id: string
+          price_pence: number
+          tier: string
+          variation_id: string
+        }
+        Update: {
+          created_at?: string
+          plan_id?: string
+          price_pence?: number
+          tier?: string
+          variation_id?: string
+        }
+        Relationships: []
+      }
+      memberships: {
+        Row: {
+          cancel_requested: boolean
+          child_dob: string | null
+          child_name: string
+          created_at: string
+          credits_given: number
+          credits_month: string | null
+          id: string
+          paid_until: string | null
+          parent_email: string
+          parent_name: string
+          parent_phone: string | null
+          pass_code: string
+          payment_issue_since: string | null
+          square_customer_id: string | null
+          square_order_id: string | null
+          square_subscription_id: string | null
+          status: string
+          tier: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          cancel_requested?: boolean
+          child_dob?: string | null
+          child_name: string
+          created_at?: string
+          credits_given?: number
+          credits_month?: string | null
+          id?: string
+          paid_until?: string | null
+          parent_email: string
+          parent_name: string
+          parent_phone?: string | null
+          pass_code: string
+          payment_issue_since?: string | null
+          square_customer_id?: string | null
+          square_order_id?: string | null
+          square_subscription_id?: string | null
+          status?: string
+          tier: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          cancel_requested?: boolean
+          child_dob?: string | null
+          child_name?: string
+          created_at?: string
+          credits_given?: number
+          credits_month?: string | null
+          id?: string
+          paid_until?: string | null
+          parent_email?: string
+          parent_name?: string
+          parent_phone?: string | null
+          pass_code?: string
+          payment_issue_since?: string | null
+          square_customer_id?: string | null
+          square_order_id?: string | null
+          square_subscription_id?: string | null
+          status?: string
+          tier?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       orders: {
         Row: {
           amount_paid: number

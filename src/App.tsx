@@ -1,4 +1,5 @@
 import { Suspense, lazy } from "react";
+import MyMembership from "./pages/MyMembership";
 import { MotionConfig } from "framer-motion";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -62,7 +63,7 @@ const App = () => (
               <Route path="/arcade-credits" element={<><RouteHead title="Buy Arcade Credits — LUXPLAY" description="Choose your LuxPlay arcade credits and buy online for your next visit to Bournemouth." path="/arcade-credits" /><OfferPage offer="credits" /></>} />
               <Route path="/about" element={<><RouteHead title="Explore LuxPlay — Our Venue & Team" description="Explore the LuxPlay arcade, soft play, prizes and café, and meet the team in Bournemouth." path="/about" /><OfferPage offer="about" /></>} />
               <Route path="/parties" element={<Parties />} />
-              <Route path="/memberships" element={<><RouteHead title="Little Lux, Lux Plus & Lux VIP — Memberships Coming Soon" description="Compare LuxPlay memberships: Little Lux £24.99, Lux Plus £34.99 and Lux VIP £49.99 per child monthly. Unlimited two-hour soft play and free adults. Not on sale yet." path="/memberships" noindex /><Memberships /></>} />
+              <Route path="/memberships" element={<><RouteHead title="Soft Play Memberships Bournemouth — LuxPlay" description="Unlimited two-hour soft play from £24.99 per child per month. Little Lux, Lux Plus and Lux VIP passes with free adult entry at LuxPlay Boscombe." path="/memberships" /><Memberships /></>} />
               <Route path="/remembering-steve" element={<><RouteHead title="In Loving Memory of Steve — LUXPLAY" description="Remembering Steve, our beloved manager, friend and part of the LuxPlay family. Read our tribute and help support his family." path="/remembering-steve" /><RememberingSteve /></>} />
               <Route path="/soft-play-bournemouth" element={<SoftPlayBournemouth />} />
               <Route path="/arcade-bournemouth" element={<ArcadeBournemouth />} />
@@ -75,6 +76,7 @@ const App = () => (
               <Route path="/softplay-success" element={<><RouteHead title="Soft Play Booking Confirmed — LUXPLAY" description="Your LUXPLAY soft play session is booked. Show your booking code on the day." path="/softplay-success" noindex /><SoftPlaySuccess /></>} />
               <Route path="/baby-softplay-success" element={<><RouteHead title="Baby Soft Play Booking Confirmed — LUXPLAY" description="Your LUXPLAY baby soft play session is booked. Show your booking code on the day." path="/baby-softplay-success" noindex /><BabySoftPlaySuccess /></>} />
               <Route path="/auth" element={<><RouteHead title="LUXPLAY Rewards — Sign In or Join Free" description="Sign in to your LUXPLAY Rewards account to collect soft play stamps — every 7th session is free per child." path="/auth" noindex /><AuthPage /></>} />
+              <Route path="/my-membership" element={<><RouteHead title="My LuxPlay Membership" description="Your LuxPlay membership pass, QR code and session bookings." path="/my-membership" noindex /><MyMembership /></>} />
               <Route path="/loyalty" element={<><RouteHead title="My LUXPLAY Rewards" description="Your LUXPLAY loyalty stamp card — 6 paid soft play sessions and the 7th is free." path="/loyalty" noindex /><Loyalty /></>} />
               <Route path="*" element={<><RouteHead title="Page Not Found — LUXPLAY" description="This LUXPLAY page could not be found." path="/404" noindex /><NotFound /></>} />
             </Routes>

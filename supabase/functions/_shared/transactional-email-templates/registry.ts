@@ -14,6 +14,7 @@ import { template as softplayBooking } from './softplay-booking.tsx'
 import { template as adminPurchaseNotification } from './admin-purchase-notification.tsx'
 import { template as delayNotice } from './delay-notice.tsx'
 import { template as bookingContact } from './booking-contact.tsx'
+import { template as membershipPass } from './membership-pass.tsx'
 
 export const TEMPLATES: Record<string, TemplateEntry> = {
   'redemption-code': redemptionCode,
@@ -21,4 +22,5 @@ export const TEMPLATES: Record<string, TemplateEntry> = {
   'admin-purchase-notification': adminPurchaseNotification,
   'delay-notice': delayNotice,
   'booking-contact': bookingContact,
+  'membership-pass': membershipPass,
 }
