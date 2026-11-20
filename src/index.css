@@ -1346,3 +1346,9 @@
 .xmas-elf-l { left: 4px; } .xmas-elf-r { right: 4px; animation-delay: -2s; }
 @keyframes xmas-swing { 0%,100% { rotate: -8deg; } 50% { rotate: 8deg; } }
 @media (prefers-reduced-motion: reduce) { .xmas-snow span, .xmas-santa, .xmas-elf { animation: none !important; } }
+
+/* Membership "Unlimited" shout */
+.promo-unlimited-word { font-size: clamp(2.4rem, 12vw, 3.4rem); text-shadow: 3px 3px 0 hsl(var(--neon-cyan)), 6px 6px 0 hsl(var(--neon-purple)), 0 0 22px hsl(var(--neon-pink) / .7); animation: unlimited-pop 2.4s ease-in-out infinite; }
+.promo-unlimited-tag { rotate: -3deg; box-shadow: 0 0 16px hsl(var(--neon-green) / .6); animation: promo-wiggle 2.8s ease-in-out infinite; }
+@keyframes unlimited-pop { 0%,100% { scale: 1; } 50% { scale: 1.07; } }
+@media (prefers-reduced-motion: reduce) { .promo-unlimited-word, .promo-unlimited-tag { animation: none; } }
