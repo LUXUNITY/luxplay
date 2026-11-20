@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, CalendarCheck, Infinity, ScanLine, Sparkles, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { MEMBERSHIP_MONTHLY_PRICE, MEMBERSHIP_SESSION_HOURS } from "@/lib/membership";
+import { MEMBERSHIP_SESSION_HOURS } from "@/lib/membership";
 import MembershipTiers from "@/components/MembershipTiers";
 
 const perks = [
@@ -23,11 +23,6 @@ export default function MembershipPromotion() {
       <div className="relative mx-auto max-w-6xl px-5 py-8 sm:px-8 sm:py-10">
         <p className="play-pass-eyebrow font-display text-2xl text-neon-pink">LUXPLAY MONTHLY MEMBERSHIPS <span className="play-pass-heart inline-block">💚</span></p>
         <h2 id="play-pass-title" className="play-pass-title mt-2 font-display leading-none">ONE PASS.<br /><span className="play-pass-unlimited text-neon-cyan">UNLIMITED FUN.</span></h2>
-        <div className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
-          <p className="play-pass-price font-display leading-none text-neon-green">{MEMBERSHIP_MONTHLY_PRICE}</p>
-          <p className="text-left font-body text-sm font-bold leading-relaxed">FROM · PER CHILD<br />PER MONTH</p>
-        </div>
-        <p className="mt-4 font-body text-sm font-semibold sm:text-base">Around the price of 3 visits.<br /><span className="play-pass-wow inline-block font-display text-3xl text-neon-pink sm:text-4xl">BUT THE PLAY? UNLIMITED! 🤩</span></p>
         <div className="mt-7"><MembershipTiers /></div>
         <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
           {perks.map(({ Icon, title, detail, colour }) => (
