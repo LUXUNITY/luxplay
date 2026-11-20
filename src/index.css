@@ -1349,10 +1349,11 @@
 
 /* Membership "Unlimited" shout */
 .promo-unlimited-word { font-size: clamp(2.5rem, 13vw, 4.6rem); letter-spacing: -.04em; text-shadow: 3px 3px 0 hsl(var(--neon-cyan)), 6px 6px 0 hsl(var(--neon-purple)), 0 0 22px hsl(var(--neon-pink) / .7); white-space: nowrap; }
-.promo-unlimited-letter { display: inline-block; text-shadow: 2px 2px 0 hsl(var(--ink, 0 0% 5%)), 4px 4px 0 currentColor, 0 0 18px currentColor; animation: unlimited-bounce 1.6s ease-in-out infinite; }
+.promo-unlimited-letter { display: inline-block; -webkit-text-stroke: 5px hsl(var(--foreground)); paint-order: stroke fill; text-shadow: 0 5px 0 hsl(var(--neon-purple) / .55), 0 0 16px currentColor; animation: unlimited-bounce 2.2s ease-in-out infinite; }
 .promo-unlimited-star { display: none; font-size: .28em; margin: 0 .05em; vertical-align: middle; animation: promo-burst 1.8s ease-in-out infinite; }
-@keyframes unlimited-bounce { 0%,60%,100% { translate: 0 0; rotate: 0deg; } 30% { translate: 0 -10px; rotate: -6deg; } }
+@keyframes unlimited-bounce { 0%,100% { translate: 0 0; rotate: -4deg; } 50% { translate: 0 -6px; rotate: 4deg; } }
+.promo-unlimited-hearts { margin-bottom: .35rem; animation: promo-jump 2.6s ease-in-out infinite; }
 .promo-unlimited { animation: promo-border 3s linear infinite; }
 .promo-unlimited-tag { rotate: -3deg; box-shadow: 0 0 16px hsl(var(--neon-green) / .6); animation: promo-wiggle 2.8s ease-in-out infinite; }
 @keyframes unlimited-pop { 0%,100% { scale: 1; } 50% { scale: 1.07; } }
-@media (prefers-reduced-motion: reduce) { .promo-unlimited, .promo-unlimited-word, .promo-unlimited-tag, .promo-unlimited-letter, .promo-unlimited-star { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .promo-unlimited, .promo-unlimited-hearts, .promo-unlimited-word, .promo-unlimited-tag, .promo-unlimited-letter, .promo-unlimited-star { animation: none; } }
