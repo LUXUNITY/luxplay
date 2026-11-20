@@ -20,7 +20,7 @@ export default function MembershipPromotion() {
         <p className="flex items-center justify-center gap-2 px-4 font-body text-xs font-extrabold uppercase sm:text-sm"><Sparkles size={16} aria-hidden="true" /> Little adventurers. Endless play. <Sparkles size={16} aria-hidden="true" /></p>
       </div>
       <div className="relative mx-auto max-w-4xl px-5 py-8 sm:px-8 sm:py-10">
-        <p className="play-pass-eyebrow font-display text-2xl text-neon-pink">THE LUXPLAY MEMBERSHIP <span className="play-pass-heart inline-block">💚</span></p>
+        <p className="play-pass-eyebrow font-display text-2xl text-neon-pink">LITTLE LUX PLAY PASS <span className="play-pass-heart inline-block">💚</span></p>
         <h2 id="play-pass-title" className="play-pass-title mt-2 font-display leading-none">ONE PASS.<br /><span className="play-pass-unlimited text-neon-cyan">UNLIMITED FUN.</span></h2>
         <div className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
           <p className="play-pass-price font-display leading-none text-neon-green">{MEMBERSHIP_MONTHLY_PRICE}</p>
@@ -37,7 +37,7 @@ export default function MembershipPromotion() {
         </div>
         <p className="mt-5 font-body text-xs leading-relaxed text-muted-foreground">One pass per named child · Not transferable · Sessions subject to availability</p>
         <Button asChild variant="secondary" size="lg" className="play-pass-cta mt-5 min-h-14 w-full max-w-sm whitespace-normal bg-neon-pink px-4 py-3 font-body font-extrabold text-ink hover:bg-neon-pink/90">
-          <Link to="/memberships">EXPLORE THE PLAY PASS <ArrowRight aria-hidden="true" /></Link>
+          <Link to="/memberships">EXPLORE LITTLE LUX PLAY PASS <ArrowRight aria-hidden="true" /></Link>
         </Button>
         <p className="mt-3 font-body text-xs text-muted-foreground">Coming soon · Membership sales open once monthly billing is ready.</p>
       </div>
