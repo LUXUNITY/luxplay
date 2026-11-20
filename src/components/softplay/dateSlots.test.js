@@ -2,6 +2,29 @@ import { describe, expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
 import { isSoftPlaySlotBlocked, isBabySlotBlocked } from "./dateSlots";
 
+describe("Steve’s funeral full-day closure", () => {
+  test("both areas block every session on Tuesday 24 November 2026 only", () => {
+    for (const blocked of [isSoftPlaySlotBlocked, isBabySlotBlocked]) {
+      for (const time of ["10:00", "12:00", "14:00", "16:00", "18:00"]) {
+        expect(blocked("2026-11-24", time)).toBe(true);
+        expect(blocked("2026-11-23", time)).toBe(false);
+        expect(blocked("2026-11-25", time)).toBe(false);
+      }
+    }
+  });
+  for (const name of ["create-softplay-checkout", "create-baby-softplay-checkout", "create-refresh-play-checkout", "create-baby-deal-checkout", "redeem-loyalty-session"]) {
+    test(`${name} blocks all five funeral-day sessions without closing adjacent dates`, () => {
+      const source = readFileSync(`supabase/functions/${name}/index.ts`, "utf8");
+      const map = source.match(/const BLOCKED_SLOTS: Record<string, string\[\]> = (\{[\s\S]*?\n\});/);
+      if (!map) throw new Error("Missing closure map");
+      const blocked = Function(`return (${map[1]})`)();
+      expect(blocked["2026-11-24"]).toEqual(["10:00", "12:00", "14:00", "16:00", "18:00"]);
+      expect(blocked["2026-11-23"] ?? []).toEqual([]);
+      expect(blocked["2026-11-25"] ?? []).toEqual([]);
+    });
+  }
+});
+
 describe("Halloween 31 October session closure", () => {
   test("both areas close from 2PM on Friday 30 October, leaving morning sessions open", () => {
     for (const blocked of [isSoftPlaySlotBlocked, isBabySlotBlocked]) {

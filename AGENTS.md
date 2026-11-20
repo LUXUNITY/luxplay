@@ -7,6 +7,7 @@
 - Keep the heated-venue promotion in its own component with CSS-only motion and reduced-motion support, so seasonal presentation stays isolated from booking logic.
 - Keep seasonal coming-soon announcements in an isolated live-text component with CSS-only motion and reduced-motion support; removing a promotion must preserve paid tickets and staff check-in flows.
 - Use dedicated offer pages with the existing booking and credit components; redirect legacy homepage anchors to their destinations so shortening the homepage never strands existing links.
+- Keep full-day closures in the shared date helpers and every session checkout/reward map; test adjacent days remain open and never simulate closure by inflating paid booking counts.
 
 ## Booking communication
 - Send booking-change notices through the existing admin-password-protected action and transactional email queue, looking up the recipient from the booking rather than accepting an arbitrary address, so notices preserve booking records and delivery tracking.

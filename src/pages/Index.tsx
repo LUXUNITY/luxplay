@@ -2,6 +2,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import HeroSection from "@/components/HeroSection";
 import SteveMemorial from "@/components/SteveMemorial";
 import FooterSection from "@/components/FooterSection";
+import FuneralClosureBanner from "@/components/FuneralClosureBanner";
 
 const legacyDestinations: Record<string, string> = {
   softplay: "/softplay", "baby-softplay": "/softplay#baby-softplay", presale: "/arcade-credits",
@@ -16,6 +17,7 @@ export default function Index() {
   return (
     <main className="min-h-screen bg-background">
       <SteveMemorial />
+      <FuneralClosureBanner />
       <HeroSection />
       <FooterSection />
     </main>

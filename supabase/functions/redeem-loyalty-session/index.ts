@@ -17,6 +17,7 @@ const HELD_SPOTS: Record<string, Record<string, number>> = {
 };
 const getHeldSpots = (d: string, t: string) => HELD_SPOTS[d]?.[t] ?? 0;
 const BLOCKED_SLOTS: Record<string, string[]> = {
+  "2026-11-24": ["10:00", "12:00", "14:00", "16:00", "18:00"], // Closed all day for Steve’s funeral
   "2026-08-15": ["14:00"],
   "2026-09-01": ["14:00"], // private party
   "2026-09-05": ["10:00"],

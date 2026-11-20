@@ -171,6 +171,8 @@
 @media (prefers-reduced-motion: reduce) { .steve-support-banner-message, .steve-support-banner-heart { animation: none; } }
 
 .steve-memorial { background: var(--memorial-light), hsl(var(--memorial-background)); color: hsl(var(--memorial-foreground)); border-bottom: 1px solid hsl(var(--memorial-gold) / .25); }
+.funeral-closure-banner h2 { letter-spacing: 0; animation: memorial-heart 5s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .funeral-closure-banner h2 { animation: none; } }
 .memorial-inner { max-width: 1120px; margin: auto; padding: 48px 28px 52px; }
 .memorial-preview { max-width: 720px; margin: auto; padding: 18px 22px; display: flex; align-items: center; gap: 20px; text-align: left; }
 .memorial-preview-photo { display: block; width: 110px; flex-shrink: 0; border: 1px solid hsl(var(--memorial-gold) / .6); padding: 3px; animation: memorial-photo-glow 5s ease-in-out infinite; }

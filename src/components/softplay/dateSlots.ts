@@ -3,6 +3,8 @@
 export const OPENING_DATE = "2026-06-13"; // Sat 13 Jun 2026 — soft play opens
 export const NEW_SCHEDULE_FROM = "2026-06-13"; // single schedule from opening
 export const BOOKING_WINDOW_DAYS = 14; // Max 2 weeks ahead
+export const STEVE_FUNERAL_CLOSURE_DATE = "2026-11-24";
+export const isVenueClosed = (dateISO: string) => dateISO === STEVE_FUNERAL_CLOSURE_DATE;
 
 // Daily 2-hour sessions, 10AM – 8PM
 const STANDARD_SLOTS = [
@@ -55,7 +57,7 @@ export const getHeldSpots = (dateISO: string, time: string) =>
   HELD_SPOTS[dateISO]?.[time] ?? 0;
 
 export const isSoftPlaySlotBlocked = (dateISO: string, time: string) =>
-  (SOFT_PLAY_BLOCKED_SLOTS[dateISO] ?? []).includes(time);
+  isVenueClosed(dateISO) || (SOFT_PLAY_BLOCKED_SLOTS[dateISO] ?? []).includes(time);
 
 // Private-party closures — baby (under 3s) soft play
 const BABY_BLOCKED_SLOTS: Record<string, string[]> = {
@@ -69,7 +71,7 @@ const BABY_BLOCKED_SLOTS: Record<string, string[]> = {
 };
 
 export const isBabySlotBlocked = (dateISO: string, time: string) =>
-  (BABY_BLOCKED_SLOTS[dateISO] ?? []).includes(time);
+  isVenueClosed(dateISO) || (BABY_BLOCKED_SLOTS[dateISO] ?? []).includes(time);
 
 
 
