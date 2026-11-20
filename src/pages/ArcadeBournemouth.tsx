@@ -134,13 +134,13 @@ const ArcadeBournemouth = () => {
   return (
     <main className="min-h-screen bg-background">
       <Helmet>
-        <title>Arcade Bournemouth — 40+ Games &amp; Prize Machines | LUXPLAY</title>
+        <title>Arcade Bournemouth — 60+ Games &amp; Prize Machines | LUXPLAY</title>
         <meta
           name="description"
           content="Indoor arcade in Boscombe, Bournemouth with 60+ arcade and prize redemption machines. Credits from £5, most games 5–10 credits. Open 7 days — buy credits online."
         />
         <link rel="canonical" href="https://luxplay.uk/arcade-bournemouth" />
-        <meta property="og:title" content="Arcade Bournemouth — 40+ Games & Prize Machines | LUXPLAY" />
+        <meta property="og:title" content="Arcade Bournemouth — 60+ Games & Prize Machines | LUXPLAY" />
         <meta
           property="og:description"
           content="60+ arcade and prize redemption machines in Boscombe, Bournemouth. Credits from £5. Soft play and Cafè Lux on site."

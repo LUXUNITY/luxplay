@@ -229,7 +229,7 @@ const SoftPlayBournemouth = () => {
                 d: "A dedicated soft, padded area for 0–3 year olds away from the bigger frame — £4 per child for a 2-hour session, adults free.",
               },
               {
-                t: "40+ ARCADE GAMES NEXT DOOR",
+                t: "60+ ARCADE GAMES NEXT DOOR",
                 d: "Add arcade credits to your visit and the kids can move between soft play and the arcade in the same trip. Most games cost 5–10 credits.",
               },
               {
