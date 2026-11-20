@@ -2,7 +2,7 @@
 // Actions (signed-in parents only): join, mine, book, cancel.
 import { createClient } from "npm:@supabase/supabase-js@2.57.2";
 import { syncMembership } from "../_shared/membership-sync.ts";
-import { MEMBERSHIP_PLANS, decideStatus, canEnter, canBookMore, creditsLeft } from "../_shared/membership-rules.ts";
+import { MEMBERSHIP_PLANS, decideStatus, canEnter, canBookMore, canBookOnDay, creditsLeft } from "../_shared/membership-rules.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -162,6 +162,9 @@ Deno.serve(async (req) => {
       await refresh(m);
       if (!canEnter(m.status)) return json(403, { error: "This pass isn't active right now. Please update your payment to book." });
       if (!canBookMore((await upcomingFor(m.id)).length)) return json(409, { error: "This child already has an upcoming session booked. You can book the next one after that visit." });
+      const { count: sameDay } = await db.from("soft_play_bookings").select("id", { count: "exact", head: true }).eq("stripe_session_id", `membership:${m.id}`).eq("session_date", d);
+      const { count: scansDay } = await db.from("membership_checkins").select("id", { count: "exact", head: true }).eq("membership_id", m.id).eq("session_date", d);
+      if (!canBookOnDay((sameDay ?? 0) + (scansDay ?? 0))) return json(409, { error: "Members can enjoy 1 session per day — please pick another day." });
       const { count } = await db.from("soft_play_bookings").select("id", { count: "exact", head: true }).eq("session_date", d).eq("session_time", t);
       if (MAX_CAPACITY - (count ?? 0) - (HELD_SPOTS[d]?.[t] ?? 0) < 1) return json(409, { error: "Sorry, that session is full. Please pick another time." });
       const bookingCode = code(6);

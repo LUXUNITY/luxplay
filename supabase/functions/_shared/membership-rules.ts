@@ -33,6 +33,8 @@ export function decideStatus(opts: {
 
 export const canEnter = (s: MemberStatus) => s === "active" || s === "grace";
 export const canBookMore = (upcomingCount: number) => upcomingCount < MAX_UPCOMING_MEMBER_BOOKINGS;
+/** Members get one soft play session per calendar day (bookings + walk-in scans). */
+export const canBookOnDay = (sessionsThatDay: number) => sessionsThatDay < 1;
 export const creditsLeft = (tier: string, monthGiven: string | null, given: number, now = new Date()) => {
   const month = now.toISOString().slice(0, 7);
   const total = MEMBERSHIP_PLANS[tier]?.credits ?? 0;

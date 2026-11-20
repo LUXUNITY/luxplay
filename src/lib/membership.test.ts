@@ -30,7 +30,7 @@ describe("approved membership tiers", () => {
     });
   }
 });
-import { decideStatus, canEnter, canBookMore, creditsLeft, MEMBERSHIP_PLANS } from "../../supabase/functions/_shared/membership-rules";
+import { decideStatus, canEnter, canBookMore, canBookOnDay, creditsLeft, MEMBERSHIP_PLANS } from "../../supabase/functions/_shared/membership-rules";
 
 describe("live membership rules", () => {
   const now = new Date("2026-12-10T12:00:00Z");
@@ -60,4 +60,9 @@ describe("live membership rules", () => {
     expect(creditsLeft("lux-plus", "2026-12", 150, now)).toBe(50);
     expect(creditsLeft("lux-vip", "2026-11", 600, now)).toBe(600);
   });
+});
+
+describe("member one session per day", () => {
+  it("allows the first session of the day", () => expect(canBookOnDay(0)).toBe(true));
+  it("blocks a second session on the same day", () => expect(canBookOnDay(1)).toBe(false));
 });
