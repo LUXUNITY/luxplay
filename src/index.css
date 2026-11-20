@@ -99,6 +99,9 @@
 .play-pass-ribbon { position: relative; }
 .play-pass-ribbon svg { animation: play-pass-twinkle 2.6s ease-in-out infinite; }
 .play-pass-heart { animation: play-pass-hop 2.8s ease-in-out infinite; }
+.membership-best-value { animation: membership-best-value-flash 2s ease-in-out infinite; }
+@keyframes membership-best-value-flash { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .45; transform: scale(1.04); } }
+@media (prefers-reduced-motion: reduce) { .membership-best-value { animation: none; } }
 .play-pass-title { font-size: 60px; letter-spacing: 0; }
 .play-pass-unlimited { display: inline-block; text-shadow: var(--membership-promo-glow); animation: play-pass-glow 3s ease-in-out infinite, play-pass-heading 4s ease-in-out infinite; }
 .play-pass-price { font-size: 76px; letter-spacing: 0; animation: play-pass-price-pop 3.8s ease-in-out infinite; }

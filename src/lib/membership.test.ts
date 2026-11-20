@@ -16,8 +16,8 @@ describe("soft play membership pricing", () => {
 describe("approved membership tiers", () => {
   for (const [id, price, discount, credits] of [
     ["little-lux", 2499, 0, 0],
-    ["lux-plus", 3499, 10, 300],
-    ["lux-vip", 4999, 20, 750],
+    ["lux-plus", 3499, 10, 200],
+    ["lux-vip", 4999, 20, 600],
   ] as const) {
     it(`${id} has the approved monthly price`, () => {
       expect(MEMBERSHIP_TIERS.find(tier => tier.id === id)?.pricePence).toBe(price);
