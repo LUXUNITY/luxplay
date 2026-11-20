@@ -24,10 +24,9 @@ export default function SteveMemorial({ full = false }: { full?: boolean }) {
             <img src={stevePortrait.url} alt="Steve among the arcade machines at the LuxPlay he loved" fetchPriority="high" />
           </Link>
           <div className="memorial-preview-copy">
-            <h2 id="steve-preview-title">In Loving Memory of Steve <span aria-hidden="true">❤️</span></h2>
-            <p>Our manager. Our friend. Forever part of LuxPlay.</p>
-            <p className="memorial-preview-support">Let’s come together for Steve’s family ❤️</p>
-            <Button asChild variant="memorial" className="memorial-read"><Link to="/remembering-steve">Read his tribute &amp; help his family <ArrowRight /></Link></Button>
+            <h2 id="steve-preview-title">Remembering Steve <span aria-hidden="true">❤️</span></h2>
+            <p>Forever part of the LuxPlay family.</p>
+            <Button asChild variant="link" className="memorial-read"><Link to="/remembering-steve">His tribute &amp; family support <ArrowRight /></Link></Button>
           </div>
         </div>
       </section>
