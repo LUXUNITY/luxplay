@@ -13,14 +13,28 @@ export default function Memberships() {
           <Link to="/"><ArrowLeft /> Back to LuxPlay</Link>
         </Button>
         <header className="membership-heading text-center">
-          <p className="inline-flex items-center gap-2 font-semibold text-neon-green"><Sparkles size={18} /> COMING SOON</p>
-          <h1 className="font-display">LUXPLAY<br /><span className="text-neon-cyan">MEMBERSHIPS</span></h1>
-          <p className="play-pass-unlimited mt-4 font-display text-4xl text-neon-pink">SOFT PLAY. ON REPEAT! 🤩</p>
-          <div className="membership-price font-display text-neon-pink"><p className="mb-3 font-body text-base font-bold text-neon-green">Starting from as little as</p>{MEMBERSHIP_MONTHLY_PRICE}<span className="font-body text-sm text-foreground">per child, per month</span></div>
-          <p className="mx-auto max-w-md text-sm font-semibold leading-relaxed text-foreground">Unlimited {MEMBERSHIP_SESSION_HOURS}-hour soft play sessions.<br />Their own pass. Free entry for grown-ups. Endless smiles. 💚</p>
+          <p className="membership-launch inline-flex items-center gap-2 font-body text-xs font-extrabold text-neon-green"><Sparkles size={16} aria-hidden="true" /> BIG LITTLE ADVENTURES · COMING SOON</p>
+          <h1 className="font-display"><span className="membership-brand">LUXPLAY</span><span className="text-neon-cyan">MEMBERSHIPS</span></h1>
+          <div className="membership-repeat">
+            <Sparkles className="membership-heading-spark membership-heading-spark-left text-neon-green" aria-hidden="true" />
+            <p className="font-display"><span className="membership-soft-play">SOFT PLAY.</span><span className="membership-repeat-ribbon">ON REPEAT! <span className="membership-happy-face" aria-hidden="true">🤩</span></span></p>
+            <Sparkles className="membership-heading-spark membership-heading-spark-right text-neon-cyan" aria-hidden="true" />
+          </div>
+          <div className="membership-price">
+            <p className="font-body text-sm font-bold text-foreground">Starting from as little as</p>
+            <div className="membership-price-amount font-display text-neon-green">{MEMBERSHIP_MONTHLY_PRICE}</div>
+            <p className="font-body text-xs font-semibold text-muted-foreground">per child, per month</p>
+          </div>
+          <div className="membership-heading-perks">
+            <div><Infinity className="text-neon-cyan" aria-hidden="true" /><p><strong>UNLIMITED</strong><span>{MEMBERSHIP_SESSION_HOURS}-hour sessions</span></p></div>
+            <div><ScanLine className="text-neon-pink" aria-hidden="true" /><p><strong>THEIR OWN</strong><span>Personal play pass</span></p></div>
+            <div><Users className="text-neon-green" aria-hidden="true" /><p><strong>ADULTS FREE</strong><span>Grown-ups included</span></p></div>
+          </div>
+          <p className="membership-heading-signoff font-body text-sm font-bold text-foreground">Little feet. Big adventures. Endless smiles. 💚</p>
+          <a href="#membership-options" className="membership-explore inline-flex items-center gap-2 font-body text-xs font-extrabold text-neon-cyan">MEET YOUR CHILD’S PLAY PASS <ArrowRight size={16} aria-hidden="true" /></a>
         </header>
 
-        <section className="play-pass-promo py-6" aria-label="Choose your membership"><MembershipTiers /></section>
+        <section id="membership-options" className="play-pass-promo scroll-mt-20 py-6" aria-label="Choose your membership"><MembershipTiers /></section>
 
         <section className="membership-pass-section" aria-label="Membership pass preview">
           <div className="membership-pass">
