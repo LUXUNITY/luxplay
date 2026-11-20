@@ -1,0 +1,1 @@
+ALTER TABLE public.memberships ADD COLUMN IF NOT EXISTS card_on_file boolean;

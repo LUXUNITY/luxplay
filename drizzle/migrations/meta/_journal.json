@@ -15,6 +15,13 @@
       "when": 1795196016502,
       "tag": "0001_create_memberships",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1795197303152,
+      "tag": "0002_membership_card_on_file",
+      "breakpoints": true
     }
   ]
 }

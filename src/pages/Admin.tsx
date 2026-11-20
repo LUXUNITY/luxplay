@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import MembersList from "@/components/MembersList";
 import MembershipAdminCard, { type MemberPass } from "@/components/MembershipAdminCard";
 import { supabase } from "@/integrations/supabase/client";
 import { Search, Check, X, Loader2, Lock, ScanLine } from "lucide-react";
@@ -432,6 +433,8 @@ const Admin = () => {
         )}
 
         {result?.kind === "membership" && <MembershipAdminCard key={result.data.id} pass={result.data} callAdmin={callAdmin} />}
+
+        <MembersList callAdmin={callAdmin} />
 
         {/* SOFT PLAY BOOKING */}
         {result?.kind === "booking" && (

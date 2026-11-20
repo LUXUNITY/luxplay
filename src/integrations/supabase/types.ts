@@ -292,6 +292,7 @@ export type Database = {
       memberships: {
         Row: {
           cancel_requested: boolean
+          card_on_file: boolean | null
           child_dob: string | null
           child_name: string
           created_at: string
@@ -314,6 +315,7 @@ export type Database = {
         }
         Insert: {
           cancel_requested?: boolean
+          card_on_file?: boolean | null
           child_dob?: string | null
           child_name: string
           created_at?: string
@@ -336,6 +338,7 @@ export type Database = {
         }
         Update: {
           cancel_requested?: boolean
+          card_on_file?: boolean | null
           child_dob?: string | null
           child_name?: string
           created_at?: string

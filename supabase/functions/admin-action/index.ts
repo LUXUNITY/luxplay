@@ -1,6 +1,7 @@
 // Admin-only actions: lookup + redeem orders, lookup + check-in bookings.
 // Gated by ADMIN_PASSWORD secret sent in the `x-admin-password` header.
 import { createClient } from "npm:@supabase/supabase-js@2.57.2";
+import { syncMembership } from "../_shared/membership-sync.ts";
 import { MEMBERSHIP_PLANS, decideStatus, canEnter, creditsLeft } from "../_shared/membership-rules.ts";
 
 const corsHeaders = {
@@ -87,25 +88,8 @@ Deno.serve(async (req) => {
   };
   const currentSession = (h: number) => (["10:00", "12:00", "14:00", "16:00", "18:00"].find((s) => h >= Number(s.slice(0, 2)) && h < Number(s.slice(0, 2)) + 2) ?? null);
   const memberView = async (m: any) => {
-    // Re-check payment state with Square on every scan.
-    if (m.square_subscription_id) {
-      try {
-        const sq = (path: string) => fetch(`https://connect.squareup.com/v2/${path}`, { headers: { Authorization: `Bearer ${Deno.env.get("SQUARE_ACCESS_TOKEN")}`, "Square-Version": "2024-12-18" } }).then((r) => r.json());
-        const { subscription: sub } = await sq(`subscriptions/${m.square_subscription_id}`);
-        let unpaidSince: string | null = null;
-        for (const id of (sub?.invoice_ids ?? []).slice(0, 3)) {
-          const { invoice } = await sq(`invoices/${id}`);
-          const due = invoice?.payment_requests?.[0]?.due_date;
-          if ((invoice?.status === "UNPAID" || invoice?.status === "PARTIALLY_PAID") && due && `${due}T00:00:00Z` <= new Date().toISOString()) unpaidSince = unpaidSince && unpaidSince < `${due}T00:00:00Z` ? unpaidSince : `${due}T00:00:00Z`;
-        }
-        if (sub) {
-          const paidUntil = sub.charged_through_date ?? sub.canceled_date ?? null;
-          m.status = decideStatus({ subscriptionStatus: sub.status, paidUntil, unpaidSince });
-          m.paid_until = paidUntil;
-          await supabase.from("memberships").update({ status: m.status, paid_until: paidUntil, payment_issue_since: unpaidSince, updated_at: new Date().toISOString() }).eq("id", m.id);
-        }
-      } catch (e) { console.error("member refresh failed", e); }
-    }
+    // Re-check payment state with Square on every scan (also links new subscriptions).
+    await syncMembership(supabase, m);
     const now = ukNow();
     const session = currentSession(now.hour);
     const { data: booking } = await supabase.from("soft_play_bookings").select("booking_code, session_time, checked_in")
@@ -122,6 +106,22 @@ Deno.serve(async (req) => {
     const { data: m } = await supabase.from("memberships").select("*").eq("pass_code", compact(String(body.code ?? ""))).maybeSingle();
     if (!m) return json(404, { error: "Membership pass not found" });
     return json(200, { kind: "membership", data: await memberView(m) });
+  }
+
+  if (action === "list_memberships") {
+    const { data: all } = await supabase.from("memberships").select("*").neq("status", "pending").order("created_at", { ascending: false });
+    const { data: pend } = await supabase.from("memberships").select("*").eq("status", "pending").not("square_order_id", "is", null).gte("created_at", new Date(Date.now() - 7 * 864e5).toISOString());
+    const rows = [...(pend ?? []), ...(all ?? [])];
+    for (const m of rows) await syncMembership(supabase, m);
+    const ids = rows.map((m) => m.id);
+    const { data: bk } = ids.length ? await supabase.from("soft_play_bookings").select("stripe_session_id").in("stripe_session_id", ids.map((i) => `membership:${i}`)) : { data: [] };
+    const { data: ci } = ids.length ? await supabase.from("membership_checkins").select("membership_id").in("membership_id", ids) : { data: [] };
+    const count = (arr: any[] | null, key: string, val: string) => (arr ?? []).filter((r) => r[key] === val).length;
+    return json(200, { members: rows.filter((m) => m.status !== "pending").map((m) => ({
+      pass_code: m.pass_code, child_name: m.child_name, parent_name: m.parent_name, parent_email: m.parent_email, parent_phone: m.parent_phone,
+      tier: MEMBERSHIP_PLANS[m.tier]?.name ?? m.tier, status: m.status, paid_until: m.paid_until, card_on_file: m.card_on_file, cancel_requested: m.cancel_requested,
+      joined: m.created_at, sessions_booked: count(bk, "stripe_session_id", `membership:${m.id}`), sessions_used: count(ci, "membership_id", m.id),
+    })) });
   }
 
   if (action === "membership_checkin") {

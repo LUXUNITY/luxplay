@@ -1,6 +1,7 @@
 // Monthly soft play memberships billed by Square subscriptions.
 // Actions (signed-in parents only): join, mine, book, cancel.
 import { createClient } from "npm:@supabase/supabase-js@2.57.2";
+import { syncMembership } from "../_shared/membership-sync.ts";
 import { MEMBERSHIP_PLANS, decideStatus, canEnter, canBookMore, creditsLeft } from "../_shared/membership-rules.ts";
 
 const corsHeaders = {
@@ -75,56 +76,7 @@ async function ensurePlan(tier: string) {
   return variationId as string;
 }
 
-// Bring a pass up to date from Square (payment status, paid-until, suspension).
-async function refresh(m: any) {
-  try {
-    let subId = m.square_subscription_id as string | null;
-    if (!subId && m.square_order_id) {
-      const { order } = await square(`orders/${m.square_order_id}`);
-      let customerId = order?.customer_id;
-      const paymentId = order?.tenders?.[0]?.payment_id;
-      if (!customerId && paymentId) customerId = (await square(`payments/${paymentId}`)).payment?.customer_id;
-      if (customerId) {
-        const { data: planRow } = await db.from("membership_square_plans").select("variation_id").eq("tier", m.tier).maybeSingle();
-        const s = await square("subscriptions/search", { method: "POST", body: { query: { filter: { customer_ids: [customerId], location_ids: [await locationId()] } } } });
-        const taken = new Set(((await db.from("memberships").select("square_subscription_id").not("square_subscription_id", "is", null)).data ?? []).map((r: any) => r.square_subscription_id));
-        const match = (s.subscriptions ?? [])
-          .filter((x: any) => x.plan_variation_id === planRow?.variation_id && !taken.has(x.id) && x.created_at >= new Date(new Date(m.created_at).getTime() - 6e4).toISOString())
-          .sort((a: any, b: any) => a.created_at.localeCompare(b.created_at))[0];
-        if (match) { subId = match.id; m.square_customer_id = customerId; }
-      }
-    }
-    if (!subId) return m;
-    const { subscription: sub } = await square(`subscriptions/${subId}`);
-    let unpaidSince: string | null = null;
-    for (const invId of (sub.invoice_ids ?? []).slice(0, 3)) {
-      const { invoice } = await square(`invoices/${invId}`);
-      const due = invoice?.payment_requests?.[0]?.due_date;
-      if ((invoice?.status === "UNPAID" || invoice?.status === "PARTIALLY_PAID") && due && `${due}T00:00:00Z` <= new Date().toISOString()) {
-        const t = `${due}T00:00:00Z`;
-        if (!unpaidSince || t < unpaidSince) unpaidSince = t;
-      }
-    }
-    const paidUntil = sub.charged_through_date ?? sub.canceled_date ?? null;
-    const status = decideStatus({ subscriptionStatus: sub.status, paidUntil, unpaidSince });
-    const wasActive = m.status === "active" || m.status === "grace" || m.status === "suspended";
-    const patch = { square_subscription_id: subId, square_customer_id: m.square_customer_id ?? sub.customer_id, status, paid_until: paidUntil, payment_issue_since: unpaidSince, updated_at: new Date().toISOString() };
-    await db.from("memberships").update(patch).eq("id", m.id);
-    Object.assign(m, patch);
-    if (!wasActive && canEnter(status)) {
-      const plan = MEMBERSHIP_PLANS[m.tier];
-      await db.functions.invoke("send-transactional-email", { body: {
-        templateName: "membership-pass", recipientEmail: m.parent_email, idempotencyKey: `membership-pass-${m.id}`,
-        templateData: { parentName: m.parent_name, childName: m.child_name, tierName: plan.name, passCode: m.pass_code, price: `£${(plan.pricePence / 100).toFixed(2)}` },
-      } });
-      await db.functions.invoke("send-transactional-email", { body: {
-        templateName: "admin-purchase-notification", idempotencyKey: `admin-membership-${m.id}`,
-        templateData: { type: "Membership", customerEmail: m.parent_email, packageName: `${plan.name} membership — ${m.child_name}`, amount: `£${(plan.pricePence / 100).toFixed(2)} / month`, code: m.pass_code },
-      } });
-    }
-  } catch (e) { console.error("refresh failed", m.id, (e as Error).message); }
-  return m;
-}
+const refresh = (m: any) => syncMembership(db, m);
 
 const upcomingFor = async (id: string) => (await db.from("soft_play_bookings").select("booking_code, session_date, session_time, checked_in")
   .eq("stripe_session_id", `membership:${id}`).gte("session_date", ukToday()).eq("checked_in", false).order("session_date")).data ?? [];
