@@ -1303,7 +1303,7 @@
 .home-cute-logo > span:nth-child(odd) { rotate: -6deg; } .home-cute-logo > span:nth-child(even) { rotate: 5deg; }
 .home-cute-logo > span:nth-child(4) { color: hsl(var(--foreground)); }
 @keyframes logo-bounce { 0%,100% { translate: 0 0; } 30% { translate: 0 -10px; } 50% { translate: 0 0; } }
-.home-fun-list li { display: inline-flex; align-items: center; gap: 6px; border: 3px solid hsl(var(--foreground)); border-radius: 999px; padding: 6px 14px 6px 8px; font-weight: 900; box-shadow: 0 4px 0 hsl(var(--ink)), 0 0 16px hsl(var(--foreground) / .25); animation: fun-wiggle 3s ease-in-out infinite; }
+.home-fun-list li { width: 100%; max-width: 250px; justify-content: flex-start; display: inline-flex; align-items: center; gap: 6px; border: 3px solid hsl(var(--foreground)); border-radius: 999px; padding: 6px 14px 6px 8px; font-weight: 900; box-shadow: 0 4px 0 hsl(var(--ink)), 0 0 16px hsl(var(--foreground) / .25); animation: fun-wiggle 3s ease-in-out infinite; }
 .home-fun-list li:nth-child(odd) { rotate: -2deg; } .home-fun-list li:nth-child(even) { rotate: 2deg; }
 .home-fun-emoji { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 999px; background: hsl(var(--foreground)); font-size: 16px; animation: fun-hop 1.8s ease-in-out infinite; }
 @keyframes fun-wiggle { 0%,100% { translate: 0 0; } 50% { translate: 0 -3px; } }
@@ -1314,3 +1314,13 @@
 @media (prefers-reduced-motion: reduce) { .home-fun-list li, .home-fun-emoji, .home-sparkle { animation: none !important; } }
 @media (min-width: 768px) { .family-website .home-hub h1.home-cute-logo { font-size: 80px; } }
 @media (prefers-reduced-motion: reduce) { .home-cute-logo > span { animation: none !important; } }
+
+/* cuter equal bubbles + puffy logo */
+.home-fun-list { flex-direction: column; align-items: center; }
+.home-fun-list li { border-radius: 26px; padding: 8px 16px 8px 8px; font-size: 15px; position: relative; }
+.home-fun-list li::after { content: "♥"; margin-left: auto; font-size: 14px; color: hsl(var(--ink) / .55); }
+.home-fun-emoji { width: 34px; height: 34px; font-size: 19px; box-shadow: inset 0 -3px 0 hsl(var(--ink) / .15); }
+.home-logo-wrap { padding: 10px 22px 14px; border-radius: 40px; background: radial-gradient(circle at 50% 40%, hsl(var(--neon-purple) / .35), transparent 70%); }
+.family-website .home-hub h1.home-cute-logo > span { -webkit-text-stroke: 3px hsl(var(--foreground)); paint-order: stroke fill; text-shadow: 0 4px 0 hsl(var(--ink)), 0 7px 0 currentColor, 0 10px 0 hsl(var(--ink)), 0 0 22px currentColor, 0 0 40px currentColor; margin: 0 -1px; }
+.family-website .home-hub h1.home-cute-logo > span:nth-child(3)::after { content: "💖"; position: absolute; font-size: 18px; top: -8px; right: -10px; -webkit-text-stroke: 0; text-shadow: none; }
+.family-website .home-hub h1.home-cute-logo > span { position: relative; }
