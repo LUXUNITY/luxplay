@@ -40,16 +40,6 @@ const tiles = [
     text: "text-ink",
     shadow: "0 6px 0 0 #B34A00",
   },
-  {
-    href: "#deals",
-    emoji: "🤩",
-    line1: "Play",
-    line2: "Deals",
-    bg: "bg-neon-purple",
-    text: "text-ink",
-    shadow: "0 6px 0 0 #7A16BF",
-    flash: true,
-  },
 ];
 
 const LOGO_LETTERS = [
@@ -116,13 +106,11 @@ const HeroSection = () => {
             <a
               key={t.line2}
               href={t.href}
-              style={t.flash ? undefined : { boxShadow: t.shadow }}
-              className={`flex flex-col items-center justify-center gap-2 rounded-2xl py-6 px-4 transition-transform duration-150 active:translate-y-1.5 ${t.bg} ${t.text} ${
-                t.flash ? "animate-deals-tile" : ""
-              }`}
+              style={{ boxShadow: t.shadow }}
+              className={`flex flex-col items-center justify-center gap-2 rounded-2xl py-6 px-4 transition-transform duration-150 active:translate-y-1.5 ${t.bg} ${t.text} ${t.href === "/parties" ? "col-span-2" : ""}`}
             >
               <span className="text-3xl leading-none">{t.emoji}</span>
-              <span className={`text-center text-sm font-extrabold uppercase leading-tight ${t.flash ? "animate-deals-text" : ""}`}>
+              <span className="text-center text-sm font-extrabold uppercase leading-tight">
                 {t.line1}
                 <br />
                 {t.line2}

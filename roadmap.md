@@ -9,4 +9,5 @@
 - [x] Replace the homepage heater promotion with an animated membership offer and align the membership benefits; no food or drink discount.
 - [x] Verify membership promotion on phone and desktop, including its information link.
 - [x] Replace single membership with the three approved tiers and verify prices, benefits and mobile presentation.
+- [x] Remove expired Play Deal, All-In Deal and under-3s deal from website and app; preserve regular bookings and paid records.
 - [ ] Live membership billing, paid-status checks, member reservations and staff scanning: awaiting agreement to proceed beyond the preview and a live Square connection; the linked connection is test-only.

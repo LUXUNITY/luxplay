@@ -12,8 +12,6 @@ const FooterSection = lazy(() => import("@/components/FooterSection"));
 const SoftPlaySection = lazy(() => import("@/components/SoftPlaySection"));
 const BabySoftPlaySection = lazy(() => import("@/components/BabySoftPlaySection"));
 const PartiesSection = lazy(() => import("@/components/PartiesSection"));
-const DealsSection = lazy(() => import("@/components/DealsSection"));
-const BabyDealSection = lazy(() => import("@/components/BabyDealSection"));
 
 
 const Index = () => {
@@ -35,7 +33,7 @@ const Index = () => {
     <main className="min-h-screen bg-background">
       <SteveMemorial />
       <MembershipPromotion />
-      {/* 1. Hero — logo, then REFRESH & PLAY deal, then CTAs */}
+      {/* 1. Hero — logo, seasonal announcement and booking CTAs */}
       <HeroSection />
 
       {/* Mid-page sections — LuxPlay card starfield background */}
@@ -48,14 +46,6 @@ const Index = () => {
             </ScrollReveal>
           </Suspense>
         </div>
-        {/* 3. Deals — Play Deal & All-In Deal, right under the venue zones */}
-        <Suspense fallback={null}>
-          <DealsSection />
-        </Suspense>
-        {/* Under-3s deal — after the main upsell deals */}
-        <Suspense fallback={null}>
-          <BabyDealSection />
-        </Suspense>
         {/* 4. Credits — money section after zones explain the value */}
         <div className="defer-section">
           <Suspense fallback={null}>
