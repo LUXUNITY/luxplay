@@ -109,6 +109,7 @@ export default function MyMembership() {
                   </div>
                   <Button disabled={busy || !sel.t} className="mt-3 w-full bg-neon-cyan text-ink hover:bg-neon-cyan/90"
                     onClick={() => act({ action: "book", membershipId: p.id, sessionDate: sel.d, sessionTime: sel.t }, "🎉 Session booked! Just scan the pass when you arrive.")}>Book session</Button>
+                  <p className="mt-2 text-center text-[11px] text-muted-foreground">Only 1 session per day · one upcoming booking at a time</p>
                 </div>
               )}
               {p.status !== "cancelled" && !p.cancel_requested && p.status !== "pending" && (
