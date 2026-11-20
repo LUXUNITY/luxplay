@@ -12,11 +12,11 @@ export default function MembershipPromotion() {
         </div>
         <p className="relative inline-block rounded-full bg-neon-pink px-4 py-1 font-body text-xs text-ink">💚 NEW AT LUXPLAY 💚</p>
         <h2 id="play-pass-title" className="promo-hello-title relative mt-5 font-display leading-none">
-          <span className="block text-neon-cyan">Soft Play</span>
-          <span className="block text-neon-pink">Memberships!</span>
+          <span className="block text-neon-cyan"><span className="promo-cute-emoji" aria-hidden="true">🧸</span> Soft Play <span className="promo-cute-emoji" aria-hidden="true">🎈</span></span>
+          <span className="block text-neon-green">Memberships! <span className="promo-cute-emoji" aria-hidden="true">💖</span></span>
         </h2>
         <div className="promo-price-burst relative mx-auto mt-6"><span className="block font-body text-ink">FROM</span><span className="block font-display text-ink">{MEMBERSHIP_MONTHLY_PRICE}</span><span className="block font-body text-ink">per child / month</span></div>
-        <p className="relative mt-5 font-body text-lg text-foreground">Unlimited 2-hour soft play, every month! 🎉</p>
+        <p className="relative mt-5 font-body text-lg text-foreground">Unlimited soft play sessions all month long! 🎉</p>
         <p className="promo-free relative mt-2 font-body text-lg text-neon-green">Grown-ups go FREE! 🤩</p>
         <div className="relative mt-5 flex flex-wrap justify-center gap-2">
           {MEMBERSHIP_TIERS.map(tier => <span key={tier.id} className={`promo-pill rounded-full border-2 ${tier.border} px-3 py-1 font-body text-sm ${tier.colour}`}>{tier.emoji} {tier.name}</span>)}

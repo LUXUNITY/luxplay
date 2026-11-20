@@ -1287,3 +1287,7 @@
 .family-website .promo-hello-title > span:last-child { font-size: 38px !important; white-space: nowrap; }
 @media (max-width: 359px) { .family-website .promo-hello-title > span:last-child { font-size: 36px !important; } }
 @media (min-width: 768px) { .family-website .promo-hello-title > span:last-child { font-size: 70px !important; } }
+.family-website .promo-hello-title > span:first-child { font-size: 42px; white-space: nowrap; }
+.family-website .promo-hello-title > span:last-child { font-size: 34px !important; border-radius: 999px; text-shadow: 0 3px 0 hsl(var(--ink)), 0 6px 0 hsl(var(--neon-pink)), 0 0 20px hsl(var(--neon-green) / .6); }
+.family-website .promo-cute-emoji { display: inline-block; font-size: .6em; text-shadow: none; vertical-align: middle; animation: promo-wiggle 1.8s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .promo-cute-emoji { animation: none !important; } }
