@@ -20,7 +20,7 @@ const FAQS = [
   },
   {
     q: "Where is LuxPlay?",
-    a: "LuxPlay is at Unit 7, Sovereign Centre, Boscombe, Bournemouth, BH1 4SX — with 40+ arcade games, a 3-level soft play, baby soft play, prize redemption and Cafè Lux on site.",
+    a: "LuxPlay is at Unit 7, Sovereign Centre, Boscombe, Bournemouth, BH1 4SX — with 60+ arcade games, a 3-level soft play, baby soft play, prize redemption and Cafè Lux on site.",
   },
   {
     q: "Do parents have to pay?",
@@ -56,7 +56,7 @@ const Parties = () => {
     url: "https://luxplay.uk/parties",
     email: "luxplayuk@gmail.com",
     description:
-      "Children's birthday party venue in Boscombe, Bournemouth with a 3-level soft play, 40+ arcade games, baby soft play and Cafè Lux on site.",
+      "Children's birthday party venue in Boscombe, Bournemouth with a 3-level soft play, 60+ arcade games, baby soft play and Cafè Lux on site.",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Unit 7, Sovereign Centre",
@@ -198,7 +198,7 @@ const Parties = () => {
 
           <p className="font-body text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
             Looking for a kids party venue in Bournemouth? LuxPlay wraps a 3-level
-            soft play, 40+ arcade games and hot food into one price per child —
+            soft play, 60+ arcade games and hot food into one price per child —
             from <span className="text-neon-green font-semibold">£19.99</span>. You
             bring the birthday child, we handle the rest.
           </p>

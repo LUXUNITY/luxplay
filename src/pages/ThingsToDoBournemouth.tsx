@@ -8,7 +8,7 @@ const IDEAS = [
   {
     n: 1,
     t: "LUXPLAY — ARCADE, SOFT PLAY & CAFÉ (BOSCOMBE)",
-    d: "Our place, so we'll be upfront about it: 40+ arcade and prize machines, a 3-level soft play frame, a separate baby soft play area for under-3s and Cafè Lux, all indoors and air conditioned at the Sovereign Centre. Soft play is £8 per child for 2 hours (£4 for the baby area) and adults go free. Arcade credits start at £5.",
+    d: "Our place, so we'll be upfront about it: 60+ arcade and prize machines, a 3-level soft play frame, a separate baby soft play area for under-3s and Cafè Lux, all indoors and air conditioned at the Sovereign Centre. Soft play is £8 per child for 2 hours (£4 for the baby area) and adults go free. Arcade credits start at £5.",
     price: "Soft play from £8 · credits from £5",
     weather: "Indoors — rain or shine",
     age: "0–11 for soft play, all ages for the arcade",
@@ -78,7 +78,7 @@ const FAQS = [
   },
   {
     q: "What is there to do in Bournemouth when it's raining?",
-    a: "Stick to indoor venues. LuxPlay at the Sovereign Centre in Boscombe is fully indoors and air conditioned, with 40+ arcade games, soft play from £8 per child and Cafè Lux on site — so the children play while the adults sit down with a coffee. The Oceanarium is the other main indoor option.",
+    a: "Stick to indoor venues. LuxPlay at the Sovereign Centre in Boscombe is fully indoors and air conditioned, with 60+ arcade games, soft play from £8 per child and Cafè Lux on site — so the children play while the adults sit down with a coffee. The Oceanarium is the other main indoor option.",
   },
   {
     q: "What can you do in Bournemouth for free with children?",

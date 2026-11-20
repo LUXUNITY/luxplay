@@ -24,7 +24,7 @@ const THINGS = [
   {
     n: 3,
     t: "LUXPLAY — ARCADE, SOFT PLAY & CAFÉ (BOSCOMBE)",
-    d: "Our place, so we'll be upfront: 40+ arcade and prize machines, a 3-level soft play frame, a separate baby soft play area for under-3s and Cafè Lux, all indoors and air conditioned at the Sovereign Centre. The reliable answer when it rains, and five minutes from Boscombe beach when it doesn't.",
+    d: "Our place, so we'll be upfront: 60+ arcade and prize machines, a 3-level soft play frame, a separate baby soft play area for under-3s and Cafè Lux, all indoors and air conditioned at the Sovereign Centre. The reliable answer when it rains, and five minutes from Boscombe beach when it doesn't.",
     price: "Credits from £5 · soft play from £8",
     weather: "Indoors — rain or shine",
     who: "Families, groups, all ages in the arcade",
@@ -90,7 +90,7 @@ const THINGS = [
 const FAQS = [
   {
     q: "What are the best things to do in Bournemouth?",
-    a: "The beach and pier, Lower and Central Gardens, Hengistbury Head and the Oceanarium are the classics. For indoor days, LuxPlay in Boscombe (40+ arcade games, 3-level soft play, baby soft play and Cafè Lux) and the Russell-Cotes museum are the most reliable options.",
+    a: "The beach and pier, Lower and Central Gardens, Hengistbury Head and the Oceanarium are the classics. For indoor days, LuxPlay in Boscombe (60+ arcade games, 3-level soft play, baby soft play and Cafè Lux) and the Russell-Cotes museum are the most reliable options.",
   },
   {
     q: "What is there to do in Bournemouth when it's raining?",

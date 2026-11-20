@@ -32,8 +32,14 @@ export default function HeroSection() {
         <div className="relative mx-auto -mt-14 flex h-28 w-28 items-center justify-center rounded-full border-4 border-background bg-background">
           <img src={logoAsset} alt="LuxPlay logo" className="h-full w-full object-contain" />
         </div>
-        <h1 className="mt-3 font-logo text-5xl sm:text-6xl">{"LUXPLAY".split("").map((letter, i) => <span key={i} className={letters[i]}>{letter}</span>)}</h1>
-        <p className="mx-auto mt-3 max-w-sm px-4 font-body text-xs font-extrabold leading-relaxed text-neon-cyan">40+ ARCADE MACHINES · SOFT PLAY · PRIZES · CAFÉ</p>
+        <h1 className="home-cute-logo mt-3 font-logo" aria-label="LUXPLAY">{"LUXPLAY".split("").map((letter, i) => <span key={i} aria-hidden="true" className={letters[i]} style={{ animationDelay: `${i * 0.12}s` }}>{letter}</span>)}</h1>
+        <ul className="home-fun-list mx-auto mt-4 flex max-w-md flex-wrap justify-center gap-2 px-4 font-body text-sm" aria-label="What's inside LuxPlay">
+          <li className="border-neon-cyan text-neon-cyan">🕹️ 60+ arcade games</li>
+          <li className="border-neon-pink text-neon-pink">🏰 3-level soft play</li>
+          <li className="border-neon-green text-neon-green">🍼 Baby soft play</li>
+          <li className="border-neon-purple text-foreground">🎁 Prizes to win</li>
+          <li className="border-neon-cyan text-neon-cyan">🍔 Delicious hot food</li>
+        </ul>
         <p className="mt-3 inline-flex items-center gap-1 font-body text-xs text-muted-foreground"><MapPin size={14} /> Sovereign Centre · Boscombe, Bournemouth</p>
       </header>
       <nav aria-label="Plan your LuxPlay visit" className="mx-auto mt-6 grid max-w-3xl grid-cols-2 gap-4 px-5">

@@ -1297,3 +1297,12 @@
 .family-website .promo-pill { animation: promo-pill-glow 2.4s ease-in-out infinite; rotate: 0deg; translate: 0 0; }
 .promo-pill:nth-child(2) { animation-delay: -.8s; } .promo-pill:nth-child(3) { animation-delay: -1.6s; }
 @keyframes promo-pill-glow { 0%,100% { box-shadow: 0 0 0 transparent; } 50% { box-shadow: 0 0 12px currentColor; } }
+/* Cute bouncy LUXPLAY title and feature bubbles on the homepage. */
+.family-website .home-hub h1.home-cute-logo { font-size: 58px; line-height: 1.1; letter-spacing: .02em; text-shadow: none; }
+.home-cute-logo > span { display: inline-block; text-shadow: 0 3px 0 hsl(var(--ink)), 0 6px 0 currentColor, 0 0 18px currentColor; animation: logo-bounce 2.2s ease-in-out infinite; }
+.home-cute-logo > span:nth-child(odd) { rotate: -6deg; } .home-cute-logo > span:nth-child(even) { rotate: 5deg; }
+.home-cute-logo > span:nth-child(4) { color: hsl(var(--foreground)); }
+@keyframes logo-bounce { 0%,100% { translate: 0 0; } 30% { translate: 0 -10px; } 50% { translate: 0 0; } }
+.home-fun-list li { border-width: 2px; border-radius: 999px; padding: 4px 12px; background: hsl(var(--card)); }
+@media (min-width: 768px) { .family-website .home-hub h1.home-cute-logo { font-size: 80px; } }
+@media (prefers-reduced-motion: reduce) { .home-cute-logo > span { animation: none !important; } }

@@ -55,7 +55,7 @@ const App = () => (
                 <Route path="rewards" element={<Loyalty />} />
                 <Route path="account" element={<AppAccount />} />
               </Route>
-              <Route path="/" element={<><RouteHead title="LUXPLAY — Family Entertainment Centre in Bournemouth" description="LUXPLAY in Boscombe, Bournemouth: 40+ arcade games, 3-level soft play, baby soft play, prize redemption and Cafè Lux. Book soft play or buy credits online." path="/" /><Index /></>} />
+              <Route path="/" element={<><RouteHead title="LUXPLAY — Family Entertainment Centre in Bournemouth" description="LUXPLAY in Boscombe, Bournemouth: 60+ arcade games, 3-level soft play, baby soft play, prize redemption and Cafè Lux. Book soft play or buy credits online." path="/" /><Index /></>} />
               <Route path="/halloween" element={<Navigate to="/christmas" replace />} />
               <Route path="/christmas" element={<><RouteHead title="LuxPlay Winter Wonderland — Coming Soon" description="Christmas magic is coming to LuxPlay. Stay tuned for Winter Wonderland announcements." path="/christmas" /><OfferPage offer="christmas" /></>} />
               <Route path="/softplay" element={<><RouteHead title="Book Soft Play — LUXPLAY" description="Book two-hour soft play sessions for big kids and under-3s at LuxPlay Bournemouth. Adults go free." path="/softplay" /><OfferPage offer="softplay" /></>} />

@@ -66,7 +66,7 @@ const SoftPlayBournemouth = () => {
     url: "https://luxplay.uk/soft-play-bournemouth",
     email: "luxplayuk@gmail.com",
     description:
-      "Indoor soft play in Boscombe, Bournemouth: a 3-level soft play frame from £8 per child, a separate baby soft play area for under-3s from £4, plus 40+ arcade games and Cafè Lux on site. Adults go free.",
+      "Indoor soft play in Boscombe, Bournemouth: a 3-level soft play frame from £8 per child, a separate baby soft play area for under-3s from £4, plus 60+ arcade games and Cafè Lux on site. Adults go free.",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Unit 7, Sovereign Centre",
@@ -186,7 +186,7 @@ const SoftPlayBournemouth = () => {
           <p className="font-body text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
             LuxPlay is an indoor soft play centre in Boscombe, Bournemouth. Three
             levels of slides, ball pits and climbing for the big kids, a separate
-            padded baby area for the under-3s, and 40+ arcade games right next door.
+            padded baby area for the under-3s, and 60+ arcade games right next door.
             Sessions are 2 hours from{" "}
             <span className="text-neon-green font-semibold">£8 per child</span> —
             and adults go free.

@@ -12,7 +12,7 @@ const FAQS = [
   },
   {
     q: "How many arcade games are there?",
-    a: "There are 40+ arcade and redemption machines at LuxPlay in Boscombe — driving and racing cabinets, basketball, air hockey, ticket pushers, claw machines and classic redemption games.",
+    a: "There are 60+ arcade and redemption machines at LuxPlay in Boscombe — driving and racing cabinets, basketball, air hockey, ticket pushers, claw machines and classic redemption games.",
   },
   {
     q: "Can you win prizes?",
@@ -61,7 +61,7 @@ const ArcadeBournemouth = () => {
     url: "https://luxplay.uk/arcade-bournemouth",
     email: "luxplayuk@gmail.com",
     description:
-      "Indoor arcade in Boscombe, Bournemouth with 40+ arcade and prize redemption machines, a 3-level soft play and Cafè Lux on site. Credits from £5.",
+      "Indoor arcade in Boscombe, Bournemouth with 60+ arcade and prize redemption machines, a 3-level soft play and Cafè Lux on site. Credits from £5.",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Unit 7, Sovereign Centre",
@@ -123,7 +123,7 @@ const ArcadeBournemouth = () => {
             "@type": "Service",
             name: "300 arcade credits",
             description:
-              "Our most popular top-up: 300 credits on your LuxPlay card for the 40+ arcade and redemption games.",
+              "Our most popular top-up: 300 credits on your LuxPlay card for the 60+ arcade and redemption games.",
             serviceType: "Arcade games",
           },
         },
@@ -137,20 +137,20 @@ const ArcadeBournemouth = () => {
         <title>Arcade Bournemouth — 40+ Games &amp; Prize Machines | LUXPLAY</title>
         <meta
           name="description"
-          content="Indoor arcade in Boscombe, Bournemouth with 40+ arcade and prize redemption machines. Credits from £5, most games 5–10 credits. Open 7 days — buy credits online."
+          content="Indoor arcade in Boscombe, Bournemouth with 60+ arcade and prize redemption machines. Credits from £5, most games 5–10 credits. Open 7 days — buy credits online."
         />
         <link rel="canonical" href="https://luxplay.uk/arcade-bournemouth" />
         <meta property="og:title" content="Arcade Bournemouth — 40+ Games & Prize Machines | LUXPLAY" />
         <meta
           property="og:description"
-          content="40+ arcade and prize redemption machines in Boscombe, Bournemouth. Credits from £5. Soft play and Cafè Lux on site."
+          content="60+ arcade and prize redemption machines in Boscombe, Bournemouth. Credits from £5. Soft play and Cafè Lux on site."
         />
         <meta property="og:url" content="https://luxplay.uk/arcade-bournemouth" />
         <meta property="og:type" content="website" />
         <meta name="twitter:title" content="Arcade Bournemouth — LUXPLAY" />
         <meta
           name="twitter:description"
-          content="40+ arcade and prize machines in Boscombe, Bournemouth. Credits from £5."
+          content="60+ arcade and prize machines in Boscombe, Bournemouth. Credits from £5."
         />
         <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
         <script type="application/ld+json">{JSON.stringify(breadcrumbJsonLd)}</script>
@@ -179,7 +179,7 @@ const ArcadeBournemouth = () => {
           </h1>
 
           <p className="font-body text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
-            40+ arcade and prize redemption machines under one roof in Boscombe —
+            60+ arcade and prize redemption machines under one roof in Boscombe —
             racing cabinets, basketball, air hockey, ticket pushers, claw machines
             and a wall of prizes. Load credits onto your LuxPlay card from{" "}
             <span className="text-neon-green font-semibold">£5</span> and play. Most
