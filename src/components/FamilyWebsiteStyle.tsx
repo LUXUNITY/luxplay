@@ -15,7 +15,7 @@ export default function FamilyWebsiteStyle({ children }: { children: ReactNode }
     const link = document.createElement("link");
     link.id = "family-website-fonts";
     link.rel = "stylesheet";
-    link.href = "https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;500;600;700;800;900&display=swap";
+    link.href = "https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@400;500;600;700;800;900&display=swap";
     document.head.appendChild(link);
   }, []);
   return <div className={familyPages.has(pathname) ? "family-website" : undefined}>{children}</div>;
