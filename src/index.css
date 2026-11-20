@@ -182,6 +182,13 @@
 .family-website :is(h1, h2, h3, .font-display, .font-logo, .membership-heading-perks strong, .winter-coming):not(.steve-memorial *, .funeral-closure-banner *, .membership-heading h1, .membership-repeat-ribbon) { font-weight: 400; }
 .family-website .home-offer-button .font-display, .family-website .membership-benefits h2, .family-website .membership-spotlight-title > span:first-child { font-weight: 400; }
 .family-website :is(p, li, label):not(.steve-memorial *, .funeral-closure-banner *) { font-weight: 600; }
+/* Chunky, friendly lettering everywhere except the approved membership introduction and memorial areas. */
+.family-website :is(p, li, label, span, a, button, small, td, th, input, select, textarea):not(.steve-memorial *, .funeral-closure-banner *, .membership-heading *) { font-family: var(--family-font-body); font-weight: 800; letter-spacing: .01em; }
+.family-website :is(strong, b, .font-bold, .font-semibold, .font-black, button, .uppercase):not(.steve-memorial *, .funeral-closure-banner *, .membership-heading *) { font-weight: 900; }
+.family-website :is(h1, h2, h3, h4, .font-display, .font-logo):not(.steve-memorial *, .funeral-closure-banner *, .membership-heading *) { font-family: var(--family-font-heading); font-weight: 400; letter-spacing: .02em; -webkit-text-stroke: 1.5px currentColor; paint-order: stroke fill; }
+.family-website :is(h1, h2):not(.steve-memorial *, .funeral-closure-banner *, .membership-heading *) { text-shadow: var(--family-heading-depth); }
+.family-website h3:not(.steve-memorial *, .funeral-closure-banner *, .membership-heading *) { text-shadow: 0 3px 0 hsl(var(--ink)); -webkit-text-stroke-width: 1px; }
+.family-website :is(h4, .font-display, .font-logo):not(h1, h2, h3, .steve-memorial *, .funeral-closure-banner *, .membership-heading *) { -webkit-text-stroke: .75px currentColor; }
 @media (min-width: 768px) { .family-website .membership-repeat-ribbon { font-size: 68px; padding: 8px 24px; } .family-website .membership-title-label { font-size: 22px; } .family-website .membership-heading-perks strong { font-size: 20px; } }
 @media (max-width: 359px) { .family-website .membership-repeat-ribbon { font-size: 40px; padding: 6px 12px; } .family-website .membership-title-label { font-size: 16px; } .family-website .membership-heading-perks strong { font-size: 13px; } .family-website .membership-heading-perks span { font-size: 10px; } .family-website .membership-price-amount { font-size: 70px; } }
 
