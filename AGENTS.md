@@ -1,5 +1,6 @@
 ## Presentation
 - Keep the membership preview separate from existing checkouts; sample passes link only to membership information and must never grant entry before real billing and staff checks exist.
+- Keep the homepage membership promotion in its own live-text component with reduced-motion-aware CSS and shared membership terms, so marketing remains separate from billing and entry checks.
 - Render the family-support banner once above the shared route outlet, using memorial tokens and reduced-motion-aware CSS so every page shows it without duplicating page content.
 - Keep Steve’s homepage tribute and permanent memorial page in one shared presentation component; memorial-specific tokens isolate its respectful appearance from promotions and booking logic.
 - Keep the heated-venue promotion in its own component with CSS-only motion and reduced-motion support, so seasonal presentation stays isolated from booking logic.

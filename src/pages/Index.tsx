@@ -1,6 +1,6 @@
 import { Suspense, lazy, useEffect } from "react";
 import HeroSection from "@/components/HeroSection";
-import HeatedVenueBanner from "@/components/HeatedVenueBanner";
+import MembershipPromotion from "@/components/MembershipPromotion";
 import SteveMemorial from "@/components/SteveMemorial";
 
 import ScrollReveal from "@/components/ScrollReveal";
@@ -34,7 +34,7 @@ const Index = () => {
   return (
     <main className="min-h-screen bg-background">
       <SteveMemorial />
-      <HeatedVenueBanner />
+      <MembershipPromotion />
       {/* 1. Hero — logo, then REFRESH & PLAY deal, then CTAs */}
       <HeroSection />
 

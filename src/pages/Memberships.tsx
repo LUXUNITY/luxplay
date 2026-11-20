@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, ArrowRight, CalendarDays, Heart, Infinity, ScanLine, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, CalendarDays, Heart, Infinity, ScanLine, ShieldCheck, Sparkles, Users } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { Button } from "@/components/ui/button";
-import { MEMBERSHIP_MONTHLY_PRICE } from "@/lib/membership";
+import { MEMBERSHIP_MONTHLY_PRICE, MEMBERSHIP_SESSION_HOURS } from "@/lib/membership";
 
 export default function Memberships() {
   return (
@@ -16,7 +16,8 @@ export default function Memberships() {
           <h1 className="font-display">LUXPLAY<br /><span className="text-neon-cyan">PLAY PASS</span></h1>
           <p className="text-lg font-semibold">Little adventurers. Endless play. 💚</p>
           <div className="membership-price font-display text-neon-pink">{MEMBERSHIP_MONTHLY_PRICE}<span className="font-body text-sm text-foreground">per child / month</span></div>
-          <p className="text-muted-foreground">Unlimited soft play. One child. Their very own pass.</p>
+          <p className="text-muted-foreground">Unlimited {MEMBERSHIP_SESSION_HOURS}-hour soft play sessions. One child. Their very own pass.</p>
+          <p className="mt-4 font-display text-3xl text-neon-green">AROUND THE PRICE OF 3 VISITS. ENDLESS PLAY! 🤩</p>
         </header>
 
         <section className="membership-pass-section" aria-label="Membership pass preview">
@@ -41,9 +42,10 @@ export default function Memberships() {
         </section>
 
         <section className="membership-benefits" aria-label="Membership benefits">
-          <div><Infinity className="text-neon-cyan" /><h2>PLAY ON REPEAT</h2><p>Unlimited soft play sessions for your named child.</p></div>
+          <div><Infinity className="text-neon-cyan" /><h2>PLAY ON REPEAT</h2><p>Unlimited {MEMBERSHIP_SESSION_HOURS}-hour soft play sessions for your named child.</p></div>
           <div><CalendarDays className="text-neon-pink" /><h2>YOUR SESSION, RESERVED</h2><p>Book online before visiting. Sessions stay subject to availability.</p></div>
           <div><ScanLine className="text-neon-green" /><h2>THEIR OWN QR PASS</h2><p>A personal membership pass for staff to check at every visit.</p></div>
+          <div><Users className="text-neon-pink" /><h2>GROWN-UPS GO FREE!</h2><p>More family time, with no adult entry fee.</p></div>
         </section>
 
         <section className="membership-notice text-center">
