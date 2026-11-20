@@ -102,11 +102,12 @@
 .home-venue-strip { max-height: 190px; }
 .home-membership { box-shadow: var(--home-tile-shadow); }
 .membership-spotlight { box-shadow: var(--home-tile-shadow), var(--home-membership-glow); }
-.membership-spotlight-title { font-size: 48px; letter-spacing: 0; }
-.membership-spotlight-unlimited { font-size: 58px; text-shadow: 3px 3px 0 hsl(var(--neon-purple)); animation: play-pass-heading 3s ease-in-out infinite; }
+.membership-spotlight-title { display: flex; flex-direction: column; align-items: center; gap: 10px; font-size: 48px; line-height: 1.05; letter-spacing: 0; padding: 6px 0; }
+.membership-spotlight-title > span:first-child { font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 900; line-height: 1.2; }
+.membership-spotlight-unlimited { font-size: 62px; text-shadow: var(--membership-promo-glow); animation: play-pass-heading 3s ease-in-out infinite; }
 .membership-spotlight-ribbon svg { animation: play-pass-twinkle 3s ease-in-out infinite; }
-@media (min-width: 640px) { .membership-spotlight-title { font-size: 64px; } .membership-spotlight-unlimited { font-size: 82px; } }
-@media (max-width: 359px) { .membership-spotlight-title { font-size: 42px; } .membership-spotlight-unlimited { font-size: 48px; } }
+@media (min-width: 640px) { .membership-spotlight-title { font-size: 64px; gap: 14px; } .membership-spotlight-title > span:first-child { font-size: 34px; } .membership-spotlight-unlimited { font-size: 82px; } }
+@media (max-width: 359px) { .membership-spotlight-title { font-size: 42px; } .membership-spotlight-title > span:first-child { font-size: 24px; } .membership-spotlight-unlimited { font-size: 52px; } }
 .home-membership-title { font-size: 44px; letter-spacing: 0; }
 .home-membership .play-pass-unlimited { text-shadow: var(--home-membership-glow); }
 .home-offer-button { box-shadow: var(--home-tile-shadow); transition: transform 180ms ease; }
