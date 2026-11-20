@@ -54,6 +54,7 @@
     --membership-price-glow: 0 0 24px hsl(var(--neon-green) / .28);
     --membership-letter-shadow: 0 3px 0 hsl(var(--ink)), 0 6px 0 hsl(var(--neon-purple)), 0 9px 18px hsl(var(--neon-purple) / .25);
     --membership-brand-shadow: 2px 3px 0 hsl(var(--neon-purple));
+    --family-heading-depth: 0 2px 0 hsl(var(--ink)), 0 4px 0 hsl(var(--neon-purple)), 0 8px 16px hsl(var(--neon-purple) / .2);
     --memorial-background: 30 13% 8%;
     --memorial-foreground: 40 30% 92%;
     --memorial-muted: 36 15% 73%;
@@ -82,6 +83,54 @@
     @apply bg-background text-foreground font-body;
     background-color: hsl(270 40% 4%);
   }
+}
+
+/* Public promotional type only: never restyle staff tools, app, memorials or booking inputs. */
+.family-website :is(h1, h2, h3):not(.steve-memorial *, .funeral-closure-banner *, .membership-heading *) {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1.18;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+.family-website h1:not(.membership-heading *) { font-size: 38px; }
+.family-website h2:not(.steve-memorial *, .funeral-closure-banner *, .membership-heading *, .membership-benefits *, .membership-notice *) { font-size: 32px; text-shadow: var(--family-heading-depth); }
+.family-website h3:not(.steve-memorial *) { font-size: 22px; }
+.family-website .home-hub h1 { font-size: 48px; text-shadow: var(--membership-brand-shadow); }
+.family-website .home-offer-button .font-display { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 900; line-height: 1.25; letter-spacing: 0; }
+.family-website .membership-spotlight-title { font-size: 38px; gap: 12px; }
+.family-website .membership-spotlight-title > span:first-child { font-size: 26px; }
+.family-website .membership-spotlight-unlimited { font-size: 38px; line-height: 1.15; text-shadow: var(--family-heading-depth); }
+.family-website .membership-spotlight-title > span:last-child { transform: rotate(-2deg); }
+.family-website .membership-spotlight-title + p { line-height: 1.7; }
+.family-website .funeral-closure-banner { overflow: hidden; }
+.family-website .animate-fun-bubble { padding-inline: 16px; font-size: 1em; max-width: 100%; }
+.family-website .membership-benefits h2 { font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 900; line-height: 1.3; }
+.family-website .membership-notice h2 { font-size: 26px; }
+.family-website .play-pass-perk h3 { font-size: 30px; line-height: 1.2; }
+.family-website .winter-title .winter-word { font-size: 48px; line-height: 1.2; }
+.family-website .winter-title .wonder-word { font-size: 46px; line-height: 1.2; transform: rotate(-3deg); }
+.family-website .winter-title .land-word { font-size: 54px; line-height: 1.2; transform: rotate(2deg); }
+.family-website .winter-coming { font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: 900; line-height: 1.3; }
+@media (min-width: 768px) {
+  .family-website h1:not(.membership-heading *) { font-size: 60px; }
+  .family-website h2:not(.steve-memorial *, .funeral-closure-banner *, .membership-heading *, .membership-benefits *, .membership-notice *) { font-size: 42px; }
+  .family-website .home-hub h1 { font-size: 64px; }
+  .family-website .membership-spotlight-title, .family-website .membership-spotlight-unlimited { font-size: 54px; }
+  .family-website .home-offer-button .font-display { font-size: 24px; }
+  .family-website .winter-title .winter-word { font-size: 68px; }
+  .family-website .winter-title .wonder-word { font-size: 66px; }
+  .family-website .winter-title .land-word { font-size: 74px; }
+}
+@media (max-width: 359px) {
+  .family-website h1:not(.membership-heading *) { font-size: 32px; }
+  .family-website h2:not(.steve-memorial *, .funeral-closure-banner *, .membership-heading *, .membership-benefits *, .membership-notice *) { font-size: 28px; }
+  .family-website .membership-spotlight-title, .family-website .membership-spotlight-unlimited { font-size: 30px; }
+  .family-website .home-offer-button .font-display { font-size: 15px; }
+  .family-website .winter-title .winter-word { font-size: 42px; }
+  .family-website .winter-title .wonder-word { font-size: 40px; }
+  .family-website .winter-title .land-word { font-size: 48px; }
 }
 
 .membership-page { min-height: 100vh; }

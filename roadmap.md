@@ -13,4 +13,6 @@
 - [x] Shorten the homepage into exciting links to memberships, soft play, arcade credits, Christmas and parties; preserve Steve’s tribute and existing bookings.
 - [x] Strengthen the membership headline and verify the new page links on phone and desktop.
 - [x] Add Steve’s funeral-day notice beneath the homepage tribute and block all sessions on 24 November 2026; verify live checkout rejection.
+- [x] Carry the approved playful membership lettering across public website headings; keep practical booking details and memorial styling intact.
+- [x] Verify public pages, homepage links and booking selection on phone and desktop.
 - [ ] Live membership billing, paid-status checks, member reservations and staff scanning: awaiting agreement to proceed beyond the preview and a live Square connection; the linked connection is test-only.

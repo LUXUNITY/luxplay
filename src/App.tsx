@@ -10,6 +10,7 @@ import RouteHead from "@/components/RouteHead";
 import AppShellRedirect from "@/components/app/AppShellRedirect";
 import { AuthProvider } from "@/hooks/useAuth";
 import SteveSupportBanner from "@/components/SteveSupportBanner";
+import FamilyWebsiteStyle from "@/components/FamilyWebsiteStyle";
 
 const NotFound = lazy(() => import("./pages/NotFound"));
 const RememberingSteve = lazy(() => import("./pages/RememberingSteve"));
@@ -44,6 +45,7 @@ const App = () => (
         <AuthProvider>
           <AppShellRedirect />
           <SteveSupportBanner />
+          <FamilyWebsiteStyle>
           <Suspense fallback={null}>
             <Routes>
               {/* Native app shell — separate look from the website */}
@@ -77,6 +79,7 @@ const App = () => (
               <Route path="*" element={<><RouteHead title="Page Not Found — LUXPLAY" description="This LUXPLAY page could not be found." path="/404" noindex /><NotFound /></>} />
             </Routes>
           </Suspense>
+          </FamilyWebsiteStyle>
         </AuthProvider>
         </BrowserRouter>
       </TooltipProvider>
