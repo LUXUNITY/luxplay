@@ -3,22 +3,25 @@ import { ArrowLeft, ArrowRight, CalendarDays, Heart, Infinity, ScanLine, ShieldC
 import { QRCodeSVG } from "qrcode.react";
 import { Button } from "@/components/ui/button";
 import { MEMBERSHIP_MONTHLY_PRICE, MEMBERSHIP_SESSION_HOURS } from "@/lib/membership";
+import MembershipTiers from "@/components/MembershipTiers";
 
 export default function Memberships() {
   return (
     <main className="membership-page bg-background text-foreground">
-      <div className="mx-auto max-w-5xl px-5 py-7 md:px-10">
+      <div className="mx-auto max-w-6xl px-5 py-7 md:px-10">
         <Button asChild variant="link" className="px-0 text-neon-cyan">
           <Link to="/"><ArrowLeft /> Back to LuxPlay</Link>
         </Button>
         <header className="membership-heading text-center">
           <p className="inline-flex items-center gap-2 font-semibold text-neon-green"><Sparkles size={18} /> COMING SOON</p>
-          <h1 className="font-display">LITTLE LUX<br /><span className="text-neon-cyan">PLAY PASS</span></h1>
+          <h1 className="font-display">LUXPLAY<br /><span className="text-neon-cyan">MEMBERSHIPS</span></h1>
           <p className="text-lg font-semibold">Little adventurers. Endless play. 💚</p>
-          <div className="membership-price font-display text-neon-pink">{MEMBERSHIP_MONTHLY_PRICE}<span className="font-body text-sm text-foreground">per child / month</span></div>
+          <div className="membership-price font-display text-neon-pink">{MEMBERSHIP_MONTHLY_PRICE}<span className="font-body text-sm text-foreground">from · per child / month</span></div>
           <p className="text-muted-foreground">Unlimited {MEMBERSHIP_SESSION_HOURS}-hour soft play sessions. One child. Their very own pass.</p>
           <p className="mt-4 font-display text-3xl text-neon-green">AROUND THE PRICE OF 3 VISITS. ENDLESS PLAY! 🤩</p>
         </header>
+
+        <section className="play-pass-promo py-6" aria-label="Choose your membership"><MembershipTiers /></section>
 
         <section className="membership-pass-section" aria-label="Membership pass preview">
           <div className="membership-pass">
@@ -28,7 +31,7 @@ export default function Memberships() {
             <div className="membership-pass-body">
               <div>
                 <p className="font-semibold text-xs">UNLIMITED SOFT PLAY</p>
-                <p className="font-display text-3xl leading-none mt-3">LITTLE LUX<br />PLAY PASS 💚</p>
+                <p className="font-display text-3xl leading-none mt-3">MY LUX<br />PLAY PASS 💚</p>
                 <p className="mt-4 text-sm font-semibold">One named child</p>
                 <p className="mt-1 text-xs">One happy little adventurer</p>
               </div>
