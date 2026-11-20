@@ -188,7 +188,7 @@ const ArcadeBournemouth = () => {
 
           <div className="mt-10 grid grid-cols-1 sm:grid-cols-4 gap-3 max-w-4xl mx-auto">
             {[
-              { Icon: Gamepad2, label: "40+ MACHINES", sub: "Arcade + redemption" },
+              { Icon: Gamepad2, label: "60+ MACHINES", sub: "Arcade + redemption" },
               { Icon: Trophy, label: "WIN PRIZES", sub: "Ticket prize counter" },
               { Icon: Clock, label: "OPEN 7 DAYS", sub: "From 10am" },
               { Icon: MapPin, label: "SOVEREIGN CENTRE", sub: "Boscombe, BH1 4SX" },
