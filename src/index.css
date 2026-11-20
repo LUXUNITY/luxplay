@@ -1278,3 +1278,12 @@
 .family-website .promo-price-burst .font-display { font-size: 50px; }
 .family-website .promo-price-burst span:first-child { font-size: 20px; }
 .family-website .promo-price-burst span:last-child { font-size: 14px; }
+.family-website .promo-hello-title { font-size: 50px; }
+.family-website .promo-hello-title > span:first-child { font-size: 54px; }
+.family-website .promo-hello-title > span { text-shadow: 0 3px 0 hsl(var(--ink)), 0 6px 0 hsl(var(--neon-purple)), 0 0 22px hsl(var(--neon-pink) / .6); }
+.family-website .promo-hello-title > span:first-child { text-shadow: 0 3px 0 hsl(var(--ink)), 0 6px 0 hsl(var(--neon-purple)), 0 0 22px hsl(var(--neon-cyan) / .7); }
+@media (max-width: 359px) { .family-website .promo-hello-title, .family-website .promo-hello-title > span:first-child { font-size: 40px; } }
+@media (min-width: 768px) { .family-website .promo-hello-title, .family-website .promo-hello-title > span:first-child { font-size: 76px; } }
+.family-website .promo-hello-title > span:last-child { font-size: 38px !important; white-space: nowrap; }
+@media (max-width: 359px) { .family-website .promo-hello-title > span:last-child { font-size: 36px !important; } }
+@media (min-width: 768px) { .family-website .promo-hello-title > span:last-child { font-size: 70px !important; } }
