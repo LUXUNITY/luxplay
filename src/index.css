@@ -55,9 +55,10 @@
     --membership-letter-shadow: 0 3px 0 hsl(var(--ink)), 0 6px 0 hsl(var(--neon-purple)), 0 9px 18px hsl(var(--neon-purple) / .25);
     --membership-brand-shadow: 2px 3px 0 hsl(var(--neon-purple));
     --family-heading-depth: 0 2px 0 hsl(var(--ink)), 0 4px 0 hsl(var(--neon-purple)), 0 8px 16px hsl(var(--neon-purple) / .2);
-    --family-confetti-pattern: radial-gradient(ellipse 3px 7px at 12px 14px, hsl(var(--neon-pink) / .48) 95%, transparent), radial-gradient(ellipse 6px 2px at 18px 22px, hsl(var(--neon-cyan) / .42) 95%, transparent), radial-gradient(ellipse 2px 5px at 24px 12px, hsl(var(--neon-green) / .35) 95%, transparent), radial-gradient(ellipse 5px 2px at 14px 24px, hsl(var(--neon-purple) / .5) 95%, transparent);
-    --family-colour-wash: repeating-linear-gradient(125deg, hsl(var(--neon-cyan) / .055) 0 90px, hsl(var(--neon-purple) / .1) 90px 180px, hsl(var(--neon-pink) / .055) 180px 270px, hsl(var(--neon-green) / .035) 270px 360px);
-    --family-playful-background: var(--family-confetti-pattern), var(--family-colour-wash);
+    --family-colour-wash: linear-gradient(135deg, hsl(var(--neon-green) / .065), transparent 45%, hsl(var(--neon-pink) / .065));
+    --family-playful-background: var(--family-colour-wash);
+    --family-snow-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='200' viewBox='0 0 180 200'%3E%3Cg stroke='black' stroke-width='1.3' fill='none' stroke-linecap='round'%3E%3Cpath d='M28 15v22M18.5 20.5l19 11M18.5 31.5l19-11M25 18l3 3 3-3M25 34l3-3 3 3'/%3E%3Cpath d='M126 112v16M119 116l14 8M119 124l14-8'/%3E%3C/g%3E%3C/svg%3E");
+    --family-fairy-lights: repeating-linear-gradient(90deg, hsl(var(--neon-pink) / .7) 0 5px, transparent 5px 28px, hsl(var(--neon-green) / .65) 28px 33px, transparent 33px 56px, hsl(var(--neon-cyan) / .65) 56px 61px, transparent 61px 84px);
     --memorial-background: 30 13% 8%;
     --memorial-foreground: 40 30% 92%;
     --memorial-muted: 36 15% 73%;
@@ -92,17 +93,24 @@
 .family-website { background-color: hsl(var(--background)); }
 .family-website :is(main, section, footer, .membership-heading, nav[aria-label="Back to homepage"]):not(.steve-memorial, .steve-memorial *, .funeral-closure-banner, .funeral-closure-banner *, .membership-pass-section, .membership-benefits, .membership-notice) {
   background-image: var(--family-playful-background);
-  background-repeat: repeat;
-  /* Each little sprinkle lives in a larger transparent tile. */
-  background-size: 173px 151px, 211px 179px, 257px 223px, 293px 257px, 720px 720px;
-  animation: family-confetti-drift 40s linear infinite;
+  background-repeat: no-repeat;
 }
-@keyframes family-confetti-drift {
-  from { background-position: 0 0, 60px 30px, 110px 70px, 35px 120px, 0 0; }
-  to { background-position: 173px 151px, -151px 209px, 367px 293px, -258px 377px, 720px 720px; }
+.family-website :is(.home-hub, .membership-heading, main > section, footer):not(.steve-memorial, .funeral-closure-banner) { position: relative; isolation: isolate; }
+.family-website :is(.home-hub, .membership-heading, main > section, footer):not(.steve-memorial, .funeral-closure-banner)::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: -1;
+  background: hsl(var(--neon-cyan)); opacity: .24;
+  mask-image: var(--family-snow-mask); mask-size: 180px 200px;
+  animation: family-snow-drift 28s linear infinite;
 }
+.family-website :is(.home-hub, .membership-heading)::after {
+  content: ''; position: absolute; inset: 0 0 auto; height: 8px; pointer-events: none;
+  background-image: var(--family-fairy-lights); border-top: 1px solid hsl(var(--neon-cyan) / .2);
+  animation: family-lights-twinkle 5s ease-in-out infinite;
+}
+@keyframes family-snow-drift { from { mask-position: 0 -200px; } to { mask-position: 0 0; } }
+@keyframes family-lights-twinkle { 0%,100% { opacity: .8; } 50% { opacity: .45; } }
 @media (prefers-reduced-motion: reduce) {
-  .family-website :is(main, section, footer, .membership-heading, nav[aria-label="Back to homepage"]) { animation: none !important; }
+  .family-website :is(main, section, footer, .membership-heading, nav[aria-label="Back to homepage"]), .family-website section::before, .family-website footer::before, .family-website .membership-heading::before, .family-website .home-hub::after, .family-website .membership-heading::after { animation: none !important; }
 }
 .family-website :is(h1, h2, h3):not(.steve-memorial *, .funeral-closure-banner *, .membership-heading *) {
   font-family: 'Montserrat', sans-serif;
