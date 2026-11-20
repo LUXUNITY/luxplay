@@ -47,6 +47,8 @@
     --membership-promo-pattern: repeating-linear-gradient(135deg, transparent 0 38px, hsl(var(--neon-purple) / .07) 38px 40px);
     --membership-promo-glow: 0 0 20px hsl(var(--neon-cyan) / .35);
     --membership-cta-shadow: 4px 4px 0 hsl(var(--neon-purple));
+    --home-tile-shadow: 0 5px 0 hsl(var(--neon-purple) / .65);
+    --home-membership-glow: 0 0 22px hsl(var(--neon-pink) / .35);
     --memorial-background: 30 13% 8%;
     --memorial-foreground: 40 30% 92%;
     --memorial-muted: 36 15% 73%;
@@ -96,6 +98,19 @@
 @media (prefers-reduced-motion: reduce) { .membership-pass { animation: none; transform: none; } }
 
 .play-pass-promo { background-image: var(--membership-promo-pattern); }
+.home-hub, .home-hub .font-logo, .home-hub .font-display { letter-spacing: 0; }
+.home-venue-strip { max-height: 190px; }
+.home-membership { box-shadow: var(--home-tile-shadow); }
+.home-membership-title { font-size: 44px; letter-spacing: 0; }
+.home-membership .play-pass-unlimited { text-shadow: var(--home-membership-glow); }
+.home-offer-button { box-shadow: var(--home-tile-shadow); transition: transform 180ms ease; }
+.home-offer-button:hover { transform: translateY(-3px); }
+.home-offer-button:active { transform: translateY(3px); }
+.home-tile-emoji { animation: play-pass-hop 4s ease-in-out infinite; }
+.home-offer-button:nth-child(odd) .home-tile-emoji { animation-delay: -2s; }
+.home-christmas { background-image: var(--membership-promo-pattern); }
+@media (min-width: 640px) { .home-membership-title { font-size: 60px; } }
+@media (prefers-reduced-motion: reduce) { .home-tile-emoji { animation: none; } .home-offer-button { transition: none; } }
 .play-pass-ribbon { position: relative; }
 .play-pass-ribbon svg { animation: play-pass-twinkle 2.6s ease-in-out infinite; }
 .play-pass-heart { animation: play-pass-hop 2.8s ease-in-out infinite; }

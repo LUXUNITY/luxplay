@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import RouteHead from "@/components/RouteHead";
 import AppShellRedirect from "@/components/app/AppShellRedirect";
@@ -13,6 +13,7 @@ import SteveSupportBanner from "@/components/SteveSupportBanner";
 
 const NotFound = lazy(() => import("./pages/NotFound"));
 const RememberingSteve = lazy(() => import("./pages/RememberingSteve"));
+const OfferPage = lazy(() => import("./pages/OfferPage"));
 const Memberships = lazy(() => import("./pages/Memberships"));
 const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
 const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
@@ -53,7 +54,11 @@ const App = () => (
                 <Route path="account" element={<AppAccount />} />
               </Route>
               <Route path="/" element={<><RouteHead title="LUXPLAY — Family Entertainment Centre in Bournemouth" description="LUXPLAY in Boscombe, Bournemouth: 40+ arcade games, 3-level soft play, baby soft play, prize redemption and Cafè Lux. Book soft play or buy credits online." path="/" /><Index /></>} />
-              <Route path="/halloween" element={<><RouteHead title="Winter Wonderland Coming Soon — LUXPLAY" description="LuxPlay Winter Wonderland is coming soon to Bournemouth. Stay tuned for more information!" path="/halloween" /><Index /></>} />
+              <Route path="/halloween" element={<Navigate to="/christmas" replace />} />
+              <Route path="/christmas" element={<><RouteHead title="LuxPlay Winter Wonderland — Coming Soon" description="Christmas magic is coming to LuxPlay. Stay tuned for Winter Wonderland announcements." path="/christmas" /><OfferPage offer="christmas" /></>} />
+              <Route path="/softplay" element={<><RouteHead title="Book Soft Play — LUXPLAY" description="Book two-hour soft play sessions for big kids and under-3s at LuxPlay Bournemouth. Adults go free." path="/softplay" /><OfferPage offer="softplay" /></>} />
+              <Route path="/arcade-credits" element={<><RouteHead title="Buy Arcade Credits — LUXPLAY" description="Choose your LuxPlay arcade credits and buy online for your next visit to Bournemouth." path="/arcade-credits" /><OfferPage offer="credits" /></>} />
+              <Route path="/about" element={<><RouteHead title="Explore LuxPlay — Our Venue & Team" description="Explore the LuxPlay arcade, soft play, prizes and café, and meet the team in Bournemouth." path="/about" /><OfferPage offer="about" /></>} />
               <Route path="/parties" element={<Parties />} />
               <Route path="/memberships" element={<><RouteHead title="Little Lux, Lux Plus & Lux VIP — Memberships Coming Soon" description="Compare LuxPlay memberships: Little Lux £24.99, Lux Plus £34.99 and Lux VIP £49.99 per child monthly. Unlimited two-hour soft play and free adults. Not on sale yet." path="/memberships" noindex /><Memberships /></>} />
               <Route path="/remembering-steve" element={<><RouteHead title="In Loving Memory of Steve — LUXPLAY" description="Remembering Steve, our beloved manager, friend and part of the LuxPlay family. Read our tribute and help support his family." path="/remembering-steve" /><RememberingSteve /></>} />

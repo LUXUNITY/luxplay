@@ -10,4 +10,6 @@
 - [x] Verify membership promotion on phone and desktop, including its information link.
 - [x] Replace single membership with the three approved tiers and verify prices, benefits and mobile presentation.
 - [x] Remove expired Play Deal, All-In Deal and under-3s deal from website and app; preserve regular bookings and paid records.
+- [x] Shorten the homepage into exciting links to memberships, soft play, arcade credits, Christmas and parties; preserve Steve’s tribute and existing bookings.
+- [x] Strengthen the membership headline and verify the new page links on phone and desktop.
 - [ ] Live membership billing, paid-status checks, member reservations and staff scanning: awaiting agreement to proceed beyond the preview and a live Square connection; the linked connection is test-only.

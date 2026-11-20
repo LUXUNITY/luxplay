@@ -1,109 +1,23 @@
-import { Suspense, lazy, useEffect } from "react";
+import { Navigate, useLocation } from "react-router-dom";
 import HeroSection from "@/components/HeroSection";
-import MembershipPromotion from "@/components/MembershipPromotion";
 import SteveMemorial from "@/components/SteveMemorial";
+import FooterSection from "@/components/FooterSection";
 
-import ScrollReveal from "@/components/ScrollReveal";
+const legacyDestinations: Record<string, string> = {
+  softplay: "/softplay", "baby-softplay": "/softplay#baby-softplay", presale: "/arcade-credits",
+  "play-pass": "/memberships", halloween: "/christmas", "winter-wonderland": "/christmas",
+  parties: "/parties", about: "/about", venue: "/about",
+};
 
-const PreSaleSection = lazy(() => import("@/components/PreSaleSection"));
-const VenueSection = lazy(() => import("@/components/VenueSection"));
-const FeaturesSection = lazy(() => import("@/components/FeaturesSection"));
-const FooterSection = lazy(() => import("@/components/FooterSection"));
-const SoftPlaySection = lazy(() => import("@/components/SoftPlaySection"));
-const BabySoftPlaySection = lazy(() => import("@/components/BabySoftPlaySection"));
-const PartiesSection = lazy(() => import("@/components/PartiesSection"));
-
-
-const Index = () => {
-  // Old counter links now lead to the next seasonal announcement.
-  useEffect(() => {
-    const hash = window.location.hash.slice(1);
-    const id = window.location.pathname === "/halloween" || hash === "halloween" ? "winter-wonderland" : hash;
-    if (!id) return;
-    let tries = 0;
-    const t = setInterval(() => {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ block: "start" });
-      if (++tries >= 6) clearInterval(t);
-    }, 300);
-    return () => clearInterval(t);
-  }, []);
-
+export default function Index() {
+  const { hash } = useLocation();
+  const destination = legacyDestinations[hash.slice(1)];
+  if (destination) return <Navigate to={destination} replace />;
   return (
     <main className="min-h-screen bg-background">
       <SteveMemorial />
-      <MembershipPromotion />
-      {/* 1. Hero — logo, seasonal announcement and booking CTAs */}
       <HeroSection />
-
-      {/* Mid-page sections — LuxPlay card starfield background */}
-      <div className="relative luxplay-pattern-bg">
-        {/* 2. Venue visuals — zones so visitors see what they're buying */}
-        <div className="defer-section">
-          <Suspense fallback={null}>
-            <ScrollReveal>
-              <VenueSection />
-            </ScrollReveal>
-          </Suspense>
-        </div>
-        {/* 4. Credits — money section after zones explain the value */}
-        <div className="defer-section">
-          <Suspense fallback={null}>
-            <ScrollReveal>
-              <PreSaleSection />
-            </ScrollReveal>
-          </Suspense>
-        </div>
-        {/* 5. Soft play booking */}
-
-        <div className="defer-section">
-          <Suspense fallback={null}>
-            <ScrollReveal>
-              <SoftPlaySection />
-            </ScrollReveal>
-          </Suspense>
-        </div>
-        {/* 5. Standard baby soft play booking */}
-        <div className="defer-section">
-          <Suspense fallback={null}>
-            <ScrollReveal>
-              <BabySoftPlaySection />
-            </ScrollReveal>
-          </Suspense>
-        </div>
-
-        {/* 6. Birthday parties */}
-        <div className="defer-section">
-          <Suspense fallback={null}>
-            <ScrollReveal>
-              <PartiesSection />
-            </ScrollReveal>
-          </Suspense>
-        </div>
-      </div>
-
-      {/* 5. Founder story — last, earns trust after excitement */}
-      <div className="defer-section">
-        <Suspense fallback={null}>
-          <ScrollReveal>
-            <FeaturesSection />
-          </ScrollReveal>
-        </Suspense>
-      </div>
-
-      {/* 6. Footer — also keeps the starfield */}
-      <div className="relative luxplay-pattern-bg">
-        <div className="defer-section">
-          <Suspense fallback={null}>
-            <ScrollReveal>
-              <FooterSection />
-            </ScrollReveal>
-          </Suspense>
-        </div>
-      </div>
+      <FooterSection />
     </main>
   );
-};
-
-export default Index;
-
+}

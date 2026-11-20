@@ -1,4 +1,7 @@
-import WinterWonderland from "@/components/WinterWonderland";
+import { Link } from "react-router-dom";
+import { ArrowUpRight, MapPin } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import MembershipPromotion from "@/components/MembershipPromotion";
 import logoAsset from "@/assets/logo-luxplay.png";
 import arcadeAsset from "@/assets/real-arcade.jpeg.asset.json";
 import softplayAsset from "@/assets/real-softplay-v2.png.asset.json";
@@ -6,149 +9,45 @@ import babySoftplayAsset from "@/assets/real-baby-softplay.png.asset.json";
 import prizeAsset from "@/assets/real-prize-redemption.jpg.asset.json";
 
 const collage = [
-  { img: arcadeAsset.url, label: "ARCADE", bg: "bg-neon-green", text: "text-ink", shadow: "#5EA80F" },
-  { img: softplayAsset.url, label: "SOFT PLAY", bg: "bg-neon-cyan", text: "text-ink", shadow: "#B37A00" },
-  { img: babySoftplayAsset.url, label: "UNDER 3s", bg: "bg-neon-pink", text: "text-ink", shadow: "#B34A00" },
-  { img: prizeAsset.url, label: "PRIZES", bg: "bg-neon-purple", text: "text-white", shadow: "#7A16BF" },
+  { img: arcadeAsset.url, label: "Arcade machines" },
+  { img: softplayAsset.url, label: "Soft play" },
+  { img: babySoftplayAsset.url, label: "Baby soft play" },
+  { img: prizeAsset.url, label: "Prize counter" },
 ];
-
 const tiles = [
-  {
-    href: "#softplay",
-    emoji: "🛝",
-    line1: "Book",
-    line2: "Soft Play",
-    bg: "bg-neon-green",
-    text: "text-ink",
-    shadow: "0 6px 0 0 #5EA80F",
-  },
-  {
-    href: "#presale",
-    emoji: "🕹️",
-    line1: "Arcade",
-    line2: "Credits",
-    bg: "bg-neon-cyan",
-    text: "text-ink",
-    shadow: "0 6px 0 0 #B37A00",
-  },
-  {
-    href: "/parties",
-    emoji: "🎂",
-    line1: "Party",
-    line2: "Packages",
-    bg: "bg-neon-pink",
-    text: "text-ink",
-    shadow: "0 6px 0 0 #B34A00",
-  },
+  { href: "/softplay", emoji: "🛝", title: "BOOK SOFT PLAY", detail: "Big kids & little ones", cls: "bg-neon-cyan hover:bg-neon-cyan/90" },
+  { href: "/arcade-credits", emoji: "🕹️", title: "ARCADE CREDITS", detail: "Let the games begin!", cls: "bg-neon-green hover:bg-neon-green/90" },
+  { href: "/christmas", emoji: "🎄", title: "WINTER WONDERLAND", detail: "Christmas magic · Coming soon", cls: "bg-card hover:bg-muted border-2 border-neon-purple text-foreground home-christmas" },
+  { href: "/parties", emoji: "🎂", title: "PARTY PACKAGES", detail: "Their biggest day. Our biggest fun.", cls: "bg-neon-pink hover:bg-neon-pink/90" },
 ];
+const letters = ["text-neon-pink", "text-neon-cyan", "text-neon-green", "text-neon-purple", "text-neon-pink", "text-neon-cyan", "text-neon-green"];
 
-const LOGO_LETTERS = [
-  { char: "L", cls: "text-neon-pink" },
-  { char: "U", cls: "text-neon-cyan" },
-  { char: "X", cls: "text-neon-green" },
-  { char: "P", cls: "text-neon-purple" },
-  { char: "L", cls: "text-neon-pink" },
-  { char: "A", cls: "text-neon-cyan" },
-  { char: "Y", cls: "text-neon-green" },
-];
-
-const HeroSection = () => {
+export default function HeroSection() {
   return (
-    <section className="relative w-full bg-background overflow-hidden">
-      <div className="w-full max-w-md mx-auto">
-        {/* Full-bleed four-way venue picture with logo badge */}
-        <div className="relative w-full">
-          <div className="grid grid-cols-2 gap-0">
-            {collage.map((c) => (
-              <div key={c.label} className="relative aspect-square overflow-hidden">
-                <img
-                  src={c.img}
-                  alt={`LuxPlay ${c.label}`}
-                  className="absolute inset-0 h-full w-full object-cover"
-                  loading="eager"
-                />
-              </div>
-            ))}
-          </div>
-
-          {/* Centre logo badge */}
-          <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <img
-              src={logoAsset}
-              alt="LuxPlay — arcade, soft play and café at Unit 7 Sovereign Centre, Boscombe, Bournemouth"
-              className="h-28 w-28 sm:h-32 sm:w-32 rounded-full object-contain bg-background/80 p-1"
-              style={{ boxShadow: "0 0 0 3px hsl(var(--background)), 0 0 30px 6px rgba(255,122,26,0.45)" }}
-              loading="eager"
-            />
-          </div>
+    <section className="home-hub w-full overflow-hidden bg-background pb-8 text-center">
+      <header className="relative mx-auto max-w-3xl">
+        <div className="home-venue-strip grid grid-cols-4 overflow-hidden" aria-label="Inside LuxPlay">
+          {collage.map(c => <img key={c.label} src={c.img} alt={c.label} className="aspect-square h-full w-full object-cover" loading="eager" />)}
         </div>
-
-        {/* Wordmark */}
-        <div className="relative px-6 pt-6 pb-6 text-center">
-          <h1 className="relative font-logo text-5xl sm:text-6xl tracking-tighter mb-2">
-            {LOGO_LETTERS.map((l, i) => (
-              <span key={i} className={l.cls}>
-                {l.char}
-              </span>
-            ))}
-          </h1>
-          <p className="relative text-sm sm:text-base font-bold uppercase tracking-[0.18em] text-neon-cyan">
-            40+ ARCADE MACHINES · SOFT PLAY · PRIZES · CAFÉ
-          </p>
+        <div className="relative mx-auto -mt-14 flex h-28 w-28 items-center justify-center rounded-full border-4 border-background bg-background">
+          <img src={logoAsset} alt="LuxPlay logo" className="h-full w-full object-contain" />
         </div>
-
-        {/* Seasonal teaser — no ticket sales until the event is announced */}
-        <WinterWonderland />
-
-        {/* Quick actions */}
-        <div className="grid grid-cols-2 gap-4 px-6 mb-8">
-          {tiles.map((t) => (
-            <a
-              key={t.line2}
-              href={t.href}
-              style={{ boxShadow: t.shadow }}
-              className={`flex flex-col items-center justify-center gap-2 rounded-2xl py-6 px-4 transition-transform duration-150 active:translate-y-1.5 ${t.bg} ${t.text} ${t.href === "/parties" ? "col-span-2" : ""}`}
-            >
-              <span className="text-3xl leading-none">{t.emoji}</span>
-              <span className="text-center text-sm font-extrabold uppercase leading-tight">
-                {t.line1}
-                <br />
-                {t.line2}
-              </span>
-            </a>
-          ))}
-        </div>
-
-
-        {/* Price snapshot */}
-        <div className="px-6 space-y-3 pb-8">
-          <div className="grid grid-cols-3 items-center gap-2 rounded-2xl border-2 border-dashed border-border bg-muted/60 p-4">
-            <div className="text-left">
-              <p className="text-[11px] font-bold uppercase tracking-tight text-muted-foreground">
-                Soft play from
-              </p>
-              <p className="font-display text-xl text-neon-pink">£4.00</p>
-            </div>
-            <div className="flex justify-center">
-              <div className="animate-[pulse_1.2s_cubic-bezier(0.4,0,0.6,1)_infinite] rounded-full bg-neon-green px-4 py-3 text-center text-ink shadow-[0_0_24px_6px_rgba(57,255,20,0.5)]">
-                <p className="font-display text-2xl leading-none">ADULTS</p>
-                <p className="font-display text-2xl leading-none">FREE</p>
-              </div>
-            </div>
-
-            <div className="text-right">
-              <p className="text-[11px] font-bold uppercase tracking-tight text-muted-foreground">
-                Parties from
-              </p>
-              <p className="font-display text-xl text-neon-cyan">£19.99<span className="text-[11px] align-top">pp</span></p>
-            </div>
-          </div>
-
-
-        </div>
-      </div>
+        <h1 className="mt-3 font-logo text-5xl sm:text-6xl">{"LUXPLAY".split("").map((letter, i) => <span key={i} className={letters[i]}>{letter}</span>)}</h1>
+        <p className="mx-auto mt-3 max-w-sm px-4 font-body text-xs font-extrabold leading-relaxed text-neon-cyan">40+ ARCADE MACHINES · SOFT PLAY · PRIZES · CAFÉ</p>
+        <p className="mt-3 inline-flex items-center gap-1 font-body text-xs text-muted-foreground"><MapPin size={14} /> Sovereign Centre · Boscombe, Bournemouth</p>
+      </header>
+      <nav aria-label="Plan your LuxPlay visit" className="mx-auto mt-6 grid max-w-3xl grid-cols-2 gap-4 px-5">
+        <div className="col-span-2"><MembershipPromotion /></div>
+        {tiles.map(t => <Button key={t.href} asChild variant="secondary" className={`home-offer-button relative flex h-auto min-h-40 flex-col justify-center gap-2 whitespace-normal rounded-lg p-4 text-ink ${t.cls}`}>
+          <Link to={t.href}>
+            <ArrowUpRight className="absolute right-3 top-3" aria-hidden="true" />
+            <span className="home-tile-emoji text-4xl" aria-hidden="true">{t.emoji}</span>
+            <span className="font-display text-2xl leading-none">{t.title}</span>
+            <span className="font-body text-[11px] font-bold leading-relaxed">{t.detail}</span>
+          </Link>
+        </Button>)}
+        <Button asChild variant="outline" className="col-span-2 min-h-12 whitespace-normal border-neon-purple font-body font-bold text-foreground"><Link to="/about">Explore LuxPlay & meet the team <ArrowUpRight /></Link></Button>
+      </nav>
     </section>
   );
-};
-
-export default HeroSection;
+}
