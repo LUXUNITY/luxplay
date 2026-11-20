@@ -55,8 +55,8 @@
     --membership-letter-shadow: 0 3px 0 hsl(var(--ink)), 0 6px 0 hsl(var(--neon-purple)), 0 9px 18px hsl(var(--neon-purple) / .25);
     --membership-brand-shadow: 2px 3px 0 hsl(var(--neon-purple));
     --family-heading-depth: 0 2px 0 hsl(var(--ink)), 0 4px 0 hsl(var(--neon-purple)), 0 8px 16px hsl(var(--neon-purple) / .2);
-    --family-font-heading: 'Chewy', 'Lilita One', sans-serif;
-    --family-font-body: 'Chewy', 'Baloo 2', sans-serif;
+    --family-font-heading: 'Montserrat', sans-serif;
+    --family-font-body: 'Montserrat', sans-serif;
     --family-colour-wash: linear-gradient(135deg, hsl(var(--neon-green) / .065), transparent 45%, hsl(var(--neon-pink) / .065));
     --family-playful-background: var(--family-colour-wash);
     --family-snow-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='200' viewBox='0 0 180 200'%3E%3Cg stroke='black' stroke-width='1.3' fill='none' stroke-linecap='round'%3E%3Cpath d='M28 15v22M18.5 20.5l19 11M18.5 31.5l19-11M25 18l3 3 3-3M25 34l3-3 3 3'/%3E%3Cpath d='M126 112v16M119 116l14 8M119 124l14-8'/%3E%3C/g%3E%3C/svg%3E");
@@ -1243,3 +1243,11 @@
 }
 /* Chewy has a single weight: avoid faux-bold smearing and give it a touch of spacing. */
 .family-website :is(p, li, label, span, a, button, small, strong, b, div, h1, h2, h3, h4, .font-display, .font-logo):not(.steve-memorial, .steve-memorial *, .funeral-closure-banner, .funeral-closure-banner *, .membership-heading h1, .membership-heading h1 *, .membership-repeat, .membership-repeat *) { font-weight: 400; letter-spacing: .02em; }
+/* Site-wide "Soft play!" look: extra-heavy lettering, bright neon colours and the same layered 3D shadow. */
+.family-website :is(p, li, label, span, a, button, small, strong, b, div, h1, h2, h3, h4, .font-display, .font-logo):not(.steve-memorial, .steve-memorial *, .funeral-closure-banner, .funeral-closure-banner *, .membership-heading h1, .membership-heading h1 *, .membership-repeat, .membership-repeat *) { font-family: 'Montserrat', sans-serif; font-weight: 800; letter-spacing: -.01em; -webkit-text-stroke: 0; }
+.family-website :is(h1, h2, h3, h4, strong, b, button, .font-display, .font-logo, .uppercase):not(.steve-memorial *, .funeral-closure-banner *, .membership-heading h1 *, .membership-repeat *) { font-weight: 900 !important; }
+.family-website :is(h1, h2):not(.steve-memorial *, .funeral-closure-banner *, .membership-heading *) { text-shadow: var(--membership-letter-shadow); line-height: 1.1; }
+.family-website h3:not(.steve-memorial *, .funeral-closure-banner *, .membership-heading *) { text-shadow: 0 2px 0 hsl(var(--ink)), 0 4px 0 hsl(var(--neon-purple)); line-height: 1.1; }
+.family-website :is(main, section) h2:not(.steve-memorial *, .funeral-closure-banner *, .membership-heading *, [class*="text-neon"], [class*="text-ink"]) { color: hsl(var(--neon-cyan)); }
+.family-website :is(main, section) h3:not(.steve-memorial *, .funeral-closure-banner *, .membership-heading *, [class*="text-neon"], [class*="text-ink"], .bg-neon-cyan *, .bg-neon-green *, .bg-neon-pink *) { color: hsl(var(--neon-pink)); }
+.family-website :is(.bg-neon-cyan, .bg-neon-green, .bg-neon-pink, .bg-neon-purple) :is(h1, h2, h3, h4, .font-display) { text-shadow: none; }
