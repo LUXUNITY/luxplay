@@ -1291,3 +1291,9 @@
 .family-website .promo-hello-title > span:last-child { font-size: 34px !important; border-radius: 999px; text-shadow: 0 3px 0 hsl(var(--ink)), 0 6px 0 hsl(var(--neon-pink)), 0 0 20px hsl(var(--neon-green) / .6); }
 .family-website .promo-cute-emoji { display: inline-block; font-size: .6em; text-shadow: none; vertical-align: middle; animation: promo-wiggle 1.8s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .promo-cute-emoji { animation: none !important; } }
+/* Grown-ups free: bright flashing badge. Tier names: calm, gentle glow only. */
+.family-website .promo-free { display: inline-block; padding: 6px 16px; border-radius: 999px; font-size: 20px; color: hsl(var(--ink)) !important; background: hsl(var(--neon-green)); animation: promo-flash .9s steps(1, end) infinite, promo-cta 1.8s ease-in-out infinite; }
+@keyframes promo-flash { 0% { background: hsl(var(--neon-green)); } 33% { background: hsl(var(--neon-cyan)); } 66% { background: hsl(var(--neon-pink)); } }
+.family-website .promo-pill { animation: promo-pill-glow 2.4s ease-in-out infinite; rotate: 0deg; translate: 0 0; }
+.promo-pill:nth-child(2) { animation-delay: -.8s; } .promo-pill:nth-child(3) { animation-delay: -1.6s; }
+@keyframes promo-pill-glow { 0%,100% { box-shadow: 0 0 0 transparent; } 50% { box-shadow: 0 0 12px currentColor; } }
