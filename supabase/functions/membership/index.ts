@@ -154,13 +154,17 @@ Deno.serve(async (req) => {
       }).select().single();
       if (error) throw error;
       const origin = Deno.env.get("SITE_URL") || "https://luxplay.uk";
-      const link = await square("online-checkout/payment-links", { method: "POST", body: {
-        idempotency_key: `membership-${m.id}`,
-        quick_pay: { name: `LuxPlay ${plan.name} membership — ${childName}`, price_money: { amount: plan.pricePence, currency: "GBP" }, location_id: await locationId() },
+      const loc = await locationId();
+      const linkBody = (withEmail: boolean) => ({
+        idempotency_key: `membership-${m.id}${withEmail ? "" : "-ne"}`,
+        quick_pay: { name: `LuxPlay ${plan.name} membership — ${childName}`, price_money: { amount: plan.pricePence, currency: "GBP" }, location_id: loc },
         checkout_options: { subscription_plan_id: variationId, redirect_url: `${origin}/my-membership?joined=${m.id}`, ask_for_shipping_address: false },
-        pre_populated_data: { buyer_email: user.email },
+        ...(withEmail ? { pre_populated_data: { buyer_email: user.email } } : {}),
         payment_note: `membership:${m.id}`,
-      } });
+      });
+      let link;
+      try { link = await square("online-checkout/payment-links", { method: "POST", body: linkBody(true) }); }
+      catch (e) { if (!String((e as Error).message).includes("INVALID_EMAIL")) throw e; link = await square("online-checkout/payment-links", { method: "POST", body: linkBody(false) }); }
       await db.from("memberships").update({ square_order_id: link.payment_link?.order_id }).eq("id", m.id);
       return json(200, { url: link.payment_link?.url });
     }

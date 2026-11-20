@@ -15,4 +15,5 @@
 - [x] Add Steve’s funeral-day notice beneath the homepage tribute and block all sessions on 24 November 2026; verify live checkout rejection.
 - [x] Carry the approved playful membership lettering across public website headings; keep practical booking details and memorial styling intact.
 - [x] Verify public pages, homepage links and booking selection on phone and desktop.
-- [ ] Live membership billing, paid-status checks, member reservations and staff scanning: awaiting agreement to proceed beyond the preview and a live Square connection; the linked connection is test-only.
+- [x] Live membership billing (Square monthly), paid-status checks with 24h grace, member reservations (1 upcoming per child) and staff pass scanning.
+- [ ] First real membership payment end-to-end: waiting for the owner to do one real £24.99 sign-up.
