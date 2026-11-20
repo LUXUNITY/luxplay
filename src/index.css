@@ -52,6 +52,8 @@
     --membership-heading-pattern: repeating-linear-gradient(135deg, transparent 0 22px, hsl(var(--neon-purple) / .08) 22px 24px);
     --membership-ribbon-shadow: 5px 5px 0 hsl(var(--neon-purple));
     --membership-price-glow: 0 0 24px hsl(var(--neon-green) / .28);
+    --membership-letter-shadow: 0 3px 0 hsl(var(--ink)), 0 6px 0 hsl(var(--neon-purple)), 0 9px 18px hsl(var(--neon-purple) / .25);
+    --membership-brand-shadow: 2px 3px 0 hsl(var(--neon-purple));
     --memorial-background: 30 13% 8%;
     --memorial-foreground: 40 30% 92%;
     --memorial-muted: 36 15% 73%;
@@ -85,11 +87,15 @@
 .membership-page { min-height: 100vh; }
 .membership-heading { padding: 16px 0 8px; background-image: var(--membership-heading-pattern); letter-spacing: 0; }
 .membership-launch { line-height: 1.6; }
-.membership-heading h1 { font-size: 52px; line-height: 1; margin: 16px 0 18px; }
+.membership-heading h1 { line-height: 1; margin: 18px 0 22px; }
 .membership-heading h1 > span { display: block; }
-.membership-heading h1 .membership-brand { font-size: 28px; margin-bottom: 4px; color: hsl(var(--foreground)); }
+.membership-heading h1 .membership-brand { font-size: 44px; font-weight: 900; margin-bottom: 12px; color: hsl(var(--neon-cyan)); text-shadow: var(--membership-brand-shadow); }
+.membership-brand > span { color: hsl(var(--neon-pink)); }
+.membership-title-label { font-size: 18px; font-weight: 800; color: hsl(var(--foreground)); }
 .membership-repeat { position: relative; max-width: 550px; margin: auto; padding: 0 8px; }
-.membership-soft-play { display: block; font-size: 70px; line-height: 1; text-shadow: var(--home-membership-glow); }
+.membership-soft-play { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 14px; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 64px; line-height: 1.12; padding-bottom: 10px; text-shadow: var(--membership-letter-shadow); }
+.membership-soft-play > span { display: inline-block; color: hsl(var(--neon-cyan)); transform: rotate(-4deg); animation: membership-letter-bounce 5s ease-in-out infinite; }
+.membership-soft-play > span + span { color: hsl(var(--neon-pink)); transform: rotate(3deg); animation-delay: -2.5s; }
 .membership-repeat-ribbon { display: flex; align-items: center; justify-content: center; gap: 8px; width: fit-content; max-width: 100%; margin: 8px auto 0; padding: 6px 16px; background: hsl(var(--neon-pink)); color: hsl(var(--ink)); font-size: 48px; line-height: 1.05; border-radius: 4px; box-shadow: var(--membership-ribbon-shadow); transform: rotate(-2deg); animation: membership-ribbon-rock 5s ease-in-out infinite; }
 .membership-happy-face { font-size: 34px; }
 .membership-heading-spark { position: absolute; width: 24px; height: 24px; animation: play-pass-twinkle 3s ease-in-out infinite; }
@@ -110,8 +116,9 @@
 .membership-explore svg { animation: play-pass-arrow 2s ease-in-out infinite; }
 .membership-explore:focus-visible { outline: 2px solid hsl(var(--neon-cyan)); outline-offset: 4px; }
 @keyframes membership-ribbon-rock { 0%,100% { transform: rotate(-2deg) translateY(0); } 50% { transform: rotate(1deg) translateY(-3px); } }
-@media (min-width: 768px) { .membership-heading h1 { font-size: 64px; } .membership-soft-play { font-size: 104px; } .membership-repeat-ribbon { font-size: 68px; padding: 8px 24px; } .membership-happy-face { font-size: 48px; } .membership-heading-perks span { font-size: 12px; } }
-@media (max-width: 359px) { .membership-heading h1 { font-size: 46px; } .membership-launch { font-size: 10px; } .membership-soft-play { font-size: 58px; } .membership-repeat-ribbon { font-size: 40px; padding: 6px 12px; } .membership-happy-face { font-size: 28px; } .membership-heading-perks strong { font-size: 18px; } .membership-heading-signoff { font-size: 12px; } }
+@keyframes membership-letter-bounce { 0%,70%,100% { translate: 0 0; } 80% { translate: 0 -5px; } 90% { translate: 0 -2px; } }
+@media (min-width: 768px) { .membership-heading h1 .membership-brand { font-size: 64px; } .membership-title-label { font-size: 22px; } .membership-soft-play { font-size: 86px; } .membership-repeat-ribbon { font-size: 68px; padding: 8px 24px; } .membership-happy-face { font-size: 48px; } .membership-heading-perks span { font-size: 12px; } }
+@media (max-width: 359px) { .membership-heading h1 .membership-brand { font-size: 38px; } .membership-title-label { font-size: 16px; } .membership-launch { font-size: 10px; } .membership-soft-play { font-size: 54px; } .membership-repeat-ribbon { font-size: 40px; padding: 6px 12px; } .membership-happy-face { font-size: 28px; } .membership-heading-perks strong { font-size: 18px; } .membership-heading-signoff { font-size: 12px; } }
 @media (prefers-reduced-motion: reduce) { .membership-heading *, .membership-heading *::before, .membership-heading *::after { animation: none !important; } }
 .membership-pass-section { padding: 25px 0 40px; }
 .membership-pass { max-width: 420px; margin: auto; padding: 22px; background: hsl(var(--neon-green)); color: hsl(var(--ink)); border-radius: 8px; box-shadow: 8px 8px 0 hsl(var(--neon-purple)); transform: rotate(-2deg); animation: membership-pass-float 6s ease-in-out infinite; }

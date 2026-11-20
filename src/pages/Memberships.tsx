@@ -14,10 +14,10 @@ export default function Memberships() {
         </Button>
         <header className="membership-heading text-center">
           <p className="membership-launch inline-flex items-center gap-2 font-body text-xs font-extrabold text-neon-green"><Sparkles size={16} aria-hidden="true" /> BIG LITTLE ADVENTURES · COMING SOON</p>
-          <h1 className="font-display"><span className="membership-brand">LUXPLAY</span><span className="text-neon-cyan">MEMBERSHIPS</span></h1>
+          <h1 className="font-body"><span className="membership-brand">LUX<span>PLAY</span></span><span className="membership-title-label">MEMBERSHIPS</span></h1>
           <div className="membership-repeat">
             <Sparkles className="membership-heading-spark membership-heading-spark-left text-neon-green" aria-hidden="true" />
-            <p className="font-display"><span className="membership-soft-play">SOFT PLAY.</span><span className="membership-repeat-ribbon">ON REPEAT! <span className="membership-happy-face" aria-hidden="true">🤩</span></span></p>
+            <p className="font-display"><span className="membership-soft-play"><span>Soft</span> <span>play!</span></span><span className="membership-repeat-ribbon">ON REPEAT! <span className="membership-happy-face" aria-hidden="true">🤩</span></span></p>
             <Sparkles className="membership-heading-spark membership-heading-spark-right text-neon-cyan" aria-hidden="true" />
           </div>
           <div className="membership-price">
