@@ -1,45 +1,28 @@
-## Goal
-Rip out Stripe entirely. Replace with Square (faster payouts — next business day vs Stripe's 2–7 days) across all three payment flows: credit packs, soft play, baby soft play.
+# Make LuxPlay Memberships live
 
-## What changes
+## What customers will get
+- Pick **Little Lux £24.99**, **Lux Plus £34.99** or **Lux VIP £49.99** on the Memberships page.
+- Create a free LuxPlay account, enter the **child's name and date of birth** (one pass per named child), then pay monthly by card through **Square** (same as current checkouts). They're charged automatically every month until they cancel.
+- After paying they get a **membership QR pass** in their account and by email.
+- Members **book sessions free** online (counts against the normal 40-space limit), up to **1 upcoming booking per child at a time** so spaces stay fair. They can also walk in if there's space.
+- Grown-ups free, as now. Lux Plus/VIP perks are shown on the pass: café discount (10% / 20%) and monthly arcade credits (200 / 600).
 
-### 1. Square account setup (you do this)
-- Create products + prices in Square Dashboard, OR let the code create payment links on the fly (recommended — simpler, no price IDs to wire up).
-- Generate a **Production Access Token** and grab your **Location ID** from Square Dashboard → Developer → Applications.
-- I'll ask for `SQUARE_ACCESS_TOKEN` and `SQUARE_LOCATION_ID` as secrets when ready.
-- Sandbox token first for testing, then swap to production.
+## Staff
+- Scanning the membership QR in the existing staff scanner shows: child's name, tier, **ACTIVE / SUSPENDED**, today's booking, café discount, and credits left this month, with a button to mark credits given.
+- One check-in per child per session, so one pass can't bring in 10 kids.
 
-### 2. Replace 3 edge functions (create-checkout)
-Rewrite using Square's **Checkout API → Quick Pay**, which creates a hosted payment link (Stripe Checkout equivalent):
-- `create-checkout` → 8 credit packages (£/credits hardcoded in function, no more `price_xxx` IDs)
-- `create-softplay-checkout` → £4 opening / £7.20 standard, keeps capacity check
-- `create-baby-softplay-checkout` → £2 opening / £3.60 standard, keeps capacity check
+## Missed payments
+- Payment fails → 24 hours to fix it → pass shows **SUSPENDED** (no entry, no booking). Paying again reactivates the same pass and QR.
+- Payment status is checked directly with Square when staff scan and when members book (no webhooks, in line with how the site already works).
 
-Each returns a `checkout_url` we redirect to. Success URL routing (`/payment-success`, `/softplay-success`, `/baby-softplay-success`) stays the same.
+## Cancelling
+- Members can cancel from their account; the pass stays active until the end of the paid month.
 
-### 3. Replace 3 verify functions
-- `verify-payment`, `verify-softplay-payment`, `verify-baby-softplay-payment`
-- Square returns an `order_id` on the success redirect (not a session ID). We call `Orders.retrieveOrder` + `Payments.listPayments` to confirm `COMPLETED` state, then insert into `orders` / `soft_play_bookings` / `baby_soft_play_bookings` exactly as today.
+## Test first
+- Built and tested with Square **test** payments, then switched to live. You'll do one real £24.99 sign-up yourself before announcing it.
 
-### 4. Database migration
-- Rename `stripe_session_id` → `payment_reference` on `orders`, `soft_play_bookings`, `baby_soft_play_bookings` (keeps old Stripe orders intact, new Square orders use same column).
-- No data loss — existing rows keep their Stripe session IDs in that column.
-
-### 5. Frontend
-- `PreSaleSection.tsx`, `SoftPlaySection.tsx`, `BabySoftPlaySection.tsx`: success pages already read `?session_id=…` — swap to `?order_id=…` from Square redirect. Minimal change.
-- Admin dashboard (`/admin`): no change, still reads `orders` table.
-
-### 6. Remove Stripe
-- Delete Stripe imports from all 6 edge functions.
-- Leave `STRIPE_SECRET_KEY` secret in place for now (harmless, can be deleted later).
-- Stripe Dashboard: you'll want to cancel any pending payouts and disable the account separately — I can't do that for you.
-
-## Risks / things to know
-- **Square sandbox ≠ production.** We'll test in sandbox first; you'll need to add the production token before going live.
-- **Refunds**: existing Stripe orders refund via Stripe Dashboard. New Square orders refund via Square Dashboard. Two separate refund queues until the old Stripe orders are all consumed/expired.
-- **Receipts**: Square auto-sends a payment receipt by email — same UX as Stripe.
-- **Apple Pay / Google Pay** are enabled by default on Square Checkout — no extra config.
-
-## What I need from you to start
-1. Confirm this plan.
-2. A Square **sandbox** access token + location ID (I'll request as secrets when you confirm). We test end-to-end, then swap to production tokens.
+## Technical details
+- New tables: `memberships` (user, child name, DOB, tier, Square customer/subscription/card ids, status, period end, credits used), `membership_checkins`. GRANTs + RLS scoped to owner; staff via existing admin-action.
+- Square Subscriptions API: catalog subscription plans for the three tiers (GBP monthly), card-on-file via Web Payments SDK, edge functions `create-membership`, `membership-status` (Square lookup + 24h grace), `cancel-membership`, `book-member-session`, staff actions added to `admin-action`.
+- Tier prices read from shared `src/lib/membership.ts`; tests for prices, 24h grace, one-booking-per-child, one-check-in-per-session.
+- Existing paid booking/checkout flows untouched.
