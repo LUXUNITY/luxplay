@@ -15,7 +15,7 @@ export const readFnError = async (error: unknown) =>
 export default function MembershipJoin() {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [tier, setTier] = useState<string>("little-lux");
+  const [tier, setTier] = useState<string | null>(null);
   const [childName, setChildName] = useState("");
   const [childDob, setChildDob] = useState("");
   const [parentName, setParentName] = useState("");
@@ -25,6 +25,7 @@ export default function MembershipJoin() {
 
   const join = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!tier) return;
     if (!user) { navigate(`/auth?next=${encodeURIComponent("/memberships#join")}`); return; }
     setBusy(true); setError(null);
     const { data, error } = await supabase.functions.invoke("membership", { body: { action: "join", tier, childName, childDob, parentName, parentPhone } });
@@ -36,12 +37,13 @@ export default function MembershipJoin() {
     <form id="join" onSubmit={join} className="mx-auto mt-8 max-w-xl scroll-mt-24 rounded-lg border-2 border-neon-green bg-card p-5 text-left">
       <h2 className="font-display text-3xl text-neon-green">Join now 💚</h2>
       <p className="mt-1 font-body text-sm text-muted-foreground">One pass per named child. Paid monthly by card through Square — cancel any time.</p>
-      <div className="mt-4 grid gap-2" role="radiogroup" aria-label="Choose a pass">
+      <p id="choose-pass" className="mt-4 font-body font-extrabold text-neon-green">Click to choose your pass 💚</p>
+      <div className="mt-2 grid gap-2" role="radiogroup" aria-labelledby="choose-pass">
         {MEMBERSHIP_TIERS.map(t => (
-          <button type="button" role="radio" aria-checked={tier === t.id} key={t.id} onClick={() => setTier(t.id)}
-            className={`flex items-center justify-between rounded-lg border-2 px-4 py-3 font-body font-extrabold ${tier === t.id ? `${t.fill} text-ink border-foreground` : `${t.border} ${t.colour} bg-background`}`}>
+          <Button type="button" variant="outline" role="radio" aria-checked={tier === t.id} key={t.id} onClick={() => setTier(t.id)}
+            className={`flex h-auto min-h-12 items-center justify-between rounded-lg border-2 px-4 py-3 font-body font-extrabold ${tier === t.id ? `${t.fill} text-ink border-foreground hover:text-ink` : `${t.border} ${t.colour} bg-background hover:bg-background`}`}>
             <span>{t.emoji} {t.name}</span><span>{formatMembershipPrice(t.pricePence)}/mo</span>
-          </button>
+          </Button>
         ))}
       </div>
       {user ? (
@@ -54,8 +56,8 @@ export default function MembershipJoin() {
         </div>
       ) : <p className="mt-4 font-body text-sm">Create a free LuxPlay account (or sign in) so your child's pass is saved safely.</p>}
       {error && <p className="mt-3 font-body text-sm font-bold text-destructive">{error}</p>}
-      <Button type="submit" disabled={busy} size="lg" className="mt-5 w-full bg-neon-green text-ink hover:bg-neon-green/90">
-        {busy ? <Loader2 className="animate-spin" /> : user ? "Continue to secure payment" : "Sign in or create account to join"}
+      <Button type="submit" disabled={busy || !tier} size="lg" className="mt-5 h-auto min-h-11 w-full whitespace-normal bg-neon-green text-ink hover:bg-neon-green/90">
+        {busy ? <Loader2 className="animate-spin" /> : !tier ? "Choose your pass above to continue" : user ? "Continue to secure payment" : "Sign in or create account to join"}
       </Button>
     </form>
   );
