@@ -9,10 +9,10 @@ import babySoftplayAsset from "@/assets/real-baby-softplay.png.asset.json";
 import prizeAsset from "@/assets/real-prize-redemption.jpg.asset.json";
 
 const collage = [
-  { img: arcadeAsset.url, label: "Arcade machines" },
   { img: softplayAsset.url, label: "Soft play" },
-  { img: babySoftplayAsset.url, label: "Baby soft play" },
+  { img: arcadeAsset.url, label: "Arcade machines" },
   { img: prizeAsset.url, label: "Prize counter" },
+  { img: babySoftplayAsset.url, label: "Baby soft play" },
 ];
 const tiles = [
   { href: "/softplay", emoji: "🛝", title: "BOOK SOFT PLAY", detail: "Big kids & little ones", cls: "bg-neon-cyan hover:bg-neon-cyan/90" },
