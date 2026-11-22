@@ -15,8 +15,9 @@ export default function MembershipPromotion() {
           <span className="block text-neon-cyan"><span className="promo-cute-emoji" aria-hidden="true">🧸</span> Soft Play <span className="promo-cute-emoji" aria-hidden="true">🎈</span></span>
           <span className="block text-neon-green">Memberships! <span className="promo-cute-emoji" aria-hidden="true">💖</span></span>
         </h2>
-        <div className="promo-price-burst relative mx-auto mt-6"><span className="block font-body text-ink">MONTHLY FROM</span><span className="block font-display !text-4xl text-ink">{MEMBERSHIP_MONTHLY_PRICE}</span><span className="block font-body text-ink">per child / month</span></div>
-        <p className="relative mt-3 font-body text-xl text-neon-cyan">About {formatMembershipDailyPrice(MEMBERSHIP_MONTHLY_PRICE_PENCE, "monthly")} a day! 💚</p>
+        <div className="promo-price-burst relative mx-auto mt-6"><span className="block font-body text-ink">FROM AS<br />LITTLE AS</span><span className="block font-display !text-4xl text-ink">{formatMembershipDailyPrice(MEMBERSHIP_MONTHLY_PRICE_PENCE, "yearly")}</span><span className="block font-body text-ink">a day! 💚</span></div>
+        <p className="relative mt-3 font-body text-base text-foreground">From <strong className="text-neon-green">{formatMembershipPrice(membershipPricePence(MEMBERSHIP_MONTHLY_PRICE_PENCE, "yearly"))} per child</strong>,<br />paid yearly upfront.</p>
+        <p className="relative mt-2 font-body text-base text-neon-cyan">Or {MEMBERSHIP_MONTHLY_PRICE} monthly — about {formatMembershipDailyPrice(MEMBERSHIP_MONTHLY_PRICE_PENCE, "monthly")} a day.</p>
         <p className="promo-unlimited relative mx-auto mt-6 max-w-sm rounded-2xl border-4 border-neon-pink bg-ink/60 px-1 pb-4 pt-3 font-display leading-none">
           <span className="promo-unlimited-hearts block text-2xl" aria-hidden="true">💖 ✨ 🧸 ✨ 💖</span>
           <span className="promo-unlimited-word block" aria-label="UNLIMITED">
@@ -27,7 +28,6 @@ export default function MembershipPromotion() {
         </p>
         <p className="promo-free relative mt-2 font-body text-lg text-neon-green">Grown-ups go FREE! 🤩</p>
         <p className="relative mt-4 font-display text-3xl text-neon-pink">GO YEARLY. SAVE {MEMBERSHIP_YEARLY_DISCOUNT_PERCENT}%! 💖</p>
-        <p className="relative mt-2 font-body text-base text-foreground">Yearly from {formatMembershipPrice(membershipPricePence(MEMBERSHIP_MONTHLY_PRICE_PENCE, "yearly"))} per child, paid upfront.<br /><strong className="text-neon-green">About {formatMembershipDailyPrice(MEMBERSHIP_MONTHLY_PRICE_PENCE, "yearly")} a day!</strong></p>
         <div className="relative mt-5 flex flex-wrap justify-center gap-2">
           {MEMBERSHIP_TIERS.map(tier => <span key={tier.id} className={`promo-pill rounded-full border-2 ${tier.border} px-3 py-1 font-body text-sm ${tier.colour}`}>{tier.emoji} {tier.name}</span>)}
         </div>
