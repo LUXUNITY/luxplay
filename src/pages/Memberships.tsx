@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight, CalendarDays, Heart, Infinity, ScanLine, ShieldCheck, Sparkles, Users } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { Button } from "@/components/ui/button";
-import { MEMBERSHIP_MONTHLY_PRICE, MEMBERSHIP_MONTHLY_PRICE_PENCE, MEMBERSHIP_SESSION_HOURS, MEMBERSHIP_YEARLY_DISCOUNT_PERCENT, membershipPricePence, formatMembershipPrice } from "@/lib/membership";
+import { MEMBERSHIP_MONTHLY_PRICE, MEMBERSHIP_MONTHLY_PRICE_PENCE, MEMBERSHIP_SESSION_HOURS, MEMBERSHIP_YEARLY_DISCOUNT_PERCENT, membershipPricePence, formatMembershipPrice, formatMembershipDailyPrice } from "@/lib/membership";
 import MembershipJoin from "@/components/MembershipJoin";
 
 export default function Memberships() {
@@ -21,10 +21,13 @@ export default function Memberships() {
             <Sparkles className="membership-heading-spark membership-heading-spark-right text-neon-cyan" aria-hidden="true" />
           </div>
           <div className="membership-price">
-            <p className="font-body text-lg font-extrabold text-neon-pink">A whole year of play — save {MEMBERSHIP_YEARLY_DISCOUNT_PERCENT}%!</p>
-            <div className="membership-price-amount font-display text-neon-green">{formatMembershipPrice(membershipPricePence(MEMBERSHIP_MONTHLY_PRICE_PENCE, "yearly"))}</div>
-            <p className="font-body text-sm font-semibold text-foreground">Yearly from · per child, paid upfront</p>
-            <p className="mt-2 font-body text-xs font-semibold text-muted-foreground">Or pay monthly from {MEMBERSHIP_MONTHLY_PRICE} per child</p>
+            <p className="font-body text-lg font-extrabold text-neon-cyan">Monthly from</p>
+            <div className="membership-price-amount font-display text-neon-green">{MEMBERSHIP_MONTHLY_PRICE}</div>
+            <p className="font-body text-sm font-semibold text-foreground">per child / month · about {formatMembershipDailyPrice(MEMBERSHIP_MONTHLY_PRICE_PENCE, "monthly")} a day!</p>
+            <p className="mt-4 font-body text-lg font-extrabold text-neon-pink">Go yearly &amp; save {MEMBERSHIP_YEARLY_DISCOUNT_PERCENT}% 💖</p>
+            <p className="mt-1 font-body text-base font-extrabold text-neon-green">From {formatMembershipPrice(membershipPricePence(MEMBERSHIP_MONTHLY_PRICE_PENCE, "yearly"))} per child / year</p>
+            <p className="mt-1 font-body text-sm font-semibold text-foreground">Paid upfront · about {formatMembershipDailyPrice(MEMBERSHIP_MONTHLY_PRICE_PENCE, "yearly")} a day!</p>
+            <p className="mt-2 font-body text-xs text-muted-foreground">Both renew automatically. Daily equivalents: monthly ÷ 30; yearly ÷ 365.</p>
           </div>
           <div className="membership-heading-perks">
             <div><Infinity className="text-neon-cyan" aria-hidden="true" /><p><strong>UNLIMITED</strong><span>{MEMBERSHIP_SESSION_HOURS}-hour sessions</span></p></div>

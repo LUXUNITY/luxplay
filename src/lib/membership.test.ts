@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { MEMBERSHIP_ADULT_ENTRY_PRICE_PENCE, MEMBERSHIP_MONTHLY_PRICE_PENCE, MEMBERSHIP_SESSION_HOURS, MEMBERSHIP_TIERS } from "./membership";
+import { MEMBERSHIP_ADULT_ENTRY_PRICE_PENCE, MEMBERSHIP_MONTHLY_PRICE_PENCE, MEMBERSHIP_SESSION_HOURS, MEMBERSHIP_TIERS, membershipDailyPence } from "./membership";
 
 describe("soft play membership pricing", () => {
   it("costs £24.99 per child each month", () => {
@@ -11,6 +11,13 @@ describe("soft play membership pricing", () => {
   it("includes free adult entry", () => {
     expect(MEMBERSHIP_ADULT_ENTRY_PRICE_PENCE).toBe(0);
   });
+});
+
+describe("approximate daily membership equivalents", () => {
+  for (const [price, monthlyDaily, yearlyDaily] of [[2499, 83, 70], [3499, 117, 98], [4999, 167, 140]]) {
+    it(`${price} pence monthly uses a 30-day comparison`, () => expect(membershipDailyPence(price, "monthly")).toBe(monthlyDaily));
+    it(`${price} pence monthly uses the discounted annual price over 365 days`, () => expect(membershipDailyPence(price, "yearly")).toBe(yearlyDaily));
+  }
 });
 
 describe("approved membership tiers", () => {

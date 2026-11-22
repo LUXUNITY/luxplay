@@ -21,3 +21,4 @@
 - [x] Verify annual prices, monthly benefits, paid-period cancellation rules and signed-in checkout through to Square (no charge made).
 - [x] Configure automatic annual renewal with an option to switch renewal off while retaining the paid year.
 - [ ] First real yearly payment, pass activation and paid-pass renewal cancellation: waiting for the owner to make a real annual purchase.
+- [x] Clarify monthly and yearly promotion with simple approximate daily prices and verify both selections on phone and desktop.

@@ -1,5 +1,5 @@
 import { Check, Gamepad2, Sparkles, Utensils } from "lucide-react";
-import { MEMBERSHIP_SESSION_HOURS, MEMBERSHIP_TIERS, formatMembershipPrice, membershipPricePence, MEMBERSHIP_YEARLY_DISCOUNT_PERCENT, type MembershipBillingPeriod } from "@/lib/membership";
+import { MEMBERSHIP_SESSION_HOURS, MEMBERSHIP_TIERS, formatMembershipPrice, formatMembershipDailyPrice, membershipPricePence, MEMBERSHIP_YEARLY_DISCOUNT_PERCENT, type MembershipBillingPeriod } from "@/lib/membership";
 
 type Props = { selected?: string | null; onSelect?: (id: string) => void; billingPeriod?: MembershipBillingPeriod };
 
@@ -19,6 +19,7 @@ export default function MembershipTiers({ selected, onSelect, billingPeriod = "m
             <p className={`mt-2 min-h-10 font-body text-lg leading-snug ${tier.colour}`}>{tier.tagline}</p>
             <p className={`play-pass-price mt-4 font-display !text-5xl leading-none ${tier.colour}`}>{formatMembershipPrice(membershipPricePence(tier.pricePence, billingPeriod))}</p>
             <p className="mt-2 font-body text-base text-foreground">per child / {billingPeriod === "yearly" ? "year · paid upfront" : "month"}</p>
+            <p className={`mt-3 font-body text-xl font-extrabold ${tier.colour}`}>Works out at about {formatMembershipDailyPrice(tier.pricePence, billingPeriod)} a day 💚</p>
             {billingPeriod === "yearly" && <div className={`mt-4 border-y-2 ${tier.border} py-3 font-body ${tier.colour}`}>
               <p className="text-xl font-extrabold">Save {formatMembershipPrice(tier.pricePence * 12 - membershipPricePence(tier.pricePence, "yearly"))} a year! 🎉</p>
               <p className="mt-1 text-sm">{MEMBERSHIP_YEARLY_DISCOUNT_PERCENT}% less than 12 monthly payments</p>

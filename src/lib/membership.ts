@@ -1,4 +1,4 @@
-import { membershipPricePence, MEMBERSHIP_YEARLY_DISCOUNT_PERCENT } from "../../supabase/functions/_shared/membership-rules";
+import { membershipPricePence, MEMBERSHIP_YEARLY_DISCOUNT_PERCENT, type MembershipBillingPeriod } from "../../supabase/functions/_shared/membership-rules";
 export { membershipPricePence, MEMBERSHIP_YEARLY_DISCOUNT_PERCENT };
 export type { MembershipBillingPeriod } from "../../supabase/functions/_shared/membership-rules";
 export const MEMBERSHIP_MONTHLY_PRICE_PENCE = 2499;
@@ -16,3 +16,12 @@ export const MEMBERSHIP_TIERS = [
 ] as const;
 
 export const formatMembershipPrice = (pence: number) => new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP" }).format(pence / 100);
+
+// Marketing equivalents only: the full monthly/yearly amount is still charged.
+export const membershipDailyPence = (monthlyPence: number, period: MembershipBillingPeriod) =>
+  Math.round(membershipPricePence(monthlyPence, period) / (period === "monthly" ? 30 : 365));
+
+export const formatMembershipDailyPrice = (monthlyPence: number, period: MembershipBillingPeriod) => {
+  const pence = membershipDailyPence(monthlyPence, period);
+  return pence < 100 ? `${pence}p` : formatMembershipPrice(pence);
+};

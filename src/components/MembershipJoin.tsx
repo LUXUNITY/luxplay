@@ -49,15 +49,16 @@ export default function MembershipJoin() {
   return (
     <>
     <div className="mb-6 text-center">
-      <p className="font-display text-3xl text-neon-pink md:text-4xl">A WHOLE YEAR OF HAPPY! 💖</p>
-      <p className="mt-2 font-body text-lg font-extrabold text-neon-green">More adventures. {MEMBERSHIP_YEARLY_DISCOUNT_PERCENT}% less to pay.</p>
+      <p className="font-display text-3xl text-neon-pink md:text-4xl">YOUR PASS. YOUR WAY! 💖</p>
+      <p className="mt-2 font-body text-lg font-extrabold text-neon-green">Pay monthly, or save {MEMBERSHIP_YEARLY_DISCOUNT_PERCENT}% with yearly.</p>
       <div className="mx-auto mt-5 grid max-w-lg grid-cols-2 gap-2" aria-label="Payment frequency">
         <Button type="button" variant="outline" aria-pressed={billingPeriod === "monthly"} onClick={() => setBillingPeriod("monthly")} className={`h-auto min-h-16 whitespace-normal border-2 px-3 py-3 font-body ${billingPeriod === "monthly" ? "border-neon-cyan bg-neon-cyan text-ink hover:bg-neon-cyan/90" : "border-border"}`}>Monthly</Button>
         <Button type="button" variant="outline" aria-pressed={billingPeriod === "yearly"} onClick={() => setBillingPeriod("yearly")} className={`h-auto min-h-16 flex-col whitespace-normal border-2 px-3 py-3 font-body ${billingPeriod === "yearly" ? "border-neon-green bg-neon-green text-ink hover:bg-neon-green/90" : "border-neon-green text-neon-green"}`}><span>Yearly ✨</span><span className="text-xs">SAVE {MEMBERSHIP_YEARLY_DISCOUNT_PERCENT}%</span></Button>
       </div>
-      <p className="mt-3 font-body text-sm text-foreground">{billingPeriod === "yearly" ? "12 months of play. One upfront payment. All their favourite perks." : "Pay monthly, or choose yearly for 15% off a whole year of play."}</p>
+      <p className="mt-3 font-body text-sm text-foreground">{billingPeriod === "yearly" ? "One upfront payment. Renews automatically each year." : "Pay monthly. Renews automatically each month. Cancel any time."}</p>
     </div>
     <MembershipTiers selected={tier} onSelect={choose} billingPeriod={billingPeriod} />
+    <p className="mt-3 text-center font-body text-xs text-muted-foreground">Daily prices are approximate, per child: monthly ÷ 30 days; yearly ÷ 365 days. Payments are monthly or yearly, not daily.</p>
     <form id="join" onSubmit={join} className="mx-auto mt-8 max-w-xl scroll-mt-24 rounded-lg border-2 border-neon-green bg-card p-5 text-left">
       <h2 className="font-display text-3xl text-neon-green">Join now 💚</h2>
       <p className="mt-1 font-body text-sm text-muted-foreground">One pass per named child · only 1 session per day. {billingPeriod === "yearly" ? "Paid upfront by card through Square. Renews automatically every 12 months; switch off renewal any time and keep the rest of your paid year. Plus and VIP arcade credits are released monthly." : "Paid monthly by card through Square — cancel any time."}</p>
