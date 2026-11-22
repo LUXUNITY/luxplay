@@ -3,7 +3,6 @@ import { ArrowLeft, ArrowRight, CalendarDays, Heart, Infinity, ScanLine, ShieldC
 import { QRCodeSVG } from "qrcode.react";
 import { Button } from "@/components/ui/button";
 import { MEMBERSHIP_MONTHLY_PRICE, MEMBERSHIP_SESSION_HOURS } from "@/lib/membership";
-import MembershipTiers from "@/components/MembershipTiers";
 import MembershipJoin from "@/components/MembershipJoin";
 
 export default function Memberships() {
@@ -35,7 +34,7 @@ export default function Memberships() {
           <a href="#membership-options" className="membership-explore inline-flex items-center gap-2 font-body text-xs font-extrabold text-neon-cyan">CHOOSE YOUR CHILD’S PLAY PASS <ArrowRight size={16} aria-hidden="true" /></a>
         </header>
 
-        <section id="membership-options" className="play-pass-promo scroll-mt-20 py-6" aria-label="Choose your membership"><MembershipTiers /><MembershipJoin /></section>
+        <section id="membership-options" className="play-pass-promo scroll-mt-20 py-6" aria-label="Choose your membership"><MembershipJoin /></section>
 
         <section className="membership-pass-section" aria-label="Membership pass preview">
           <div className="membership-pass">

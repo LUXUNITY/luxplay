@@ -10,7 +10,7 @@ describe("membership pass selection", () => {
   it("starts without a selected pass and selects only the clicked pass", () => {
     render(<MemoryRouter><MembershipJoin /></MemoryRouter>);
     const choices = screen.getAllByRole("radio");
-    const submit = screen.getByRole("button");
+    const submit = screen.getByRole("button", { name: /continue|join/i });
     expect(choices).toHaveLength(3);
     choices.forEach(choice => expect(choice).toHaveAttribute("aria-checked", "false"));
     expect(submit).toBeDisabled();

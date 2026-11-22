@@ -7,7 +7,8 @@ import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { MEMBERSHIP_TIERS, formatMembershipPrice } from "@/lib/membership";
+import { MEMBERSHIP_TIERS } from "@/lib/membership";
+import MembershipTiers from "@/components/MembershipTiers";
 
 export const readFnError = async (error: unknown) =>
   error instanceof FunctionsHttpError ? (await error.context.json().catch(() => ({})))?.error ?? "Something went wrong" : (error as Error)?.message ?? "Something went wrong";
@@ -33,19 +34,15 @@ export default function MembershipJoin() {
     window.location.href = data.url;
   };
 
+  const chosen = MEMBERSHIP_TIERS.find(t => t.id === tier);
   return (
+    <>
+    <p className="mb-3 text-center font-body font-extrabold text-neon-green">Tap a pass to choose it 💚</p>
+    <MembershipTiers selected={tier} onSelect={setTier} />
     <form id="join" onSubmit={join} className="mx-auto mt-8 max-w-xl scroll-mt-24 rounded-lg border-2 border-neon-green bg-card p-5 text-left">
       <h2 className="font-display text-3xl text-neon-green">Join now 💚</h2>
       <p className="mt-1 font-body text-sm text-muted-foreground">One pass per named child. Paid monthly by card through Square — cancel any time.</p>
-      <p id="choose-pass" className="mt-4 font-body font-extrabold text-neon-green">Click to choose your pass 💚</p>
-      <div className="mt-2 grid gap-2" role="radiogroup" aria-labelledby="choose-pass">
-        {MEMBERSHIP_TIERS.map(t => (
-          <Button type="button" variant="outline" role="radio" aria-checked={tier === t.id} key={t.id} onClick={() => setTier(t.id)}
-            className={`flex h-auto min-h-12 items-center justify-between rounded-lg border-2 px-4 py-3 font-body font-extrabold ${tier === t.id ? `${t.fill} text-ink border-foreground hover:text-ink` : `${t.border} ${t.colour} bg-background hover:bg-background`}`}>
-            <span>{t.emoji} {t.name}</span><span>{formatMembershipPrice(t.pricePence)}/mo</span>
-          </Button>
-        ))}
-      </div>
+      {chosen && <p className={`mt-3 font-body font-extrabold ${chosen.colour}`}>{chosen.emoji} {chosen.name} chosen</p>}
       {user ? (
         <div className="mt-4 grid gap-3">
           <div><Label htmlFor="child-name">Child's full name</Label><Input id="child-name" required maxLength={80} value={childName} onChange={e => setChildName(e.target.value)} /></div>
@@ -57,8 +54,9 @@ export default function MembershipJoin() {
       ) : <p className="mt-4 font-body text-sm">Create a free LuxPlay account (or sign in) so your child's pass is saved safely.</p>}
       {error && <p className="mt-3 font-body text-sm font-bold text-destructive">{error}</p>}
       <Button type="submit" disabled={busy || !tier} size="lg" className="mt-5 h-auto min-h-11 w-full whitespace-normal bg-neon-green text-ink hover:bg-neon-green/90">
-        {busy ? <Loader2 className="animate-spin" /> : !tier ? "Choose your pass above to continue" : user ? "Continue to secure payment" : "Sign in or create account to join"}
+        {busy ? <Loader2 className="animate-spin" /> : !tier ? "Tap a pass above to continue" : user ? "Continue to secure payment" : "Sign in or create account to join"}
       </Button>
     </form>
+    </>
   );
 }

@@ -1,13 +1,17 @@
 import { Check, Gamepad2, Sparkles, Utensils } from "lucide-react";
 import { MEMBERSHIP_SESSION_HOURS, MEMBERSHIP_TIERS, formatMembershipPrice } from "@/lib/membership";
 
-export default function MembershipTiers() {
+type Props = { selected?: string | null; onSelect?: (id: string) => void };
+
+export default function MembershipTiers({ selected, onSelect }: Props = {}) {
   return (
-    <div className="grid grid-cols-1 gap-5 text-left md:grid-cols-3" aria-label="Monthly membership options">
+    <div className="grid grid-cols-1 gap-5 text-left md:grid-cols-3" aria-label="Monthly membership options" role={onSelect ? "radiogroup" : undefined}>
       {MEMBERSHIP_TIERS.map(tier => (
-        <article key={tier.id} className={`play-pass-perk flex min-w-0 flex-col overflow-hidden rounded-lg border-2 ${tier.border} bg-card`} aria-labelledby={`${tier.id}-title`}>
+        <article key={tier.id} aria-labelledby={`${tier.id}-title`}
+          {...(onSelect ? { role: "radio", "aria-checked": selected === tier.id, tabIndex: 0, onClick: () => onSelect(tier.id), onKeyDown: (e: React.KeyboardEvent) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onSelect(tier.id); } } } : {})}
+          className={`play-pass-perk flex min-w-0 flex-col overflow-hidden rounded-lg bg-card transition-transform ${onSelect ? "cursor-pointer focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring" : ""} ${selected === tier.id ? `border-[6px] ${tier.border} scale-[1.03] ring-4 ring-foreground` : `border-2 ${tier.border}`} ${selected && selected !== tier.id ? "opacity-60" : ""}`}>
           <div className={`${tier.fill} px-5 py-2 font-body text-xs font-extrabold text-ink`}>
-            {tier.id === "lux-vip" ? <span className="membership-best-value inline-flex items-center gap-2"><Sparkles className="h-4 w-4" aria-hidden="true" /> BEST VALUE <Sparkles className="h-4 w-4" aria-hidden="true" /></span> : "ONE CHILD · UNLIMITED PLAY"}
+            {selected === tier.id ? "✓ YOUR PASS" : tier.id === "lux-vip" ? <span className="membership-best-value inline-flex items-center gap-2"><Sparkles className="h-4 w-4" aria-hidden="true" /> BEST VALUE <Sparkles className="h-4 w-4" aria-hidden="true" /></span> : "ONE CHILD · UNLIMITED PLAY"}
           </div>
           <div className="flex flex-1 flex-col px-5 py-6">
             <span className="play-pass-heart mb-3 inline-block self-start text-4xl" aria-hidden="true">{tier.emoji}</span>
