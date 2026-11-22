@@ -9,6 +9,7 @@ import choc from "@/assets/gallery-cafe-hot-chocolate.jpg.asset.json";
 import shakes from "@/assets/gallery-cafe-milkshakes.jpg.asset.json";
 import prizes from "@/assets/gallery-prize-shop.jpg.asset.json";
 import carousel from "@/assets/gallery-coin-carousel.jpg.asset.json";
+import climb from "@/assets/gallery-softplay-climbing-frame.jpg.asset.json";
 import pusher from "@/assets/gallery-coin-pusher-prizes.jpg.asset.json";
 
 const photos = [
@@ -18,6 +19,7 @@ const photos = [
   { src: prizes.url, cap: "Win amazing prizes 🎁" },
   { src: choc.url, cap: "Cosy hot chocolate ☕" },
   { src: softplay.url, cap: "Climb, slide & explore 🏰" },
+  { src: climb.url, cap: "Climb to the top! 🧗" },
   { src: shakes.url, cap: "Shake it up! 🥤" },
   { src: carousel.url, cap: "Coin pusher fun 🪙" },
   { src: view.url, cap: "Grown-ups relax nearby 💚" },
