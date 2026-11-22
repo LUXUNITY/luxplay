@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import { FunctionsHttpError } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
@@ -16,7 +16,14 @@ export const readFnError = async (error: unknown) =>
 export default function MembershipJoin() {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [tier, setTier] = useState<string | null>(null);
+  const [params] = useSearchParams();
+  const initialTier = params.get("tier");
+  const [tier, setTier] = useState<string | null>(MEMBERSHIP_TIERS.some(t => t.id === initialTier) ? initialTier : null);
+  const choose = (id: string) => {
+    setTier(id);
+    if (!user) { navigate(`/auth?next=${encodeURIComponent(`/memberships?tier=${id}#join`)}`); return; }
+    setTimeout(() => { document.getElementById("join")?.scrollIntoView({ behavior: "smooth", block: "start" }); document.getElementById("child-name")?.focus({ preventScroll: true }); }, 50);
+  };
   const [childName, setChildName] = useState("");
   const [childDob, setChildDob] = useState("");
   const [parentName, setParentName] = useState("");
@@ -24,10 +31,12 @@ export default function MembershipJoin() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  useEffect(() => { if (user && initialTier) setTimeout(() => document.getElementById("join")?.scrollIntoView({ block: "start" }), 300); }, [user, initialTier]);
+
   const join = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!tier) return;
-    if (!user) { navigate(`/auth?next=${encodeURIComponent("/memberships#join")}`); return; }
+    if (!user) { navigate(`/auth?next=${encodeURIComponent(`/memberships?tier=${tier}#join`)}`); return; }
     setBusy(true); setError(null);
     const { data, error } = await supabase.functions.invoke("membership", { body: { action: "join", tier, childName, childDob, parentName, parentPhone } });
     if (error || !data?.url) { setError(error ? await readFnError(error) : "Could not start checkout"); setBusy(false); return; }
@@ -38,7 +47,7 @@ export default function MembershipJoin() {
   return (
     <>
     <p className="mb-3 text-center font-body font-extrabold text-neon-green">Tap a pass to choose it 💚</p>
-    <MembershipTiers selected={tier} onSelect={setTier} />
+    <MembershipTiers selected={tier} onSelect={choose} />
     <form id="join" onSubmit={join} className="mx-auto mt-8 max-w-xl scroll-mt-24 rounded-lg border-2 border-neon-green bg-card p-5 text-left">
       <h2 className="font-display text-3xl text-neon-green">Join now 💚</h2>
       <p className="mt-1 font-body text-sm text-muted-foreground">One pass per named child. Paid monthly by card through Square — cancel any time.</p>
