@@ -18,7 +18,7 @@ export default function MembershipTiers() {
             <ul className="mt-5 space-y-4 border-t border-border pt-5 font-body text-sm leading-relaxed">
               <li className="flex items-start gap-2"><Check className={`mt-1 h-4 w-4 shrink-0 ${tier.colour}`} /><span><strong>Unlimited soft play</strong><br />{MEMBERSHIP_SESSION_HOURS}-hour sessions for one child</span></li>
               {tier.foodDrinkDiscountPercent > 0 && <li className="flex items-start gap-2"><Utensils className={`mt-1 h-4 w-4 shrink-0 ${tier.colour}`} /><span><strong>{tier.foodDrinkDiscountPercent}% off</strong> food &amp; drinks</span></li>}
-              {tier.monthlyArcadeCredits > 0 && <li className="flex items-start gap-2"><Gamepad2 className={`mt-1 h-4 w-4 shrink-0 ${tier.colour}`} /><span><strong>{tier.monthlyArcadeCredits} arcade credits</strong> every month</span></li>}
+              {tier.monthlyArcadeCredits > 0 && <li className="flex items-start gap-2"><Gamepad2 className={`mt-1 h-4 w-4 shrink-0 ${tier.colour}`} /><span><strong>£{tier.monthlyArcadeCreditValuePounds} worth of arcade credits</strong> every month</span></li>}
               <li className="flex items-start gap-2"><Check className={`mt-1 h-4 w-4 shrink-0 ${tier.colour}`} /><strong>Adults enter free</strong></li>
             </ul>
           </div>
