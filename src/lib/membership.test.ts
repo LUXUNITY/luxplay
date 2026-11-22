@@ -30,7 +30,7 @@ describe("approved membership tiers", () => {
     });
   }
 });
-import { decideStatus, canEnter, canBookMore, canBookOnDay, creditsLeft, MEMBERSHIP_PLANS } from "../../supabase/functions/_shared/membership-rules";
+import { decideStatus, canEnter, canBookMore, canBookOnDay, creditsLeft, MEMBERSHIP_PLANS, membershipPricePence, membershipPlanKey, membershipBilling, isMembershipBillingPeriod, MEMBERSHIP_YEARLY_DISCOUNT_PERCENT } from "../../supabase/functions/_shared/membership-rules";
 
 describe("live membership rules", () => {
   const now = new Date("2026-12-10T12:00:00Z");
@@ -65,4 +65,31 @@ describe("live membership rules", () => {
 describe("member one session per day", () => {
   it("allows the first session of the day", () => expect(canBookOnDay(0)).toBe(true));
   it("blocks a second session on the same day", () => expect(canBookOnDay(1)).toBe(false));
+});
+
+describe("yearly memberships paid upfront", () => {
+  it("automatically charges the annual price once per year", () => expect(membershipBilling("little-lux", "yearly")).toEqual({ key: "little-lux:yearly", pricePence: 25490, cadence: "ANNUAL" }));
+  it("leaves monthly subscriptions unchanged", () => expect(membershipBilling("lux-plus", "monthly")).toEqual({ key: "lux-plus", pricePence: 3499, cadence: "MONTHLY" }));
+  it("gives 15% off twelve monthly payments", () => expect(MEMBERSHIP_YEARLY_DISCOUNT_PERCENT).toBe(15));
+  for (const [monthly, annual, saving] of [[2499, 25490, 4498], [3499, 35690, 6298], [4999, 50990, 8998]]) {
+    it(`charges ${annual} pence upfront with ${saving} pence saving`, () => {
+      expect(membershipPricePence(monthly, "yearly")).toBe(annual);
+      expect(monthly * 12 - membershipPricePence(monthly, "yearly")).toBe(saving);
+    });
+    it(`preserves the ${monthly} pence monthly option`, () => expect(membershipPricePence(monthly, "monthly")).toBe(monthly));
+  }
+  it("keeps annual and monthly Square plans separate", () => {
+    expect(membershipPlanKey("lux-plus", "monthly")).toBe("lux-plus");
+    expect(membershipPlanKey("lux-plus", "yearly")).toBe("lux-plus:yearly");
+  });
+  it("rejects unsupported billing choices", () => {
+    expect(isMembershipBillingPeriod("yearly")).toBe(true);
+    expect(isMembershipBillingPeriod("weekly")).toBe(false);
+  });
+  it("releases Plus credits monthly rather than all 2400 for the year", () => {
+    expect(creditsLeft("lux-plus", "2026-12", 0, new Date("2026-12-10"))).toBe(200);
+    expect(creditsLeft("lux-plus", "2026-12", 200, new Date("2027-01-10"))).toBe(200);
+  });
+  it("releases VIP credits monthly rather than all 7200 for the year", () => expect(creditsLeft("lux-vip", null, 0)).toBe(600));
+  it("keeps a cancelled annual pass active for its paid year", () => expect(decideStatus({ subscriptionStatus: "CANCELED", paidUntil: "2027-11-22", now: new Date("2027-06-01") })).toBe("active"));
 });

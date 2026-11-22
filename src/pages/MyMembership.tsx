@@ -6,9 +6,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { readFnError } from "@/components/MembershipJoin";
-import { MEMBERSHIP_TIERS } from "@/lib/membership";
+import { MEMBERSHIP_TIERS, membershipPricePence, formatMembershipPrice, type MembershipBillingPeriod } from "@/lib/membership";
 
-interface Pass { id: string; child_name: string; tier: string; pass_code: string; status: string; paid_until: string | null; cancel_requested: boolean; credits_left: number;
+interface Pass { id: string; child_name: string; tier: string; billing_period?: MembershipBillingPeriod; pass_code: string; status: string; paid_until: string | null; cancel_requested: boolean; credits_left: number;
   upcoming: { booking_code: string; session_date: string; session_time: string }[] }
 
 const SESSIONS = ["10:00", "12:00", "14:00", "16:00", "18:00"];
@@ -75,6 +75,7 @@ export default function MyMembership() {
             <section key={p.id} className={`mt-6 rounded-lg border-2 ${tier?.border ?? "border-border"} bg-card p-5 font-body`}>
               <p className={`font-display text-3xl ${tier?.colour}`}>{tier?.emoji} {p.child_name}</p>
               <p className="text-sm text-muted-foreground">{tier?.name} · {STATUS[p.status] ?? p.status}</p>
+              {tier && <p className="mt-1 text-sm">{formatMembershipPrice(membershipPricePence(tier.pricePence, p.billing_period ?? "monthly"))} / {p.billing_period === "yearly" ? "year · paid upfront" : "month"}</p>}
               {live && (
                 <div className="mx-auto mt-4 w-fit rounded-lg bg-foreground p-3 text-center text-ink">
                   <QRCodeSVG value={p.pass_code} size={180} bgColor="transparent" fgColor="currentColor" />
@@ -82,6 +83,7 @@ export default function MyMembership() {
                 </div>
               )}
               {p.paid_until && <p className="mt-3 text-sm">{p.cancel_requested ? "Ends" : "Paid until"}: {new Date(p.paid_until).toLocaleDateString("en-GB")}</p>}
+              {p.billing_period === "yearly" && <p className="mt-2 text-xs text-muted-foreground">{p.cancel_requested ? "Yearly renewal is off. Your pass stays active until the end of your paid year." : "Renews automatically every 12 months. You can switch off renewal below and keep your paid year."}</p>}
               {(tier?.monthlyArcadeCredits ?? 0) > 0 && <p className="text-sm">Arcade credits left this month: <b>{p.credits_left}</b> (collect at the counter)</p>}
               {p.upcoming.length > 0 ? p.upcoming.map(b => (
                 <div key={b.booking_code} className="mt-4 rounded-lg border border-neon-cyan p-3">
@@ -113,8 +115,8 @@ export default function MyMembership() {
                 </div>
               )}
               {p.status !== "cancelled" && !p.cancel_requested && p.status !== "pending" && (
-                <button disabled={busy} className="mt-4 text-xs text-muted-foreground underline"
-                  onClick={() => window.confirm(`Cancel ${p.child_name}'s membership? It stays active until the end of the paid month.`) && act({ action: "cancel", membershipId: p.id }, "Membership cancelled — it stays active until the end of your paid month.")}>Cancel membership</button>
+                <Button variant="link" disabled={busy} className="mt-4 h-auto whitespace-normal p-0 text-xs text-muted-foreground underline"
+                  onClick={() => window.confirm(`${p.billing_period === "yearly" ? "Switch off renewal for" : "Cancel"} ${p.child_name}'s membership? It stays active until the end of the paid ${p.billing_period === "yearly" ? "year" : "month"}.`) && act({ action: "cancel", membershipId: p.id }, `Renewal stopped — your pass stays active until the end of your paid ${p.billing_period === "yearly" ? "year" : "month"}.`)}>{p.billing_period === "yearly" ? "Switch off yearly renewal" : "Cancel membership"}</Button>
               )}
             </section>
           );

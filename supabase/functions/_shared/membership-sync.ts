@@ -1,6 +1,6 @@
 // Shared Square sync for memberships: links the Square subscription created by the
 // payment link, then derives pass status from Square. Used by member and staff functions.
-import { MEMBERSHIP_PLANS, decideStatus, canEnter } from "./membership-rules.ts";
+import { MEMBERSHIP_PLANS, decideStatus, canEnter, membershipPlanKey, membershipPricePence } from "./membership-rules.ts";
 
 const SQUARE_BASE = "https://connect.squareup.com";
 export async function square(path: string, init: { method?: string; body?: unknown } = {}) {
@@ -24,7 +24,7 @@ export async function syncMembership(db: any, m: any) {
       const paymentId = order?.tenders?.[0]?.payment_id;
       if (!customerId && paymentId) customerId = (await square(`payments/${paymentId}`)).payment?.customer_id;
       if (customerId) {
-        const { data: planRow } = await db.from("membership_square_plans").select("variation_id").eq("tier", m.tier).maybeSingle();
+        const { data: planRow } = await db.from("membership_square_plans").select("variation_id").eq("tier", membershipPlanKey(m.tier, m.billing_period === "yearly" ? "yearly" : "monthly")).maybeSingle();
         const s = await square("subscriptions/search", { method: "POST", body: { query: { filter: { customer_ids: [customerId], location_ids: [Deno.env.get("SQUARE_LOCATION_ID") ?? ""] } } } });
         // deno-lint-ignore no-explicit-any
         const taken = new Set(((await db.from("memberships").select("square_subscription_id").not("square_subscription_id", "is", null)).data ?? []).map((r: any) => r.square_subscription_id));
@@ -55,14 +55,15 @@ export async function syncMembership(db: any, m: any) {
     Object.assign(m, patch);
     if (!wasActive && canEnter(status)) {
       const plan = MEMBERSHIP_PLANS[m.tier];
-      const price = `£${(plan.pricePence / 100).toFixed(2)}`;
+      const billingPeriod = m.billing_period === "yearly" ? "yearly" : "monthly";
+      const price = `£${(membershipPricePence(plan.pricePence, billingPeriod) / 100).toFixed(2)}`;
       await db.functions.invoke("send-transactional-email", { body: {
         templateName: "membership-pass", recipientEmail: m.parent_email, idempotencyKey: `membership-pass-${m.id}`,
-        templateData: { parentName: m.parent_name, childName: m.child_name, tierName: plan.name, passCode: m.pass_code, price },
+        templateData: { parentName: m.parent_name, childName: m.child_name, tierName: plan.name, passCode: m.pass_code, price, billingPeriod },
       } });
       await db.functions.invoke("send-transactional-email", { body: {
         templateName: "admin-purchase-notification", idempotencyKey: `admin-membership-${m.id}`,
-        templateData: { type: "Membership", customerEmail: m.parent_email, packageName: `${plan.name} membership — ${m.child_name}`, amount: `${price} / month`, code: m.pass_code },
+        templateData: { type: "Membership", customerEmail: m.parent_email, packageName: `${plan.name} ${billingPeriod} membership — ${m.child_name}`, amount: `${price} / ${billingPeriod === "yearly" ? "year" : "month"}`, code: m.pass_code },
       } });
     }
   } catch (e) { console.error("membership sync failed", m.id, (e as Error).message); }

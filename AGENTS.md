@@ -11,4 +11,5 @@
 - Keep full-day closures in the shared date helpers and every session checkout/reward map; test adjacent days remain open and never simulate closure by inflating paid booking counts.
 
 ## Booking communication
+- Membership billing periods use shared server/client price helpers and distinct Square plan keys, defaulting existing passes to monthly; preserve the chosen period through sign-in so the displayed offer and charged amount agree while arcade allowances stay monthly.
 - Send booking-change notices through the existing admin-password-protected action and transactional email queue, looking up the recipient from the booking rather than accepting an arbitrary address, so notices preserve booking records and delivery tracking.- Memberships bill through Square subscription payment links; pass status is re-checked with Square on member actions and staff scans (no webhooks), with rules in `supabase/functions/_shared/membership-rules.ts` shared by functions and tests so billing, grace and booking limits cannot drift.

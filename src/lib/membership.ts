@@ -1,3 +1,6 @@
+import { membershipPricePence, MEMBERSHIP_YEARLY_DISCOUNT_PERCENT } from "../../supabase/functions/_shared/membership-rules";
+export { membershipPricePence, MEMBERSHIP_YEARLY_DISCOUNT_PERCENT };
+export type { MembershipBillingPeriod } from "../../supabase/functions/_shared/membership-rules";
 export const MEMBERSHIP_MONTHLY_PRICE_PENCE = 2499;
 export const MEMBERSHIP_SESSION_HOURS = 2;
 export const MEMBERSHIP_ADULT_ENTRY_PRICE_PENCE = 0;

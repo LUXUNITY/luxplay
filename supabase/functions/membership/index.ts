@@ -1,8 +1,8 @@
-// Monthly soft play memberships billed by Square subscriptions.
+// Monthly or yearly soft play memberships billed by Square subscriptions.
 // Actions (signed-in parents only): join, mine, book, cancel.
 import { createClient } from "npm:@supabase/supabase-js@2.57.2";
 import { syncMembership } from "../_shared/membership-sync.ts";
-import { MEMBERSHIP_PLANS, decideStatus, canEnter, canBookMore, canBookOnDay, creditsLeft } from "../_shared/membership-rules.ts";
+import { MEMBERSHIP_PLANS, decideStatus, canEnter, canBookMore, canBookOnDay, creditsLeft, membershipBilling, isMembershipBillingPeriod, type MembershipBillingPeriod } from "../_shared/membership-rules.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -55,24 +55,26 @@ const db = createClient(Deno.env.get("SUPABASE_URL") ?? "", Deno.env.get("SUPABA
 let cachedLocation = "";
 const locationId = async () => cachedLocation || (cachedLocation = Deno.env.get("SQUARE_LOCATION_ID") ?? "");
 
-async function ensurePlan(tier: string) {
-  const { data } = await db.from("membership_square_plans").select("*").eq("tier", tier).maybeSingle();
+async function ensurePlan(tier: string, period: MembershipBillingPeriod) {
+  const billing = membershipBilling(tier, period);
+  const { data } = await db.from("membership_square_plans").select("*").eq("tier", billing.key).maybeSingle();
   const plan = MEMBERSHIP_PLANS[tier];
-  if (data && data.price_pence === plan.pricePence) return data.variation_id as string;
+  if (data && data.price_pence === billing.pricePence) return data.variation_id as string;
   const planRes = await square("catalog/object", { method: "POST", body: {
-    idempotency_key: `lux-plan-${tier}-${plan.pricePence}`,
-    object: { type: "SUBSCRIPTION_PLAN", id: "#plan", subscription_plan_data: { name: `LuxPlay ${plan.name} Membership` } },
+    idempotency_key: `lux-plan-${billing.key}-${billing.pricePence}`,
+    object: { type: "SUBSCRIPTION_PLAN", id: "#plan", subscription_plan_data: { name: `LuxPlay ${plan.name} ${period} Membership` } },
   } });
   const planId = planRes.catalog_object.id;
   const varRes = await square("catalog/object", { method: "POST", body: {
-    idempotency_key: `lux-planvar-${tier}-${plan.pricePence}`,
+    idempotency_key: `lux-planvar-${billing.key}-${billing.pricePence}`,
     object: { type: "SUBSCRIPTION_PLAN_VARIATION", id: "#var", subscription_plan_variation_data: {
-      name: `${plan.name} monthly`, subscription_plan_id: planId,
-      phases: [{ cadence: "MONTHLY", ordinal: 0, pricing: { type: "STATIC", price: { amount: plan.pricePence, currency: "GBP" } } }],
+      name: `${plan.name} ${period}`, subscription_plan_id: planId,
+      phases: [{ cadence: billing.cadence, ordinal: 0, pricing: { type: "STATIC", price: { amount: billing.pricePence, currency: "GBP" } } }],
     } },
   } });
   const variationId = varRes.catalog_object.id;
-  await db.from("membership_square_plans").upsert({ tier, plan_id: planId, variation_id: variationId, price_pence: plan.pricePence });
+  const { error } = await db.from("membership_square_plans").upsert({ tier: billing.key, plan_id: planId, variation_id: variationId, price_pence: billing.pricePence });
+  if (error) throw error;
   return variationId as string;
 }
 
@@ -93,6 +95,8 @@ Deno.serve(async (req) => {
 
     if (action === "join") {
       const tier = String(body.tier ?? "");
+      const billingPeriod = body.billingPeriod ?? "monthly";
+      if (!isMembershipBillingPeriod(billingPeriod)) return json(400, { error: "Please choose monthly or yearly payment." });
       // Names may only start with a letter or number (blocks spreadsheet formulas in staff exports).
       const clean = (v: unknown) => String(v ?? "").trim().replace(/^[=+\-@\t\r\s]+/, "").slice(0, 80);
       const childName = clean(body.childName);
@@ -100,18 +104,19 @@ Deno.serve(async (req) => {
       const parentPhone = String(body.parentPhone ?? "").trim().slice(0, 30);
       const childDob = /^\d{4}-\d{2}-\d{2}$/.test(String(body.childDob ?? "")) ? body.childDob : null;
       if (!MEMBERSHIP_PLANS[tier] || !childName || !parentName) return json(400, { error: "Please fill in the child's name, your name and pick a pass." });
-      const variationId = await ensurePlan(tier);
+      const variationId = await ensurePlan(tier, billingPeriod);
       const plan = MEMBERSHIP_PLANS[tier];
+      const billing = membershipBilling(tier, billingPeriod);
       const { data: m, error } = await db.from("memberships").insert({
         user_id: user.id, parent_name: parentName, parent_email: user.email, parent_phone: parentPhone || null,
-        child_name: childName, child_dob: childDob, tier, pass_code: code(6, "LM"),
+        child_name: childName, child_dob: childDob, tier, billing_period: billingPeriod, pass_code: code(6, "LM"),
       }).select().single();
       if (error) throw error;
       const origin = Deno.env.get("SITE_URL") || "https://luxplay.uk";
       const loc = await locationId();
       const linkBody = (withEmail: boolean) => ({
         idempotency_key: `membership-${m.id}${withEmail ? "" : "-ne"}`,
-        quick_pay: { name: `LuxPlay ${plan.name} membership — ${childName}`, price_money: { amount: plan.pricePence, currency: "GBP" }, location_id: loc },
+        quick_pay: { name: `LuxPlay ${plan.name} ${billingPeriod} membership — ${childName}`, price_money: { amount: billing.pricePence, currency: "GBP" }, location_id: loc },
         checkout_options: { subscription_plan_id: variationId, redirect_url: `${origin}/my-membership?joined=${m.id}`, ask_for_shipping_address: false },
         ...(withEmail ? { pre_populated_data: { buyer_email: user.email } } : {}),
         payment_note: `membership:${m.id}`,
@@ -147,7 +152,7 @@ Deno.serve(async (req) => {
         if (m.status === "pending" && Date.now() - new Date(m.created_at).getTime() > 3 * 864e5) continue; // abandoned checkout
         await refresh(m);
         if (m.status === "pending" && Date.now() - new Date(m.created_at).getTime() > 2 * 36e5) continue;
-        out.push({ id: m.id, child_name: m.child_name, tier: m.tier, pass_code: m.pass_code, status: m.status, paid_until: m.paid_until,
+        out.push({ id: m.id, child_name: m.child_name, tier: m.tier, billing_period: m.billing_period ?? "monthly", pass_code: m.pass_code, status: m.status, paid_until: m.paid_until,
           cancel_requested: m.cancel_requested, credits_left: creditsLeft(m.tier, m.credits_month, m.credits_given), upcoming: await upcomingFor(m.id) });
       }
       return json(200, { memberships: out });

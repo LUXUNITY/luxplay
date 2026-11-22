@@ -2,16 +2,17 @@ import * as React from 'npm:react@18.3.1'
 import { Body, Container, Head, Heading, Html, Img, Preview, Text } from 'npm:@react-email/components@0.0.22'
 import type { TemplateEntry } from './registry.ts'
 
-const MembershipPass = ({ parentName, childName, tierName, passCode, price }: Record<string, string>) => (
+const MembershipPass = ({ parentName, childName, tierName, passCode, price, billingPeriod = 'monthly' }: Record<string, string>) => (
   <Html lang="en"><Head /><Preview>{childName}'s LuxPlay {tierName} pass is ready</Preview>
     <Body style={{ backgroundColor: '#ffffff', fontFamily: 'Arial, sans-serif' }}><Container>
       <Heading>🎉 Welcome to {tierName}!</Heading>
       <Text>Hi {parentName},</Text>
-      <Text>{childName}'s LuxPlay membership is active ({price} per month). Show this QR code at the counter every visit:</Text>
+      <Text>{childName}'s LuxPlay membership is active ({price} per {billingPeriod === 'yearly' ? 'year, paid upfront' : 'month'}). Show this QR code at the counter every visit:</Text>
       <Img src={`https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=10&data=${encodeURIComponent(passCode)}`} width="220" height="220" alt={`Pass ${passCode}`} style={{ display: 'block', margin: '0 auto' }} />
       <Text style={{ textAlign: 'center', fontSize: '22px', fontWeight: 'bold', letterSpacing: '3px' }}>{passCode}</Text>
-      <Text>Book your free 2-hour sessions any time at luxplay.uk/my-membership (one upcoming booking at a time). Grown-ups go free.</Text>
-      <Text>The pass belongs to {childName} only. If a monthly payment fails you have 24 hours to fix it before the pass is paused; it switches back on as soon as you pay.</Text>
+      <Text>Book your free 2-hour sessions any time at luxplay.uk/my-membership (only 1 session per day, one upcoming booking at a time). Grown-ups go free.</Text>
+      <Text>The pass belongs to {childName} only. If a payment fails you have 24 hours to fix it before the pass is paused; it switches back on as soon as you pay.</Text>
+      {billingPeriod === 'yearly' && <Text>Your pass renews automatically every 12 months. Switch off renewal in My Membership any time; you keep access until the end of your paid year. Included arcade credits are released monthly.</Text>}
       <Text>See you soon! The LuxPlay team</Text>
     </Container></Body>
   </Html>

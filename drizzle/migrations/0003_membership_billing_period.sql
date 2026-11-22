@@ -1,0 +1,2 @@
+ALTER TABLE public.memberships ADD COLUMN billing_period text NOT NULL DEFAULT 'monthly' CHECK (billing_period IN ('monthly', 'yearly'));
+COMMENT ON COLUMN public.memberships.billing_period IS 'Monthly or annual upfront Square subscription billing; arcade credit allowances remain monthly.';

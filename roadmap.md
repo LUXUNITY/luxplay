@@ -17,3 +17,7 @@
 - [x] Verify public pages, homepage links and booking selection on phone and desktop.
 - [x] Live membership billing (Square monthly), paid-status checks with 24h grace, member reservations (1 upcoming per child) and staff pass scanning.
 - [ ] First real membership payment end-to-end: waiting for the owner to do one real £24.99 sign-up.
+- [x] Add monthly/yearly membership choices, promote the 15% annual saving, and preserve the choice through sign-in and Square checkout.
+- [x] Verify annual prices, monthly benefits, paid-period cancellation rules and signed-in checkout through to Square (no charge made).
+- [x] Configure automatic annual renewal with an option to switch renewal off while retaining the paid year.
+- [ ] First real yearly payment, pass activation and paid-pass renewal cancellation: waiting for the owner to make a real annual purchase.
