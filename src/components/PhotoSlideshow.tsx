@@ -24,14 +24,14 @@ const photos = [
   { src: carousel.url, cap: "Coin pusher fun 🪙" },
   { src: view.url, cap: "Grown-ups relax nearby 💚" },
   { src: pusher.url, cap: "Push for prizes! 🦆" },
-  { src: games.url, cap: "Claw machines galore 🧸" },
+  { src: games.url, cap: "Games in every corner 🎮" },
 ];
 
 export default function PhotoSlideshow() {
   const [i, setI] = useState(0);
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const t = setInterval(() => setI(n => (n + 1) % photos.length), 3500);
+    const t = setInterval(() => setI(n => (n + 1) % photos.length), 2800);
     return () => clearInterval(t);
   }, []);
   return (
