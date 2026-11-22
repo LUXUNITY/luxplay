@@ -29,7 +29,7 @@ export default function HeroSection() {
         <div className="home-venue-strip grid grid-cols-4 overflow-hidden" aria-label="Inside LuxPlay">
           {collage.map(c => <img key={c.label} src={c.img} alt={c.label} className="aspect-square h-full w-full object-cover" loading="eager" />)}
         </div>
-        <div className="relative mx-auto -mt-14 flex h-28 w-28 items-center justify-center rounded-full border-4 border-background bg-background">
+        <div className="relative mx-auto -mt-12 flex h-24 w-24 items-center justify-center rounded-full border-4 border-background bg-background">
           <img src={logoAsset} alt="LuxPlay logo" className="h-full w-full object-contain" />
         </div>
         <div className="home-logo-wrap relative mx-auto mt-3 inline-block"><span className="home-sparkle home-sparkle-a" aria-hidden="true">✨</span><span className="home-sparkle home-sparkle-b" aria-hidden="true">⭐</span><span className="home-sparkle home-sparkle-c" aria-hidden="true">💖</span>
