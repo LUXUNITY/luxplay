@@ -8,7 +8,6 @@ import games from "@/assets/gallery-arcade-games.jpg.asset.json";
 import choc from "@/assets/gallery-cafe-hot-chocolate.jpg.asset.json";
 import shakes from "@/assets/gallery-cafe-milkshakes.jpg.asset.json";
 import prizes from "@/assets/gallery-prize-shop.jpg.asset.json";
-import birds from "@/assets/gallery-angry-birds.jpg.asset.json";
 import carousel from "@/assets/gallery-coin-carousel.jpg.asset.json";
 import pusher from "@/assets/gallery-coin-pusher-prizes.jpg.asset.json";
 
@@ -18,7 +17,6 @@ const photos = [
   { src: baby.url, cap: "Baby soft play 🍼" },
   { src: prizes.url, cap: "Win amazing prizes 🎁" },
   { src: choc.url, cap: "Cosy hot chocolate ☕" },
-  { src: birds.url, cap: "Smash it! 🐦" },
   { src: softplay.url, cap: "Climb, slide & explore 🏰" },
   { src: shakes.url, cap: "Shake it up! 🥤" },
   { src: carousel.url, cap: "Coin pusher fun 🪙" },
