@@ -1,20 +1,10 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import PhotoScatter from "@/components/PhotoScatter";
+import PhotoSlideshow from "@/components/PhotoSlideshow";
 import MembershipPromotion from "@/components/MembershipPromotion";
 import logoAsset from "@/assets/logo-luxplay.png";
-import arcadeAsset from "@/assets/real-arcade.jpeg.asset.json";
-import softplayAsset from "@/assets/real-softplay-v2.png.asset.json";
-import babySoftplayAsset from "@/assets/real-baby-softplay.png.asset.json";
-import prizeAsset from "@/assets/real-prize-redemption.jpg.asset.json";
 
-const collage = [
-  { img: softplayAsset.url, label: "Soft play" },
-  { img: arcadeAsset.url, label: "Arcade machines" },
-  { img: prizeAsset.url, label: "Prize counter" },
-  { img: babySoftplayAsset.url, label: "Baby soft play" },
-];
 const tiles = [
   { href: "/softplay", emoji: "🛝", title: "BOOK SOFT PLAY", detail: "Big kids & little ones", cls: "bg-neon-cyan hover:bg-neon-cyan/90" },
   { href: "/arcade-credits", emoji: "🕹️", title: "ARCADE CREDITS", detail: "Let the games begin!", cls: "bg-neon-green hover:bg-neon-green/90" },
@@ -27,9 +17,7 @@ export default function HeroSection() {
   return (
     <section className="home-hub w-full overflow-hidden bg-background pb-8 text-center">
       <header className="relative mx-auto max-w-3xl">
-        <div className="home-venue-strip grid grid-cols-4 overflow-hidden" aria-label="Inside LuxPlay">
-          {collage.map(c => <img key={c.label} src={c.img} alt={c.label} className="aspect-square h-full w-full object-cover" loading="eager" />)}
-        </div>
+        <PhotoSlideshow />
         <div className="relative mx-auto -mt-12 flex h-24 w-24 items-center justify-center rounded-full border-4 border-background bg-background">
           <img src={logoAsset} alt="LuxPlay logo" className="h-full w-full object-contain" />
         </div>
@@ -56,7 +44,6 @@ export default function HeroSection() {
         </Button>)}
         <Button asChild variant="outline" className="col-span-2 min-h-12 whitespace-normal border-neon-purple font-body font-bold text-foreground"><Link to="/about">Explore LuxPlay & meet the team <ArrowUpRight /></Link></Button>
       </nav>
-      <PhotoScatter />
     </section>
   );
 }
