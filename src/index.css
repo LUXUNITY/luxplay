@@ -1357,3 +1357,8 @@
 .promo-unlimited-tag { rotate: -3deg; box-shadow: 0 0 16px hsl(var(--neon-green) / .6); animation: promo-wiggle 2.8s ease-in-out infinite; }
 @keyframes unlimited-pop { 0%,100% { scale: 1; } 50% { scale: 1.07; } }
 @media (prefers-reduced-motion: reduce) { .promo-unlimited, .promo-unlimited-hearts, .promo-unlimited-word, .promo-unlimited-tag, .promo-unlimited-letter, .promo-unlimited-star { animation: none; } }
+
+/* Homepage scattered photo snapshots */
+.photo-snap { animation: photo-float 6s ease-in-out infinite; }
+@keyframes photo-float { 0%,100% { translate: 0 0; } 50% { translate: 0 -4px; } }
+@media (prefers-reduced-motion: reduce) { .photo-snap { animation: none; } }

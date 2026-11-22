@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import PhotoScatter from "@/components/PhotoScatter";
 import MembershipPromotion from "@/components/MembershipPromotion";
 import logoAsset from "@/assets/logo-luxplay.png";
 import arcadeAsset from "@/assets/real-arcade.jpeg.asset.json";
@@ -55,6 +56,7 @@ export default function HeroSection() {
         </Button>)}
         <Button asChild variant="outline" className="col-span-2 min-h-12 whitespace-normal border-neon-purple font-body font-bold text-foreground"><Link to="/about">Explore LuxPlay & meet the team <ArrowUpRight /></Link></Button>
       </nav>
+      <PhotoScatter />
     </section>
   );
 }
