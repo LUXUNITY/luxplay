@@ -52,7 +52,6 @@ const FeaturesSection = () => {
                   src={f.img}
                   alt={`${f.name} — LuxPlay`}
                   className={`w-full h-full object-cover ${f.objectPos}`}
-                  style={f.zoom ? { transform: `translateY(${f.offsetY ?? 0}px) scale(${f.zoom})` } : undefined}
                   loading="lazy"
                   decoding="async"
                 />
