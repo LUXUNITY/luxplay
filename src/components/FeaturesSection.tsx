@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import founderBazAsset from "@/assets/baz-updated.jpg.asset.json";
-import founderMartinAsset from "@/assets/founder-martin-clean.png.asset.json";
 import logoLuxPlay from "@/assets/logo-luxplay.png";
 import logoCafeLux from "@/assets/logo-cafe-lux.png";
 import logoLuxKey from "@/assets/logo-luxkey.png";
@@ -18,16 +17,6 @@ const founders = [
     img: founderBazAsset.url,
     objectPos: "object-top",
     name: "Baz Roushbaiani",
-    role: "Owner & Director",
-  },
-
-
-  {
-    img: founderMartinAsset.url,
-    objectPos: "object-center",
-    zoom: 1.5,
-    offsetY: 30,
-    name: "Martin MacGillivray",
     role: "Owner & Director",
   },
 ];
@@ -50,7 +39,7 @@ const FeaturesSection = () => {
         </p>
 
         {/* Founders */}
-        <div className="grid grid-cols-2 gap-4 mb-5">
+        <div className="grid grid-cols-1 max-w-[220px] mx-auto gap-4 mb-5">
           {founders.map((f) => (
             <div key={f.name} className="flex flex-col items-center text-center">
               <div
@@ -81,10 +70,10 @@ const FeaturesSection = () => {
         </p>
 
 
-        {/* Shared co-owners */}
+        {/* Businesses */}
         <div className="bg-card rounded-3xl p-5" style={{ boxShadow: "0 8px 0 0 #241C3D" }}>
           <p className="font-display text-xs font-extrabold tracking-wide text-foreground/50 text-center mb-4">
-            CO-OWNERS OF
+            OWNER OF
           </p>
           <div className="grid grid-cols-2 gap-4 items-center">
             {sharedBusinesses.map((b) => (
