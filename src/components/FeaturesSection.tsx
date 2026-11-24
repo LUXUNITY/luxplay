@@ -3,13 +3,11 @@ import founderBazAsset from "@/assets/baz-updated.jpg.asset.json";
 import logoLuxPlay from "@/assets/logo-luxplay.png";
 import logoCafeLux from "@/assets/logo-cafe-lux.png";
 import logoLuxKey from "@/assets/logo-luxkey.png";
-import logoMasterclass from "@/assets/logo-masterclass-exteriors.png.asset.json";
 
 const sharedBusinesses = [
   { name: "LuxPlay", logo: logoLuxPlay, scale: 1 },
   { name: "Cafè Lux", logo: logoCafeLux, scale: 1 },
   { name: "LuxKey", logo: logoLuxKey, scale: 1 },
-  { name: "Masterclass Exteriors", logo: logoMasterclass.url, scale: 1.1 },
 ];
 
 const founders = [
