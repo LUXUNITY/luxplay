@@ -22,3 +22,4 @@
 - [x] Configure automatic annual renewal with an option to switch renewal off while retaining the paid year.
 - [ ] First real yearly payment, pass activation and paid-pass renewal cancellation: waiting for the owner to make a real annual purchase.
 - [x] Clarify monthly and yearly promotion with simple approximate daily prices and verify both selections on phone and desktop.
+- [x] Close 25 November 2026 4–6pm and 6–8pm in both play areas and membership booking; verify customer labels and live checkout rejection.

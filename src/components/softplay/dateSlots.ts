@@ -30,6 +30,9 @@ const getUKTDateISO = () => {
   return `${get("year")}-${get("month")}-${get("day")}`;
 };
 
+export const getSessionClosureLabel = (dateISO: string, time: string) =>
+  dateISO === "2026-11-25" && ["16:00", "18:00"].includes(time) ? "SESSION CLOSED" : null;
+
 export const getSlotsForDate = (_dateISO: string) => STANDARD_SLOTS;
 
 export const isSlotForcedFull = (dateISO: string, time: string) =>
@@ -37,6 +40,7 @@ export const isSlotForcedFull = (dateISO: string, time: string) =>
 
 // Private-party closures — big soft play only (incl. deal bundles that share capacity)
 const SOFT_PLAY_BLOCKED_SLOTS: Record<string, string[]> = {
+  "2026-11-25": ["16:00", "18:00"], // One-off evening session closure
   "2026-08-15": ["14:00"], // private party
   "2026-09-01": ["14:00"], // private party
   "2026-09-05": ["10:00"], // private party
@@ -61,6 +65,7 @@ export const isSoftPlaySlotBlocked = (dateISO: string, time: string) =>
 
 // Private-party closures — baby (under 3s) soft play
 const BABY_BLOCKED_SLOTS: Record<string, string[]> = {
+  "2026-11-25": ["16:00", "18:00"], // One-off evening session closure
   "2026-08-15": ["14:00"], // private party
   "2026-09-01": ["14:00"], // private party
   "2026-09-05": ["10:00"], // private party

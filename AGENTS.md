@@ -9,7 +9,7 @@
 - Keep the heated-venue promotion in its own component with CSS-only motion and reduced-motion support, so seasonal presentation stays isolated from booking logic.
 - Keep seasonal coming-soon announcements in an isolated live-text component with CSS-only motion and reduced-motion support; removing a promotion must preserve paid tickets and staff check-in flows.
 - Use dedicated offer pages with the existing booking and credit components; redirect legacy homepage anchors to their destinations so shortening the homepage never strands existing links.
-- Keep full-day closures in the shared date helpers and every session checkout/reward map; test adjacent days remain open and never simulate closure by inflating paid booking counts.
+- Keep dated full-day and partial-session closures in the shared date helpers and every checkout, reward and membership map; use shared closure labels and test unaffected sessions and dates so closures never inflate paid booking counts.
 
 ## Booking communication
 - Membership billing periods use shared server/client price helpers and distinct Square plan keys, defaulting existing passes to monthly; preserve the chosen period through sign-in so the displayed offer and charged amount agree while arcade allowances stay monthly.

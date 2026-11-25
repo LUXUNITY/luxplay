@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Loader2 } from "lucide-react";
+import { getSessionClosureLabel, isSoftPlaySlotBlocked } from "@/components/softplay/dateSlots";
 import { QRCodeSVG } from "qrcode.react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -99,12 +100,13 @@ export default function MyMembership() {
                   <div className="mt-2 grid grid-cols-3 gap-2">
                     {SESSIONS.map(t => {
                       const left = daySpaces?.[t];
-                      const full = left !== undefined && left <= 0;
+                      const closed = isSoftPlaySlotBlocked(sel.d, t);
+                      const full = closed || (left !== undefined && left <= 0);
                       return <button key={t} type="button" disabled={full || left === undefined} onClick={() => setPick({ ...pick, [p.id]: { ...sel, t } })}
                         className={`rounded-md border px-2 py-2 text-xs font-extrabold disabled:opacity-40 ${sel.t === t ? "border-foreground bg-neon-green text-ink" : "border-border"}`}>
                         {label(t)}
                         <span className={`mt-0.5 block text-[11px] font-bold ${sel.t === t ? "" : left !== undefined && left <= 10 ? "text-neon-pink" : "text-neon-green"}`}>
-                          {left === undefined ? "…" : left === -1 ? "Finished" : full ? "Full" : `${left} spaces left`}
+                          {closed ? getSessionClosureLabel(sel.d, t) ?? "Closed" : left === undefined ? "…" : left === -1 ? "Finished" : full ? "Full" : `${left} spaces left`}
                         </span>
                       </button>;
                     })}

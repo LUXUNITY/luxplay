@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import DateStrip from "./softplay/DateStrip";
-import { getAvailableDates, getSlotsForDate, getBabyPrice, getBabyFullPrice, isOpeningWeekend, isSlotForcedFull, isBabySlotBlocked, getHeldSpots, isVenueClosed } from "./softplay/dateSlots";
+import { getAvailableDates, getSlotsForDate, getBabyPrice, getBabyFullPrice, isOpeningWeekend, isSlotForcedFull, isBabySlotBlocked, getHeldSpots, isVenueClosed, getSessionClosureLabel } from "./softplay/dateSlots";
 
 const MAX_CAPACITY = 15;
 // Price is now date-dependent — see getBabyPrice in dateSlots.ts
@@ -204,9 +204,9 @@ const BabySoftPlaySection = () => {
                   <div className="flex items-center justify-center gap-1">
                     {partyBooked ? (
                       <span className="font-display text-[10px] text-center leading-snug">
-                        {isVenueClosed(selectedDate) ? "🕯️ CLOSED — REMEMBERING STEVE" : selectedDate === "2026-10-30" || selectedDate === "2026-10-31"
+                        {getSessionClosureLabel(selectedDate, s.time) ?? (isVenueClosed(selectedDate) ? "🕯️ CLOSED — REMEMBERING STEVE" : selectedDate === "2026-10-30" || selectedDate === "2026-10-31"
                           ? "🎃 HALLOWEEN PARTY"
-                          : "🎉 PARTY BOOKED"}
+                          : "🎉 PARTY BOOKED")}
                       </span>
                     ) : (
                       <>
