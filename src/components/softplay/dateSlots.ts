@@ -31,7 +31,9 @@ const getUKTDateISO = () => {
 };
 
 export const getSessionClosureLabel = (dateISO: string, time: string) =>
-  dateISO === "2026-11-25" && ["16:00", "18:00"].includes(time) ? "SESSION CLOSED" : null;
+  dateISO === "2026-11-25" && ["16:00", "18:00"].includes(time)
+    ? "Closed this evening to support Steve’s family following his funeral."
+    : null;
 
 export const getSlotsForDate = (_dateISO: string) => STANDARD_SLOTS;
 
