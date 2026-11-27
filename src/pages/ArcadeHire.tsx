@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowUpRight, CalendarDays, Gamepad2, Mail, Store } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import arcadePhoto from "@/assets/venue-arcade.webp";
+import arcadeScene from "@/assets/arcade-hire-neon-scene.jpg.asset.json";
+import arcadeWideScene from "@/assets/arcade-hire-neon-wide.jpg.asset.json";
 import FooterSection from "@/components/FooterSection";
 import partyExample from "@/assets/party-arcade-example.jpg.asset.json";
 import boxingExample from "@/assets/boxing-venue-example.jpg.asset.json";
@@ -22,7 +23,10 @@ export default function ArcadeHire() {
       </nav>
 
       <section className="arcade-hire-hero relative flex min-h-[400px] items-end overflow-hidden md:min-h-[480px]">
-        <img src={arcadePhoto} alt="Colourful arcade machines at LuxPlay" className="absolute inset-0 h-full w-full object-cover" />
+        <picture className="absolute inset-0 h-full w-full">
+          <source media="(min-width: 768px)" srcSet={arcadeWideScene.url} />
+          <img src={arcadeScene.url} alt="AI-created arcade example with colourful racing, basketball, boxing and claw machines" className="h-full w-full object-cover" width={1024} height={1536} fetchPriority="high" />
+        </picture>
         <div className="arcade-hire-photo-shade absolute inset-0" />
         <div className="relative mx-auto w-full max-w-4xl px-5 pb-9 pt-36 text-center md:pb-12">
           <p className="mb-3 text-sm font-extrabold text-neon-green">LUXPLAY · FUN BEYOND OUR DOORS</p>
@@ -33,6 +37,7 @@ export default function ArcadeHire() {
             <Button asChild className="h-auto min-h-12 whitespace-normal bg-neon-pink px-5 py-3 text-ink hover:bg-neon-pink/90"><a href="#party-arcade"><Gamepad2 /> Build Your Party Arcade</a></Button>
             <Button asChild className="h-auto min-h-12 whitespace-normal bg-neon-green px-5 py-3 text-ink hover:bg-neon-green/90"><a href="#host-machine"><Store /> Host a Machine</a></Button>
           </div>
+          <p className="arcade-hire-scene-note mt-4">AI-created arcade example</p>
         </div>
       </section>
 

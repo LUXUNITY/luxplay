@@ -9,7 +9,12 @@
 }
 .family-website .arcade-hire .arcade-hire-photo-shade {
   background: var(--arcade-hire-photo-shade);
-  opacity: .8;
+  opacity: .35;
+}
+.family-website .arcade-hire .arcade-hire-scene-note {
+  font-size: 11px;
+  color: hsl(var(--foreground));
+  text-shadow: var(--family-heading-depth);
 }
 .family-website .arcade-hire .arcade-hire-hero h1 {
   text-shadow: var(--membership-letter-shadow);
