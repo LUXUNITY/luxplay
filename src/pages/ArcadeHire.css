@@ -53,6 +53,12 @@
 .family-website .arcade-hire .arcade-hire-photo-host figcaption {
   background: hsl(var(--neon-green));
 }
+.family-website .arcade-hire .arcade-hire-setting:nth-child(2) { border-color: hsl(var(--neon-cyan)); }
+.family-website .arcade-hire .arcade-hire-setting:nth-child(2) figcaption { background: hsl(var(--neon-cyan)); }
+.family-website .arcade-hire .arcade-hire-setting:nth-child(3) { border-color: hsl(var(--neon-green)); }
+.family-website .arcade-hire .arcade-hire-setting:nth-child(3) figcaption { background: hsl(var(--neon-green)); }
+.family-website .arcade-hire .arcade-hire-setting:nth-child(4) { border-color: hsl(var(--neon-purple)); }
+.family-website .arcade-hire .arcade-hire-setting:nth-child(4) figcaption { background: hsl(var(--neon-purple)); }
 @media (prefers-reduced-motion: reduce) {
   .family-website .home-arcade-hire .home-hire-symbols { animation: none; }
 }

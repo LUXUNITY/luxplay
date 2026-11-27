@@ -6,7 +6,18 @@ import arcadeWideScene from "@/assets/arcade-hire-neon-wide.jpg.asset.json";
 import FooterSection from "@/components/FooterSection";
 import partyExample from "@/assets/party-arcade-example.jpg.asset.json";
 import boxingExample from "@/assets/boxing-venue-example.jpg.asset.json";
+import gardenExample from "@/assets/hire-garden.jpg.asset.json";
+import homeExample from "@/assets/hire-living-room.jpg.asset.json";
+import weddingExample from "@/assets/hire-wedding.jpg.asset.json";
+import hallExample from "@/assets/hire-hall.jpg.asset.json";
 import "./ArcadeHire.css";
+
+const settings = [
+  { title: "Garden party 🌿", image: gardenExample, alt: "Arcade and claw machines beneath a roofed garden shelter on a paved patio" },
+  { title: "Living-room fun 🏡", image: homeExample, alt: "Joystick and claw arcade machines beside a sofa in a family living room" },
+  { title: "Wedding arcade 💍", image: weddingExample, alt: "Racing, joystick and claw machines at a barn wedding reception" },
+  { title: "Make the hall yours 🎉", image: hallExample, alt: "Basketball, joystick and boxing machines in a hired community hall" },
+];
 
 function enquiry(kind: string) {
   const body = kind === "Party Arcade"
@@ -58,6 +69,21 @@ export default function ArcadeHire() {
             <img src={partyExample.url} alt="Illustrative mini arcade with racing, joystick and basketball games at a children's party" loading="lazy" width={1536} height={1024} />
             <figcaption>A little party. A big arcade moment! 🎮 · AI-created example; available machines confirmed with your quote.</figcaption>
           </figure>
+        </div>
+      </section>
+
+      <section aria-labelledby="hire-settings-title" className="border-b border-neon-cyan/30 px-5 py-10 md:py-14">
+        <div className="mx-auto max-w-5xl">
+          <h2 id="hire-settings-title" className="text-center text-neon-cyan">Your place. Your arcade!</h2>
+          <div className="mt-7 grid grid-cols-1 gap-6 md:grid-cols-2">
+            {settings.map((setting) => (
+              <figure key={setting.title} className="arcade-hire-photo arcade-hire-setting">
+                <img src={setting.image.url} alt={`AI-created example: ${setting.alt}`} loading="lazy" width={1536} height={1024} />
+                <figcaption>{setting.title}</figcaption>
+              </figure>
+            ))}
+          </div>
+          <p className="mt-6 text-center text-sm leading-relaxed text-muted-foreground">AI-created examples, not previous LuxPlay hires. Machines, space and access confirmed with your quote. Garden setups need suitable shelter, a dry level surface and a safe power supply.</p>
         </div>
       </section>
 

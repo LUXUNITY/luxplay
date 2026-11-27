@@ -25,3 +25,4 @@
 - [x] Close 25 November 2026 4–6pm and 6–8pm in both play areas and membership booking; verify customer labels and live checkout rejection.
 - [x] Build and verify a removable Arcade Hire page and homepage link; leave unpublished.
 - [x] Brighten Arcade Machine Hire and add realistic illustrative party and venue photos; verify phone and desktop without publishing.
+- [x] Add garden, living-room, wedding and hired-hall hire examples and verify all four on phone and desktop; leave unpublished.
