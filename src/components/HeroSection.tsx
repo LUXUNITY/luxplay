@@ -42,6 +42,7 @@ export default function HeroSection() {
             <span className="font-body text-[11px] font-bold leading-relaxed">{t.detail}</span>
           </Link>
         </Button>)}
+        <Button asChild variant="outline" className="home-offer-button col-span-2 flex h-auto min-h-24 flex-col gap-2 whitespace-normal border-2 border-neon-cyan bg-neon-cyan/5 px-5 py-4 text-neon-cyan hover:bg-neon-cyan/10"><Link to="/arcade-hire"><span className="font-display">🎮 ARCADE HIRE <ArrowUpRight className="inline-block" size={20} /></span><span className="font-body text-xs">Build Your Party Arcade · Host a Machine</span></Link></Button>
         <Button asChild variant="outline" className="col-span-2 min-h-12 whitespace-normal border-neon-purple font-body font-bold text-foreground"><Link to="/about">Explore LuxPlay & meet the team <ArrowUpRight /></Link></Button>
       </nav>
     </section>

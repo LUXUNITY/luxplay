@@ -24,6 +24,7 @@ const Admin = lazy(() => import("./pages/Admin"));
 const SoftPlaySuccess = lazy(() => import("./pages/SoftPlaySuccess"));
 const BabySoftPlaySuccess = lazy(() => import("./pages/BabySoftPlaySuccess"));
 const Parties = lazy(() => import("./pages/Parties"));
+const ArcadeHire = lazy(() => import("./pages/ArcadeHire"));
 const SoftPlayBournemouth = lazy(() => import("./pages/SoftPlayBournemouth"));
 const ArcadeBournemouth = lazy(() => import("./pages/ArcadeBournemouth"));
 const ThingsToDoBournemouth = lazy(() => import("./pages/ThingsToDoBournemouth"));
@@ -66,6 +67,7 @@ const App = () => (
               <Route path="/arcade-credits" element={<><RouteHead title="Buy Arcade Credits — LUXPLAY" description="Choose your LuxPlay arcade credits and buy online for your next visit to Bournemouth." path="/arcade-credits" /><OfferPage offer="credits" /></>} />
               <Route path="/about" element={<><RouteHead title="Explore LuxPlay — Our Venue & Team" description="Explore the LuxPlay arcade, soft play, prizes and café, and meet the team in Bournemouth." path="/about" /><OfferPage offer="about" /></>} />
               <Route path="/parties" element={<Parties />} />
+              <Route path="/arcade-hire" element={<><RouteHead title="Arcade Hire — LUXPLAY" description="Build your party arcade or host a machine at your venue. Ask LuxPlay about event hire and revenue-share placements." path="/arcade-hire" noindex /><ArcadeHire /></>} />
               <Route path="/memberships" element={<><RouteHead title="Soft Play Memberships Bournemouth — LuxPlay" description="Unlimited two-hour soft play from £24.99 per child per month. Little Lux, Lux Plus and Lux VIP passes with free adult entry at LuxPlay Boscombe." path="/memberships" /><Memberships /></>} />
               <Route path="/remembering-steve" element={<><RouteHead title="In Loving Memory of Steve — LUXPLAY" description="Remembering Steve, our beloved manager, friend and part of the LuxPlay family. Read our tribute and help support his family." path="/remembering-steve" /><RememberingSteve /></>} />
               <Route path="/soft-play-bournemouth" element={<SoftPlayBournemouth />} />

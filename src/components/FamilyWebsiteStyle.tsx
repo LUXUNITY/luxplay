@@ -6,6 +6,7 @@ const familyPages = new Set([
   "/", "/memberships", "/softplay", "/arcade-credits", "/christmas",
   "/about", "/parties", "/soft-play-bournemouth", "/arcade-bournemouth",
   "/things-to-do-in-bournemouth-with-kids", "/things-to-do-in-bournemouth",
+  "/arcade-hire",
 ]);
 
 export default function FamilyWebsiteStyle({ children }: { children: ReactNode }) {

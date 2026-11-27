@@ -48,6 +48,7 @@
     --membership-promo-glow: 0 0 20px hsl(var(--neon-cyan) / .35);
     --membership-cta-shadow: 4px 4px 0 hsl(var(--neon-purple));
     --home-tile-shadow: 0 5px 0 hsl(var(--neon-purple) / .65);
+    --arcade-hire-photo-shade: linear-gradient(to top, hsl(var(--background)) 0%, hsl(var(--background) / .85) 36%, hsl(var(--background) / .05) 100%);
     --home-membership-glow: 0 0 22px hsl(var(--neon-pink) / .35);
     --membership-heading-pattern: repeating-linear-gradient(135deg, transparent 0 22px, hsl(var(--neon-purple) / .08) 22px 24px);
     --membership-ribbon-shadow: 5px 5px 0 hsl(var(--neon-purple));
@@ -93,6 +94,9 @@
 
 /* Public promotional type only: never restyle staff tools, app, memorials or booking inputs. */
 .family-website { background-color: hsl(var(--background)); }
+.arcade-hire-photo-shade { background: var(--arcade-hire-photo-shade); }
+.family-website .arcade-hire { letter-spacing: 0; }
+.family-website .arcade-hire :is(h1, h2, p, a) { letter-spacing: 0; }
 .family-website :is(main, section, footer, .membership-heading, nav[aria-label="Back to homepage"]):not(.steve-memorial, .steve-memorial *, .funeral-closure-banner, .funeral-closure-banner *, .membership-pass-section, .membership-benefits, .membership-notice) {
   background-image: var(--family-playful-background);
   background-repeat: no-repeat;
