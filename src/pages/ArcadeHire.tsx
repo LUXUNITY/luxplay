@@ -4,19 +4,19 @@ import { Button } from "@/components/ui/button";
 import arcadeScene from "@/assets/arcade-hire-neon-scene.jpg.asset.json";
 import arcadeWideScene from "@/assets/arcade-hire-neon-wide.jpg.asset.json";
 import FooterSection from "@/components/FooterSection";
-import partyExample from "@/assets/party-arcade-example.jpg.asset.json";
+import partyExample from "@/assets/hire-party-games.jpg.asset.json";
 import boxingExample from "@/assets/boxing-venue-example.jpg.asset.json";
-import gardenExample from "@/assets/hire-garden.jpg.asset.json";
-import homeExample from "@/assets/hire-living-room.jpg.asset.json";
-import weddingExample from "@/assets/hire-wedding.jpg.asset.json";
-import hallExample from "@/assets/hire-hall.jpg.asset.json";
+import gardenExample from "@/assets/hire-garden-games.jpg.asset.json";
+import homeExample from "@/assets/hire-living-games.jpg.asset.json";
+import weddingExample from "@/assets/hire-wedding-games.jpg.asset.json";
+import hallExample from "@/assets/hire-hall-games.jpg.asset.json";
 import "./ArcadeHire.css";
 
 const settings = [
-  { title: "Garden party 🌿", image: gardenExample, alt: "Arcade and claw machines beneath a roofed garden shelter on a paved patio" },
-  { title: "Living-room fun 🏡", image: homeExample, alt: "Joystick and claw arcade machines beside a sofa in a family living room" },
-  { title: "Wedding arcade 💍", image: weddingExample, alt: "Racing, joystick and claw machines at a barn wedding reception" },
-  { title: "Make the hall yours 🎉", image: hallExample, alt: "Basketball, joystick and boxing machines in a hired community hall" },
+  { title: "Garden party 🌿", image: gardenExample, alt: "Children playing a hammer game, claw machine, boxing machine and car racers under a garden party marquee" },
+  { title: "Living-room fun 🏡", image: homeExample, alt: "Children playing air hockey beside a claw machine and basketball game in a family living room" },
+  { title: "Wedding arcade 💍", image: weddingExample, alt: "Wedding guests on car racers, a boxing machine, air hockey and a claw machine at a barn reception" },
+  { title: "Make the hall yours 🎉", image: hallExample, alt: "A busy hired hall filled with basketball games, car racers, air hockey tables, claw machines and a boxing machine" },
 ];
 
 function enquiry(kind: string) {
@@ -33,17 +33,17 @@ export default function ArcadeHire() {
         <Button asChild variant="ghost" className="font-body text-neon-cyan"><Link to="/"><ArrowLeft size={18} /> Back to LuxPlay</Link></Button>
       </nav>
 
-      <section className="arcade-hire-hero relative flex min-h-[400px] items-end overflow-hidden md:min-h-[480px]">
+      <section className="arcade-hire-hero relative flex min-h-[560px] items-end overflow-hidden md:min-h-[560px]">
         <picture className="absolute inset-0 h-full w-full">
           <source media="(min-width: 768px)" srcSet={arcadeWideScene.url} />
           <img src={arcadeScene.url} alt="AI-created arcade example with colourful racing, basketball, boxing and claw machines" className="h-full w-full object-cover" width={1024} height={1536} fetchPriority="high" />
         </picture>
         <div className="arcade-hire-photo-shade absolute inset-0" />
-        <div className="relative mx-auto w-full max-w-4xl px-5 pb-9 pt-36 text-center md:pb-12">
-          <p className="mb-3 text-sm font-extrabold text-neon-green">LUXPLAY · FUN BEYOND OUR DOORS</p>
+        <div className="arcade-hire-hero-panel relative mx-auto mb-6 w-[calc(100%-2rem)] max-w-3xl px-5 py-7 text-center md:mb-10">
+          <p className="arcade-hire-kicker mb-3 text-neon-green">LUXPLAY · FUN BEYOND OUR DOORS</p>
           <div aria-hidden="true" className="mb-3 flex justify-center gap-5 text-3xl"><span>🕹️</span><span>🎮</span><span>👾</span></div>
           <h1 aria-label="Arcade Machine Hire"><span className="arcade-hire-title-first">Arcade</span><span className="arcade-hire-title-last">Machine Hire</span></h1>
-          <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-neon-green">Your party. Your venue. A whole lot of play.</p>
+          <p className="arcade-hire-tagline mx-auto mt-4 max-w-xl text-neon-green">Your party. Your venue. A whole lot of play.</p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Button asChild className="h-auto min-h-12 whitespace-normal bg-neon-pink px-5 py-3 text-ink hover:bg-neon-pink/90"><a href="#party-arcade"><Gamepad2 /> Build Your Party Arcade</a></Button>
             <Button asChild className="h-auto min-h-12 whitespace-normal bg-neon-green px-5 py-3 text-ink hover:bg-neon-green/90"><a href="#host-machine"><Store /> Host a Machine</a></Button>
@@ -66,7 +66,7 @@ export default function ArcadeHire() {
             <Button asChild className="mt-6 h-auto min-h-12 w-full whitespace-normal bg-neon-pink px-6 py-3 text-ink hover:bg-neon-pink/90 sm:w-auto"><a href={enquiry("Party Arcade")}><Mail size={18} /> Get a party quote <ArrowUpRight size={18} /></a></Button>
           </div>
           <figure className="arcade-hire-photo md:col-span-2">
-            <img src={partyExample.url} alt="Illustrative mini arcade with racing, joystick and basketball games at a children's party" loading="lazy" width={1536} height={1024} />
+            <img src={partyExample.url} alt="Illustrative mini arcade with car racers, basketball, air hockey and a claw machine at a children's party" loading="lazy" width={1536} height={1024} />
             <figcaption>A little party. A big arcade moment! 🎮 · AI-created example; available machines confirmed with your quote.</figcaption>
           </figure>
         </div>

@@ -61,4 +61,20 @@
 .family-website .arcade-hire .arcade-hire-setting:nth-child(4) figcaption { background: hsl(var(--neon-purple)); }
 @media (prefers-reduced-motion: reduce) {
   .family-website .home-arcade-hire .home-hire-symbols { animation: none; }
+}.family-website .arcade-hire .arcade-hire-hero-panel {
+  background: hsl(var(--background) / .82);
+  border: 3px solid hsl(var(--neon-pink));
+  border-radius: 20px;
+  box-shadow: var(--membership-cta-shadow);
 }
+.family-website .arcade-hire .arcade-hire-kicker {
+  font-size: clamp(15px, 4.2vw, 20px);
+  font-weight: 900;
+  letter-spacing: .04em;
+}
+.family-website .arcade-hire .arcade-hire-tagline {
+  font-size: clamp(20px, 5.4vw, 26px);
+  font-weight: 900;
+  line-height: 1.3;
+}
+.family-website .arcade-hire .arcade-hire-scene-note { font-size: 13px; }
