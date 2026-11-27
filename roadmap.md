@@ -24,3 +24,4 @@
 - [x] Clarify monthly and yearly promotion with simple approximate daily prices and verify both selections on phone and desktop.
 - [x] Close 25 November 2026 4–6pm and 6–8pm in both play areas and membership booking; verify customer labels and live checkout rejection.
 - [x] Build and verify a removable Arcade Hire page and homepage link; leave unpublished.
+- [x] Brighten Arcade Machine Hire and add realistic illustrative party and venue photos; verify phone and desktop without publishing.

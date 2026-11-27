@@ -1,5 +1,6 @@
 ## Presentation
 - Keep Arcade Hire isolated in its own page with one homepage link and email enquiry links, so removing the trial offer leaves bookings, payments and the native app untouched.
+- Keep hire-specific styling in its dedicated public-scoped stylesheet and label generated placement photos as illustrative, so trial visuals stay removable and do not imply completed hires or exact inventory.
 - Calculate promotional daily membership equivalents in the shared client pricing helper using 30 days for monthly and 365 for yearly; label them approximate and keep the actual billed price visible to avoid implying daily billing.
 - Scope playful promotional typography and CSS-only animated backgrounds through the public-page style boundary; exclude the app, staff tools, transaction screens, memorials and booking controls so presentation changes cannot compromise practical workflows.
 - Keep the membership preview separate from existing checkouts; sample passes link only to membership information and must never grant entry before real billing and staff checks exist.

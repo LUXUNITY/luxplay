@@ -1,0 +1,53 @@
+.family-website .home-arcade-hire {
+  box-shadow: var(--home-tile-shadow), var(--membership-promo-glow);
+}
+.family-website .home-arcade-hire .home-hire-symbols {
+  animation: play-pass-hop 4s ease-in-out infinite;
+}
+.family-website .arcade-hire .arcade-hire-hero {
+  border-bottom: 4px solid hsl(var(--neon-cyan));
+}
+.family-website .arcade-hire .arcade-hire-photo-shade {
+  background: var(--arcade-hire-photo-shade);
+  opacity: .8;
+}
+.family-website .arcade-hire .arcade-hire-hero h1 {
+  text-shadow: var(--membership-letter-shadow);
+  line-height: 1.12;
+}
+.family-website .arcade-hire .arcade-hire-title-first {
+  display: block;
+  color: hsl(var(--neon-pink));
+}
+.family-website .arcade-hire .arcade-hire-title-last {
+  display: block;
+  color: hsl(var(--neon-cyan));
+}
+.family-website .arcade-hire .arcade-hire-photo {
+  overflow: hidden;
+  border: 3px solid hsl(var(--neon-pink));
+  border-radius: 8px;
+  box-shadow: var(--membership-cta-shadow);
+}
+.family-website .arcade-hire .arcade-hire-photo-host {
+  border-color: hsl(var(--neon-green));
+}
+.family-website .arcade-hire .arcade-hire-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+.family-website .arcade-hire .arcade-hire-photo figcaption {
+  padding: 12px 16px;
+  background: hsl(var(--neon-pink));
+  color: hsl(var(--ink));
+  font-size: 14px;
+  line-height: 1.5;
+}
+.family-website .arcade-hire .arcade-hire-photo-host figcaption {
+  background: hsl(var(--neon-green));
+}
+@media (prefers-reduced-motion: reduce) {
+  .family-website .home-arcade-hire .home-hire-symbols { animation: none; }
+}

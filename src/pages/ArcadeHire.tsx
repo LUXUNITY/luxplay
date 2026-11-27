@@ -3,6 +3,9 @@ import { ArrowLeft, ArrowUpRight, CalendarDays, Gamepad2, Mail, Store } from "lu
 import { Button } from "@/components/ui/button";
 import arcadePhoto from "@/assets/venue-arcade.webp";
 import FooterSection from "@/components/FooterSection";
+import partyExample from "@/assets/party-arcade-example.jpg.asset.json";
+import boxingExample from "@/assets/boxing-venue-example.jpg.asset.json";
+import "./ArcadeHire.css";
 
 function enquiry(kind: string) {
   const body = kind === "Party Arcade"
@@ -24,8 +27,8 @@ export default function ArcadeHire() {
         <div className="relative mx-auto w-full max-w-4xl px-5 pb-9 pt-36 text-center md:pb-12">
           <p className="mb-3 text-sm font-extrabold text-neon-green">LUXPLAY · FUN BEYOND OUR DOORS</p>
           <div aria-hidden="true" className="mb-3 flex justify-center gap-5 text-3xl"><span>🕹️</span><span>🎮</span><span>👾</span></div>
-          <h1 className="text-neon-cyan">Arcade Machine Hire</h1>
-          <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed">Your party. Your venue. A whole lot of play.</p>
+          <h1 aria-label="Arcade Machine Hire"><span className="arcade-hire-title-first">Arcade</span><span className="arcade-hire-title-last">Machine Hire</span></h1>
+          <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-neon-green">Your party. Your venue. A whole lot of play.</p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Button asChild className="h-auto min-h-12 whitespace-normal bg-neon-pink px-5 py-3 text-ink hover:bg-neon-pink/90"><a href="#party-arcade"><Gamepad2 /> Build Your Party Arcade</a></Button>
             <Button asChild className="h-auto min-h-12 whitespace-normal bg-neon-green px-5 py-3 text-ink hover:bg-neon-green/90"><a href="#host-machine"><Store /> Host a Machine</a></Button>
@@ -46,6 +49,10 @@ export default function ArcadeHire() {
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">Tell us your date, location and favourite games. We’ll discuss suitable machines, availability, access and delivery, then quote for your event.</p>
             <Button asChild className="mt-6 h-auto min-h-12 w-full whitespace-normal bg-neon-pink px-6 py-3 text-ink hover:bg-neon-pink/90 sm:w-auto"><a href={enquiry("Party Arcade")}><Mail size={18} /> Get a party quote <ArrowUpRight size={18} /></a></Button>
           </div>
+          <figure className="arcade-hire-photo md:col-span-2">
+            <img src={partyExample.url} alt="Illustrative mini arcade with racing, joystick and basketball games at a children's party" loading="lazy" width={1536} height={1024} />
+            <figcaption>A little party. A big arcade moment! 🎮 · AI-created example; available machines confirmed with your quote.</figcaption>
+          </figure>
         </div>
       </section>
 
@@ -62,6 +69,10 @@ export default function ArcadeHire() {
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">We’ll discuss the right machine for your space and agree a share of its takings. Suitability, installation and the arrangement are confirmed individually.</p>
             <Button asChild className="mt-6 h-auto min-h-12 w-full whitespace-normal bg-neon-green px-6 py-3 text-ink hover:bg-neon-green/90 sm:w-auto"><a href={enquiry("Host a Machine")}><Mail size={18} /> Let's talk machines <ArrowUpRight size={18} /></a></Button>
           </div>
+          <figure className="arcade-hire-photo arcade-hire-photo-host md:col-span-2">
+            <img src={boxingExample.url} alt="Illustrative boxing arcade machine in a sports pub beside a pool table" loading="lazy" width={1536} height={1024} />
+            <figcaption>Your venue. Their next high score! 🥊 · AI-created example; machine and placement agreed individually.</figcaption>
+          </figure>
         </div>
       </section>
 
