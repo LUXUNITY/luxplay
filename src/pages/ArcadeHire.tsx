@@ -23,7 +23,8 @@ export default function ArcadeHire() {
         <div className="arcade-hire-photo-shade absolute inset-0" />
         <div className="relative mx-auto w-full max-w-4xl px-5 pb-9 pt-36 text-center md:pb-12">
           <p className="mb-3 text-sm font-extrabold text-neon-green">LUXPLAY · FUN BEYOND OUR DOORS</p>
-          <h1 className="text-neon-cyan">Arcade Hire 🎮</h1>
+          <div aria-hidden="true" className="mb-3 flex justify-center gap-5 text-3xl"><span>🕹️</span><span>🎮</span><span>👾</span></div>
+          <h1 className="text-neon-cyan">Arcade Machine Hire</h1>
           <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed">Your party. Your venue. A whole lot of play.</p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Button asChild className="h-auto min-h-12 whitespace-normal bg-neon-pink px-5 py-3 text-ink hover:bg-neon-pink/90"><a href="#party-arcade"><Gamepad2 /> Build Your Party Arcade</a></Button>
